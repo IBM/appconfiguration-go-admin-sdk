@@ -55,7 +55,7 @@ func init() {
 		ApiKey: "apikey",
 	}
 
-	options := &appConfigurationv1.AppConfigurationV1Options{ 
+	options := &appconfigurationv1.AppConfigurationV1Options{ 
 		Authenticator: authenticator, 
   		URL: "url"
 	}
