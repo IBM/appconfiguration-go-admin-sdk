@@ -55,12 +55,12 @@ func init() {
 		ApiKey: "apikey",
 	}
 
-	options := &appconfigurationv1.AppConfigurationV1Options{ 
+	options := &appConfigurationv1.AppConfigurationV1Options{ 
 		Authenticator: authenticator, 
   		URL: "url"
 	}
 
-	appconfigurationServiceInstance, err := appconfigurationv1.NewAppConfigurationV1(options)
+	appConfigurationServiceInstance, err := appconfigurationv1.NewAppConfigurationV1(options)
 
 	if err != nil {
 		panic(err)
