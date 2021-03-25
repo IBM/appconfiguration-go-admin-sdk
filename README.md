@@ -17,7 +17,7 @@ The IBM Cloud App Configuration Go Admin SDK allows developers to programmatical
 
 * An [IBM Cloud](https://cloud.ibm.com/registration) account.
 * An [App Configuration](https://cloud.ibm.com/docs/app-configuration) instance.
-* Go version 1.15 or above.
+* Go version 1.16 or above.
 
 ## Overview
 
@@ -152,9 +152,9 @@ result, response, error := appConfigurationServiceInstance.GetFeature(getFeature
 
 ### Delete Segment
 ```go
-deleteasegmentOptionsModel := new(appconfigurationv1.DeleteSegmentOptions)
-deleteasegmentOptionsModel.SegmentID = core.StringPtr(id)
-response, error := appConfigurationServiceInstance.DeleteSegment(deleteasegmentOptionsModel)
+deleteSegmentOptionsModel := new(appconfigurationv1.DeleteSegmentOptions)
+deleteSegmentOptionsModel.SegmentID = core.StringPtr(id)
+response, error := appConfigurationServiceInstance.DeleteSegment(deleteSegmentOptionsModel)
 ```
 
 ## License
