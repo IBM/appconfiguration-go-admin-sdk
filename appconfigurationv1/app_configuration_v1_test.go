@@ -30,7 +30,7 @@ import (
 
 	"github.com/IBM/appconfiguration-go-admin-sdk/appconfigurationv1"
 
-	"github.com/IBM/go-sdk-core/v4/core"
+	"github.com/IBM/go-sdk-core/v5/core"
 	"github.com/go-openapi/strfmt"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"

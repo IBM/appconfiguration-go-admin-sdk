@@ -32,7 +32,7 @@ import (
 
 	"github.com/IBM/appconfiguration-go-admin-sdk/common"
 
-	"github.com/IBM/go-sdk-core/v4/core"
+	"github.com/IBM/go-sdk-core/v5/core"
 )
 
 // AppConfigurationV1 : ReST APIs for App Configuration
