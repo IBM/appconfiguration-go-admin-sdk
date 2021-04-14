@@ -162,6 +162,439 @@ func (appConfiguration *AppConfigurationV1) DisableRetries() {
 	appConfiguration.Service.DisableRetries()
 }
 
+// GetProperties : Get list of Properties
+// Get list of properties.
+func (appConfiguration *AppConfigurationV1) GetProperties(getPropertiesOptions *GetPropertiesOptions) (result *ListProperties, response *core.DetailedResponse, err error) {
+	return appConfiguration.getPropertiesWithContext(context.Background(), getPropertiesOptions)
+}
+
+// GetPropertiesWithContext is an alternate form of the GetProperties method which supports a Context parameter
+func (appConfiguration *AppConfigurationV1) getPropertiesWithContext(ctx context.Context, getPropertiesOptions *GetPropertiesOptions) (result *ListProperties, response *core.DetailedResponse, err error) {
+	err = core.ValidateStruct(getPropertiesOptions, "getPropertiesOptions")
+	if err != nil {
+		return
+	}
+
+	builder := core.NewRequestBuilder(core.GET)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = appConfiguration.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(appConfiguration.Service.Options.URL, `/properties`, nil)
+	if err != nil {
+		return
+	}
+
+	for headerName, headerValue := range getPropertiesOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	sdkHeaders := common.GetSdkHeaders(DefaultServiceName, "V1", "GetProperties")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+	builder.AddHeader("Accept", "application/json")
+
+	if getPropertiesOptions.Expand != nil {
+		builder.AddQuery("expand", fmt.Sprint(*getPropertiesOptions.Expand))
+	}
+	if getPropertiesOptions.Sort != nil {
+		builder.AddQuery("sort", fmt.Sprint(*getPropertiesOptions.Sort))
+	}
+	if getPropertiesOptions.Tags != nil {
+		builder.AddQuery("tags", fmt.Sprint(*getPropertiesOptions.Tags))
+	}
+	if getPropertiesOptions.Include != nil {
+		builder.AddQuery("include", fmt.Sprint(*getPropertiesOptions.Include))
+	}
+	if getPropertiesOptions.Collections != nil {
+		builder.AddQuery("collections", fmt.Sprint(*getPropertiesOptions.Collections))
+	}
+	if getPropertiesOptions.Segments != nil {
+		builder.AddQuery("segments", fmt.Sprint(*getPropertiesOptions.Segments))
+	}
+	if getPropertiesOptions.Size != nil {
+		builder.AddQuery("size", fmt.Sprint(*getPropertiesOptions.Size))
+	}
+	if getPropertiesOptions.Offset != nil {
+		builder.AddQuery("offset", fmt.Sprint(*getPropertiesOptions.Offset))
+	}
+
+	request, err := builder.Build()
+	if err != nil {
+		return
+	}
+
+	var rawResponse map[string]json.RawMessage
+	response, err = appConfiguration.Service.Request(request, &rawResponse)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalListProperties)
+	if err != nil {
+		return
+	}
+	response.Result = result
+
+	return
+}
+
+// CreateProperty : Create Property
+// Create a Property.
+func (appConfiguration *AppConfigurationV1) CreateProperty(createPropertyOptions *CreatePropertyOptions) (result *PropertyObject, response *core.DetailedResponse, err error) {
+	return appConfiguration.createPropertyWithContext(context.Background(), createPropertyOptions)
+}
+
+// CreatePropertyWithContext is an alternate form of the CreateProperty method which supports a Context parameter
+func (appConfiguration *AppConfigurationV1) createPropertyWithContext(ctx context.Context, createPropertyOptions *CreatePropertyOptions) (result *PropertyObject, response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(createPropertyOptions, "createPropertyOptions cannot be nil")
+	if err != nil {
+		return
+	}
+	err = core.ValidateStruct(createPropertyOptions, "createPropertyOptions")
+	if err != nil {
+		return
+	}
+
+	builder := core.NewRequestBuilder(core.POST)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = appConfiguration.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(appConfiguration.Service.Options.URL, `/properties`, nil)
+	if err != nil {
+		return
+	}
+
+	for headerName, headerValue := range createPropertyOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	sdkHeaders := common.GetSdkHeaders(DefaultServiceName, "V1", "CreateProperty")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+	builder.AddHeader("Accept", "application/json")
+	builder.AddHeader("Content-Type", "application/json")
+
+	body := make(map[string]interface{})
+	if createPropertyOptions.Name != nil {
+		body["name"] = createPropertyOptions.Name
+	}
+	if createPropertyOptions.PropertyID != nil {
+		body["property_id"] = createPropertyOptions.PropertyID
+	}
+	if createPropertyOptions.Description != nil {
+		body["description"] = createPropertyOptions.Description
+	}
+	if createPropertyOptions.Type != nil {
+		body["type"] = createPropertyOptions.Type
+	}
+	if createPropertyOptions.Value != nil {
+		body["value"] = createPropertyOptions.Value
+	}
+	if createPropertyOptions.Tags != nil {
+		body["tags"] = createPropertyOptions.Tags
+	}
+	if createPropertyOptions.SegmentRules != nil {
+		body["segment_rules"] = createPropertyOptions.SegmentRules
+	}
+	if createPropertyOptions.Collections != nil {
+		body["collections"] = createPropertyOptions.Collections
+	}
+	_, err = builder.SetBodyContentJSON(body)
+	if err != nil {
+		return
+	}
+
+	request, err := builder.Build()
+	if err != nil {
+		return
+	}
+
+	var rawResponse map[string]json.RawMessage
+	response, err = appConfiguration.Service.Request(request, &rawResponse)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalPropertyObject)
+	if err != nil {
+		return
+	}
+	response.Result = result
+
+	return
+}
+
+// UpdateProperty : Update Property
+// Update a Property.
+func (appConfiguration *AppConfigurationV1) UpdateProperty(updatePropertyOptions *UpdatePropertyOptions) (result *PropertyObject, response *core.DetailedResponse, err error) {
+	return appConfiguration.updatePropertyWithContext(context.Background(), updatePropertyOptions)
+}
+
+// UpdatePropertyWithContext is an alternate form of the UpdateProperty method which supports a Context parameter
+func (appConfiguration *AppConfigurationV1) updatePropertyWithContext(ctx context.Context, updatePropertyOptions *UpdatePropertyOptions) (result *PropertyObject, response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(updatePropertyOptions, "updatePropertyOptions cannot be nil")
+	if err != nil {
+		return
+	}
+	err = core.ValidateStruct(updatePropertyOptions, "updatePropertyOptions")
+	if err != nil {
+		return
+	}
+
+	pathParamsMap := map[string]string{
+		"property_id": *updatePropertyOptions.PropertyID,
+	}
+
+	builder := core.NewRequestBuilder(core.PUT)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = appConfiguration.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(appConfiguration.Service.Options.URL, `/properties/{property_id}`, pathParamsMap)
+	if err != nil {
+		return
+	}
+
+	for headerName, headerValue := range updatePropertyOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	sdkHeaders := common.GetSdkHeaders(DefaultServiceName, "V1", "UpdateProperty")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+	builder.AddHeader("Accept", "application/json")
+	builder.AddHeader("Content-Type", "application/json")
+
+	body := make(map[string]interface{})
+	if updatePropertyOptions.Name != nil {
+		body["name"] = updatePropertyOptions.Name
+	}
+	if updatePropertyOptions.Description != nil {
+		body["description"] = updatePropertyOptions.Description
+	}
+	if updatePropertyOptions.Value != nil {
+		body["value"] = updatePropertyOptions.Value
+	}
+	if updatePropertyOptions.Tags != nil {
+		body["tags"] = updatePropertyOptions.Tags
+	}
+	if updatePropertyOptions.SegmentRules != nil {
+		body["segment_rules"] = updatePropertyOptions.SegmentRules
+	}
+	if updatePropertyOptions.Collections != nil {
+		body["collections"] = updatePropertyOptions.Collections
+	}
+	_, err = builder.SetBodyContentJSON(body)
+	if err != nil {
+		return
+	}
+
+	request, err := builder.Build()
+	if err != nil {
+		return
+	}
+
+	var rawResponse map[string]json.RawMessage
+	response, err = appConfiguration.Service.Request(request, &rawResponse)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalPropertyObject)
+	if err != nil {
+		return
+	}
+	response.Result = result
+
+	return
+}
+
+// PatchProperty : Patch Property
+// Patch a Property.
+func (appConfiguration *AppConfigurationV1) PatchProperty(patchPropertyOptions *PatchPropertyOptions) (result *PropertyObject, response *core.DetailedResponse, err error) {
+	return appConfiguration.patchPropertyWithContext(context.Background(), patchPropertyOptions)
+}
+
+// PatchPropertyWithContext is an alternate form of the PatchProperty method which supports a Context parameter
+func (appConfiguration *AppConfigurationV1) patchPropertyWithContext(ctx context.Context, patchPropertyOptions *PatchPropertyOptions) (result *PropertyObject, response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(patchPropertyOptions, "patchPropertyOptions cannot be nil")
+	if err != nil {
+		return
+	}
+	err = core.ValidateStruct(patchPropertyOptions, "patchPropertyOptions")
+	if err != nil {
+		return
+	}
+
+	pathParamsMap := map[string]string{
+		"property_id": *patchPropertyOptions.PropertyID,
+	}
+
+	builder := core.NewRequestBuilder(core.PATCH)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = appConfiguration.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(appConfiguration.Service.Options.URL, `/properties/{property_id}`, pathParamsMap)
+	if err != nil {
+		return
+	}
+
+	for headerName, headerValue := range patchPropertyOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	sdkHeaders := common.GetSdkHeaders(DefaultServiceName, "V1", "PatchProperty")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+	builder.AddHeader("Accept", "application/json")
+	builder.AddHeader("Content-Type", "application/json")
+
+	body := make(map[string]interface{})
+	if patchPropertyOptions.Name != nil {
+		body["name"] = patchPropertyOptions.Name
+	}
+	if patchPropertyOptions.Description != nil {
+		body["description"] = patchPropertyOptions.Description
+	}
+	if patchPropertyOptions.Tags != nil {
+		body["tags"] = patchPropertyOptions.Tags
+	}
+	if patchPropertyOptions.Value != nil {
+		body["value"] = patchPropertyOptions.Value
+	}
+	if patchPropertyOptions.SegmentRules != nil {
+		body["segment_rules"] = patchPropertyOptions.SegmentRules
+	}
+	_, err = builder.SetBodyContentJSON(body)
+	if err != nil {
+		return
+	}
+
+	request, err := builder.Build()
+	if err != nil {
+		return
+	}
+
+	var rawResponse map[string]json.RawMessage
+	response, err = appConfiguration.Service.Request(request, &rawResponse)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalPropertyObject)
+	if err != nil {
+		return
+	}
+	response.Result = result
+
+	return
+}
+
+// DeleteProperty : Delete Property
+// Delete a Property.
+func (appConfiguration *AppConfigurationV1) DeleteProperty(deletePropertyOptions *DeletePropertyOptions) (response *core.DetailedResponse, err error) {
+	return appConfiguration.deletePropertyWithContext(context.Background(), deletePropertyOptions)
+}
+
+// DeletePropertyWithContext is an alternate form of the DeleteProperty method which supports a Context parameter
+func (appConfiguration *AppConfigurationV1) deletePropertyWithContext(ctx context.Context, deletePropertyOptions *DeletePropertyOptions) (response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(deletePropertyOptions, "deletePropertyOptions cannot be nil")
+	if err != nil {
+		return
+	}
+	err = core.ValidateStruct(deletePropertyOptions, "deletePropertyOptions")
+	if err != nil {
+		return
+	}
+
+	pathParamsMap := map[string]string{
+		"property_id": *deletePropertyOptions.PropertyID,
+	}
+
+	builder := core.NewRequestBuilder(core.DELETE)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = appConfiguration.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(appConfiguration.Service.Options.URL, `/properties/{property_id}`, pathParamsMap)
+	if err != nil {
+		return
+	}
+
+	for headerName, headerValue := range deletePropertyOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	sdkHeaders := common.GetSdkHeaders(DefaultServiceName, "V1", "DeleteProperty")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	request, err := builder.Build()
+	if err != nil {
+		return
+	}
+
+	response, err = appConfiguration.Service.Request(request, nil)
+
+	return
+}
+
+// GetPropertyDetails : Get Property
+// Retrieve details of a property.
+func (appConfiguration *AppConfigurationV1) GetProperty(getPropertyDetailsOptions *GetPropertyDetailsOptions) (result *PropertyObject, response *core.DetailedResponse, err error) {
+	return appConfiguration.getPropertyDetailsWithContext(context.Background(), getPropertyDetailsOptions)
+}
+
+// GetPropertyDetailsWithContext is an alternate form of the GetPropertyDetails method which supports a Context parameter
+func (appConfiguration *AppConfigurationV1) getPropertyDetailsWithContext(ctx context.Context, getPropertyDetailsOptions *GetPropertyDetailsOptions) (result *PropertyObject, response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(getPropertyDetailsOptions, "getPropertyDetailsOptions cannot be nil")
+	if err != nil {
+		return
+	}
+	err = core.ValidateStruct(getPropertyDetailsOptions, "getPropertyDetailsOptions")
+	if err != nil {
+		return
+	}
+
+	pathParamsMap := map[string]string{
+		"property_id": *getPropertyDetailsOptions.PropertyID,
+	}
+
+	builder := core.NewRequestBuilder(core.GET)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = appConfiguration.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(appConfiguration.Service.Options.URL, `/properties/{property_id}`, pathParamsMap)
+	if err != nil {
+		return
+	}
+
+	for headerName, headerValue := range getPropertyDetailsOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	sdkHeaders := common.GetSdkHeaders(DefaultServiceName, "V1", "GetPropertyDetails")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+	builder.AddHeader("Accept", "application/json")
+
+	if getPropertyDetailsOptions.Include != nil {
+		builder.AddQuery("include", fmt.Sprint(*getPropertyDetailsOptions.Include))
+	}
+
+	request, err := builder.Build()
+	if err != nil {
+		return
+	}
+
+	var rawResponse map[string]json.RawMessage
+	response, err = appConfiguration.Service.Request(request, &rawResponse)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalPropertyObject)
+	if err != nil {
+		return
+	}
+	response.Result = result
+
+	return
+}
+
 // PageInfo : PageInfo struct
 type PageInfo struct {
 	// total count of the records.
@@ -257,11 +690,11 @@ func UnmarshalRuleArray(m map[string]json.RawMessage, result interface{}) (err e
 // CreateCollection : Create Collection
 // Create a collection.
 func (appConfiguration *AppConfigurationV1) CreateCollection(createCollectionOptions *CreateCollectionOptions) (result *CreateCollection, response *core.DetailedResponse, err error) {
-	return appConfiguration.CreateCollectionWithContext(context.Background(), createCollectionOptions)
+	return appConfiguration.createCollectionWithContext(context.Background(), createCollectionOptions)
 }
 
 // CreateCollectionWithContext is an alternate form of the CreateCollection method which supports a Context parameter
-func (appConfiguration *AppConfigurationV1) CreateCollectionWithContext(ctx context.Context, createCollectionOptions *CreateCollectionOptions) (result *CreateCollection, response *core.DetailedResponse, err error) {
+func (appConfiguration *AppConfigurationV1) createCollectionWithContext(ctx context.Context, createCollectionOptions *CreateCollectionOptions) (result *CreateCollection, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(createCollectionOptions, "createCollectionOptions cannot be nil")
 	if err != nil {
 		return
@@ -330,11 +763,11 @@ func (appConfiguration *AppConfigurationV1) CreateCollectionWithContext(ctx cont
 // GetCollections : Get list of collections
 // Get list of collections.
 func (appConfiguration *AppConfigurationV1) GetCollections(getCollectionsOptions *GetCollectionsOptions) (result *GetCollections, response *core.DetailedResponse, err error) {
-	return appConfiguration.GetCollectionsWithContext(context.Background(), getCollectionsOptions)
+	return appConfiguration.getCollectionsWithContext(context.Background(), getCollectionsOptions)
 }
 
 // GetCollectionsWithContext is an alternate form of the GetCollections method which supports a Context parameter
-func (appConfiguration *AppConfigurationV1) GetCollectionsWithContext(ctx context.Context, getCollectionsOptions *GetCollectionsOptions) (result *GetCollections, response *core.DetailedResponse, err error) {
+func (appConfiguration *AppConfigurationV1) getCollectionsWithContext(ctx context.Context, getCollectionsOptions *GetCollectionsOptions) (result *GetCollections, response *core.DetailedResponse, err error) {
 	err = core.ValidateStruct(getCollectionsOptions, "getCollectionsOptions")
 	if err != nil {
 		return
@@ -399,11 +832,11 @@ func (appConfiguration *AppConfigurationV1) GetCollectionsWithContext(ctx contex
 // UpdateCollection : Update Collection
 // Update the collection name, tags and description. Collection Id cannot be updated.
 func (appConfiguration *AppConfigurationV1) UpdateCollection(updateCollectionOptions *UpdateCollectionOptions) (result *UpdateCollection, response *core.DetailedResponse, err error) {
-	return appConfiguration.UpdateCollectionWithContext(context.Background(), updateCollectionOptions)
+	return appConfiguration.updateCollectionWithContext(context.Background(), updateCollectionOptions)
 }
 
 // UpdateCollectionWithContext is an alternate form of the UpdateCollection method which supports a Context parameter
-func (appConfiguration *AppConfigurationV1) UpdateCollectionWithContext(ctx context.Context, updateCollectionOptions *UpdateCollectionOptions) (result *UpdateCollection, response *core.DetailedResponse, err error) {
+func (appConfiguration *AppConfigurationV1) updateCollectionWithContext(ctx context.Context, updateCollectionOptions *UpdateCollectionOptions) (result *UpdateCollection, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(updateCollectionOptions, "updateCollectionOptions cannot be nil")
 	if err != nil {
 		return
@@ -473,11 +906,11 @@ func (appConfiguration *AppConfigurationV1) UpdateCollectionWithContext(ctx cont
 // GetCollection : Get Collection
 // Retrieve the details of the collection.
 func (appConfiguration *AppConfigurationV1) GetCollection(getCollectionOptions *GetCollectionOptions) (result *GetCollection, response *core.DetailedResponse, err error) {
-	return appConfiguration.GetCollectionWithContext(context.Background(), getCollectionOptions)
+	return appConfiguration.getCollectionWithContext(context.Background(), getCollectionOptions)
 }
 
 // GetCollectionWithContext is an alternate form of the GetCollection method which supports a Context parameter
-func (appConfiguration *AppConfigurationV1) GetCollectionWithContext(ctx context.Context, getCollectionOptions *GetCollectionOptions) (result *GetCollection, response *core.DetailedResponse, err error) {
+func (appConfiguration *AppConfigurationV1) getCollectionWithContext(ctx context.Context, getCollectionOptions *GetCollectionOptions) (result *GetCollection, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(getCollectionOptions, "getCollectionOptions cannot be nil")
 	if err != nil {
 		return
@@ -531,11 +964,11 @@ func (appConfiguration *AppConfigurationV1) GetCollectionWithContext(ctx context
 // DeleteCollection : Delete Collection
 // Delete the collection.
 func (appConfiguration *AppConfigurationV1) DeleteCollection(deleteCollectionOptions *DeleteCollectionOptions) (response *core.DetailedResponse, err error) {
-	return appConfiguration.DeleteCollectionWithContext(context.Background(), deleteCollectionOptions)
+	return appConfiguration.deleteCollectionWithContext(context.Background(), deleteCollectionOptions)
 }
 
 // DeleteCollectionWithContext is an alternate form of the DeleteCollection method which supports a Context parameter
-func (appConfiguration *AppConfigurationV1) DeleteCollectionWithContext(ctx context.Context, deleteCollectionOptions *DeleteCollectionOptions) (response *core.DetailedResponse, err error) {
+func (appConfiguration *AppConfigurationV1) deleteCollectionWithContext(ctx context.Context, deleteCollectionOptions *DeleteCollectionOptions) (response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(deleteCollectionOptions, "deleteCollectionOptions cannot be nil")
 	if err != nil {
 		return
@@ -603,6 +1036,32 @@ func UnmarshalCollection(m map[string]json.RawMessage, result interface{}) (err 
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "enabled", &obj.Enabled)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// CollectionID : Collection struct
+type CollectionID struct {
+	// Collection id.
+	CollectionID *string `json:"collection_id" validate:"required"`
+}
+
+// NewCollection : Instantiate Collection (Generic Model Constructor)
+func (*AppConfigurationV1) NewCollectionID(collectionID string) (model *CollectionID, err error) {
+	model = &CollectionID{
+		CollectionID: core.StringPtr(collectionID),
+	}
+	err = core.ValidateStruct(model, "required parameters")
+	return
+}
+
+// UnmarshalCollection unmarshals an instance of Collection from the specified map of raw messages.
+func UnmarshalCollectionID(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(CollectionID)
+	err = core.UnmarshalPrimitive(m, "collection_id", &obj.CollectionID)
 	if err != nil {
 		return
 	}
@@ -687,14 +1146,14 @@ type CreateCollection struct {
 	// Collection name.
 	Name *string `json:"name" validate:"required"`
 
-	// Guid to which the Collection belongs to.
-	Guid *string `json:"guid,omitempty"`
-
 	// Collection Id.
 	CollectionID *string `json:"collection_id" validate:"required"`
 
 	// Collection description.
 	Description *string `json:"description" validate:"required"`
+
+	// Tags associated with the collection.
+	Tags *string `json:"tags,omitempty"`
 
 	// Collection created time.
 	CreatedTime *string `json:"created_time" validate:"required"`
@@ -710,15 +1169,15 @@ func UnmarshalCreateCollection(m map[string]json.RawMessage, result interface{})
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "guid", &obj.Guid)
-	if err != nil {
-		return
-	}
 	err = core.UnmarshalPrimitive(m, "collection_id", &obj.CollectionID)
 	if err != nil {
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "description", &obj.Description)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "tags", &obj.Tags)
 	if err != nil {
 		return
 	}
@@ -827,6 +1286,9 @@ type GetSingleCollection struct {
 
 	// Collection description.
 	Description *string `json:"description,omitempty"`
+
+	// Tags associated with the collection.
+	Tags *string `json:"tags,omitempty"`
 }
 
 // UnmarshalGetSingleCollection unmarshals an instance of GetSingleCollection from the specified map of raw messages.
@@ -841,6 +1303,10 @@ func UnmarshalGetSingleCollection(m map[string]json.RawMessage, result interface
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "description", &obj.Description)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "tags", &obj.Tags)
 	if err != nil {
 		return
 	}
@@ -860,6 +1326,9 @@ type UpdateCollection struct {
 	Description *string `json:"description" validate:"required"`
 
 	// Tags associated with the collection.
+	Tags *string `json:"tags,omitempty"`
+
+	// Collection created time.
 	CreatedTime *string `json:"created_time" validate:"required"`
 
 	// Collection updated time.
@@ -878,6 +1347,10 @@ func UnmarshalUpdateCollection(m map[string]json.RawMessage, result interface{})
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "description", &obj.Description)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "tags", &obj.Tags)
 	if err != nil {
 		return
 	}
@@ -954,11 +1427,11 @@ func (options *UpdateCollectionOptions) SetHeaders(param map[string]string) *Upd
 // CreateFeature : Create Feature
 // Create a feature flag.
 func (appConfiguration *AppConfigurationV1) CreateFeature(createFeatureOptions *CreateFeatureOptions) (result *CreateFeature, response *core.DetailedResponse, err error) {
-	return appConfiguration.CreateFeatureWithContext(context.Background(), createFeatureOptions)
+	return appConfiguration.createFeatureWithContext(context.Background(), createFeatureOptions)
 }
 
 // CreateFeatureWithContext is an alternate form of the CreateFeature method which supports a Context parameter
-func (appConfiguration *AppConfigurationV1) CreateFeatureWithContext(ctx context.Context, createFeatureOptions *CreateFeatureOptions) (result *CreateFeature, response *core.DetailedResponse, err error) {
+func (appConfiguration *AppConfigurationV1) createFeatureWithContext(ctx context.Context, createFeatureOptions *CreateFeatureOptions) (result *CreateFeature, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(createFeatureOptions, "createFeatureOptions cannot be nil")
 	if err != nil {
 		return
@@ -1058,14 +1531,165 @@ func (appConfiguration *AppConfigurationV1) CreateFeatureWithContext(ctx context
 	return
 }
 
+// PatchFeature : Patch Feature
+// Update a feature flag properties.
+func (appConfiguration *AppConfigurationV1) PatchFeature(patchFeatureOptions *PatchFeatureOptions) (result *UpdateFeature, response *core.DetailedResponse, err error) {
+	return appConfiguration.patchfeaturepropertiesWithContext(context.Background(), patchFeatureOptions)
+}
+
+// PatchfeaturepropertiesWithContext is an alternate form of the PatchFeature method which supports a Context parameter
+func (appConfiguration *AppConfigurationV1) patchfeaturepropertiesWithContext(ctx context.Context, patchfeaturepropertiesOptions *PatchFeatureOptions) (result *UpdateFeature, response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(patchfeaturepropertiesOptions, "patchfeaturepropertiesOptions cannot be nil")
+	if err != nil {
+		return
+	}
+	err = core.ValidateStruct(patchfeaturepropertiesOptions, "patchfeaturepropertiesOptions")
+	if err != nil {
+		return
+	}
+
+	pathParamsMap := map[string]string{
+		"feature_id": *patchfeaturepropertiesOptions.FeatureID,
+	}
+
+	builder := core.NewRequestBuilder(core.PATCH)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = appConfiguration.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(appConfiguration.Service.Options.URL, `/features/{feature_id}`, pathParamsMap)
+	if err != nil {
+		return
+	}
+
+	for headerName, headerValue := range patchfeaturepropertiesOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	sdkHeaders := common.GetSdkHeaders("app_configuration_api_collection", "V1", "PatchFeature")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+	builder.AddHeader("Accept", "application/json")
+	builder.AddHeader("Content-Type", "application/json")
+
+	body := make(map[string]interface{})
+	if patchfeaturepropertiesOptions.Name != nil {
+		body["name"] = patchfeaturepropertiesOptions.Name
+	}
+	if patchfeaturepropertiesOptions.Description != nil {
+		body["description"] = patchfeaturepropertiesOptions.Description
+	}
+	if patchfeaturepropertiesOptions.Tags != nil {
+		body["tags"] = patchfeaturepropertiesOptions.Tags
+	}
+	if patchfeaturepropertiesOptions.EnabledValue != nil {
+		body["enabled_value"] = patchfeaturepropertiesOptions.EnabledValue
+	}
+	if patchfeaturepropertiesOptions.DisabledValue != nil {
+		body["disabled_value"] = patchfeaturepropertiesOptions.DisabledValue
+	}
+	if patchfeaturepropertiesOptions.SegmentRules != nil {
+		body["segment_rules"] = patchfeaturepropertiesOptions.SegmentRules
+	}
+	_, err = builder.SetBodyContentJSON(body)
+	if err != nil {
+		return
+	}
+
+	request, err := builder.Build()
+	if err != nil {
+		return
+	}
+
+	var rawResponse map[string]json.RawMessage
+	response, err = appConfiguration.Service.Request(request, &rawResponse)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalUpdateFeature)
+	if err != nil {
+		return
+	}
+	response.Result = result
+
+	return
+}
+
+// ToggleFeature : Toggle Feature
+// Toggle a feature.
+func (appConfiguration *AppConfigurationV1) ToggleFeature(toggleFeatureOptions *ToggleFeatureOptions) (result *GetFeature, response *core.DetailedResponse, err error) {
+	return appConfiguration.toggleFeatureWithContext(context.Background(), toggleFeatureOptions)
+}
+
+// ToggleFeatureWithContext is an alternate form of the ToggleFeature method which supports a Context parameter
+func (appConfiguration *AppConfigurationV1) toggleFeatureWithContext(ctx context.Context, toggleFeatureOptions *ToggleFeatureOptions) (result *GetFeature, response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(toggleFeatureOptions, "toggleFeatureOptions cannot be nil")
+	if err != nil {
+		return
+	}
+	err = core.ValidateStruct(toggleFeatureOptions, "toggleFeatureOptions")
+	if err != nil {
+		return
+	}
+
+	pathParamsMap := map[string]string{
+		"feature_id": *toggleFeatureOptions.FeatureID,
+	}
+
+	builder := core.NewRequestBuilder(core.PUT)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = appConfiguration.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(appConfiguration.Service.Options.URL, `/features/{feature_id}/toggle`, pathParamsMap)
+	if err != nil {
+		return
+	}
+
+	for headerName, headerValue := range toggleFeatureOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	sdkHeaders := common.GetSdkHeaders("app_configuration_api_collection", "V1", "ToggleFeature")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+	builder.AddHeader("Accept", "application/json")
+	builder.AddHeader("Content-Type", "application/json")
+
+	body := make(map[string]interface{})
+	if toggleFeatureOptions.Enabled != nil {
+		body["enabled"] = toggleFeatureOptions.Enabled
+	}
+	_, err = builder.SetBodyContentJSON(body)
+	if err != nil {
+		return
+	}
+
+	request, err := builder.Build()
+	if err != nil {
+		return
+	}
+
+	var rawResponse map[string]json.RawMessage
+	response, err = appConfiguration.Service.Request(request, &rawResponse)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalGetFeature)
+	if err != nil {
+		return
+	}
+	response.Result = result
+
+	return
+}
+
 // GetFeatures : Get list of features
 // Get list of features.
 func (appConfiguration *AppConfigurationV1) GetFeatures(getFeaturesOptions *GetFeaturesOptions) (result *GetFeatures, response *core.DetailedResponse, err error) {
-	return appConfiguration.GetFeaturesWithContext(context.Background(), getFeaturesOptions)
+	return appConfiguration.getFeaturesWithContext(context.Background(), getFeaturesOptions)
 }
 
 // GetFeaturesWithContext is an alternate form of the GetFeatures method which supports a Context parameter
-func (appConfiguration *AppConfigurationV1) GetFeaturesWithContext(ctx context.Context, getFeaturesOptions *GetFeaturesOptions) (result *GetFeatures, response *core.DetailedResponse, err error) {
+func (appConfiguration *AppConfigurationV1) getFeaturesWithContext(ctx context.Context, getFeaturesOptions *GetFeaturesOptions) (result *GetFeatures, response *core.DetailedResponse, err error) {
 	err = core.ValidateStruct(getFeaturesOptions, "getFeaturesOptions")
 	if err != nil {
 		return
@@ -1133,11 +1757,11 @@ func (appConfiguration *AppConfigurationV1) GetFeaturesWithContext(ctx context.C
 // UpdateFeature : Update feature properties
 // Update a feature flag properties.
 func (appConfiguration *AppConfigurationV1) UpdateFeature(updateFeatureOptions *UpdateFeatureOptions) (result *UpdateFeature, response *core.DetailedResponse, err error) {
-	return appConfiguration.UpdatefeaturepropertiesWithContext(context.Background(), updateFeatureOptions)
+	return appConfiguration.updatefeaturepropertiesWithContext(context.Background(), updateFeatureOptions)
 }
 
 // UpdatefeaturepropertiesWithContext is an alternate form of the UpdateFeature method which supports a Context parameter
-func (appConfiguration *AppConfigurationV1) UpdatefeaturepropertiesWithContext(ctx context.Context, updateFeatureOptions *UpdateFeatureOptions) (result *UpdateFeature, response *core.DetailedResponse, err error) {
+func (appConfiguration *AppConfigurationV1) updatefeaturepropertiesWithContext(ctx context.Context, updateFeatureOptions *UpdateFeatureOptions) (result *UpdateFeature, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(updateFeatureOptions, "updateFeatureOptions cannot be nil")
 	if err != nil {
 		return
@@ -1177,30 +1801,12 @@ func (appConfiguration *AppConfigurationV1) UpdatefeaturepropertiesWithContext(c
 	if updateFeatureOptions.Description != nil {
 		body["description"] = updateFeatureOptions.Description
 	}
-	if updateFeatureOptions.Type != nil {
-		body["type"] = updateFeatureOptions.Type
-	}
+
 	if updateFeatureOptions.EnabledValue != nil {
-		if *updateFeatureOptions.Type == "BOOLEAN" {
-			enabledValue, _ := strconv.ParseBool(*updateFeatureOptions.EnabledValue)
-			body["enabled_value"] = enabledValue
-		} else if *updateFeatureOptions.Type == "NUMERIC" {
-			enabledValue, _ := strconv.ParseInt(*updateFeatureOptions.EnabledValue, 10, 64)
-			body["enabled_value"] = enabledValue
-		} else {
-			body["enabled_value"] = updateFeatureOptions.EnabledValue
-		}
+		body["enabled_value"] = updateFeatureOptions.EnabledValue
 	}
 	if updateFeatureOptions.DisabledValue != nil {
-		if *updateFeatureOptions.Type == "BOOLEAN" {
-			disabledValue, _ := strconv.ParseBool(*updateFeatureOptions.DisabledValue)
-			body["disabled_value"] = disabledValue
-		} else if *updateFeatureOptions.Type == "NUMERIC" {
-			disabledValue, _ := strconv.ParseInt(*updateFeatureOptions.DisabledValue, 10, 64)
-			body["disabled_value"] = disabledValue
-		} else {
-			body["disabled_value"] = updateFeatureOptions.DisabledValue
-		}
+		body["disabled_value"] = updateFeatureOptions.DisabledValue
 	}
 	if updateFeatureOptions.Tags != nil {
 		body["tags"] = updateFeatureOptions.Tags
@@ -1238,11 +1844,11 @@ func (appConfiguration *AppConfigurationV1) UpdatefeaturepropertiesWithContext(c
 // DeleteFeature : Delete a feature
 // Delete a feature flag.
 func (appConfiguration *AppConfigurationV1) DeleteFeature(deleteFeatureOptions *DeleteafeatureOptions) (response *core.DetailedResponse, err error) {
-	return appConfiguration.DeleteafeatureWithContext(context.Background(), deleteFeatureOptions)
+	return appConfiguration.deleteafeatureWithContext(context.Background(), deleteFeatureOptions)
 }
 
 // DeleteafeatureWithContext is an alternate form of the DeleteFeature method which supports a Context parameter
-func (appConfiguration *AppConfigurationV1) DeleteafeatureWithContext(ctx context.Context, deleteFeatureOptions *DeleteafeatureOptions) (response *core.DetailedResponse, err error) {
+func (appConfiguration *AppConfigurationV1) deleteafeatureWithContext(ctx context.Context, deleteFeatureOptions *DeleteafeatureOptions) (response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(deleteFeatureOptions, "deleteFeatureOptions cannot be nil")
 	if err != nil {
 		return
@@ -1286,11 +1892,11 @@ func (appConfiguration *AppConfigurationV1) DeleteafeatureWithContext(ctx contex
 // GetFeature : Get feature details
 // Retrieve details of a feature.
 func (appConfiguration *AppConfigurationV1) GetFeature(getFeatureOptions *GetFeatureOptions) (result *GetFeature, response *core.DetailedResponse, err error) {
-	return appConfiguration.GetFeatureWithContext(context.Background(), getFeatureOptions)
+	return appConfiguration.getFeatureWithContext(context.Background(), getFeatureOptions)
 }
 
 // GetFeatureWithContext is an alternate form of the GetFeature method which supports a Context parameter
-func (appConfiguration *AppConfigurationV1) GetFeatureWithContext(ctx context.Context, getFeatureOptions *GetFeatureOptions) (result *GetFeature, response *core.DetailedResponse, err error) {
+func (appConfiguration *AppConfigurationV1) getFeatureWithContext(ctx context.Context, getFeatureOptions *GetFeatureOptions) (result *GetFeature, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(getFeatureOptions, "getFeatureOptions cannot be nil")
 	if err != nil {
 		return
@@ -1359,6 +1965,9 @@ type CreateFeature struct {
 	// Type of the feature (Boolean, String, Number).
 	Type *string `json:"type" validate:"required"`
 
+	// Tags associated with the feature.
+	Tags *string `json:"tags,omitempty"`
+
 	// Value of the feature when it is enabled.
 	EnabledValue interface{} `json:"enabled_value" validate:"required"`
 
@@ -1394,6 +2003,10 @@ func UnmarshalCreateFeature(m map[string]json.RawMessage, result interface{}) (e
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "type", &obj.Type)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "tags", &obj.Tags)
 	if err != nil {
 		return
 	}
@@ -1786,6 +2399,9 @@ type GetFeature struct {
 	// Type of the feature (Boolean, String, Number).
 	Type *string `json:"type" validate:"required"`
 
+	// Tags associated with the feature.
+	Tags *string `json:"tags,omitempty"`
+
 	// Value of the feature when it is enabled.
 	EnabledValue interface{} `json:"enabled_value" validate:"required"`
 
@@ -1820,6 +2436,10 @@ func UnmarshalGetFeature(m map[string]json.RawMessage, result interface{}) (err 
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "type", &obj.Type)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "tags", &obj.Tags)
 	if err != nil {
 		return
 	}
@@ -2002,6 +2622,9 @@ type UpdateFeature struct {
 	// Type of the feature (Boolean, String, Number).
 	Type *string `json:"type" validate:"required"`
 
+	// Tags associated with the feature.
+	Tags *string `json:"tags,omitempty"`
+
 	// Value of the feature when it is enabled.
 	EnabledValue interface{} `json:"enabled_value" validate:"required"`
 
@@ -2044,6 +2667,10 @@ func UnmarshalUpdateFeature(m map[string]json.RawMessage, result interface{}) (e
 	if err != nil {
 		return
 	}
+	err = core.UnmarshalPrimitive(m, "tags", &obj.Tags)
+	if err != nil {
+		return
+	}
 	err = core.UnmarshalModel(m, "segment_rules", &obj.SegmentRules, UnmarshalSegmentRule)
 	if err != nil {
 		return
@@ -2075,9 +2702,6 @@ type UpdateFeatureOptions struct {
 	// Feature description.
 	Description *string `json:"description" validate:"required"`
 
-	// Type of the feature (Boolean, String, Number).
-	Type *string `json:"type" validate:"required"`
-
 	// Value of the feature when it is enabled.
 	EnabledValue *string `json:"enabled_value" validate:"required"`
 
@@ -2098,12 +2722,11 @@ type UpdateFeatureOptions struct {
 }
 
 // NewUpdateFeatureOptions : Instantiate UpdateFeatureOptions
-func (*AppConfigurationV1) NewUpdateFeatureOptions(featureID string, name string, description string, typeVar string, enabledValue string, disabledValue string, tags string, segmentRules []SegmentRule, collections []CollectionWithDeletedFlag) *UpdateFeatureOptions {
+func (*AppConfigurationV1) NewUpdateFeatureOptions(featureID string, name string, description string, enabledValue string, disabledValue string, tags string, segmentRules []SegmentRule, collections []CollectionWithDeletedFlag) *UpdateFeatureOptions {
 	return &UpdateFeatureOptions{
 		FeatureID:     core.StringPtr(featureID),
 		Name:          core.StringPtr(name),
 		Description:   core.StringPtr(description),
-		Type:          core.StringPtr(typeVar),
 		EnabledValue:  core.StringPtr(enabledValue),
 		DisabledValue: core.StringPtr(disabledValue),
 		Tags:          core.StringPtr(tags),
@@ -2127,12 +2750,6 @@ func (options *UpdateFeatureOptions) SetName(name string) *UpdateFeatureOptions 
 // SetDescription : Allow user to set Description
 func (options *UpdateFeatureOptions) SetDescription(description string) *UpdateFeatureOptions {
 	options.Description = core.StringPtr(description)
-	return options
-}
-
-// SetType : Allow user to set Type
-func (options *UpdateFeatureOptions) SetType(typeVar string) *UpdateFeatureOptions {
-	options.Type = core.StringPtr(typeVar)
 	return options
 }
 
@@ -2186,6 +2803,9 @@ type SingleFeature struct {
 	// Feature description.
 	Description *string `json:"description,omitempty"`
 
+	// Tags associated with the feature.
+	Tags *string `json:"tags,omitempty"`
+
 	// Type of the feature (Boolean, String, Number).
 	Type *string `json:"type,omitempty"`
 
@@ -2225,6 +2845,10 @@ func UnmarshalSingleFeature(m map[string]json.RawMessage, result interface{}) (e
 	if err != nil {
 		return
 	}
+	err = core.UnmarshalPrimitive(m, "tags", &obj.Tags)
+	if err != nil {
+		return
+	}
 	err = core.UnmarshalPrimitive(m, "enabled_value", &obj.EnabledValue)
 	if err != nil {
 		return
@@ -2248,11 +2872,11 @@ func UnmarshalSingleFeature(m map[string]json.RawMessage, result interface{}) (e
 // CreateSegment : Create Segment
 // Create a segment of users.
 func (appConfiguration *AppConfigurationV1) CreateSegment(createSegmentOptions *CreateSegmentOptions) (result *CreateSegment, response *core.DetailedResponse, err error) {
-	return appConfiguration.CreateSegmentWithContext(context.Background(), createSegmentOptions)
+	return appConfiguration.createSegmentWithContext(context.Background(), createSegmentOptions)
 }
 
 // CreateSegmentWithContext is an alternate form of the CreateSegment method which supports a Context parameter
-func (appConfiguration *AppConfigurationV1) CreateSegmentWithContext(ctx context.Context, createSegmentOptions *CreateSegmentOptions) (result *CreateSegment, response *core.DetailedResponse, err error) {
+func (appConfiguration *AppConfigurationV1) createSegmentWithContext(ctx context.Context, createSegmentOptions *CreateSegmentOptions) (result *CreateSegment, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(createSegmentOptions, "createSegmentOptions cannot be nil")
 	if err != nil {
 		return
@@ -2327,11 +2951,11 @@ func (appConfiguration *AppConfigurationV1) CreateSegmentWithContext(ctx context
 // GetSegments : Get list of segments
 // Get list of segments.
 func (appConfiguration *AppConfigurationV1) GetSegments(getSegmentsOptions *GetSegmentsOptions) (result *GetSegments, response *core.DetailedResponse, err error) {
-	return appConfiguration.GetSegmentsWithContext(context.Background(), getSegmentsOptions)
+	return appConfiguration.getSegmentsWithContext(context.Background(), getSegmentsOptions)
 }
 
 // GetSegmentsWithContext is an alternate form of the GetSegments method which supports a Context parameter
-func (appConfiguration *AppConfigurationV1) GetSegmentsWithContext(ctx context.Context, getSegmentsOptions *GetSegmentsOptions) (result *GetSegments, response *core.DetailedResponse, err error) {
+func (appConfiguration *AppConfigurationV1) getSegmentsWithContext(ctx context.Context, getSegmentsOptions *GetSegmentsOptions) (result *GetSegments, response *core.DetailedResponse, err error) {
 	err = core.ValidateStruct(getSegmentsOptions, "getSegmentsOptions")
 	if err != nil {
 		return
@@ -2396,11 +3020,11 @@ func (appConfiguration *AppConfigurationV1) GetSegmentsWithContext(ctx context.C
 // UpdateSegment : Update the segment
 // Update the segment properties.
 func (appConfiguration *AppConfigurationV1) UpdateSegment(updateSegmentOptions *UpdateSegmentOptions) (result *UpdateSegment, response *core.DetailedResponse, err error) {
-	return appConfiguration.UpdateSegmentWithContext(context.Background(), updateSegmentOptions)
+	return appConfiguration.updateSegmentWithContext(context.Background(), updateSegmentOptions)
 }
 
 // UpdateSegmentWithContext is an alternate form of the UpdateSegment method which supports a Context parameter
-func (appConfiguration *AppConfigurationV1) UpdateSegmentWithContext(ctx context.Context, updateSegmentOptions *UpdateSegmentOptions) (result *UpdateSegment, response *core.DetailedResponse, err error) {
+func (appConfiguration *AppConfigurationV1) updateSegmentWithContext(ctx context.Context, updateSegmentOptions *UpdateSegmentOptions) (result *UpdateSegment, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(updateSegmentOptions, "updateSegmentOptions cannot be nil")
 	if err != nil {
 		return
@@ -2473,11 +3097,11 @@ func (appConfiguration *AppConfigurationV1) UpdateSegmentWithContext(ctx context
 // GetSegment : Get segment details
 // Retrieve details of a segment.
 func (appConfiguration *AppConfigurationV1) GetSegment(getSegmentOptions *GetSegmentOptions) (result *GetSegment, response *core.DetailedResponse, err error) {
-	return appConfiguration.GetSegmentWithContext(context.Background(), getSegmentOptions)
+	return appConfiguration.getSegmentWithContext(context.Background(), getSegmentOptions)
 }
 
 // GetSegmentWithContext is an alternate form of the GetSegment method which supports a Context parameter
-func (appConfiguration *AppConfigurationV1) GetSegmentWithContext(ctx context.Context, getSegmentOptions *GetSegmentOptions) (result *GetSegment, response *core.DetailedResponse, err error) {
+func (appConfiguration *AppConfigurationV1) getSegmentWithContext(ctx context.Context, getSegmentOptions *GetSegmentOptions) (result *GetSegment, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(getSegmentOptions, "getSegmentOptions cannot be nil")
 	if err != nil {
 		return
@@ -2536,11 +3160,11 @@ func (appConfiguration *AppConfigurationV1) GetSegmentWithContext(ctx context.Co
 // DeleteSegment : Delete a segment
 // Delete a segment.
 func (appConfiguration *AppConfigurationV1) DeleteSegment(deleteSegmentOptions *DeleteSegmentOptions) (response *core.DetailedResponse, err error) {
-	return appConfiguration.DeleteSegmentWithContext(context.Background(), deleteSegmentOptions)
+	return appConfiguration.deleteSegmentWithContext(context.Background(), deleteSegmentOptions)
 }
 
 // DeleteSegmentWithContext is an alternate form of the DeleteSegment method which supports a Context parameter
-func (appConfiguration *AppConfigurationV1) DeleteSegmentWithContext(ctx context.Context, deleteSegmentOptions *DeleteSegmentOptions) (response *core.DetailedResponse, err error) {
+func (appConfiguration *AppConfigurationV1) deleteSegmentWithContext(ctx context.Context, deleteSegmentOptions *DeleteSegmentOptions) (response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(deleteSegmentOptions, "deleteSegmentOptions cannot be nil")
 	if err != nil {
 		return
@@ -2714,7 +3338,7 @@ type DeleteSegmentOptions struct {
 }
 
 // NewDeleteasegmentOptions : Instantiate DeleteSegmentOptions
-func (*AppConfigurationV1) NewDeleteasegmentOptions(segmentID string) *DeleteSegmentOptions {
+func (*AppConfigurationV1) NewDeleteSegmentOptions(segmentID string) *DeleteSegmentOptions {
 	return &DeleteSegmentOptions{
 		SegmentID: core.StringPtr(segmentID),
 	}
@@ -3127,4 +3751,677 @@ func UnmarshalSegmentRule(m map[string]json.RawMessage, result interface{}) (err
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
 	return
+}
+
+// GetPropertiesOptions : The GetProperties options.
+type GetPropertiesOptions struct {
+	// Optional.  Expanded view of the collection details.
+	Expand *bool `json:"expand,omitempty"`
+
+	// property Id.
+	Sort *string `json:"sort,omitempty"`
+
+	// Optional.  Filter based on the tags.
+	Tags *string `json:"tags,omitempty"`
+
+	// Optional.  Feature details to include the associated collections or rules details in the response.
+	Include *string `json:"include,omitempty"`
+
+	// Optional.  Filter features by a list of comma separated collections.
+	Collections *string `json:"collections,omitempty"`
+
+	// Optional.  Filter features by a list of comma separated segments.
+	Segments *string `json:"segments,omitempty"`
+
+	// Optional.  Used for pagination.  Size of the number of records retrieved.
+	Size *int64 `json:"size,omitempty"`
+
+	// Optional.  Used for pagination.  Offset used to retrieve records.
+	Offset *int64 `json:"offset,omitempty"`
+
+	// Allows users to set headers on API requests
+	Headers map[string]string
+}
+
+// NewGetPropertiesOptions : Instantiate GetPropertiesOptions
+func (*AppConfigurationV1) NewGetPropertiesOptions() *GetPropertiesOptions {
+	return &GetPropertiesOptions{}
+}
+
+// SetExpand : Allow user to set Expand
+func (options *GetPropertiesOptions) SetExpand(expand bool) *GetPropertiesOptions {
+	options.Expand = core.BoolPtr(expand)
+	return options
+}
+
+// SetSort : Allow user to set Sort
+func (options *GetPropertiesOptions) SetSort(sort string) *GetPropertiesOptions {
+	options.Sort = core.StringPtr(sort)
+	return options
+}
+
+// SetTags : Allow user to set Tags
+func (options *GetPropertiesOptions) SetTags(tags string) *GetPropertiesOptions {
+	options.Tags = core.StringPtr(tags)
+	return options
+}
+
+// SetInclude : Allow user to set Include
+func (options *GetPropertiesOptions) SetInclude(include string) *GetPropertiesOptions {
+	options.Include = core.StringPtr(include)
+	return options
+}
+
+// SetCollections : Allow user to set Collections
+func (options *GetPropertiesOptions) SetCollections(collections string) *GetPropertiesOptions {
+	options.Collections = core.StringPtr(collections)
+	return options
+}
+
+// SetSegments : Allow user to set Segments
+func (options *GetPropertiesOptions) SetSegments(segments string) *GetPropertiesOptions {
+	options.Segments = core.StringPtr(segments)
+	return options
+}
+
+// SetSize : Allow user to set Size
+func (options *GetPropertiesOptions) SetSize(size int64) *GetPropertiesOptions {
+	options.Size = core.Int64Ptr(size)
+	return options
+}
+
+// SetOffset : Allow user to set Offset
+func (options *GetPropertiesOptions) SetOffset(offset int64) *GetPropertiesOptions {
+	options.Offset = core.Int64Ptr(offset)
+	return options
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *GetPropertiesOptions) SetHeaders(param map[string]string) *GetPropertiesOptions {
+	options.Headers = param
+	return options
+}
+
+// GetPropertyDetailsOptions : The GetPropertyDetails options.
+type GetPropertyDetailsOptions struct {
+	// Property Id.
+	PropertyID *string `json:"property_id" validate:"required,ne="`
+
+	// Optional.  Feature details to include the associated collections or rules details in the response.
+	Include *string `json:"include,omitempty"`
+
+	// Allows users to set headers on API requests
+	Headers map[string]string
+}
+
+// NewGetPropertyDetailsOptions : Instantiate GetPropertyDetailsOptions
+func (*AppConfigurationV1) NewGetPropertyOptions(propertyID string) *GetPropertyDetailsOptions {
+	return &GetPropertyDetailsOptions{
+		PropertyID: core.StringPtr(propertyID),
+	}
+}
+
+// SetPropertyID : Allow user to set PropertyID
+func (options *GetPropertyDetailsOptions) SetPropertyID(propertyID string) *GetPropertyDetailsOptions {
+	options.PropertyID = core.StringPtr(propertyID)
+	return options
+}
+
+// SetInclude : Allow user to set Include
+func (options *GetPropertyDetailsOptions) SetInclude(include string) *GetPropertyDetailsOptions {
+	options.Include = core.StringPtr(include)
+	return options
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *GetPropertyDetailsOptions) SetHeaders(param map[string]string) *GetPropertyDetailsOptions {
+	options.Headers = param
+	return options
+}
+
+// ListProperties : List all properties.
+type ListProperties struct {
+	// Array of properties.
+	Properties []PropertyObject `json:"properties" validate:"required"`
+
+	PageInfo *PageInfo `json:"page_info" validate:"required"`
+}
+
+// UnmarshalListProperties unmarshals an instance of ListProperties from the specified map of raw messages.
+func UnmarshalListProperties(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(ListProperties)
+	err = core.UnmarshalModel(m, "properties", &obj.Properties, UnmarshalPropertyObject)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(m, "page_info", &obj.PageInfo, UnmarshalPageInfo)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// PropertyObject : properties object.
+type PropertyObject struct {
+	// Property name.
+	Name *string `json:"name" validate:"required"`
+
+	// Property id.
+	PropertyID *string `json:"property_id" validate:"required"`
+
+	// Property description.
+	Description *string `json:"description" validate:"required"`
+
+	// Type of the Property (BOOLEAN, STRING, NUMERIC).
+	Type *string `json:"type" validate:"required"`
+
+	// Value of the Property.
+	Value interface{} `json:"value" validate:"required"`
+
+	// Tags associated with the Property.
+	Tags *string `json:"tags" validate:"required"`
+
+	// Segment Rules array.
+	SegmentRules []SegmentRule `json:"segment_rules" validate:"required"`
+
+	// Collection array.
+	Collections []CollectionID `json:"collections" validate:"required"`
+}
+
+// NewPropertyObject : Instantiate PropertyObject (Generic Model Constructor)
+func (*AppConfigurationV1) NewPropertyObject(name string, propertyID string, description string, typeVar string, value bool, tags string, segmentRules []SegmentRule, collections []CollectionID) (model *PropertyObject, err error) {
+	model = &PropertyObject{
+		Name:         core.StringPtr(name),
+		PropertyID:   core.StringPtr(propertyID),
+		Description:  core.StringPtr(description),
+		Type:         core.StringPtr(typeVar),
+		Value:        core.BoolPtr(value),
+		Tags:         core.StringPtr(tags),
+		SegmentRules: segmentRules,
+		Collections:  collections,
+	}
+	err = core.ValidateStruct(model, "required parameters")
+	return
+}
+
+// UnmarshalPropertyObject unmarshals an instance of PropertyObject from the specified map of raw messages.
+func UnmarshalPropertyObject(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(PropertyObject)
+	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "property_id", &obj.PropertyID)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "description", &obj.Description)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "type", &obj.Type)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "value", &obj.Value)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "tags", &obj.Tags)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(m, "segment_rules", &obj.SegmentRules, UnmarshalSegmentRule)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(m, "collections", &obj.Collections, UnmarshalCollectionID)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// PropertyOutput : Property object.
+type PropertyOutput struct {
+	// Property id.
+	PropertyID *string `json:"property_id" validate:"required"`
+
+	// Feature name.
+	Name *string `json:"name" validate:"required"`
+
+	// Value of the Property.
+	Value *bool `json:"value" validate:"required"`
+}
+
+// NewPropertyOutput : Instantiate PropertyOutput (Generic Model Constructor)
+func (*AppConfigurationV1) NewPropertyOutput(propertyID string, name string, value bool) (model *PropertyOutput, err error) {
+	model = &PropertyOutput{
+		PropertyID: core.StringPtr(propertyID),
+		Name:       core.StringPtr(name),
+		Value:      core.BoolPtr(value),
+	}
+	err = core.ValidateStruct(model, "required parameters")
+	return
+}
+
+// UnmarshalPropertyOutput unmarshals an instance of PropertyOutput from the specified map of raw messages.
+func UnmarshalPropertyOutput(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(PropertyOutput)
+	err = core.UnmarshalPrimitive(m, "property_id", &obj.PropertyID)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "value", &obj.Value)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// UpdatePropertyOptions : The UpdateProperty options.
+type UpdatePropertyOptions struct {
+	// Property Id.
+	PropertyID *string `json:"property_id" validate:"required,ne="`
+
+	// Property name.
+	Name *string `json:"name,omitempty"`
+
+	// Property description.
+	Description *string `json:"description,omitempty"`
+
+	// Value of the property when it is enabled.
+	Value *string `json:"value,omitempty"`
+
+	// Tags associated with the property.
+	Tags *string `json:"tags,omitempty"`
+
+	// Segment Rule array.
+	SegmentRules []SegmentRule `json:"segment_rules,omitempty"`
+
+	// Collections array.
+	Collections []CollectionID `json:"collections,omitempty"`
+
+	// Allows users to set headers on API requests
+	Headers map[string]string
+}
+
+// NewUpdatePropertyOptions : Instantiate UpdatePropertyOptions
+func (*AppConfigurationV1) NewUpdatePropertyOptions(propertyID string) *UpdatePropertyOptions {
+	return &UpdatePropertyOptions{
+		PropertyID: core.StringPtr(propertyID),
+	}
+}
+
+// SetPropertyID : Allow user to set PropertyID
+func (options *UpdatePropertyOptions) SetPropertyID(propertyID string) *UpdatePropertyOptions {
+	options.PropertyID = core.StringPtr(propertyID)
+	return options
+}
+
+// SetName : Allow user to set Name
+func (options *UpdatePropertyOptions) SetName(name string) *UpdatePropertyOptions {
+	options.Name = core.StringPtr(name)
+	return options
+}
+
+// SetDescription : Allow user to set Description
+func (options *UpdatePropertyOptions) SetDescription(description string) *UpdatePropertyOptions {
+	options.Description = core.StringPtr(description)
+	return options
+}
+
+// SetValue : Allow user to set Value
+func (options *UpdatePropertyOptions) SetValue(value string) *UpdatePropertyOptions {
+	options.Value = core.StringPtr(value)
+	return options
+}
+
+// SetTags : Allow user to set Tags
+func (options *UpdatePropertyOptions) SetTags(tags string) *UpdatePropertyOptions {
+	options.Tags = core.StringPtr(tags)
+	return options
+}
+
+// SetSegmentRules : Allow user to set SegmentRules
+func (options *UpdatePropertyOptions) SetSegmentRules(segmentRules []SegmentRule) *UpdatePropertyOptions {
+	options.SegmentRules = segmentRules
+	return options
+}
+
+// SetCollections : Allow user to set Collections
+func (options *UpdatePropertyOptions) SetCollections(collections []CollectionID) *UpdatePropertyOptions {
+	options.Collections = collections
+	return options
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *UpdatePropertyOptions) SetHeaders(param map[string]string) *UpdatePropertyOptions {
+	options.Headers = param
+	return options
+}
+
+// PatchPropertyOptions : The PatchProperty options.
+type PatchPropertyOptions struct {
+	// Property Id.
+	PropertyID *string `json:"property_id" validate:"required,ne="`
+
+	// Property name.
+	Name *string `json:"name,omitempty"`
+
+	// Property description.
+	Description *string `json:"description,omitempty"`
+
+	// Property tags.
+	Tags *string `json:"tags,omitempty"`
+
+	// Value of the property when it is enabled.
+	Value *string `json:"value,omitempty"`
+
+	// Segment Rule array.
+	SegmentRules []SegmentRule `json:"segment_rules,omitempty"`
+
+	// Allows users to set headers on API requests
+	Headers map[string]string
+}
+
+// NewPatchPropertyOptions : Instantiate PatchPropertyOptions
+func (*AppConfigurationV1) NewPatchPropertyOptions(propertyID string) *PatchPropertyOptions {
+	return &PatchPropertyOptions{
+		PropertyID: core.StringPtr(propertyID),
+	}
+}
+
+// SetPropertyID : Allow user to set PropertyID
+func (options *PatchPropertyOptions) SetPropertyID(propertyID string) *PatchPropertyOptions {
+	options.PropertyID = core.StringPtr(propertyID)
+	return options
+}
+
+// SetName : Allow user to set Name
+func (options *PatchPropertyOptions) SetName(name string) *PatchPropertyOptions {
+	options.Name = core.StringPtr(name)
+	return options
+}
+
+// SetDescription : Allow user to set Description
+func (options *PatchPropertyOptions) SetDescription(description string) *PatchPropertyOptions {
+	options.Description = core.StringPtr(description)
+	return options
+}
+
+// SetTags : Allow user to set Tags
+func (options *PatchPropertyOptions) SetTags(tags string) *PatchPropertyOptions {
+	options.Tags = core.StringPtr(tags)
+	return options
+}
+
+// SetValue : Allow user to set Value
+func (options *PatchPropertyOptions) SetValue(value string) *PatchPropertyOptions {
+	options.Value = core.StringPtr(value)
+	return options
+}
+
+// SetSegmentRules : Allow user to set SegmentRules
+func (options *PatchPropertyOptions) SetSegmentRules(segmentRules []SegmentRule) *PatchPropertyOptions {
+	options.SegmentRules = segmentRules
+	return options
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *PatchPropertyOptions) SetHeaders(param map[string]string) *PatchPropertyOptions {
+	options.Headers = param
+	return options
+}
+
+// PatchFeatureOptions : The PatchFeature options.
+type PatchFeatureOptions struct {
+	// Feature Id.
+	FeatureID *string `json:"feature_id" validate:"required,ne="`
+
+	// Feature name.
+	Name *string `json:"name,omitempty"`
+
+	// Feature description.
+	Description *string `json:"description,omitempty"`
+
+	// Feature tags.
+	Tags *string `json:"tags,omitempty"`
+
+	// Value of the feature when it is enabled.
+	EnabledValue *string `json:"enabled_value,omitempty"`
+
+	// Value of the feature when it is disabled.
+	DisabledValue *string `json:"disabled_value,omitempty"`
+
+	// Segment Rule array.
+	SegmentRules []SegmentRule `json:"segment_rules,omitempty"`
+
+	// Allows users to set headers on API requests
+	Headers map[string]string
+}
+
+// NewPatchFeatureOptions : Instantiate PatchFeatureOptions
+func (*AppConfigurationV1) NewPatchFeatureOptions(featureID string) *PatchFeatureOptions {
+	return &PatchFeatureOptions{
+		FeatureID: core.StringPtr(featureID),
+	}
+}
+
+// SetPropertyID : Allow user to set PropertyID
+func (options *PatchFeatureOptions) SetFeatureID(featureID string) *PatchFeatureOptions {
+	options.FeatureID = core.StringPtr(featureID)
+	return options
+}
+
+// SetName : Allow user to set Name
+func (options *PatchFeatureOptions) SetName(name string) *PatchFeatureOptions {
+	options.Name = core.StringPtr(name)
+	return options
+}
+
+// SetDescription : Allow user to set Description
+func (options *PatchFeatureOptions) SetDescription(description string) *PatchFeatureOptions {
+	options.Description = core.StringPtr(description)
+	return options
+}
+
+// SetTags : Allow user to set Description
+func (options *PatchFeatureOptions) SetTags(tags string) *PatchFeatureOptions {
+	options.Tags = core.StringPtr(tags)
+	return options
+}
+
+// SetDisabledValue : Allow user to set DisabledValue
+func (options *PatchFeatureOptions) SetDisabledValue(disabledValue string) *PatchFeatureOptions {
+	options.DisabledValue = core.StringPtr(disabledValue)
+	return options
+}
+
+// SetEnabledValue : Allow user to set EnabledValue
+func (options *PatchFeatureOptions) SetEnabledValue(enabledValue string) *PatchFeatureOptions {
+	options.EnabledValue = core.StringPtr(enabledValue)
+	return options
+}
+
+// SetSegmentRules : Allow user to set SegmentRules
+func (options *PatchFeatureOptions) SetSegmentRules(segmentRules []SegmentRule) *PatchFeatureOptions {
+	options.SegmentRules = segmentRules
+	return options
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *PatchFeatureOptions) SetHeaders(param map[string]string) *PatchFeatureOptions {
+	options.Headers = param
+	return options
+}
+
+// CreatePropertyOptions : The CreateProperty options.
+type CreatePropertyOptions struct {
+	// Property name.
+	Name *string `json:"name" validate:"required"`
+
+	// Property id.
+	PropertyID *string `json:"property_id" validate:"required"`
+
+	// Property description.
+	Description *string `json:"description" validate:"required"`
+
+	// Type of the Property (BOOLEAN, STRING, NUMERIC).
+	Type *string `json:"type" validate:"required"`
+
+	// Value of the Property.
+	Value *string `json:"value" validate:"required"`
+
+	// Tags associated with the Property.
+	Tags *string `json:"tags" validate:"required"`
+
+	// Segment Rules array.
+	SegmentRules []SegmentRule `json:"segment_rules" validate:"required"`
+
+	// Collection array.
+	Collections []CollectionID `json:"collections" validate:"required"`
+
+	// Allows users to set headers on API requests
+	Headers map[string]string
+}
+
+// NewCreatePropertyOptions : Instantiate CreatePropertyOptions
+func (*AppConfigurationV1) NewCreatePropertyOptions(name string, propertyID string, description string, typeVar string, value string, tags string, segmentRules []SegmentRule, collections []CollectionID) *CreatePropertyOptions {
+	return &CreatePropertyOptions{
+		Name:         core.StringPtr(name),
+		PropertyID:   core.StringPtr(propertyID),
+		Description:  core.StringPtr(description),
+		Type:         core.StringPtr(typeVar),
+		Value:        core.StringPtr(value),
+		Tags:         core.StringPtr(tags),
+		SegmentRules: segmentRules,
+		Collections:  collections,
+	}
+}
+
+// SetName : Allow user to set Name
+func (options *CreatePropertyOptions) SetName(name string) *CreatePropertyOptions {
+	options.Name = core.StringPtr(name)
+	return options
+}
+
+// SetPropertyID : Allow user to set PropertyID
+func (options *CreatePropertyOptions) SetPropertyID(propertyID string) *CreatePropertyOptions {
+	options.PropertyID = core.StringPtr(propertyID)
+	return options
+}
+
+// SetDescription : Allow user to set Description
+func (options *CreatePropertyOptions) SetDescription(description string) *CreatePropertyOptions {
+	options.Description = core.StringPtr(description)
+	return options
+}
+
+// SetType : Allow user to set Type
+func (options *CreatePropertyOptions) SetType(typeVar string) *CreatePropertyOptions {
+	options.Type = core.StringPtr(typeVar)
+	return options
+}
+
+// SetValue : Allow user to set Value
+func (options *CreatePropertyOptions) SetValue(value string) *CreatePropertyOptions {
+	options.Value = core.StringPtr(value)
+	return options
+}
+
+// SetTags : Allow user to set Tags
+func (options *CreatePropertyOptions) SetTags(tags string) *CreatePropertyOptions {
+	options.Tags = core.StringPtr(tags)
+	return options
+}
+
+// SetSegmentRules : Allow user to set SegmentRules
+func (options *CreatePropertyOptions) SetSegmentRules(segmentRules []SegmentRule) *CreatePropertyOptions {
+	options.SegmentRules = segmentRules
+	return options
+}
+
+// SetCollections : Allow user to set Collections
+func (options *CreatePropertyOptions) SetCollections(collections []CollectionID) *CreatePropertyOptions {
+	options.Collections = collections
+	return options
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *CreatePropertyOptions) SetHeaders(param map[string]string) *CreatePropertyOptions {
+	options.Headers = param
+	return options
+}
+
+// DeletePropertyOptions : The DeleteProperty options.
+type DeletePropertyOptions struct {
+	// Property Id.
+	PropertyID *string `json:"property_id" validate:"required,ne="`
+
+	// Allows users to set headers on API requests
+	Headers map[string]string
+}
+
+// NewDeletePropertyOptions : Instantiate DeletePropertyOptions
+func (*AppConfigurationV1) NewDeletePropertyOptions(propertyID string) *DeletePropertyOptions {
+	return &DeletePropertyOptions{
+		PropertyID: core.StringPtr(propertyID),
+	}
+}
+
+// SetPropertyID : Allow user to set PropertyID
+func (options *DeletePropertyOptions) SetPropertyID(propertyID string) *DeletePropertyOptions {
+	options.PropertyID = core.StringPtr(propertyID)
+	return options
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *DeletePropertyOptions) SetHeaders(param map[string]string) *DeletePropertyOptions {
+	options.Headers = param
+	return options
+}
+
+// ToggleFeatureOptions : The ToggleFeature options.
+type ToggleFeatureOptions struct {
+	// Feature Id.
+	FeatureID *string `json:"feature_id" validate:"required,ne="`
+
+	// feature enabled.
+	Enabled *bool `json:"enabled,omitempty"`
+
+	// Allows users to set headers on API requests
+	Headers map[string]string
+}
+
+// NewToggleFeatureOptions : Instantiate ToggleFeatureOptions
+func (*AppConfigurationV1) NewToggleFeatureOptions(featureID string) *ToggleFeatureOptions {
+	return &ToggleFeatureOptions{
+		FeatureID: core.StringPtr(featureID),
+	}
+}
+
+// SetFeatureID : Allow user to set FeatureID
+func (options *ToggleFeatureOptions) SetFeatureID(featureID string) *ToggleFeatureOptions {
+	options.FeatureID = core.StringPtr(featureID)
+	return options
+}
+
+// SetEnabled : Allow user to set Enabled
+func (options *ToggleFeatureOptions) SetEnabled(enabled bool) *ToggleFeatureOptions {
+	options.Enabled = core.BoolPtr(enabled)
+	return options
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *ToggleFeatureOptions) SetHeaders(param map[string]string) *ToggleFeatureOptions {
+	options.Headers = param
+	return options
 }

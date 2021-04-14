@@ -51,8 +51,15 @@ var appConfigurationServiceInstance *appconfigurationv1.AppConfigurationV1
 
 
 func init() {
+
+    // Using Bearer Token
+    authenticator := &core.BearerTokenAuthenticator{
+        BearerToken: "authToken",
+    }
+	
+	// Using API Key
 	authenticator := &core.IamAuthenticator{
-		ApiKey: "apikey",
+		ApiKey: "authToken",
 	}
 
 	options := &appconfigurationv1.AppConfigurationV1Options{ 
@@ -69,7 +76,7 @@ func init() {
 
 ```
 
-- apikey : apikey of the App Configuration service. Get it from the service credentials section of the dashboard.
+- authToken : authToken of the App Configuration service. Get it from the service credentials section of the dashboard. Choose any option from APIKey or Bearer Token to authenticate.
 - url : url of the App Configuration Instance. URL instance can found from [here](https://cloud.ibm.com/apidocs/app-configuration#endpoint-url)
 
 ## Using the SDK
@@ -97,6 +104,8 @@ SDK Methods to consume ->
 where *Item* can be replaced with Collection, Feature or Segment.
 
 Refer [this](https://cloud.ibm.com/apidocs/app-configuration) for details on the input parameters for each SDK method.
+
+Note -> You need to have the required access (READER/WRITER/MANAGER/CONFIG_OPERATOR) to the instances for respective APIs.
 
 **For more details on the above points, refer 'sampleProgram.go' in 'examples' directory.**
 ### Create Collection
@@ -152,9 +161,28 @@ result, response, error := appConfigurationServiceInstance.GetFeature(getFeature
 
 ### Delete Segment
 ```go
-deleteSegmentOptionsModel := new(appconfigurationv1.DeleteSegmentOptions)
-deleteSegmentOptionsModel.SegmentID = core.StringPtr(id)
+deleteSegmentOptionsModel := appConfigurationServiceInstance.NewDeleteSegmentOptions(segmentId)
 response, error := appConfigurationServiceInstance.DeleteSegment(deleteSegmentOptionsModel)
+```
+
+### Toggle Feature
+```go
+toggleFeatureOptionsModel := appConfigurationServiceInstance.NewToggleFeatureOptions(featureId)
+toggleFeatureOptionsModel.SetEnabled(enableFlag)
+result, response, error := appConfigurationServiceInstance.ToggleFeature(toggleFeatureOptionsModel)
+```
+
+### Patch Property
+```go
+ruleArray, _ := appConfigurationServiceInstance.NewRule(segments)
+segmentRuleArray, _ := appConfigurationServiceInstance.NewSegmentRule([]appconfigurationv1.Rule{*ruleArray}, value, order)
+patchPropertyOptionsModel := appConfigurationServiceInstance.NewPatchPropertyOptions(propertyId)
+patchPropertyOptionsModel.SetName(name)
+patchPropertyOptionsModel.SetDescription(description)
+patchPropertyOptionsModel.SetTags(tags)
+patchPropertyOptionsModel.SetValue(valueOfProperty)
+patchPropertyOptionsModel.SetSegmentRules([]appconfigurationv1.SegmentRule{*segmentRuleArray})
+result, response, error := appConfigurationServiceInstance.PatchProperty(patchPropertyOptionsModel)
 ```
 
 ## License
