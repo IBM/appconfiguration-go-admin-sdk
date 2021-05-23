@@ -26,7 +26,7 @@ import (
 
 var appConfigurationServiceInstance *appconfigurationv1.AppConfigurationV1
 
-func initAndReturnSingletonInstanceWithAPIKey(authToken string, url string) *appconfigurationv1.AppConfigurationV1 {
+func initAndReturnSingletonInstanceWithAPIKey(authToken string, guid string, region string) *appconfigurationv1.AppConfigurationV1 {
 
 	var once sync.Once
 	if appConfigurationServiceInstance == nil {
@@ -37,12 +37,12 @@ func initAndReturnSingletonInstanceWithAPIKey(authToken string, url string) *app
 				}
 				options := &appconfigurationv1.AppConfigurationV1Options{
 					Authenticator: authenticator,
-					URL:           url,
+					URL:           "https://" + region + ".apprapp.cloud.ibm.com/apprapp/feature/v1/instances/" + guid,
 				}
-				var error error
-				appConfigurationServiceInstance, error = appconfigurationv1.NewAppConfigurationV1(options)
-				if error != nil {
-					fmt.Println("Error: " + error.Error())
+				var err error
+				appConfigurationServiceInstance, err = appconfigurationv1.NewAppConfigurationV1(options)
+				if err != nil {
+					fmt.Println("Error: " + err.Error())
 					return
 				}
 			}
@@ -51,7 +51,7 @@ func initAndReturnSingletonInstanceWithAPIKey(authToken string, url string) *app
 	return appConfigurationServiceInstance
 }
 
-func initAndReturnSingletonInstanceWithBearerToken(authToken string, url string) *appconfigurationv1.AppConfigurationV1 {
+func initAndReturnSingletonInstanceWithBearerToken(authToken string, guid string, region string) *appconfigurationv1.AppConfigurationV1 {
 
 	var once sync.Once
 	if appConfigurationServiceInstance == nil {
@@ -62,12 +62,12 @@ func initAndReturnSingletonInstanceWithBearerToken(authToken string, url string)
 				}
 				options := &appconfigurationv1.AppConfigurationV1Options{
 					Authenticator: authenticator,
-					URL:           url,
+					URL:           "https://" + region + ".apprapp.cloud.ibm.com/apprapp/feature/v1/instances/" + guid,
 				}
-				var error error
-				appConfigurationServiceInstance, error = appconfigurationv1.NewAppConfigurationV1(options)
-				if error != nil {
-					fmt.Println("Error: " + error.Error())
+				var err error
+				appConfigurationServiceInstance, err = appconfigurationv1.NewAppConfigurationV1(options)
+				if err != nil {
+					fmt.Println("Error: " + err.Error())
 					return
 				}
 			}
@@ -79,56 +79,76 @@ func initAndReturnSingletonInstanceWithBearerToken(authToken string, url string)
 func main() {
 
 	authToken := "<authToken>"
-	url := "<url>"
+	guid := "<guid>"
+	region := "<region>"
 
-	initAndReturnSingletonInstanceWithAPIKey(authToken, url)
+	initAndReturnSingletonInstanceWithAPIKey(authToken, guid, region)
 
+	createEnvironment("environmentId", "environmentName", "desc", "tags", "#FDD13A")
 	createCollection("collectionId", "collectionName", "desc", "tags")
 	createSegment("segmentName", "segmentId", "desc", "tags", "email", "endsWith", []string{"@in.ibm.com"})
-	createFeature("booleanFeatureName", "booleanFeatureId", "desc", "BOOLEAN", "true", "false", "tags", []string{"segmentId"}, 1, "collectionId", false, "true")
-	createFeature("numberFeatureName", "numberFeatureId", "desc", "NUMERIC", "1", "2", "tags", []string{"segmentId"}, 1, "collectionId", true, "3")
-	createProperty("booleanPropertyName", "booleanPropertyId", "desc", "BOOLEAN", "true", "tags", []string{"segmentId"}, "collectionId", 2, "true")
-	createProperty("numberPropertyName", "numberPropertyId", "desc", "NUMERIC", "2", "tags", []string{"segmentId"}, "collectionId", 2, "4")
+	createFeature("environmentId", "booleanFeatureName", "booleanFeatureId", "desc", "BOOLEAN", "true", "false", "tags", []string{"segmentId"}, 1, "collectionId", "true")
+	createFeature("environmentId", "numberFeatureName", "numberFeatureId", "desc", "NUMERIC", "1", "2", "tags", []string{"segmentId"}, 1, "collectionId", "3")
+	createProperty("environmentId", "booleanPropertyName", "booleanPropertyId", "desc", "BOOLEAN", "true", "tags", []string{"segmentId"}, "collectionId", 2, "true")
+	createProperty("environmentId", "numberPropertyName", "numberPropertyId", "desc", "NUMERIC", "2", "tags", []string{"segmentId"}, "collectionId", 2, "4")
 
-	toggleFeature("numberFeatureId", false)
+	toggleFeature("environmentId", "booleanFeatureId", true)
 
-	getCollections()
-	getFeatures()
-	getSegments()
-	getProperties()
+	listEnvironments()
+	listCollections()
+	listFeatures("environmentId")
+	listSegments()
+	listProperties("environmentId")
 
-	updateFeature("numberFeatureId", "numberFeatureName", "updatedDesc", "1", "1", "tags", []string{}, 1, "collectionId", false, "2", true)
+	updateFeature("environmentId", "numberFeatureId", "numberFeatureName", "updatedDesc", "1", "1", "tags", []string{}, 1, "collectionId", "2", true)
 	updateCollection("collectionId", "collectionName", "updatedDesc", "updatedTags")
 	updateSegment("segmentId", "segmentName", "updatedDesc", "updatedTags", "email", "endsWith", []string{"@in.ibm.com"})
-	updateProperty("booleanPropertyName", "booleanPropertyId", "updatedDescBoolean", "true", "updatedTags", []string{"segmentId"}, "collectionId", 2, "true")
+	updateProperty("environmentId", "booleanPropertyName", "booleanPropertyId", "updatedDescBoolean", "true", "updatedTags", []string{"segmentId"}, "collectionId", 2, "true")
+	updateEnvironment("environmentId", "environmentName", "updatedDesc", "tags", "#FDD13A")
 
+	getEnvironment("environmentId")
 	getCollection("collectionId")
-	getFeature("booleanFeatureId")
-	getProperty("booleanPropertyId")
+	getFeature("environmentId", "booleanFeatureId")
+	getProperty("environmentId", "booleanPropertyId")
 	getSegment("segmentId")
 
-	patchFeature("booleanFeatureId", "booleanFeatureName", "patchedDesc", "1", "12", "tag", []string{}, 1, "2")
-	patchProperty("numberPropertyName", "numberPropertyId", "desc", "1", "tags", []string{"segmentId"}, 2, "2")
+	updateFeatureValues("environmentId", "booleanFeatureId", "booleanFeatureName", "patchedDesc", "1", "12", "tag", []string{}, 1, "2")
+	updatePropertyValues("environmentId", "numberPropertyName", "numberPropertyId", "desc", "1", "tags", []string{"segmentId"}, 2, "2")
 
+	deleteFeature("environmentId", "numberFeatureId")
+	deleteFeature("environmentId", "booleanFeatureId")
+	deleteProperty("environmentId", "numberPropertyId")
+	deleteProperty("environmentId", "booleanPropertyId")
 	deleteSegment("segmentId")
 	deleteCollection("collectionId")
-	deleteFeature("numberFeatureId")
-	deleteFeature("booleanFeatureId")
-	deleteProperty("numberPropertyId")
-	deleteProperty("booleanPropertyId")
+	deleteEnvironment("environmentId")
 }
 
 // Create examples
 
+func createEnvironment(environmentId string, name string, description string, tags string, colorCode string) {
+	fmt.Println("createEnvironment")
+	createEnvironmentOptionsModel := appConfigurationServiceInstance.NewCreateEnvironmentOptions(name, environmentId)
+	createEnvironmentOptionsModel.SetDescription(description)
+	createEnvironmentOptionsModel.SetTags(tags)
+	createEnvironmentOptionsModel.SetColorCode(colorCode)
+	result, response, err := appConfigurationServiceInstance.CreateEnvironment(createEnvironmentOptionsModel)
+	if err != nil {
+		fmt.Println("Error: " + err.Error())
+		return
+	}
+	fmt.Println(response.StatusCode)
+	fmt.Println(*result.EnvironmentID)
+}
+
 func createCollection(collectionId string, name string, description string, tags string) {
 	fmt.Println("createCollection")
-	createCollectionOptionsModel := appConfigurationServiceInstance.NewCreateCollectionOptions(name)
-	createCollectionOptionsModel.SetCollectionID(collectionId)
+	createCollectionOptionsModel := appConfigurationServiceInstance.NewCreateCollectionOptions(name, collectionId)
 	createCollectionOptionsModel.SetDescription(description)
 	createCollectionOptionsModel.SetTags(tags)
-	result, response, error := appConfigurationServiceInstance.CreateCollection(createCollectionOptionsModel)
-	if error != nil {
-		fmt.Println("Error: " + error.Error())
+	result, response, err := appConfigurationServiceInstance.CreateCollection(createCollectionOptionsModel)
+	if err != nil {
+		fmt.Println("Error: " + err.Error())
 		return
 	}
 	fmt.Println(response.StatusCode)
@@ -137,42 +157,54 @@ func createCollection(collectionId string, name string, description string, tags
 
 func createSegment(name string, id string, description string, tags string, attributeName string, operator string, values []string) {
 	fmt.Println("createSegment")
-	ruleArray, _ := appConfigurationServiceInstance.NewRuleArray(attributeName, operator, values)
-	createSegmentOptionsModel := appConfigurationServiceInstance.NewCreateSegmentOptions(name, id, description, tags, []appconfigurationv1.RuleArray{*ruleArray}, "SDK")
-	result, response, error := appConfigurationServiceInstance.CreateSegment(createSegmentOptionsModel)
-	if error != nil {
-		fmt.Println("Error: " + error.Error())
+	ruleArray, _ := appConfigurationServiceInstance.NewRule(attributeName, operator, values)
+	createSegmentOptionsModel := appConfigurationServiceInstance.NewCreateSegmentOptions()
+	createSegmentOptionsModel.SetName(name)
+	createSegmentOptionsModel.SetDescription(description)
+	createSegmentOptionsModel.SetTags(tags)
+	createSegmentOptionsModel.SetSegmentID(id)
+	createSegmentOptionsModel.SetRules([]appconfigurationv1.Rule{*ruleArray})
+	result, response, err := appConfigurationServiceInstance.CreateSegment(createSegmentOptionsModel)
+	if err != nil {
+		fmt.Println("Error: " + err.Error())
 		return
 	}
 	fmt.Println(response.StatusCode)
 	fmt.Println(*result.SegmentID)
 }
 
-func createFeature(name string, id string, description string, typeOfFeature string, enabledValue string, disabledValue string, tags string, segments []string, order int64, collectionId string, enabledInCollection bool, value string) {
+func createFeature(environmentId string, name string, id string, description string, typeOfFeature string, enabledValue string, disabledValue string, tags string, segments []string, order int64, collectionId string, value string) {
 	fmt.Println("createFeature")
-	ruleArray, _ := appConfigurationServiceInstance.NewRule(segments)
-	segmentRuleArray, _ := appConfigurationServiceInstance.NewSegmentRule([]appconfigurationv1.Rule{*ruleArray}, value, order)
-	collectionArray, _ := appConfigurationServiceInstance.NewCollection(collectionId, enabledInCollection)
-	createFeatureOptionsModel := appConfigurationServiceInstance.NewCreateFeatureOptions(name, id, description, typeOfFeature, enabledValue, disabledValue, tags, []appconfigurationv1.SegmentRule{*segmentRuleArray}, []appconfigurationv1.Collection{*collectionArray}, "SDK")
-	result, response, error := appConfigurationServiceInstance.CreateFeature(createFeatureOptionsModel)
-	if error != nil {
-		fmt.Println("Error: " + error.Error())
+	ruleArray, _ := appConfigurationServiceInstance.NewTargetSegments(segments)
+	segmentRuleArray, _ := appConfigurationServiceInstance.NewSegmentRule([]appconfigurationv1.TargetSegments{*ruleArray}, value, order)
+	collectionArray, _ := appConfigurationServiceInstance.NewCollectionRef(collectionId)
+	createFeatureOptionsModel := appConfigurationServiceInstance.NewCreateFeatureOptions(environmentId, name, id, typeOfFeature, enabledValue, disabledValue)
+	createFeatureOptionsModel.SetTags(tags)
+	createFeatureOptionsModel.SetDescription(description)
+	createFeatureOptionsModel.SetSegmentRules([]appconfigurationv1.SegmentRule{*segmentRuleArray})
+	createFeatureOptionsModel.SetCollections([]appconfigurationv1.CollectionRef{*collectionArray})
+	result, response, err := appConfigurationServiceInstance.CreateFeature(createFeatureOptionsModel)
+	if err != nil {
+		fmt.Println("Error: " + err.Error())
 		return
 	}
 	fmt.Println(response.StatusCode)
 	fmt.Println(*result.FeatureID)
 }
 
-
-func createProperty(name string, propertyId string, description string, typeOfProperty string, valueOfProperty string, tags string, segments []string, collectionId string, order int64, value string) {
+func createProperty(environmentId string, name string, propertyId string, description string, typeOfProperty string, valueOfProperty string, tags string, segments []string, collectionId string, order int64, value string) {
 	fmt.Println("createProperty")
-	ruleArray2, _ := appConfigurationServiceInstance.NewRule(segments)
-	segmentRuleArray, _ := appConfigurationServiceInstance.NewSegmentRule([]appconfigurationv1.Rule{*ruleArray2}, value, order)
-	collectionArray, _ := appConfigurationServiceInstance.NewCollectionID(collectionId)
-	createPropertyOptionsModel := appConfigurationServiceInstance.NewCreatePropertyOptions(name, propertyId, description, typeOfProperty, valueOfProperty, tags, []appconfigurationv1.SegmentRule{*segmentRuleArray}, []appconfigurationv1.CollectionID{*collectionArray})
-	result, response, error := appConfigurationServiceInstance.CreateProperty(createPropertyOptionsModel)
-	if error != nil {
-		fmt.Println("Error: " + error.Error())
+	ruleArray, _ := appConfigurationServiceInstance.NewTargetSegments(segments)
+	segmentRuleArray, _ := appConfigurationServiceInstance.NewSegmentRule([]appconfigurationv1.TargetSegments{*ruleArray}, value, order)
+	collectionArray, _ := appConfigurationServiceInstance.NewCollectionRef(collectionId)
+	createPropertyOptionsModel := appConfigurationServiceInstance.NewCreatePropertyOptions(environmentId, name, propertyId, typeOfProperty, valueOfProperty)
+	createPropertyOptionsModel.SetTags(tags)
+	createPropertyOptionsModel.SetDescription(description)
+	createPropertyOptionsModel.SetSegmentRules([]appconfigurationv1.SegmentRule{*segmentRuleArray})
+	createPropertyOptionsModel.SetCollections([]appconfigurationv1.CollectionRef{*collectionArray})
+	result, response, err := appConfigurationServiceInstance.CreateProperty(createPropertyOptionsModel)
+	if err != nil {
+		fmt.Println("Error: " + err.Error())
 		return
 	}
 	fmt.Println(response.StatusCode)
@@ -181,15 +213,38 @@ func createProperty(name string, propertyId string, description string, typeOfPr
 
 // Update examples
 
-func updateFeature(id string, name string, description string, enabledValue string, disabledValue string, tags string, segments []string, order int64, collectionName string, enabledInCollection bool, value string, deletedFlag bool) {
+func updateEnvironment(environmentId string, name string, description string, tags string, colorCode string) {
+	fmt.Println("updateEnvironment")
+	updateEnvironmentOptionsModel := appConfigurationServiceInstance.NewUpdateEnvironmentOptions(environmentId)
+	updateEnvironmentOptionsModel.SetName(name)
+	updateEnvironmentOptionsModel.SetDescription(description)
+	updateEnvironmentOptionsModel.SetTags(tags)
+	updateEnvironmentOptionsModel.SetColorCode(colorCode)
+	result, response, err := appConfigurationServiceInstance.UpdateEnvironment(updateEnvironmentOptionsModel)
+	if err != nil {
+		fmt.Println("Error: " + err.Error())
+		return
+	}
+	fmt.Println(response.StatusCode)
+	fmt.Println(*result.Description)
+}
+
+func updateFeature(environmentId string, id string, name string, description string, enabledValue string, disabledValue string, tags string, segments []string, order int64, collectionId string, value string, deletedFlag bool) {
 	fmt.Println("updateFeatureWithNumberValue")
-	ruleArray, _ := appConfigurationServiceInstance.NewRule(segments)
-	segmentRuleArray, _ := appConfigurationServiceInstance.NewSegmentRule([]appconfigurationv1.Rule{*ruleArray}, value, order)
-	collectionArray, _ := appConfigurationServiceInstance.NewCollectionWithDeletedFlag(collectionName, enabledInCollection, deletedFlag)
-	updateFeatureOptionsModel := appConfigurationServiceInstance.NewUpdateFeatureOptions(id, name, description, enabledValue, disabledValue, tags, []appconfigurationv1.SegmentRule{*segmentRuleArray}, []appconfigurationv1.CollectionWithDeletedFlag{*collectionArray})
-	result, response, error := appConfigurationServiceInstance.UpdateFeature(updateFeatureOptionsModel)
-	if error != nil {
-		fmt.Println("Error: " + error.Error())
+	ruleArray, _ := appConfigurationServiceInstance.NewTargetSegments(segments)
+	segmentRuleArray, _ := appConfigurationServiceInstance.NewSegmentRule([]appconfigurationv1.TargetSegments{*ruleArray}, value, order)
+	collectionArray, _ := appConfigurationServiceInstance.NewCollectionRef(collectionId)
+	updateFeatureOptionsModel := appConfigurationServiceInstance.NewUpdateFeatureOptions(environmentId, id)
+	updateFeatureOptionsModel.SetName(name)
+	updateFeatureOptionsModel.SetDescription(description)
+	updateFeatureOptionsModel.SetTags(tags)
+	updateFeatureOptionsModel.SetDisabledValue(disabledValue)
+	updateFeatureOptionsModel.SetEnabledValue(enabledValue)
+	updateFeatureOptionsModel.SetSegmentRules([]appconfigurationv1.SegmentRule{*segmentRuleArray})
+	updateFeatureOptionsModel.SetCollections([]appconfigurationv1.CollectionRef{*collectionArray})
+	result, response, err := appConfigurationServiceInstance.UpdateFeature(updateFeatureOptionsModel)
+	if err != nil {
+		fmt.Println("Error: " + err.Error())
 		return
 	}
 	fmt.Println(response.StatusCode)
@@ -198,87 +253,96 @@ func updateFeature(id string, name string, description string, enabledValue stri
 
 func updateCollection(collectionId string, name string, description string, tags string) {
 	fmt.Println("updateCollection")
-	updateCollectionOptionsModel := appConfigurationServiceInstance.NewUpdateCollectionOptions(collectionId, name, description, tags)
-	result, response, error := appConfigurationServiceInstance.UpdateCollection(updateCollectionOptionsModel)
-	if error != nil {
-		fmt.Println("Error: " + error.Error())
+	updateCollectionOptionsModel := appConfigurationServiceInstance.NewUpdateCollectionOptions(collectionId)
+	updateCollectionOptionsModel.SetName(name)
+	updateCollectionOptionsModel.SetTags(tags)
+	updateCollectionOptionsModel.SetDescription(description)
+	result, response, err := appConfigurationServiceInstance.UpdateCollection(updateCollectionOptionsModel)
+	if err != nil {
+		fmt.Println("Error: " + err.Error())
 		return
 	}
 	fmt.Println(response.StatusCode)
 	fmt.Println(*result.Description)
 }
 
-func patchFeature(id string, name string, description string, enabledValue string, disabledValue string, tags string, segments []string, order int64, value string) {
+func updateSegment(segmentId string, name string, description string, tags string, attributeName string, operator string, values []string) {
+	fmt.Println("updateSegment")
+	ruleArray, _ := appConfigurationServiceInstance.NewRule(attributeName, operator, values)
+	updateSegmentOptionsModel := appConfigurationServiceInstance.NewUpdateSegmentOptions(segmentId)
+	updateSegmentOptionsModel.SetName(name)
+	updateSegmentOptionsModel.SetDescription(description)
+	updateSegmentOptionsModel.SetTags(tags)
+	updateSegmentOptionsModel.SetRules([]appconfigurationv1.Rule{*ruleArray})
+	result, response, err := appConfigurationServiceInstance.UpdateSegment(updateSegmentOptionsModel)
+	if err != nil {
+		fmt.Println("Error: " + err.Error())
+		return
+	}
+	fmt.Println(response.StatusCode)
+	fmt.Println(*result.Name)
+}
+
+func updateProperty(environmentId string, name string, propertyId string, description string, valueOfProperty string, tags string, segments []string, collectionId string, order int64, value string) {
+	fmt.Println("updateProperty")
+	ruleArray, _ := appConfigurationServiceInstance.NewTargetSegments(segments)
+	segmentRuleArray, _ := appConfigurationServiceInstance.NewSegmentRule([]appconfigurationv1.TargetSegments{*ruleArray}, value, order)
+	collectionArray, _ := appConfigurationServiceInstance.NewCollectionRef(collectionId)
+	updatePropertyOptionsModel := appConfigurationServiceInstance.NewUpdatePropertyOptions(environmentId, propertyId)
+	updatePropertyOptionsModel.SetName(name)
+	updatePropertyOptionsModel.SetDescription(description)
+	updatePropertyOptionsModel.SetTags(tags)
+	updatePropertyOptionsModel.SetValue(valueOfProperty)
+	updatePropertyOptionsModel.SetSegmentRules([]appconfigurationv1.SegmentRule{*segmentRuleArray})
+	updatePropertyOptionsModel.SetCollections([]appconfigurationv1.CollectionRef{*collectionArray})
+	result, response, err := appConfigurationServiceInstance.UpdateProperty(updatePropertyOptionsModel)
+	if err != nil {
+		fmt.Println("Error: " + err.Error())
+		return
+	}
+	fmt.Println(response.StatusCode)
+	fmt.Println(*result.PropertyID)
+}
+
+// Update Values Examples
+
+func updatePropertyValues(environmentId string, name string, propertyId string, description string, valueOfProperty string, tags string, segments []string, order int64, value string) {
+	fmt.Println("patchProperty")
+	ruleArray, _ := appConfigurationServiceInstance.NewTargetSegments(segments)
+	segmentRuleArray, _ := appConfigurationServiceInstance.NewSegmentRule([]appconfigurationv1.TargetSegments{*ruleArray}, value, order)
+	patchPropertyOptionsModel := appConfigurationServiceInstance.NewUpdatePropertyValuesOptions(environmentId, propertyId)
+	patchPropertyOptionsModel.SetName(name)
+	patchPropertyOptionsModel.SetDescription(description)
+	patchPropertyOptionsModel.SetTags(tags)
+	patchPropertyOptionsModel.SetValue(valueOfProperty)
+	patchPropertyOptionsModel.SetSegmentRules([]appconfigurationv1.SegmentRule{*segmentRuleArray})
+	result, response, err := appConfigurationServiceInstance.UpdatePropertyValues(patchPropertyOptionsModel)
+	if err != nil {
+		fmt.Println("Error: " + err.Error())
+		return
+	}
+	fmt.Println(response.StatusCode)
+	fmt.Println(*result.PropertyID)
+}
+
+func updateFeatureValues(environmentId string, id string, name string, description string, enabledValue string, disabledValue string, tags string, segments []string, order int64, value string) {
 	fmt.Println("patchFeatureWithNumberValue")
-	ruleArray, _ := appConfigurationServiceInstance.NewRule(segments)
-	segmentRuleArray, _ := appConfigurationServiceInstance.NewSegmentRule([]appconfigurationv1.Rule{*ruleArray}, value, order)
-	patchFeatureOptionsModel := appConfigurationServiceInstance.NewPatchFeatureOptions(id)
+	ruleArray, _ := appConfigurationServiceInstance.NewTargetSegments(segments)
+	segmentRuleArray, _ := appConfigurationServiceInstance.NewSegmentRule([]appconfigurationv1.TargetSegments{*ruleArray}, value, order)
+	patchFeatureOptionsModel := appConfigurationServiceInstance.NewUpdateFeatureValuesOptions(environmentId, id)
 	patchFeatureOptionsModel.SetName(name)
 	patchFeatureOptionsModel.SetDescription(description)
 	patchFeatureOptionsModel.SetTags(tags)
 	patchFeatureOptionsModel.SetDisabledValue(disabledValue)
 	patchFeatureOptionsModel.SetEnabledValue(enabledValue)
 	patchFeatureOptionsModel.SetSegmentRules([]appconfigurationv1.SegmentRule{*segmentRuleArray})
-	result, response, error := appConfigurationServiceInstance.PatchFeature(patchFeatureOptionsModel)
-	if error != nil {
-		fmt.Println("Error: " + error.Error())
+	result, response, err := appConfigurationServiceInstance.UpdateFeatureValues(patchFeatureOptionsModel)
+	if err != nil {
+		fmt.Println("Error: " + err.Error())
 		return
 	}
 	fmt.Println(response.StatusCode)
 	fmt.Println(*result.Name)
-}
-
-func updateSegment(segmentId string, name string, description string, tags string, attributeName string, operator string, values []string) {
-	fmt.Println("updateSegment")
-	ruleArray, _ := appConfigurationServiceInstance.NewRuleArray(attributeName, operator, values)
-	updateSegmentOptionsModel := appConfigurationServiceInstance.NewUpdateSegmentOptions(segmentId, name, description, tags, []appconfigurationv1.RuleArray{*ruleArray})
-	result, response, error := appConfigurationServiceInstance.UpdateSegment(updateSegmentOptionsModel)
-	if error != nil {
-		fmt.Println("Error: " + error.Error())
-		return
-	}
-	fmt.Println(response.StatusCode)
-	fmt.Println(*result.Name)
-}
-
-func updateProperty(name string, propertyId string, description string, valueOfProperty string, tags string, segments []string, collectionId string, order int64, value string) {
-	fmt.Println("updateProperty")
-	ruleArray2, _ := appConfigurationServiceInstance.NewRule(segments)
-	segmentRuleArray, _ := appConfigurationServiceInstance.NewSegmentRule([]appconfigurationv1.Rule{*ruleArray2}, value, order)
-	collectionArray, _ := appConfigurationServiceInstance.NewCollectionID(collectionId)
-	updatePropertyOptionsModel := appConfigurationServiceInstance.NewUpdatePropertyOptions(propertyId)
-	updatePropertyOptionsModel.SetName(name)
-	updatePropertyOptionsModel.SetDescription(description)
-	updatePropertyOptionsModel.SetTags(tags)
-	updatePropertyOptionsModel.SetValue(valueOfProperty)
-	updatePropertyOptionsModel.SetSegmentRules([]appconfigurationv1.SegmentRule{*segmentRuleArray})
-	updatePropertyOptionsModel.SetCollections([]appconfigurationv1.CollectionID{*collectionArray})
-	result, response, error := appConfigurationServiceInstance.UpdateProperty(updatePropertyOptionsModel)
-	if error != nil {
-		fmt.Println("Error: " + error.Error())
-		return
-	}
-	fmt.Println(response.StatusCode)
-	fmt.Println(*result.PropertyID)
-}
-
-func patchProperty(name string, propertyId string, description string, valueOfProperty string, tags string, segments []string, order int64, value string) {
-	fmt.Println("patchProperty")
-	ruleArray, _ := appConfigurationServiceInstance.NewRule(segments)
-	segmentRuleArray, _ := appConfigurationServiceInstance.NewSegmentRule([]appconfigurationv1.Rule{*ruleArray}, value, order)
-	patchPropertyOptionsModel := appConfigurationServiceInstance.NewPatchPropertyOptions(propertyId)
-	patchPropertyOptionsModel.SetName(name)
-	patchPropertyOptionsModel.SetDescription(description)
-	patchPropertyOptionsModel.SetTags(tags)
-	patchPropertyOptionsModel.SetValue(valueOfProperty)
-	patchPropertyOptionsModel.SetSegmentRules([]appconfigurationv1.SegmentRule{*segmentRuleArray})
-	result, response, error := appConfigurationServiceInstance.PatchProperty(patchPropertyOptionsModel)
-	if error != nil {
-		fmt.Println("Error: " + error.Error())
-		return
-	}
-	fmt.Println(response.StatusCode)
-	fmt.Println(*result.PropertyID)
 }
 
 // Delete examples
@@ -286,20 +350,20 @@ func patchProperty(name string, propertyId string, description string, valueOfPr
 func deleteCollection(collectionId string) {
 	fmt.Println("deleteCollection")
 	deleteCollectionOptionsModel := appConfigurationServiceInstance.NewDeleteCollectionOptions(collectionId)
-	response, error := appConfigurationServiceInstance.DeleteCollection(deleteCollectionOptionsModel)
-	if error != nil {
-		fmt.Println("Error: " + error.Error())
+	response, err := appConfigurationServiceInstance.DeleteCollection(deleteCollectionOptionsModel)
+	if err != nil {
+		fmt.Println("Error: " + err.Error())
 		return
 	}
 	fmt.Println(response.StatusCode)
 }
 
-func deleteFeature(featureId string) {
+func deleteFeature(environmentId string, featureId string) {
 	fmt.Println("deleteFeature")
-	deleteFeatureOptionsModel := appConfigurationServiceInstance.NewDeleteafeatureOptions(featureId)
-	response, error := appConfigurationServiceInstance.DeleteFeature(deleteFeatureOptionsModel)
-	if error != nil {
-		fmt.Println("Error: " + error.Error())
+	deleteFeatureOptionsModel := appConfigurationServiceInstance.NewDeleteFeatureOptions(environmentId, featureId)
+	response, err := appConfigurationServiceInstance.DeleteFeature(deleteFeatureOptionsModel)
+	if err != nil {
+		fmt.Println("Error: " + err.Error())
 		return
 	}
 	fmt.Println(response.StatusCode)
@@ -308,20 +372,31 @@ func deleteFeature(featureId string) {
 func deleteSegment(segmentId string) {
 	fmt.Println("deleteSegment")
 	deleteSegmentOptionsModel := appConfigurationServiceInstance.NewDeleteSegmentOptions(segmentId)
-	response, error := appConfigurationServiceInstance.DeleteSegment(deleteSegmentOptionsModel)
-	if error != nil {
-		fmt.Println("Error: " + error.Error())
+	response, err := appConfigurationServiceInstance.DeleteSegment(deleteSegmentOptionsModel)
+	if err != nil {
+		fmt.Println("Error: " + err.Error())
 		return
 	}
 	fmt.Println(response.StatusCode)
 }
 
-func deleteProperty(propertyId string) {
+func deleteProperty(environmentId string, propertyId string) {
 	fmt.Println("deleteProperty")
-	deletePropertyOptionsModel := appConfigurationServiceInstance.NewDeletePropertyOptions(propertyId)
-	response, error := appConfigurationServiceInstance.DeleteProperty(deletePropertyOptionsModel)
-	if error != nil {
-		fmt.Println("Error: " + error.Error())
+	deletePropertyOptionsModel := appConfigurationServiceInstance.NewDeletePropertyOptions(environmentId, propertyId)
+	response, err := appConfigurationServiceInstance.DeleteProperty(deletePropertyOptionsModel)
+	if err != nil {
+		fmt.Println("Error: " + err.Error())
+		return
+	}
+	fmt.Println(response.StatusCode)
+}
+
+func deleteEnvironment(environmentId string) {
+	fmt.Println("deleteEnvironment")
+	deleteEnvironmentOptionsModel := appConfigurationServiceInstance.NewDeleteEnvironmentOptions(environmentId)
+	response, err := appConfigurationServiceInstance.DeleteEnvironment(deleteEnvironmentOptionsModel)
+	if err != nil {
+		fmt.Println("Error: " + err.Error())
 		return
 	}
 	fmt.Println(response.StatusCode)
@@ -329,53 +404,65 @@ func deleteProperty(propertyId string) {
 
 // List examples
 
-func getCollections() {
-	fmt.Println("getCollections")
-	getCollectionsOptionsModel := appConfigurationServiceInstance.NewGetCollectionsOptions()
-	getCollectionsOptionsModel.SetExpand("true")
-	result, response, error := appConfigurationServiceInstance.GetCollections(getCollectionsOptionsModel)
-	if error != nil {
-		fmt.Println("Error: " + error.Error())
+func listCollections() {
+	fmt.Println("listCollections")
+	listCollectionsOptionsModel := appConfigurationServiceInstance.NewListCollectionsOptions()
+	listCollectionsOptionsModel.SetExpand(true)
+	result, response, err := appConfigurationServiceInstance.ListCollections(listCollectionsOptionsModel)
+	if err != nil {
+		fmt.Println("Error: " + err.Error())
 		return
 	}
 	fmt.Println(response.StatusCode)
-	fmt.Println(*result.PageInfo.Count)
+	fmt.Println(len(result.Collections))
 }
 
-func getFeatures() {
-	fmt.Println("getFeatures")
-	getFeaturesOptionsModel := appConfigurationServiceInstance.NewGetFeaturesOptions()
-	result, response, error := appConfigurationServiceInstance.GetFeatures(getFeaturesOptionsModel)
-	if error != nil {
-		fmt.Println("Error: " + error.Error())
+func listFeatures(environmentId string) {
+	fmt.Println("listFeatures")
+	listFeaturesOptionsModel := appConfigurationServiceInstance.NewListFeaturesOptions(environmentId)
+	result, response, err := appConfigurationServiceInstance.ListFeatures(listFeaturesOptionsModel)
+	if err != nil {
+		fmt.Println("Error: " + err.Error())
 		return
 	}
 	fmt.Println(response.StatusCode)
-	fmt.Println(*result.PageInfo.Count)
+	fmt.Println(len(result.Features))
 }
 
-func getSegments() {
-	fmt.Println("getSegments")
-	getSegmentsOptionsModel := appConfigurationServiceInstance.NewGetSegmentsOptions()
-	result, response, error := appConfigurationServiceInstance.GetSegments(getSegmentsOptionsModel)
-	if error != nil {
-		fmt.Println("Error: " + error.Error())
+func listSegments() {
+	fmt.Println("listSegments")
+	listSegmentsOptionsModel := appConfigurationServiceInstance.NewListSegmentsOptions()
+	result, response, err := appConfigurationServiceInstance.ListSegments(listSegmentsOptionsModel)
+	if err != nil {
+		fmt.Println("Error: " + err.Error())
 		return
 	}
 	fmt.Println(response.StatusCode)
-	fmt.Println(*result.PageInfo.Count)
+	fmt.Println(len(result.Segments))
 }
 
-func getProperties() {
-	fmt.Println("getProperties")
-	getPropertiesOptionsModel := appConfigurationServiceInstance.NewGetPropertiesOptions()
-	result, response, error := appConfigurationServiceInstance.GetProperties(getPropertiesOptionsModel)
-	if error != nil {
-		fmt.Println("Error: " + error.Error())
+func listProperties(environmentId string) {
+	fmt.Println("listProperties")
+	listPropertiesOptionsModel := appConfigurationServiceInstance.NewListPropertiesOptions(environmentId)
+	result, response, err := appConfigurationServiceInstance.ListProperties(listPropertiesOptionsModel)
+	if err != nil {
+		fmt.Println("Error: " + err.Error())
 		return
 	}
 	fmt.Println(response.StatusCode)
-	fmt.Println(*result.PageInfo.Count)
+	fmt.Println(len(result.Properties))
+}
+
+func listEnvironments() {
+	fmt.Println("listEnvironments")
+	listEnvironmentsOptionsModel := appConfigurationServiceInstance.NewListEnvironmentsOptions()
+	result, response, err := appConfigurationServiceInstance.ListEnvironments(listEnvironmentsOptionsModel)
+	if err != nil {
+		fmt.Println("Error: " + err.Error())
+		return
+	}
+	fmt.Println(response.StatusCode)
+	fmt.Println(len(result.Environments))
 }
 
 // Get examples
@@ -383,21 +470,21 @@ func getProperties() {
 func getCollection(collectionId string) {
 	fmt.Println("getCollection")
 	getCollectionOptionsModel := appConfigurationServiceInstance.NewGetCollectionOptions(collectionId)
-	result, response, error := appConfigurationServiceInstance.GetCollection(getCollectionOptionsModel)
-	if error != nil {
-		fmt.Println("Error: " + error.Error())
+	result, response, err := appConfigurationServiceInstance.GetCollection(getCollectionOptionsModel)
+	if err != nil {
+		fmt.Println("Error: " + err.Error())
 		return
 	}
 	fmt.Println(response.StatusCode)
 	fmt.Println(*result.Name)
 }
 
-func getFeature(featureId string) {
+func getFeature(environmentId string, featureId string) {
 	fmt.Println("getFeature")
-	getFeatureOptionsModel := appConfigurationServiceInstance.NewGetFeatureOptions(featureId)
-	result, response, error := appConfigurationServiceInstance.GetFeature(getFeatureOptionsModel)
-	if error != nil {
-		fmt.Println("Error: " + error.Error())
+	getFeatureOptionsModel := appConfigurationServiceInstance.NewGetFeatureOptions(environmentId, featureId)
+	result, response, err := appConfigurationServiceInstance.GetFeature(getFeatureOptionsModel)
+	if err != nil {
+		fmt.Println("Error: " + err.Error())
 		return
 	}
 	fmt.Println(response.StatusCode)
@@ -408,21 +495,33 @@ func getFeature(featureId string) {
 func getSegment(segmentId string) {
 	fmt.Println("getSegment")
 	getSegmentOptionsModel := appConfigurationServiceInstance.NewGetSegmentOptions(segmentId)
-	result, response, error := appConfigurationServiceInstance.GetSegment(getSegmentOptionsModel)
-	if error != nil {
-		fmt.Println("Error: " + error.Error())
+	result, response, err := appConfigurationServiceInstance.GetSegment(getSegmentOptionsModel)
+	if err != nil {
+		fmt.Println("Error: " + err.Error())
 		return
 	}
 	fmt.Println(response.StatusCode)
 	fmt.Println(*result.Name)
 }
 
-func getProperty(propertyId string) {
+func getProperty(environmentId string, propertyId string) {
 	fmt.Println("getProperty")
-	getPropertyOptionsModel := appConfigurationServiceInstance.NewGetPropertyOptions(propertyId)
-	result, response, error := appConfigurationServiceInstance.GetProperty(getPropertyOptionsModel)
-	if error != nil {
-		fmt.Println("Error: " + error.Error())
+	getPropertyOptionsModel := appConfigurationServiceInstance.NewGetPropertyOptions(environmentId, propertyId)
+	result, response, err := appConfigurationServiceInstance.GetProperty(getPropertyOptionsModel)
+	if err != nil {
+		fmt.Println("Error: " + err.Error())
+		return
+	}
+	fmt.Println(response.StatusCode)
+	fmt.Println(*result.Name)
+}
+
+func getEnvironment(environmentId string) {
+	fmt.Println("getEnvironment")
+	getEnvironmentOptionsModel := appConfigurationServiceInstance.NewGetEnvironmentOptions(environmentId)
+	result, response, err := appConfigurationServiceInstance.GetEnvironment(getEnvironmentOptionsModel)
+	if err != nil {
+		fmt.Println("Error: " + err.Error())
 		return
 	}
 	fmt.Println(response.StatusCode)
@@ -431,13 +530,13 @@ func getProperty(propertyId string) {
 
 // Toggle Examples
 
-func toggleFeature(featureId string, enableFlag bool) {
+func toggleFeature(environmentId string, featureId string, enableFlag bool) {
 	fmt.Println("toggleFeature")
-	toggleFeatureOptionsModel := appConfigurationServiceInstance.NewToggleFeatureOptions(featureId)
+	toggleFeatureOptionsModel := appConfigurationServiceInstance.NewToggleFeatureOptions(environmentId, featureId)
 	toggleFeatureOptionsModel.SetEnabled(enableFlag)
-	result, response, error := appConfigurationServiceInstance.ToggleFeature(toggleFeatureOptionsModel)
-	if error != nil {
-		fmt.Println("Error: " + error.Error())
+	result, response, err := appConfigurationServiceInstance.ToggleFeature(toggleFeatureOptionsModel)
+	if err != nil {
+		fmt.Println("Error: " + err.Error())
 		return
 	}
 	fmt.Println(response.StatusCode)
