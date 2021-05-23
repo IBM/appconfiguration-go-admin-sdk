@@ -21,7 +21,7 @@ The IBM Cloud App Configuration Go Admin SDK allows developers to programmatical
 
 ## Overview
 
-IBM Cloud App Configuration is a centralized feature management and configuration service on [IBM Cloud](https://www.cloud.ibm.com) for use with web and mobile applications, microservices, and distributed environments.
+IBM Cloud App Configuration is a centralized feature management and configuration service on [IBM Cloud](https://cloud.ibm.com) for use with web and mobile applications, microservices, and distributed environments.
 
 Use the Go Admin SDK to manage the App Configuration service instance. The Go Admin SDK provides APIs to define and manage feature flags, collections and segments. Alternately, you can also use the IBM Cloud App Configuration CLI to manage the App Configuration service instance. You can find more information about the CLI [here.](https://cloud.ibm.com/docs/app-configuration?topic=app-configuration-cli-plugin-app-configuration-cli) 
 
@@ -49,22 +49,22 @@ Initialize the sdk to connect with your App Configuration service instance.
 ```go
 var appConfigurationServiceInstance *appconfigurationv1.AppConfigurationV1
 
-
+// Use any one of bearer token or API Key
 func init() {
 
-    // Using Bearer Token
-    authenticator := &core.BearerTokenAuthenticator{
-        BearerToken: "authToken",
-    }
+	// Using Bearer Token
+	authenticator := &core.BearerTokenAuthenticator{
+		BearerToken: "<authToken>",
+	}
 	
 	// Using API Key
 	authenticator := &core.IamAuthenticator{
-		ApiKey: "authToken",
+		ApiKey: "<apikey>",
 	}
 
 	options := &appconfigurationv1.AppConfigurationV1Options{ 
 		Authenticator: authenticator, 
-  		URL: "url"
+  		URL: "https://" + region + ".apprapp.cloud.ibm.com/apprapp/feature/v1/instances/" + guid,
 	}
 
 	appConfigurationServiceInstance, err := appconfigurationv1.NewAppConfigurationV1(options)
@@ -77,7 +77,8 @@ func init() {
 ```
 
 - authToken : authToken of the App Configuration service. Get it from the service credentials section of the dashboard. Choose any option from APIKey or Bearer Token to authenticate.
-- url : url of the App Configuration Instance. URL instance can found from [here](https://cloud.ibm.com/apidocs/app-configuration#endpoint-url)
+- guid : ID of the App Configuration Instance.
+- region : Region of the App Configuration Instance
 
 ## Using the SDK
 
@@ -96,12 +97,13 @@ Steps to use the SDK method's -
 
 SDK Methods to consume ->
 - Create*Item*
-- Get*Item*s
+- List*Item*
 - Get*Item*
 - Update*Item*
+- Update*Item*Values
 - Delete*Item*
 
-where *Item* can be replaced with Collection, Feature or Segment.
+where *Item* can be replaced with Collection, Property, Environment, Feature or Segment.
 
 Refer [this](https://cloud.ibm.com/apidocs/app-configuration) for details on the input parameters for each SDK method.
 
@@ -111,78 +113,103 @@ Note -> You need to have the required access (READER/WRITER/MANAGER/CONFIG_OPERA
 ### Create Collection
 
 ```go
-createCollectionOptionsModel := appConfigurationServiceInstance.NewCreateCollectionOptions(name)
-createCollectionOptionsModel.SetCollectionID(id)
+createCollectionOptionsModel := appConfigurationServiceInstance.NewCreateCollectionOptions(name, collectionId)
 createCollectionOptionsModel.SetDescription(description)
 createCollectionOptionsModel.SetTags(tags)
-result, response, error := appConfigurationServiceInstance.CreateCollection(createCollectionOptionsModel)
+result, response, err := appConfigurationServiceInstance.CreateCollection(createCollectionOptionsModel)
 ```
 
-### Get Collections 
+### List Collections 
 You can list all collections with expand as true
 ```go
-getCollectionsOptionsModel := appConfigurationServiceInstance.NewGetCollectionsOptions()
-getCollectionsOptionsModel.SetExpand("true")   // setting expand option as "true"
-result, response, error := appConfigurationServiceInstance.GetCollections(getCollectionsOptionsModel)
+getCollectionsOptionsModel := appConfigurationServiceInstance.NewListCollectionsOptions()
+getCollectionsOptionsModel.SetExpand(true)   // setting expand option as "true"
+result, response, err := appConfigurationServiceInstance.ListCollections(getCollectionsOptionsModel)
 ```
 
 ### Create segment
 
 ```go
-ruleArray, _ := appConfigurationServiceInstance.NewRuleArray(attributeName, operator, values)
-createSegmentOptionsModel := appConfigurationServiceInstance.NewCreateSegmentOptions(name, id, description, tags, []appconfigurationv1.RuleArray{*ruleArray})
-result, response, error := appConfigurationServiceInstance.CreateSegment(createSegmentOptionsModel)
+ruleArray, _ := appConfigurationServiceInstance.NewRule(attributeName, operator, values)
+createSegmentOptionsModel := appConfigurationServiceInstance.NewCreateSegmentOptions()
+createSegmentOptionsModel.SetName(name)
+createSegmentOptionsModel.SetDescription(description)
+createSegmentOptionsModel.SetTags(tags)
+createSegmentOptionsModel.SetSegmentID(id)
+createSegmentOptionsModel.SetRules([]appconfigurationv1.Rule{*ruleArray})
+result, response, err := appConfigurationServiceInstance.CreateSegment(createSegmentOptionsModel)
 ```
 
 ### Create Feature
 
 ```go
-ruleArray, _ := appConfigurationServiceInstance.NewRule(segments)
-segmentRuleArray, _ := appConfigurationServiceInstance.NewSegmentRule([]appconfigurationv1.Rule{*ruleArray}, value, order)
-collectionArray, _ := appConfigurationServiceInstance.NewCollection(collectionId, enabledInCollection)
-createFeatureOptionsModel := appConfigurationServiceInstance.NewCreateFeatureOptions(name, id, description, typeOfFeature, enabledValue, disabledValue, tags, []appconfigurationv1.SegmentRule{*segmentRuleArray}, []appconfigurationv1.Collection{*collectionArray})
-result, response, error := appConfigurationServiceInstance.CreateFeature(createFeatureOptionsModel)
+ruleArray, _ := appConfigurationServiceInstance.NewTargetSegments(segments)
+segmentRuleArray, _ := appConfigurationServiceInstance.NewSegmentRule([]appconfigurationv1.TargetSegments{*ruleArray}, value, order)
+collectionArray, _ := appConfigurationServiceInstance.NewCollectionRef(collectionId)
+createFeatureOptionsModel := appConfigurationServiceInstance.NewCreateFeatureOptions(environmentId, name, id, typeOfFeature, enabledValue, disabledValue)
+createFeatureOptionsModel.SetTags(tags)
+createFeatureOptionsModel.SetDescription(description)
+createFeatureOptionsModel.SetSegmentRules([]appconfigurationv1.SegmentRule{*segmentRuleArray})
+createFeatureOptionsModel.SetCollections([]appconfigurationv1.CollectionRef{*collectionArray})
+result, response, err := appConfigurationServiceInstance.CreateFeature(createFeatureOptionsModel)
 ```
 
 ### Update Feature
 ```go
-ruleArray, _ := appConfigurationServiceInstance.NewRule(segments)
-segmentRuleArray, _ := appConfigurationServiceInstance.NewSegmentRule([]appconfigurationv1.Rule{*ruleArray}, value, order)
-collectionArray, _ := appConfigurationServiceInstance.NewCollectionWithDeletedFlag(collectionName, enabledInCollection, deletedFlag)
-updateFeatureOptionsModel := appConfigurationServiceInstance.NewUpdateFeatureOptions(id, name, description, typeOfFeature, enabledValue, disabledValue, tags, []appconfigurationv1.SegmentRule{*segmentRuleArray}, []appconfigurationv1.CollectionWithDeletedFlag{*collectionArray})
-result, response, error := appConfigurationServiceInstance.UpdateFeature(updateFeatureOptionsModel)
+ruleArray, _ := appConfigurationServiceInstance.NewTargetSegments(segments)
+segmentRuleArray, _ := appConfigurationServiceInstance.NewSegmentRule([]appconfigurationv1.TargetSegments{*ruleArray}, value, order)
+collectionArray, _ := appConfigurationServiceInstance.NewCollectionRef(collectionId)
+updateFeatureOptionsModel := appConfigurationServiceInstance.NewUpdateFeatureOptions(environmentId, id)
+updateFeatureOptionsModel.SetName(name)
+updateFeatureOptionsModel.SetDescription(description)
+updateFeatureOptionsModel.SetTags(tags)
+updateFeatureOptionsModel.SetDisabledValue(disabledValue)
+updateFeatureOptionsModel.SetEnabledValue(enabledValue)
+updateFeatureOptionsModel.SetSegmentRules([]appconfigurationv1.SegmentRule{*segmentRuleArray})
+updateFeatureOptionsModel.SetCollections([]appconfigurationv1.CollectionRef{*collectionArray})
+result, response, err := appConfigurationServiceInstance.UpdateFeature(updateFeatureOptionsModel)
+```
+
+### Update Environment
+```go
+updateEnvironmentOptionsModel := appConfigurationServiceInstance.NewUpdateEnvironmentOptions(environmentId)
+updateEnvironmentOptionsModel.SetName(name)
+updateEnvironmentOptionsModel.SetDescription(description)
+updateEnvironmentOptionsModel.SetTags(tags)
+updateEnvironmentOptionsModel.SetColorCode(colorCode)
+result, response, err := appConfigurationServiceInstance.UpdateEnvironment(updateEnvironmentOptionsModel)
 ```
 
 ### Get Feature 
 ```go
-getFeatureOptionsModel := appConfigurationServiceInstance.NewGetFeatureOptions(featureId)
-result, response, error := appConfigurationServiceInstance.GetFeature(getFeatureOptionsModel)
+getFeatureOptionsModel := appConfigurationServiceInstance.NewGetFeatureOptions(environmentId, featureId)
+result, response, err := appConfigurationServiceInstance.GetFeature(getFeatureOptionsModel)
 ```
 
 ### Delete Segment
 ```go
 deleteSegmentOptionsModel := appConfigurationServiceInstance.NewDeleteSegmentOptions(segmentId)
-response, error := appConfigurationServiceInstance.DeleteSegment(deleteSegmentOptionsModel)
+response, err := appConfigurationServiceInstance.DeleteSegment(deleteSegmentOptionsModel)
 ```
 
 ### Toggle Feature
 ```go
-toggleFeatureOptionsModel := appConfigurationServiceInstance.NewToggleFeatureOptions(featureId)
+toggleFeatureOptionsModel := appConfigurationServiceInstance.NewToggleFeatureOptions(environmentId, featureId)
 toggleFeatureOptionsModel.SetEnabled(enableFlag)
-result, response, error := appConfigurationServiceInstance.ToggleFeature(toggleFeatureOptionsModel)
+result, response, err := appConfigurationServiceInstance.ToggleFeature(toggleFeatureOptionsModel)
 ```
 
 ### Patch Property
 ```go
-ruleArray, _ := appConfigurationServiceInstance.NewRule(segments)
-segmentRuleArray, _ := appConfigurationServiceInstance.NewSegmentRule([]appconfigurationv1.Rule{*ruleArray}, value, order)
-patchPropertyOptionsModel := appConfigurationServiceInstance.NewPatchPropertyOptions(propertyId)
+ruleArray, _ := appConfigurationServiceInstance.NewTargetSegments(segments)
+segmentRuleArray, _ := appConfigurationServiceInstance.NewSegmentRule([]appconfigurationv1.TargetSegments{*ruleArray}, value, order)
+patchPropertyOptionsModel := appConfigurationServiceInstance.NewUpdatePropertyValuesOptions(environmentId, propertyId)
 patchPropertyOptionsModel.SetName(name)
 patchPropertyOptionsModel.SetDescription(description)
 patchPropertyOptionsModel.SetTags(tags)
 patchPropertyOptionsModel.SetValue(valueOfProperty)
 patchPropertyOptionsModel.SetSegmentRules([]appconfigurationv1.SegmentRule{*segmentRuleArray})
-result, response, error := appConfigurationServiceInstance.PatchProperty(patchPropertyOptionsModel)
+result, response, err := appConfigurationServiceInstance.UpdatePropertyValues(patchPropertyOptionsModel)
 ```
 
 ## License
