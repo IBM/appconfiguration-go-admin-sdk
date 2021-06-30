@@ -20,18 +20,18 @@ import (
 	"bytes"
 	"context"
 	"fmt"
-
-	"github.com/IBM/appconfiguration-go-admin-sdk/appconfigurationv1"
-	"github.com/IBM/go-sdk-core/v5/core"
-	"github.com/go-openapi/strfmt"
-	. "github.com/onsi/ginkgo"
-	. "github.com/onsi/gomega"
 	"io"
 	"io/ioutil"
 	"net/http"
 	"net/http/httptest"
 	"os"
 	"time"
+
+	"github.com/IBM/appconfiguration-go-admin-sdk/appconfigurationv1"
+	"github.com/IBM/go-sdk-core/v5/core"
+	"github.com/go-openapi/strfmt"
+	. "github.com/onsi/ginkgo"
+	. "github.com/onsi/gomega"
 )
 
 var _ = Describe(`AppConfigurationV1`, func() {
@@ -67,14 +67,13 @@ var _ = Describe(`AppConfigurationV1`, func() {
 		Context(`Using external config, construct service client instances`, func() {
 			// Map containing environment variables used in testing.
 			var testEnvironment = map[string]string{
-				"APP_CONFIGURATION_URL": "https://appconfigurationv1/api",
+				"APP_CONFIGURATION_URL":       "https://appconfigurationv1/api",
 				"APP_CONFIGURATION_AUTH_TYPE": "noauth",
 			}
 
 			It(`Create service client using external config successfully`, func() {
 				SetTestEnvironment(testEnvironment)
-				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1UsingExternalConfig(&appconfigurationv1.AppConfigurationV1Options{
-				})
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1UsingExternalConfig(&appconfigurationv1.AppConfigurationV1Options{})
 				Expect(appConfigurationService).ToNot(BeNil())
 				Expect(serviceErr).To(BeNil())
 				ClearTestEnvironment(testEnvironment)
@@ -103,8 +102,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 			})
 			It(`Create service client using external config and set url programatically successfully`, func() {
 				SetTestEnvironment(testEnvironment)
-				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1UsingExternalConfig(&appconfigurationv1.AppConfigurationV1Options{
-				})
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1UsingExternalConfig(&appconfigurationv1.AppConfigurationV1Options{})
 				err := appConfigurationService.SetServiceURL("https://testService/api")
 				Expect(err).To(BeNil())
 				Expect(appConfigurationService).ToNot(BeNil())
@@ -122,13 +120,12 @@ var _ = Describe(`AppConfigurationV1`, func() {
 		Context(`Using external config, construct service client instances with error: Invalid Auth`, func() {
 			// Map containing environment variables used in testing.
 			var testEnvironment = map[string]string{
-				"APP_CONFIGURATION_URL": "https://appconfigurationv1/api",
+				"APP_CONFIGURATION_URL":       "https://appconfigurationv1/api",
 				"APP_CONFIGURATION_AUTH_TYPE": "someOtherAuth",
 			}
 
 			SetTestEnvironment(testEnvironment)
-			appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1UsingExternalConfig(&appconfigurationv1.AppConfigurationV1Options{
-			})
+			appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1UsingExternalConfig(&appconfigurationv1.AppConfigurationV1Options{})
 
 			It(`Instantiate service client with error`, func() {
 				Expect(appConfigurationService).To(BeNil())
@@ -139,7 +136,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 		Context(`Using external config, construct service client instances with error: Invalid URL`, func() {
 			// Map containing environment variables used in testing.
 			var testEnvironment = map[string]string{
-				"APP_CONFIGURATION_AUTH_TYPE":   "NOAuth",
+				"APP_CONFIGURATION_AUTH_TYPE": "NOAuth",
 			}
 
 			SetTestEnvironment(testEnvironment)
@@ -238,7 +235,6 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Verify the contents of the request
 					Expect(req.URL.EscapedPath()).To(Equal(listEnvironmentsPath))
 					Expect(req.Method).To(Equal("GET"))
-
 
 					// TODO: Add check for expand query parameter
 
@@ -770,7 +766,6 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(getEnvironmentPath))
 					Expect(req.Method).To(Equal("GET"))
 
-
 					// TODO: Add check for expand query parameter
 
 					// Sleep a short time to support a timeout test
@@ -977,14 +972,13 @@ var _ = Describe(`AppConfigurationV1`, func() {
 		Context(`Using external config, construct service client instances`, func() {
 			// Map containing environment variables used in testing.
 			var testEnvironment = map[string]string{
-				"APP_CONFIGURATION_URL": "https://appconfigurationv1/api",
+				"APP_CONFIGURATION_URL":       "https://appconfigurationv1/api",
 				"APP_CONFIGURATION_AUTH_TYPE": "noauth",
 			}
 
 			It(`Create service client using external config successfully`, func() {
 				SetTestEnvironment(testEnvironment)
-				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1UsingExternalConfig(&appconfigurationv1.AppConfigurationV1Options{
-				})
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1UsingExternalConfig(&appconfigurationv1.AppConfigurationV1Options{})
 				Expect(appConfigurationService).ToNot(BeNil())
 				Expect(serviceErr).To(BeNil())
 				ClearTestEnvironment(testEnvironment)
@@ -1013,8 +1007,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 			})
 			It(`Create service client using external config and set url programatically successfully`, func() {
 				SetTestEnvironment(testEnvironment)
-				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1UsingExternalConfig(&appconfigurationv1.AppConfigurationV1Options{
-				})
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1UsingExternalConfig(&appconfigurationv1.AppConfigurationV1Options{})
 				err := appConfigurationService.SetServiceURL("https://testService/api")
 				Expect(err).To(BeNil())
 				Expect(appConfigurationService).ToNot(BeNil())
@@ -1032,13 +1025,12 @@ var _ = Describe(`AppConfigurationV1`, func() {
 		Context(`Using external config, construct service client instances with error: Invalid Auth`, func() {
 			// Map containing environment variables used in testing.
 			var testEnvironment = map[string]string{
-				"APP_CONFIGURATION_URL": "https://appconfigurationv1/api",
+				"APP_CONFIGURATION_URL":       "https://appconfigurationv1/api",
 				"APP_CONFIGURATION_AUTH_TYPE": "someOtherAuth",
 			}
 
 			SetTestEnvironment(testEnvironment)
-			appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1UsingExternalConfig(&appconfigurationv1.AppConfigurationV1Options{
-			})
+			appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1UsingExternalConfig(&appconfigurationv1.AppConfigurationV1Options{})
 
 			It(`Instantiate service client with error`, func() {
 				Expect(appConfigurationService).To(BeNil())
@@ -1049,7 +1041,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 		Context(`Using external config, construct service client instances with error: Invalid URL`, func() {
 			// Map containing environment variables used in testing.
 			var testEnvironment = map[string]string{
-				"APP_CONFIGURATION_AUTH_TYPE":   "NOAuth",
+				"APP_CONFIGURATION_AUTH_TYPE": "NOAuth",
 			}
 
 			SetTestEnvironment(testEnvironment)
@@ -1150,7 +1142,6 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Verify the contents of the request
 					Expect(req.URL.EscapedPath()).To(Equal(listCollectionsPath))
 					Expect(req.Method).To(Equal("GET"))
-
 
 					// TODO: Add check for expand query parameter
 
@@ -1680,7 +1671,6 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(getCollectionPath))
 					Expect(req.Method).To(Equal("GET"))
 
-
 					// TODO: Add check for expand query parameter
 
 					// Sleep a short time to support a timeout test
@@ -1887,14 +1877,13 @@ var _ = Describe(`AppConfigurationV1`, func() {
 		Context(`Using external config, construct service client instances`, func() {
 			// Map containing environment variables used in testing.
 			var testEnvironment = map[string]string{
-				"APP_CONFIGURATION_URL": "https://appconfigurationv1/api",
+				"APP_CONFIGURATION_URL":       "https://appconfigurationv1/api",
 				"APP_CONFIGURATION_AUTH_TYPE": "noauth",
 			}
 
 			It(`Create service client using external config successfully`, func() {
 				SetTestEnvironment(testEnvironment)
-				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1UsingExternalConfig(&appconfigurationv1.AppConfigurationV1Options{
-				})
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1UsingExternalConfig(&appconfigurationv1.AppConfigurationV1Options{})
 				Expect(appConfigurationService).ToNot(BeNil())
 				Expect(serviceErr).To(BeNil())
 				ClearTestEnvironment(testEnvironment)
@@ -1923,8 +1912,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 			})
 			It(`Create service client using external config and set url programatically successfully`, func() {
 				SetTestEnvironment(testEnvironment)
-				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1UsingExternalConfig(&appconfigurationv1.AppConfigurationV1Options{
-				})
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1UsingExternalConfig(&appconfigurationv1.AppConfigurationV1Options{})
 				err := appConfigurationService.SetServiceURL("https://testService/api")
 				Expect(err).To(BeNil())
 				Expect(appConfigurationService).ToNot(BeNil())
@@ -1942,13 +1930,12 @@ var _ = Describe(`AppConfigurationV1`, func() {
 		Context(`Using external config, construct service client instances with error: Invalid Auth`, func() {
 			// Map containing environment variables used in testing.
 			var testEnvironment = map[string]string{
-				"APP_CONFIGURATION_URL": "https://appconfigurationv1/api",
+				"APP_CONFIGURATION_URL":       "https://appconfigurationv1/api",
 				"APP_CONFIGURATION_AUTH_TYPE": "someOtherAuth",
 			}
 
 			SetTestEnvironment(testEnvironment)
-			appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1UsingExternalConfig(&appconfigurationv1.AppConfigurationV1Options{
-			})
+			appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1UsingExternalConfig(&appconfigurationv1.AppConfigurationV1Options{})
 
 			It(`Instantiate service client with error`, func() {
 				Expect(appConfigurationService).To(BeNil())
@@ -1959,7 +1946,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 		Context(`Using external config, construct service client instances with error: Invalid URL`, func() {
 			// Map containing environment variables used in testing.
 			var testEnvironment = map[string]string{
-				"APP_CONFIGURATION_AUTH_TYPE":   "NOAuth",
+				"APP_CONFIGURATION_AUTH_TYPE": "NOAuth",
 			}
 
 			SetTestEnvironment(testEnvironment)
@@ -2061,7 +2048,6 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Verify the contents of the request
 					Expect(req.URL.EscapedPath()).To(Equal(listFeaturesPath))
 					Expect(req.Method).To(Equal("GET"))
-
 
 					// TODO: Add check for expand query parameter
 
@@ -3323,14 +3309,13 @@ var _ = Describe(`AppConfigurationV1`, func() {
 		Context(`Using external config, construct service client instances`, func() {
 			// Map containing environment variables used in testing.
 			var testEnvironment = map[string]string{
-				"APP_CONFIGURATION_URL": "https://appconfigurationv1/api",
+				"APP_CONFIGURATION_URL":       "https://appconfigurationv1/api",
 				"APP_CONFIGURATION_AUTH_TYPE": "noauth",
 			}
 
 			It(`Create service client using external config successfully`, func() {
 				SetTestEnvironment(testEnvironment)
-				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1UsingExternalConfig(&appconfigurationv1.AppConfigurationV1Options{
-				})
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1UsingExternalConfig(&appconfigurationv1.AppConfigurationV1Options{})
 				Expect(appConfigurationService).ToNot(BeNil())
 				Expect(serviceErr).To(BeNil())
 				ClearTestEnvironment(testEnvironment)
@@ -3359,8 +3344,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 			})
 			It(`Create service client using external config and set url programatically successfully`, func() {
 				SetTestEnvironment(testEnvironment)
-				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1UsingExternalConfig(&appconfigurationv1.AppConfigurationV1Options{
-				})
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1UsingExternalConfig(&appconfigurationv1.AppConfigurationV1Options{})
 				err := appConfigurationService.SetServiceURL("https://testService/api")
 				Expect(err).To(BeNil())
 				Expect(appConfigurationService).ToNot(BeNil())
@@ -3378,13 +3362,12 @@ var _ = Describe(`AppConfigurationV1`, func() {
 		Context(`Using external config, construct service client instances with error: Invalid Auth`, func() {
 			// Map containing environment variables used in testing.
 			var testEnvironment = map[string]string{
-				"APP_CONFIGURATION_URL": "https://appconfigurationv1/api",
+				"APP_CONFIGURATION_URL":       "https://appconfigurationv1/api",
 				"APP_CONFIGURATION_AUTH_TYPE": "someOtherAuth",
 			}
 
 			SetTestEnvironment(testEnvironment)
-			appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1UsingExternalConfig(&appconfigurationv1.AppConfigurationV1Options{
-			})
+			appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1UsingExternalConfig(&appconfigurationv1.AppConfigurationV1Options{})
 
 			It(`Instantiate service client with error`, func() {
 				Expect(appConfigurationService).To(BeNil())
@@ -3395,7 +3378,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 		Context(`Using external config, construct service client instances with error: Invalid URL`, func() {
 			// Map containing environment variables used in testing.
 			var testEnvironment = map[string]string{
-				"APP_CONFIGURATION_AUTH_TYPE":   "NOAuth",
+				"APP_CONFIGURATION_AUTH_TYPE": "NOAuth",
 			}
 
 			SetTestEnvironment(testEnvironment)
@@ -3497,7 +3480,6 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Verify the contents of the request
 					Expect(req.URL.EscapedPath()).To(Equal(listPropertiesPath))
 					Expect(req.Method).To(Equal("GET"))
-
 
 					// TODO: Add check for expand query parameter
 
@@ -4570,14 +4552,13 @@ var _ = Describe(`AppConfigurationV1`, func() {
 		Context(`Using external config, construct service client instances`, func() {
 			// Map containing environment variables used in testing.
 			var testEnvironment = map[string]string{
-				"APP_CONFIGURATION_URL": "https://appconfigurationv1/api",
+				"APP_CONFIGURATION_URL":       "https://appconfigurationv1/api",
 				"APP_CONFIGURATION_AUTH_TYPE": "noauth",
 			}
 
 			It(`Create service client using external config successfully`, func() {
 				SetTestEnvironment(testEnvironment)
-				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1UsingExternalConfig(&appconfigurationv1.AppConfigurationV1Options{
-				})
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1UsingExternalConfig(&appconfigurationv1.AppConfigurationV1Options{})
 				Expect(appConfigurationService).ToNot(BeNil())
 				Expect(serviceErr).To(BeNil())
 				ClearTestEnvironment(testEnvironment)
@@ -4606,8 +4587,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 			})
 			It(`Create service client using external config and set url programatically successfully`, func() {
 				SetTestEnvironment(testEnvironment)
-				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1UsingExternalConfig(&appconfigurationv1.AppConfigurationV1Options{
-				})
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1UsingExternalConfig(&appconfigurationv1.AppConfigurationV1Options{})
 				err := appConfigurationService.SetServiceURL("https://testService/api")
 				Expect(err).To(BeNil())
 				Expect(appConfigurationService).ToNot(BeNil())
@@ -4625,13 +4605,12 @@ var _ = Describe(`AppConfigurationV1`, func() {
 		Context(`Using external config, construct service client instances with error: Invalid Auth`, func() {
 			// Map containing environment variables used in testing.
 			var testEnvironment = map[string]string{
-				"APP_CONFIGURATION_URL": "https://appconfigurationv1/api",
+				"APP_CONFIGURATION_URL":       "https://appconfigurationv1/api",
 				"APP_CONFIGURATION_AUTH_TYPE": "someOtherAuth",
 			}
 
 			SetTestEnvironment(testEnvironment)
-			appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1UsingExternalConfig(&appconfigurationv1.AppConfigurationV1Options{
-			})
+			appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1UsingExternalConfig(&appconfigurationv1.AppConfigurationV1Options{})
 
 			It(`Instantiate service client with error`, func() {
 				Expect(appConfigurationService).To(BeNil())
@@ -4642,7 +4621,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 		Context(`Using external config, construct service client instances with error: Invalid URL`, func() {
 			// Map containing environment variables used in testing.
 			var testEnvironment = map[string]string{
-				"APP_CONFIGURATION_AUTH_TYPE":   "NOAuth",
+				"APP_CONFIGURATION_AUTH_TYPE": "NOAuth",
 			}
 
 			SetTestEnvironment(testEnvironment)
@@ -4743,7 +4722,6 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Verify the contents of the request
 					Expect(req.URL.EscapedPath()).To(Equal(listSegmentsPath))
 					Expect(req.Method).To(Equal("GET"))
-
 
 					// TODO: Add check for expand query parameter
 
@@ -5471,6 +5449,256 @@ var _ = Describe(`AppConfigurationV1`, func() {
 			AfterEach(func() {
 				testServer.Close()
 			})
+		})
+	})
+	Describe(`Service constructor tests`, func() {
+		It(`Instantiate service client`, func() {
+			appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+				Authenticator: &core.NoAuthAuthenticator{},
+			})
+			Expect(appConfigurationService).ToNot(BeNil())
+			Expect(serviceErr).To(BeNil())
+		})
+		It(`Instantiate service client with error: Invalid URL`, func() {
+			appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+				URL: "{BAD_URL_STRING",
+			})
+			Expect(appConfigurationService).To(BeNil())
+			Expect(serviceErr).ToNot(BeNil())
+		})
+		It(`Instantiate service client with error: Invalid Auth`, func() {
+			appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+				URL: "https://appconfigurationv1/api",
+				Authenticator: &core.BasicAuthenticator{
+					Username: "",
+					Password: "",
+				},
+			})
+			Expect(appConfigurationService).To(BeNil())
+			Expect(serviceErr).ToNot(BeNil())
+		})
+	})
+	Describe(`Service constructor tests using external config`, func() {
+		Context(`Using external config, construct service client instances`, func() {
+			// Map containing environment variables used in testing.
+			var testEnvironment = map[string]string{
+				"APP_CONFIGURATION_URL":       "https://appconfigurationv1/api",
+				"APP_CONFIGURATION_AUTH_TYPE": "noauth",
+			}
+
+			It(`Create service client using external config successfully`, func() {
+				SetTestEnvironment(testEnvironment)
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1UsingExternalConfig(&appconfigurationv1.AppConfigurationV1Options{})
+				Expect(appConfigurationService).ToNot(BeNil())
+				Expect(serviceErr).To(BeNil())
+				ClearTestEnvironment(testEnvironment)
+
+				clone := appConfigurationService.Clone()
+				Expect(clone).ToNot(BeNil())
+				Expect(clone.Service != appConfigurationService.Service).To(BeTrue())
+				Expect(clone.GetServiceURL()).To(Equal(appConfigurationService.GetServiceURL()))
+				Expect(clone.Service.Options.Authenticator).To(Equal(appConfigurationService.Service.Options.Authenticator))
+			})
+			It(`Create service client using external config and set url from constructor successfully`, func() {
+				SetTestEnvironment(testEnvironment)
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1UsingExternalConfig(&appconfigurationv1.AppConfigurationV1Options{
+					URL: "https://testService/api",
+				})
+				Expect(appConfigurationService).ToNot(BeNil())
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService.Service.GetServiceURL()).To(Equal("https://testService/api"))
+				ClearTestEnvironment(testEnvironment)
+
+				clone := appConfigurationService.Clone()
+				Expect(clone).ToNot(BeNil())
+				Expect(clone.Service != appConfigurationService.Service).To(BeTrue())
+				Expect(clone.GetServiceURL()).To(Equal(appConfigurationService.GetServiceURL()))
+				Expect(clone.Service.Options.Authenticator).To(Equal(appConfigurationService.Service.Options.Authenticator))
+			})
+			It(`Create service client using external config and set url programatically successfully`, func() {
+				SetTestEnvironment(testEnvironment)
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1UsingExternalConfig(&appconfigurationv1.AppConfigurationV1Options{})
+				err := appConfigurationService.SetServiceURL("https://testService/api")
+				Expect(err).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService.Service.GetServiceURL()).To(Equal("https://testService/api"))
+				ClearTestEnvironment(testEnvironment)
+
+				clone := appConfigurationService.Clone()
+				Expect(clone).ToNot(BeNil())
+				Expect(clone.Service != appConfigurationService.Service).To(BeTrue())
+				Expect(clone.GetServiceURL()).To(Equal(appConfigurationService.GetServiceURL()))
+				Expect(clone.Service.Options.Authenticator).To(Equal(appConfigurationService.Service.Options.Authenticator))
+			})
+		})
+		Context(`Using external config, construct service client instances with error: Invalid Auth`, func() {
+			// Map containing environment variables used in testing.
+			var testEnvironment = map[string]string{
+				"APP_CONFIGURATION_URL":       "https://appconfigurationv1/api",
+				"APP_CONFIGURATION_AUTH_TYPE": "someOtherAuth",
+			}
+
+			SetTestEnvironment(testEnvironment)
+			appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1UsingExternalConfig(&appconfigurationv1.AppConfigurationV1Options{})
+
+			It(`Instantiate service client with error`, func() {
+				Expect(appConfigurationService).To(BeNil())
+				Expect(serviceErr).ToNot(BeNil())
+				ClearTestEnvironment(testEnvironment)
+			})
+		})
+		Context(`Using external config, construct service client instances with error: Invalid URL`, func() {
+			// Map containing environment variables used in testing.
+			var testEnvironment = map[string]string{
+				"APP_CONFIGURATION_AUTH_TYPE": "NOAuth",
+			}
+
+			SetTestEnvironment(testEnvironment)
+			appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1UsingExternalConfig(&appconfigurationv1.AppConfigurationV1Options{
+				URL: "{BAD_URL_STRING",
+			})
+
+			It(`Instantiate service client with error`, func() {
+				Expect(appConfigurationService).To(BeNil())
+				Expect(serviceErr).ToNot(BeNil())
+				ClearTestEnvironment(testEnvironment)
+			})
+		})
+	})
+	Describe(`Regional endpoint tests`, func() {
+		It(`GetServiceURLForRegion(region string)`, func() {
+			var url string
+			var err error
+			url, err = appconfigurationv1.GetServiceURLForRegion("INVALID_REGION")
+			Expect(url).To(BeEmpty())
+			Expect(err).ToNot(BeNil())
+			fmt.Fprintf(GinkgoWriter, "Expected error: %s\n", err.Error())
+		})
+	})
+	Describe(`Service constructor tests`, func() {
+		It(`Instantiate service client`, func() {
+			appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+				Authenticator: &core.NoAuthAuthenticator{},
+			})
+			Expect(appConfigurationService).ToNot(BeNil())
+			Expect(serviceErr).To(BeNil())
+		})
+		It(`Instantiate service client with error: Invalid URL`, func() {
+			appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+				URL: "{BAD_URL_STRING",
+			})
+			Expect(appConfigurationService).To(BeNil())
+			Expect(serviceErr).ToNot(BeNil())
+		})
+		It(`Instantiate service client with error: Invalid Auth`, func() {
+			appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+				URL: "https://appconfigurationv1/api",
+				Authenticator: &core.BasicAuthenticator{
+					Username: "",
+					Password: "",
+				},
+			})
+			Expect(appConfigurationService).To(BeNil())
+			Expect(serviceErr).ToNot(BeNil())
+		})
+	})
+	Describe(`Service constructor tests using external config`, func() {
+		Context(`Using external config, construct service client instances`, func() {
+			// Map containing environment variables used in testing.
+			var testEnvironment = map[string]string{
+				"APP_CONFIGURATION_URL":       "https://appconfigurationv1/api",
+				"APP_CONFIGURATION_AUTH_TYPE": "noauth",
+			}
+
+			It(`Create service client using external config successfully`, func() {
+				SetTestEnvironment(testEnvironment)
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1UsingExternalConfig(&appconfigurationv1.AppConfigurationV1Options{})
+				Expect(appConfigurationService).ToNot(BeNil())
+				Expect(serviceErr).To(BeNil())
+				ClearTestEnvironment(testEnvironment)
+
+				clone := appConfigurationService.Clone()
+				Expect(clone).ToNot(BeNil())
+				Expect(clone.Service != appConfigurationService.Service).To(BeTrue())
+				Expect(clone.GetServiceURL()).To(Equal(appConfigurationService.GetServiceURL()))
+				Expect(clone.Service.Options.Authenticator).To(Equal(appConfigurationService.Service.Options.Authenticator))
+			})
+			It(`Create service client using external config and set url from constructor successfully`, func() {
+				SetTestEnvironment(testEnvironment)
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1UsingExternalConfig(&appconfigurationv1.AppConfigurationV1Options{
+					URL: "https://testService/api",
+				})
+				Expect(appConfigurationService).ToNot(BeNil())
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService.Service.GetServiceURL()).To(Equal("https://testService/api"))
+				ClearTestEnvironment(testEnvironment)
+
+				clone := appConfigurationService.Clone()
+				Expect(clone).ToNot(BeNil())
+				Expect(clone.Service != appConfigurationService.Service).To(BeTrue())
+				Expect(clone.GetServiceURL()).To(Equal(appConfigurationService.GetServiceURL()))
+				Expect(clone.Service.Options.Authenticator).To(Equal(appConfigurationService.Service.Options.Authenticator))
+			})
+			It(`Create service client using external config and set url programatically successfully`, func() {
+				SetTestEnvironment(testEnvironment)
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1UsingExternalConfig(&appconfigurationv1.AppConfigurationV1Options{})
+				err := appConfigurationService.SetServiceURL("https://testService/api")
+				Expect(err).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService.Service.GetServiceURL()).To(Equal("https://testService/api"))
+				ClearTestEnvironment(testEnvironment)
+
+				clone := appConfigurationService.Clone()
+				Expect(clone).ToNot(BeNil())
+				Expect(clone.Service != appConfigurationService.Service).To(BeTrue())
+				Expect(clone.GetServiceURL()).To(Equal(appConfigurationService.GetServiceURL()))
+				Expect(clone.Service.Options.Authenticator).To(Equal(appConfigurationService.Service.Options.Authenticator))
+			})
+		})
+		Context(`Using external config, construct service client instances with error: Invalid Auth`, func() {
+			// Map containing environment variables used in testing.
+			var testEnvironment = map[string]string{
+				"APP_CONFIGURATION_URL":       "https://appconfigurationv1/api",
+				"APP_CONFIGURATION_AUTH_TYPE": "someOtherAuth",
+			}
+
+			SetTestEnvironment(testEnvironment)
+			appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1UsingExternalConfig(&appconfigurationv1.AppConfigurationV1Options{})
+
+			It(`Instantiate service client with error`, func() {
+				Expect(appConfigurationService).To(BeNil())
+				Expect(serviceErr).ToNot(BeNil())
+				ClearTestEnvironment(testEnvironment)
+			})
+		})
+		Context(`Using external config, construct service client instances with error: Invalid URL`, func() {
+			// Map containing environment variables used in testing.
+			var testEnvironment = map[string]string{
+				"APP_CONFIGURATION_AUTH_TYPE": "NOAuth",
+			}
+
+			SetTestEnvironment(testEnvironment)
+			appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1UsingExternalConfig(&appconfigurationv1.AppConfigurationV1Options{
+				URL: "{BAD_URL_STRING",
+			})
+
+			It(`Instantiate service client with error`, func() {
+				Expect(appConfigurationService).To(BeNil())
+				Expect(serviceErr).ToNot(BeNil())
+				ClearTestEnvironment(testEnvironment)
+			})
+		})
+	})
+	Describe(`Regional endpoint tests`, func() {
+		It(`GetServiceURLForRegion(region string)`, func() {
+			var url string
+			var err error
+			url, err = appconfigurationv1.GetServiceURLForRegion("INVALID_REGION")
+			Expect(url).To(BeEmpty())
+			Expect(err).ToNot(BeNil())
+			fmt.Fprintf(GinkgoWriter, "Expected error: %s\n", err.Error())
 		})
 	})
 	Describe(`Model constructor tests`, func() {

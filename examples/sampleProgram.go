@@ -28,6 +28,7 @@ var appConfigurationServiceInstance *appconfigurationv1.AppConfigurationV1
 
 func initAndReturnSingletonInstanceWithAPIKey(authToken string, guid string, region string) *appconfigurationv1.AppConfigurationV1 {
 
+	instanceURL := "https://" + region + ".apprapp.cloud.ibm.com/apprapp/feature/v1/instances/" + guid
 	var once sync.Once
 	if appConfigurationServiceInstance == nil {
 		once.Do(func() {
@@ -37,7 +38,7 @@ func initAndReturnSingletonInstanceWithAPIKey(authToken string, guid string, reg
 				}
 				options := &appconfigurationv1.AppConfigurationV1Options{
 					Authenticator: authenticator,
-					URL:           "https://" + region + ".apprapp.cloud.ibm.com/apprapp/feature/v1/instances/" + guid,
+					URL:           instanceURL,
 				}
 				var err error
 				appConfigurationServiceInstance, err = appconfigurationv1.NewAppConfigurationV1(options)
@@ -86,7 +87,7 @@ func main() {
 
 	createEnvironment("environmentId", "environmentName", "desc", "tags", "#FDD13A")
 	createCollection("collectionId", "collectionName", "desc", "tags")
-	createSegment("segmentName", "segmentId", "desc", "tags", "email", "endsWith", []string{"@in.ibm.com"})
+	createSegment("segmentId", "segmentName", "desc", "tags", "email", "endsWith", []string{"@in.ibm.com"})
 	createFeature("environmentId", "booleanFeatureName", "booleanFeatureId", "desc", "BOOLEAN", "true", "false", "tags", []string{"segmentId"}, 1, "collectionId", "true")
 	createFeature("environmentId", "numberFeatureName", "numberFeatureId", "desc", "NUMERIC", "1", "2", "tags", []string{"segmentId"}, 1, "collectionId", "3")
 	createProperty("environmentId", "booleanPropertyName", "booleanPropertyId", "desc", "BOOLEAN", "true", "tags", []string{"segmentId"}, "collectionId", 2, "true")
@@ -103,7 +104,7 @@ func main() {
 	updateFeature("environmentId", "numberFeatureId", "numberFeatureName", "updatedDesc", "1", "1", "tags", []string{}, 1, "collectionId", "2", true)
 	updateCollection("collectionId", "collectionName", "updatedDesc", "updatedTags")
 	updateSegment("segmentId", "segmentName", "updatedDesc", "updatedTags", "email", "endsWith", []string{"@in.ibm.com"})
-	updateProperty("environmentId", "booleanPropertyName", "booleanPropertyId", "updatedDescBoolean", "true", "updatedTags", []string{"segmentId"}, "collectionId", 2, "true")
+	updateProperty("environmentId", "booleanPropertyId", "booleanPropertyName", "updatedDescBoolean", "true", "updatedTags", []string{"segmentId"}, "collectionId", 2, "true")
 	updateEnvironment("environmentId", "environmentName", "updatedDesc", "tags", "#FDD13A")
 
 	getEnvironment("environmentId")
@@ -155,7 +156,7 @@ func createCollection(collectionId string, name string, description string, tags
 	fmt.Println(*result.CollectionID)
 }
 
-func createSegment(name string, id string, description string, tags string, attributeName string, operator string, values []string) {
+func createSegment(id string, name string, description string, tags string, attributeName string, operator string, values []string) {
 	fmt.Println("createSegment")
 	ruleArray, _ := appConfigurationServiceInstance.NewRule(attributeName, operator, values)
 	createSegmentOptionsModel := appConfigurationServiceInstance.NewCreateSegmentOptions()
@@ -283,7 +284,7 @@ func updateSegment(segmentId string, name string, description string, tags strin
 	fmt.Println(*result.Name)
 }
 
-func updateProperty(environmentId string, name string, propertyId string, description string, valueOfProperty string, tags string, segments []string, collectionId string, order int64, value string) {
+func updateProperty(environmentId string, propertyId string, name string, description string, valueOfProperty string, tags string, segments []string, collectionId string, order int64, value string) {
 	fmt.Println("updateProperty")
 	ruleArray, _ := appConfigurationServiceInstance.NewTargetSegments(segments)
 	segmentRuleArray, _ := appConfigurationServiceInstance.NewSegmentRule([]appconfigurationv1.TargetSegments{*ruleArray}, value, order)

@@ -18,7 +18,6 @@
  * IBM OpenAPI SDK Code Generator Version: 3.22.0-937b9a1c-20201211-223043
  */
 
-
 // Package appconfigurationv1 : Operations and models for the AppConfigurationV1 service
 package appconfigurationv1
 
@@ -26,13 +25,14 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"github.com/IBM/appconfiguration-go-admin-sdk/common"
-	"github.com/IBM/go-sdk-core/v5/core"
-	"github.com/go-openapi/strfmt"
 	"net/http"
 	"reflect"
 	"strings"
 	"time"
+
+	"github.com/IBM/appconfiguration-go-admin-sdk/common"
+	"github.com/IBM/go-sdk-core/v5/core"
+	"github.com/go-openapi/strfmt"
 )
 
 // AppConfigurationV1 : ReST APIs for App Configuration
@@ -1025,7 +1025,7 @@ func (appConfiguration *AppConfigurationV1) UpdateFeatureWithContext(ctx context
 
 	pathParamsMap := map[string]string{
 		"environment_id": *updateFeatureOptions.EnvironmentID,
-		"feature_id": *updateFeatureOptions.FeatureID,
+		"feature_id":     *updateFeatureOptions.FeatureID,
 	}
 
 	builder := core.NewRequestBuilder(core.PUT)
@@ -1117,7 +1117,7 @@ func (appConfiguration *AppConfigurationV1) UpdateFeatureValuesWithContext(ctx c
 
 	pathParamsMap := map[string]string{
 		"environment_id": *updateFeatureValuesOptions.EnvironmentID,
-		"feature_id": *updateFeatureValuesOptions.FeatureID,
+		"feature_id":     *updateFeatureValuesOptions.FeatureID,
 	}
 
 	builder := core.NewRequestBuilder(core.PATCH)
@@ -1201,7 +1201,7 @@ func (appConfiguration *AppConfigurationV1) GetFeatureWithContext(ctx context.Co
 
 	pathParamsMap := map[string]string{
 		"environment_id": *getFeatureOptions.EnvironmentID,
-		"feature_id": *getFeatureOptions.FeatureID,
+		"feature_id":     *getFeatureOptions.FeatureID,
 	}
 
 	builder := core.NewRequestBuilder(core.GET)
@@ -1264,7 +1264,7 @@ func (appConfiguration *AppConfigurationV1) DeleteFeatureWithContext(ctx context
 
 	pathParamsMap := map[string]string{
 		"environment_id": *deleteFeatureOptions.EnvironmentID,
-		"feature_id": *deleteFeatureOptions.FeatureID,
+		"feature_id":     *deleteFeatureOptions.FeatureID,
 	}
 
 	builder := core.NewRequestBuilder(core.DELETE)
@@ -1313,7 +1313,7 @@ func (appConfiguration *AppConfigurationV1) ToggleFeatureWithContext(ctx context
 
 	pathParamsMap := map[string]string{
 		"environment_id": *toggleFeatureOptions.EnvironmentID,
-		"feature_id": *toggleFeatureOptions.FeatureID,
+		"feature_id":     *toggleFeatureOptions.FeatureID,
 	}
 
 	builder := core.NewRequestBuilder(core.PUT)
@@ -1554,7 +1554,7 @@ func (appConfiguration *AppConfigurationV1) UpdatePropertyWithContext(ctx contex
 
 	pathParamsMap := map[string]string{
 		"environment_id": *updatePropertyOptions.EnvironmentID,
-		"property_id": *updatePropertyOptions.PropertyID,
+		"property_id":    *updatePropertyOptions.PropertyID,
 	}
 
 	builder := core.NewRequestBuilder(core.PUT)
@@ -1639,7 +1639,7 @@ func (appConfiguration *AppConfigurationV1) UpdatePropertyValuesWithContext(ctx 
 
 	pathParamsMap := map[string]string{
 		"environment_id": *updatePropertyValuesOptions.EnvironmentID,
-		"property_id": *updatePropertyValuesOptions.PropertyID,
+		"property_id":    *updatePropertyValuesOptions.PropertyID,
 	}
 
 	builder := core.NewRequestBuilder(core.PATCH)
@@ -1720,7 +1720,7 @@ func (appConfiguration *AppConfigurationV1) GetPropertyWithContext(ctx context.C
 
 	pathParamsMap := map[string]string{
 		"environment_id": *getPropertyOptions.EnvironmentID,
-		"property_id": *getPropertyOptions.PropertyID,
+		"property_id":    *getPropertyOptions.PropertyID,
 	}
 
 	builder := core.NewRequestBuilder(core.GET)
@@ -1783,7 +1783,7 @@ func (appConfiguration *AppConfigurationV1) DeletePropertyWithContext(ctx contex
 
 	pathParamsMap := map[string]string{
 		"environment_id": *deletePropertyOptions.EnvironmentID,
-		"property_id": *deletePropertyOptions.PropertyID,
+		"property_id":    *deletePropertyOptions.PropertyID,
 	}
 
 	builder := core.NewRequestBuilder(core.DELETE)
@@ -2177,11 +2177,10 @@ type Collection struct {
 	PropertiesCount *int64 `json:"properties_count,omitempty"`
 }
 
-
 // NewCollection : Instantiate Collection (Generic Model Constructor)
 func (*AppConfigurationV1) NewCollection(name string, collectionID string) (model *Collection, err error) {
 	model = &Collection{
-		Name: core.StringPtr(name),
+		Name:         core.StringPtr(name),
 		CollectionID: core.StringPtr(collectionID),
 	}
 	err = core.ValidateStruct(model, "required parameters")
@@ -2254,7 +2253,7 @@ type CollectionList struct {
 	TotalCount *int64 `json:"total_count" validate:"required"`
 
 	// Response having URL of the page.
-	First *PageHrefResponse `json:"first,omitempty"`
+	First *PageHrefResponse `json:"first" validate:"required"`
 
 	// Response having URL of the page.
 	Previous *PageHrefResponse `json:"previous,omitempty"`
@@ -2263,9 +2262,8 @@ type CollectionList struct {
 	Next *PageHrefResponse `json:"next,omitempty"`
 
 	// Response having URL of the page.
-	Last *PageHrefResponse `json:"last,omitempty"`
+	Last *PageHrefResponse `json:"last" validate:"required"`
 }
-
 
 // UnmarshalCollectionList unmarshals an instance of CollectionList from the specified map of raw messages.
 func UnmarshalCollectionList(m map[string]json.RawMessage, result interface{}) (err error) {
@@ -2330,7 +2328,6 @@ type CollectionLite struct {
 	Href *string `json:"href,omitempty"`
 }
 
-
 // UnmarshalCollectionLite unmarshals an instance of CollectionLite from the specified map of raw messages.
 func UnmarshalCollectionLite(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(CollectionLite)
@@ -2374,7 +2371,6 @@ type CollectionRef struct {
 	// Name of the collection.
 	Name *string `json:"name,omitempty"`
 }
-
 
 // NewCollectionRef : Instantiate CollectionRef (Generic Model Constructor)
 func (*AppConfigurationV1) NewCollectionRef(collectionID string) (model *CollectionRef, err error) {
@@ -2421,7 +2417,7 @@ type CreateCollectionOptions struct {
 // NewCreateCollectionOptions : Instantiate CreateCollectionOptions
 func (*AppConfigurationV1) NewCreateCollectionOptions(name string, collectionID string) *CreateCollectionOptions {
 	return &CreateCollectionOptions{
-		Name: core.StringPtr(name),
+		Name:         core.StringPtr(name),
 		CollectionID: core.StringPtr(collectionID),
 	}
 }
@@ -2480,7 +2476,7 @@ type CreateEnvironmentOptions struct {
 // NewCreateEnvironmentOptions : Instantiate CreateEnvironmentOptions
 func (*AppConfigurationV1) NewCreateEnvironmentOptions(name string, environmentID string) *CreateEnvironmentOptions {
 	return &CreateEnvironmentOptions{
-		Name: core.StringPtr(name),
+		Name:          core.StringPtr(name),
 		EnvironmentID: core.StringPtr(environmentID),
 	}
 }
@@ -2567,17 +2563,17 @@ type CreateFeatureOptions struct {
 const (
 	CreateFeatureOptions_Type_Boolean = "BOOLEAN"
 	CreateFeatureOptions_Type_Numeric = "NUMERIC"
-	CreateFeatureOptions_Type_String = "STRING"
+	CreateFeatureOptions_Type_String  = "STRING"
 )
 
 // NewCreateFeatureOptions : Instantiate CreateFeatureOptions
 func (*AppConfigurationV1) NewCreateFeatureOptions(environmentID string, name string, featureID string, typeVar string, enabledValue interface{}, disabledValue interface{}) *CreateFeatureOptions {
 	return &CreateFeatureOptions{
 		EnvironmentID: core.StringPtr(environmentID),
-		Name: core.StringPtr(name),
-		FeatureID: core.StringPtr(featureID),
-		Type: core.StringPtr(typeVar),
-		EnabledValue: enabledValue,
+		Name:          core.StringPtr(name),
+		FeatureID:     core.StringPtr(featureID),
+		Type:          core.StringPtr(typeVar),
+		EnabledValue:  enabledValue,
 		DisabledValue: disabledValue,
 	}
 }
@@ -2692,17 +2688,17 @@ type CreatePropertyOptions struct {
 const (
 	CreatePropertyOptions_Type_Boolean = "BOOLEAN"
 	CreatePropertyOptions_Type_Numeric = "NUMERIC"
-	CreatePropertyOptions_Type_String = "STRING"
+	CreatePropertyOptions_Type_String  = "STRING"
 )
 
 // NewCreatePropertyOptions : Instantiate CreatePropertyOptions
 func (*AppConfigurationV1) NewCreatePropertyOptions(environmentID string, name string, propertyID string, typeVar string, value interface{}) *CreatePropertyOptions {
 	return &CreatePropertyOptions{
 		EnvironmentID: core.StringPtr(environmentID),
-		Name: core.StringPtr(name),
-		PropertyID: core.StringPtr(propertyID),
-		Type: core.StringPtr(typeVar),
-		Value: value,
+		Name:          core.StringPtr(name),
+		PropertyID:    core.StringPtr(propertyID),
+		Type:          core.StringPtr(typeVar),
+		Value:         value,
 	}
 }
 
@@ -2780,7 +2776,9 @@ type CreateSegmentOptions struct {
 	// Tags associated with the segments.
 	Tags *string `json:"tags,omitempty"`
 
-	// List of rules that determine if the entity is part of the segment.
+	// List of rules that determine if the entity belongs to the segment during feature / property evaluation. An entity is
+	// identified by an unique identifier and the attributes that it defines. Any feature flag and property value
+	// evaluation is performed in the context of an entity when it is targeted to segments.
 	Rules []Rule `json:"rules,omitempty"`
 
 	// Allows users to set headers on API requests
@@ -2900,7 +2898,7 @@ type DeleteFeatureOptions struct {
 func (*AppConfigurationV1) NewDeleteFeatureOptions(environmentID string, featureID string) *DeleteFeatureOptions {
 	return &DeleteFeatureOptions{
 		EnvironmentID: core.StringPtr(environmentID),
-		FeatureID: core.StringPtr(featureID),
+		FeatureID:     core.StringPtr(featureID),
 	}
 }
 
@@ -2938,7 +2936,7 @@ type DeletePropertyOptions struct {
 func (*AppConfigurationV1) NewDeletePropertyOptions(environmentID string, propertyID string) *DeletePropertyOptions {
 	return &DeletePropertyOptions{
 		EnvironmentID: core.StringPtr(environmentID),
-		PropertyID: core.StringPtr(propertyID),
+		PropertyID:    core.StringPtr(propertyID),
 	}
 }
 
@@ -3021,11 +3019,10 @@ type Environment struct {
 	Properties []PropertyOutput `json:"properties,omitempty"`
 }
 
-
 // NewEnvironment : Instantiate Environment (Generic Model Constructor)
 func (*AppConfigurationV1) NewEnvironment(name string, environmentID string) (model *Environment, err error) {
 	model = &Environment{
-		Name: core.StringPtr(name),
+		Name:          core.StringPtr(name),
 		EnvironmentID: core.StringPtr(environmentID),
 	}
 	err = core.ValidateStruct(model, "required parameters")
@@ -3094,7 +3091,7 @@ type EnvironmentList struct {
 	TotalCount *int64 `json:"total_count" validate:"required"`
 
 	// Response having URL of the page.
-	First *PageHrefResponse `json:"first,omitempty"`
+	First *PageHrefResponse `json:"first" validate:"required"`
 
 	// Response having URL of the page.
 	Previous *PageHrefResponse `json:"previous,omitempty"`
@@ -3103,9 +3100,8 @@ type EnvironmentList struct {
 	Next *PageHrefResponse `json:"next,omitempty"`
 
 	// Response having URL of the page.
-	Last *PageHrefResponse `json:"last,omitempty"`
+	Last *PageHrefResponse `json:"last" validate:"required"`
 }
-
 
 // UnmarshalEnvironmentList unmarshals an instance of EnvironmentList from the specified map of raw messages.
 func UnmarshalEnvironmentList(m map[string]json.RawMessage, result interface{}) (err error) {
@@ -3201,17 +3197,16 @@ type Feature struct {
 const (
 	Feature_Type_Boolean = "BOOLEAN"
 	Feature_Type_Numeric = "NUMERIC"
-	Feature_Type_String = "STRING"
+	Feature_Type_String  = "STRING"
 )
-
 
 // NewFeature : Instantiate Feature (Generic Model Constructor)
 func (*AppConfigurationV1) NewFeature(name string, featureID string, typeVar string, enabledValue interface{}, disabledValue interface{}) (model *Feature, err error) {
 	model = &Feature{
-		Name: core.StringPtr(name),
-		FeatureID: core.StringPtr(featureID),
-		Type: core.StringPtr(typeVar),
-		EnabledValue: enabledValue,
+		Name:          core.StringPtr(name),
+		FeatureID:     core.StringPtr(featureID),
+		Type:          core.StringPtr(typeVar),
+		EnabledValue:  enabledValue,
 		DisabledValue: disabledValue,
 	}
 	err = core.ValidateStruct(model, "required parameters")
@@ -3294,12 +3289,11 @@ type FeatureOutput struct {
 	Name *string `json:"name" validate:"required"`
 }
 
-
 // NewFeatureOutput : Instantiate FeatureOutput (Generic Model Constructor)
 func (*AppConfigurationV1) NewFeatureOutput(featureID string, name string) (model *FeatureOutput, err error) {
 	model = &FeatureOutput{
 		FeatureID: core.StringPtr(featureID),
-		Name: core.StringPtr(name),
+		Name:      core.StringPtr(name),
 	}
 	err = core.ValidateStruct(model, "required parameters")
 	return
@@ -3335,7 +3329,7 @@ type FeaturesList struct {
 	TotalCount *int64 `json:"total_count" validate:"required"`
 
 	// Response having URL of the page.
-	First *PageHrefResponse `json:"first,omitempty"`
+	First *PageHrefResponse `json:"first" validate:"required"`
 
 	// Response having URL of the page.
 	Previous *PageHrefResponse `json:"previous,omitempty"`
@@ -3344,9 +3338,8 @@ type FeaturesList struct {
 	Next *PageHrefResponse `json:"next,omitempty"`
 
 	// Response having URL of the page.
-	Last *PageHrefResponse `json:"last,omitempty"`
+	Last *PageHrefResponse `json:"last" validate:"required"`
 }
-
 
 // UnmarshalFeaturesList unmarshals an instance of FeaturesList from the specified map of raw messages.
 func UnmarshalFeaturesList(m map[string]json.RawMessage, result interface{}) (err error) {
@@ -3404,7 +3397,7 @@ type GetCollectionOptions struct {
 
 // Constants associated with the GetCollectionOptions.Include property.
 const (
-	GetCollectionOptions_Include_Features = "features"
+	GetCollectionOptions_Include_Features   = "features"
 	GetCollectionOptions_Include_Properties = "properties"
 )
 
@@ -3456,7 +3449,7 @@ type GetEnvironmentOptions struct {
 
 // Constants associated with the GetEnvironmentOptions.Include property.
 const (
-	GetEnvironmentOptions_Include_Features = "features"
+	GetEnvironmentOptions_Include_Features   = "features"
 	GetEnvironmentOptions_Include_Properties = "properties"
 )
 
@@ -3516,7 +3509,7 @@ const (
 func (*AppConfigurationV1) NewGetFeatureOptions(environmentID string, featureID string) *GetFeatureOptions {
 	return &GetFeatureOptions{
 		EnvironmentID: core.StringPtr(environmentID),
-		FeatureID: core.StringPtr(featureID),
+		FeatureID:     core.StringPtr(featureID),
 	}
 }
 
@@ -3569,7 +3562,7 @@ const (
 func (*AppConfigurationV1) NewGetPropertyOptions(environmentID string, propertyID string) *GetPropertyOptions {
 	return &GetPropertyOptions{
 		EnvironmentID: core.StringPtr(environmentID),
-		PropertyID: core.StringPtr(propertyID),
+		PropertyID:    core.StringPtr(propertyID),
 	}
 }
 
@@ -3611,7 +3604,7 @@ type GetSegmentOptions struct {
 
 // Constants associated with the GetSegmentOptions.Include property.
 const (
-	GetSegmentOptions_Include_Features = "features"
+	GetSegmentOptions_Include_Features   = "features"
 	GetSegmentOptions_Include_Properties = "properties"
 )
 
@@ -3677,13 +3670,13 @@ type ListCollectionsOptions struct {
 // Sort the collection details based on the specified attribute.
 const (
 	ListCollectionsOptions_Sort_CollectionID = "collection_id"
-	ListCollectionsOptions_Sort_CreatedTime = "created_time"
-	ListCollectionsOptions_Sort_UpdatedTime = "updated_time"
+	ListCollectionsOptions_Sort_CreatedTime  = "created_time"
+	ListCollectionsOptions_Sort_UpdatedTime  = "updated_time"
 )
 
 // Constants associated with the ListCollectionsOptions.Include property.
 const (
-	ListCollectionsOptions_Include_Features = "features"
+	ListCollectionsOptions_Include_Features   = "features"
 	ListCollectionsOptions_Include_Properties = "properties"
 )
 
@@ -3776,14 +3769,14 @@ type ListEnvironmentsOptions struct {
 // Constants associated with the ListEnvironmentsOptions.Sort property.
 // Sort the environment details based on the specified attribute.
 const (
-	ListEnvironmentsOptions_Sort_CreatedTime = "created_time"
+	ListEnvironmentsOptions_Sort_CreatedTime   = "created_time"
 	ListEnvironmentsOptions_Sort_EnvironmentID = "environment_id"
-	ListEnvironmentsOptions_Sort_UpdatedTime = "updated_time"
+	ListEnvironmentsOptions_Sort_UpdatedTime   = "updated_time"
 )
 
 // Constants associated with the ListEnvironmentsOptions.Include property.
 const (
-	ListEnvironmentsOptions_Include_Features = "features"
+	ListEnvironmentsOptions_Include_Features   = "features"
 	ListEnvironmentsOptions_Include_Properties = "properties"
 )
 
@@ -3874,14 +3867,14 @@ type ListFeaturesOptions struct {
 // Sort the feature details based on the specified attribute.
 const (
 	ListFeaturesOptions_Sort_CreatedTime = "created_time"
-	ListFeaturesOptions_Sort_FeatureID = "feature_id"
+	ListFeaturesOptions_Sort_FeatureID   = "feature_id"
 	ListFeaturesOptions_Sort_UpdatedTime = "updated_time"
 )
 
 // Constants associated with the ListFeaturesOptions.Include property.
 const (
 	ListFeaturesOptions_Include_Collections = "collections"
-	ListFeaturesOptions_Include_Rules = " rules"
+	ListFeaturesOptions_Include_Rules       = " rules"
 )
 
 // NewListFeaturesOptions : Instantiate ListFeaturesOptions
@@ -3991,14 +3984,14 @@ type ListPropertiesOptions struct {
 // Sort the property details based on the specified attribute.
 const (
 	ListPropertiesOptions_Sort_CreatedTime = "created_time"
-	ListPropertiesOptions_Sort_PropertyID = "property_id"
+	ListPropertiesOptions_Sort_PropertyID  = "property_id"
 	ListPropertiesOptions_Sort_UpdatedTime = "updated_time"
 )
 
 // Constants associated with the ListPropertiesOptions.Include property.
 const (
 	ListPropertiesOptions_Include_Collections = "collections"
-	ListPropertiesOptions_Include_Rules = " rules"
+	ListPropertiesOptions_Include_Rules       = " rules"
 )
 
 // NewListPropertiesOptions : Instantiate ListPropertiesOptions
@@ -4099,7 +4092,7 @@ type ListSegmentsOptions struct {
 // Sort the segment details based on the specified attribute.
 const (
 	ListSegmentsOptions_Sort_CreatedTime = "created_time"
-	ListSegmentsOptions_Sort_SegmentID = "segment_id"
+	ListSegmentsOptions_Sort_SegmentID   = "segment_id"
 	ListSegmentsOptions_Sort_UpdatedTime = "updated_time"
 )
 
@@ -4158,10 +4151,9 @@ func (options *ListSegmentsOptions) SetHeaders(param map[string]string) *ListSeg
 
 // PageHrefResponse : Response having URL of the page.
 type PageHrefResponse struct {
-	// URL of the response.
+	// URL to the page.
 	Href *string `json:"href" validate:"required"`
 }
-
 
 // UnmarshalPageHrefResponse unmarshals an instance of PageHrefResponse from the specified map of raw messages.
 func UnmarshalPageHrefResponse(m map[string]json.RawMessage, result interface{}) (err error) {
@@ -4189,7 +4181,7 @@ type PropertiesList struct {
 	TotalCount *int64 `json:"total_count" validate:"required"`
 
 	// Response having URL of the page.
-	First *PageHrefResponse `json:"first,omitempty"`
+	First *PageHrefResponse `json:"first" validate:"required"`
 
 	// Response having URL of the page.
 	Previous *PageHrefResponse `json:"previous,omitempty"`
@@ -4198,9 +4190,8 @@ type PropertiesList struct {
 	Next *PageHrefResponse `json:"next,omitempty"`
 
 	// Response having URL of the page.
-	Last *PageHrefResponse `json:"last,omitempty"`
+	Last *PageHrefResponse `json:"last" validate:"required"`
 }
-
 
 // UnmarshalPropertiesList unmarshals an instance of PropertiesList from the specified map of raw messages.
 func UnmarshalPropertiesList(m map[string]json.RawMessage, result interface{}) (err error) {
@@ -4288,17 +4279,16 @@ type Property struct {
 const (
 	Property_Type_Boolean = "BOOLEAN"
 	Property_Type_Numeric = "NUMERIC"
-	Property_Type_String = "STRING"
+	Property_Type_String  = "STRING"
 )
-
 
 // NewProperty : Instantiate Property (Generic Model Constructor)
 func (*AppConfigurationV1) NewProperty(name string, propertyID string, typeVar string, value interface{}) (model *Property, err error) {
 	model = &Property{
-		Name: core.StringPtr(name),
+		Name:       core.StringPtr(name),
 		PropertyID: core.StringPtr(propertyID),
-		Type: core.StringPtr(typeVar),
-		Value: value,
+		Type:       core.StringPtr(typeVar),
+		Value:      value,
 	}
 	err = core.ValidateStruct(model, "required parameters")
 	return
@@ -4372,12 +4362,11 @@ type PropertyOutput struct {
 	Name *string `json:"name" validate:"required"`
 }
 
-
 // NewPropertyOutput : Instantiate PropertyOutput (Generic Model Constructor)
 func (*AppConfigurationV1) NewPropertyOutput(propertyID string, name string) (model *PropertyOutput, err error) {
 	model = &PropertyOutput{
 		PropertyID: core.StringPtr(propertyID),
-		Name: core.StringPtr(name),
+		Name:       core.StringPtr(name),
 	}
 	err = core.ValidateStruct(model, "required parameters")
 	return
@@ -4398,40 +4387,37 @@ func UnmarshalPropertyOutput(m map[string]json.RawMessage, result interface{}) (
 	return
 }
 
-// Rule : Rule is used to determine if the entity belongs to the segment during feature / property evaluation. An entity is
-// identified by a unique identifier and the attributes that it defines. Any feature flag and property value evaluation
-// is performed in the context of an entity when it is targeted to segments.
+// Rule : Rule is used to determine if the entity belongs to the segment during feature / property evaluation.
 type Rule struct {
 	// Attribute name.
 	AttributeName *string `json:"attribute_name" validate:"required"`
 
-	// Operator to be used for the evaluation if the entity is part of the segment.
+	// Operator to be used for the evaluation if the entity belongs to the segment.
 	Operator *string `json:"operator" validate:"required"`
 
-	// List of values. Entities matching any of the given values will be considered to be part of the segment.
+	// List of values. Entities matching any of the given values will be considered to belong to the segment.
 	Values []string `json:"values" validate:"required"`
 }
 
 // Constants associated with the Rule.Operator property.
-// Operator to be used for the evaluation if the entity is part of the segment.
+// Operator to be used for the evaluation if the entity belongs to the segment.
 const (
-	Rule_Operator_Contains = "contains"
-	Rule_Operator_Endswith = "endsWith"
-	Rule_Operator_Greaterthan = "greaterThan"
+	Rule_Operator_Contains          = "contains"
+	Rule_Operator_Endswith          = "endsWith"
+	Rule_Operator_Greaterthan       = "greaterThan"
 	Rule_Operator_Greaterthanequals = "greaterThanEquals"
-	Rule_Operator_Is = "is"
-	Rule_Operator_Lesserthan = "lesserThan"
-	Rule_Operator_Lesserthanequals = "lesserThanEquals"
-	Rule_Operator_Startswith = "startsWith"
+	Rule_Operator_Is                = "is"
+	Rule_Operator_Lesserthan        = "lesserThan"
+	Rule_Operator_Lesserthanequals  = "lesserThanEquals"
+	Rule_Operator_Startswith        = "startsWith"
 )
-
 
 // NewRule : Instantiate Rule (Generic Model Constructor)
 func (*AppConfigurationV1) NewRule(attributeName string, operator string, values []string) (model *Rule, err error) {
 	model = &Rule{
 		AttributeName: core.StringPtr(attributeName),
-		Operator: core.StringPtr(operator),
-		Values: values,
+		Operator:      core.StringPtr(operator),
+		Values:        values,
 	}
 	err = core.ValidateStruct(model, "required parameters")
 	return
@@ -4470,7 +4456,9 @@ type Segment struct {
 	// Tags associated with the segments.
 	Tags *string `json:"tags,omitempty"`
 
-	// List of rules that determine if the entity is part of the segment.
+	// List of rules that determine if the entity belongs to the segment during feature / property evaluation. An entity is
+	// identified by an unique identifier and the attributes that it defines. Any feature flag and property value
+	// evaluation is performed in the context of an entity when it is targeted to segments.
 	Rules []Rule `json:"rules" validate:"required"`
 
 	// Creation time of the segment.
@@ -4489,13 +4477,12 @@ type Segment struct {
 	Properties []PropertyOutput `json:"properties,omitempty"`
 }
 
-
 // NewSegment : Instantiate Segment (Generic Model Constructor)
 func (*AppConfigurationV1) NewSegment(name string, segmentID string, rules []Rule) (model *Segment, err error) {
 	model = &Segment{
-		Name: core.StringPtr(name),
+		Name:      core.StringPtr(name),
 		SegmentID: core.StringPtr(segmentID),
-		Rules: rules,
+		Rules:     rules,
 	}
 	err = core.ValidateStruct(model, "required parameters")
 	return
@@ -4562,7 +4549,6 @@ type SegmentRule struct {
 	Order *int64 `json:"order" validate:"required"`
 }
 
-
 // NewSegmentRule : Instantiate SegmentRule (Generic Model Constructor)
 func (*AppConfigurationV1) NewSegmentRule(rules []TargetSegments, value interface{}, order int64) (model *SegmentRule, err error) {
 	model = &SegmentRule{
@@ -4608,7 +4594,7 @@ type SegmentsList struct {
 	TotalCount *int64 `json:"total_count" validate:"required"`
 
 	// Response having URL of the page.
-	First *PageHrefResponse `json:"first,omitempty"`
+	First *PageHrefResponse `json:"first" validate:"required"`
 
 	// Response having URL of the page.
 	Previous *PageHrefResponse `json:"previous,omitempty"`
@@ -4617,9 +4603,8 @@ type SegmentsList struct {
 	Next *PageHrefResponse `json:"next,omitempty"`
 
 	// Response having URL of the page.
-	Last *PageHrefResponse `json:"last,omitempty"`
+	Last *PageHrefResponse `json:"last" validate:"required"`
 }
-
 
 // UnmarshalSegmentsList unmarshals an instance of SegmentsList from the specified map of raw messages.
 func UnmarshalSegmentsList(m map[string]json.RawMessage, result interface{}) (err error) {
@@ -4666,7 +4651,6 @@ type TargetSegments struct {
 	Segments []string `json:"segments" validate:"required"`
 }
 
-
 // NewTargetSegments : Instantiate TargetSegments (Generic Model Constructor)
 func (*AppConfigurationV1) NewTargetSegments(segments []string) (model *TargetSegments, err error) {
 	model = &TargetSegments{
@@ -4706,7 +4690,7 @@ type ToggleFeatureOptions struct {
 func (*AppConfigurationV1) NewToggleFeatureOptions(environmentID string, featureID string) *ToggleFeatureOptions {
 	return &ToggleFeatureOptions{
 		EnvironmentID: core.StringPtr(environmentID),
-		FeatureID: core.StringPtr(featureID),
+		FeatureID:     core.StringPtr(featureID),
 	}
 }
 
@@ -4895,7 +4879,7 @@ type UpdateFeatureOptions struct {
 func (*AppConfigurationV1) NewUpdateFeatureOptions(environmentID string, featureID string) *UpdateFeatureOptions {
 	return &UpdateFeatureOptions{
 		EnvironmentID: core.StringPtr(environmentID),
-		FeatureID: core.StringPtr(featureID),
+		FeatureID:     core.StringPtr(featureID),
 	}
 }
 
@@ -5001,7 +4985,7 @@ type UpdateFeatureValuesOptions struct {
 func (*AppConfigurationV1) NewUpdateFeatureValuesOptions(environmentID string, featureID string) *UpdateFeatureValuesOptions {
 	return &UpdateFeatureValuesOptions{
 		EnvironmentID: core.StringPtr(environmentID),
-		FeatureID: core.StringPtr(featureID),
+		FeatureID:     core.StringPtr(featureID),
 	}
 }
 
@@ -5093,7 +5077,7 @@ type UpdatePropertyOptions struct {
 func (*AppConfigurationV1) NewUpdatePropertyOptions(environmentID string, propertyID string) *UpdatePropertyOptions {
 	return &UpdatePropertyOptions{
 		EnvironmentID: core.StringPtr(environmentID),
-		PropertyID: core.StringPtr(propertyID),
+		PropertyID:    core.StringPtr(propertyID),
 	}
 }
 
@@ -5182,7 +5166,7 @@ type UpdatePropertyValuesOptions struct {
 func (*AppConfigurationV1) NewUpdatePropertyValuesOptions(environmentID string, propertyID string) *UpdatePropertyValuesOptions {
 	return &UpdatePropertyValuesOptions{
 		EnvironmentID: core.StringPtr(environmentID),
-		PropertyID: core.StringPtr(propertyID),
+		PropertyID:    core.StringPtr(propertyID),
 	}
 }
 
@@ -5248,7 +5232,9 @@ type UpdateSegmentOptions struct {
 	// Tags associated with segments.
 	Tags *string `json:"tags,omitempty"`
 
-	// List of rules that determine if the entity is part of the segment.
+	// List of rules that determine if the entity belongs to the segment during feature / property evaluation. An entity is
+	// identified by an unique identifier and the attributes that it defines. Any feature flag and property value
+	// evaluation is performed in the context of an entity when it is targeted to segments.
 	Rules []Rule `json:"rules,omitempty"`
 
 	// Allows users to set headers on API requests

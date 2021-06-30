@@ -1,7 +1,10 @@
-# Makefile to build appconfiguration-admin-sdk-go
+# Makefile to build appconfiguration-go-admin-sdk
 
 build:
 	go build ./...
+
+lint:
+	golangci-lint run
 
 runUnitTests:
 	make build
@@ -10,3 +13,11 @@ runUnitTests:
 
 tidy:
 	go mod tidy
+
+vendor:
+	go mod vendor
+
+runCoverage:
+	make build
+	cd appconfigurationv1 && go test -coverprofile=coverage.out
+	cd common && go test -coverprofile=coverage.out
