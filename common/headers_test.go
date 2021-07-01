@@ -17,20 +17,9 @@
 package common
 
 import (
-	"strings"
 	"testing"
-
 	"github.com/stretchr/testify/assert"
 )
-
-func TestGetSystemInfo(t *testing.T) {
-	var sysinfo = GetSystemInfo()
-	assert.NotNil(t, sysinfo)
-	assert.True(t, strings.Contains(sysinfo, "lang="))
-	assert.True(t, strings.Contains(sysinfo, "arch="))
-	assert.True(t, strings.Contains(sysinfo, "os="))
-	assert.True(t, strings.Contains(sysinfo, "go.version="))
-}
 
 func TestGetSdkHeaders(t *testing.T) {
 	var headers = GetSdkHeaders("myService", "v123", "myOperation")
