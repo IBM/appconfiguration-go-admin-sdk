@@ -161,9 +161,25 @@ var _ = Describe(`AppConfigurationV1`, func() {
 			fmt.Fprintf(GinkgoWriter, "Expected error: %s\n", err.Error())
 		})
 	})
+	Describe(`Parameterized URL tests`, func() {
+		It(`Format parameterized URL with all default values`, func() {
+			constructedURL, err := appconfigurationv1.ConstructServiceURL(nil)
+			Expect(constructedURL).To(Equal("https://us-south.apprapp.cloud.ibm.com/apprapp/feature/v1/instances/{guid}"))
+			Expect(constructedURL).ToNot(BeNil())
+			Expect(err).To(BeNil())
+		})
+		It(`Return an error if a provided variable name is invalid`, func() {
+			var providedUrlVariables = map[string]string{
+				"invalid_variable_name": "value",
+			}
+			constructedURL, err := appconfigurationv1.ConstructServiceURL(providedUrlVariables)
+			Expect(constructedURL).To(Equal(""))
+			Expect(err).ToNot(BeNil())
+		})
+	})
 	Describe(`ListEnvironments(listEnvironmentsOptions *ListEnvironmentsOptions) - Operation response error`, func() {
 		listEnvironmentsPath := "/environments"
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
@@ -171,17 +187,12 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Verify the contents of the request
 					Expect(req.URL.EscapedPath()).To(Equal(listEnvironmentsPath))
 					Expect(req.Method).To(Equal("GET"))
-
 					// TODO: Add check for expand query parameter
-
 					Expect(req.URL.Query()["sort"]).To(Equal([]string{"created_time"}))
-
 					Expect(req.URL.Query()["tags"]).To(Equal([]string{"version 1.1, pre-release"}))
-
 					Expect(req.URL.Query()["limit"]).To(Equal([]string{fmt.Sprint(int64(1))}))
-
 					Expect(req.URL.Query()["offset"]).To(Equal([]string{fmt.Sprint(int64(0))}))
-
+					Expect(req.URL.Query()["search"]).To(Equal([]string{"test tag"}))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
 					fmt.Fprintf(res, `} this is not valid json {`)
@@ -203,6 +214,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				listEnvironmentsOptionsModel.Include = []string{"features"}
 				listEnvironmentsOptionsModel.Limit = core.Int64Ptr(int64(1))
 				listEnvironmentsOptionsModel.Offset = core.Int64Ptr(int64(0))
+				listEnvironmentsOptionsModel.Search = core.StringPtr("test tag")
 				listEnvironmentsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
 				result, response, operationErr := appConfigurationService.ListEnvironments(listEnvironmentsOptionsModel)
@@ -222,13 +234,10 @@ var _ = Describe(`AppConfigurationV1`, func() {
 			})
 		})
 	})
-
 	Describe(`ListEnvironments(listEnvironmentsOptions *ListEnvironmentsOptions)`, func() {
 		listEnvironmentsPath := "/environments"
-		var serverSleepTime time.Duration
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with timeout`, func() {
 			BeforeEach(func() {
-				serverSleepTime = 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -237,22 +246,84 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					Expect(req.Method).To(Equal("GET"))
 
 					// TODO: Add check for expand query parameter
-
 					Expect(req.URL.Query()["sort"]).To(Equal([]string{"created_time"}))
-
 					Expect(req.URL.Query()["tags"]).To(Equal([]string{"version 1.1, pre-release"}))
-
 					Expect(req.URL.Query()["limit"]).To(Equal([]string{fmt.Sprint(int64(1))}))
-
 					Expect(req.URL.Query()["offset"]).To(Equal([]string{fmt.Sprint(int64(0))}))
-
+					Expect(req.URL.Query()["search"]).To(Equal([]string{"test tag"}))
 					// Sleep a short time to support a timeout test
-					time.Sleep(serverSleepTime)
+					time.Sleep(100 * time.Millisecond)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"environments": [{"name": "Name", "environment_id": "EnvironmentID", "description": "Description", "tags": "Tags", "color_code": "#FDD13A", "created_time": "2019-01-01T12:00:00", "updated_time": "2019-01-01T12:00:00", "href": "Href", "features": [{"feature_id": "FeatureID", "name": "Name"}], "properties": [{"property_id": "PropertyID", "name": "Name"}]}], "limit": 5, "offset": 6, "total_count": 10, "first": {"href": "Href"}, "previous": {"href": "Href"}, "next": {"href": "Href"}, "last": {"href": "Href"}}`)
+					fmt.Fprintf(res, "%s", `{"environments": [{"name": "Name", "environment_id": "EnvironmentID", "description": "Description", "tags": "Tags", "color_code": "#FDD13A", "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "href": "Href", "features": [{"feature_id": "FeatureID", "name": "Name"}], "properties": [{"property_id": "PropertyID", "name": "Name"}]}], "limit": 5, "offset": 6, "total_count": 10, "first": {"href": "Href"}, "previous": {"href": "Href"}, "next": {"href": "Href"}, "last": {"href": "Href"}}`)
+				}))
+			})
+			It(`Invoke ListEnvironments successfully with retries`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+				appConfigurationService.EnableRetries(0, 0)
+
+				// Construct an instance of the ListEnvironmentsOptions model
+				listEnvironmentsOptionsModel := new(appconfigurationv1.ListEnvironmentsOptions)
+				listEnvironmentsOptionsModel.Expand = core.BoolPtr(true)
+				listEnvironmentsOptionsModel.Sort = core.StringPtr("created_time")
+				listEnvironmentsOptionsModel.Tags = core.StringPtr("version 1.1, pre-release")
+				listEnvironmentsOptionsModel.Include = []string{"features"}
+				listEnvironmentsOptionsModel.Limit = core.Int64Ptr(int64(1))
+				listEnvironmentsOptionsModel.Offset = core.Int64Ptr(int64(0))
+				listEnvironmentsOptionsModel.Search = core.StringPtr("test tag")
+				listEnvironmentsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with a Context to test a timeout error
+				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc()
+				_, _, operationErr := appConfigurationService.ListEnvironmentsWithContext(ctx, listEnvironmentsOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+
+				// Disable retries and test again
+				appConfigurationService.DisableRetries()
+				result, response, operationErr := appConfigurationService.ListEnvironments(listEnvironmentsOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				_, _, operationErr = appConfigurationService.ListEnvironmentsWithContext(ctx, listEnvironmentsOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(listEnvironmentsPath))
+					Expect(req.Method).To(Equal("GET"))
+
+					// TODO: Add check for expand query parameter
+					Expect(req.URL.Query()["sort"]).To(Equal([]string{"created_time"}))
+					Expect(req.URL.Query()["tags"]).To(Equal([]string{"version 1.1, pre-release"}))
+					Expect(req.URL.Query()["limit"]).To(Equal([]string{fmt.Sprint(int64(1))}))
+					Expect(req.URL.Query()["offset"]).To(Equal([]string{fmt.Sprint(int64(0))}))
+					Expect(req.URL.Query()["search"]).To(Equal([]string{"test tag"}))
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"environments": [{"name": "Name", "environment_id": "EnvironmentID", "description": "Description", "tags": "Tags", "color_code": "#FDD13A", "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "href": "Href", "features": [{"feature_id": "FeatureID", "name": "Name"}], "properties": [{"property_id": "PropertyID", "name": "Name"}]}], "limit": 5, "offset": 6, "total_count": 10, "first": {"href": "Href"}, "previous": {"href": "Href"}, "next": {"href": "Href"}, "last": {"href": "Href"}}`)
 				}))
 			})
 			It(`Invoke ListEnvironments successfully`, func() {
@@ -262,7 +333,6 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(appConfigurationService).ToNot(BeNil())
-				appConfigurationService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				result, response, operationErr := appConfigurationService.ListEnvironments(nil)
@@ -278,6 +348,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				listEnvironmentsOptionsModel.Include = []string{"features"}
 				listEnvironmentsOptionsModel.Limit = core.Int64Ptr(int64(1))
 				listEnvironmentsOptionsModel.Offset = core.Int64Ptr(int64(0))
+				listEnvironmentsOptionsModel.Search = core.StringPtr("test tag")
 				listEnvironmentsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
@@ -286,30 +357,6 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(response).ToNot(BeNil())
 				Expect(result).ToNot(BeNil())
 
-				// Invoke operation with a Context to test a timeout error
-				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
-				defer cancelFunc()
-				serverSleepTime = 100 * time.Millisecond
-				_, _, operationErr = appConfigurationService.ListEnvironmentsWithContext(ctx, listEnvironmentsOptionsModel)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
-				serverSleepTime = time.Duration(0)
-
-				// Disable retries and test again
-				appConfigurationService.DisableRetries()
-				result, response, operationErr = appConfigurationService.ListEnvironments(listEnvironmentsOptionsModel)
-				Expect(operationErr).To(BeNil())
-				Expect(response).ToNot(BeNil())
-				Expect(result).ToNot(BeNil())
-
-				// Re-test the timeout error with retries disabled
-				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
-				defer cancelFunc2()
-				serverSleepTime = 100 * time.Millisecond
-				_, _, operationErr = appConfigurationService.ListEnvironmentsWithContext(ctx, listEnvironmentsOptionsModel)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
-				serverSleepTime = time.Duration(0)
 			})
 			It(`Invoke ListEnvironments with error: Operation request error`, func() {
 				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
@@ -327,6 +374,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				listEnvironmentsOptionsModel.Include = []string{"features"}
 				listEnvironmentsOptionsModel.Limit = core.Int64Ptr(int64(1))
 				listEnvironmentsOptionsModel.Offset = core.Int64Ptr(int64(0))
+				listEnvironmentsOptionsModel.Search = core.StringPtr("test tag")
 				listEnvironmentsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := appConfigurationService.SetServiceURL("")
@@ -341,10 +389,89 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				testServer.Close()
 			})
 		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke ListEnvironments successfully`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the ListEnvironmentsOptions model
+				listEnvironmentsOptionsModel := new(appconfigurationv1.ListEnvironmentsOptions)
+				listEnvironmentsOptionsModel.Expand = core.BoolPtr(true)
+				listEnvironmentsOptionsModel.Sort = core.StringPtr("created_time")
+				listEnvironmentsOptionsModel.Tags = core.StringPtr("version 1.1, pre-release")
+				listEnvironmentsOptionsModel.Include = []string{"features"}
+				listEnvironmentsOptionsModel.Limit = core.Int64Ptr(int64(1))
+				listEnvironmentsOptionsModel.Offset = core.Int64Ptr(int64(0))
+				listEnvironmentsOptionsModel.Search = core.StringPtr("test tag")
+				listEnvironmentsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := appConfigurationService.ListEnvironments(listEnvironmentsOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Test pagination helper method on response`, func() {
+			It(`Invoke GetNextOffset successfully`, func() {
+				responseObject := new(appconfigurationv1.EnvironmentList)
+				nextObject := new(appconfigurationv1.PageHrefResponse)
+				nextObject.Href = core.StringPtr("ibm.com?offset=135")
+				responseObject.Next = nextObject
+
+				value, err := responseObject.GetNextOffset()
+				Expect(err).To(BeNil())
+				Expect(value).To(Equal(core.Int64Ptr(int64(135))))
+			})
+			It(`Invoke GetNextOffset without a "Next" property in the response`, func() {
+				responseObject := new(appconfigurationv1.EnvironmentList)
+
+				value, err := responseObject.GetNextOffset()
+				Expect(err).To(BeNil())
+				Expect(value).To(BeNil())
+			})
+			It(`Invoke GetNextOffset without any query params in the "Next" URL`, func() {
+				responseObject := new(appconfigurationv1.EnvironmentList)
+				nextObject := new(appconfigurationv1.PageHrefResponse)
+				nextObject.Href = core.StringPtr("ibm.com")
+				responseObject.Next = nextObject
+
+				value, err := responseObject.GetNextOffset()
+				Expect(err).To(BeNil())
+				Expect(value).To(BeNil())
+			})
+			It(`Invoke GetNextOffset with a non-integer query param in the "Next" URL`, func() {
+				responseObject := new(appconfigurationv1.EnvironmentList)
+				nextObject := new(appconfigurationv1.PageHrefResponse)
+				nextObject.Href = core.StringPtr("ibm.com?offset=tiger")
+				responseObject.Next = nextObject
+
+				value, err := responseObject.GetNextOffset()
+				Expect(err).NotTo(BeNil())
+				Expect(value).To(BeNil())
+			})
+		})
 	})
 	Describe(`CreateEnvironment(createEnvironmentOptions *CreateEnvironmentOptions) - Operation response error`, func() {
 		createEnvironmentPath := "/environments"
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
@@ -391,13 +518,10 @@ var _ = Describe(`AppConfigurationV1`, func() {
 			})
 		})
 	})
-
 	Describe(`CreateEnvironment(createEnvironmentOptions *CreateEnvironmentOptions)`, func() {
 		createEnvironmentPath := "/environments"
-		var serverSleepTime time.Duration
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with timeout`, func() {
 			BeforeEach(func() {
-				serverSleepTime = 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -422,12 +546,86 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
 
 					// Sleep a short time to support a timeout test
-					time.Sleep(serverSleepTime)
+					time.Sleep(100 * time.Millisecond)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
-					fmt.Fprintf(res, "%s", `{"name": "Name", "environment_id": "EnvironmentID", "description": "Description", "tags": "Tags", "color_code": "#FDD13A", "created_time": "2019-01-01T12:00:00", "updated_time": "2019-01-01T12:00:00", "href": "Href", "features": [{"feature_id": "FeatureID", "name": "Name"}], "properties": [{"property_id": "PropertyID", "name": "Name"}]}`)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "environment_id": "EnvironmentID", "description": "Description", "tags": "Tags", "color_code": "#FDD13A", "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "href": "Href", "features": [{"feature_id": "FeatureID", "name": "Name"}], "properties": [{"property_id": "PropertyID", "name": "Name"}]}`)
+				}))
+			})
+			It(`Invoke CreateEnvironment successfully with retries`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+				appConfigurationService.EnableRetries(0, 0)
+
+				// Construct an instance of the CreateEnvironmentOptions model
+				createEnvironmentOptionsModel := new(appconfigurationv1.CreateEnvironmentOptions)
+				createEnvironmentOptionsModel.Name = core.StringPtr("Dev environment")
+				createEnvironmentOptionsModel.EnvironmentID = core.StringPtr("dev-environment")
+				createEnvironmentOptionsModel.Description = core.StringPtr("Dev environment description")
+				createEnvironmentOptionsModel.Tags = core.StringPtr("development")
+				createEnvironmentOptionsModel.ColorCode = core.StringPtr("#FDD13A")
+				createEnvironmentOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with a Context to test a timeout error
+				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc()
+				_, _, operationErr := appConfigurationService.CreateEnvironmentWithContext(ctx, createEnvironmentOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+
+				// Disable retries and test again
+				appConfigurationService.DisableRetries()
+				result, response, operationErr := appConfigurationService.CreateEnvironment(createEnvironmentOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				_, _, operationErr = appConfigurationService.CreateEnvironmentWithContext(ctx, createEnvironmentOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(createEnvironmentPath))
+					Expect(req.Method).To(Equal("POST"))
+
+					// For gzip-disabled operation, verify Content-Encoding is not set.
+					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+
+					// If there is a body, then make sure we can read it
+					bodyBuf := new(bytes.Buffer)
+					if req.Header.Get("Content-Encoding") == "gzip" {
+						body, err := core.NewGzipDecompressionReader(req.Body)
+						Expect(err).To(BeNil())
+						_, err = bodyBuf.ReadFrom(body)
+						Expect(err).To(BeNil())
+					} else {
+						_, err := bodyBuf.ReadFrom(req.Body)
+						Expect(err).To(BeNil())
+					}
+					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(201)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "environment_id": "EnvironmentID", "description": "Description", "tags": "Tags", "color_code": "#FDD13A", "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "href": "Href", "features": [{"feature_id": "FeatureID", "name": "Name"}], "properties": [{"property_id": "PropertyID", "name": "Name"}]}`)
 				}))
 			})
 			It(`Invoke CreateEnvironment successfully`, func() {
@@ -437,7 +635,6 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(appConfigurationService).ToNot(BeNil())
-				appConfigurationService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				result, response, operationErr := appConfigurationService.CreateEnvironment(nil)
@@ -460,30 +657,6 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(response).ToNot(BeNil())
 				Expect(result).ToNot(BeNil())
 
-				// Invoke operation with a Context to test a timeout error
-				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
-				defer cancelFunc()
-				serverSleepTime = 100 * time.Millisecond
-				_, _, operationErr = appConfigurationService.CreateEnvironmentWithContext(ctx, createEnvironmentOptionsModel)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
-				serverSleepTime = time.Duration(0)
-
-				// Disable retries and test again
-				appConfigurationService.DisableRetries()
-				result, response, operationErr = appConfigurationService.CreateEnvironment(createEnvironmentOptionsModel)
-				Expect(operationErr).To(BeNil())
-				Expect(response).ToNot(BeNil())
-				Expect(result).ToNot(BeNil())
-
-				// Re-test the timeout error with retries disabled
-				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
-				defer cancelFunc2()
-				serverSleepTime = 100 * time.Millisecond
-				_, _, operationErr = appConfigurationService.CreateEnvironmentWithContext(ctx, createEnvironmentOptionsModel)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
-				serverSleepTime = time.Duration(0)
 			})
 			It(`Invoke CreateEnvironment with error: Operation validation and request error`, func() {
 				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
@@ -521,10 +694,48 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				testServer.Close()
 			})
 		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(201)
+				}))
+			})
+			It(`Invoke CreateEnvironment successfully`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the CreateEnvironmentOptions model
+				createEnvironmentOptionsModel := new(appconfigurationv1.CreateEnvironmentOptions)
+				createEnvironmentOptionsModel.Name = core.StringPtr("Dev environment")
+				createEnvironmentOptionsModel.EnvironmentID = core.StringPtr("dev-environment")
+				createEnvironmentOptionsModel.Description = core.StringPtr("Dev environment description")
+				createEnvironmentOptionsModel.Tags = core.StringPtr("development")
+				createEnvironmentOptionsModel.ColorCode = core.StringPtr("#FDD13A")
+				createEnvironmentOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := appConfigurationService.CreateEnvironment(createEnvironmentOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
 	})
 	Describe(`UpdateEnvironment(updateEnvironmentOptions *UpdateEnvironmentOptions) - Operation response error`, func() {
 		updateEnvironmentPath := "/environments/testString"
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
@@ -571,13 +782,10 @@ var _ = Describe(`AppConfigurationV1`, func() {
 			})
 		})
 	})
-
 	Describe(`UpdateEnvironment(updateEnvironmentOptions *UpdateEnvironmentOptions)`, func() {
 		updateEnvironmentPath := "/environments/testString"
-		var serverSleepTime time.Duration
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with timeout`, func() {
 			BeforeEach(func() {
-				serverSleepTime = 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -602,12 +810,86 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
 
 					// Sleep a short time to support a timeout test
-					time.Sleep(serverSleepTime)
+					time.Sleep(100 * time.Millisecond)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"name": "Name", "environment_id": "EnvironmentID", "description": "Description", "tags": "Tags", "color_code": "#FDD13A", "created_time": "2019-01-01T12:00:00", "updated_time": "2019-01-01T12:00:00", "href": "Href", "features": [{"feature_id": "FeatureID", "name": "Name"}], "properties": [{"property_id": "PropertyID", "name": "Name"}]}`)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "environment_id": "EnvironmentID", "description": "Description", "tags": "Tags", "color_code": "#FDD13A", "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "href": "Href", "features": [{"feature_id": "FeatureID", "name": "Name"}], "properties": [{"property_id": "PropertyID", "name": "Name"}]}`)
+				}))
+			})
+			It(`Invoke UpdateEnvironment successfully with retries`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+				appConfigurationService.EnableRetries(0, 0)
+
+				// Construct an instance of the UpdateEnvironmentOptions model
+				updateEnvironmentOptionsModel := new(appconfigurationv1.UpdateEnvironmentOptions)
+				updateEnvironmentOptionsModel.EnvironmentID = core.StringPtr("testString")
+				updateEnvironmentOptionsModel.Name = core.StringPtr("testString")
+				updateEnvironmentOptionsModel.Description = core.StringPtr("testString")
+				updateEnvironmentOptionsModel.Tags = core.StringPtr("testString")
+				updateEnvironmentOptionsModel.ColorCode = core.StringPtr("#FDD13A")
+				updateEnvironmentOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with a Context to test a timeout error
+				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc()
+				_, _, operationErr := appConfigurationService.UpdateEnvironmentWithContext(ctx, updateEnvironmentOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+
+				// Disable retries and test again
+				appConfigurationService.DisableRetries()
+				result, response, operationErr := appConfigurationService.UpdateEnvironment(updateEnvironmentOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				_, _, operationErr = appConfigurationService.UpdateEnvironmentWithContext(ctx, updateEnvironmentOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(updateEnvironmentPath))
+					Expect(req.Method).To(Equal("PUT"))
+
+					// For gzip-disabled operation, verify Content-Encoding is not set.
+					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+
+					// If there is a body, then make sure we can read it
+					bodyBuf := new(bytes.Buffer)
+					if req.Header.Get("Content-Encoding") == "gzip" {
+						body, err := core.NewGzipDecompressionReader(req.Body)
+						Expect(err).To(BeNil())
+						_, err = bodyBuf.ReadFrom(body)
+						Expect(err).To(BeNil())
+					} else {
+						_, err := bodyBuf.ReadFrom(req.Body)
+						Expect(err).To(BeNil())
+					}
+					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "environment_id": "EnvironmentID", "description": "Description", "tags": "Tags", "color_code": "#FDD13A", "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "href": "Href", "features": [{"feature_id": "FeatureID", "name": "Name"}], "properties": [{"property_id": "PropertyID", "name": "Name"}]}`)
 				}))
 			})
 			It(`Invoke UpdateEnvironment successfully`, func() {
@@ -617,7 +899,6 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(appConfigurationService).ToNot(BeNil())
-				appConfigurationService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				result, response, operationErr := appConfigurationService.UpdateEnvironment(nil)
@@ -640,30 +921,6 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(response).ToNot(BeNil())
 				Expect(result).ToNot(BeNil())
 
-				// Invoke operation with a Context to test a timeout error
-				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
-				defer cancelFunc()
-				serverSleepTime = 100 * time.Millisecond
-				_, _, operationErr = appConfigurationService.UpdateEnvironmentWithContext(ctx, updateEnvironmentOptionsModel)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
-				serverSleepTime = time.Duration(0)
-
-				// Disable retries and test again
-				appConfigurationService.DisableRetries()
-				result, response, operationErr = appConfigurationService.UpdateEnvironment(updateEnvironmentOptionsModel)
-				Expect(operationErr).To(BeNil())
-				Expect(response).ToNot(BeNil())
-				Expect(result).ToNot(BeNil())
-
-				// Re-test the timeout error with retries disabled
-				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
-				defer cancelFunc2()
-				serverSleepTime = 100 * time.Millisecond
-				_, _, operationErr = appConfigurationService.UpdateEnvironmentWithContext(ctx, updateEnvironmentOptionsModel)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
-				serverSleepTime = time.Duration(0)
 			})
 			It(`Invoke UpdateEnvironment with error: Operation validation and request error`, func() {
 				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
@@ -701,10 +958,48 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				testServer.Close()
 			})
 		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke UpdateEnvironment successfully`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the UpdateEnvironmentOptions model
+				updateEnvironmentOptionsModel := new(appconfigurationv1.UpdateEnvironmentOptions)
+				updateEnvironmentOptionsModel.EnvironmentID = core.StringPtr("testString")
+				updateEnvironmentOptionsModel.Name = core.StringPtr("testString")
+				updateEnvironmentOptionsModel.Description = core.StringPtr("testString")
+				updateEnvironmentOptionsModel.Tags = core.StringPtr("testString")
+				updateEnvironmentOptionsModel.ColorCode = core.StringPtr("#FDD13A")
+				updateEnvironmentOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := appConfigurationService.UpdateEnvironment(updateEnvironmentOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
 	})
 	Describe(`GetEnvironment(getEnvironmentOptions *GetEnvironmentOptions) - Operation response error`, func() {
 		getEnvironmentPath := "/environments/testString"
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
@@ -712,9 +1007,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Verify the contents of the request
 					Expect(req.URL.EscapedPath()).To(Equal(getEnvironmentPath))
 					Expect(req.Method).To(Equal("GET"))
-
 					// TODO: Add check for expand query parameter
-
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
 					fmt.Fprintf(res, `} this is not valid json {`)
@@ -752,13 +1045,10 @@ var _ = Describe(`AppConfigurationV1`, func() {
 			})
 		})
 	})
-
 	Describe(`GetEnvironment(getEnvironmentOptions *GetEnvironmentOptions)`, func() {
 		getEnvironmentPath := "/environments/testString"
-		var serverSleepTime time.Duration
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with timeout`, func() {
 			BeforeEach(func() {
-				serverSleepTime = 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -767,14 +1057,70 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					Expect(req.Method).To(Equal("GET"))
 
 					// TODO: Add check for expand query parameter
-
 					// Sleep a short time to support a timeout test
-					time.Sleep(serverSleepTime)
+					time.Sleep(100 * time.Millisecond)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"name": "Name", "environment_id": "EnvironmentID", "description": "Description", "tags": "Tags", "color_code": "#FDD13A", "created_time": "2019-01-01T12:00:00", "updated_time": "2019-01-01T12:00:00", "href": "Href", "features": [{"feature_id": "FeatureID", "name": "Name"}], "properties": [{"property_id": "PropertyID", "name": "Name"}]}`)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "environment_id": "EnvironmentID", "description": "Description", "tags": "Tags", "color_code": "#FDD13A", "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "href": "Href", "features": [{"feature_id": "FeatureID", "name": "Name"}], "properties": [{"property_id": "PropertyID", "name": "Name"}]}`)
+				}))
+			})
+			It(`Invoke GetEnvironment successfully with retries`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+				appConfigurationService.EnableRetries(0, 0)
+
+				// Construct an instance of the GetEnvironmentOptions model
+				getEnvironmentOptionsModel := new(appconfigurationv1.GetEnvironmentOptions)
+				getEnvironmentOptionsModel.EnvironmentID = core.StringPtr("testString")
+				getEnvironmentOptionsModel.Expand = core.BoolPtr(true)
+				getEnvironmentOptionsModel.Include = []string{"features"}
+				getEnvironmentOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with a Context to test a timeout error
+				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc()
+				_, _, operationErr := appConfigurationService.GetEnvironmentWithContext(ctx, getEnvironmentOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+
+				// Disable retries and test again
+				appConfigurationService.DisableRetries()
+				result, response, operationErr := appConfigurationService.GetEnvironment(getEnvironmentOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				_, _, operationErr = appConfigurationService.GetEnvironmentWithContext(ctx, getEnvironmentOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(getEnvironmentPath))
+					Expect(req.Method).To(Equal("GET"))
+
+					// TODO: Add check for expand query parameter
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "environment_id": "EnvironmentID", "description": "Description", "tags": "Tags", "color_code": "#FDD13A", "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "href": "Href", "features": [{"feature_id": "FeatureID", "name": "Name"}], "properties": [{"property_id": "PropertyID", "name": "Name"}]}`)
 				}))
 			})
 			It(`Invoke GetEnvironment successfully`, func() {
@@ -784,7 +1130,6 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(appConfigurationService).ToNot(BeNil())
-				appConfigurationService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				result, response, operationErr := appConfigurationService.GetEnvironment(nil)
@@ -805,30 +1150,6 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(response).ToNot(BeNil())
 				Expect(result).ToNot(BeNil())
 
-				// Invoke operation with a Context to test a timeout error
-				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
-				defer cancelFunc()
-				serverSleepTime = 100 * time.Millisecond
-				_, _, operationErr = appConfigurationService.GetEnvironmentWithContext(ctx, getEnvironmentOptionsModel)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
-				serverSleepTime = time.Duration(0)
-
-				// Disable retries and test again
-				appConfigurationService.DisableRetries()
-				result, response, operationErr = appConfigurationService.GetEnvironment(getEnvironmentOptionsModel)
-				Expect(operationErr).To(BeNil())
-				Expect(response).ToNot(BeNil())
-				Expect(result).ToNot(BeNil())
-
-				// Re-test the timeout error with retries disabled
-				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
-				defer cancelFunc2()
-				serverSleepTime = 100 * time.Millisecond
-				_, _, operationErr = appConfigurationService.GetEnvironmentWithContext(ctx, getEnvironmentOptionsModel)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
-				serverSleepTime = time.Duration(0)
 			})
 			It(`Invoke GetEnvironment with error: Operation validation and request error`, func() {
 				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
@@ -864,8 +1185,43 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				testServer.Close()
 			})
 		})
-	})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
 
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke GetEnvironment successfully`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the GetEnvironmentOptions model
+				getEnvironmentOptionsModel := new(appconfigurationv1.GetEnvironmentOptions)
+				getEnvironmentOptionsModel.EnvironmentID = core.StringPtr("testString")
+				getEnvironmentOptionsModel.Expand = core.BoolPtr(true)
+				getEnvironmentOptionsModel.Include = []string{"features"}
+				getEnvironmentOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := appConfigurationService.GetEnvironment(getEnvironmentOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
 	Describe(`DeleteEnvironment(deleteEnvironmentOptions *DeleteEnvironmentOptions)`, func() {
 		deleteEnvironmentPath := "/environments/testString"
 		Context(`Using mock server endpoint`, func() {
@@ -887,7 +1243,6 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(appConfigurationService).ToNot(BeNil())
-				appConfigurationService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				response, operationErr := appConfigurationService.DeleteEnvironment(nil)
@@ -900,12 +1255,6 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				deleteEnvironmentOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
-				response, operationErr = appConfigurationService.DeleteEnvironment(deleteEnvironmentOptionsModel)
-				Expect(operationErr).To(BeNil())
-				Expect(response).ToNot(BeNil())
-
-				// Disable retries and test again
-				appConfigurationService.DisableRetries()
 				response, operationErr = appConfigurationService.DeleteEnvironment(deleteEnvironmentOptionsModel)
 				Expect(operationErr).To(BeNil())
 				Expect(response).ToNot(BeNil())
@@ -941,134 +1290,9 @@ var _ = Describe(`AppConfigurationV1`, func() {
 			})
 		})
 	})
-	Describe(`Service constructor tests`, func() {
-		It(`Instantiate service client`, func() {
-			appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
-				Authenticator: &core.NoAuthAuthenticator{},
-			})
-			Expect(appConfigurationService).ToNot(BeNil())
-			Expect(serviceErr).To(BeNil())
-		})
-		It(`Instantiate service client with error: Invalid URL`, func() {
-			appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
-				URL: "{BAD_URL_STRING",
-			})
-			Expect(appConfigurationService).To(BeNil())
-			Expect(serviceErr).ToNot(BeNil())
-		})
-		It(`Instantiate service client with error: Invalid Auth`, func() {
-			appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
-				URL: "https://appconfigurationv1/api",
-				Authenticator: &core.BasicAuthenticator{
-					Username: "",
-					Password: "",
-				},
-			})
-			Expect(appConfigurationService).To(BeNil())
-			Expect(serviceErr).ToNot(BeNil())
-		})
-	})
-	Describe(`Service constructor tests using external config`, func() {
-		Context(`Using external config, construct service client instances`, func() {
-			// Map containing environment variables used in testing.
-			var testEnvironment = map[string]string{
-				"APP_CONFIGURATION_URL":       "https://appconfigurationv1/api",
-				"APP_CONFIGURATION_AUTH_TYPE": "noauth",
-			}
-
-			It(`Create service client using external config successfully`, func() {
-				SetTestEnvironment(testEnvironment)
-				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1UsingExternalConfig(&appconfigurationv1.AppConfigurationV1Options{})
-				Expect(appConfigurationService).ToNot(BeNil())
-				Expect(serviceErr).To(BeNil())
-				ClearTestEnvironment(testEnvironment)
-
-				clone := appConfigurationService.Clone()
-				Expect(clone).ToNot(BeNil())
-				Expect(clone.Service != appConfigurationService.Service).To(BeTrue())
-				Expect(clone.GetServiceURL()).To(Equal(appConfigurationService.GetServiceURL()))
-				Expect(clone.Service.Options.Authenticator).To(Equal(appConfigurationService.Service.Options.Authenticator))
-			})
-			It(`Create service client using external config and set url from constructor successfully`, func() {
-				SetTestEnvironment(testEnvironment)
-				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1UsingExternalConfig(&appconfigurationv1.AppConfigurationV1Options{
-					URL: "https://testService/api",
-				})
-				Expect(appConfigurationService).ToNot(BeNil())
-				Expect(serviceErr).To(BeNil())
-				Expect(appConfigurationService.Service.GetServiceURL()).To(Equal("https://testService/api"))
-				ClearTestEnvironment(testEnvironment)
-
-				clone := appConfigurationService.Clone()
-				Expect(clone).ToNot(BeNil())
-				Expect(clone.Service != appConfigurationService.Service).To(BeTrue())
-				Expect(clone.GetServiceURL()).To(Equal(appConfigurationService.GetServiceURL()))
-				Expect(clone.Service.Options.Authenticator).To(Equal(appConfigurationService.Service.Options.Authenticator))
-			})
-			It(`Create service client using external config and set url programatically successfully`, func() {
-				SetTestEnvironment(testEnvironment)
-				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1UsingExternalConfig(&appconfigurationv1.AppConfigurationV1Options{})
-				err := appConfigurationService.SetServiceURL("https://testService/api")
-				Expect(err).To(BeNil())
-				Expect(appConfigurationService).ToNot(BeNil())
-				Expect(serviceErr).To(BeNil())
-				Expect(appConfigurationService.Service.GetServiceURL()).To(Equal("https://testService/api"))
-				ClearTestEnvironment(testEnvironment)
-
-				clone := appConfigurationService.Clone()
-				Expect(clone).ToNot(BeNil())
-				Expect(clone.Service != appConfigurationService.Service).To(BeTrue())
-				Expect(clone.GetServiceURL()).To(Equal(appConfigurationService.GetServiceURL()))
-				Expect(clone.Service.Options.Authenticator).To(Equal(appConfigurationService.Service.Options.Authenticator))
-			})
-		})
-		Context(`Using external config, construct service client instances with error: Invalid Auth`, func() {
-			// Map containing environment variables used in testing.
-			var testEnvironment = map[string]string{
-				"APP_CONFIGURATION_URL":       "https://appconfigurationv1/api",
-				"APP_CONFIGURATION_AUTH_TYPE": "someOtherAuth",
-			}
-
-			SetTestEnvironment(testEnvironment)
-			appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1UsingExternalConfig(&appconfigurationv1.AppConfigurationV1Options{})
-
-			It(`Instantiate service client with error`, func() {
-				Expect(appConfigurationService).To(BeNil())
-				Expect(serviceErr).ToNot(BeNil())
-				ClearTestEnvironment(testEnvironment)
-			})
-		})
-		Context(`Using external config, construct service client instances with error: Invalid URL`, func() {
-			// Map containing environment variables used in testing.
-			var testEnvironment = map[string]string{
-				"APP_CONFIGURATION_AUTH_TYPE": "NOAuth",
-			}
-
-			SetTestEnvironment(testEnvironment)
-			appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1UsingExternalConfig(&appconfigurationv1.AppConfigurationV1Options{
-				URL: "{BAD_URL_STRING",
-			})
-
-			It(`Instantiate service client with error`, func() {
-				Expect(appConfigurationService).To(BeNil())
-				Expect(serviceErr).ToNot(BeNil())
-				ClearTestEnvironment(testEnvironment)
-			})
-		})
-	})
-	Describe(`Regional endpoint tests`, func() {
-		It(`GetServiceURLForRegion(region string)`, func() {
-			var url string
-			var err error
-			url, err = appconfigurationv1.GetServiceURLForRegion("INVALID_REGION")
-			Expect(url).To(BeEmpty())
-			Expect(err).ToNot(BeNil())
-			fmt.Fprintf(GinkgoWriter, "Expected error: %s\n", err.Error())
-		})
-	})
 	Describe(`ListCollections(listCollectionsOptions *ListCollectionsOptions) - Operation response error`, func() {
 		listCollectionsPath := "/collections"
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
@@ -1076,17 +1300,12 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Verify the contents of the request
 					Expect(req.URL.EscapedPath()).To(Equal(listCollectionsPath))
 					Expect(req.Method).To(Equal("GET"))
-
 					// TODO: Add check for expand query parameter
-
 					Expect(req.URL.Query()["sort"]).To(Equal([]string{"created_time"}))
-
 					Expect(req.URL.Query()["tags"]).To(Equal([]string{"version 1.1, pre-release"}))
-
 					Expect(req.URL.Query()["limit"]).To(Equal([]string{fmt.Sprint(int64(1))}))
-
 					Expect(req.URL.Query()["offset"]).To(Equal([]string{fmt.Sprint(int64(0))}))
-
+					Expect(req.URL.Query()["search"]).To(Equal([]string{"test tag"}))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
 					fmt.Fprintf(res, `} this is not valid json {`)
@@ -1110,6 +1329,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				listCollectionsOptionsModel.Include = []string{"features"}
 				listCollectionsOptionsModel.Limit = core.Int64Ptr(int64(1))
 				listCollectionsOptionsModel.Offset = core.Int64Ptr(int64(0))
+				listCollectionsOptionsModel.Search = core.StringPtr("test tag")
 				listCollectionsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
 				result, response, operationErr := appConfigurationService.ListCollections(listCollectionsOptionsModel)
@@ -1129,13 +1349,10 @@ var _ = Describe(`AppConfigurationV1`, func() {
 			})
 		})
 	})
-
 	Describe(`ListCollections(listCollectionsOptions *ListCollectionsOptions)`, func() {
 		listCollectionsPath := "/collections"
-		var serverSleepTime time.Duration
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with timeout`, func() {
 			BeforeEach(func() {
-				serverSleepTime = 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -1144,22 +1361,86 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					Expect(req.Method).To(Equal("GET"))
 
 					// TODO: Add check for expand query parameter
-
 					Expect(req.URL.Query()["sort"]).To(Equal([]string{"created_time"}))
-
 					Expect(req.URL.Query()["tags"]).To(Equal([]string{"version 1.1, pre-release"}))
-
 					Expect(req.URL.Query()["limit"]).To(Equal([]string{fmt.Sprint(int64(1))}))
-
 					Expect(req.URL.Query()["offset"]).To(Equal([]string{fmt.Sprint(int64(0))}))
-
+					Expect(req.URL.Query()["search"]).To(Equal([]string{"test tag"}))
 					// Sleep a short time to support a timeout test
-					time.Sleep(serverSleepTime)
+					time.Sleep(100 * time.Millisecond)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"collections": [{"name": "Name", "collection_id": "CollectionID", "description": "Description", "tags": "Tags", "created_time": "2019-01-01T12:00:00", "updated_time": "2019-01-01T12:00:00", "href": "Href", "features": [{"feature_id": "FeatureID", "name": "Name"}], "properties": [{"property_id": "PropertyID", "name": "Name"}], "features_count": 13, "properties_count": 15}], "limit": 5, "offset": 6, "total_count": 10, "first": {"href": "Href"}, "previous": {"href": "Href"}, "next": {"href": "Href"}, "last": {"href": "Href"}}`)
+					fmt.Fprintf(res, "%s", `{"collections": [{"name": "Name", "collection_id": "CollectionID", "description": "Description", "tags": "Tags", "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "href": "Href", "features": [{"feature_id": "FeatureID", "name": "Name"}], "properties": [{"property_id": "PropertyID", "name": "Name"}], "features_count": 13, "properties_count": 15}], "limit": 5, "offset": 6, "total_count": 10, "first": {"href": "Href"}, "previous": {"href": "Href"}, "next": {"href": "Href"}, "last": {"href": "Href"}}`)
+				}))
+			})
+			It(`Invoke ListCollections successfully with retries`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+				appConfigurationService.EnableRetries(0, 0)
+
+				// Construct an instance of the ListCollectionsOptions model
+				listCollectionsOptionsModel := new(appconfigurationv1.ListCollectionsOptions)
+				listCollectionsOptionsModel.Expand = core.BoolPtr(true)
+				listCollectionsOptionsModel.Sort = core.StringPtr("created_time")
+				listCollectionsOptionsModel.Tags = core.StringPtr("version 1.1, pre-release")
+				listCollectionsOptionsModel.Features = []string{"testString"}
+				listCollectionsOptionsModel.Properties = []string{"testString"}
+				listCollectionsOptionsModel.Include = []string{"features"}
+				listCollectionsOptionsModel.Limit = core.Int64Ptr(int64(1))
+				listCollectionsOptionsModel.Offset = core.Int64Ptr(int64(0))
+				listCollectionsOptionsModel.Search = core.StringPtr("test tag")
+				listCollectionsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with a Context to test a timeout error
+				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc()
+				_, _, operationErr := appConfigurationService.ListCollectionsWithContext(ctx, listCollectionsOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+
+				// Disable retries and test again
+				appConfigurationService.DisableRetries()
+				result, response, operationErr := appConfigurationService.ListCollections(listCollectionsOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				_, _, operationErr = appConfigurationService.ListCollectionsWithContext(ctx, listCollectionsOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(listCollectionsPath))
+					Expect(req.Method).To(Equal("GET"))
+
+					// TODO: Add check for expand query parameter
+					Expect(req.URL.Query()["sort"]).To(Equal([]string{"created_time"}))
+					Expect(req.URL.Query()["tags"]).To(Equal([]string{"version 1.1, pre-release"}))
+					Expect(req.URL.Query()["limit"]).To(Equal([]string{fmt.Sprint(int64(1))}))
+					Expect(req.URL.Query()["offset"]).To(Equal([]string{fmt.Sprint(int64(0))}))
+					Expect(req.URL.Query()["search"]).To(Equal([]string{"test tag"}))
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"collections": [{"name": "Name", "collection_id": "CollectionID", "description": "Description", "tags": "Tags", "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "href": "Href", "features": [{"feature_id": "FeatureID", "name": "Name"}], "properties": [{"property_id": "PropertyID", "name": "Name"}], "features_count": 13, "properties_count": 15}], "limit": 5, "offset": 6, "total_count": 10, "first": {"href": "Href"}, "previous": {"href": "Href"}, "next": {"href": "Href"}, "last": {"href": "Href"}}`)
 				}))
 			})
 			It(`Invoke ListCollections successfully`, func() {
@@ -1169,7 +1450,6 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(appConfigurationService).ToNot(BeNil())
-				appConfigurationService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				result, response, operationErr := appConfigurationService.ListCollections(nil)
@@ -1187,6 +1467,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				listCollectionsOptionsModel.Include = []string{"features"}
 				listCollectionsOptionsModel.Limit = core.Int64Ptr(int64(1))
 				listCollectionsOptionsModel.Offset = core.Int64Ptr(int64(0))
+				listCollectionsOptionsModel.Search = core.StringPtr("test tag")
 				listCollectionsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
@@ -1195,30 +1476,6 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(response).ToNot(BeNil())
 				Expect(result).ToNot(BeNil())
 
-				// Invoke operation with a Context to test a timeout error
-				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
-				defer cancelFunc()
-				serverSleepTime = 100 * time.Millisecond
-				_, _, operationErr = appConfigurationService.ListCollectionsWithContext(ctx, listCollectionsOptionsModel)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
-				serverSleepTime = time.Duration(0)
-
-				// Disable retries and test again
-				appConfigurationService.DisableRetries()
-				result, response, operationErr = appConfigurationService.ListCollections(listCollectionsOptionsModel)
-				Expect(operationErr).To(BeNil())
-				Expect(response).ToNot(BeNil())
-				Expect(result).ToNot(BeNil())
-
-				// Re-test the timeout error with retries disabled
-				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
-				defer cancelFunc2()
-				serverSleepTime = 100 * time.Millisecond
-				_, _, operationErr = appConfigurationService.ListCollectionsWithContext(ctx, listCollectionsOptionsModel)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
-				serverSleepTime = time.Duration(0)
 			})
 			It(`Invoke ListCollections with error: Operation request error`, func() {
 				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
@@ -1238,6 +1495,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				listCollectionsOptionsModel.Include = []string{"features"}
 				listCollectionsOptionsModel.Limit = core.Int64Ptr(int64(1))
 				listCollectionsOptionsModel.Offset = core.Int64Ptr(int64(0))
+				listCollectionsOptionsModel.Search = core.StringPtr("test tag")
 				listCollectionsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := appConfigurationService.SetServiceURL("")
@@ -1252,10 +1510,91 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				testServer.Close()
 			})
 		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke ListCollections successfully`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the ListCollectionsOptions model
+				listCollectionsOptionsModel := new(appconfigurationv1.ListCollectionsOptions)
+				listCollectionsOptionsModel.Expand = core.BoolPtr(true)
+				listCollectionsOptionsModel.Sort = core.StringPtr("created_time")
+				listCollectionsOptionsModel.Tags = core.StringPtr("version 1.1, pre-release")
+				listCollectionsOptionsModel.Features = []string{"testString"}
+				listCollectionsOptionsModel.Properties = []string{"testString"}
+				listCollectionsOptionsModel.Include = []string{"features"}
+				listCollectionsOptionsModel.Limit = core.Int64Ptr(int64(1))
+				listCollectionsOptionsModel.Offset = core.Int64Ptr(int64(0))
+				listCollectionsOptionsModel.Search = core.StringPtr("test tag")
+				listCollectionsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := appConfigurationService.ListCollections(listCollectionsOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Test pagination helper method on response`, func() {
+			It(`Invoke GetNextOffset successfully`, func() {
+				responseObject := new(appconfigurationv1.CollectionList)
+				nextObject := new(appconfigurationv1.PageHrefResponse)
+				nextObject.Href = core.StringPtr("ibm.com?offset=135")
+				responseObject.Next = nextObject
+
+				value, err := responseObject.GetNextOffset()
+				Expect(err).To(BeNil())
+				Expect(value).To(Equal(core.Int64Ptr(int64(135))))
+			})
+			It(`Invoke GetNextOffset without a "Next" property in the response`, func() {
+				responseObject := new(appconfigurationv1.CollectionList)
+
+				value, err := responseObject.GetNextOffset()
+				Expect(err).To(BeNil())
+				Expect(value).To(BeNil())
+			})
+			It(`Invoke GetNextOffset without any query params in the "Next" URL`, func() {
+				responseObject := new(appconfigurationv1.CollectionList)
+				nextObject := new(appconfigurationv1.PageHrefResponse)
+				nextObject.Href = core.StringPtr("ibm.com")
+				responseObject.Next = nextObject
+
+				value, err := responseObject.GetNextOffset()
+				Expect(err).To(BeNil())
+				Expect(value).To(BeNil())
+			})
+			It(`Invoke GetNextOffset with a non-integer query param in the "Next" URL`, func() {
+				responseObject := new(appconfigurationv1.CollectionList)
+				nextObject := new(appconfigurationv1.PageHrefResponse)
+				nextObject.Href = core.StringPtr("ibm.com?offset=tiger")
+				responseObject.Next = nextObject
+
+				value, err := responseObject.GetNextOffset()
+				Expect(err).NotTo(BeNil())
+				Expect(value).To(BeNil())
+			})
+		})
 	})
 	Describe(`CreateCollection(createCollectionOptions *CreateCollectionOptions) - Operation response error`, func() {
 		createCollectionPath := "/collections"
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
@@ -1301,13 +1640,10 @@ var _ = Describe(`AppConfigurationV1`, func() {
 			})
 		})
 	})
-
 	Describe(`CreateCollection(createCollectionOptions *CreateCollectionOptions)`, func() {
 		createCollectionPath := "/collections"
-		var serverSleepTime time.Duration
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with timeout`, func() {
 			BeforeEach(func() {
-				serverSleepTime = 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -1332,12 +1668,85 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
 
 					// Sleep a short time to support a timeout test
-					time.Sleep(serverSleepTime)
+					time.Sleep(100 * time.Millisecond)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
-					fmt.Fprintf(res, "%s", `{"name": "Name", "collection_id": "CollectionID", "description": "Description", "tags": "Tags", "created_time": "2019-01-01T12:00:00", "updated_time": "2019-01-01T12:00:00", "href": "Href"}`)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "collection_id": "CollectionID", "description": "Description", "tags": "Tags", "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "href": "Href"}`)
+				}))
+			})
+			It(`Invoke CreateCollection successfully with retries`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+				appConfigurationService.EnableRetries(0, 0)
+
+				// Construct an instance of the CreateCollectionOptions model
+				createCollectionOptionsModel := new(appconfigurationv1.CreateCollectionOptions)
+				createCollectionOptionsModel.Name = core.StringPtr("Web App Collection")
+				createCollectionOptionsModel.CollectionID = core.StringPtr("web-app-collection")
+				createCollectionOptionsModel.Description = core.StringPtr("Collection for Web application")
+				createCollectionOptionsModel.Tags = core.StringPtr("version: 1.1, pre-release")
+				createCollectionOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with a Context to test a timeout error
+				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc()
+				_, _, operationErr := appConfigurationService.CreateCollectionWithContext(ctx, createCollectionOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+
+				// Disable retries and test again
+				appConfigurationService.DisableRetries()
+				result, response, operationErr := appConfigurationService.CreateCollection(createCollectionOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				_, _, operationErr = appConfigurationService.CreateCollectionWithContext(ctx, createCollectionOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(createCollectionPath))
+					Expect(req.Method).To(Equal("POST"))
+
+					// For gzip-disabled operation, verify Content-Encoding is not set.
+					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+
+					// If there is a body, then make sure we can read it
+					bodyBuf := new(bytes.Buffer)
+					if req.Header.Get("Content-Encoding") == "gzip" {
+						body, err := core.NewGzipDecompressionReader(req.Body)
+						Expect(err).To(BeNil())
+						_, err = bodyBuf.ReadFrom(body)
+						Expect(err).To(BeNil())
+					} else {
+						_, err := bodyBuf.ReadFrom(req.Body)
+						Expect(err).To(BeNil())
+					}
+					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(201)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "collection_id": "CollectionID", "description": "Description", "tags": "Tags", "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "href": "Href"}`)
 				}))
 			})
 			It(`Invoke CreateCollection successfully`, func() {
@@ -1347,7 +1756,6 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(appConfigurationService).ToNot(BeNil())
-				appConfigurationService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				result, response, operationErr := appConfigurationService.CreateCollection(nil)
@@ -1369,30 +1777,6 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(response).ToNot(BeNil())
 				Expect(result).ToNot(BeNil())
 
-				// Invoke operation with a Context to test a timeout error
-				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
-				defer cancelFunc()
-				serverSleepTime = 100 * time.Millisecond
-				_, _, operationErr = appConfigurationService.CreateCollectionWithContext(ctx, createCollectionOptionsModel)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
-				serverSleepTime = time.Duration(0)
-
-				// Disable retries and test again
-				appConfigurationService.DisableRetries()
-				result, response, operationErr = appConfigurationService.CreateCollection(createCollectionOptionsModel)
-				Expect(operationErr).To(BeNil())
-				Expect(response).ToNot(BeNil())
-				Expect(result).ToNot(BeNil())
-
-				// Re-test the timeout error with retries disabled
-				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
-				defer cancelFunc2()
-				serverSleepTime = 100 * time.Millisecond
-				_, _, operationErr = appConfigurationService.CreateCollectionWithContext(ctx, createCollectionOptionsModel)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
-				serverSleepTime = time.Duration(0)
 			})
 			It(`Invoke CreateCollection with error: Operation validation and request error`, func() {
 				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
@@ -1429,10 +1813,47 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				testServer.Close()
 			})
 		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(201)
+				}))
+			})
+			It(`Invoke CreateCollection successfully`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the CreateCollectionOptions model
+				createCollectionOptionsModel := new(appconfigurationv1.CreateCollectionOptions)
+				createCollectionOptionsModel.Name = core.StringPtr("Web App Collection")
+				createCollectionOptionsModel.CollectionID = core.StringPtr("web-app-collection")
+				createCollectionOptionsModel.Description = core.StringPtr("Collection for Web application")
+				createCollectionOptionsModel.Tags = core.StringPtr("version: 1.1, pre-release")
+				createCollectionOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := appConfigurationService.CreateCollection(createCollectionOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
 	})
 	Describe(`UpdateCollection(updateCollectionOptions *UpdateCollectionOptions) - Operation response error`, func() {
 		updateCollectionPath := "/collections/testString"
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
@@ -1478,13 +1899,10 @@ var _ = Describe(`AppConfigurationV1`, func() {
 			})
 		})
 	})
-
 	Describe(`UpdateCollection(updateCollectionOptions *UpdateCollectionOptions)`, func() {
 		updateCollectionPath := "/collections/testString"
-		var serverSleepTime time.Duration
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with timeout`, func() {
 			BeforeEach(func() {
-				serverSleepTime = 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -1509,12 +1927,85 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
 
 					// Sleep a short time to support a timeout test
-					time.Sleep(serverSleepTime)
+					time.Sleep(100 * time.Millisecond)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"name": "Name", "collection_id": "CollectionID", "description": "Description", "tags": "Tags", "created_time": "2019-01-01T12:00:00", "updated_time": "2019-01-01T12:00:00", "href": "Href"}`)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "collection_id": "CollectionID", "description": "Description", "tags": "Tags", "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "href": "Href"}`)
+				}))
+			})
+			It(`Invoke UpdateCollection successfully with retries`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+				appConfigurationService.EnableRetries(0, 0)
+
+				// Construct an instance of the UpdateCollectionOptions model
+				updateCollectionOptionsModel := new(appconfigurationv1.UpdateCollectionOptions)
+				updateCollectionOptionsModel.CollectionID = core.StringPtr("testString")
+				updateCollectionOptionsModel.Name = core.StringPtr("testString")
+				updateCollectionOptionsModel.Description = core.StringPtr("testString")
+				updateCollectionOptionsModel.Tags = core.StringPtr("testString")
+				updateCollectionOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with a Context to test a timeout error
+				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc()
+				_, _, operationErr := appConfigurationService.UpdateCollectionWithContext(ctx, updateCollectionOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+
+				// Disable retries and test again
+				appConfigurationService.DisableRetries()
+				result, response, operationErr := appConfigurationService.UpdateCollection(updateCollectionOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				_, _, operationErr = appConfigurationService.UpdateCollectionWithContext(ctx, updateCollectionOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(updateCollectionPath))
+					Expect(req.Method).To(Equal("PUT"))
+
+					// For gzip-disabled operation, verify Content-Encoding is not set.
+					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+
+					// If there is a body, then make sure we can read it
+					bodyBuf := new(bytes.Buffer)
+					if req.Header.Get("Content-Encoding") == "gzip" {
+						body, err := core.NewGzipDecompressionReader(req.Body)
+						Expect(err).To(BeNil())
+						_, err = bodyBuf.ReadFrom(body)
+						Expect(err).To(BeNil())
+					} else {
+						_, err := bodyBuf.ReadFrom(req.Body)
+						Expect(err).To(BeNil())
+					}
+					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "collection_id": "CollectionID", "description": "Description", "tags": "Tags", "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "href": "Href"}`)
 				}))
 			})
 			It(`Invoke UpdateCollection successfully`, func() {
@@ -1524,7 +2015,6 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(appConfigurationService).ToNot(BeNil())
-				appConfigurationService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				result, response, operationErr := appConfigurationService.UpdateCollection(nil)
@@ -1546,30 +2036,6 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(response).ToNot(BeNil())
 				Expect(result).ToNot(BeNil())
 
-				// Invoke operation with a Context to test a timeout error
-				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
-				defer cancelFunc()
-				serverSleepTime = 100 * time.Millisecond
-				_, _, operationErr = appConfigurationService.UpdateCollectionWithContext(ctx, updateCollectionOptionsModel)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
-				serverSleepTime = time.Duration(0)
-
-				// Disable retries and test again
-				appConfigurationService.DisableRetries()
-				result, response, operationErr = appConfigurationService.UpdateCollection(updateCollectionOptionsModel)
-				Expect(operationErr).To(BeNil())
-				Expect(response).ToNot(BeNil())
-				Expect(result).ToNot(BeNil())
-
-				// Re-test the timeout error with retries disabled
-				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
-				defer cancelFunc2()
-				serverSleepTime = 100 * time.Millisecond
-				_, _, operationErr = appConfigurationService.UpdateCollectionWithContext(ctx, updateCollectionOptionsModel)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
-				serverSleepTime = time.Duration(0)
 			})
 			It(`Invoke UpdateCollection with error: Operation validation and request error`, func() {
 				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
@@ -1606,10 +2072,47 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				testServer.Close()
 			})
 		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke UpdateCollection successfully`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the UpdateCollectionOptions model
+				updateCollectionOptionsModel := new(appconfigurationv1.UpdateCollectionOptions)
+				updateCollectionOptionsModel.CollectionID = core.StringPtr("testString")
+				updateCollectionOptionsModel.Name = core.StringPtr("testString")
+				updateCollectionOptionsModel.Description = core.StringPtr("testString")
+				updateCollectionOptionsModel.Tags = core.StringPtr("testString")
+				updateCollectionOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := appConfigurationService.UpdateCollection(updateCollectionOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
 	})
 	Describe(`GetCollection(getCollectionOptions *GetCollectionOptions) - Operation response error`, func() {
 		getCollectionPath := "/collections/testString"
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
@@ -1617,9 +2120,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Verify the contents of the request
 					Expect(req.URL.EscapedPath()).To(Equal(getCollectionPath))
 					Expect(req.Method).To(Equal("GET"))
-
 					// TODO: Add check for expand query parameter
-
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
 					fmt.Fprintf(res, `} this is not valid json {`)
@@ -1657,13 +2158,10 @@ var _ = Describe(`AppConfigurationV1`, func() {
 			})
 		})
 	})
-
 	Describe(`GetCollection(getCollectionOptions *GetCollectionOptions)`, func() {
 		getCollectionPath := "/collections/testString"
-		var serverSleepTime time.Duration
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with timeout`, func() {
 			BeforeEach(func() {
-				serverSleepTime = 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -1672,14 +2170,70 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					Expect(req.Method).To(Equal("GET"))
 
 					// TODO: Add check for expand query parameter
-
 					// Sleep a short time to support a timeout test
-					time.Sleep(serverSleepTime)
+					time.Sleep(100 * time.Millisecond)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"name": "Name", "collection_id": "CollectionID", "description": "Description", "tags": "Tags", "created_time": "2019-01-01T12:00:00", "updated_time": "2019-01-01T12:00:00", "href": "Href", "features": [{"feature_id": "FeatureID", "name": "Name"}], "properties": [{"property_id": "PropertyID", "name": "Name"}], "features_count": 13, "properties_count": 15}`)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "collection_id": "CollectionID", "description": "Description", "tags": "Tags", "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "href": "Href", "features": [{"feature_id": "FeatureID", "name": "Name"}], "properties": [{"property_id": "PropertyID", "name": "Name"}], "features_count": 13, "properties_count": 15}`)
+				}))
+			})
+			It(`Invoke GetCollection successfully with retries`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+				appConfigurationService.EnableRetries(0, 0)
+
+				// Construct an instance of the GetCollectionOptions model
+				getCollectionOptionsModel := new(appconfigurationv1.GetCollectionOptions)
+				getCollectionOptionsModel.CollectionID = core.StringPtr("testString")
+				getCollectionOptionsModel.Expand = core.BoolPtr(true)
+				getCollectionOptionsModel.Include = []string{"features"}
+				getCollectionOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with a Context to test a timeout error
+				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc()
+				_, _, operationErr := appConfigurationService.GetCollectionWithContext(ctx, getCollectionOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+
+				// Disable retries and test again
+				appConfigurationService.DisableRetries()
+				result, response, operationErr := appConfigurationService.GetCollection(getCollectionOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				_, _, operationErr = appConfigurationService.GetCollectionWithContext(ctx, getCollectionOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(getCollectionPath))
+					Expect(req.Method).To(Equal("GET"))
+
+					// TODO: Add check for expand query parameter
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "collection_id": "CollectionID", "description": "Description", "tags": "Tags", "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "href": "Href", "features": [{"feature_id": "FeatureID", "name": "Name"}], "properties": [{"property_id": "PropertyID", "name": "Name"}], "features_count": 13, "properties_count": 15}`)
 				}))
 			})
 			It(`Invoke GetCollection successfully`, func() {
@@ -1689,7 +2243,6 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(appConfigurationService).ToNot(BeNil())
-				appConfigurationService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				result, response, operationErr := appConfigurationService.GetCollection(nil)
@@ -1710,30 +2263,6 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(response).ToNot(BeNil())
 				Expect(result).ToNot(BeNil())
 
-				// Invoke operation with a Context to test a timeout error
-				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
-				defer cancelFunc()
-				serverSleepTime = 100 * time.Millisecond
-				_, _, operationErr = appConfigurationService.GetCollectionWithContext(ctx, getCollectionOptionsModel)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
-				serverSleepTime = time.Duration(0)
-
-				// Disable retries and test again
-				appConfigurationService.DisableRetries()
-				result, response, operationErr = appConfigurationService.GetCollection(getCollectionOptionsModel)
-				Expect(operationErr).To(BeNil())
-				Expect(response).ToNot(BeNil())
-				Expect(result).ToNot(BeNil())
-
-				// Re-test the timeout error with retries disabled
-				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
-				defer cancelFunc2()
-				serverSleepTime = 100 * time.Millisecond
-				_, _, operationErr = appConfigurationService.GetCollectionWithContext(ctx, getCollectionOptionsModel)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
-				serverSleepTime = time.Duration(0)
 			})
 			It(`Invoke GetCollection with error: Operation validation and request error`, func() {
 				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
@@ -1769,8 +2298,43 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				testServer.Close()
 			})
 		})
-	})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
 
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke GetCollection successfully`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the GetCollectionOptions model
+				getCollectionOptionsModel := new(appconfigurationv1.GetCollectionOptions)
+				getCollectionOptionsModel.CollectionID = core.StringPtr("testString")
+				getCollectionOptionsModel.Expand = core.BoolPtr(true)
+				getCollectionOptionsModel.Include = []string{"features"}
+				getCollectionOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := appConfigurationService.GetCollection(getCollectionOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
 	Describe(`DeleteCollection(deleteCollectionOptions *DeleteCollectionOptions)`, func() {
 		deleteCollectionPath := "/collections/testString"
 		Context(`Using mock server endpoint`, func() {
@@ -1792,7 +2356,6 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(appConfigurationService).ToNot(BeNil())
-				appConfigurationService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				response, operationErr := appConfigurationService.DeleteCollection(nil)
@@ -1805,12 +2368,6 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				deleteCollectionOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
-				response, operationErr = appConfigurationService.DeleteCollection(deleteCollectionOptionsModel)
-				Expect(operationErr).To(BeNil())
-				Expect(response).ToNot(BeNil())
-
-				// Disable retries and test again
-				appConfigurationService.DisableRetries()
 				response, operationErr = appConfigurationService.DeleteCollection(deleteCollectionOptionsModel)
 				Expect(operationErr).To(BeNil())
 				Expect(response).ToNot(BeNil())
@@ -1846,134 +2403,9 @@ var _ = Describe(`AppConfigurationV1`, func() {
 			})
 		})
 	})
-	Describe(`Service constructor tests`, func() {
-		It(`Instantiate service client`, func() {
-			appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
-				Authenticator: &core.NoAuthAuthenticator{},
-			})
-			Expect(appConfigurationService).ToNot(BeNil())
-			Expect(serviceErr).To(BeNil())
-		})
-		It(`Instantiate service client with error: Invalid URL`, func() {
-			appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
-				URL: "{BAD_URL_STRING",
-			})
-			Expect(appConfigurationService).To(BeNil())
-			Expect(serviceErr).ToNot(BeNil())
-		})
-		It(`Instantiate service client with error: Invalid Auth`, func() {
-			appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
-				URL: "https://appconfigurationv1/api",
-				Authenticator: &core.BasicAuthenticator{
-					Username: "",
-					Password: "",
-				},
-			})
-			Expect(appConfigurationService).To(BeNil())
-			Expect(serviceErr).ToNot(BeNil())
-		})
-	})
-	Describe(`Service constructor tests using external config`, func() {
-		Context(`Using external config, construct service client instances`, func() {
-			// Map containing environment variables used in testing.
-			var testEnvironment = map[string]string{
-				"APP_CONFIGURATION_URL":       "https://appconfigurationv1/api",
-				"APP_CONFIGURATION_AUTH_TYPE": "noauth",
-			}
-
-			It(`Create service client using external config successfully`, func() {
-				SetTestEnvironment(testEnvironment)
-				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1UsingExternalConfig(&appconfigurationv1.AppConfigurationV1Options{})
-				Expect(appConfigurationService).ToNot(BeNil())
-				Expect(serviceErr).To(BeNil())
-				ClearTestEnvironment(testEnvironment)
-
-				clone := appConfigurationService.Clone()
-				Expect(clone).ToNot(BeNil())
-				Expect(clone.Service != appConfigurationService.Service).To(BeTrue())
-				Expect(clone.GetServiceURL()).To(Equal(appConfigurationService.GetServiceURL()))
-				Expect(clone.Service.Options.Authenticator).To(Equal(appConfigurationService.Service.Options.Authenticator))
-			})
-			It(`Create service client using external config and set url from constructor successfully`, func() {
-				SetTestEnvironment(testEnvironment)
-				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1UsingExternalConfig(&appconfigurationv1.AppConfigurationV1Options{
-					URL: "https://testService/api",
-				})
-				Expect(appConfigurationService).ToNot(BeNil())
-				Expect(serviceErr).To(BeNil())
-				Expect(appConfigurationService.Service.GetServiceURL()).To(Equal("https://testService/api"))
-				ClearTestEnvironment(testEnvironment)
-
-				clone := appConfigurationService.Clone()
-				Expect(clone).ToNot(BeNil())
-				Expect(clone.Service != appConfigurationService.Service).To(BeTrue())
-				Expect(clone.GetServiceURL()).To(Equal(appConfigurationService.GetServiceURL()))
-				Expect(clone.Service.Options.Authenticator).To(Equal(appConfigurationService.Service.Options.Authenticator))
-			})
-			It(`Create service client using external config and set url programatically successfully`, func() {
-				SetTestEnvironment(testEnvironment)
-				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1UsingExternalConfig(&appconfigurationv1.AppConfigurationV1Options{})
-				err := appConfigurationService.SetServiceURL("https://testService/api")
-				Expect(err).To(BeNil())
-				Expect(appConfigurationService).ToNot(BeNil())
-				Expect(serviceErr).To(BeNil())
-				Expect(appConfigurationService.Service.GetServiceURL()).To(Equal("https://testService/api"))
-				ClearTestEnvironment(testEnvironment)
-
-				clone := appConfigurationService.Clone()
-				Expect(clone).ToNot(BeNil())
-				Expect(clone.Service != appConfigurationService.Service).To(BeTrue())
-				Expect(clone.GetServiceURL()).To(Equal(appConfigurationService.GetServiceURL()))
-				Expect(clone.Service.Options.Authenticator).To(Equal(appConfigurationService.Service.Options.Authenticator))
-			})
-		})
-		Context(`Using external config, construct service client instances with error: Invalid Auth`, func() {
-			// Map containing environment variables used in testing.
-			var testEnvironment = map[string]string{
-				"APP_CONFIGURATION_URL":       "https://appconfigurationv1/api",
-				"APP_CONFIGURATION_AUTH_TYPE": "someOtherAuth",
-			}
-
-			SetTestEnvironment(testEnvironment)
-			appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1UsingExternalConfig(&appconfigurationv1.AppConfigurationV1Options{})
-
-			It(`Instantiate service client with error`, func() {
-				Expect(appConfigurationService).To(BeNil())
-				Expect(serviceErr).ToNot(BeNil())
-				ClearTestEnvironment(testEnvironment)
-			})
-		})
-		Context(`Using external config, construct service client instances with error: Invalid URL`, func() {
-			// Map containing environment variables used in testing.
-			var testEnvironment = map[string]string{
-				"APP_CONFIGURATION_AUTH_TYPE": "NOAuth",
-			}
-
-			SetTestEnvironment(testEnvironment)
-			appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1UsingExternalConfig(&appconfigurationv1.AppConfigurationV1Options{
-				URL: "{BAD_URL_STRING",
-			})
-
-			It(`Instantiate service client with error`, func() {
-				Expect(appConfigurationService).To(BeNil())
-				Expect(serviceErr).ToNot(BeNil())
-				ClearTestEnvironment(testEnvironment)
-			})
-		})
-	})
-	Describe(`Regional endpoint tests`, func() {
-		It(`GetServiceURLForRegion(region string)`, func() {
-			var url string
-			var err error
-			url, err = appconfigurationv1.GetServiceURLForRegion("INVALID_REGION")
-			Expect(url).To(BeEmpty())
-			Expect(err).ToNot(BeNil())
-			fmt.Fprintf(GinkgoWriter, "Expected error: %s\n", err.Error())
-		})
-	})
 	Describe(`ListFeatures(listFeaturesOptions *ListFeaturesOptions) - Operation response error`, func() {
 		listFeaturesPath := "/environments/testString/features"
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
@@ -1981,17 +2413,12 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Verify the contents of the request
 					Expect(req.URL.EscapedPath()).To(Equal(listFeaturesPath))
 					Expect(req.Method).To(Equal("GET"))
-
 					// TODO: Add check for expand query parameter
-
 					Expect(req.URL.Query()["sort"]).To(Equal([]string{"created_time"}))
-
 					Expect(req.URL.Query()["tags"]).To(Equal([]string{"version 1.1, pre-release"}))
-
 					Expect(req.URL.Query()["limit"]).To(Equal([]string{fmt.Sprint(int64(1))}))
-
 					Expect(req.URL.Query()["offset"]).To(Equal([]string{fmt.Sprint(int64(0))}))
-
+					Expect(req.URL.Query()["search"]).To(Equal([]string{"test tag"}))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
 					fmt.Fprintf(res, `} this is not valid json {`)
@@ -2016,6 +2443,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				listFeaturesOptionsModel.Include = []string{"collections"}
 				listFeaturesOptionsModel.Limit = core.Int64Ptr(int64(1))
 				listFeaturesOptionsModel.Offset = core.Int64Ptr(int64(0))
+				listFeaturesOptionsModel.Search = core.StringPtr("test tag")
 				listFeaturesOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
 				result, response, operationErr := appConfigurationService.ListFeatures(listFeaturesOptionsModel)
@@ -2035,13 +2463,10 @@ var _ = Describe(`AppConfigurationV1`, func() {
 			})
 		})
 	})
-
 	Describe(`ListFeatures(listFeaturesOptions *ListFeaturesOptions)`, func() {
 		listFeaturesPath := "/environments/testString/features"
-		var serverSleepTime time.Duration
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with timeout`, func() {
 			BeforeEach(func() {
-				serverSleepTime = 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -2050,22 +2475,87 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					Expect(req.Method).To(Equal("GET"))
 
 					// TODO: Add check for expand query parameter
-
 					Expect(req.URL.Query()["sort"]).To(Equal([]string{"created_time"}))
-
 					Expect(req.URL.Query()["tags"]).To(Equal([]string{"version 1.1, pre-release"}))
-
 					Expect(req.URL.Query()["limit"]).To(Equal([]string{fmt.Sprint(int64(1))}))
-
 					Expect(req.URL.Query()["offset"]).To(Equal([]string{fmt.Sprint(int64(0))}))
-
+					Expect(req.URL.Query()["search"]).To(Equal([]string{"test tag"}))
 					// Sleep a short time to support a timeout test
-					time.Sleep(serverSleepTime)
+					time.Sleep(100 * time.Millisecond)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"features": [{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5}], "segment_exists": false, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2019-01-01T12:00:00", "updated_time": "2019-01-01T12:00:00", "evaluation_time": "2019-01-01T12:00:00", "href": "Href"}], "limit": 5, "offset": 6, "total_count": 10, "first": {"href": "Href"}, "previous": {"href": "Href"}, "next": {"href": "Href"}, "last": {"href": "Href"}}`)
+					fmt.Fprintf(res, "%s", `{"features": [{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5}], "segment_exists": false, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href"}], "limit": 5, "offset": 6, "total_count": 10, "first": {"href": "Href"}, "previous": {"href": "Href"}, "next": {"href": "Href"}, "last": {"href": "Href"}}`)
+				}))
+			})
+			It(`Invoke ListFeatures successfully with retries`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+				appConfigurationService.EnableRetries(0, 0)
+
+				// Construct an instance of the ListFeaturesOptions model
+				listFeaturesOptionsModel := new(appconfigurationv1.ListFeaturesOptions)
+				listFeaturesOptionsModel.EnvironmentID = core.StringPtr("testString")
+				listFeaturesOptionsModel.Expand = core.BoolPtr(true)
+				listFeaturesOptionsModel.Sort = core.StringPtr("created_time")
+				listFeaturesOptionsModel.Tags = core.StringPtr("version 1.1, pre-release")
+				listFeaturesOptionsModel.Collections = []string{"testString"}
+				listFeaturesOptionsModel.Segments = []string{"testString"}
+				listFeaturesOptionsModel.Include = []string{"collections"}
+				listFeaturesOptionsModel.Limit = core.Int64Ptr(int64(1))
+				listFeaturesOptionsModel.Offset = core.Int64Ptr(int64(0))
+				listFeaturesOptionsModel.Search = core.StringPtr("test tag")
+				listFeaturesOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with a Context to test a timeout error
+				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc()
+				_, _, operationErr := appConfigurationService.ListFeaturesWithContext(ctx, listFeaturesOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+
+				// Disable retries and test again
+				appConfigurationService.DisableRetries()
+				result, response, operationErr := appConfigurationService.ListFeatures(listFeaturesOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				_, _, operationErr = appConfigurationService.ListFeaturesWithContext(ctx, listFeaturesOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(listFeaturesPath))
+					Expect(req.Method).To(Equal("GET"))
+
+					// TODO: Add check for expand query parameter
+					Expect(req.URL.Query()["sort"]).To(Equal([]string{"created_time"}))
+					Expect(req.URL.Query()["tags"]).To(Equal([]string{"version 1.1, pre-release"}))
+					Expect(req.URL.Query()["limit"]).To(Equal([]string{fmt.Sprint(int64(1))}))
+					Expect(req.URL.Query()["offset"]).To(Equal([]string{fmt.Sprint(int64(0))}))
+					Expect(req.URL.Query()["search"]).To(Equal([]string{"test tag"}))
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"features": [{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5}], "segment_exists": false, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href"}], "limit": 5, "offset": 6, "total_count": 10, "first": {"href": "Href"}, "previous": {"href": "Href"}, "next": {"href": "Href"}, "last": {"href": "Href"}}`)
 				}))
 			})
 			It(`Invoke ListFeatures successfully`, func() {
@@ -2075,7 +2565,6 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(appConfigurationService).ToNot(BeNil())
-				appConfigurationService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				result, response, operationErr := appConfigurationService.ListFeatures(nil)
@@ -2094,6 +2583,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				listFeaturesOptionsModel.Include = []string{"collections"}
 				listFeaturesOptionsModel.Limit = core.Int64Ptr(int64(1))
 				listFeaturesOptionsModel.Offset = core.Int64Ptr(int64(0))
+				listFeaturesOptionsModel.Search = core.StringPtr("test tag")
 				listFeaturesOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
@@ -2102,30 +2592,6 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(response).ToNot(BeNil())
 				Expect(result).ToNot(BeNil())
 
-				// Invoke operation with a Context to test a timeout error
-				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
-				defer cancelFunc()
-				serverSleepTime = 100 * time.Millisecond
-				_, _, operationErr = appConfigurationService.ListFeaturesWithContext(ctx, listFeaturesOptionsModel)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
-				serverSleepTime = time.Duration(0)
-
-				// Disable retries and test again
-				appConfigurationService.DisableRetries()
-				result, response, operationErr = appConfigurationService.ListFeatures(listFeaturesOptionsModel)
-				Expect(operationErr).To(BeNil())
-				Expect(response).ToNot(BeNil())
-				Expect(result).ToNot(BeNil())
-
-				// Re-test the timeout error with retries disabled
-				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
-				defer cancelFunc2()
-				serverSleepTime = 100 * time.Millisecond
-				_, _, operationErr = appConfigurationService.ListFeaturesWithContext(ctx, listFeaturesOptionsModel)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
-				serverSleepTime = time.Duration(0)
 			})
 			It(`Invoke ListFeatures with error: Operation validation and request error`, func() {
 				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
@@ -2146,6 +2612,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				listFeaturesOptionsModel.Include = []string{"collections"}
 				listFeaturesOptionsModel.Limit = core.Int64Ptr(int64(1))
 				listFeaturesOptionsModel.Offset = core.Int64Ptr(int64(0))
+				listFeaturesOptionsModel.Search = core.StringPtr("test tag")
 				listFeaturesOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := appConfigurationService.SetServiceURL("")
@@ -2167,10 +2634,92 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				testServer.Close()
 			})
 		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke ListFeatures successfully`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the ListFeaturesOptions model
+				listFeaturesOptionsModel := new(appconfigurationv1.ListFeaturesOptions)
+				listFeaturesOptionsModel.EnvironmentID = core.StringPtr("testString")
+				listFeaturesOptionsModel.Expand = core.BoolPtr(true)
+				listFeaturesOptionsModel.Sort = core.StringPtr("created_time")
+				listFeaturesOptionsModel.Tags = core.StringPtr("version 1.1, pre-release")
+				listFeaturesOptionsModel.Collections = []string{"testString"}
+				listFeaturesOptionsModel.Segments = []string{"testString"}
+				listFeaturesOptionsModel.Include = []string{"collections"}
+				listFeaturesOptionsModel.Limit = core.Int64Ptr(int64(1))
+				listFeaturesOptionsModel.Offset = core.Int64Ptr(int64(0))
+				listFeaturesOptionsModel.Search = core.StringPtr("test tag")
+				listFeaturesOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := appConfigurationService.ListFeatures(listFeaturesOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Test pagination helper method on response`, func() {
+			It(`Invoke GetNextOffset successfully`, func() {
+				responseObject := new(appconfigurationv1.FeaturesList)
+				nextObject := new(appconfigurationv1.PageHrefResponse)
+				nextObject.Href = core.StringPtr("ibm.com?offset=135")
+				responseObject.Next = nextObject
+
+				value, err := responseObject.GetNextOffset()
+				Expect(err).To(BeNil())
+				Expect(value).To(Equal(core.Int64Ptr(int64(135))))
+			})
+			It(`Invoke GetNextOffset without a "Next" property in the response`, func() {
+				responseObject := new(appconfigurationv1.FeaturesList)
+
+				value, err := responseObject.GetNextOffset()
+				Expect(err).To(BeNil())
+				Expect(value).To(BeNil())
+			})
+			It(`Invoke GetNextOffset without any query params in the "Next" URL`, func() {
+				responseObject := new(appconfigurationv1.FeaturesList)
+				nextObject := new(appconfigurationv1.PageHrefResponse)
+				nextObject.Href = core.StringPtr("ibm.com")
+				responseObject.Next = nextObject
+
+				value, err := responseObject.GetNextOffset()
+				Expect(err).To(BeNil())
+				Expect(value).To(BeNil())
+			})
+			It(`Invoke GetNextOffset with a non-integer query param in the "Next" URL`, func() {
+				responseObject := new(appconfigurationv1.FeaturesList)
+				nextObject := new(appconfigurationv1.PageHrefResponse)
+				nextObject.Href = core.StringPtr("ibm.com?offset=tiger")
+				responseObject.Next = nextObject
+
+				value, err := responseObject.GetNextOffset()
+				Expect(err).NotTo(BeNil())
+				Expect(value).To(BeNil())
+			})
+		})
 	})
 	Describe(`CreateFeature(createFeatureOptions *CreateFeatureOptions) - Operation response error`, func() {
 		createFeaturePath := "/environments/testString/features"
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
@@ -2193,7 +2742,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the TargetSegments model
 				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
-				targetSegmentsModel.Segments = []string{"testString"}
+				targetSegmentsModel.Segments = []string{"betausers", "premiumusers"}
 
 				// Construct an instance of the SegmentRule model
 				segmentRuleModel := new(appconfigurationv1.SegmentRule)
@@ -2214,6 +2763,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				createFeatureOptionsModel.EnabledValue = core.StringPtr("true")
 				createFeatureOptionsModel.DisabledValue = core.StringPtr("false")
 				createFeatureOptionsModel.Description = core.StringPtr("Feature flag to enable Cycle Rentals")
+				createFeatureOptionsModel.Format = core.StringPtr("TEXT")
 				createFeatureOptionsModel.Enabled = core.BoolPtr(true)
 				createFeatureOptionsModel.Tags = core.StringPtr("version: 1.1, pre-release")
 				createFeatureOptionsModel.SegmentRules = []appconfigurationv1.SegmentRule{*segmentRuleModel}
@@ -2237,13 +2787,10 @@ var _ = Describe(`AppConfigurationV1`, func() {
 			})
 		})
 	})
-
 	Describe(`CreateFeature(createFeatureOptions *CreateFeatureOptions)`, func() {
 		createFeaturePath := "/environments/testString/features"
-		var serverSleepTime time.Duration
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with timeout`, func() {
 			BeforeEach(func() {
-				serverSleepTime = 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -2268,15 +2815,15 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
 
 					// Sleep a short time to support a timeout test
-					time.Sleep(serverSleepTime)
+					time.Sleep(100 * time.Millisecond)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
-					fmt.Fprintf(res, "%s", `{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5}], "segment_exists": false, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2019-01-01T12:00:00", "updated_time": "2019-01-01T12:00:00", "evaluation_time": "2019-01-01T12:00:00", "href": "Href"}`)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5}], "segment_exists": false, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href"}`)
 				}))
 			})
-			It(`Invoke CreateFeature successfully`, func() {
+			It(`Invoke CreateFeature successfully with retries`, func() {
 				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
 					URL:           testServer.URL,
 					Authenticator: &core.NoAuthAuthenticator{},
@@ -2285,15 +2832,9 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(appConfigurationService).ToNot(BeNil())
 				appConfigurationService.EnableRetries(0, 0)
 
-				// Invoke operation with nil options model (negative test)
-				result, response, operationErr := appConfigurationService.CreateFeature(nil)
-				Expect(operationErr).NotTo(BeNil())
-				Expect(response).To(BeNil())
-				Expect(result).To(BeNil())
-
 				// Construct an instance of the TargetSegments model
 				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
-				targetSegmentsModel.Segments = []string{"testString"}
+				targetSegmentsModel.Segments = []string{"betausers", "premiumusers"}
 
 				// Construct an instance of the SegmentRule model
 				segmentRuleModel := new(appconfigurationv1.SegmentRule)
@@ -2314,6 +2855,107 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				createFeatureOptionsModel.EnabledValue = core.StringPtr("true")
 				createFeatureOptionsModel.DisabledValue = core.StringPtr("false")
 				createFeatureOptionsModel.Description = core.StringPtr("Feature flag to enable Cycle Rentals")
+				createFeatureOptionsModel.Format = core.StringPtr("TEXT")
+				createFeatureOptionsModel.Enabled = core.BoolPtr(true)
+				createFeatureOptionsModel.Tags = core.StringPtr("version: 1.1, pre-release")
+				createFeatureOptionsModel.SegmentRules = []appconfigurationv1.SegmentRule{*segmentRuleModel}
+				createFeatureOptionsModel.Collections = []appconfigurationv1.CollectionRef{*collectionRefModel}
+				createFeatureOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with a Context to test a timeout error
+				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc()
+				_, _, operationErr := appConfigurationService.CreateFeatureWithContext(ctx, createFeatureOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+
+				// Disable retries and test again
+				appConfigurationService.DisableRetries()
+				result, response, operationErr := appConfigurationService.CreateFeature(createFeatureOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				_, _, operationErr = appConfigurationService.CreateFeatureWithContext(ctx, createFeatureOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(createFeaturePath))
+					Expect(req.Method).To(Equal("POST"))
+
+					// For gzip-disabled operation, verify Content-Encoding is not set.
+					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+
+					// If there is a body, then make sure we can read it
+					bodyBuf := new(bytes.Buffer)
+					if req.Header.Get("Content-Encoding") == "gzip" {
+						body, err := core.NewGzipDecompressionReader(req.Body)
+						Expect(err).To(BeNil())
+						_, err = bodyBuf.ReadFrom(body)
+						Expect(err).To(BeNil())
+					} else {
+						_, err := bodyBuf.ReadFrom(req.Body)
+						Expect(err).To(BeNil())
+					}
+					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(201)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5}], "segment_exists": false, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href"}`)
+				}))
+			})
+			It(`Invoke CreateFeature successfully`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Invoke operation with nil options model (negative test)
+				result, response, operationErr := appConfigurationService.CreateFeature(nil)
+				Expect(operationErr).NotTo(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+
+				// Construct an instance of the TargetSegments model
+				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
+				targetSegmentsModel.Segments = []string{"betausers", "premiumusers"}
+
+				// Construct an instance of the SegmentRule model
+				segmentRuleModel := new(appconfigurationv1.SegmentRule)
+				segmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
+				segmentRuleModel.Value = core.StringPtr("true")
+				segmentRuleModel.Order = core.Int64Ptr(int64(1))
+
+				// Construct an instance of the CollectionRef model
+				collectionRefModel := new(appconfigurationv1.CollectionRef)
+				collectionRefModel.CollectionID = core.StringPtr("ghzinc")
+
+				// Construct an instance of the CreateFeatureOptions model
+				createFeatureOptionsModel := new(appconfigurationv1.CreateFeatureOptions)
+				createFeatureOptionsModel.EnvironmentID = core.StringPtr("testString")
+				createFeatureOptionsModel.Name = core.StringPtr("Cycle Rentals")
+				createFeatureOptionsModel.FeatureID = core.StringPtr("cycle-rentals")
+				createFeatureOptionsModel.Type = core.StringPtr("BOOLEAN")
+				createFeatureOptionsModel.EnabledValue = core.StringPtr("true")
+				createFeatureOptionsModel.DisabledValue = core.StringPtr("false")
+				createFeatureOptionsModel.Description = core.StringPtr("Feature flag to enable Cycle Rentals")
+				createFeatureOptionsModel.Format = core.StringPtr("TEXT")
 				createFeatureOptionsModel.Enabled = core.BoolPtr(true)
 				createFeatureOptionsModel.Tags = core.StringPtr("version: 1.1, pre-release")
 				createFeatureOptionsModel.SegmentRules = []appconfigurationv1.SegmentRule{*segmentRuleModel}
@@ -2326,30 +2968,6 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(response).ToNot(BeNil())
 				Expect(result).ToNot(BeNil())
 
-				// Invoke operation with a Context to test a timeout error
-				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
-				defer cancelFunc()
-				serverSleepTime = 100 * time.Millisecond
-				_, _, operationErr = appConfigurationService.CreateFeatureWithContext(ctx, createFeatureOptionsModel)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
-				serverSleepTime = time.Duration(0)
-
-				// Disable retries and test again
-				appConfigurationService.DisableRetries()
-				result, response, operationErr = appConfigurationService.CreateFeature(createFeatureOptionsModel)
-				Expect(operationErr).To(BeNil())
-				Expect(response).ToNot(BeNil())
-				Expect(result).ToNot(BeNil())
-
-				// Re-test the timeout error with retries disabled
-				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
-				defer cancelFunc2()
-				serverSleepTime = 100 * time.Millisecond
-				_, _, operationErr = appConfigurationService.CreateFeatureWithContext(ctx, createFeatureOptionsModel)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
-				serverSleepTime = time.Duration(0)
 			})
 			It(`Invoke CreateFeature with error: Operation validation and request error`, func() {
 				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
@@ -2361,7 +2979,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the TargetSegments model
 				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
-				targetSegmentsModel.Segments = []string{"testString"}
+				targetSegmentsModel.Segments = []string{"betausers", "premiumusers"}
 
 				// Construct an instance of the SegmentRule model
 				segmentRuleModel := new(appconfigurationv1.SegmentRule)
@@ -2382,6 +3000,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				createFeatureOptionsModel.EnabledValue = core.StringPtr("true")
 				createFeatureOptionsModel.DisabledValue = core.StringPtr("false")
 				createFeatureOptionsModel.Description = core.StringPtr("Feature flag to enable Cycle Rentals")
+				createFeatureOptionsModel.Format = core.StringPtr("TEXT")
 				createFeatureOptionsModel.Enabled = core.BoolPtr(true)
 				createFeatureOptionsModel.Tags = core.StringPtr("version: 1.1, pre-release")
 				createFeatureOptionsModel.SegmentRules = []appconfigurationv1.SegmentRule{*segmentRuleModel}
@@ -2407,10 +3026,69 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				testServer.Close()
 			})
 		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(201)
+				}))
+			})
+			It(`Invoke CreateFeature successfully`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the TargetSegments model
+				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
+				targetSegmentsModel.Segments = []string{"betausers", "premiumusers"}
+
+				// Construct an instance of the SegmentRule model
+				segmentRuleModel := new(appconfigurationv1.SegmentRule)
+				segmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
+				segmentRuleModel.Value = core.StringPtr("true")
+				segmentRuleModel.Order = core.Int64Ptr(int64(1))
+
+				// Construct an instance of the CollectionRef model
+				collectionRefModel := new(appconfigurationv1.CollectionRef)
+				collectionRefModel.CollectionID = core.StringPtr("ghzinc")
+
+				// Construct an instance of the CreateFeatureOptions model
+				createFeatureOptionsModel := new(appconfigurationv1.CreateFeatureOptions)
+				createFeatureOptionsModel.EnvironmentID = core.StringPtr("testString")
+				createFeatureOptionsModel.Name = core.StringPtr("Cycle Rentals")
+				createFeatureOptionsModel.FeatureID = core.StringPtr("cycle-rentals")
+				createFeatureOptionsModel.Type = core.StringPtr("BOOLEAN")
+				createFeatureOptionsModel.EnabledValue = core.StringPtr("true")
+				createFeatureOptionsModel.DisabledValue = core.StringPtr("false")
+				createFeatureOptionsModel.Description = core.StringPtr("Feature flag to enable Cycle Rentals")
+				createFeatureOptionsModel.Format = core.StringPtr("TEXT")
+				createFeatureOptionsModel.Enabled = core.BoolPtr(true)
+				createFeatureOptionsModel.Tags = core.StringPtr("version: 1.1, pre-release")
+				createFeatureOptionsModel.SegmentRules = []appconfigurationv1.SegmentRule{*segmentRuleModel}
+				createFeatureOptionsModel.Collections = []appconfigurationv1.CollectionRef{*collectionRefModel}
+				createFeatureOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := appConfigurationService.CreateFeature(createFeatureOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
 	})
 	Describe(`UpdateFeature(updateFeatureOptions *UpdateFeatureOptions) - Operation response error`, func() {
 		updateFeaturePath := "/environments/testString/features/testString"
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
@@ -2433,28 +3111,28 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the TargetSegments model
 				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
-				targetSegmentsModel.Segments = []string{"testString"}
+				targetSegmentsModel.Segments = []string{"betausers", "premiumusers"}
 
 				// Construct an instance of the SegmentRule model
 				segmentRuleModel := new(appconfigurationv1.SegmentRule)
 				segmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
-				segmentRuleModel.Value = core.StringPtr("testString")
-				segmentRuleModel.Order = core.Int64Ptr(int64(38))
+				segmentRuleModel.Value = core.StringPtr("true")
+				segmentRuleModel.Order = core.Int64Ptr(int64(1))
 
 				// Construct an instance of the CollectionRef model
 				collectionRefModel := new(appconfigurationv1.CollectionRef)
-				collectionRefModel.CollectionID = core.StringPtr("testString")
+				collectionRefModel.CollectionID = core.StringPtr("ghzinc")
 
 				// Construct an instance of the UpdateFeatureOptions model
 				updateFeatureOptionsModel := new(appconfigurationv1.UpdateFeatureOptions)
 				updateFeatureOptionsModel.EnvironmentID = core.StringPtr("testString")
 				updateFeatureOptionsModel.FeatureID = core.StringPtr("testString")
-				updateFeatureOptionsModel.Name = core.StringPtr("testString")
-				updateFeatureOptionsModel.Description = core.StringPtr("testString")
-				updateFeatureOptionsModel.EnabledValue = core.StringPtr("testString")
-				updateFeatureOptionsModel.DisabledValue = core.StringPtr("testString")
+				updateFeatureOptionsModel.Name = core.StringPtr("Cycle Rentals")
+				updateFeatureOptionsModel.Description = core.StringPtr("Feature flags to enable Cycle Rentals")
+				updateFeatureOptionsModel.EnabledValue = core.StringPtr("true")
+				updateFeatureOptionsModel.DisabledValue = core.StringPtr("false")
 				updateFeatureOptionsModel.Enabled = core.BoolPtr(true)
-				updateFeatureOptionsModel.Tags = core.StringPtr("testString")
+				updateFeatureOptionsModel.Tags = core.StringPtr("version: 1.1, yet-to-release")
 				updateFeatureOptionsModel.SegmentRules = []appconfigurationv1.SegmentRule{*segmentRuleModel}
 				updateFeatureOptionsModel.Collections = []appconfigurationv1.CollectionRef{*collectionRefModel}
 				updateFeatureOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -2476,13 +3154,10 @@ var _ = Describe(`AppConfigurationV1`, func() {
 			})
 		})
 	})
-
 	Describe(`UpdateFeature(updateFeatureOptions *UpdateFeatureOptions)`, func() {
 		updateFeaturePath := "/environments/testString/features/testString"
-		var serverSleepTime time.Duration
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with timeout`, func() {
 			BeforeEach(func() {
-				serverSleepTime = 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -2507,12 +3182,105 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
 
 					// Sleep a short time to support a timeout test
-					time.Sleep(serverSleepTime)
+					time.Sleep(100 * time.Millisecond)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5}], "segment_exists": false, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2019-01-01T12:00:00", "updated_time": "2019-01-01T12:00:00", "evaluation_time": "2019-01-01T12:00:00", "href": "Href"}`)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5}], "segment_exists": false, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href"}`)
+				}))
+			})
+			It(`Invoke UpdateFeature successfully with retries`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+				appConfigurationService.EnableRetries(0, 0)
+
+				// Construct an instance of the TargetSegments model
+				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
+				targetSegmentsModel.Segments = []string{"betausers", "premiumusers"}
+
+				// Construct an instance of the SegmentRule model
+				segmentRuleModel := new(appconfigurationv1.SegmentRule)
+				segmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
+				segmentRuleModel.Value = core.StringPtr("true")
+				segmentRuleModel.Order = core.Int64Ptr(int64(1))
+
+				// Construct an instance of the CollectionRef model
+				collectionRefModel := new(appconfigurationv1.CollectionRef)
+				collectionRefModel.CollectionID = core.StringPtr("ghzinc")
+
+				// Construct an instance of the UpdateFeatureOptions model
+				updateFeatureOptionsModel := new(appconfigurationv1.UpdateFeatureOptions)
+				updateFeatureOptionsModel.EnvironmentID = core.StringPtr("testString")
+				updateFeatureOptionsModel.FeatureID = core.StringPtr("testString")
+				updateFeatureOptionsModel.Name = core.StringPtr("Cycle Rentals")
+				updateFeatureOptionsModel.Description = core.StringPtr("Feature flags to enable Cycle Rentals")
+				updateFeatureOptionsModel.EnabledValue = core.StringPtr("true")
+				updateFeatureOptionsModel.DisabledValue = core.StringPtr("false")
+				updateFeatureOptionsModel.Enabled = core.BoolPtr(true)
+				updateFeatureOptionsModel.Tags = core.StringPtr("version: 1.1, yet-to-release")
+				updateFeatureOptionsModel.SegmentRules = []appconfigurationv1.SegmentRule{*segmentRuleModel}
+				updateFeatureOptionsModel.Collections = []appconfigurationv1.CollectionRef{*collectionRefModel}
+				updateFeatureOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with a Context to test a timeout error
+				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc()
+				_, _, operationErr := appConfigurationService.UpdateFeatureWithContext(ctx, updateFeatureOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+
+				// Disable retries and test again
+				appConfigurationService.DisableRetries()
+				result, response, operationErr := appConfigurationService.UpdateFeature(updateFeatureOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				_, _, operationErr = appConfigurationService.UpdateFeatureWithContext(ctx, updateFeatureOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(updateFeaturePath))
+					Expect(req.Method).To(Equal("PUT"))
+
+					// For gzip-disabled operation, verify Content-Encoding is not set.
+					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+
+					// If there is a body, then make sure we can read it
+					bodyBuf := new(bytes.Buffer)
+					if req.Header.Get("Content-Encoding") == "gzip" {
+						body, err := core.NewGzipDecompressionReader(req.Body)
+						Expect(err).To(BeNil())
+						_, err = bodyBuf.ReadFrom(body)
+						Expect(err).To(BeNil())
+					} else {
+						_, err := bodyBuf.ReadFrom(req.Body)
+						Expect(err).To(BeNil())
+					}
+					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5}], "segment_exists": false, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href"}`)
 				}))
 			})
 			It(`Invoke UpdateFeature successfully`, func() {
@@ -2522,7 +3290,6 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(appConfigurationService).ToNot(BeNil())
-				appConfigurationService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				result, response, operationErr := appConfigurationService.UpdateFeature(nil)
@@ -2532,28 +3299,28 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the TargetSegments model
 				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
-				targetSegmentsModel.Segments = []string{"testString"}
+				targetSegmentsModel.Segments = []string{"betausers", "premiumusers"}
 
 				// Construct an instance of the SegmentRule model
 				segmentRuleModel := new(appconfigurationv1.SegmentRule)
 				segmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
-				segmentRuleModel.Value = core.StringPtr("testString")
-				segmentRuleModel.Order = core.Int64Ptr(int64(38))
+				segmentRuleModel.Value = core.StringPtr("true")
+				segmentRuleModel.Order = core.Int64Ptr(int64(1))
 
 				// Construct an instance of the CollectionRef model
 				collectionRefModel := new(appconfigurationv1.CollectionRef)
-				collectionRefModel.CollectionID = core.StringPtr("testString")
+				collectionRefModel.CollectionID = core.StringPtr("ghzinc")
 
 				// Construct an instance of the UpdateFeatureOptions model
 				updateFeatureOptionsModel := new(appconfigurationv1.UpdateFeatureOptions)
 				updateFeatureOptionsModel.EnvironmentID = core.StringPtr("testString")
 				updateFeatureOptionsModel.FeatureID = core.StringPtr("testString")
-				updateFeatureOptionsModel.Name = core.StringPtr("testString")
-				updateFeatureOptionsModel.Description = core.StringPtr("testString")
-				updateFeatureOptionsModel.EnabledValue = core.StringPtr("testString")
-				updateFeatureOptionsModel.DisabledValue = core.StringPtr("testString")
+				updateFeatureOptionsModel.Name = core.StringPtr("Cycle Rentals")
+				updateFeatureOptionsModel.Description = core.StringPtr("Feature flags to enable Cycle Rentals")
+				updateFeatureOptionsModel.EnabledValue = core.StringPtr("true")
+				updateFeatureOptionsModel.DisabledValue = core.StringPtr("false")
 				updateFeatureOptionsModel.Enabled = core.BoolPtr(true)
-				updateFeatureOptionsModel.Tags = core.StringPtr("testString")
+				updateFeatureOptionsModel.Tags = core.StringPtr("version: 1.1, yet-to-release")
 				updateFeatureOptionsModel.SegmentRules = []appconfigurationv1.SegmentRule{*segmentRuleModel}
 				updateFeatureOptionsModel.Collections = []appconfigurationv1.CollectionRef{*collectionRefModel}
 				updateFeatureOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -2564,30 +3331,6 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(response).ToNot(BeNil())
 				Expect(result).ToNot(BeNil())
 
-				// Invoke operation with a Context to test a timeout error
-				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
-				defer cancelFunc()
-				serverSleepTime = 100 * time.Millisecond
-				_, _, operationErr = appConfigurationService.UpdateFeatureWithContext(ctx, updateFeatureOptionsModel)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
-				serverSleepTime = time.Duration(0)
-
-				// Disable retries and test again
-				appConfigurationService.DisableRetries()
-				result, response, operationErr = appConfigurationService.UpdateFeature(updateFeatureOptionsModel)
-				Expect(operationErr).To(BeNil())
-				Expect(response).ToNot(BeNil())
-				Expect(result).ToNot(BeNil())
-
-				// Re-test the timeout error with retries disabled
-				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
-				defer cancelFunc2()
-				serverSleepTime = 100 * time.Millisecond
-				_, _, operationErr = appConfigurationService.UpdateFeatureWithContext(ctx, updateFeatureOptionsModel)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
-				serverSleepTime = time.Duration(0)
 			})
 			It(`Invoke UpdateFeature with error: Operation validation and request error`, func() {
 				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
@@ -2599,28 +3342,28 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the TargetSegments model
 				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
-				targetSegmentsModel.Segments = []string{"testString"}
+				targetSegmentsModel.Segments = []string{"betausers", "premiumusers"}
 
 				// Construct an instance of the SegmentRule model
 				segmentRuleModel := new(appconfigurationv1.SegmentRule)
 				segmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
-				segmentRuleModel.Value = core.StringPtr("testString")
-				segmentRuleModel.Order = core.Int64Ptr(int64(38))
+				segmentRuleModel.Value = core.StringPtr("true")
+				segmentRuleModel.Order = core.Int64Ptr(int64(1))
 
 				// Construct an instance of the CollectionRef model
 				collectionRefModel := new(appconfigurationv1.CollectionRef)
-				collectionRefModel.CollectionID = core.StringPtr("testString")
+				collectionRefModel.CollectionID = core.StringPtr("ghzinc")
 
 				// Construct an instance of the UpdateFeatureOptions model
 				updateFeatureOptionsModel := new(appconfigurationv1.UpdateFeatureOptions)
 				updateFeatureOptionsModel.EnvironmentID = core.StringPtr("testString")
 				updateFeatureOptionsModel.FeatureID = core.StringPtr("testString")
-				updateFeatureOptionsModel.Name = core.StringPtr("testString")
-				updateFeatureOptionsModel.Description = core.StringPtr("testString")
-				updateFeatureOptionsModel.EnabledValue = core.StringPtr("testString")
-				updateFeatureOptionsModel.DisabledValue = core.StringPtr("testString")
+				updateFeatureOptionsModel.Name = core.StringPtr("Cycle Rentals")
+				updateFeatureOptionsModel.Description = core.StringPtr("Feature flags to enable Cycle Rentals")
+				updateFeatureOptionsModel.EnabledValue = core.StringPtr("true")
+				updateFeatureOptionsModel.DisabledValue = core.StringPtr("false")
 				updateFeatureOptionsModel.Enabled = core.BoolPtr(true)
-				updateFeatureOptionsModel.Tags = core.StringPtr("testString")
+				updateFeatureOptionsModel.Tags = core.StringPtr("version: 1.1, yet-to-release")
 				updateFeatureOptionsModel.SegmentRules = []appconfigurationv1.SegmentRule{*segmentRuleModel}
 				updateFeatureOptionsModel.Collections = []appconfigurationv1.CollectionRef{*collectionRefModel}
 				updateFeatureOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -2644,10 +3387,67 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				testServer.Close()
 			})
 		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke UpdateFeature successfully`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the TargetSegments model
+				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
+				targetSegmentsModel.Segments = []string{"betausers", "premiumusers"}
+
+				// Construct an instance of the SegmentRule model
+				segmentRuleModel := new(appconfigurationv1.SegmentRule)
+				segmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
+				segmentRuleModel.Value = core.StringPtr("true")
+				segmentRuleModel.Order = core.Int64Ptr(int64(1))
+
+				// Construct an instance of the CollectionRef model
+				collectionRefModel := new(appconfigurationv1.CollectionRef)
+				collectionRefModel.CollectionID = core.StringPtr("ghzinc")
+
+				// Construct an instance of the UpdateFeatureOptions model
+				updateFeatureOptionsModel := new(appconfigurationv1.UpdateFeatureOptions)
+				updateFeatureOptionsModel.EnvironmentID = core.StringPtr("testString")
+				updateFeatureOptionsModel.FeatureID = core.StringPtr("testString")
+				updateFeatureOptionsModel.Name = core.StringPtr("Cycle Rentals")
+				updateFeatureOptionsModel.Description = core.StringPtr("Feature flags to enable Cycle Rentals")
+				updateFeatureOptionsModel.EnabledValue = core.StringPtr("true")
+				updateFeatureOptionsModel.DisabledValue = core.StringPtr("false")
+				updateFeatureOptionsModel.Enabled = core.BoolPtr(true)
+				updateFeatureOptionsModel.Tags = core.StringPtr("version: 1.1, yet-to-release")
+				updateFeatureOptionsModel.SegmentRules = []appconfigurationv1.SegmentRule{*segmentRuleModel}
+				updateFeatureOptionsModel.Collections = []appconfigurationv1.CollectionRef{*collectionRefModel}
+				updateFeatureOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := appConfigurationService.UpdateFeature(updateFeatureOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
 	})
 	Describe(`UpdateFeatureValues(updateFeatureValuesOptions *UpdateFeatureValuesOptions) - Operation response error`, func() {
 		updateFeatureValuesPath := "/environments/testString/features/testString"
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
@@ -2670,23 +3470,23 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the TargetSegments model
 				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
-				targetSegmentsModel.Segments = []string{"testString"}
+				targetSegmentsModel.Segments = []string{"betausers", "premiumusers"}
 
 				// Construct an instance of the SegmentRule model
 				segmentRuleModel := new(appconfigurationv1.SegmentRule)
 				segmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
-				segmentRuleModel.Value = core.StringPtr("testString")
-				segmentRuleModel.Order = core.Int64Ptr(int64(38))
+				segmentRuleModel.Value = core.StringPtr("true")
+				segmentRuleModel.Order = core.Int64Ptr(int64(1))
 
 				// Construct an instance of the UpdateFeatureValuesOptions model
 				updateFeatureValuesOptionsModel := new(appconfigurationv1.UpdateFeatureValuesOptions)
 				updateFeatureValuesOptionsModel.EnvironmentID = core.StringPtr("testString")
 				updateFeatureValuesOptionsModel.FeatureID = core.StringPtr("testString")
-				updateFeatureValuesOptionsModel.Name = core.StringPtr("testString")
-				updateFeatureValuesOptionsModel.Description = core.StringPtr("testString")
-				updateFeatureValuesOptionsModel.Tags = core.StringPtr("testString")
-				updateFeatureValuesOptionsModel.EnabledValue = core.StringPtr("testString")
-				updateFeatureValuesOptionsModel.DisabledValue = core.StringPtr("testString")
+				updateFeatureValuesOptionsModel.Name = core.StringPtr("Cycle Rentals")
+				updateFeatureValuesOptionsModel.Description = core.StringPtr("Feature flags to enable Cycle Rentals")
+				updateFeatureValuesOptionsModel.Tags = core.StringPtr("version: 1.1, yet-to-release")
+				updateFeatureValuesOptionsModel.EnabledValue = core.StringPtr("true")
+				updateFeatureValuesOptionsModel.DisabledValue = core.StringPtr("false")
 				updateFeatureValuesOptionsModel.SegmentRules = []appconfigurationv1.SegmentRule{*segmentRuleModel}
 				updateFeatureValuesOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
@@ -2707,13 +3507,10 @@ var _ = Describe(`AppConfigurationV1`, func() {
 			})
 		})
 	})
-
 	Describe(`UpdateFeatureValues(updateFeatureValuesOptions *UpdateFeatureValuesOptions)`, func() {
 		updateFeatureValuesPath := "/environments/testString/features/testString"
-		var serverSleepTime time.Duration
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with timeout`, func() {
 			BeforeEach(func() {
-				serverSleepTime = 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -2738,12 +3535,99 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
 
 					// Sleep a short time to support a timeout test
-					time.Sleep(serverSleepTime)
+					time.Sleep(100 * time.Millisecond)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5}], "segment_exists": false, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2019-01-01T12:00:00", "updated_time": "2019-01-01T12:00:00", "evaluation_time": "2019-01-01T12:00:00", "href": "Href"}`)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5}], "segment_exists": false, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href"}`)
+				}))
+			})
+			It(`Invoke UpdateFeatureValues successfully with retries`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+				appConfigurationService.EnableRetries(0, 0)
+
+				// Construct an instance of the TargetSegments model
+				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
+				targetSegmentsModel.Segments = []string{"betausers", "premiumusers"}
+
+				// Construct an instance of the SegmentRule model
+				segmentRuleModel := new(appconfigurationv1.SegmentRule)
+				segmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
+				segmentRuleModel.Value = core.StringPtr("true")
+				segmentRuleModel.Order = core.Int64Ptr(int64(1))
+
+				// Construct an instance of the UpdateFeatureValuesOptions model
+				updateFeatureValuesOptionsModel := new(appconfigurationv1.UpdateFeatureValuesOptions)
+				updateFeatureValuesOptionsModel.EnvironmentID = core.StringPtr("testString")
+				updateFeatureValuesOptionsModel.FeatureID = core.StringPtr("testString")
+				updateFeatureValuesOptionsModel.Name = core.StringPtr("Cycle Rentals")
+				updateFeatureValuesOptionsModel.Description = core.StringPtr("Feature flags to enable Cycle Rentals")
+				updateFeatureValuesOptionsModel.Tags = core.StringPtr("version: 1.1, yet-to-release")
+				updateFeatureValuesOptionsModel.EnabledValue = core.StringPtr("true")
+				updateFeatureValuesOptionsModel.DisabledValue = core.StringPtr("false")
+				updateFeatureValuesOptionsModel.SegmentRules = []appconfigurationv1.SegmentRule{*segmentRuleModel}
+				updateFeatureValuesOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with a Context to test a timeout error
+				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc()
+				_, _, operationErr := appConfigurationService.UpdateFeatureValuesWithContext(ctx, updateFeatureValuesOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+
+				// Disable retries and test again
+				appConfigurationService.DisableRetries()
+				result, response, operationErr := appConfigurationService.UpdateFeatureValues(updateFeatureValuesOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				_, _, operationErr = appConfigurationService.UpdateFeatureValuesWithContext(ctx, updateFeatureValuesOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(updateFeatureValuesPath))
+					Expect(req.Method).To(Equal("PATCH"))
+
+					// For gzip-disabled operation, verify Content-Encoding is not set.
+					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+
+					// If there is a body, then make sure we can read it
+					bodyBuf := new(bytes.Buffer)
+					if req.Header.Get("Content-Encoding") == "gzip" {
+						body, err := core.NewGzipDecompressionReader(req.Body)
+						Expect(err).To(BeNil())
+						_, err = bodyBuf.ReadFrom(body)
+						Expect(err).To(BeNil())
+					} else {
+						_, err := bodyBuf.ReadFrom(req.Body)
+						Expect(err).To(BeNil())
+					}
+					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5}], "segment_exists": false, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href"}`)
 				}))
 			})
 			It(`Invoke UpdateFeatureValues successfully`, func() {
@@ -2753,7 +3637,6 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(appConfigurationService).ToNot(BeNil())
-				appConfigurationService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				result, response, operationErr := appConfigurationService.UpdateFeatureValues(nil)
@@ -2763,23 +3646,23 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the TargetSegments model
 				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
-				targetSegmentsModel.Segments = []string{"testString"}
+				targetSegmentsModel.Segments = []string{"betausers", "premiumusers"}
 
 				// Construct an instance of the SegmentRule model
 				segmentRuleModel := new(appconfigurationv1.SegmentRule)
 				segmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
-				segmentRuleModel.Value = core.StringPtr("testString")
-				segmentRuleModel.Order = core.Int64Ptr(int64(38))
+				segmentRuleModel.Value = core.StringPtr("true")
+				segmentRuleModel.Order = core.Int64Ptr(int64(1))
 
 				// Construct an instance of the UpdateFeatureValuesOptions model
 				updateFeatureValuesOptionsModel := new(appconfigurationv1.UpdateFeatureValuesOptions)
 				updateFeatureValuesOptionsModel.EnvironmentID = core.StringPtr("testString")
 				updateFeatureValuesOptionsModel.FeatureID = core.StringPtr("testString")
-				updateFeatureValuesOptionsModel.Name = core.StringPtr("testString")
-				updateFeatureValuesOptionsModel.Description = core.StringPtr("testString")
-				updateFeatureValuesOptionsModel.Tags = core.StringPtr("testString")
-				updateFeatureValuesOptionsModel.EnabledValue = core.StringPtr("testString")
-				updateFeatureValuesOptionsModel.DisabledValue = core.StringPtr("testString")
+				updateFeatureValuesOptionsModel.Name = core.StringPtr("Cycle Rentals")
+				updateFeatureValuesOptionsModel.Description = core.StringPtr("Feature flags to enable Cycle Rentals")
+				updateFeatureValuesOptionsModel.Tags = core.StringPtr("version: 1.1, yet-to-release")
+				updateFeatureValuesOptionsModel.EnabledValue = core.StringPtr("true")
+				updateFeatureValuesOptionsModel.DisabledValue = core.StringPtr("false")
 				updateFeatureValuesOptionsModel.SegmentRules = []appconfigurationv1.SegmentRule{*segmentRuleModel}
 				updateFeatureValuesOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
@@ -2789,30 +3672,6 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(response).ToNot(BeNil())
 				Expect(result).ToNot(BeNil())
 
-				// Invoke operation with a Context to test a timeout error
-				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
-				defer cancelFunc()
-				serverSleepTime = 100 * time.Millisecond
-				_, _, operationErr = appConfigurationService.UpdateFeatureValuesWithContext(ctx, updateFeatureValuesOptionsModel)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
-				serverSleepTime = time.Duration(0)
-
-				// Disable retries and test again
-				appConfigurationService.DisableRetries()
-				result, response, operationErr = appConfigurationService.UpdateFeatureValues(updateFeatureValuesOptionsModel)
-				Expect(operationErr).To(BeNil())
-				Expect(response).ToNot(BeNil())
-				Expect(result).ToNot(BeNil())
-
-				// Re-test the timeout error with retries disabled
-				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
-				defer cancelFunc2()
-				serverSleepTime = 100 * time.Millisecond
-				_, _, operationErr = appConfigurationService.UpdateFeatureValuesWithContext(ctx, updateFeatureValuesOptionsModel)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
-				serverSleepTime = time.Duration(0)
 			})
 			It(`Invoke UpdateFeatureValues with error: Operation validation and request error`, func() {
 				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
@@ -2824,23 +3683,23 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the TargetSegments model
 				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
-				targetSegmentsModel.Segments = []string{"testString"}
+				targetSegmentsModel.Segments = []string{"betausers", "premiumusers"}
 
 				// Construct an instance of the SegmentRule model
 				segmentRuleModel := new(appconfigurationv1.SegmentRule)
 				segmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
-				segmentRuleModel.Value = core.StringPtr("testString")
-				segmentRuleModel.Order = core.Int64Ptr(int64(38))
+				segmentRuleModel.Value = core.StringPtr("true")
+				segmentRuleModel.Order = core.Int64Ptr(int64(1))
 
 				// Construct an instance of the UpdateFeatureValuesOptions model
 				updateFeatureValuesOptionsModel := new(appconfigurationv1.UpdateFeatureValuesOptions)
 				updateFeatureValuesOptionsModel.EnvironmentID = core.StringPtr("testString")
 				updateFeatureValuesOptionsModel.FeatureID = core.StringPtr("testString")
-				updateFeatureValuesOptionsModel.Name = core.StringPtr("testString")
-				updateFeatureValuesOptionsModel.Description = core.StringPtr("testString")
-				updateFeatureValuesOptionsModel.Tags = core.StringPtr("testString")
-				updateFeatureValuesOptionsModel.EnabledValue = core.StringPtr("testString")
-				updateFeatureValuesOptionsModel.DisabledValue = core.StringPtr("testString")
+				updateFeatureValuesOptionsModel.Name = core.StringPtr("Cycle Rentals")
+				updateFeatureValuesOptionsModel.Description = core.StringPtr("Feature flags to enable Cycle Rentals")
+				updateFeatureValuesOptionsModel.Tags = core.StringPtr("version: 1.1, yet-to-release")
+				updateFeatureValuesOptionsModel.EnabledValue = core.StringPtr("true")
+				updateFeatureValuesOptionsModel.DisabledValue = core.StringPtr("false")
 				updateFeatureValuesOptionsModel.SegmentRules = []appconfigurationv1.SegmentRule{*segmentRuleModel}
 				updateFeatureValuesOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
@@ -2863,10 +3722,61 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				testServer.Close()
 			})
 		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke UpdateFeatureValues successfully`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the TargetSegments model
+				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
+				targetSegmentsModel.Segments = []string{"betausers", "premiumusers"}
+
+				// Construct an instance of the SegmentRule model
+				segmentRuleModel := new(appconfigurationv1.SegmentRule)
+				segmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
+				segmentRuleModel.Value = core.StringPtr("true")
+				segmentRuleModel.Order = core.Int64Ptr(int64(1))
+
+				// Construct an instance of the UpdateFeatureValuesOptions model
+				updateFeatureValuesOptionsModel := new(appconfigurationv1.UpdateFeatureValuesOptions)
+				updateFeatureValuesOptionsModel.EnvironmentID = core.StringPtr("testString")
+				updateFeatureValuesOptionsModel.FeatureID = core.StringPtr("testString")
+				updateFeatureValuesOptionsModel.Name = core.StringPtr("Cycle Rentals")
+				updateFeatureValuesOptionsModel.Description = core.StringPtr("Feature flags to enable Cycle Rentals")
+				updateFeatureValuesOptionsModel.Tags = core.StringPtr("version: 1.1, yet-to-release")
+				updateFeatureValuesOptionsModel.EnabledValue = core.StringPtr("true")
+				updateFeatureValuesOptionsModel.DisabledValue = core.StringPtr("false")
+				updateFeatureValuesOptionsModel.SegmentRules = []appconfigurationv1.SegmentRule{*segmentRuleModel}
+				updateFeatureValuesOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := appConfigurationService.UpdateFeatureValues(updateFeatureValuesOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
 	})
 	Describe(`GetFeature(getFeatureOptions *GetFeatureOptions) - Operation response error`, func() {
 		getFeaturePath := "/environments/testString/features/testString"
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
@@ -2875,7 +3785,6 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(getFeaturePath))
 					Expect(req.Method).To(Equal("GET"))
 					Expect(req.URL.Query()["include"]).To(Equal([]string{"collections"}))
-
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
 					fmt.Fprintf(res, `} this is not valid json {`)
@@ -2913,13 +3822,10 @@ var _ = Describe(`AppConfigurationV1`, func() {
 			})
 		})
 	})
-
 	Describe(`GetFeature(getFeatureOptions *GetFeatureOptions)`, func() {
 		getFeaturePath := "/environments/testString/features/testString"
-		var serverSleepTime time.Duration
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with timeout`, func() {
 			BeforeEach(func() {
-				serverSleepTime = 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -2928,14 +3834,70 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					Expect(req.Method).To(Equal("GET"))
 
 					Expect(req.URL.Query()["include"]).To(Equal([]string{"collections"}))
-
 					// Sleep a short time to support a timeout test
-					time.Sleep(serverSleepTime)
+					time.Sleep(100 * time.Millisecond)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5}], "segment_exists": false, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2019-01-01T12:00:00", "updated_time": "2019-01-01T12:00:00", "evaluation_time": "2019-01-01T12:00:00", "href": "Href"}`)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5}], "segment_exists": false, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href"}`)
+				}))
+			})
+			It(`Invoke GetFeature successfully with retries`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+				appConfigurationService.EnableRetries(0, 0)
+
+				// Construct an instance of the GetFeatureOptions model
+				getFeatureOptionsModel := new(appconfigurationv1.GetFeatureOptions)
+				getFeatureOptionsModel.EnvironmentID = core.StringPtr("testString")
+				getFeatureOptionsModel.FeatureID = core.StringPtr("testString")
+				getFeatureOptionsModel.Include = core.StringPtr("collections")
+				getFeatureOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with a Context to test a timeout error
+				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc()
+				_, _, operationErr := appConfigurationService.GetFeatureWithContext(ctx, getFeatureOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+
+				// Disable retries and test again
+				appConfigurationService.DisableRetries()
+				result, response, operationErr := appConfigurationService.GetFeature(getFeatureOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				_, _, operationErr = appConfigurationService.GetFeatureWithContext(ctx, getFeatureOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(getFeaturePath))
+					Expect(req.Method).To(Equal("GET"))
+
+					Expect(req.URL.Query()["include"]).To(Equal([]string{"collections"}))
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5}], "segment_exists": false, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href"}`)
 				}))
 			})
 			It(`Invoke GetFeature successfully`, func() {
@@ -2945,7 +3907,6 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(appConfigurationService).ToNot(BeNil())
-				appConfigurationService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				result, response, operationErr := appConfigurationService.GetFeature(nil)
@@ -2966,30 +3927,6 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(response).ToNot(BeNil())
 				Expect(result).ToNot(BeNil())
 
-				// Invoke operation with a Context to test a timeout error
-				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
-				defer cancelFunc()
-				serverSleepTime = 100 * time.Millisecond
-				_, _, operationErr = appConfigurationService.GetFeatureWithContext(ctx, getFeatureOptionsModel)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
-				serverSleepTime = time.Duration(0)
-
-				// Disable retries and test again
-				appConfigurationService.DisableRetries()
-				result, response, operationErr = appConfigurationService.GetFeature(getFeatureOptionsModel)
-				Expect(operationErr).To(BeNil())
-				Expect(response).ToNot(BeNil())
-				Expect(result).ToNot(BeNil())
-
-				// Re-test the timeout error with retries disabled
-				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
-				defer cancelFunc2()
-				serverSleepTime = 100 * time.Millisecond
-				_, _, operationErr = appConfigurationService.GetFeatureWithContext(ctx, getFeatureOptionsModel)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
-				serverSleepTime = time.Duration(0)
 			})
 			It(`Invoke GetFeature with error: Operation validation and request error`, func() {
 				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
@@ -3025,8 +3962,43 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				testServer.Close()
 			})
 		})
-	})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
 
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke GetFeature successfully`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the GetFeatureOptions model
+				getFeatureOptionsModel := new(appconfigurationv1.GetFeatureOptions)
+				getFeatureOptionsModel.EnvironmentID = core.StringPtr("testString")
+				getFeatureOptionsModel.FeatureID = core.StringPtr("testString")
+				getFeatureOptionsModel.Include = core.StringPtr("collections")
+				getFeatureOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := appConfigurationService.GetFeature(getFeatureOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
 	Describe(`DeleteFeature(deleteFeatureOptions *DeleteFeatureOptions)`, func() {
 		deleteFeaturePath := "/environments/testString/features/testString"
 		Context(`Using mock server endpoint`, func() {
@@ -3048,7 +4020,6 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(appConfigurationService).ToNot(BeNil())
-				appConfigurationService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				response, operationErr := appConfigurationService.DeleteFeature(nil)
@@ -3062,12 +4033,6 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				deleteFeatureOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
-				response, operationErr = appConfigurationService.DeleteFeature(deleteFeatureOptionsModel)
-				Expect(operationErr).To(BeNil())
-				Expect(response).ToNot(BeNil())
-
-				// Disable retries and test again
-				appConfigurationService.DisableRetries()
 				response, operationErr = appConfigurationService.DeleteFeature(deleteFeatureOptionsModel)
 				Expect(operationErr).To(BeNil())
 				Expect(response).ToNot(BeNil())
@@ -3106,7 +4071,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 	})
 	Describe(`ToggleFeature(toggleFeatureOptions *ToggleFeatureOptions) - Operation response error`, func() {
 		toggleFeaturePath := "/environments/testString/features/testString/toggle"
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
@@ -3151,13 +4116,10 @@ var _ = Describe(`AppConfigurationV1`, func() {
 			})
 		})
 	})
-
 	Describe(`ToggleFeature(toggleFeatureOptions *ToggleFeatureOptions)`, func() {
 		toggleFeaturePath := "/environments/testString/features/testString/toggle"
-		var serverSleepTime time.Duration
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with timeout`, func() {
 			BeforeEach(func() {
-				serverSleepTime = 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -3182,12 +4144,84 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
 
 					// Sleep a short time to support a timeout test
-					time.Sleep(serverSleepTime)
+					time.Sleep(100 * time.Millisecond)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5}], "segment_exists": false, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2019-01-01T12:00:00", "updated_time": "2019-01-01T12:00:00", "evaluation_time": "2019-01-01T12:00:00", "href": "Href"}`)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5}], "segment_exists": false, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href"}`)
+				}))
+			})
+			It(`Invoke ToggleFeature successfully with retries`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+				appConfigurationService.EnableRetries(0, 0)
+
+				// Construct an instance of the ToggleFeatureOptions model
+				toggleFeatureOptionsModel := new(appconfigurationv1.ToggleFeatureOptions)
+				toggleFeatureOptionsModel.EnvironmentID = core.StringPtr("testString")
+				toggleFeatureOptionsModel.FeatureID = core.StringPtr("testString")
+				toggleFeatureOptionsModel.Enabled = core.BoolPtr(true)
+				toggleFeatureOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with a Context to test a timeout error
+				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc()
+				_, _, operationErr := appConfigurationService.ToggleFeatureWithContext(ctx, toggleFeatureOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+
+				// Disable retries and test again
+				appConfigurationService.DisableRetries()
+				result, response, operationErr := appConfigurationService.ToggleFeature(toggleFeatureOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				_, _, operationErr = appConfigurationService.ToggleFeatureWithContext(ctx, toggleFeatureOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(toggleFeaturePath))
+					Expect(req.Method).To(Equal("PUT"))
+
+					// For gzip-disabled operation, verify Content-Encoding is not set.
+					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+
+					// If there is a body, then make sure we can read it
+					bodyBuf := new(bytes.Buffer)
+					if req.Header.Get("Content-Encoding") == "gzip" {
+						body, err := core.NewGzipDecompressionReader(req.Body)
+						Expect(err).To(BeNil())
+						_, err = bodyBuf.ReadFrom(body)
+						Expect(err).To(BeNil())
+					} else {
+						_, err := bodyBuf.ReadFrom(req.Body)
+						Expect(err).To(BeNil())
+					}
+					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5}], "segment_exists": false, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href"}`)
 				}))
 			})
 			It(`Invoke ToggleFeature successfully`, func() {
@@ -3197,7 +4231,6 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(appConfigurationService).ToNot(BeNil())
-				appConfigurationService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				result, response, operationErr := appConfigurationService.ToggleFeature(nil)
@@ -3218,30 +4251,6 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(response).ToNot(BeNil())
 				Expect(result).ToNot(BeNil())
 
-				// Invoke operation with a Context to test a timeout error
-				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
-				defer cancelFunc()
-				serverSleepTime = 100 * time.Millisecond
-				_, _, operationErr = appConfigurationService.ToggleFeatureWithContext(ctx, toggleFeatureOptionsModel)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
-				serverSleepTime = time.Duration(0)
-
-				// Disable retries and test again
-				appConfigurationService.DisableRetries()
-				result, response, operationErr = appConfigurationService.ToggleFeature(toggleFeatureOptionsModel)
-				Expect(operationErr).To(BeNil())
-				Expect(response).ToNot(BeNil())
-				Expect(result).ToNot(BeNil())
-
-				// Re-test the timeout error with retries disabled
-				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
-				defer cancelFunc2()
-				serverSleepTime = 100 * time.Millisecond
-				_, _, operationErr = appConfigurationService.ToggleFeatureWithContext(ctx, toggleFeatureOptionsModel)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
-				serverSleepTime = time.Duration(0)
 			})
 			It(`Invoke ToggleFeature with error: Operation validation and request error`, func() {
 				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
@@ -3277,135 +4286,46 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				testServer.Close()
 			})
 		})
-	})
-	Describe(`Service constructor tests`, func() {
-		It(`Instantiate service client`, func() {
-			appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
-				Authenticator: &core.NoAuthAuthenticator{},
-			})
-			Expect(appConfigurationService).ToNot(BeNil())
-			Expect(serviceErr).To(BeNil())
-		})
-		It(`Instantiate service client with error: Invalid URL`, func() {
-			appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
-				URL: "{BAD_URL_STRING",
-			})
-			Expect(appConfigurationService).To(BeNil())
-			Expect(serviceErr).ToNot(BeNil())
-		})
-		It(`Instantiate service client with error: Invalid Auth`, func() {
-			appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
-				URL: "https://appconfigurationv1/api",
-				Authenticator: &core.BasicAuthenticator{
-					Username: "",
-					Password: "",
-				},
-			})
-			Expect(appConfigurationService).To(BeNil())
-			Expect(serviceErr).ToNot(BeNil())
-		})
-	})
-	Describe(`Service constructor tests using external config`, func() {
-		Context(`Using external config, construct service client instances`, func() {
-			// Map containing environment variables used in testing.
-			var testEnvironment = map[string]string{
-				"APP_CONFIGURATION_URL":       "https://appconfigurationv1/api",
-				"APP_CONFIGURATION_AUTH_TYPE": "noauth",
-			}
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
 
-			It(`Create service client using external config successfully`, func() {
-				SetTestEnvironment(testEnvironment)
-				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1UsingExternalConfig(&appconfigurationv1.AppConfigurationV1Options{})
-				Expect(appConfigurationService).ToNot(BeNil())
-				Expect(serviceErr).To(BeNil())
-				ClearTestEnvironment(testEnvironment)
-
-				clone := appConfigurationService.Clone()
-				Expect(clone).ToNot(BeNil())
-				Expect(clone.Service != appConfigurationService.Service).To(BeTrue())
-				Expect(clone.GetServiceURL()).To(Equal(appConfigurationService.GetServiceURL()))
-				Expect(clone.Service.Options.Authenticator).To(Equal(appConfigurationService.Service.Options.Authenticator))
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
 			})
-			It(`Create service client using external config and set url from constructor successfully`, func() {
-				SetTestEnvironment(testEnvironment)
-				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1UsingExternalConfig(&appconfigurationv1.AppConfigurationV1Options{
-					URL: "https://testService/api",
+			It(`Invoke ToggleFeature successfully`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
 				})
-				Expect(appConfigurationService).ToNot(BeNil())
 				Expect(serviceErr).To(BeNil())
-				Expect(appConfigurationService.Service.GetServiceURL()).To(Equal("https://testService/api"))
-				ClearTestEnvironment(testEnvironment)
-
-				clone := appConfigurationService.Clone()
-				Expect(clone).ToNot(BeNil())
-				Expect(clone.Service != appConfigurationService.Service).To(BeTrue())
-				Expect(clone.GetServiceURL()).To(Equal(appConfigurationService.GetServiceURL()))
-				Expect(clone.Service.Options.Authenticator).To(Equal(appConfigurationService.Service.Options.Authenticator))
-			})
-			It(`Create service client using external config and set url programatically successfully`, func() {
-				SetTestEnvironment(testEnvironment)
-				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1UsingExternalConfig(&appconfigurationv1.AppConfigurationV1Options{})
-				err := appConfigurationService.SetServiceURL("https://testService/api")
-				Expect(err).To(BeNil())
 				Expect(appConfigurationService).ToNot(BeNil())
-				Expect(serviceErr).To(BeNil())
-				Expect(appConfigurationService.Service.GetServiceURL()).To(Equal("https://testService/api"))
-				ClearTestEnvironment(testEnvironment)
 
-				clone := appConfigurationService.Clone()
-				Expect(clone).ToNot(BeNil())
-				Expect(clone.Service != appConfigurationService.Service).To(BeTrue())
-				Expect(clone.GetServiceURL()).To(Equal(appConfigurationService.GetServiceURL()))
-				Expect(clone.Service.Options.Authenticator).To(Equal(appConfigurationService.Service.Options.Authenticator))
+				// Construct an instance of the ToggleFeatureOptions model
+				toggleFeatureOptionsModel := new(appconfigurationv1.ToggleFeatureOptions)
+				toggleFeatureOptionsModel.EnvironmentID = core.StringPtr("testString")
+				toggleFeatureOptionsModel.FeatureID = core.StringPtr("testString")
+				toggleFeatureOptionsModel.Enabled = core.BoolPtr(true)
+				toggleFeatureOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := appConfigurationService.ToggleFeature(toggleFeatureOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
 			})
-		})
-		Context(`Using external config, construct service client instances with error: Invalid Auth`, func() {
-			// Map containing environment variables used in testing.
-			var testEnvironment = map[string]string{
-				"APP_CONFIGURATION_URL":       "https://appconfigurationv1/api",
-				"APP_CONFIGURATION_AUTH_TYPE": "someOtherAuth",
-			}
-
-			SetTestEnvironment(testEnvironment)
-			appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1UsingExternalConfig(&appconfigurationv1.AppConfigurationV1Options{})
-
-			It(`Instantiate service client with error`, func() {
-				Expect(appConfigurationService).To(BeNil())
-				Expect(serviceErr).ToNot(BeNil())
-				ClearTestEnvironment(testEnvironment)
+			AfterEach(func() {
+				testServer.Close()
 			})
-		})
-		Context(`Using external config, construct service client instances with error: Invalid URL`, func() {
-			// Map containing environment variables used in testing.
-			var testEnvironment = map[string]string{
-				"APP_CONFIGURATION_AUTH_TYPE": "NOAuth",
-			}
-
-			SetTestEnvironment(testEnvironment)
-			appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1UsingExternalConfig(&appconfigurationv1.AppConfigurationV1Options{
-				URL: "{BAD_URL_STRING",
-			})
-
-			It(`Instantiate service client with error`, func() {
-				Expect(appConfigurationService).To(BeNil())
-				Expect(serviceErr).ToNot(BeNil())
-				ClearTestEnvironment(testEnvironment)
-			})
-		})
-	})
-	Describe(`Regional endpoint tests`, func() {
-		It(`GetServiceURLForRegion(region string)`, func() {
-			var url string
-			var err error
-			url, err = appconfigurationv1.GetServiceURLForRegion("INVALID_REGION")
-			Expect(url).To(BeEmpty())
-			Expect(err).ToNot(BeNil())
-			fmt.Fprintf(GinkgoWriter, "Expected error: %s\n", err.Error())
 		})
 	})
 	Describe(`ListProperties(listPropertiesOptions *ListPropertiesOptions) - Operation response error`, func() {
 		listPropertiesPath := "/environments/testString/properties"
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
@@ -3413,17 +4333,12 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Verify the contents of the request
 					Expect(req.URL.EscapedPath()).To(Equal(listPropertiesPath))
 					Expect(req.Method).To(Equal("GET"))
-
 					// TODO: Add check for expand query parameter
-
 					Expect(req.URL.Query()["sort"]).To(Equal([]string{"created_time"}))
-
 					Expect(req.URL.Query()["tags"]).To(Equal([]string{"version 1.1, pre-release"}))
-
 					Expect(req.URL.Query()["limit"]).To(Equal([]string{fmt.Sprint(int64(1))}))
-
 					Expect(req.URL.Query()["offset"]).To(Equal([]string{fmt.Sprint(int64(0))}))
-
+					Expect(req.URL.Query()["search"]).To(Equal([]string{"test tag"}))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
 					fmt.Fprintf(res, `} this is not valid json {`)
@@ -3448,6 +4363,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				listPropertiesOptionsModel.Include = []string{"collections"}
 				listPropertiesOptionsModel.Limit = core.Int64Ptr(int64(1))
 				listPropertiesOptionsModel.Offset = core.Int64Ptr(int64(0))
+				listPropertiesOptionsModel.Search = core.StringPtr("test tag")
 				listPropertiesOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
 				result, response, operationErr := appConfigurationService.ListProperties(listPropertiesOptionsModel)
@@ -3467,13 +4383,10 @@ var _ = Describe(`AppConfigurationV1`, func() {
 			})
 		})
 	})
-
 	Describe(`ListProperties(listPropertiesOptions *ListPropertiesOptions)`, func() {
 		listPropertiesPath := "/environments/testString/properties"
-		var serverSleepTime time.Duration
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with timeout`, func() {
 			BeforeEach(func() {
-				serverSleepTime = 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -3482,22 +4395,87 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					Expect(req.Method).To(Equal("GET"))
 
 					// TODO: Add check for expand query parameter
-
 					Expect(req.URL.Query()["sort"]).To(Equal([]string{"created_time"}))
-
 					Expect(req.URL.Query()["tags"]).To(Equal([]string{"version 1.1, pre-release"}))
-
 					Expect(req.URL.Query()["limit"]).To(Equal([]string{fmt.Sprint(int64(1))}))
-
 					Expect(req.URL.Query()["offset"]).To(Equal([]string{fmt.Sprint(int64(0))}))
-
+					Expect(req.URL.Query()["search"]).To(Equal([]string{"test tag"}))
 					// Sleep a short time to support a timeout test
-					time.Sleep(serverSleepTime)
+					time.Sleep(100 * time.Millisecond)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"properties": [{"name": "Name", "property_id": "PropertyID", "description": "Description", "type": "BOOLEAN", "value": "anyValue", "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5}], "segment_exists": false, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2019-01-01T12:00:00", "updated_time": "2019-01-01T12:00:00", "evaluation_time": "2019-01-01T12:00:00", "href": "Href"}], "limit": 5, "offset": 6, "total_count": 10, "first": {"href": "Href"}, "previous": {"href": "Href"}, "next": {"href": "Href"}, "last": {"href": "Href"}}`)
+					fmt.Fprintf(res, "%s", `{"properties": [{"name": "Name", "property_id": "PropertyID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "value": "anyValue", "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5}], "segment_exists": false, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href"}], "limit": 5, "offset": 6, "total_count": 10, "first": {"href": "Href"}, "previous": {"href": "Href"}, "next": {"href": "Href"}, "last": {"href": "Href"}}`)
+				}))
+			})
+			It(`Invoke ListProperties successfully with retries`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+				appConfigurationService.EnableRetries(0, 0)
+
+				// Construct an instance of the ListPropertiesOptions model
+				listPropertiesOptionsModel := new(appconfigurationv1.ListPropertiesOptions)
+				listPropertiesOptionsModel.EnvironmentID = core.StringPtr("testString")
+				listPropertiesOptionsModel.Expand = core.BoolPtr(true)
+				listPropertiesOptionsModel.Sort = core.StringPtr("created_time")
+				listPropertiesOptionsModel.Tags = core.StringPtr("version 1.1, pre-release")
+				listPropertiesOptionsModel.Collections = []string{"testString"}
+				listPropertiesOptionsModel.Segments = []string{"testString"}
+				listPropertiesOptionsModel.Include = []string{"collections"}
+				listPropertiesOptionsModel.Limit = core.Int64Ptr(int64(1))
+				listPropertiesOptionsModel.Offset = core.Int64Ptr(int64(0))
+				listPropertiesOptionsModel.Search = core.StringPtr("test tag")
+				listPropertiesOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with a Context to test a timeout error
+				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc()
+				_, _, operationErr := appConfigurationService.ListPropertiesWithContext(ctx, listPropertiesOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+
+				// Disable retries and test again
+				appConfigurationService.DisableRetries()
+				result, response, operationErr := appConfigurationService.ListProperties(listPropertiesOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				_, _, operationErr = appConfigurationService.ListPropertiesWithContext(ctx, listPropertiesOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(listPropertiesPath))
+					Expect(req.Method).To(Equal("GET"))
+
+					// TODO: Add check for expand query parameter
+					Expect(req.URL.Query()["sort"]).To(Equal([]string{"created_time"}))
+					Expect(req.URL.Query()["tags"]).To(Equal([]string{"version 1.1, pre-release"}))
+					Expect(req.URL.Query()["limit"]).To(Equal([]string{fmt.Sprint(int64(1))}))
+					Expect(req.URL.Query()["offset"]).To(Equal([]string{fmt.Sprint(int64(0))}))
+					Expect(req.URL.Query()["search"]).To(Equal([]string{"test tag"}))
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"properties": [{"name": "Name", "property_id": "PropertyID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "value": "anyValue", "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5}], "segment_exists": false, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href"}], "limit": 5, "offset": 6, "total_count": 10, "first": {"href": "Href"}, "previous": {"href": "Href"}, "next": {"href": "Href"}, "last": {"href": "Href"}}`)
 				}))
 			})
 			It(`Invoke ListProperties successfully`, func() {
@@ -3507,7 +4485,6 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(appConfigurationService).ToNot(BeNil())
-				appConfigurationService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				result, response, operationErr := appConfigurationService.ListProperties(nil)
@@ -3526,6 +4503,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				listPropertiesOptionsModel.Include = []string{"collections"}
 				listPropertiesOptionsModel.Limit = core.Int64Ptr(int64(1))
 				listPropertiesOptionsModel.Offset = core.Int64Ptr(int64(0))
+				listPropertiesOptionsModel.Search = core.StringPtr("test tag")
 				listPropertiesOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
@@ -3534,30 +4512,6 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(response).ToNot(BeNil())
 				Expect(result).ToNot(BeNil())
 
-				// Invoke operation with a Context to test a timeout error
-				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
-				defer cancelFunc()
-				serverSleepTime = 100 * time.Millisecond
-				_, _, operationErr = appConfigurationService.ListPropertiesWithContext(ctx, listPropertiesOptionsModel)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
-				serverSleepTime = time.Duration(0)
-
-				// Disable retries and test again
-				appConfigurationService.DisableRetries()
-				result, response, operationErr = appConfigurationService.ListProperties(listPropertiesOptionsModel)
-				Expect(operationErr).To(BeNil())
-				Expect(response).ToNot(BeNil())
-				Expect(result).ToNot(BeNil())
-
-				// Re-test the timeout error with retries disabled
-				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
-				defer cancelFunc2()
-				serverSleepTime = 100 * time.Millisecond
-				_, _, operationErr = appConfigurationService.ListPropertiesWithContext(ctx, listPropertiesOptionsModel)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
-				serverSleepTime = time.Duration(0)
 			})
 			It(`Invoke ListProperties with error: Operation validation and request error`, func() {
 				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
@@ -3578,6 +4532,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				listPropertiesOptionsModel.Include = []string{"collections"}
 				listPropertiesOptionsModel.Limit = core.Int64Ptr(int64(1))
 				listPropertiesOptionsModel.Offset = core.Int64Ptr(int64(0))
+				listPropertiesOptionsModel.Search = core.StringPtr("test tag")
 				listPropertiesOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := appConfigurationService.SetServiceURL("")
@@ -3599,10 +4554,92 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				testServer.Close()
 			})
 		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke ListProperties successfully`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the ListPropertiesOptions model
+				listPropertiesOptionsModel := new(appconfigurationv1.ListPropertiesOptions)
+				listPropertiesOptionsModel.EnvironmentID = core.StringPtr("testString")
+				listPropertiesOptionsModel.Expand = core.BoolPtr(true)
+				listPropertiesOptionsModel.Sort = core.StringPtr("created_time")
+				listPropertiesOptionsModel.Tags = core.StringPtr("version 1.1, pre-release")
+				listPropertiesOptionsModel.Collections = []string{"testString"}
+				listPropertiesOptionsModel.Segments = []string{"testString"}
+				listPropertiesOptionsModel.Include = []string{"collections"}
+				listPropertiesOptionsModel.Limit = core.Int64Ptr(int64(1))
+				listPropertiesOptionsModel.Offset = core.Int64Ptr(int64(0))
+				listPropertiesOptionsModel.Search = core.StringPtr("test tag")
+				listPropertiesOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := appConfigurationService.ListProperties(listPropertiesOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Test pagination helper method on response`, func() {
+			It(`Invoke GetNextOffset successfully`, func() {
+				responseObject := new(appconfigurationv1.PropertiesList)
+				nextObject := new(appconfigurationv1.PageHrefResponse)
+				nextObject.Href = core.StringPtr("ibm.com?offset=135")
+				responseObject.Next = nextObject
+
+				value, err := responseObject.GetNextOffset()
+				Expect(err).To(BeNil())
+				Expect(value).To(Equal(core.Int64Ptr(int64(135))))
+			})
+			It(`Invoke GetNextOffset without a "Next" property in the response`, func() {
+				responseObject := new(appconfigurationv1.PropertiesList)
+
+				value, err := responseObject.GetNextOffset()
+				Expect(err).To(BeNil())
+				Expect(value).To(BeNil())
+			})
+			It(`Invoke GetNextOffset without any query params in the "Next" URL`, func() {
+				responseObject := new(appconfigurationv1.PropertiesList)
+				nextObject := new(appconfigurationv1.PageHrefResponse)
+				nextObject.Href = core.StringPtr("ibm.com")
+				responseObject.Next = nextObject
+
+				value, err := responseObject.GetNextOffset()
+				Expect(err).To(BeNil())
+				Expect(value).To(BeNil())
+			})
+			It(`Invoke GetNextOffset with a non-integer query param in the "Next" URL`, func() {
+				responseObject := new(appconfigurationv1.PropertiesList)
+				nextObject := new(appconfigurationv1.PageHrefResponse)
+				nextObject.Href = core.StringPtr("ibm.com?offset=tiger")
+				responseObject.Next = nextObject
+
+				value, err := responseObject.GetNextOffset()
+				Expect(err).NotTo(BeNil())
+				Expect(value).To(BeNil())
+			})
+		})
 	})
 	Describe(`CreateProperty(createPropertyOptions *CreatePropertyOptions) - Operation response error`, func() {
 		createPropertyPath := "/environments/testString/properties"
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
@@ -3625,7 +4662,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the TargetSegments model
 				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
-				targetSegmentsModel.Segments = []string{"testString"}
+				targetSegmentsModel.Segments = []string{"betausers", "premiumusers"}
 
 				// Construct an instance of the SegmentRule model
 				segmentRuleModel := new(appconfigurationv1.SegmentRule)
@@ -3645,6 +4682,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				createPropertyOptionsModel.Type = core.StringPtr("BOOLEAN")
 				createPropertyOptionsModel.Value = core.StringPtr("true")
 				createPropertyOptionsModel.Description = core.StringPtr("Property for email")
+				createPropertyOptionsModel.Format = core.StringPtr("TEXT")
 				createPropertyOptionsModel.Tags = core.StringPtr("version: 1.1, pre-release")
 				createPropertyOptionsModel.SegmentRules = []appconfigurationv1.SegmentRule{*segmentRuleModel}
 				createPropertyOptionsModel.Collections = []appconfigurationv1.CollectionRef{*collectionRefModel}
@@ -3667,13 +4705,10 @@ var _ = Describe(`AppConfigurationV1`, func() {
 			})
 		})
 	})
-
 	Describe(`CreateProperty(createPropertyOptions *CreatePropertyOptions)`, func() {
 		createPropertyPath := "/environments/testString/properties"
-		var serverSleepTime time.Duration
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with timeout`, func() {
 			BeforeEach(func() {
-				serverSleepTime = 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -3698,15 +4733,15 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
 
 					// Sleep a short time to support a timeout test
-					time.Sleep(serverSleepTime)
+					time.Sleep(100 * time.Millisecond)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
-					fmt.Fprintf(res, "%s", `{"name": "Name", "property_id": "PropertyID", "description": "Description", "type": "BOOLEAN", "value": "anyValue", "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5}], "segment_exists": false, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2019-01-01T12:00:00", "updated_time": "2019-01-01T12:00:00", "evaluation_time": "2019-01-01T12:00:00", "href": "Href"}`)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "property_id": "PropertyID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "value": "anyValue", "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5}], "segment_exists": false, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href"}`)
 				}))
 			})
-			It(`Invoke CreateProperty successfully`, func() {
+			It(`Invoke CreateProperty successfully with retries`, func() {
 				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
 					URL:           testServer.URL,
 					Authenticator: &core.NoAuthAuthenticator{},
@@ -3715,15 +4750,9 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(appConfigurationService).ToNot(BeNil())
 				appConfigurationService.EnableRetries(0, 0)
 
-				// Invoke operation with nil options model (negative test)
-				result, response, operationErr := appConfigurationService.CreateProperty(nil)
-				Expect(operationErr).NotTo(BeNil())
-				Expect(response).To(BeNil())
-				Expect(result).To(BeNil())
-
 				// Construct an instance of the TargetSegments model
 				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
-				targetSegmentsModel.Segments = []string{"testString"}
+				targetSegmentsModel.Segments = []string{"betausers", "premiumusers"}
 
 				// Construct an instance of the SegmentRule model
 				segmentRuleModel := new(appconfigurationv1.SegmentRule)
@@ -3743,6 +4772,105 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				createPropertyOptionsModel.Type = core.StringPtr("BOOLEAN")
 				createPropertyOptionsModel.Value = core.StringPtr("true")
 				createPropertyOptionsModel.Description = core.StringPtr("Property for email")
+				createPropertyOptionsModel.Format = core.StringPtr("TEXT")
+				createPropertyOptionsModel.Tags = core.StringPtr("version: 1.1, pre-release")
+				createPropertyOptionsModel.SegmentRules = []appconfigurationv1.SegmentRule{*segmentRuleModel}
+				createPropertyOptionsModel.Collections = []appconfigurationv1.CollectionRef{*collectionRefModel}
+				createPropertyOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with a Context to test a timeout error
+				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc()
+				_, _, operationErr := appConfigurationService.CreatePropertyWithContext(ctx, createPropertyOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+
+				// Disable retries and test again
+				appConfigurationService.DisableRetries()
+				result, response, operationErr := appConfigurationService.CreateProperty(createPropertyOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				_, _, operationErr = appConfigurationService.CreatePropertyWithContext(ctx, createPropertyOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(createPropertyPath))
+					Expect(req.Method).To(Equal("POST"))
+
+					// For gzip-disabled operation, verify Content-Encoding is not set.
+					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+
+					// If there is a body, then make sure we can read it
+					bodyBuf := new(bytes.Buffer)
+					if req.Header.Get("Content-Encoding") == "gzip" {
+						body, err := core.NewGzipDecompressionReader(req.Body)
+						Expect(err).To(BeNil())
+						_, err = bodyBuf.ReadFrom(body)
+						Expect(err).To(BeNil())
+					} else {
+						_, err := bodyBuf.ReadFrom(req.Body)
+						Expect(err).To(BeNil())
+					}
+					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(201)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "property_id": "PropertyID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "value": "anyValue", "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5}], "segment_exists": false, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href"}`)
+				}))
+			})
+			It(`Invoke CreateProperty successfully`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Invoke operation with nil options model (negative test)
+				result, response, operationErr := appConfigurationService.CreateProperty(nil)
+				Expect(operationErr).NotTo(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+
+				// Construct an instance of the TargetSegments model
+				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
+				targetSegmentsModel.Segments = []string{"betausers", "premiumusers"}
+
+				// Construct an instance of the SegmentRule model
+				segmentRuleModel := new(appconfigurationv1.SegmentRule)
+				segmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
+				segmentRuleModel.Value = core.StringPtr("true")
+				segmentRuleModel.Order = core.Int64Ptr(int64(1))
+
+				// Construct an instance of the CollectionRef model
+				collectionRefModel := new(appconfigurationv1.CollectionRef)
+				collectionRefModel.CollectionID = core.StringPtr("ghzinc")
+
+				// Construct an instance of the CreatePropertyOptions model
+				createPropertyOptionsModel := new(appconfigurationv1.CreatePropertyOptions)
+				createPropertyOptionsModel.EnvironmentID = core.StringPtr("testString")
+				createPropertyOptionsModel.Name = core.StringPtr("Email property")
+				createPropertyOptionsModel.PropertyID = core.StringPtr("email-property")
+				createPropertyOptionsModel.Type = core.StringPtr("BOOLEAN")
+				createPropertyOptionsModel.Value = core.StringPtr("true")
+				createPropertyOptionsModel.Description = core.StringPtr("Property for email")
+				createPropertyOptionsModel.Format = core.StringPtr("TEXT")
 				createPropertyOptionsModel.Tags = core.StringPtr("version: 1.1, pre-release")
 				createPropertyOptionsModel.SegmentRules = []appconfigurationv1.SegmentRule{*segmentRuleModel}
 				createPropertyOptionsModel.Collections = []appconfigurationv1.CollectionRef{*collectionRefModel}
@@ -3754,30 +4882,6 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(response).ToNot(BeNil())
 				Expect(result).ToNot(BeNil())
 
-				// Invoke operation with a Context to test a timeout error
-				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
-				defer cancelFunc()
-				serverSleepTime = 100 * time.Millisecond
-				_, _, operationErr = appConfigurationService.CreatePropertyWithContext(ctx, createPropertyOptionsModel)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
-				serverSleepTime = time.Duration(0)
-
-				// Disable retries and test again
-				appConfigurationService.DisableRetries()
-				result, response, operationErr = appConfigurationService.CreateProperty(createPropertyOptionsModel)
-				Expect(operationErr).To(BeNil())
-				Expect(response).ToNot(BeNil())
-				Expect(result).ToNot(BeNil())
-
-				// Re-test the timeout error with retries disabled
-				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
-				defer cancelFunc2()
-				serverSleepTime = 100 * time.Millisecond
-				_, _, operationErr = appConfigurationService.CreatePropertyWithContext(ctx, createPropertyOptionsModel)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
-				serverSleepTime = time.Duration(0)
 			})
 			It(`Invoke CreateProperty with error: Operation validation and request error`, func() {
 				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
@@ -3789,7 +4893,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the TargetSegments model
 				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
-				targetSegmentsModel.Segments = []string{"testString"}
+				targetSegmentsModel.Segments = []string{"betausers", "premiumusers"}
 
 				// Construct an instance of the SegmentRule model
 				segmentRuleModel := new(appconfigurationv1.SegmentRule)
@@ -3809,6 +4913,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				createPropertyOptionsModel.Type = core.StringPtr("BOOLEAN")
 				createPropertyOptionsModel.Value = core.StringPtr("true")
 				createPropertyOptionsModel.Description = core.StringPtr("Property for email")
+				createPropertyOptionsModel.Format = core.StringPtr("TEXT")
 				createPropertyOptionsModel.Tags = core.StringPtr("version: 1.1, pre-release")
 				createPropertyOptionsModel.SegmentRules = []appconfigurationv1.SegmentRule{*segmentRuleModel}
 				createPropertyOptionsModel.Collections = []appconfigurationv1.CollectionRef{*collectionRefModel}
@@ -3833,10 +4938,67 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				testServer.Close()
 			})
 		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(201)
+				}))
+			})
+			It(`Invoke CreateProperty successfully`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the TargetSegments model
+				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
+				targetSegmentsModel.Segments = []string{"betausers", "premiumusers"}
+
+				// Construct an instance of the SegmentRule model
+				segmentRuleModel := new(appconfigurationv1.SegmentRule)
+				segmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
+				segmentRuleModel.Value = core.StringPtr("true")
+				segmentRuleModel.Order = core.Int64Ptr(int64(1))
+
+				// Construct an instance of the CollectionRef model
+				collectionRefModel := new(appconfigurationv1.CollectionRef)
+				collectionRefModel.CollectionID = core.StringPtr("ghzinc")
+
+				// Construct an instance of the CreatePropertyOptions model
+				createPropertyOptionsModel := new(appconfigurationv1.CreatePropertyOptions)
+				createPropertyOptionsModel.EnvironmentID = core.StringPtr("testString")
+				createPropertyOptionsModel.Name = core.StringPtr("Email property")
+				createPropertyOptionsModel.PropertyID = core.StringPtr("email-property")
+				createPropertyOptionsModel.Type = core.StringPtr("BOOLEAN")
+				createPropertyOptionsModel.Value = core.StringPtr("true")
+				createPropertyOptionsModel.Description = core.StringPtr("Property for email")
+				createPropertyOptionsModel.Format = core.StringPtr("TEXT")
+				createPropertyOptionsModel.Tags = core.StringPtr("version: 1.1, pre-release")
+				createPropertyOptionsModel.SegmentRules = []appconfigurationv1.SegmentRule{*segmentRuleModel}
+				createPropertyOptionsModel.Collections = []appconfigurationv1.CollectionRef{*collectionRefModel}
+				createPropertyOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := appConfigurationService.CreateProperty(createPropertyOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
 	})
 	Describe(`UpdateProperty(updatePropertyOptions *UpdatePropertyOptions) - Operation response error`, func() {
 		updatePropertyPath := "/environments/testString/properties/testString"
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
@@ -3859,26 +5021,26 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the TargetSegments model
 				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
-				targetSegmentsModel.Segments = []string{"testString"}
+				targetSegmentsModel.Segments = []string{"betausers", "premiumusers"}
 
 				// Construct an instance of the SegmentRule model
 				segmentRuleModel := new(appconfigurationv1.SegmentRule)
 				segmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
-				segmentRuleModel.Value = core.StringPtr("testString")
-				segmentRuleModel.Order = core.Int64Ptr(int64(38))
+				segmentRuleModel.Value = core.StringPtr("true")
+				segmentRuleModel.Order = core.Int64Ptr(int64(1))
 
 				// Construct an instance of the CollectionRef model
 				collectionRefModel := new(appconfigurationv1.CollectionRef)
-				collectionRefModel.CollectionID = core.StringPtr("testString")
+				collectionRefModel.CollectionID = core.StringPtr("ghzinc")
 
 				// Construct an instance of the UpdatePropertyOptions model
 				updatePropertyOptionsModel := new(appconfigurationv1.UpdatePropertyOptions)
 				updatePropertyOptionsModel.EnvironmentID = core.StringPtr("testString")
 				updatePropertyOptionsModel.PropertyID = core.StringPtr("testString")
-				updatePropertyOptionsModel.Name = core.StringPtr("testString")
-				updatePropertyOptionsModel.Description = core.StringPtr("testString")
-				updatePropertyOptionsModel.Value = core.StringPtr("testString")
-				updatePropertyOptionsModel.Tags = core.StringPtr("testString")
+				updatePropertyOptionsModel.Name = core.StringPtr("Email property")
+				updatePropertyOptionsModel.Description = core.StringPtr("Property for email")
+				updatePropertyOptionsModel.Value = core.StringPtr("true")
+				updatePropertyOptionsModel.Tags = core.StringPtr("version: 1.1, pre-release")
 				updatePropertyOptionsModel.SegmentRules = []appconfigurationv1.SegmentRule{*segmentRuleModel}
 				updatePropertyOptionsModel.Collections = []appconfigurationv1.CollectionRef{*collectionRefModel}
 				updatePropertyOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -3900,13 +5062,10 @@ var _ = Describe(`AppConfigurationV1`, func() {
 			})
 		})
 	})
-
 	Describe(`UpdateProperty(updatePropertyOptions *UpdatePropertyOptions)`, func() {
 		updatePropertyPath := "/environments/testString/properties/testString"
-		var serverSleepTime time.Duration
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with timeout`, func() {
 			BeforeEach(func() {
-				serverSleepTime = 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -3931,12 +5090,103 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
 
 					// Sleep a short time to support a timeout test
-					time.Sleep(serverSleepTime)
+					time.Sleep(100 * time.Millisecond)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"name": "Name", "property_id": "PropertyID", "description": "Description", "type": "BOOLEAN", "value": "anyValue", "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5}], "segment_exists": false, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2019-01-01T12:00:00", "updated_time": "2019-01-01T12:00:00", "evaluation_time": "2019-01-01T12:00:00", "href": "Href"}`)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "property_id": "PropertyID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "value": "anyValue", "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5}], "segment_exists": false, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href"}`)
+				}))
+			})
+			It(`Invoke UpdateProperty successfully with retries`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+				appConfigurationService.EnableRetries(0, 0)
+
+				// Construct an instance of the TargetSegments model
+				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
+				targetSegmentsModel.Segments = []string{"betausers", "premiumusers"}
+
+				// Construct an instance of the SegmentRule model
+				segmentRuleModel := new(appconfigurationv1.SegmentRule)
+				segmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
+				segmentRuleModel.Value = core.StringPtr("true")
+				segmentRuleModel.Order = core.Int64Ptr(int64(1))
+
+				// Construct an instance of the CollectionRef model
+				collectionRefModel := new(appconfigurationv1.CollectionRef)
+				collectionRefModel.CollectionID = core.StringPtr("ghzinc")
+
+				// Construct an instance of the UpdatePropertyOptions model
+				updatePropertyOptionsModel := new(appconfigurationv1.UpdatePropertyOptions)
+				updatePropertyOptionsModel.EnvironmentID = core.StringPtr("testString")
+				updatePropertyOptionsModel.PropertyID = core.StringPtr("testString")
+				updatePropertyOptionsModel.Name = core.StringPtr("Email property")
+				updatePropertyOptionsModel.Description = core.StringPtr("Property for email")
+				updatePropertyOptionsModel.Value = core.StringPtr("true")
+				updatePropertyOptionsModel.Tags = core.StringPtr("version: 1.1, pre-release")
+				updatePropertyOptionsModel.SegmentRules = []appconfigurationv1.SegmentRule{*segmentRuleModel}
+				updatePropertyOptionsModel.Collections = []appconfigurationv1.CollectionRef{*collectionRefModel}
+				updatePropertyOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with a Context to test a timeout error
+				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc()
+				_, _, operationErr := appConfigurationService.UpdatePropertyWithContext(ctx, updatePropertyOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+
+				// Disable retries and test again
+				appConfigurationService.DisableRetries()
+				result, response, operationErr := appConfigurationService.UpdateProperty(updatePropertyOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				_, _, operationErr = appConfigurationService.UpdatePropertyWithContext(ctx, updatePropertyOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(updatePropertyPath))
+					Expect(req.Method).To(Equal("PUT"))
+
+					// For gzip-disabled operation, verify Content-Encoding is not set.
+					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+
+					// If there is a body, then make sure we can read it
+					bodyBuf := new(bytes.Buffer)
+					if req.Header.Get("Content-Encoding") == "gzip" {
+						body, err := core.NewGzipDecompressionReader(req.Body)
+						Expect(err).To(BeNil())
+						_, err = bodyBuf.ReadFrom(body)
+						Expect(err).To(BeNil())
+					} else {
+						_, err := bodyBuf.ReadFrom(req.Body)
+						Expect(err).To(BeNil())
+					}
+					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "property_id": "PropertyID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "value": "anyValue", "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5}], "segment_exists": false, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href"}`)
 				}))
 			})
 			It(`Invoke UpdateProperty successfully`, func() {
@@ -3946,7 +5196,6 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(appConfigurationService).ToNot(BeNil())
-				appConfigurationService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				result, response, operationErr := appConfigurationService.UpdateProperty(nil)
@@ -3956,26 +5205,26 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the TargetSegments model
 				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
-				targetSegmentsModel.Segments = []string{"testString"}
+				targetSegmentsModel.Segments = []string{"betausers", "premiumusers"}
 
 				// Construct an instance of the SegmentRule model
 				segmentRuleModel := new(appconfigurationv1.SegmentRule)
 				segmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
-				segmentRuleModel.Value = core.StringPtr("testString")
-				segmentRuleModel.Order = core.Int64Ptr(int64(38))
+				segmentRuleModel.Value = core.StringPtr("true")
+				segmentRuleModel.Order = core.Int64Ptr(int64(1))
 
 				// Construct an instance of the CollectionRef model
 				collectionRefModel := new(appconfigurationv1.CollectionRef)
-				collectionRefModel.CollectionID = core.StringPtr("testString")
+				collectionRefModel.CollectionID = core.StringPtr("ghzinc")
 
 				// Construct an instance of the UpdatePropertyOptions model
 				updatePropertyOptionsModel := new(appconfigurationv1.UpdatePropertyOptions)
 				updatePropertyOptionsModel.EnvironmentID = core.StringPtr("testString")
 				updatePropertyOptionsModel.PropertyID = core.StringPtr("testString")
-				updatePropertyOptionsModel.Name = core.StringPtr("testString")
-				updatePropertyOptionsModel.Description = core.StringPtr("testString")
-				updatePropertyOptionsModel.Value = core.StringPtr("testString")
-				updatePropertyOptionsModel.Tags = core.StringPtr("testString")
+				updatePropertyOptionsModel.Name = core.StringPtr("Email property")
+				updatePropertyOptionsModel.Description = core.StringPtr("Property for email")
+				updatePropertyOptionsModel.Value = core.StringPtr("true")
+				updatePropertyOptionsModel.Tags = core.StringPtr("version: 1.1, pre-release")
 				updatePropertyOptionsModel.SegmentRules = []appconfigurationv1.SegmentRule{*segmentRuleModel}
 				updatePropertyOptionsModel.Collections = []appconfigurationv1.CollectionRef{*collectionRefModel}
 				updatePropertyOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -3986,30 +5235,6 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(response).ToNot(BeNil())
 				Expect(result).ToNot(BeNil())
 
-				// Invoke operation with a Context to test a timeout error
-				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
-				defer cancelFunc()
-				serverSleepTime = 100 * time.Millisecond
-				_, _, operationErr = appConfigurationService.UpdatePropertyWithContext(ctx, updatePropertyOptionsModel)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
-				serverSleepTime = time.Duration(0)
-
-				// Disable retries and test again
-				appConfigurationService.DisableRetries()
-				result, response, operationErr = appConfigurationService.UpdateProperty(updatePropertyOptionsModel)
-				Expect(operationErr).To(BeNil())
-				Expect(response).ToNot(BeNil())
-				Expect(result).ToNot(BeNil())
-
-				// Re-test the timeout error with retries disabled
-				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
-				defer cancelFunc2()
-				serverSleepTime = 100 * time.Millisecond
-				_, _, operationErr = appConfigurationService.UpdatePropertyWithContext(ctx, updatePropertyOptionsModel)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
-				serverSleepTime = time.Duration(0)
 			})
 			It(`Invoke UpdateProperty with error: Operation validation and request error`, func() {
 				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
@@ -4021,26 +5246,26 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the TargetSegments model
 				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
-				targetSegmentsModel.Segments = []string{"testString"}
+				targetSegmentsModel.Segments = []string{"betausers", "premiumusers"}
 
 				// Construct an instance of the SegmentRule model
 				segmentRuleModel := new(appconfigurationv1.SegmentRule)
 				segmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
-				segmentRuleModel.Value = core.StringPtr("testString")
-				segmentRuleModel.Order = core.Int64Ptr(int64(38))
+				segmentRuleModel.Value = core.StringPtr("true")
+				segmentRuleModel.Order = core.Int64Ptr(int64(1))
 
 				// Construct an instance of the CollectionRef model
 				collectionRefModel := new(appconfigurationv1.CollectionRef)
-				collectionRefModel.CollectionID = core.StringPtr("testString")
+				collectionRefModel.CollectionID = core.StringPtr("ghzinc")
 
 				// Construct an instance of the UpdatePropertyOptions model
 				updatePropertyOptionsModel := new(appconfigurationv1.UpdatePropertyOptions)
 				updatePropertyOptionsModel.EnvironmentID = core.StringPtr("testString")
 				updatePropertyOptionsModel.PropertyID = core.StringPtr("testString")
-				updatePropertyOptionsModel.Name = core.StringPtr("testString")
-				updatePropertyOptionsModel.Description = core.StringPtr("testString")
-				updatePropertyOptionsModel.Value = core.StringPtr("testString")
-				updatePropertyOptionsModel.Tags = core.StringPtr("testString")
+				updatePropertyOptionsModel.Name = core.StringPtr("Email property")
+				updatePropertyOptionsModel.Description = core.StringPtr("Property for email")
+				updatePropertyOptionsModel.Value = core.StringPtr("true")
+				updatePropertyOptionsModel.Tags = core.StringPtr("version: 1.1, pre-release")
 				updatePropertyOptionsModel.SegmentRules = []appconfigurationv1.SegmentRule{*segmentRuleModel}
 				updatePropertyOptionsModel.Collections = []appconfigurationv1.CollectionRef{*collectionRefModel}
 				updatePropertyOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -4064,10 +5289,65 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				testServer.Close()
 			})
 		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke UpdateProperty successfully`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the TargetSegments model
+				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
+				targetSegmentsModel.Segments = []string{"betausers", "premiumusers"}
+
+				// Construct an instance of the SegmentRule model
+				segmentRuleModel := new(appconfigurationv1.SegmentRule)
+				segmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
+				segmentRuleModel.Value = core.StringPtr("true")
+				segmentRuleModel.Order = core.Int64Ptr(int64(1))
+
+				// Construct an instance of the CollectionRef model
+				collectionRefModel := new(appconfigurationv1.CollectionRef)
+				collectionRefModel.CollectionID = core.StringPtr("ghzinc")
+
+				// Construct an instance of the UpdatePropertyOptions model
+				updatePropertyOptionsModel := new(appconfigurationv1.UpdatePropertyOptions)
+				updatePropertyOptionsModel.EnvironmentID = core.StringPtr("testString")
+				updatePropertyOptionsModel.PropertyID = core.StringPtr("testString")
+				updatePropertyOptionsModel.Name = core.StringPtr("Email property")
+				updatePropertyOptionsModel.Description = core.StringPtr("Property for email")
+				updatePropertyOptionsModel.Value = core.StringPtr("true")
+				updatePropertyOptionsModel.Tags = core.StringPtr("version: 1.1, pre-release")
+				updatePropertyOptionsModel.SegmentRules = []appconfigurationv1.SegmentRule{*segmentRuleModel}
+				updatePropertyOptionsModel.Collections = []appconfigurationv1.CollectionRef{*collectionRefModel}
+				updatePropertyOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := appConfigurationService.UpdateProperty(updatePropertyOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
 	})
 	Describe(`UpdatePropertyValues(updatePropertyValuesOptions *UpdatePropertyValuesOptions) - Operation response error`, func() {
 		updatePropertyValuesPath := "/environments/testString/properties/testString"
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
@@ -4090,22 +5370,22 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the TargetSegments model
 				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
-				targetSegmentsModel.Segments = []string{"testString"}
+				targetSegmentsModel.Segments = []string{"betausers", "premiumusers"}
 
 				// Construct an instance of the SegmentRule model
 				segmentRuleModel := new(appconfigurationv1.SegmentRule)
 				segmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
-				segmentRuleModel.Value = core.StringPtr("testString")
-				segmentRuleModel.Order = core.Int64Ptr(int64(38))
+				segmentRuleModel.Value = core.StringPtr("true")
+				segmentRuleModel.Order = core.Int64Ptr(int64(1))
 
 				// Construct an instance of the UpdatePropertyValuesOptions model
 				updatePropertyValuesOptionsModel := new(appconfigurationv1.UpdatePropertyValuesOptions)
 				updatePropertyValuesOptionsModel.EnvironmentID = core.StringPtr("testString")
 				updatePropertyValuesOptionsModel.PropertyID = core.StringPtr("testString")
-				updatePropertyValuesOptionsModel.Name = core.StringPtr("testString")
-				updatePropertyValuesOptionsModel.Description = core.StringPtr("testString")
-				updatePropertyValuesOptionsModel.Tags = core.StringPtr("testString")
-				updatePropertyValuesOptionsModel.Value = core.StringPtr("testString")
+				updatePropertyValuesOptionsModel.Name = core.StringPtr("Email property")
+				updatePropertyValuesOptionsModel.Description = core.StringPtr("Property for email")
+				updatePropertyValuesOptionsModel.Tags = core.StringPtr("version: 1.1, pre-release")
+				updatePropertyValuesOptionsModel.Value = core.StringPtr("true")
 				updatePropertyValuesOptionsModel.SegmentRules = []appconfigurationv1.SegmentRule{*segmentRuleModel}
 				updatePropertyValuesOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
@@ -4126,13 +5406,10 @@ var _ = Describe(`AppConfigurationV1`, func() {
 			})
 		})
 	})
-
 	Describe(`UpdatePropertyValues(updatePropertyValuesOptions *UpdatePropertyValuesOptions)`, func() {
 		updatePropertyValuesPath := "/environments/testString/properties/testString"
-		var serverSleepTime time.Duration
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with timeout`, func() {
 			BeforeEach(func() {
-				serverSleepTime = 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -4157,12 +5434,98 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
 
 					// Sleep a short time to support a timeout test
-					time.Sleep(serverSleepTime)
+					time.Sleep(100 * time.Millisecond)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"name": "Name", "property_id": "PropertyID", "description": "Description", "type": "BOOLEAN", "value": "anyValue", "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5}], "segment_exists": false, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2019-01-01T12:00:00", "updated_time": "2019-01-01T12:00:00", "evaluation_time": "2019-01-01T12:00:00", "href": "Href"}`)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "property_id": "PropertyID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "value": "anyValue", "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5}], "segment_exists": false, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href"}`)
+				}))
+			})
+			It(`Invoke UpdatePropertyValues successfully with retries`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+				appConfigurationService.EnableRetries(0, 0)
+
+				// Construct an instance of the TargetSegments model
+				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
+				targetSegmentsModel.Segments = []string{"betausers", "premiumusers"}
+
+				// Construct an instance of the SegmentRule model
+				segmentRuleModel := new(appconfigurationv1.SegmentRule)
+				segmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
+				segmentRuleModel.Value = core.StringPtr("true")
+				segmentRuleModel.Order = core.Int64Ptr(int64(1))
+
+				// Construct an instance of the UpdatePropertyValuesOptions model
+				updatePropertyValuesOptionsModel := new(appconfigurationv1.UpdatePropertyValuesOptions)
+				updatePropertyValuesOptionsModel.EnvironmentID = core.StringPtr("testString")
+				updatePropertyValuesOptionsModel.PropertyID = core.StringPtr("testString")
+				updatePropertyValuesOptionsModel.Name = core.StringPtr("Email property")
+				updatePropertyValuesOptionsModel.Description = core.StringPtr("Property for email")
+				updatePropertyValuesOptionsModel.Tags = core.StringPtr("version: 1.1, pre-release")
+				updatePropertyValuesOptionsModel.Value = core.StringPtr("true")
+				updatePropertyValuesOptionsModel.SegmentRules = []appconfigurationv1.SegmentRule{*segmentRuleModel}
+				updatePropertyValuesOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with a Context to test a timeout error
+				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc()
+				_, _, operationErr := appConfigurationService.UpdatePropertyValuesWithContext(ctx, updatePropertyValuesOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+
+				// Disable retries and test again
+				appConfigurationService.DisableRetries()
+				result, response, operationErr := appConfigurationService.UpdatePropertyValues(updatePropertyValuesOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				_, _, operationErr = appConfigurationService.UpdatePropertyValuesWithContext(ctx, updatePropertyValuesOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(updatePropertyValuesPath))
+					Expect(req.Method).To(Equal("PATCH"))
+
+					// For gzip-disabled operation, verify Content-Encoding is not set.
+					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+
+					// If there is a body, then make sure we can read it
+					bodyBuf := new(bytes.Buffer)
+					if req.Header.Get("Content-Encoding") == "gzip" {
+						body, err := core.NewGzipDecompressionReader(req.Body)
+						Expect(err).To(BeNil())
+						_, err = bodyBuf.ReadFrom(body)
+						Expect(err).To(BeNil())
+					} else {
+						_, err := bodyBuf.ReadFrom(req.Body)
+						Expect(err).To(BeNil())
+					}
+					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "property_id": "PropertyID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "value": "anyValue", "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5}], "segment_exists": false, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href"}`)
 				}))
 			})
 			It(`Invoke UpdatePropertyValues successfully`, func() {
@@ -4172,7 +5535,6 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(appConfigurationService).ToNot(BeNil())
-				appConfigurationService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				result, response, operationErr := appConfigurationService.UpdatePropertyValues(nil)
@@ -4182,22 +5544,22 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the TargetSegments model
 				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
-				targetSegmentsModel.Segments = []string{"testString"}
+				targetSegmentsModel.Segments = []string{"betausers", "premiumusers"}
 
 				// Construct an instance of the SegmentRule model
 				segmentRuleModel := new(appconfigurationv1.SegmentRule)
 				segmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
-				segmentRuleModel.Value = core.StringPtr("testString")
-				segmentRuleModel.Order = core.Int64Ptr(int64(38))
+				segmentRuleModel.Value = core.StringPtr("true")
+				segmentRuleModel.Order = core.Int64Ptr(int64(1))
 
 				// Construct an instance of the UpdatePropertyValuesOptions model
 				updatePropertyValuesOptionsModel := new(appconfigurationv1.UpdatePropertyValuesOptions)
 				updatePropertyValuesOptionsModel.EnvironmentID = core.StringPtr("testString")
 				updatePropertyValuesOptionsModel.PropertyID = core.StringPtr("testString")
-				updatePropertyValuesOptionsModel.Name = core.StringPtr("testString")
-				updatePropertyValuesOptionsModel.Description = core.StringPtr("testString")
-				updatePropertyValuesOptionsModel.Tags = core.StringPtr("testString")
-				updatePropertyValuesOptionsModel.Value = core.StringPtr("testString")
+				updatePropertyValuesOptionsModel.Name = core.StringPtr("Email property")
+				updatePropertyValuesOptionsModel.Description = core.StringPtr("Property for email")
+				updatePropertyValuesOptionsModel.Tags = core.StringPtr("version: 1.1, pre-release")
+				updatePropertyValuesOptionsModel.Value = core.StringPtr("true")
 				updatePropertyValuesOptionsModel.SegmentRules = []appconfigurationv1.SegmentRule{*segmentRuleModel}
 				updatePropertyValuesOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
@@ -4207,30 +5569,6 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(response).ToNot(BeNil())
 				Expect(result).ToNot(BeNil())
 
-				// Invoke operation with a Context to test a timeout error
-				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
-				defer cancelFunc()
-				serverSleepTime = 100 * time.Millisecond
-				_, _, operationErr = appConfigurationService.UpdatePropertyValuesWithContext(ctx, updatePropertyValuesOptionsModel)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
-				serverSleepTime = time.Duration(0)
-
-				// Disable retries and test again
-				appConfigurationService.DisableRetries()
-				result, response, operationErr = appConfigurationService.UpdatePropertyValues(updatePropertyValuesOptionsModel)
-				Expect(operationErr).To(BeNil())
-				Expect(response).ToNot(BeNil())
-				Expect(result).ToNot(BeNil())
-
-				// Re-test the timeout error with retries disabled
-				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
-				defer cancelFunc2()
-				serverSleepTime = 100 * time.Millisecond
-				_, _, operationErr = appConfigurationService.UpdatePropertyValuesWithContext(ctx, updatePropertyValuesOptionsModel)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
-				serverSleepTime = time.Duration(0)
 			})
 			It(`Invoke UpdatePropertyValues with error: Operation validation and request error`, func() {
 				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
@@ -4242,22 +5580,22 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the TargetSegments model
 				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
-				targetSegmentsModel.Segments = []string{"testString"}
+				targetSegmentsModel.Segments = []string{"betausers", "premiumusers"}
 
 				// Construct an instance of the SegmentRule model
 				segmentRuleModel := new(appconfigurationv1.SegmentRule)
 				segmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
-				segmentRuleModel.Value = core.StringPtr("testString")
-				segmentRuleModel.Order = core.Int64Ptr(int64(38))
+				segmentRuleModel.Value = core.StringPtr("true")
+				segmentRuleModel.Order = core.Int64Ptr(int64(1))
 
 				// Construct an instance of the UpdatePropertyValuesOptions model
 				updatePropertyValuesOptionsModel := new(appconfigurationv1.UpdatePropertyValuesOptions)
 				updatePropertyValuesOptionsModel.EnvironmentID = core.StringPtr("testString")
 				updatePropertyValuesOptionsModel.PropertyID = core.StringPtr("testString")
-				updatePropertyValuesOptionsModel.Name = core.StringPtr("testString")
-				updatePropertyValuesOptionsModel.Description = core.StringPtr("testString")
-				updatePropertyValuesOptionsModel.Tags = core.StringPtr("testString")
-				updatePropertyValuesOptionsModel.Value = core.StringPtr("testString")
+				updatePropertyValuesOptionsModel.Name = core.StringPtr("Email property")
+				updatePropertyValuesOptionsModel.Description = core.StringPtr("Property for email")
+				updatePropertyValuesOptionsModel.Tags = core.StringPtr("version: 1.1, pre-release")
+				updatePropertyValuesOptionsModel.Value = core.StringPtr("true")
 				updatePropertyValuesOptionsModel.SegmentRules = []appconfigurationv1.SegmentRule{*segmentRuleModel}
 				updatePropertyValuesOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
@@ -4280,10 +5618,60 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				testServer.Close()
 			})
 		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke UpdatePropertyValues successfully`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the TargetSegments model
+				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
+				targetSegmentsModel.Segments = []string{"betausers", "premiumusers"}
+
+				// Construct an instance of the SegmentRule model
+				segmentRuleModel := new(appconfigurationv1.SegmentRule)
+				segmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
+				segmentRuleModel.Value = core.StringPtr("true")
+				segmentRuleModel.Order = core.Int64Ptr(int64(1))
+
+				// Construct an instance of the UpdatePropertyValuesOptions model
+				updatePropertyValuesOptionsModel := new(appconfigurationv1.UpdatePropertyValuesOptions)
+				updatePropertyValuesOptionsModel.EnvironmentID = core.StringPtr("testString")
+				updatePropertyValuesOptionsModel.PropertyID = core.StringPtr("testString")
+				updatePropertyValuesOptionsModel.Name = core.StringPtr("Email property")
+				updatePropertyValuesOptionsModel.Description = core.StringPtr("Property for email")
+				updatePropertyValuesOptionsModel.Tags = core.StringPtr("version: 1.1, pre-release")
+				updatePropertyValuesOptionsModel.Value = core.StringPtr("true")
+				updatePropertyValuesOptionsModel.SegmentRules = []appconfigurationv1.SegmentRule{*segmentRuleModel}
+				updatePropertyValuesOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := appConfigurationService.UpdatePropertyValues(updatePropertyValuesOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
 	})
 	Describe(`GetProperty(getPropertyOptions *GetPropertyOptions) - Operation response error`, func() {
 		getPropertyPath := "/environments/testString/properties/testString"
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
@@ -4292,7 +5680,6 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(getPropertyPath))
 					Expect(req.Method).To(Equal("GET"))
 					Expect(req.URL.Query()["include"]).To(Equal([]string{"collections"}))
-
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
 					fmt.Fprintf(res, `} this is not valid json {`)
@@ -4330,13 +5717,10 @@ var _ = Describe(`AppConfigurationV1`, func() {
 			})
 		})
 	})
-
 	Describe(`GetProperty(getPropertyOptions *GetPropertyOptions)`, func() {
 		getPropertyPath := "/environments/testString/properties/testString"
-		var serverSleepTime time.Duration
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with timeout`, func() {
 			BeforeEach(func() {
-				serverSleepTime = 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -4345,14 +5729,70 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					Expect(req.Method).To(Equal("GET"))
 
 					Expect(req.URL.Query()["include"]).To(Equal([]string{"collections"}))
-
 					// Sleep a short time to support a timeout test
-					time.Sleep(serverSleepTime)
+					time.Sleep(100 * time.Millisecond)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"name": "Name", "property_id": "PropertyID", "description": "Description", "type": "BOOLEAN", "value": "anyValue", "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5}], "segment_exists": false, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2019-01-01T12:00:00", "updated_time": "2019-01-01T12:00:00", "evaluation_time": "2019-01-01T12:00:00", "href": "Href"}`)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "property_id": "PropertyID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "value": "anyValue", "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5}], "segment_exists": false, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href"}`)
+				}))
+			})
+			It(`Invoke GetProperty successfully with retries`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+				appConfigurationService.EnableRetries(0, 0)
+
+				// Construct an instance of the GetPropertyOptions model
+				getPropertyOptionsModel := new(appconfigurationv1.GetPropertyOptions)
+				getPropertyOptionsModel.EnvironmentID = core.StringPtr("testString")
+				getPropertyOptionsModel.PropertyID = core.StringPtr("testString")
+				getPropertyOptionsModel.Include = core.StringPtr("collections")
+				getPropertyOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with a Context to test a timeout error
+				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc()
+				_, _, operationErr := appConfigurationService.GetPropertyWithContext(ctx, getPropertyOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+
+				// Disable retries and test again
+				appConfigurationService.DisableRetries()
+				result, response, operationErr := appConfigurationService.GetProperty(getPropertyOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				_, _, operationErr = appConfigurationService.GetPropertyWithContext(ctx, getPropertyOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(getPropertyPath))
+					Expect(req.Method).To(Equal("GET"))
+
+					Expect(req.URL.Query()["include"]).To(Equal([]string{"collections"}))
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "property_id": "PropertyID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "value": "anyValue", "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5}], "segment_exists": false, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href"}`)
 				}))
 			})
 			It(`Invoke GetProperty successfully`, func() {
@@ -4362,7 +5802,6 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(appConfigurationService).ToNot(BeNil())
-				appConfigurationService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				result, response, operationErr := appConfigurationService.GetProperty(nil)
@@ -4383,30 +5822,6 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(response).ToNot(BeNil())
 				Expect(result).ToNot(BeNil())
 
-				// Invoke operation with a Context to test a timeout error
-				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
-				defer cancelFunc()
-				serverSleepTime = 100 * time.Millisecond
-				_, _, operationErr = appConfigurationService.GetPropertyWithContext(ctx, getPropertyOptionsModel)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
-				serverSleepTime = time.Duration(0)
-
-				// Disable retries and test again
-				appConfigurationService.DisableRetries()
-				result, response, operationErr = appConfigurationService.GetProperty(getPropertyOptionsModel)
-				Expect(operationErr).To(BeNil())
-				Expect(response).ToNot(BeNil())
-				Expect(result).ToNot(BeNil())
-
-				// Re-test the timeout error with retries disabled
-				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
-				defer cancelFunc2()
-				serverSleepTime = 100 * time.Millisecond
-				_, _, operationErr = appConfigurationService.GetPropertyWithContext(ctx, getPropertyOptionsModel)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
-				serverSleepTime = time.Duration(0)
 			})
 			It(`Invoke GetProperty with error: Operation validation and request error`, func() {
 				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
@@ -4442,8 +5857,43 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				testServer.Close()
 			})
 		})
-	})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
 
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke GetProperty successfully`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the GetPropertyOptions model
+				getPropertyOptionsModel := new(appconfigurationv1.GetPropertyOptions)
+				getPropertyOptionsModel.EnvironmentID = core.StringPtr("testString")
+				getPropertyOptionsModel.PropertyID = core.StringPtr("testString")
+				getPropertyOptionsModel.Include = core.StringPtr("collections")
+				getPropertyOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := appConfigurationService.GetProperty(getPropertyOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
 	Describe(`DeleteProperty(deletePropertyOptions *DeletePropertyOptions)`, func() {
 		deletePropertyPath := "/environments/testString/properties/testString"
 		Context(`Using mock server endpoint`, func() {
@@ -4465,7 +5915,6 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(appConfigurationService).ToNot(BeNil())
-				appConfigurationService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				response, operationErr := appConfigurationService.DeleteProperty(nil)
@@ -4479,12 +5928,6 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				deletePropertyOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
-				response, operationErr = appConfigurationService.DeleteProperty(deletePropertyOptionsModel)
-				Expect(operationErr).To(BeNil())
-				Expect(response).ToNot(BeNil())
-
-				// Disable retries and test again
-				appConfigurationService.DisableRetries()
 				response, operationErr = appConfigurationService.DeleteProperty(deletePropertyOptionsModel)
 				Expect(operationErr).To(BeNil())
 				Expect(response).ToNot(BeNil())
@@ -4521,134 +5964,9 @@ var _ = Describe(`AppConfigurationV1`, func() {
 			})
 		})
 	})
-	Describe(`Service constructor tests`, func() {
-		It(`Instantiate service client`, func() {
-			appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
-				Authenticator: &core.NoAuthAuthenticator{},
-			})
-			Expect(appConfigurationService).ToNot(BeNil())
-			Expect(serviceErr).To(BeNil())
-		})
-		It(`Instantiate service client with error: Invalid URL`, func() {
-			appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
-				URL: "{BAD_URL_STRING",
-			})
-			Expect(appConfigurationService).To(BeNil())
-			Expect(serviceErr).ToNot(BeNil())
-		})
-		It(`Instantiate service client with error: Invalid Auth`, func() {
-			appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
-				URL: "https://appconfigurationv1/api",
-				Authenticator: &core.BasicAuthenticator{
-					Username: "",
-					Password: "",
-				},
-			})
-			Expect(appConfigurationService).To(BeNil())
-			Expect(serviceErr).ToNot(BeNil())
-		})
-	})
-	Describe(`Service constructor tests using external config`, func() {
-		Context(`Using external config, construct service client instances`, func() {
-			// Map containing environment variables used in testing.
-			var testEnvironment = map[string]string{
-				"APP_CONFIGURATION_URL":       "https://appconfigurationv1/api",
-				"APP_CONFIGURATION_AUTH_TYPE": "noauth",
-			}
-
-			It(`Create service client using external config successfully`, func() {
-				SetTestEnvironment(testEnvironment)
-				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1UsingExternalConfig(&appconfigurationv1.AppConfigurationV1Options{})
-				Expect(appConfigurationService).ToNot(BeNil())
-				Expect(serviceErr).To(BeNil())
-				ClearTestEnvironment(testEnvironment)
-
-				clone := appConfigurationService.Clone()
-				Expect(clone).ToNot(BeNil())
-				Expect(clone.Service != appConfigurationService.Service).To(BeTrue())
-				Expect(clone.GetServiceURL()).To(Equal(appConfigurationService.GetServiceURL()))
-				Expect(clone.Service.Options.Authenticator).To(Equal(appConfigurationService.Service.Options.Authenticator))
-			})
-			It(`Create service client using external config and set url from constructor successfully`, func() {
-				SetTestEnvironment(testEnvironment)
-				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1UsingExternalConfig(&appconfigurationv1.AppConfigurationV1Options{
-					URL: "https://testService/api",
-				})
-				Expect(appConfigurationService).ToNot(BeNil())
-				Expect(serviceErr).To(BeNil())
-				Expect(appConfigurationService.Service.GetServiceURL()).To(Equal("https://testService/api"))
-				ClearTestEnvironment(testEnvironment)
-
-				clone := appConfigurationService.Clone()
-				Expect(clone).ToNot(BeNil())
-				Expect(clone.Service != appConfigurationService.Service).To(BeTrue())
-				Expect(clone.GetServiceURL()).To(Equal(appConfigurationService.GetServiceURL()))
-				Expect(clone.Service.Options.Authenticator).To(Equal(appConfigurationService.Service.Options.Authenticator))
-			})
-			It(`Create service client using external config and set url programatically successfully`, func() {
-				SetTestEnvironment(testEnvironment)
-				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1UsingExternalConfig(&appconfigurationv1.AppConfigurationV1Options{})
-				err := appConfigurationService.SetServiceURL("https://testService/api")
-				Expect(err).To(BeNil())
-				Expect(appConfigurationService).ToNot(BeNil())
-				Expect(serviceErr).To(BeNil())
-				Expect(appConfigurationService.Service.GetServiceURL()).To(Equal("https://testService/api"))
-				ClearTestEnvironment(testEnvironment)
-
-				clone := appConfigurationService.Clone()
-				Expect(clone).ToNot(BeNil())
-				Expect(clone.Service != appConfigurationService.Service).To(BeTrue())
-				Expect(clone.GetServiceURL()).To(Equal(appConfigurationService.GetServiceURL()))
-				Expect(clone.Service.Options.Authenticator).To(Equal(appConfigurationService.Service.Options.Authenticator))
-			})
-		})
-		Context(`Using external config, construct service client instances with error: Invalid Auth`, func() {
-			// Map containing environment variables used in testing.
-			var testEnvironment = map[string]string{
-				"APP_CONFIGURATION_URL":       "https://appconfigurationv1/api",
-				"APP_CONFIGURATION_AUTH_TYPE": "someOtherAuth",
-			}
-
-			SetTestEnvironment(testEnvironment)
-			appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1UsingExternalConfig(&appconfigurationv1.AppConfigurationV1Options{})
-
-			It(`Instantiate service client with error`, func() {
-				Expect(appConfigurationService).To(BeNil())
-				Expect(serviceErr).ToNot(BeNil())
-				ClearTestEnvironment(testEnvironment)
-			})
-		})
-		Context(`Using external config, construct service client instances with error: Invalid URL`, func() {
-			// Map containing environment variables used in testing.
-			var testEnvironment = map[string]string{
-				"APP_CONFIGURATION_AUTH_TYPE": "NOAuth",
-			}
-
-			SetTestEnvironment(testEnvironment)
-			appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1UsingExternalConfig(&appconfigurationv1.AppConfigurationV1Options{
-				URL: "{BAD_URL_STRING",
-			})
-
-			It(`Instantiate service client with error`, func() {
-				Expect(appConfigurationService).To(BeNil())
-				Expect(serviceErr).ToNot(BeNil())
-				ClearTestEnvironment(testEnvironment)
-			})
-		})
-	})
-	Describe(`Regional endpoint tests`, func() {
-		It(`GetServiceURLForRegion(region string)`, func() {
-			var url string
-			var err error
-			url, err = appconfigurationv1.GetServiceURLForRegion("INVALID_REGION")
-			Expect(url).To(BeEmpty())
-			Expect(err).ToNot(BeNil())
-			fmt.Fprintf(GinkgoWriter, "Expected error: %s\n", err.Error())
-		})
-	})
 	Describe(`ListSegments(listSegmentsOptions *ListSegmentsOptions) - Operation response error`, func() {
 		listSegmentsPath := "/segments"
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
@@ -4656,19 +5974,13 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Verify the contents of the request
 					Expect(req.URL.EscapedPath()).To(Equal(listSegmentsPath))
 					Expect(req.Method).To(Equal("GET"))
-
 					// TODO: Add check for expand query parameter
-
 					Expect(req.URL.Query()["sort"]).To(Equal([]string{"created_time"}))
-
 					Expect(req.URL.Query()["tags"]).To(Equal([]string{"version 1.1, pre-release"}))
-
 					Expect(req.URL.Query()["include"]).To(Equal([]string{"rules"}))
-
 					Expect(req.URL.Query()["limit"]).To(Equal([]string{fmt.Sprint(int64(1))}))
-
 					Expect(req.URL.Query()["offset"]).To(Equal([]string{fmt.Sprint(int64(0))}))
-
+					Expect(req.URL.Query()["search"]).To(Equal([]string{"test tag"}))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
 					fmt.Fprintf(res, `} this is not valid json {`)
@@ -4690,6 +6002,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				listSegmentsOptionsModel.Include = core.StringPtr("rules")
 				listSegmentsOptionsModel.Limit = core.Int64Ptr(int64(1))
 				listSegmentsOptionsModel.Offset = core.Int64Ptr(int64(0))
+				listSegmentsOptionsModel.Search = core.StringPtr("test tag")
 				listSegmentsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
 				result, response, operationErr := appConfigurationService.ListSegments(listSegmentsOptionsModel)
@@ -4709,13 +6022,10 @@ var _ = Describe(`AppConfigurationV1`, func() {
 			})
 		})
 	})
-
 	Describe(`ListSegments(listSegmentsOptions *ListSegmentsOptions)`, func() {
 		listSegmentsPath := "/segments"
-		var serverSleepTime time.Duration
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with timeout`, func() {
 			BeforeEach(func() {
-				serverSleepTime = 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -4724,24 +6034,86 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					Expect(req.Method).To(Equal("GET"))
 
 					// TODO: Add check for expand query parameter
-
 					Expect(req.URL.Query()["sort"]).To(Equal([]string{"created_time"}))
-
 					Expect(req.URL.Query()["tags"]).To(Equal([]string{"version 1.1, pre-release"}))
-
 					Expect(req.URL.Query()["include"]).To(Equal([]string{"rules"}))
-
 					Expect(req.URL.Query()["limit"]).To(Equal([]string{fmt.Sprint(int64(1))}))
-
 					Expect(req.URL.Query()["offset"]).To(Equal([]string{fmt.Sprint(int64(0))}))
-
+					Expect(req.URL.Query()["search"]).To(Equal([]string{"test tag"}))
 					// Sleep a short time to support a timeout test
-					time.Sleep(serverSleepTime)
+					time.Sleep(100 * time.Millisecond)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"segments": [{"name": "Name", "segment_id": "SegmentID", "description": "Description", "tags": "Tags", "rules": [{"attribute_name": "AttributeName", "operator": "is", "values": ["Values"]}], "created_time": "2019-01-01T12:00:00", "updated_time": "2019-01-01T12:00:00", "href": "Href", "features": [{"feature_id": "FeatureID", "name": "Name"}], "properties": [{"property_id": "PropertyID", "name": "Name"}]}], "limit": 5, "offset": 6, "total_count": 10, "first": {"href": "Href"}, "previous": {"href": "Href"}, "next": {"href": "Href"}, "last": {"href": "Href"}}`)
+					fmt.Fprintf(res, "%s", `{"segments": [{"name": "Name", "segment_id": "SegmentID", "description": "Description", "tags": "Tags", "rules": [{"attribute_name": "AttributeName", "operator": "is", "values": ["Values"]}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "href": "Href", "features": [{"feature_id": "FeatureID", "name": "Name"}], "properties": [{"property_id": "PropertyID", "name": "Name"}]}], "limit": 5, "offset": 6, "total_count": 10, "first": {"href": "Href"}, "previous": {"href": "Href"}, "next": {"href": "Href"}, "last": {"href": "Href"}}`)
+				}))
+			})
+			It(`Invoke ListSegments successfully with retries`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+				appConfigurationService.EnableRetries(0, 0)
+
+				// Construct an instance of the ListSegmentsOptions model
+				listSegmentsOptionsModel := new(appconfigurationv1.ListSegmentsOptions)
+				listSegmentsOptionsModel.Expand = core.BoolPtr(true)
+				listSegmentsOptionsModel.Sort = core.StringPtr("created_time")
+				listSegmentsOptionsModel.Tags = core.StringPtr("version 1.1, pre-release")
+				listSegmentsOptionsModel.Include = core.StringPtr("rules")
+				listSegmentsOptionsModel.Limit = core.Int64Ptr(int64(1))
+				listSegmentsOptionsModel.Offset = core.Int64Ptr(int64(0))
+				listSegmentsOptionsModel.Search = core.StringPtr("test tag")
+				listSegmentsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with a Context to test a timeout error
+				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc()
+				_, _, operationErr := appConfigurationService.ListSegmentsWithContext(ctx, listSegmentsOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+
+				// Disable retries and test again
+				appConfigurationService.DisableRetries()
+				result, response, operationErr := appConfigurationService.ListSegments(listSegmentsOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				_, _, operationErr = appConfigurationService.ListSegmentsWithContext(ctx, listSegmentsOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(listSegmentsPath))
+					Expect(req.Method).To(Equal("GET"))
+
+					// TODO: Add check for expand query parameter
+					Expect(req.URL.Query()["sort"]).To(Equal([]string{"created_time"}))
+					Expect(req.URL.Query()["tags"]).To(Equal([]string{"version 1.1, pre-release"}))
+					Expect(req.URL.Query()["include"]).To(Equal([]string{"rules"}))
+					Expect(req.URL.Query()["limit"]).To(Equal([]string{fmt.Sprint(int64(1))}))
+					Expect(req.URL.Query()["offset"]).To(Equal([]string{fmt.Sprint(int64(0))}))
+					Expect(req.URL.Query()["search"]).To(Equal([]string{"test tag"}))
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"segments": [{"name": "Name", "segment_id": "SegmentID", "description": "Description", "tags": "Tags", "rules": [{"attribute_name": "AttributeName", "operator": "is", "values": ["Values"]}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "href": "Href", "features": [{"feature_id": "FeatureID", "name": "Name"}], "properties": [{"property_id": "PropertyID", "name": "Name"}]}], "limit": 5, "offset": 6, "total_count": 10, "first": {"href": "Href"}, "previous": {"href": "Href"}, "next": {"href": "Href"}, "last": {"href": "Href"}}`)
 				}))
 			})
 			It(`Invoke ListSegments successfully`, func() {
@@ -4751,7 +6123,6 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(appConfigurationService).ToNot(BeNil())
-				appConfigurationService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				result, response, operationErr := appConfigurationService.ListSegments(nil)
@@ -4767,6 +6138,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				listSegmentsOptionsModel.Include = core.StringPtr("rules")
 				listSegmentsOptionsModel.Limit = core.Int64Ptr(int64(1))
 				listSegmentsOptionsModel.Offset = core.Int64Ptr(int64(0))
+				listSegmentsOptionsModel.Search = core.StringPtr("test tag")
 				listSegmentsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
@@ -4775,30 +6147,6 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(response).ToNot(BeNil())
 				Expect(result).ToNot(BeNil())
 
-				// Invoke operation with a Context to test a timeout error
-				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
-				defer cancelFunc()
-				serverSleepTime = 100 * time.Millisecond
-				_, _, operationErr = appConfigurationService.ListSegmentsWithContext(ctx, listSegmentsOptionsModel)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
-				serverSleepTime = time.Duration(0)
-
-				// Disable retries and test again
-				appConfigurationService.DisableRetries()
-				result, response, operationErr = appConfigurationService.ListSegments(listSegmentsOptionsModel)
-				Expect(operationErr).To(BeNil())
-				Expect(response).ToNot(BeNil())
-				Expect(result).ToNot(BeNil())
-
-				// Re-test the timeout error with retries disabled
-				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
-				defer cancelFunc2()
-				serverSleepTime = 100 * time.Millisecond
-				_, _, operationErr = appConfigurationService.ListSegmentsWithContext(ctx, listSegmentsOptionsModel)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
-				serverSleepTime = time.Duration(0)
 			})
 			It(`Invoke ListSegments with error: Operation request error`, func() {
 				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
@@ -4816,6 +6164,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				listSegmentsOptionsModel.Include = core.StringPtr("rules")
 				listSegmentsOptionsModel.Limit = core.Int64Ptr(int64(1))
 				listSegmentsOptionsModel.Offset = core.Int64Ptr(int64(0))
+				listSegmentsOptionsModel.Search = core.StringPtr("test tag")
 				listSegmentsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := appConfigurationService.SetServiceURL("")
@@ -4830,10 +6179,89 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				testServer.Close()
 			})
 		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke ListSegments successfully`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the ListSegmentsOptions model
+				listSegmentsOptionsModel := new(appconfigurationv1.ListSegmentsOptions)
+				listSegmentsOptionsModel.Expand = core.BoolPtr(true)
+				listSegmentsOptionsModel.Sort = core.StringPtr("created_time")
+				listSegmentsOptionsModel.Tags = core.StringPtr("version 1.1, pre-release")
+				listSegmentsOptionsModel.Include = core.StringPtr("rules")
+				listSegmentsOptionsModel.Limit = core.Int64Ptr(int64(1))
+				listSegmentsOptionsModel.Offset = core.Int64Ptr(int64(0))
+				listSegmentsOptionsModel.Search = core.StringPtr("test tag")
+				listSegmentsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := appConfigurationService.ListSegments(listSegmentsOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Test pagination helper method on response`, func() {
+			It(`Invoke GetNextOffset successfully`, func() {
+				responseObject := new(appconfigurationv1.SegmentsList)
+				nextObject := new(appconfigurationv1.PageHrefResponse)
+				nextObject.Href = core.StringPtr("ibm.com?offset=135")
+				responseObject.Next = nextObject
+
+				value, err := responseObject.GetNextOffset()
+				Expect(err).To(BeNil())
+				Expect(value).To(Equal(core.Int64Ptr(int64(135))))
+			})
+			It(`Invoke GetNextOffset without a "Next" property in the response`, func() {
+				responseObject := new(appconfigurationv1.SegmentsList)
+
+				value, err := responseObject.GetNextOffset()
+				Expect(err).To(BeNil())
+				Expect(value).To(BeNil())
+			})
+			It(`Invoke GetNextOffset without any query params in the "Next" URL`, func() {
+				responseObject := new(appconfigurationv1.SegmentsList)
+				nextObject := new(appconfigurationv1.PageHrefResponse)
+				nextObject.Href = core.StringPtr("ibm.com")
+				responseObject.Next = nextObject
+
+				value, err := responseObject.GetNextOffset()
+				Expect(err).To(BeNil())
+				Expect(value).To(BeNil())
+			})
+			It(`Invoke GetNextOffset with a non-integer query param in the "Next" URL`, func() {
+				responseObject := new(appconfigurationv1.SegmentsList)
+				nextObject := new(appconfigurationv1.PageHrefResponse)
+				nextObject.Href = core.StringPtr("ibm.com?offset=tiger")
+				responseObject.Next = nextObject
+
+				value, err := responseObject.GetNextOffset()
+				Expect(err).NotTo(BeNil())
+				Expect(value).To(BeNil())
+			})
+		})
 	})
 	Describe(`CreateSegment(createSegmentOptions *CreateSegmentOptions) - Operation response error`, func() {
 		createSegmentPath := "/segments"
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
@@ -4858,7 +6286,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				ruleModel := new(appconfigurationv1.Rule)
 				ruleModel.AttributeName = core.StringPtr("email")
 				ruleModel.Operator = core.StringPtr("endsWith")
-				ruleModel.Values = []string{"testString"}
+				ruleModel.Values = []string{"@in.mnc.com", "@us.mnc.com"}
 
 				// Construct an instance of the CreateSegmentOptions model
 				createSegmentOptionsModel := new(appconfigurationv1.CreateSegmentOptions)
@@ -4886,13 +6314,10 @@ var _ = Describe(`AppConfigurationV1`, func() {
 			})
 		})
 	})
-
 	Describe(`CreateSegment(createSegmentOptions *CreateSegmentOptions)`, func() {
 		createSegmentPath := "/segments"
-		var serverSleepTime time.Duration
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with timeout`, func() {
 			BeforeEach(func() {
-				serverSleepTime = 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -4917,12 +6342,92 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
 
 					// Sleep a short time to support a timeout test
-					time.Sleep(serverSleepTime)
+					time.Sleep(100 * time.Millisecond)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
-					fmt.Fprintf(res, "%s", `{"name": "Name", "segment_id": "SegmentID", "description": "Description", "tags": "Tags", "rules": [{"attribute_name": "AttributeName", "operator": "is", "values": ["Values"]}], "created_time": "2019-01-01T12:00:00", "updated_time": "2019-01-01T12:00:00", "href": "Href", "features": [{"feature_id": "FeatureID", "name": "Name"}], "properties": [{"property_id": "PropertyID", "name": "Name"}]}`)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "segment_id": "SegmentID", "description": "Description", "tags": "Tags", "rules": [{"attribute_name": "AttributeName", "operator": "is", "values": ["Values"]}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "href": "Href", "features": [{"feature_id": "FeatureID", "name": "Name"}], "properties": [{"property_id": "PropertyID", "name": "Name"}]}`)
+				}))
+			})
+			It(`Invoke CreateSegment successfully with retries`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+				appConfigurationService.EnableRetries(0, 0)
+
+				// Construct an instance of the Rule model
+				ruleModel := new(appconfigurationv1.Rule)
+				ruleModel.AttributeName = core.StringPtr("email")
+				ruleModel.Operator = core.StringPtr("endsWith")
+				ruleModel.Values = []string{"@in.mnc.com", "@us.mnc.com"}
+
+				// Construct an instance of the CreateSegmentOptions model
+				createSegmentOptionsModel := new(appconfigurationv1.CreateSegmentOptions)
+				createSegmentOptionsModel.Name = core.StringPtr("Beta Users")
+				createSegmentOptionsModel.SegmentID = core.StringPtr("beta-users")
+				createSegmentOptionsModel.Description = core.StringPtr("Segment containing the beta users")
+				createSegmentOptionsModel.Tags = core.StringPtr("version: 1.1, stage")
+				createSegmentOptionsModel.Rules = []appconfigurationv1.Rule{*ruleModel}
+				createSegmentOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with a Context to test a timeout error
+				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc()
+				_, _, operationErr := appConfigurationService.CreateSegmentWithContext(ctx, createSegmentOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+
+				// Disable retries and test again
+				appConfigurationService.DisableRetries()
+				result, response, operationErr := appConfigurationService.CreateSegment(createSegmentOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				_, _, operationErr = appConfigurationService.CreateSegmentWithContext(ctx, createSegmentOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(createSegmentPath))
+					Expect(req.Method).To(Equal("POST"))
+
+					// For gzip-disabled operation, verify Content-Encoding is not set.
+					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+
+					// If there is a body, then make sure we can read it
+					bodyBuf := new(bytes.Buffer)
+					if req.Header.Get("Content-Encoding") == "gzip" {
+						body, err := core.NewGzipDecompressionReader(req.Body)
+						Expect(err).To(BeNil())
+						_, err = bodyBuf.ReadFrom(body)
+						Expect(err).To(BeNil())
+					} else {
+						_, err := bodyBuf.ReadFrom(req.Body)
+						Expect(err).To(BeNil())
+					}
+					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(201)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "segment_id": "SegmentID", "description": "Description", "tags": "Tags", "rules": [{"attribute_name": "AttributeName", "operator": "is", "values": ["Values"]}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "href": "Href", "features": [{"feature_id": "FeatureID", "name": "Name"}], "properties": [{"property_id": "PropertyID", "name": "Name"}]}`)
 				}))
 			})
 			It(`Invoke CreateSegment successfully`, func() {
@@ -4932,7 +6437,6 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(appConfigurationService).ToNot(BeNil())
-				appConfigurationService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				result, response, operationErr := appConfigurationService.CreateSegment(nil)
@@ -4944,7 +6448,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				ruleModel := new(appconfigurationv1.Rule)
 				ruleModel.AttributeName = core.StringPtr("email")
 				ruleModel.Operator = core.StringPtr("endsWith")
-				ruleModel.Values = []string{"testString"}
+				ruleModel.Values = []string{"@in.mnc.com", "@us.mnc.com"}
 
 				// Construct an instance of the CreateSegmentOptions model
 				createSegmentOptionsModel := new(appconfigurationv1.CreateSegmentOptions)
@@ -4961,30 +6465,6 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(response).ToNot(BeNil())
 				Expect(result).ToNot(BeNil())
 
-				// Invoke operation with a Context to test a timeout error
-				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
-				defer cancelFunc()
-				serverSleepTime = 100 * time.Millisecond
-				_, _, operationErr = appConfigurationService.CreateSegmentWithContext(ctx, createSegmentOptionsModel)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
-				serverSleepTime = time.Duration(0)
-
-				// Disable retries and test again
-				appConfigurationService.DisableRetries()
-				result, response, operationErr = appConfigurationService.CreateSegment(createSegmentOptionsModel)
-				Expect(operationErr).To(BeNil())
-				Expect(response).ToNot(BeNil())
-				Expect(result).ToNot(BeNil())
-
-				// Re-test the timeout error with retries disabled
-				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
-				defer cancelFunc2()
-				serverSleepTime = 100 * time.Millisecond
-				_, _, operationErr = appConfigurationService.CreateSegmentWithContext(ctx, createSegmentOptionsModel)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
-				serverSleepTime = time.Duration(0)
 			})
 			It(`Invoke CreateSegment with error: Operation request error`, func() {
 				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
@@ -4998,7 +6478,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				ruleModel := new(appconfigurationv1.Rule)
 				ruleModel.AttributeName = core.StringPtr("email")
 				ruleModel.Operator = core.StringPtr("endsWith")
-				ruleModel.Values = []string{"testString"}
+				ruleModel.Values = []string{"@in.mnc.com", "@us.mnc.com"}
 
 				// Construct an instance of the CreateSegmentOptions model
 				createSegmentOptionsModel := new(appconfigurationv1.CreateSegmentOptions)
@@ -5021,10 +6501,54 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				testServer.Close()
 			})
 		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(201)
+				}))
+			})
+			It(`Invoke CreateSegment successfully`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the Rule model
+				ruleModel := new(appconfigurationv1.Rule)
+				ruleModel.AttributeName = core.StringPtr("email")
+				ruleModel.Operator = core.StringPtr("endsWith")
+				ruleModel.Values = []string{"@in.mnc.com", "@us.mnc.com"}
+
+				// Construct an instance of the CreateSegmentOptions model
+				createSegmentOptionsModel := new(appconfigurationv1.CreateSegmentOptions)
+				createSegmentOptionsModel.Name = core.StringPtr("Beta Users")
+				createSegmentOptionsModel.SegmentID = core.StringPtr("beta-users")
+				createSegmentOptionsModel.Description = core.StringPtr("Segment containing the beta users")
+				createSegmentOptionsModel.Tags = core.StringPtr("version: 1.1, stage")
+				createSegmentOptionsModel.Rules = []appconfigurationv1.Rule{*ruleModel}
+				createSegmentOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := appConfigurationService.CreateSegment(createSegmentOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
 	})
 	Describe(`UpdateSegment(updateSegmentOptions *UpdateSegmentOptions) - Operation response error`, func() {
 		updateSegmentPath := "/segments/testString"
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
@@ -5077,13 +6601,10 @@ var _ = Describe(`AppConfigurationV1`, func() {
 			})
 		})
 	})
-
 	Describe(`UpdateSegment(updateSegmentOptions *UpdateSegmentOptions)`, func() {
 		updateSegmentPath := "/segments/testString"
-		var serverSleepTime time.Duration
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with timeout`, func() {
 			BeforeEach(func() {
-				serverSleepTime = 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -5108,12 +6629,92 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
 
 					// Sleep a short time to support a timeout test
-					time.Sleep(serverSleepTime)
+					time.Sleep(100 * time.Millisecond)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"name": "Name", "segment_id": "SegmentID", "description": "Description", "tags": "Tags", "rules": [{"attribute_name": "AttributeName", "operator": "is", "values": ["Values"]}], "created_time": "2019-01-01T12:00:00", "updated_time": "2019-01-01T12:00:00", "href": "Href", "features": [{"feature_id": "FeatureID", "name": "Name"}], "properties": [{"property_id": "PropertyID", "name": "Name"}]}`)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "segment_id": "SegmentID", "description": "Description", "tags": "Tags", "rules": [{"attribute_name": "AttributeName", "operator": "is", "values": ["Values"]}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "href": "Href", "features": [{"feature_id": "FeatureID", "name": "Name"}], "properties": [{"property_id": "PropertyID", "name": "Name"}]}`)
+				}))
+			})
+			It(`Invoke UpdateSegment successfully with retries`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+				appConfigurationService.EnableRetries(0, 0)
+
+				// Construct an instance of the Rule model
+				ruleModel := new(appconfigurationv1.Rule)
+				ruleModel.AttributeName = core.StringPtr("testString")
+				ruleModel.Operator = core.StringPtr("is")
+				ruleModel.Values = []string{"testString"}
+
+				// Construct an instance of the UpdateSegmentOptions model
+				updateSegmentOptionsModel := new(appconfigurationv1.UpdateSegmentOptions)
+				updateSegmentOptionsModel.SegmentID = core.StringPtr("testString")
+				updateSegmentOptionsModel.Name = core.StringPtr("testString")
+				updateSegmentOptionsModel.Description = core.StringPtr("testString")
+				updateSegmentOptionsModel.Tags = core.StringPtr("testString")
+				updateSegmentOptionsModel.Rules = []appconfigurationv1.Rule{*ruleModel}
+				updateSegmentOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with a Context to test a timeout error
+				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc()
+				_, _, operationErr := appConfigurationService.UpdateSegmentWithContext(ctx, updateSegmentOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+
+				// Disable retries and test again
+				appConfigurationService.DisableRetries()
+				result, response, operationErr := appConfigurationService.UpdateSegment(updateSegmentOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				_, _, operationErr = appConfigurationService.UpdateSegmentWithContext(ctx, updateSegmentOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(updateSegmentPath))
+					Expect(req.Method).To(Equal("PUT"))
+
+					// For gzip-disabled operation, verify Content-Encoding is not set.
+					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+
+					// If there is a body, then make sure we can read it
+					bodyBuf := new(bytes.Buffer)
+					if req.Header.Get("Content-Encoding") == "gzip" {
+						body, err := core.NewGzipDecompressionReader(req.Body)
+						Expect(err).To(BeNil())
+						_, err = bodyBuf.ReadFrom(body)
+						Expect(err).To(BeNil())
+					} else {
+						_, err := bodyBuf.ReadFrom(req.Body)
+						Expect(err).To(BeNil())
+					}
+					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "segment_id": "SegmentID", "description": "Description", "tags": "Tags", "rules": [{"attribute_name": "AttributeName", "operator": "is", "values": ["Values"]}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "href": "Href", "features": [{"feature_id": "FeatureID", "name": "Name"}], "properties": [{"property_id": "PropertyID", "name": "Name"}]}`)
 				}))
 			})
 			It(`Invoke UpdateSegment successfully`, func() {
@@ -5123,7 +6724,6 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(appConfigurationService).ToNot(BeNil())
-				appConfigurationService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				result, response, operationErr := appConfigurationService.UpdateSegment(nil)
@@ -5152,30 +6752,6 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(response).ToNot(BeNil())
 				Expect(result).ToNot(BeNil())
 
-				// Invoke operation with a Context to test a timeout error
-				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
-				defer cancelFunc()
-				serverSleepTime = 100 * time.Millisecond
-				_, _, operationErr = appConfigurationService.UpdateSegmentWithContext(ctx, updateSegmentOptionsModel)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
-				serverSleepTime = time.Duration(0)
-
-				// Disable retries and test again
-				appConfigurationService.DisableRetries()
-				result, response, operationErr = appConfigurationService.UpdateSegment(updateSegmentOptionsModel)
-				Expect(operationErr).To(BeNil())
-				Expect(response).ToNot(BeNil())
-				Expect(result).ToNot(BeNil())
-
-				// Re-test the timeout error with retries disabled
-				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
-				defer cancelFunc2()
-				serverSleepTime = 100 * time.Millisecond
-				_, _, operationErr = appConfigurationService.UpdateSegmentWithContext(ctx, updateSegmentOptionsModel)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
-				serverSleepTime = time.Duration(0)
 			})
 			It(`Invoke UpdateSegment with error: Operation validation and request error`, func() {
 				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
@@ -5219,10 +6795,54 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				testServer.Close()
 			})
 		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke UpdateSegment successfully`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the Rule model
+				ruleModel := new(appconfigurationv1.Rule)
+				ruleModel.AttributeName = core.StringPtr("testString")
+				ruleModel.Operator = core.StringPtr("is")
+				ruleModel.Values = []string{"testString"}
+
+				// Construct an instance of the UpdateSegmentOptions model
+				updateSegmentOptionsModel := new(appconfigurationv1.UpdateSegmentOptions)
+				updateSegmentOptionsModel.SegmentID = core.StringPtr("testString")
+				updateSegmentOptionsModel.Name = core.StringPtr("testString")
+				updateSegmentOptionsModel.Description = core.StringPtr("testString")
+				updateSegmentOptionsModel.Tags = core.StringPtr("testString")
+				updateSegmentOptionsModel.Rules = []appconfigurationv1.Rule{*ruleModel}
+				updateSegmentOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := appConfigurationService.UpdateSegment(updateSegmentOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
 	})
 	Describe(`GetSegment(getSegmentOptions *GetSegmentOptions) - Operation response error`, func() {
 		getSegmentPath := "/segments/testString"
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
@@ -5266,13 +6886,10 @@ var _ = Describe(`AppConfigurationV1`, func() {
 			})
 		})
 	})
-
 	Describe(`GetSegment(getSegmentOptions *GetSegmentOptions)`, func() {
 		getSegmentPath := "/segments/testString"
-		var serverSleepTime time.Duration
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with timeout`, func() {
 			BeforeEach(func() {
-				serverSleepTime = 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -5281,12 +6898,67 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					Expect(req.Method).To(Equal("GET"))
 
 					// Sleep a short time to support a timeout test
-					time.Sleep(serverSleepTime)
+					time.Sleep(100 * time.Millisecond)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"name": "Name", "segment_id": "SegmentID", "description": "Description", "tags": "Tags", "rules": [{"attribute_name": "AttributeName", "operator": "is", "values": ["Values"]}], "created_time": "2019-01-01T12:00:00", "updated_time": "2019-01-01T12:00:00", "href": "Href", "features": [{"feature_id": "FeatureID", "name": "Name"}], "properties": [{"property_id": "PropertyID", "name": "Name"}]}`)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "segment_id": "SegmentID", "description": "Description", "tags": "Tags", "rules": [{"attribute_name": "AttributeName", "operator": "is", "values": ["Values"]}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "href": "Href", "features": [{"feature_id": "FeatureID", "name": "Name"}], "properties": [{"property_id": "PropertyID", "name": "Name"}]}`)
+				}))
+			})
+			It(`Invoke GetSegment successfully with retries`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+				appConfigurationService.EnableRetries(0, 0)
+
+				// Construct an instance of the GetSegmentOptions model
+				getSegmentOptionsModel := new(appconfigurationv1.GetSegmentOptions)
+				getSegmentOptionsModel.SegmentID = core.StringPtr("testString")
+				getSegmentOptionsModel.Include = []string{"features"}
+				getSegmentOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with a Context to test a timeout error
+				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc()
+				_, _, operationErr := appConfigurationService.GetSegmentWithContext(ctx, getSegmentOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+
+				// Disable retries and test again
+				appConfigurationService.DisableRetries()
+				result, response, operationErr := appConfigurationService.GetSegment(getSegmentOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				_, _, operationErr = appConfigurationService.GetSegmentWithContext(ctx, getSegmentOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(getSegmentPath))
+					Expect(req.Method).To(Equal("GET"))
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "segment_id": "SegmentID", "description": "Description", "tags": "Tags", "rules": [{"attribute_name": "AttributeName", "operator": "is", "values": ["Values"]}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "href": "Href", "features": [{"feature_id": "FeatureID", "name": "Name"}], "properties": [{"property_id": "PropertyID", "name": "Name"}]}`)
 				}))
 			})
 			It(`Invoke GetSegment successfully`, func() {
@@ -5296,7 +6968,6 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(appConfigurationService).ToNot(BeNil())
-				appConfigurationService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				result, response, operationErr := appConfigurationService.GetSegment(nil)
@@ -5316,30 +6987,6 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(response).ToNot(BeNil())
 				Expect(result).ToNot(BeNil())
 
-				// Invoke operation with a Context to test a timeout error
-				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
-				defer cancelFunc()
-				serverSleepTime = 100 * time.Millisecond
-				_, _, operationErr = appConfigurationService.GetSegmentWithContext(ctx, getSegmentOptionsModel)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
-				serverSleepTime = time.Duration(0)
-
-				// Disable retries and test again
-				appConfigurationService.DisableRetries()
-				result, response, operationErr = appConfigurationService.GetSegment(getSegmentOptionsModel)
-				Expect(operationErr).To(BeNil())
-				Expect(response).ToNot(BeNil())
-				Expect(result).ToNot(BeNil())
-
-				// Re-test the timeout error with retries disabled
-				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
-				defer cancelFunc2()
-				serverSleepTime = 100 * time.Millisecond
-				_, _, operationErr = appConfigurationService.GetSegmentWithContext(ctx, getSegmentOptionsModel)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
-				serverSleepTime = time.Duration(0)
 			})
 			It(`Invoke GetSegment with error: Operation validation and request error`, func() {
 				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
@@ -5374,8 +7021,42 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				testServer.Close()
 			})
 		})
-	})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
 
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke GetSegment successfully`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the GetSegmentOptions model
+				getSegmentOptionsModel := new(appconfigurationv1.GetSegmentOptions)
+				getSegmentOptionsModel.SegmentID = core.StringPtr("testString")
+				getSegmentOptionsModel.Include = []string{"features"}
+				getSegmentOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := appConfigurationService.GetSegment(getSegmentOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
 	Describe(`DeleteSegment(deleteSegmentOptions *DeleteSegmentOptions)`, func() {
 		deleteSegmentPath := "/segments/testString"
 		Context(`Using mock server endpoint`, func() {
@@ -5397,7 +7078,6 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(appConfigurationService).ToNot(BeNil())
-				appConfigurationService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				response, operationErr := appConfigurationService.DeleteSegment(nil)
@@ -5410,12 +7090,6 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				deleteSegmentOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
-				response, operationErr = appConfigurationService.DeleteSegment(deleteSegmentOptionsModel)
-				Expect(operationErr).To(BeNil())
-				Expect(response).ToNot(BeNil())
-
-				// Disable retries and test again
-				appConfigurationService.DisableRetries()
 				response, operationErr = appConfigurationService.DeleteSegment(deleteSegmentOptionsModel)
 				Expect(operationErr).To(BeNil())
 				Expect(response).ToNot(BeNil())
@@ -5451,256 +7125,6 @@ var _ = Describe(`AppConfigurationV1`, func() {
 			})
 		})
 	})
-	Describe(`Service constructor tests`, func() {
-		It(`Instantiate service client`, func() {
-			appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
-				Authenticator: &core.NoAuthAuthenticator{},
-			})
-			Expect(appConfigurationService).ToNot(BeNil())
-			Expect(serviceErr).To(BeNil())
-		})
-		It(`Instantiate service client with error: Invalid URL`, func() {
-			appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
-				URL: "{BAD_URL_STRING",
-			})
-			Expect(appConfigurationService).To(BeNil())
-			Expect(serviceErr).ToNot(BeNil())
-		})
-		It(`Instantiate service client with error: Invalid Auth`, func() {
-			appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
-				URL: "https://appconfigurationv1/api",
-				Authenticator: &core.BasicAuthenticator{
-					Username: "",
-					Password: "",
-				},
-			})
-			Expect(appConfigurationService).To(BeNil())
-			Expect(serviceErr).ToNot(BeNil())
-		})
-	})
-	Describe(`Service constructor tests using external config`, func() {
-		Context(`Using external config, construct service client instances`, func() {
-			// Map containing environment variables used in testing.
-			var testEnvironment = map[string]string{
-				"APP_CONFIGURATION_URL":       "https://appconfigurationv1/api",
-				"APP_CONFIGURATION_AUTH_TYPE": "noauth",
-			}
-
-			It(`Create service client using external config successfully`, func() {
-				SetTestEnvironment(testEnvironment)
-				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1UsingExternalConfig(&appconfigurationv1.AppConfigurationV1Options{})
-				Expect(appConfigurationService).ToNot(BeNil())
-				Expect(serviceErr).To(BeNil())
-				ClearTestEnvironment(testEnvironment)
-
-				clone := appConfigurationService.Clone()
-				Expect(clone).ToNot(BeNil())
-				Expect(clone.Service != appConfigurationService.Service).To(BeTrue())
-				Expect(clone.GetServiceURL()).To(Equal(appConfigurationService.GetServiceURL()))
-				Expect(clone.Service.Options.Authenticator).To(Equal(appConfigurationService.Service.Options.Authenticator))
-			})
-			It(`Create service client using external config and set url from constructor successfully`, func() {
-				SetTestEnvironment(testEnvironment)
-				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1UsingExternalConfig(&appconfigurationv1.AppConfigurationV1Options{
-					URL: "https://testService/api",
-				})
-				Expect(appConfigurationService).ToNot(BeNil())
-				Expect(serviceErr).To(BeNil())
-				Expect(appConfigurationService.Service.GetServiceURL()).To(Equal("https://testService/api"))
-				ClearTestEnvironment(testEnvironment)
-
-				clone := appConfigurationService.Clone()
-				Expect(clone).ToNot(BeNil())
-				Expect(clone.Service != appConfigurationService.Service).To(BeTrue())
-				Expect(clone.GetServiceURL()).To(Equal(appConfigurationService.GetServiceURL()))
-				Expect(clone.Service.Options.Authenticator).To(Equal(appConfigurationService.Service.Options.Authenticator))
-			})
-			It(`Create service client using external config and set url programatically successfully`, func() {
-				SetTestEnvironment(testEnvironment)
-				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1UsingExternalConfig(&appconfigurationv1.AppConfigurationV1Options{})
-				err := appConfigurationService.SetServiceURL("https://testService/api")
-				Expect(err).To(BeNil())
-				Expect(appConfigurationService).ToNot(BeNil())
-				Expect(serviceErr).To(BeNil())
-				Expect(appConfigurationService.Service.GetServiceURL()).To(Equal("https://testService/api"))
-				ClearTestEnvironment(testEnvironment)
-
-				clone := appConfigurationService.Clone()
-				Expect(clone).ToNot(BeNil())
-				Expect(clone.Service != appConfigurationService.Service).To(BeTrue())
-				Expect(clone.GetServiceURL()).To(Equal(appConfigurationService.GetServiceURL()))
-				Expect(clone.Service.Options.Authenticator).To(Equal(appConfigurationService.Service.Options.Authenticator))
-			})
-		})
-		Context(`Using external config, construct service client instances with error: Invalid Auth`, func() {
-			// Map containing environment variables used in testing.
-			var testEnvironment = map[string]string{
-				"APP_CONFIGURATION_URL":       "https://appconfigurationv1/api",
-				"APP_CONFIGURATION_AUTH_TYPE": "someOtherAuth",
-			}
-
-			SetTestEnvironment(testEnvironment)
-			appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1UsingExternalConfig(&appconfigurationv1.AppConfigurationV1Options{})
-
-			It(`Instantiate service client with error`, func() {
-				Expect(appConfigurationService).To(BeNil())
-				Expect(serviceErr).ToNot(BeNil())
-				ClearTestEnvironment(testEnvironment)
-			})
-		})
-		Context(`Using external config, construct service client instances with error: Invalid URL`, func() {
-			// Map containing environment variables used in testing.
-			var testEnvironment = map[string]string{
-				"APP_CONFIGURATION_AUTH_TYPE": "NOAuth",
-			}
-
-			SetTestEnvironment(testEnvironment)
-			appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1UsingExternalConfig(&appconfigurationv1.AppConfigurationV1Options{
-				URL: "{BAD_URL_STRING",
-			})
-
-			It(`Instantiate service client with error`, func() {
-				Expect(appConfigurationService).To(BeNil())
-				Expect(serviceErr).ToNot(BeNil())
-				ClearTestEnvironment(testEnvironment)
-			})
-		})
-	})
-	Describe(`Regional endpoint tests`, func() {
-		It(`GetServiceURLForRegion(region string)`, func() {
-			var url string
-			var err error
-			url, err = appconfigurationv1.GetServiceURLForRegion("INVALID_REGION")
-			Expect(url).To(BeEmpty())
-			Expect(err).ToNot(BeNil())
-			fmt.Fprintf(GinkgoWriter, "Expected error: %s\n", err.Error())
-		})
-	})
-	Describe(`Service constructor tests`, func() {
-		It(`Instantiate service client`, func() {
-			appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
-				Authenticator: &core.NoAuthAuthenticator{},
-			})
-			Expect(appConfigurationService).ToNot(BeNil())
-			Expect(serviceErr).To(BeNil())
-		})
-		It(`Instantiate service client with error: Invalid URL`, func() {
-			appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
-				URL: "{BAD_URL_STRING",
-			})
-			Expect(appConfigurationService).To(BeNil())
-			Expect(serviceErr).ToNot(BeNil())
-		})
-		It(`Instantiate service client with error: Invalid Auth`, func() {
-			appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
-				URL: "https://appconfigurationv1/api",
-				Authenticator: &core.BasicAuthenticator{
-					Username: "",
-					Password: "",
-				},
-			})
-			Expect(appConfigurationService).To(BeNil())
-			Expect(serviceErr).ToNot(BeNil())
-		})
-	})
-	Describe(`Service constructor tests using external config`, func() {
-		Context(`Using external config, construct service client instances`, func() {
-			// Map containing environment variables used in testing.
-			var testEnvironment = map[string]string{
-				"APP_CONFIGURATION_URL":       "https://appconfigurationv1/api",
-				"APP_CONFIGURATION_AUTH_TYPE": "noauth",
-			}
-
-			It(`Create service client using external config successfully`, func() {
-				SetTestEnvironment(testEnvironment)
-				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1UsingExternalConfig(&appconfigurationv1.AppConfigurationV1Options{})
-				Expect(appConfigurationService).ToNot(BeNil())
-				Expect(serviceErr).To(BeNil())
-				ClearTestEnvironment(testEnvironment)
-
-				clone := appConfigurationService.Clone()
-				Expect(clone).ToNot(BeNil())
-				Expect(clone.Service != appConfigurationService.Service).To(BeTrue())
-				Expect(clone.GetServiceURL()).To(Equal(appConfigurationService.GetServiceURL()))
-				Expect(clone.Service.Options.Authenticator).To(Equal(appConfigurationService.Service.Options.Authenticator))
-			})
-			It(`Create service client using external config and set url from constructor successfully`, func() {
-				SetTestEnvironment(testEnvironment)
-				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1UsingExternalConfig(&appconfigurationv1.AppConfigurationV1Options{
-					URL: "https://testService/api",
-				})
-				Expect(appConfigurationService).ToNot(BeNil())
-				Expect(serviceErr).To(BeNil())
-				Expect(appConfigurationService.Service.GetServiceURL()).To(Equal("https://testService/api"))
-				ClearTestEnvironment(testEnvironment)
-
-				clone := appConfigurationService.Clone()
-				Expect(clone).ToNot(BeNil())
-				Expect(clone.Service != appConfigurationService.Service).To(BeTrue())
-				Expect(clone.GetServiceURL()).To(Equal(appConfigurationService.GetServiceURL()))
-				Expect(clone.Service.Options.Authenticator).To(Equal(appConfigurationService.Service.Options.Authenticator))
-			})
-			It(`Create service client using external config and set url programatically successfully`, func() {
-				SetTestEnvironment(testEnvironment)
-				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1UsingExternalConfig(&appconfigurationv1.AppConfigurationV1Options{})
-				err := appConfigurationService.SetServiceURL("https://testService/api")
-				Expect(err).To(BeNil())
-				Expect(appConfigurationService).ToNot(BeNil())
-				Expect(serviceErr).To(BeNil())
-				Expect(appConfigurationService.Service.GetServiceURL()).To(Equal("https://testService/api"))
-				ClearTestEnvironment(testEnvironment)
-
-				clone := appConfigurationService.Clone()
-				Expect(clone).ToNot(BeNil())
-				Expect(clone.Service != appConfigurationService.Service).To(BeTrue())
-				Expect(clone.GetServiceURL()).To(Equal(appConfigurationService.GetServiceURL()))
-				Expect(clone.Service.Options.Authenticator).To(Equal(appConfigurationService.Service.Options.Authenticator))
-			})
-		})
-		Context(`Using external config, construct service client instances with error: Invalid Auth`, func() {
-			// Map containing environment variables used in testing.
-			var testEnvironment = map[string]string{
-				"APP_CONFIGURATION_URL":       "https://appconfigurationv1/api",
-				"APP_CONFIGURATION_AUTH_TYPE": "someOtherAuth",
-			}
-
-			SetTestEnvironment(testEnvironment)
-			appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1UsingExternalConfig(&appconfigurationv1.AppConfigurationV1Options{})
-
-			It(`Instantiate service client with error`, func() {
-				Expect(appConfigurationService).To(BeNil())
-				Expect(serviceErr).ToNot(BeNil())
-				ClearTestEnvironment(testEnvironment)
-			})
-		})
-		Context(`Using external config, construct service client instances with error: Invalid URL`, func() {
-			// Map containing environment variables used in testing.
-			var testEnvironment = map[string]string{
-				"APP_CONFIGURATION_AUTH_TYPE": "NOAuth",
-			}
-
-			SetTestEnvironment(testEnvironment)
-			appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1UsingExternalConfig(&appconfigurationv1.AppConfigurationV1Options{
-				URL: "{BAD_URL_STRING",
-			})
-
-			It(`Instantiate service client with error`, func() {
-				Expect(appConfigurationService).To(BeNil())
-				Expect(serviceErr).ToNot(BeNil())
-				ClearTestEnvironment(testEnvironment)
-			})
-		})
-	})
-	Describe(`Regional endpoint tests`, func() {
-		It(`GetServiceURLForRegion(region string)`, func() {
-			var url string
-			var err error
-			url, err = appconfigurationv1.GetServiceURLForRegion("INVALID_REGION")
-			Expect(url).To(BeEmpty())
-			Expect(err).ToNot(BeNil())
-			fmt.Fprintf(GinkgoWriter, "Expected error: %s\n", err.Error())
-		})
-	})
 	Describe(`Model constructor tests`, func() {
 		Context(`Using a service client instance`, func() {
 			appConfigurationService, _ := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
@@ -5710,14 +7134,14 @@ var _ = Describe(`AppConfigurationV1`, func() {
 			It(`Invoke NewCollection successfully`, func() {
 				name := "testString"
 				collectionID := "testString"
-				model, err := appConfigurationService.NewCollection(name, collectionID)
-				Expect(model).ToNot(BeNil())
+				_model, err := appConfigurationService.NewCollection(name, collectionID)
+				Expect(_model).ToNot(BeNil())
 				Expect(err).To(BeNil())
 			})
 			It(`Invoke NewCollectionRef successfully`, func() {
 				collectionID := "testString"
-				model, err := appConfigurationService.NewCollectionRef(collectionID)
-				Expect(model).ToNot(BeNil())
+				_model, err := appConfigurationService.NewCollectionRef(collectionID)
+				Expect(_model).ToNot(BeNil())
 				Expect(err).To(BeNil())
 			})
 			It(`Invoke NewCreateCollectionOptions successfully`, func() {
@@ -5760,8 +7184,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				// Construct an instance of the TargetSegments model
 				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
 				Expect(targetSegmentsModel).ToNot(BeNil())
-				targetSegmentsModel.Segments = []string{"testString"}
-				Expect(targetSegmentsModel.Segments).To(Equal([]string{"testString"}))
+				targetSegmentsModel.Segments = []string{"betausers", "premiumusers"}
+				Expect(targetSegmentsModel.Segments).To(Equal([]string{"betausers", "premiumusers"}))
 
 				// Construct an instance of the SegmentRule model
 				segmentRuleModel := new(appconfigurationv1.SegmentRule)
@@ -5794,6 +7218,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				createFeatureOptionsModel.SetEnabledValue(core.StringPtr("true"))
 				createFeatureOptionsModel.SetDisabledValue(core.StringPtr("false"))
 				createFeatureOptionsModel.SetDescription("Feature flag to enable Cycle Rentals")
+				createFeatureOptionsModel.SetFormat("TEXT")
 				createFeatureOptionsModel.SetEnabled(true)
 				createFeatureOptionsModel.SetTags("version: 1.1, pre-release")
 				createFeatureOptionsModel.SetSegmentRules([]appconfigurationv1.SegmentRule{*segmentRuleModel})
@@ -5807,6 +7232,132 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(createFeatureOptionsModel.EnabledValue).To(Equal(core.StringPtr("true")))
 				Expect(createFeatureOptionsModel.DisabledValue).To(Equal(core.StringPtr("false")))
 				Expect(createFeatureOptionsModel.Description).To(Equal(core.StringPtr("Feature flag to enable Cycle Rentals")))
+				Expect(createFeatureOptionsModel.Format).To(Equal(core.StringPtr("TEXT")))
+				Expect(createFeatureOptionsModel.Enabled).To(Equal(core.BoolPtr(true)))
+				Expect(createFeatureOptionsModel.Tags).To(Equal(core.StringPtr("version: 1.1, pre-release")))
+				Expect(createFeatureOptionsModel.SegmentRules).To(Equal([]appconfigurationv1.SegmentRule{*segmentRuleModel}))
+				Expect(createFeatureOptionsModel.Collections).To(Equal([]appconfigurationv1.CollectionRef{*collectionRefModel}))
+				Expect(createFeatureOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
+			})
+			It(`Invoke NewCreateYamlFeatureOptions successfully`, func() {
+				// Construct an instance of the TargetSegments model
+				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
+				Expect(targetSegmentsModel).ToNot(BeNil())
+				targetSegmentsModel.Segments = []string{"betausers", "premiumusers"}
+				Expect(targetSegmentsModel.Segments).To(Equal([]string{"betausers", "premiumusers"}))
+
+				// Construct an instance of the SegmentRule model
+				segmentRuleModel := new(appconfigurationv1.SegmentRule)
+				Expect(segmentRuleModel).ToNot(BeNil())
+				segmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
+				segmentRuleModel.Value = core.StringPtr("---\nkey: segmentVal")
+				segmentRuleModel.Order = core.Int64Ptr(int64(1))
+				Expect(segmentRuleModel.Rules).To(Equal([]appconfigurationv1.TargetSegments{*targetSegmentsModel}))
+				Expect(segmentRuleModel.Value).To(Equal(core.StringPtr("---\nkey: segmentVal")))
+				Expect(segmentRuleModel.Order).To(Equal(core.Int64Ptr(int64(1))))
+
+				// Construct an instance of the CollectionRef model
+				collectionRefModel := new(appconfigurationv1.CollectionRef)
+				Expect(collectionRefModel).ToNot(BeNil())
+				collectionRefModel.CollectionID = core.StringPtr("ghzinc")
+				Expect(collectionRefModel.CollectionID).To(Equal(core.StringPtr("ghzinc")))
+
+				// Construct an instance of the CreateFeatureOptions model
+				environmentID := "testString"
+				createFeatureOptionsName := "yaml feature"
+				createFeatureOptionsFeatureID := "yaml-feature"
+				createFeatureOptionsType := "STRING"
+				createFeatureOptionsEnabledValue := core.StringPtr("---\nkey: enabledVal")
+				createFeatureOptionsDisabledValue := core.StringPtr("---\nkey: disabledVal")
+				createFeatureOptionsModel := appConfigurationService.NewCreateFeatureOptions(environmentID, createFeatureOptionsName, createFeatureOptionsFeatureID, createFeatureOptionsType, createFeatureOptionsEnabledValue, createFeatureOptionsDisabledValue)
+				createFeatureOptionsModel.SetEnvironmentID("testString")
+				createFeatureOptionsModel.SetName("yaml feature")
+				createFeatureOptionsModel.SetFeatureID("yaml-feature")
+				createFeatureOptionsModel.SetType("STRING")
+				createFeatureOptionsModel.SetEnabledValue(core.StringPtr("---\nkey: enabledVal"))
+				createFeatureOptionsModel.SetDisabledValue(core.StringPtr("---\nkey: disabledVal"))
+				createFeatureOptionsModel.SetDescription("Feature flag to enable Cycle Rentals")
+				createFeatureOptionsModel.SetFormat("YAML")
+				createFeatureOptionsModel.SetEnabled(true)
+				createFeatureOptionsModel.SetTags("version: 1.1, pre-release")
+				createFeatureOptionsModel.SetSegmentRules([]appconfigurationv1.SegmentRule{*segmentRuleModel})
+				createFeatureOptionsModel.SetCollections([]appconfigurationv1.CollectionRef{*collectionRefModel})
+				createFeatureOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
+				Expect(createFeatureOptionsModel).ToNot(BeNil())
+				Expect(createFeatureOptionsModel.EnvironmentID).To(Equal(core.StringPtr("testString")))
+				Expect(createFeatureOptionsModel.Name).To(Equal(core.StringPtr("yaml feature")))
+				Expect(createFeatureOptionsModel.FeatureID).To(Equal(core.StringPtr("yaml-feature")))
+				Expect(createFeatureOptionsModel.Type).To(Equal(core.StringPtr("STRING")))
+				Expect(createFeatureOptionsModel.EnabledValue).To(Equal(core.StringPtr("---\nkey: enabledVal")))
+				Expect(createFeatureOptionsModel.DisabledValue).To(Equal(core.StringPtr("---\nkey: disabledVal")))
+				Expect(createFeatureOptionsModel.Description).To(Equal(core.StringPtr("Feature flag to enable Cycle Rentals")))
+				Expect(createFeatureOptionsModel.Format).To(Equal(core.StringPtr("YAML")))
+				Expect(createFeatureOptionsModel.Enabled).To(Equal(core.BoolPtr(true)))
+				Expect(createFeatureOptionsModel.Tags).To(Equal(core.StringPtr("version: 1.1, pre-release")))
+				Expect(createFeatureOptionsModel.SegmentRules).To(Equal([]appconfigurationv1.SegmentRule{*segmentRuleModel}))
+				Expect(createFeatureOptionsModel.Collections).To(Equal([]appconfigurationv1.CollectionRef{*collectionRefModel}))
+				Expect(createFeatureOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
+			})
+			It(`Invoke NewCreateJsonFeatureOptions successfully`, func() {
+				// Construct an instance of the TargetSegments model
+				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
+				Expect(targetSegmentsModel).ToNot(BeNil())
+				targetSegmentsModel.Segments = []string{"betausers", "premiumusers"}
+				Expect(targetSegmentsModel.Segments).To(Equal([]string{"betausers", "premiumusers"}))
+
+				featureEnabledValMap := make(map[string]interface{})
+				featureEnabledValMap["key"] = "enabled"
+				featureDisabledValMap := make(map[string]interface{})
+				featureDisabledValMap["key"] = "disabled"
+				featureSegmentValMap := make(map[string]interface{})
+				featureSegmentValMap["key"] = "segmentVal"
+
+				// Construct an instance of the SegmentRule model
+				segmentRuleModel := new(appconfigurationv1.SegmentRule)
+				Expect(segmentRuleModel).ToNot(BeNil())
+				segmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
+				segmentRuleModel.Value = featureSegmentValMap
+				segmentRuleModel.Order = core.Int64Ptr(int64(1))
+				Expect(segmentRuleModel.Rules).To(Equal([]appconfigurationv1.TargetSegments{*targetSegmentsModel}))
+				Expect(segmentRuleModel.Value.(map[string]interface{})["key"]).To(Equal("segmentVal"))
+				Expect(segmentRuleModel.Order).To(Equal(core.Int64Ptr(int64(1))))
+
+				// Construct an instance of the CollectionRef model
+				collectionRefModel := new(appconfigurationv1.CollectionRef)
+				Expect(collectionRefModel).ToNot(BeNil())
+				collectionRefModel.CollectionID = core.StringPtr("ghzinc")
+				Expect(collectionRefModel.CollectionID).To(Equal(core.StringPtr("ghzinc")))
+
+				// Construct an instance of the CreateFeatureOptions model
+				environmentID := "testString"
+				createFeatureOptionsName := "json feature"
+				createFeatureOptionsFeatureID := "json-feature"
+				createFeatureOptionsType := "STRING"
+				createFeatureOptionsEnabledValue := featureEnabledValMap
+				createFeatureOptionsDisabledValue := featureDisabledValMap
+				createFeatureOptionsModel := appConfigurationService.NewCreateFeatureOptions(environmentID, createFeatureOptionsName, createFeatureOptionsFeatureID, createFeatureOptionsType, createFeatureOptionsEnabledValue, createFeatureOptionsDisabledValue)
+				createFeatureOptionsModel.SetEnvironmentID("testString")
+				createFeatureOptionsModel.SetName("json feature")
+				createFeatureOptionsModel.SetFeatureID("json-feature")
+				createFeatureOptionsModel.SetType("STRING")
+				createFeatureOptionsModel.SetEnabledValue(createFeatureOptionsEnabledValue)
+				createFeatureOptionsModel.SetDisabledValue(createFeatureOptionsDisabledValue)
+				createFeatureOptionsModel.SetDescription("Feature flag to enable Cycle Rentals")
+				createFeatureOptionsModel.SetFormat("JSON")
+				createFeatureOptionsModel.SetEnabled(true)
+				createFeatureOptionsModel.SetTags("version: 1.1, pre-release")
+				createFeatureOptionsModel.SetSegmentRules([]appconfigurationv1.SegmentRule{*segmentRuleModel})
+				createFeatureOptionsModel.SetCollections([]appconfigurationv1.CollectionRef{*collectionRefModel})
+				createFeatureOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
+				Expect(createFeatureOptionsModel).ToNot(BeNil())
+				Expect(createFeatureOptionsModel.EnvironmentID).To(Equal(core.StringPtr("testString")))
+				Expect(createFeatureOptionsModel.Name).To(Equal(core.StringPtr("json feature")))
+				Expect(createFeatureOptionsModel.FeatureID).To(Equal(core.StringPtr("json-feature")))
+				Expect(createFeatureOptionsModel.Type).To(Equal(core.StringPtr("STRING")))
+				Expect(createFeatureOptionsModel.EnabledValue.(map[string]interface{})["key"]).To(Equal("enabled"))
+				Expect(createFeatureOptionsModel.DisabledValue.(map[string]interface{})["key"]).To(Equal("disabled"))
+				Expect(createFeatureOptionsModel.Description).To(Equal(core.StringPtr("Feature flag to enable Cycle Rentals")))
+				Expect(createFeatureOptionsModel.Format).To(Equal(core.StringPtr("JSON")))
 				Expect(createFeatureOptionsModel.Enabled).To(Equal(core.BoolPtr(true)))
 				Expect(createFeatureOptionsModel.Tags).To(Equal(core.StringPtr("version: 1.1, pre-release")))
 				Expect(createFeatureOptionsModel.SegmentRules).To(Equal([]appconfigurationv1.SegmentRule{*segmentRuleModel}))
@@ -5817,8 +7368,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				// Construct an instance of the TargetSegments model
 				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
 				Expect(targetSegmentsModel).ToNot(BeNil())
-				targetSegmentsModel.Segments = []string{"testString"}
-				Expect(targetSegmentsModel.Segments).To(Equal([]string{"testString"}))
+				targetSegmentsModel.Segments = []string{"betausers", "premiumusers"}
+				Expect(targetSegmentsModel.Segments).To(Equal([]string{"betausers", "premiumusers"}))
 
 				// Construct an instance of the SegmentRule model
 				segmentRuleModel := new(appconfigurationv1.SegmentRule)
@@ -5849,6 +7400,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				createPropertyOptionsModel.SetType("BOOLEAN")
 				createPropertyOptionsModel.SetValue(core.StringPtr("true"))
 				createPropertyOptionsModel.SetDescription("Property for email")
+				createPropertyOptionsModel.SetFormat("TEXT")
 				createPropertyOptionsModel.SetTags("version: 1.1, pre-release")
 				createPropertyOptionsModel.SetSegmentRules([]appconfigurationv1.SegmentRule{*segmentRuleModel})
 				createPropertyOptionsModel.SetCollections([]appconfigurationv1.CollectionRef{*collectionRefModel})
@@ -5860,6 +7412,120 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(createPropertyOptionsModel.Type).To(Equal(core.StringPtr("BOOLEAN")))
 				Expect(createPropertyOptionsModel.Value).To(Equal(core.StringPtr("true")))
 				Expect(createPropertyOptionsModel.Description).To(Equal(core.StringPtr("Property for email")))
+				Expect(createPropertyOptionsModel.Format).To(Equal(core.StringPtr("TEXT")))
+				Expect(createPropertyOptionsModel.Tags).To(Equal(core.StringPtr("version: 1.1, pre-release")))
+				Expect(createPropertyOptionsModel.SegmentRules).To(Equal([]appconfigurationv1.SegmentRule{*segmentRuleModel}))
+				Expect(createPropertyOptionsModel.Collections).To(Equal([]appconfigurationv1.CollectionRef{*collectionRefModel}))
+				Expect(createPropertyOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
+			})
+			It(`Invoke NewCreateStringJsonPropertyOptions successfully`, func() {
+				// Construct an instance of the TargetSegments model
+				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
+				Expect(targetSegmentsModel).ToNot(BeNil())
+				targetSegmentsModel.Segments = []string{"betausers", "premiumusers"}
+				Expect(targetSegmentsModel.Segments).To(Equal([]string{"betausers", "premiumusers"}))
+
+				propertyValMap := make(map[string]interface{})
+				propertyValMap["key"] = "propertyVal"
+				propertySegmentValMap := make(map[string]interface{})
+				propertySegmentValMap["key"] = "segmentVal"
+
+				// Construct an instance of the SegmentRule model
+				segmentRuleModel := new(appconfigurationv1.SegmentRule)
+				Expect(segmentRuleModel).ToNot(BeNil())
+				segmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
+				segmentRuleModel.Value = propertySegmentValMap
+				segmentRuleModel.Order = core.Int64Ptr(int64(1))
+				Expect(segmentRuleModel.Rules).To(Equal([]appconfigurationv1.TargetSegments{*targetSegmentsModel}))
+				Expect(segmentRuleModel.Value.(map[string]interface{})["key"]).To(Equal("segmentVal"))
+				Expect(segmentRuleModel.Order).To(Equal(core.Int64Ptr(int64(1))))
+
+				// Construct an instance of the CollectionRef model
+				collectionRefModel := new(appconfigurationv1.CollectionRef)
+				Expect(collectionRefModel).ToNot(BeNil())
+				collectionRefModel.CollectionID = core.StringPtr("ghzinc")
+				Expect(collectionRefModel.CollectionID).To(Equal(core.StringPtr("ghzinc")))
+
+				// Construct an instance of the CreatePropertyOptions model
+				environmentID := "testString"
+				createPropertyOptionsName := "json property"
+				createPropertyOptionsPropertyID := "json-property"
+				createPropertyOptionsType := "STRING"
+				createPropertyOptionsValue := propertyValMap
+				createPropertyOptionsModel := appConfigurationService.NewCreatePropertyOptions(environmentID, createPropertyOptionsName, createPropertyOptionsPropertyID, createPropertyOptionsType, createPropertyOptionsValue)
+				createPropertyOptionsModel.SetEnvironmentID("testString")
+				createPropertyOptionsModel.SetName("json property")
+				createPropertyOptionsModel.SetPropertyID("json-property")
+				createPropertyOptionsModel.SetType("STRING")
+				createPropertyOptionsModel.SetValue(propertyValMap)
+				createPropertyOptionsModel.SetDescription("Property for email")
+				createPropertyOptionsModel.SetFormat("JSON")
+				createPropertyOptionsModel.SetTags("version: 1.1, pre-release")
+				createPropertyOptionsModel.SetSegmentRules([]appconfigurationv1.SegmentRule{*segmentRuleModel})
+				createPropertyOptionsModel.SetCollections([]appconfigurationv1.CollectionRef{*collectionRefModel})
+				createPropertyOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
+				Expect(createPropertyOptionsModel).ToNot(BeNil())
+				Expect(createPropertyOptionsModel.EnvironmentID).To(Equal(core.StringPtr("testString")))
+				Expect(createPropertyOptionsModel.Name).To(Equal(core.StringPtr("json property")))
+				Expect(createPropertyOptionsModel.PropertyID).To(Equal(core.StringPtr("json-property")))
+				Expect(createPropertyOptionsModel.Type).To(Equal(core.StringPtr("STRING")))
+				Expect(createPropertyOptionsModel.Value.(map[string]interface{})["key"]).To(Equal("propertyVal"))
+				Expect(createPropertyOptionsModel.Description).To(Equal(core.StringPtr("Property for email")))
+				Expect(createPropertyOptionsModel.Format).To(Equal(core.StringPtr("JSON")))
+				Expect(createPropertyOptionsModel.Tags).To(Equal(core.StringPtr("version: 1.1, pre-release")))
+				Expect(createPropertyOptionsModel.SegmentRules).To(Equal([]appconfigurationv1.SegmentRule{*segmentRuleModel}))
+				Expect(createPropertyOptionsModel.Collections).To(Equal([]appconfigurationv1.CollectionRef{*collectionRefModel}))
+				Expect(createPropertyOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
+			})
+			It(`Invoke NewCreateStringYamlPropertyOptions successfully`, func() {
+				// Construct an instance of the TargetSegments model
+				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
+				Expect(targetSegmentsModel).ToNot(BeNil())
+				targetSegmentsModel.Segments = []string{"betausers", "premiumusers"}
+				Expect(targetSegmentsModel.Segments).To(Equal([]string{"betausers", "premiumusers"}))
+
+				// Construct an instance of the SegmentRule model
+				segmentRuleModel := new(appconfigurationv1.SegmentRule)
+				Expect(segmentRuleModel).ToNot(BeNil())
+				segmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
+				segmentRuleModel.Value = core.StringPtr("---\nkey: segmentVal")
+				segmentRuleModel.Order = core.Int64Ptr(int64(1))
+				Expect(segmentRuleModel.Rules).To(Equal([]appconfigurationv1.TargetSegments{*targetSegmentsModel}))
+				Expect(segmentRuleModel.Value).To(Equal(core.StringPtr("---\nkey: segmentVal")))
+				Expect(segmentRuleModel.Order).To(Equal(core.Int64Ptr(int64(1))))
+
+				// Construct an instance of the CollectionRef model
+				collectionRefModel := new(appconfigurationv1.CollectionRef)
+				Expect(collectionRefModel).ToNot(BeNil())
+				collectionRefModel.CollectionID = core.StringPtr("ghzinc")
+				Expect(collectionRefModel.CollectionID).To(Equal(core.StringPtr("ghzinc")))
+
+				// Construct an instance of the CreatePropertyOptions model
+				environmentID := "testString"
+				createPropertyOptionsName := "yaml property"
+				createPropertyOptionsPropertyID := "yaml-property"
+				createPropertyOptionsType := "STRING"
+				createPropertyOptionsValue := core.StringPtr("true")
+				createPropertyOptionsModel := appConfigurationService.NewCreatePropertyOptions(environmentID, createPropertyOptionsName, createPropertyOptionsPropertyID, createPropertyOptionsType, createPropertyOptionsValue)
+				createPropertyOptionsModel.SetEnvironmentID("testString")
+				createPropertyOptionsModel.SetName("yaml property")
+				createPropertyOptionsModel.SetPropertyID("yaml-property")
+				createPropertyOptionsModel.SetType("STRING")
+				createPropertyOptionsModel.SetValue(core.StringPtr("---\nkey: propertyVal"))
+				createPropertyOptionsModel.SetDescription("Property for email")
+				createPropertyOptionsModel.SetFormat("YAML")
+				createPropertyOptionsModel.SetTags("version: 1.1, pre-release")
+				createPropertyOptionsModel.SetSegmentRules([]appconfigurationv1.SegmentRule{*segmentRuleModel})
+				createPropertyOptionsModel.SetCollections([]appconfigurationv1.CollectionRef{*collectionRefModel})
+				createPropertyOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
+				Expect(createPropertyOptionsModel).ToNot(BeNil())
+				Expect(createPropertyOptionsModel.EnvironmentID).To(Equal(core.StringPtr("testString")))
+				Expect(createPropertyOptionsModel.Name).To(Equal(core.StringPtr("yaml property")))
+				Expect(createPropertyOptionsModel.PropertyID).To(Equal(core.StringPtr("yaml-property")))
+				Expect(createPropertyOptionsModel.Type).To(Equal(core.StringPtr("STRING")))
+				Expect(createPropertyOptionsModel.Value).To(Equal(core.StringPtr("---\nkey: propertyVal")))
+				Expect(createPropertyOptionsModel.Description).To(Equal(core.StringPtr("Property for email")))
+				Expect(createPropertyOptionsModel.Format).To(Equal(core.StringPtr("YAML")))
 				Expect(createPropertyOptionsModel.Tags).To(Equal(core.StringPtr("version: 1.1, pre-release")))
 				Expect(createPropertyOptionsModel.SegmentRules).To(Equal([]appconfigurationv1.SegmentRule{*segmentRuleModel}))
 				Expect(createPropertyOptionsModel.Collections).To(Equal([]appconfigurationv1.CollectionRef{*collectionRefModel}))
@@ -5871,10 +7537,10 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(ruleModel).ToNot(BeNil())
 				ruleModel.AttributeName = core.StringPtr("email")
 				ruleModel.Operator = core.StringPtr("endsWith")
-				ruleModel.Values = []string{"testString"}
+				ruleModel.Values = []string{"@in.mnc.com", "@us.mnc.com"}
 				Expect(ruleModel.AttributeName).To(Equal(core.StringPtr("email")))
 				Expect(ruleModel.Operator).To(Equal(core.StringPtr("endsWith")))
-				Expect(ruleModel.Values).To(Equal([]string{"testString"}))
+				Expect(ruleModel.Values).To(Equal([]string{"@in.mnc.com", "@us.mnc.com"}))
 
 				// Construct an instance of the CreateSegmentOptions model
 				createSegmentOptionsModel := appConfigurationService.NewCreateSegmentOptions()
@@ -5951,8 +7617,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 			It(`Invoke NewEnvironment successfully`, func() {
 				name := "testString"
 				environmentID := "testString"
-				model, err := appConfigurationService.NewEnvironment(name, environmentID)
-				Expect(model).ToNot(BeNil())
+				_model, err := appConfigurationService.NewEnvironment(name, environmentID)
+				Expect(_model).ToNot(BeNil())
 				Expect(err).To(BeNil())
 			})
 			It(`Invoke NewFeature successfully`, func() {
@@ -5961,15 +7627,15 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				typeVar := "BOOLEAN"
 				enabledValue := core.StringPtr("testString")
 				disabledValue := core.StringPtr("testString")
-				model, err := appConfigurationService.NewFeature(name, featureID, typeVar, enabledValue, disabledValue)
-				Expect(model).ToNot(BeNil())
+				_model, err := appConfigurationService.NewFeature(name, featureID, typeVar, enabledValue, disabledValue)
+				Expect(_model).ToNot(BeNil())
 				Expect(err).To(BeNil())
 			})
 			It(`Invoke NewFeatureOutput successfully`, func() {
 				featureID := "testString"
 				name := "testString"
-				model, err := appConfigurationService.NewFeatureOutput(featureID, name)
-				Expect(model).ToNot(BeNil())
+				_model, err := appConfigurationService.NewFeatureOutput(featureID, name)
+				Expect(_model).ToNot(BeNil())
 				Expect(err).To(BeNil())
 			})
 			It(`Invoke NewGetCollectionOptions successfully`, func() {
@@ -6053,6 +7719,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				listCollectionsOptionsModel.SetInclude([]string{"features"})
 				listCollectionsOptionsModel.SetLimit(int64(1))
 				listCollectionsOptionsModel.SetOffset(int64(0))
+				listCollectionsOptionsModel.SetSearch("test tag")
 				listCollectionsOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(listCollectionsOptionsModel).ToNot(BeNil())
 				Expect(listCollectionsOptionsModel.Expand).To(Equal(core.BoolPtr(true)))
@@ -6063,6 +7730,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(listCollectionsOptionsModel.Include).To(Equal([]string{"features"}))
 				Expect(listCollectionsOptionsModel.Limit).To(Equal(core.Int64Ptr(int64(1))))
 				Expect(listCollectionsOptionsModel.Offset).To(Equal(core.Int64Ptr(int64(0))))
+				Expect(listCollectionsOptionsModel.Search).To(Equal(core.StringPtr("test tag")))
 				Expect(listCollectionsOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewListEnvironmentsOptions successfully`, func() {
@@ -6074,6 +7742,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				listEnvironmentsOptionsModel.SetInclude([]string{"features"})
 				listEnvironmentsOptionsModel.SetLimit(int64(1))
 				listEnvironmentsOptionsModel.SetOffset(int64(0))
+				listEnvironmentsOptionsModel.SetSearch("test tag")
 				listEnvironmentsOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(listEnvironmentsOptionsModel).ToNot(BeNil())
 				Expect(listEnvironmentsOptionsModel.Expand).To(Equal(core.BoolPtr(true)))
@@ -6082,6 +7751,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(listEnvironmentsOptionsModel.Include).To(Equal([]string{"features"}))
 				Expect(listEnvironmentsOptionsModel.Limit).To(Equal(core.Int64Ptr(int64(1))))
 				Expect(listEnvironmentsOptionsModel.Offset).To(Equal(core.Int64Ptr(int64(0))))
+				Expect(listEnvironmentsOptionsModel.Search).To(Equal(core.StringPtr("test tag")))
 				Expect(listEnvironmentsOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewListFeaturesOptions successfully`, func() {
@@ -6097,6 +7767,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				listFeaturesOptionsModel.SetInclude([]string{"collections"})
 				listFeaturesOptionsModel.SetLimit(int64(1))
 				listFeaturesOptionsModel.SetOffset(int64(0))
+				listFeaturesOptionsModel.SetSearch("test tag")
 				listFeaturesOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(listFeaturesOptionsModel).ToNot(BeNil())
 				Expect(listFeaturesOptionsModel.EnvironmentID).To(Equal(core.StringPtr("testString")))
@@ -6108,6 +7779,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(listFeaturesOptionsModel.Include).To(Equal([]string{"collections"}))
 				Expect(listFeaturesOptionsModel.Limit).To(Equal(core.Int64Ptr(int64(1))))
 				Expect(listFeaturesOptionsModel.Offset).To(Equal(core.Int64Ptr(int64(0))))
+				Expect(listFeaturesOptionsModel.Search).To(Equal(core.StringPtr("test tag")))
 				Expect(listFeaturesOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewListPropertiesOptions successfully`, func() {
@@ -6123,6 +7795,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				listPropertiesOptionsModel.SetInclude([]string{"collections"})
 				listPropertiesOptionsModel.SetLimit(int64(1))
 				listPropertiesOptionsModel.SetOffset(int64(0))
+				listPropertiesOptionsModel.SetSearch("test tag")
 				listPropertiesOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(listPropertiesOptionsModel).ToNot(BeNil())
 				Expect(listPropertiesOptionsModel.EnvironmentID).To(Equal(core.StringPtr("testString")))
@@ -6134,6 +7807,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(listPropertiesOptionsModel.Include).To(Equal([]string{"collections"}))
 				Expect(listPropertiesOptionsModel.Limit).To(Equal(core.Int64Ptr(int64(1))))
 				Expect(listPropertiesOptionsModel.Offset).To(Equal(core.Int64Ptr(int64(0))))
+				Expect(listPropertiesOptionsModel.Search).To(Equal(core.StringPtr("test tag")))
 				Expect(listPropertiesOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewListSegmentsOptions successfully`, func() {
@@ -6145,6 +7819,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				listSegmentsOptionsModel.SetInclude("rules")
 				listSegmentsOptionsModel.SetLimit(int64(1))
 				listSegmentsOptionsModel.SetOffset(int64(0))
+				listSegmentsOptionsModel.SetSearch("test tag")
 				listSegmentsOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(listSegmentsOptionsModel).ToNot(BeNil())
 				Expect(listSegmentsOptionsModel.Expand).To(Equal(core.BoolPtr(true)))
@@ -6153,6 +7828,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(listSegmentsOptionsModel.Include).To(Equal(core.StringPtr("rules")))
 				Expect(listSegmentsOptionsModel.Limit).To(Equal(core.Int64Ptr(int64(1))))
 				Expect(listSegmentsOptionsModel.Offset).To(Equal(core.Int64Ptr(int64(0))))
+				Expect(listSegmentsOptionsModel.Search).To(Equal(core.StringPtr("test tag")))
 				Expect(listSegmentsOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewProperty successfully`, func() {
@@ -6160,45 +7836,45 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				propertyID := "testString"
 				typeVar := "BOOLEAN"
 				value := core.StringPtr("testString")
-				model, err := appConfigurationService.NewProperty(name, propertyID, typeVar, value)
-				Expect(model).ToNot(BeNil())
+				_model, err := appConfigurationService.NewProperty(name, propertyID, typeVar, value)
+				Expect(_model).ToNot(BeNil())
 				Expect(err).To(BeNil())
 			})
 			It(`Invoke NewPropertyOutput successfully`, func() {
 				propertyID := "testString"
 				name := "testString"
-				model, err := appConfigurationService.NewPropertyOutput(propertyID, name)
-				Expect(model).ToNot(BeNil())
+				_model, err := appConfigurationService.NewPropertyOutput(propertyID, name)
+				Expect(_model).ToNot(BeNil())
 				Expect(err).To(BeNil())
 			})
 			It(`Invoke NewRule successfully`, func() {
 				attributeName := "testString"
 				operator := "is"
 				values := []string{"testString"}
-				model, err := appConfigurationService.NewRule(attributeName, operator, values)
-				Expect(model).ToNot(BeNil())
+				_model, err := appConfigurationService.NewRule(attributeName, operator, values)
+				Expect(_model).ToNot(BeNil())
 				Expect(err).To(BeNil())
 			})
 			It(`Invoke NewSegment successfully`, func() {
 				name := "testString"
 				segmentID := "testString"
 				rules := []appconfigurationv1.Rule{}
-				model, err := appConfigurationService.NewSegment(name, segmentID, rules)
-				Expect(model).ToNot(BeNil())
+				_model, err := appConfigurationService.NewSegment(name, segmentID, rules)
+				Expect(_model).ToNot(BeNil())
 				Expect(err).To(BeNil())
 			})
 			It(`Invoke NewSegmentRule successfully`, func() {
 				rules := []appconfigurationv1.TargetSegments{}
 				value := core.StringPtr("testString")
 				order := int64(38)
-				model, err := appConfigurationService.NewSegmentRule(rules, value, order)
-				Expect(model).ToNot(BeNil())
+				_model, err := appConfigurationService.NewSegmentRule(rules, value, order)
+				Expect(_model).ToNot(BeNil())
 				Expect(err).To(BeNil())
 			})
 			It(`Invoke NewTargetSegments successfully`, func() {
 				segments := []string{"testString"}
-				model, err := appConfigurationService.NewTargetSegments(segments)
-				Expect(model).ToNot(BeNil())
+				_model, err := appConfigurationService.NewTargetSegments(segments)
+				Expect(_model).ToNot(BeNil())
 				Expect(err).To(BeNil())
 			})
 			It(`Invoke NewToggleFeatureOptions successfully`, func() {
@@ -6254,24 +7930,24 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				// Construct an instance of the TargetSegments model
 				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
 				Expect(targetSegmentsModel).ToNot(BeNil())
-				targetSegmentsModel.Segments = []string{"testString"}
-				Expect(targetSegmentsModel.Segments).To(Equal([]string{"testString"}))
+				targetSegmentsModel.Segments = []string{"betausers", "premiumusers"}
+				Expect(targetSegmentsModel.Segments).To(Equal([]string{"betausers", "premiumusers"}))
 
 				// Construct an instance of the SegmentRule model
 				segmentRuleModel := new(appconfigurationv1.SegmentRule)
 				Expect(segmentRuleModel).ToNot(BeNil())
 				segmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
-				segmentRuleModel.Value = core.StringPtr("testString")
-				segmentRuleModel.Order = core.Int64Ptr(int64(38))
+				segmentRuleModel.Value = core.StringPtr("true")
+				segmentRuleModel.Order = core.Int64Ptr(int64(1))
 				Expect(segmentRuleModel.Rules).To(Equal([]appconfigurationv1.TargetSegments{*targetSegmentsModel}))
-				Expect(segmentRuleModel.Value).To(Equal(core.StringPtr("testString")))
-				Expect(segmentRuleModel.Order).To(Equal(core.Int64Ptr(int64(38))))
+				Expect(segmentRuleModel.Value).To(Equal(core.StringPtr("true")))
+				Expect(segmentRuleModel.Order).To(Equal(core.Int64Ptr(int64(1))))
 
 				// Construct an instance of the CollectionRef model
 				collectionRefModel := new(appconfigurationv1.CollectionRef)
 				Expect(collectionRefModel).ToNot(BeNil())
-				collectionRefModel.CollectionID = core.StringPtr("testString")
-				Expect(collectionRefModel.CollectionID).To(Equal(core.StringPtr("testString")))
+				collectionRefModel.CollectionID = core.StringPtr("ghzinc")
+				Expect(collectionRefModel.CollectionID).To(Equal(core.StringPtr("ghzinc")))
 
 				// Construct an instance of the UpdateFeatureOptions model
 				environmentID := "testString"
@@ -6279,24 +7955,24 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				updateFeatureOptionsModel := appConfigurationService.NewUpdateFeatureOptions(environmentID, featureID)
 				updateFeatureOptionsModel.SetEnvironmentID("testString")
 				updateFeatureOptionsModel.SetFeatureID("testString")
-				updateFeatureOptionsModel.SetName("testString")
-				updateFeatureOptionsModel.SetDescription("testString")
-				updateFeatureOptionsModel.SetEnabledValue(core.StringPtr("testString"))
-				updateFeatureOptionsModel.SetDisabledValue(core.StringPtr("testString"))
+				updateFeatureOptionsModel.SetName("Cycle Rentals")
+				updateFeatureOptionsModel.SetDescription("Feature flags to enable Cycle Rentals")
+				updateFeatureOptionsModel.SetEnabledValue(core.StringPtr("true"))
+				updateFeatureOptionsModel.SetDisabledValue(core.StringPtr("false"))
 				updateFeatureOptionsModel.SetEnabled(true)
-				updateFeatureOptionsModel.SetTags("testString")
+				updateFeatureOptionsModel.SetTags("version: 1.1, yet-to-release")
 				updateFeatureOptionsModel.SetSegmentRules([]appconfigurationv1.SegmentRule{*segmentRuleModel})
 				updateFeatureOptionsModel.SetCollections([]appconfigurationv1.CollectionRef{*collectionRefModel})
 				updateFeatureOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(updateFeatureOptionsModel).ToNot(BeNil())
 				Expect(updateFeatureOptionsModel.EnvironmentID).To(Equal(core.StringPtr("testString")))
 				Expect(updateFeatureOptionsModel.FeatureID).To(Equal(core.StringPtr("testString")))
-				Expect(updateFeatureOptionsModel.Name).To(Equal(core.StringPtr("testString")))
-				Expect(updateFeatureOptionsModel.Description).To(Equal(core.StringPtr("testString")))
-				Expect(updateFeatureOptionsModel.EnabledValue).To(Equal(core.StringPtr("testString")))
-				Expect(updateFeatureOptionsModel.DisabledValue).To(Equal(core.StringPtr("testString")))
+				Expect(updateFeatureOptionsModel.Name).To(Equal(core.StringPtr("Cycle Rentals")))
+				Expect(updateFeatureOptionsModel.Description).To(Equal(core.StringPtr("Feature flags to enable Cycle Rentals")))
+				Expect(updateFeatureOptionsModel.EnabledValue).To(Equal(core.StringPtr("true")))
+				Expect(updateFeatureOptionsModel.DisabledValue).To(Equal(core.StringPtr("false")))
 				Expect(updateFeatureOptionsModel.Enabled).To(Equal(core.BoolPtr(true)))
-				Expect(updateFeatureOptionsModel.Tags).To(Equal(core.StringPtr("testString")))
+				Expect(updateFeatureOptionsModel.Tags).To(Equal(core.StringPtr("version: 1.1, yet-to-release")))
 				Expect(updateFeatureOptionsModel.SegmentRules).To(Equal([]appconfigurationv1.SegmentRule{*segmentRuleModel}))
 				Expect(updateFeatureOptionsModel.Collections).To(Equal([]appconfigurationv1.CollectionRef{*collectionRefModel}))
 				Expect(updateFeatureOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
@@ -6305,18 +7981,18 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				// Construct an instance of the TargetSegments model
 				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
 				Expect(targetSegmentsModel).ToNot(BeNil())
-				targetSegmentsModel.Segments = []string{"testString"}
-				Expect(targetSegmentsModel.Segments).To(Equal([]string{"testString"}))
+				targetSegmentsModel.Segments = []string{"betausers", "premiumusers"}
+				Expect(targetSegmentsModel.Segments).To(Equal([]string{"betausers", "premiumusers"}))
 
 				// Construct an instance of the SegmentRule model
 				segmentRuleModel := new(appconfigurationv1.SegmentRule)
 				Expect(segmentRuleModel).ToNot(BeNil())
 				segmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
-				segmentRuleModel.Value = core.StringPtr("testString")
-				segmentRuleModel.Order = core.Int64Ptr(int64(38))
+				segmentRuleModel.Value = core.StringPtr("true")
+				segmentRuleModel.Order = core.Int64Ptr(int64(1))
 				Expect(segmentRuleModel.Rules).To(Equal([]appconfigurationv1.TargetSegments{*targetSegmentsModel}))
-				Expect(segmentRuleModel.Value).To(Equal(core.StringPtr("testString")))
-				Expect(segmentRuleModel.Order).To(Equal(core.Int64Ptr(int64(38))))
+				Expect(segmentRuleModel.Value).To(Equal(core.StringPtr("true")))
+				Expect(segmentRuleModel.Order).To(Equal(core.Int64Ptr(int64(1))))
 
 				// Construct an instance of the UpdateFeatureValuesOptions model
 				environmentID := "testString"
@@ -6324,21 +8000,21 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				updateFeatureValuesOptionsModel := appConfigurationService.NewUpdateFeatureValuesOptions(environmentID, featureID)
 				updateFeatureValuesOptionsModel.SetEnvironmentID("testString")
 				updateFeatureValuesOptionsModel.SetFeatureID("testString")
-				updateFeatureValuesOptionsModel.SetName("testString")
-				updateFeatureValuesOptionsModel.SetDescription("testString")
-				updateFeatureValuesOptionsModel.SetTags("testString")
-				updateFeatureValuesOptionsModel.SetEnabledValue(core.StringPtr("testString"))
-				updateFeatureValuesOptionsModel.SetDisabledValue(core.StringPtr("testString"))
+				updateFeatureValuesOptionsModel.SetName("Cycle Rentals")
+				updateFeatureValuesOptionsModel.SetDescription("Feature flags to enable Cycle Rentals")
+				updateFeatureValuesOptionsModel.SetTags("version: 1.1, yet-to-release")
+				updateFeatureValuesOptionsModel.SetEnabledValue(core.StringPtr("true"))
+				updateFeatureValuesOptionsModel.SetDisabledValue(core.StringPtr("false"))
 				updateFeatureValuesOptionsModel.SetSegmentRules([]appconfigurationv1.SegmentRule{*segmentRuleModel})
 				updateFeatureValuesOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(updateFeatureValuesOptionsModel).ToNot(BeNil())
 				Expect(updateFeatureValuesOptionsModel.EnvironmentID).To(Equal(core.StringPtr("testString")))
 				Expect(updateFeatureValuesOptionsModel.FeatureID).To(Equal(core.StringPtr("testString")))
-				Expect(updateFeatureValuesOptionsModel.Name).To(Equal(core.StringPtr("testString")))
-				Expect(updateFeatureValuesOptionsModel.Description).To(Equal(core.StringPtr("testString")))
-				Expect(updateFeatureValuesOptionsModel.Tags).To(Equal(core.StringPtr("testString")))
-				Expect(updateFeatureValuesOptionsModel.EnabledValue).To(Equal(core.StringPtr("testString")))
-				Expect(updateFeatureValuesOptionsModel.DisabledValue).To(Equal(core.StringPtr("testString")))
+				Expect(updateFeatureValuesOptionsModel.Name).To(Equal(core.StringPtr("Cycle Rentals")))
+				Expect(updateFeatureValuesOptionsModel.Description).To(Equal(core.StringPtr("Feature flags to enable Cycle Rentals")))
+				Expect(updateFeatureValuesOptionsModel.Tags).To(Equal(core.StringPtr("version: 1.1, yet-to-release")))
+				Expect(updateFeatureValuesOptionsModel.EnabledValue).To(Equal(core.StringPtr("true")))
+				Expect(updateFeatureValuesOptionsModel.DisabledValue).To(Equal(core.StringPtr("false")))
 				Expect(updateFeatureValuesOptionsModel.SegmentRules).To(Equal([]appconfigurationv1.SegmentRule{*segmentRuleModel}))
 				Expect(updateFeatureValuesOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
@@ -6346,24 +8022,24 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				// Construct an instance of the TargetSegments model
 				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
 				Expect(targetSegmentsModel).ToNot(BeNil())
-				targetSegmentsModel.Segments = []string{"testString"}
-				Expect(targetSegmentsModel.Segments).To(Equal([]string{"testString"}))
+				targetSegmentsModel.Segments = []string{"betausers", "premiumusers"}
+				Expect(targetSegmentsModel.Segments).To(Equal([]string{"betausers", "premiumusers"}))
 
 				// Construct an instance of the SegmentRule model
 				segmentRuleModel := new(appconfigurationv1.SegmentRule)
 				Expect(segmentRuleModel).ToNot(BeNil())
 				segmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
-				segmentRuleModel.Value = core.StringPtr("testString")
-				segmentRuleModel.Order = core.Int64Ptr(int64(38))
+				segmentRuleModel.Value = core.StringPtr("true")
+				segmentRuleModel.Order = core.Int64Ptr(int64(1))
 				Expect(segmentRuleModel.Rules).To(Equal([]appconfigurationv1.TargetSegments{*targetSegmentsModel}))
-				Expect(segmentRuleModel.Value).To(Equal(core.StringPtr("testString")))
-				Expect(segmentRuleModel.Order).To(Equal(core.Int64Ptr(int64(38))))
+				Expect(segmentRuleModel.Value).To(Equal(core.StringPtr("true")))
+				Expect(segmentRuleModel.Order).To(Equal(core.Int64Ptr(int64(1))))
 
 				// Construct an instance of the CollectionRef model
 				collectionRefModel := new(appconfigurationv1.CollectionRef)
 				Expect(collectionRefModel).ToNot(BeNil())
-				collectionRefModel.CollectionID = core.StringPtr("testString")
-				Expect(collectionRefModel.CollectionID).To(Equal(core.StringPtr("testString")))
+				collectionRefModel.CollectionID = core.StringPtr("ghzinc")
+				Expect(collectionRefModel.CollectionID).To(Equal(core.StringPtr("ghzinc")))
 
 				// Construct an instance of the UpdatePropertyOptions model
 				environmentID := "testString"
@@ -6371,20 +8047,20 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				updatePropertyOptionsModel := appConfigurationService.NewUpdatePropertyOptions(environmentID, propertyID)
 				updatePropertyOptionsModel.SetEnvironmentID("testString")
 				updatePropertyOptionsModel.SetPropertyID("testString")
-				updatePropertyOptionsModel.SetName("testString")
-				updatePropertyOptionsModel.SetDescription("testString")
-				updatePropertyOptionsModel.SetValue(core.StringPtr("testString"))
-				updatePropertyOptionsModel.SetTags("testString")
+				updatePropertyOptionsModel.SetName("Email property")
+				updatePropertyOptionsModel.SetDescription("Property for email")
+				updatePropertyOptionsModel.SetValue(core.StringPtr("true"))
+				updatePropertyOptionsModel.SetTags("version: 1.1, pre-release")
 				updatePropertyOptionsModel.SetSegmentRules([]appconfigurationv1.SegmentRule{*segmentRuleModel})
 				updatePropertyOptionsModel.SetCollections([]appconfigurationv1.CollectionRef{*collectionRefModel})
 				updatePropertyOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(updatePropertyOptionsModel).ToNot(BeNil())
 				Expect(updatePropertyOptionsModel.EnvironmentID).To(Equal(core.StringPtr("testString")))
 				Expect(updatePropertyOptionsModel.PropertyID).To(Equal(core.StringPtr("testString")))
-				Expect(updatePropertyOptionsModel.Name).To(Equal(core.StringPtr("testString")))
-				Expect(updatePropertyOptionsModel.Description).To(Equal(core.StringPtr("testString")))
-				Expect(updatePropertyOptionsModel.Value).To(Equal(core.StringPtr("testString")))
-				Expect(updatePropertyOptionsModel.Tags).To(Equal(core.StringPtr("testString")))
+				Expect(updatePropertyOptionsModel.Name).To(Equal(core.StringPtr("Email property")))
+				Expect(updatePropertyOptionsModel.Description).To(Equal(core.StringPtr("Property for email")))
+				Expect(updatePropertyOptionsModel.Value).To(Equal(core.StringPtr("true")))
+				Expect(updatePropertyOptionsModel.Tags).To(Equal(core.StringPtr("version: 1.1, pre-release")))
 				Expect(updatePropertyOptionsModel.SegmentRules).To(Equal([]appconfigurationv1.SegmentRule{*segmentRuleModel}))
 				Expect(updatePropertyOptionsModel.Collections).To(Equal([]appconfigurationv1.CollectionRef{*collectionRefModel}))
 				Expect(updatePropertyOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
@@ -6393,18 +8069,18 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				// Construct an instance of the TargetSegments model
 				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
 				Expect(targetSegmentsModel).ToNot(BeNil())
-				targetSegmentsModel.Segments = []string{"testString"}
-				Expect(targetSegmentsModel.Segments).To(Equal([]string{"testString"}))
+				targetSegmentsModel.Segments = []string{"betausers", "premiumusers"}
+				Expect(targetSegmentsModel.Segments).To(Equal([]string{"betausers", "premiumusers"}))
 
 				// Construct an instance of the SegmentRule model
 				segmentRuleModel := new(appconfigurationv1.SegmentRule)
 				Expect(segmentRuleModel).ToNot(BeNil())
 				segmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
-				segmentRuleModel.Value = core.StringPtr("testString")
-				segmentRuleModel.Order = core.Int64Ptr(int64(38))
+				segmentRuleModel.Value = core.StringPtr("true")
+				segmentRuleModel.Order = core.Int64Ptr(int64(1))
 				Expect(segmentRuleModel.Rules).To(Equal([]appconfigurationv1.TargetSegments{*targetSegmentsModel}))
-				Expect(segmentRuleModel.Value).To(Equal(core.StringPtr("testString")))
-				Expect(segmentRuleModel.Order).To(Equal(core.Int64Ptr(int64(38))))
+				Expect(segmentRuleModel.Value).To(Equal(core.StringPtr("true")))
+				Expect(segmentRuleModel.Order).To(Equal(core.Int64Ptr(int64(1))))
 
 				// Construct an instance of the UpdatePropertyValuesOptions model
 				environmentID := "testString"
@@ -6412,19 +8088,19 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				updatePropertyValuesOptionsModel := appConfigurationService.NewUpdatePropertyValuesOptions(environmentID, propertyID)
 				updatePropertyValuesOptionsModel.SetEnvironmentID("testString")
 				updatePropertyValuesOptionsModel.SetPropertyID("testString")
-				updatePropertyValuesOptionsModel.SetName("testString")
-				updatePropertyValuesOptionsModel.SetDescription("testString")
-				updatePropertyValuesOptionsModel.SetTags("testString")
-				updatePropertyValuesOptionsModel.SetValue(core.StringPtr("testString"))
+				updatePropertyValuesOptionsModel.SetName("Email property")
+				updatePropertyValuesOptionsModel.SetDescription("Property for email")
+				updatePropertyValuesOptionsModel.SetTags("version: 1.1, pre-release")
+				updatePropertyValuesOptionsModel.SetValue(core.StringPtr("true"))
 				updatePropertyValuesOptionsModel.SetSegmentRules([]appconfigurationv1.SegmentRule{*segmentRuleModel})
 				updatePropertyValuesOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(updatePropertyValuesOptionsModel).ToNot(BeNil())
 				Expect(updatePropertyValuesOptionsModel.EnvironmentID).To(Equal(core.StringPtr("testString")))
 				Expect(updatePropertyValuesOptionsModel.PropertyID).To(Equal(core.StringPtr("testString")))
-				Expect(updatePropertyValuesOptionsModel.Name).To(Equal(core.StringPtr("testString")))
-				Expect(updatePropertyValuesOptionsModel.Description).To(Equal(core.StringPtr("testString")))
-				Expect(updatePropertyValuesOptionsModel.Tags).To(Equal(core.StringPtr("testString")))
-				Expect(updatePropertyValuesOptionsModel.Value).To(Equal(core.StringPtr("testString")))
+				Expect(updatePropertyValuesOptionsModel.Name).To(Equal(core.StringPtr("Email property")))
+				Expect(updatePropertyValuesOptionsModel.Description).To(Equal(core.StringPtr("Property for email")))
+				Expect(updatePropertyValuesOptionsModel.Tags).To(Equal(core.StringPtr("version: 1.1, pre-release")))
+				Expect(updatePropertyValuesOptionsModel.Value).To(Equal(core.StringPtr("true")))
 				Expect(updatePropertyValuesOptionsModel.SegmentRules).To(Equal([]appconfigurationv1.SegmentRule{*segmentRuleModel}))
 				Expect(updatePropertyValuesOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
@@ -6472,11 +8148,11 @@ var _ = Describe(`AppConfigurationV1`, func() {
 			Expect(mockReader).ToNot(BeNil())
 		})
 		It(`Invoke CreateMockDate() successfully`, func() {
-			mockDate := CreateMockDate()
+			mockDate := CreateMockDate("2019-01-01")
 			Expect(mockDate).ToNot(BeNil())
 		})
 		It(`Invoke CreateMockDateTime() successfully`, func() {
-			mockDateTime := CreateMockDateTime()
+			mockDateTime := CreateMockDateTime("2019-01-01T12:00:00.000Z")
 			Expect(mockDateTime).ToNot(BeNil())
 		})
 	})
@@ -6501,13 +8177,19 @@ func CreateMockReader(mockData string) io.ReadCloser {
 	return ioutil.NopCloser(bytes.NewReader([]byte(mockData)))
 }
 
-func CreateMockDate() *strfmt.Date {
-	d := strfmt.Date(time.Date(2009, time.November, 10, 23, 0, 0, 0, time.UTC))
+func CreateMockDate(mockData string) *strfmt.Date {
+	d, err := core.ParseDate(mockData)
+	if err != nil {
+		return nil
+	}
 	return &d
 }
 
-func CreateMockDateTime() *strfmt.DateTime {
-	d := strfmt.DateTime(time.Date(2009, time.November, 10, 23, 0, 0, 0, time.UTC))
+func CreateMockDateTime(mockData string) *strfmt.DateTime {
+	d, err := core.ParseDateTime(mockData)
+	if err != nil {
+		return nil
+	}
 	return &d
 }
 
