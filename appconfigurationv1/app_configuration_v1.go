@@ -15,7 +15,7 @@
  */
 
 /*
- * IBM OpenAPI SDK Code Generator Version: 3.22.0-937b9a1c-20201211-223043
+ * IBM OpenAPI SDK Code Generator Version: 3.38.0-07189efd-20210827-205025
  */
 
 // Package appconfigurationv1 : Operations and models for the AppConfigurationV1 service
@@ -27,6 +27,7 @@ import (
 	"fmt"
 	"net/http"
 	"reflect"
+	"strconv"
 	"strings"
 	"time"
 
@@ -37,7 +38,7 @@ import (
 
 // AppConfigurationV1 : ReST APIs for App Configuration
 //
-// Version: 1.0
+// API Version: 1.0
 // See: https://{DomainName}/docs/app-configuration/
 type AppConfigurationV1 struct {
 	Service *core.BaseService
@@ -45,6 +46,12 @@ type AppConfigurationV1 struct {
 
 // DefaultServiceName is the default key used to find external configuration information.
 const DefaultServiceName = "app_configuration"
+
+const ParameterizedServiceURL = "https://us-south.apprapp.cloud.ibm.com/apprapp/feature/v1/instances/{guid}"
+
+var defaultUrlVariables = map[string]string{
+	"guid": "{guid}",
+}
 
 // AppConfigurationV1Options : Service options
 type AppConfigurationV1Options struct {
@@ -120,6 +127,11 @@ func (appConfiguration *AppConfigurationV1) Clone() *AppConfigurationV1 {
 	clone := *appConfiguration
 	clone.Service = appConfiguration.Service.Clone()
 	return &clone
+}
+
+// // ConstructServiceURL constructs a service URL from the parameterized URL.
+func ConstructServiceURL(providedUrlVariables map[string]string) (string, error) {
+	return core.ConstructServiceURL(ParameterizedServiceURL, defaultUrlVariables, providedUrlVariables)
 }
 
 // SetServiceURL sets the service URL
@@ -207,6 +219,9 @@ func (appConfiguration *AppConfigurationV1) ListEnvironmentsWithContext(ctx cont
 	if listEnvironmentsOptions.Offset != nil {
 		builder.AddQuery("offset", fmt.Sprint(*listEnvironmentsOptions.Offset))
 	}
+	if listEnvironmentsOptions.Search != nil {
+		builder.AddQuery("search", fmt.Sprint(*listEnvironmentsOptions.Search))
+	}
 
 	request, err := builder.Build()
 	if err != nil {
@@ -218,11 +233,13 @@ func (appConfiguration *AppConfigurationV1) ListEnvironmentsWithContext(ctx cont
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalEnvironmentList)
-	if err != nil {
-		return
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalEnvironmentList)
+		if err != nil {
+			return
+		}
+		response.Result = result
 	}
-	response.Result = result
 
 	return
 }
@@ -294,11 +311,13 @@ func (appConfiguration *AppConfigurationV1) CreateEnvironmentWithContext(ctx con
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalEnvironment)
-	if err != nil {
-		return
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalEnvironment)
+		if err != nil {
+			return
+		}
+		response.Result = result
 	}
-	response.Result = result
 
 	return
 }
@@ -371,11 +390,13 @@ func (appConfiguration *AppConfigurationV1) UpdateEnvironmentWithContext(ctx con
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalEnvironment)
-	if err != nil {
-		return
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalEnvironment)
+		if err != nil {
+			return
+		}
+		response.Result = result
 	}
-	response.Result = result
 
 	return
 }
@@ -436,11 +457,13 @@ func (appConfiguration *AppConfigurationV1) GetEnvironmentWithContext(ctx contex
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalEnvironment)
-	if err != nil {
-		return
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalEnvironment)
+		if err != nil {
+			return
+		}
+		response.Result = result
 	}
-	response.Result = result
 
 	return
 }
@@ -548,6 +571,9 @@ func (appConfiguration *AppConfigurationV1) ListCollectionsWithContext(ctx conte
 	if listCollectionsOptions.Offset != nil {
 		builder.AddQuery("offset", fmt.Sprint(*listCollectionsOptions.Offset))
 	}
+	if listCollectionsOptions.Search != nil {
+		builder.AddQuery("search", fmt.Sprint(*listCollectionsOptions.Search))
+	}
 
 	request, err := builder.Build()
 	if err != nil {
@@ -559,11 +585,13 @@ func (appConfiguration *AppConfigurationV1) ListCollectionsWithContext(ctx conte
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalCollectionList)
-	if err != nil {
-		return
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalCollectionList)
+		if err != nil {
+			return
+		}
+		response.Result = result
 	}
-	response.Result = result
 
 	return
 }
@@ -632,11 +660,13 @@ func (appConfiguration *AppConfigurationV1) CreateCollectionWithContext(ctx cont
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalCollectionLite)
-	if err != nil {
-		return
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalCollectionLite)
+		if err != nil {
+			return
+		}
+		response.Result = result
 	}
-	response.Result = result
 
 	return
 }
@@ -706,11 +736,13 @@ func (appConfiguration *AppConfigurationV1) UpdateCollectionWithContext(ctx cont
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalCollectionLite)
-	if err != nil {
-		return
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalCollectionLite)
+		if err != nil {
+			return
+		}
+		response.Result = result
 	}
-	response.Result = result
 
 	return
 }
@@ -771,11 +803,13 @@ func (appConfiguration *AppConfigurationV1) GetCollectionWithContext(ctx context
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalCollection)
-	if err != nil {
-		return
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalCollection)
+		if err != nil {
+			return
+		}
+		response.Result = result
 	}
-	response.Result = result
 
 	return
 }
@@ -891,6 +925,9 @@ func (appConfiguration *AppConfigurationV1) ListFeaturesWithContext(ctx context.
 	if listFeaturesOptions.Offset != nil {
 		builder.AddQuery("offset", fmt.Sprint(*listFeaturesOptions.Offset))
 	}
+	if listFeaturesOptions.Search != nil {
+		builder.AddQuery("search", fmt.Sprint(*listFeaturesOptions.Search))
+	}
 
 	request, err := builder.Build()
 	if err != nil {
@@ -902,11 +939,13 @@ func (appConfiguration *AppConfigurationV1) ListFeaturesWithContext(ctx context.
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalFeaturesList)
-	if err != nil {
-		return
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalFeaturesList)
+		if err != nil {
+			return
+		}
+		response.Result = result
 	}
-	response.Result = result
 
 	return
 }
@@ -970,6 +1009,9 @@ func (appConfiguration *AppConfigurationV1) CreateFeatureWithContext(ctx context
 	if createFeatureOptions.Description != nil {
 		body["description"] = createFeatureOptions.Description
 	}
+	if createFeatureOptions.Format != nil {
+		body["format"] = createFeatureOptions.Format
+	}
 	if createFeatureOptions.Enabled != nil {
 		body["enabled"] = createFeatureOptions.Enabled
 	}
@@ -997,11 +1039,13 @@ func (appConfiguration *AppConfigurationV1) CreateFeatureWithContext(ctx context
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalFeature)
-	if err != nil {
-		return
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalFeature)
+		if err != nil {
+			return
+		}
+		response.Result = result
 	}
-	response.Result = result
 
 	return
 }
@@ -1087,11 +1131,13 @@ func (appConfiguration *AppConfigurationV1) UpdateFeatureWithContext(ctx context
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalFeature)
-	if err != nil {
-		return
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalFeature)
+		if err != nil {
+			return
+		}
+		response.Result = result
 	}
-	response.Result = result
 
 	return
 }
@@ -1173,11 +1219,13 @@ func (appConfiguration *AppConfigurationV1) UpdateFeatureValuesWithContext(ctx c
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalFeature)
-	if err != nil {
-		return
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalFeature)
+		if err != nil {
+			return
+		}
+		response.Result = result
 	}
-	response.Result = result
 
 	return
 }
@@ -1236,11 +1284,13 @@ func (appConfiguration *AppConfigurationV1) GetFeatureWithContext(ctx context.Co
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalFeature)
-	if err != nil {
-		return
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalFeature)
+		if err != nil {
+			return
+		}
+		response.Result = result
 	}
-	response.Result = result
 
 	return
 }
@@ -1354,11 +1404,13 @@ func (appConfiguration *AppConfigurationV1) ToggleFeatureWithContext(ctx context
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalFeature)
-	if err != nil {
-		return
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalFeature)
+		if err != nil {
+			return
+		}
+		response.Result = result
 	}
-	response.Result = result
 
 	return
 }
@@ -1426,6 +1478,9 @@ func (appConfiguration *AppConfigurationV1) ListPropertiesWithContext(ctx contex
 	if listPropertiesOptions.Offset != nil {
 		builder.AddQuery("offset", fmt.Sprint(*listPropertiesOptions.Offset))
 	}
+	if listPropertiesOptions.Search != nil {
+		builder.AddQuery("search", fmt.Sprint(*listPropertiesOptions.Search))
+	}
 
 	request, err := builder.Build()
 	if err != nil {
@@ -1437,11 +1492,13 @@ func (appConfiguration *AppConfigurationV1) ListPropertiesWithContext(ctx contex
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalPropertiesList)
-	if err != nil {
-		return
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalPropertiesList)
+		if err != nil {
+			return
+		}
+		response.Result = result
 	}
-	response.Result = result
 
 	return
 }
@@ -1502,6 +1559,9 @@ func (appConfiguration *AppConfigurationV1) CreatePropertyWithContext(ctx contex
 	if createPropertyOptions.Description != nil {
 		body["description"] = createPropertyOptions.Description
 	}
+	if createPropertyOptions.Format != nil {
+		body["format"] = createPropertyOptions.Format
+	}
 	if createPropertyOptions.Tags != nil {
 		body["tags"] = createPropertyOptions.Tags
 	}
@@ -1526,11 +1586,13 @@ func (appConfiguration *AppConfigurationV1) CreatePropertyWithContext(ctx contex
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalProperty)
-	if err != nil {
-		return
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalProperty)
+		if err != nil {
+			return
+		}
+		response.Result = result
 	}
-	response.Result = result
 
 	return
 }
@@ -1610,11 +1672,13 @@ func (appConfiguration *AppConfigurationV1) UpdatePropertyWithContext(ctx contex
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalProperty)
-	if err != nil {
-		return
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalProperty)
+		if err != nil {
+			return
+		}
+		response.Result = result
 	}
-	response.Result = result
 
 	return
 }
@@ -1692,11 +1756,13 @@ func (appConfiguration *AppConfigurationV1) UpdatePropertyValuesWithContext(ctx 
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalProperty)
-	if err != nil {
-		return
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalProperty)
+		if err != nil {
+			return
+		}
+		response.Result = result
 	}
-	response.Result = result
 
 	return
 }
@@ -1755,11 +1821,13 @@ func (appConfiguration *AppConfigurationV1) GetPropertyWithContext(ctx context.C
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalProperty)
-	if err != nil {
-		return
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalProperty)
+		if err != nil {
+			return
+		}
+		response.Result = result
 	}
-	response.Result = result
 
 	return
 }
@@ -1862,6 +1930,9 @@ func (appConfiguration *AppConfigurationV1) ListSegmentsWithContext(ctx context.
 	if listSegmentsOptions.Offset != nil {
 		builder.AddQuery("offset", fmt.Sprint(*listSegmentsOptions.Offset))
 	}
+	if listSegmentsOptions.Search != nil {
+		builder.AddQuery("search", fmt.Sprint(*listSegmentsOptions.Search))
+	}
 
 	request, err := builder.Build()
 	if err != nil {
@@ -1873,11 +1944,13 @@ func (appConfiguration *AppConfigurationV1) ListSegmentsWithContext(ctx context.
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalSegmentsList)
-	if err != nil {
-		return
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalSegmentsList)
+		if err != nil {
+			return
+		}
+		response.Result = result
 	}
-	response.Result = result
 
 	return
 }
@@ -1945,11 +2018,13 @@ func (appConfiguration *AppConfigurationV1) CreateSegmentWithContext(ctx context
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalSegment)
-	if err != nil {
-		return
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalSegment)
+		if err != nil {
+			return
+		}
+		response.Result = result
 	}
-	response.Result = result
 
 	return
 }
@@ -2022,11 +2097,13 @@ func (appConfiguration *AppConfigurationV1) UpdateSegmentWithContext(ctx context
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalSegment)
-	if err != nil {
-		return
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalSegment)
+		if err != nil {
+			return
+		}
+		response.Result = result
 	}
-	response.Result = result
 
 	return
 }
@@ -2084,11 +2161,13 @@ func (appConfiguration *AppConfigurationV1) GetSegmentWithContext(ctx context.Co
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalSegment)
-	if err != nil {
-		return
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalSegment)
+		if err != nil {
+			return
+		}
+		response.Result = result
 	}
-	response.Result = result
 
 	return
 }
@@ -2178,12 +2257,12 @@ type Collection struct {
 }
 
 // NewCollection : Instantiate Collection (Generic Model Constructor)
-func (*AppConfigurationV1) NewCollection(name string, collectionID string) (model *Collection, err error) {
-	model = &Collection{
+func (*AppConfigurationV1) NewCollection(name string, collectionID string) (_model *Collection, err error) {
+	_model = &Collection{
 		Name:         core.StringPtr(name),
 		CollectionID: core.StringPtr(collectionID),
 	}
-	err = core.ValidateStruct(model, "required parameters")
+	err = core.ValidateStruct(_model, "required parameters")
 	return
 }
 
@@ -2304,6 +2383,23 @@ func UnmarshalCollectionList(m map[string]json.RawMessage, result interface{}) (
 	return
 }
 
+// Retrieve the value to be passed to a request to access the next page of results
+func (resp *CollectionList) GetNextOffset() (*int64, error) {
+	if core.IsNil(resp.Next) {
+		return nil, nil
+	}
+	offset, err := core.GetQueryParam(resp.Next.Href, "offset")
+	if err != nil || offset == nil {
+		return nil, err
+	}
+	var offsetValue int64
+	offsetValue, err = strconv.ParseInt(*offset, 10, 64)
+	if err != nil {
+		return nil, err
+	}
+	return core.Int64Ptr(offsetValue), nil
+}
+
 // CollectionLite : Details of the collection.
 type CollectionLite struct {
 	// Collection name.
@@ -2373,11 +2469,11 @@ type CollectionRef struct {
 }
 
 // NewCollectionRef : Instantiate CollectionRef (Generic Model Constructor)
-func (*AppConfigurationV1) NewCollectionRef(collectionID string) (model *CollectionRef, err error) {
-	model = &CollectionRef{
+func (*AppConfigurationV1) NewCollectionRef(collectionID string) (_model *CollectionRef, err error) {
+	_model = &CollectionRef{
 		CollectionID: core.StringPtr(collectionID),
 	}
-	err = core.ValidateStruct(model, "required parameters")
+	err = core.ValidateStruct(_model, "required parameters")
 	return
 }
 
@@ -2423,27 +2519,27 @@ func (*AppConfigurationV1) NewCreateCollectionOptions(name string, collectionID 
 }
 
 // SetName : Allow user to set Name
-func (options *CreateCollectionOptions) SetName(name string) *CreateCollectionOptions {
-	options.Name = core.StringPtr(name)
-	return options
+func (_options *CreateCollectionOptions) SetName(name string) *CreateCollectionOptions {
+	_options.Name = core.StringPtr(name)
+	return _options
 }
 
 // SetCollectionID : Allow user to set CollectionID
-func (options *CreateCollectionOptions) SetCollectionID(collectionID string) *CreateCollectionOptions {
-	options.CollectionID = core.StringPtr(collectionID)
-	return options
+func (_options *CreateCollectionOptions) SetCollectionID(collectionID string) *CreateCollectionOptions {
+	_options.CollectionID = core.StringPtr(collectionID)
+	return _options
 }
 
 // SetDescription : Allow user to set Description
-func (options *CreateCollectionOptions) SetDescription(description string) *CreateCollectionOptions {
-	options.Description = core.StringPtr(description)
-	return options
+func (_options *CreateCollectionOptions) SetDescription(description string) *CreateCollectionOptions {
+	_options.Description = core.StringPtr(description)
+	return _options
 }
 
 // SetTags : Allow user to set Tags
-func (options *CreateCollectionOptions) SetTags(tags string) *CreateCollectionOptions {
-	options.Tags = core.StringPtr(tags)
-	return options
+func (_options *CreateCollectionOptions) SetTags(tags string) *CreateCollectionOptions {
+	_options.Tags = core.StringPtr(tags)
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -2482,33 +2578,33 @@ func (*AppConfigurationV1) NewCreateEnvironmentOptions(name string, environmentI
 }
 
 // SetName : Allow user to set Name
-func (options *CreateEnvironmentOptions) SetName(name string) *CreateEnvironmentOptions {
-	options.Name = core.StringPtr(name)
-	return options
+func (_options *CreateEnvironmentOptions) SetName(name string) *CreateEnvironmentOptions {
+	_options.Name = core.StringPtr(name)
+	return _options
 }
 
 // SetEnvironmentID : Allow user to set EnvironmentID
-func (options *CreateEnvironmentOptions) SetEnvironmentID(environmentID string) *CreateEnvironmentOptions {
-	options.EnvironmentID = core.StringPtr(environmentID)
-	return options
+func (_options *CreateEnvironmentOptions) SetEnvironmentID(environmentID string) *CreateEnvironmentOptions {
+	_options.EnvironmentID = core.StringPtr(environmentID)
+	return _options
 }
 
 // SetDescription : Allow user to set Description
-func (options *CreateEnvironmentOptions) SetDescription(description string) *CreateEnvironmentOptions {
-	options.Description = core.StringPtr(description)
-	return options
+func (_options *CreateEnvironmentOptions) SetDescription(description string) *CreateEnvironmentOptions {
+	_options.Description = core.StringPtr(description)
+	return _options
 }
 
 // SetTags : Allow user to set Tags
-func (options *CreateEnvironmentOptions) SetTags(tags string) *CreateEnvironmentOptions {
-	options.Tags = core.StringPtr(tags)
-	return options
+func (_options *CreateEnvironmentOptions) SetTags(tags string) *CreateEnvironmentOptions {
+	_options.Tags = core.StringPtr(tags)
+	return _options
 }
 
 // SetColorCode : Allow user to set ColorCode
-func (options *CreateEnvironmentOptions) SetColorCode(colorCode string) *CreateEnvironmentOptions {
-	options.ColorCode = core.StringPtr(colorCode)
-	return options
+func (_options *CreateEnvironmentOptions) SetColorCode(colorCode string) *CreateEnvironmentOptions {
+	_options.ColorCode = core.StringPtr(colorCode)
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -2520,7 +2616,7 @@ func (options *CreateEnvironmentOptions) SetHeaders(param map[string]string) *Cr
 // CreateFeatureOptions : The CreateFeature options.
 type CreateFeatureOptions struct {
 	// Environment Id.
-	EnvironmentID *string `json:"environment_id" validate:"required,ne="`
+	EnvironmentID *string `json:"-" validate:"required,ne="`
 
 	// Feature name.
 	Name *string `json:"name" validate:"required"`
@@ -2528,19 +2624,23 @@ type CreateFeatureOptions struct {
 	// Feature id.
 	FeatureID *string `json:"feature_id" validate:"required"`
 
-	// Type of the feature (BOOLEAN, STRING, NUMERIC).
+	// Type of the feature (BOOLEAN, STRING, NUMERIC) if TYPE is STRING then format attribute is required.
 	Type *string `json:"type" validate:"required"`
 
-	// Value of the feature when it is enabled. The value can be Boolean, String or a Numeric value as per the `type`
-	// attribute.
+	// Value of the feature when it is enabled. The value can be Boolean, Numeric, String - TEXT, String - JSON, String -
+	// YAML value as per the `type` and `format` attribute.
 	EnabledValue interface{} `json:"enabled_value" validate:"required"`
 
-	// Value of the feature when it is disabled. The value can be Boolean, String or a Numeric value as per the `type`
-	// attribute.
+	// Value of the feature when it is disabled. The value can be Boolean, Numeric, String - TEXT, String - JSON, String -
+	// YAML value as per the `type` and `format` attribute.
 	DisabledValue interface{} `json:"disabled_value" validate:"required"`
 
 	// Feature description.
 	Description *string `json:"description,omitempty"`
+
+	// Format of the feature (TEXT, JSON, YAML) and this is a required attribute when STRING TYPE is used, not required
+	// when BOOLEAN and NUMERIC TYPE is used.
+	Format *string `json:"format,omitempty"`
 
 	// The state of the feature flag.
 	Enabled *bool `json:"enabled,omitempty"`
@@ -2559,11 +2659,20 @@ type CreateFeatureOptions struct {
 }
 
 // Constants associated with the CreateFeatureOptions.Type property.
-// Type of the feature (BOOLEAN, STRING, NUMERIC).
+// Type of the feature (BOOLEAN, STRING, NUMERIC) if TYPE is STRING then format attribute is required.
 const (
 	CreateFeatureOptions_Type_Boolean = "BOOLEAN"
 	CreateFeatureOptions_Type_Numeric = "NUMERIC"
 	CreateFeatureOptions_Type_String  = "STRING"
+)
+
+// Constants associated with the CreateFeatureOptions.Format property.
+// Format of the feature (TEXT, JSON, YAML) and this is a required attribute when STRING TYPE is used, not required when
+// BOOLEAN and NUMERIC TYPE is used.
+const (
+	CreateFeatureOptions_Format_JSON = "JSON"
+	CreateFeatureOptions_Format_Text = "TEXT"
+	CreateFeatureOptions_Format_Yaml = "YAML"
 )
 
 // NewCreateFeatureOptions : Instantiate CreateFeatureOptions
@@ -2579,69 +2688,75 @@ func (*AppConfigurationV1) NewCreateFeatureOptions(environmentID string, name st
 }
 
 // SetEnvironmentID : Allow user to set EnvironmentID
-func (options *CreateFeatureOptions) SetEnvironmentID(environmentID string) *CreateFeatureOptions {
-	options.EnvironmentID = core.StringPtr(environmentID)
-	return options
+func (_options *CreateFeatureOptions) SetEnvironmentID(environmentID string) *CreateFeatureOptions {
+	_options.EnvironmentID = core.StringPtr(environmentID)
+	return _options
 }
 
 // SetName : Allow user to set Name
-func (options *CreateFeatureOptions) SetName(name string) *CreateFeatureOptions {
-	options.Name = core.StringPtr(name)
-	return options
+func (_options *CreateFeatureOptions) SetName(name string) *CreateFeatureOptions {
+	_options.Name = core.StringPtr(name)
+	return _options
 }
 
 // SetFeatureID : Allow user to set FeatureID
-func (options *CreateFeatureOptions) SetFeatureID(featureID string) *CreateFeatureOptions {
-	options.FeatureID = core.StringPtr(featureID)
-	return options
+func (_options *CreateFeatureOptions) SetFeatureID(featureID string) *CreateFeatureOptions {
+	_options.FeatureID = core.StringPtr(featureID)
+	return _options
 }
 
 // SetType : Allow user to set Type
-func (options *CreateFeatureOptions) SetType(typeVar string) *CreateFeatureOptions {
-	options.Type = core.StringPtr(typeVar)
-	return options
+func (_options *CreateFeatureOptions) SetType(typeVar string) *CreateFeatureOptions {
+	_options.Type = core.StringPtr(typeVar)
+	return _options
 }
 
 // SetEnabledValue : Allow user to set EnabledValue
-func (options *CreateFeatureOptions) SetEnabledValue(enabledValue interface{}) *CreateFeatureOptions {
-	options.EnabledValue = enabledValue
-	return options
+func (_options *CreateFeatureOptions) SetEnabledValue(enabledValue interface{}) *CreateFeatureOptions {
+	_options.EnabledValue = enabledValue
+	return _options
 }
 
 // SetDisabledValue : Allow user to set DisabledValue
-func (options *CreateFeatureOptions) SetDisabledValue(disabledValue interface{}) *CreateFeatureOptions {
-	options.DisabledValue = disabledValue
-	return options
+func (_options *CreateFeatureOptions) SetDisabledValue(disabledValue interface{}) *CreateFeatureOptions {
+	_options.DisabledValue = disabledValue
+	return _options
 }
 
 // SetDescription : Allow user to set Description
-func (options *CreateFeatureOptions) SetDescription(description string) *CreateFeatureOptions {
-	options.Description = core.StringPtr(description)
-	return options
+func (_options *CreateFeatureOptions) SetDescription(description string) *CreateFeatureOptions {
+	_options.Description = core.StringPtr(description)
+	return _options
+}
+
+// SetFormat : Allow user to set Format
+func (_options *CreateFeatureOptions) SetFormat(format string) *CreateFeatureOptions {
+	_options.Format = core.StringPtr(format)
+	return _options
 }
 
 // SetEnabled : Allow user to set Enabled
-func (options *CreateFeatureOptions) SetEnabled(enabled bool) *CreateFeatureOptions {
-	options.Enabled = core.BoolPtr(enabled)
-	return options
+func (_options *CreateFeatureOptions) SetEnabled(enabled bool) *CreateFeatureOptions {
+	_options.Enabled = core.BoolPtr(enabled)
+	return _options
 }
 
 // SetTags : Allow user to set Tags
-func (options *CreateFeatureOptions) SetTags(tags string) *CreateFeatureOptions {
-	options.Tags = core.StringPtr(tags)
-	return options
+func (_options *CreateFeatureOptions) SetTags(tags string) *CreateFeatureOptions {
+	_options.Tags = core.StringPtr(tags)
+	return _options
 }
 
 // SetSegmentRules : Allow user to set SegmentRules
-func (options *CreateFeatureOptions) SetSegmentRules(segmentRules []SegmentRule) *CreateFeatureOptions {
-	options.SegmentRules = segmentRules
-	return options
+func (_options *CreateFeatureOptions) SetSegmentRules(segmentRules []SegmentRule) *CreateFeatureOptions {
+	_options.SegmentRules = segmentRules
+	return _options
 }
 
 // SetCollections : Allow user to set Collections
-func (options *CreateFeatureOptions) SetCollections(collections []CollectionRef) *CreateFeatureOptions {
-	options.Collections = collections
-	return options
+func (_options *CreateFeatureOptions) SetCollections(collections []CollectionRef) *CreateFeatureOptions {
+	_options.Collections = collections
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -2653,7 +2768,7 @@ func (options *CreateFeatureOptions) SetHeaders(param map[string]string) *Create
 // CreatePropertyOptions : The CreateProperty options.
 type CreatePropertyOptions struct {
 	// Environment Id.
-	EnvironmentID *string `json:"environment_id" validate:"required,ne="`
+	EnvironmentID *string `json:"-" validate:"required,ne="`
 
 	// Property name.
 	Name *string `json:"name" validate:"required"`
@@ -2661,14 +2776,19 @@ type CreatePropertyOptions struct {
 	// Property id.
 	PropertyID *string `json:"property_id" validate:"required"`
 
-	// Type of the Property (BOOLEAN, STRING, NUMERIC).
+	// Type of the Property (BOOLEAN, STRING, NUMERIC), if STRING TYPE is selected then format attribute is required.
 	Type *string `json:"type" validate:"required"`
 
-	// Value of the Property. The value can be Boolean, String or a Numeric value as per the `type` attribute.
+	// Value of the Property. The value can be Boolean, Numeric, String - TEXT, String - JSON, String - YAML as per the
+	// `type` and `format` attribute.
 	Value interface{} `json:"value" validate:"required"`
 
 	// Property description.
 	Description *string `json:"description,omitempty"`
+
+	// Format of the Property (TEXT, JSON, YAML) and this is a required attribute when STRING TYPE is used, not required
+	// when BOOLEAN and NUMERIC TYPE is used.
+	Format *string `json:"format,omitempty"`
 
 	// Tags associated with the property.
 	Tags *string `json:"tags,omitempty"`
@@ -2684,11 +2804,20 @@ type CreatePropertyOptions struct {
 }
 
 // Constants associated with the CreatePropertyOptions.Type property.
-// Type of the Property (BOOLEAN, STRING, NUMERIC).
+// Type of the Property (BOOLEAN, STRING, NUMERIC), if STRING TYPE is selected then format attribute is required.
 const (
 	CreatePropertyOptions_Type_Boolean = "BOOLEAN"
 	CreatePropertyOptions_Type_Numeric = "NUMERIC"
 	CreatePropertyOptions_Type_String  = "STRING"
+)
+
+// Constants associated with the CreatePropertyOptions.Format property.
+// Format of the Property (TEXT, JSON, YAML) and this is a required attribute when STRING TYPE is used, not required
+// when BOOLEAN and NUMERIC TYPE is used.
+const (
+	CreatePropertyOptions_Format_JSON = "JSON"
+	CreatePropertyOptions_Format_Text = "TEXT"
+	CreatePropertyOptions_Format_Yaml = "YAML"
 )
 
 // NewCreatePropertyOptions : Instantiate CreatePropertyOptions
@@ -2703,57 +2832,63 @@ func (*AppConfigurationV1) NewCreatePropertyOptions(environmentID string, name s
 }
 
 // SetEnvironmentID : Allow user to set EnvironmentID
-func (options *CreatePropertyOptions) SetEnvironmentID(environmentID string) *CreatePropertyOptions {
-	options.EnvironmentID = core.StringPtr(environmentID)
-	return options
+func (_options *CreatePropertyOptions) SetEnvironmentID(environmentID string) *CreatePropertyOptions {
+	_options.EnvironmentID = core.StringPtr(environmentID)
+	return _options
 }
 
 // SetName : Allow user to set Name
-func (options *CreatePropertyOptions) SetName(name string) *CreatePropertyOptions {
-	options.Name = core.StringPtr(name)
-	return options
+func (_options *CreatePropertyOptions) SetName(name string) *CreatePropertyOptions {
+	_options.Name = core.StringPtr(name)
+	return _options
 }
 
 // SetPropertyID : Allow user to set PropertyID
-func (options *CreatePropertyOptions) SetPropertyID(propertyID string) *CreatePropertyOptions {
-	options.PropertyID = core.StringPtr(propertyID)
-	return options
+func (_options *CreatePropertyOptions) SetPropertyID(propertyID string) *CreatePropertyOptions {
+	_options.PropertyID = core.StringPtr(propertyID)
+	return _options
 }
 
 // SetType : Allow user to set Type
-func (options *CreatePropertyOptions) SetType(typeVar string) *CreatePropertyOptions {
-	options.Type = core.StringPtr(typeVar)
-	return options
+func (_options *CreatePropertyOptions) SetType(typeVar string) *CreatePropertyOptions {
+	_options.Type = core.StringPtr(typeVar)
+	return _options
 }
 
 // SetValue : Allow user to set Value
-func (options *CreatePropertyOptions) SetValue(value interface{}) *CreatePropertyOptions {
-	options.Value = value
-	return options
+func (_options *CreatePropertyOptions) SetValue(value interface{}) *CreatePropertyOptions {
+	_options.Value = value
+	return _options
 }
 
 // SetDescription : Allow user to set Description
-func (options *CreatePropertyOptions) SetDescription(description string) *CreatePropertyOptions {
-	options.Description = core.StringPtr(description)
-	return options
+func (_options *CreatePropertyOptions) SetDescription(description string) *CreatePropertyOptions {
+	_options.Description = core.StringPtr(description)
+	return _options
+}
+
+// SetFormat : Allow user to set Format
+func (_options *CreatePropertyOptions) SetFormat(format string) *CreatePropertyOptions {
+	_options.Format = core.StringPtr(format)
+	return _options
 }
 
 // SetTags : Allow user to set Tags
-func (options *CreatePropertyOptions) SetTags(tags string) *CreatePropertyOptions {
-	options.Tags = core.StringPtr(tags)
-	return options
+func (_options *CreatePropertyOptions) SetTags(tags string) *CreatePropertyOptions {
+	_options.Tags = core.StringPtr(tags)
+	return _options
 }
 
 // SetSegmentRules : Allow user to set SegmentRules
-func (options *CreatePropertyOptions) SetSegmentRules(segmentRules []SegmentRule) *CreatePropertyOptions {
-	options.SegmentRules = segmentRules
-	return options
+func (_options *CreatePropertyOptions) SetSegmentRules(segmentRules []SegmentRule) *CreatePropertyOptions {
+	_options.SegmentRules = segmentRules
+	return _options
 }
 
 // SetCollections : Allow user to set Collections
-func (options *CreatePropertyOptions) SetCollections(collections []CollectionRef) *CreatePropertyOptions {
-	options.Collections = collections
-	return options
+func (_options *CreatePropertyOptions) SetCollections(collections []CollectionRef) *CreatePropertyOptions {
+	_options.Collections = collections
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -2791,33 +2926,33 @@ func (*AppConfigurationV1) NewCreateSegmentOptions() *CreateSegmentOptions {
 }
 
 // SetName : Allow user to set Name
-func (options *CreateSegmentOptions) SetName(name string) *CreateSegmentOptions {
-	options.Name = core.StringPtr(name)
-	return options
+func (_options *CreateSegmentOptions) SetName(name string) *CreateSegmentOptions {
+	_options.Name = core.StringPtr(name)
+	return _options
 }
 
 // SetSegmentID : Allow user to set SegmentID
-func (options *CreateSegmentOptions) SetSegmentID(segmentID string) *CreateSegmentOptions {
-	options.SegmentID = core.StringPtr(segmentID)
-	return options
+func (_options *CreateSegmentOptions) SetSegmentID(segmentID string) *CreateSegmentOptions {
+	_options.SegmentID = core.StringPtr(segmentID)
+	return _options
 }
 
 // SetDescription : Allow user to set Description
-func (options *CreateSegmentOptions) SetDescription(description string) *CreateSegmentOptions {
-	options.Description = core.StringPtr(description)
-	return options
+func (_options *CreateSegmentOptions) SetDescription(description string) *CreateSegmentOptions {
+	_options.Description = core.StringPtr(description)
+	return _options
 }
 
 // SetTags : Allow user to set Tags
-func (options *CreateSegmentOptions) SetTags(tags string) *CreateSegmentOptions {
-	options.Tags = core.StringPtr(tags)
-	return options
+func (_options *CreateSegmentOptions) SetTags(tags string) *CreateSegmentOptions {
+	_options.Tags = core.StringPtr(tags)
+	return _options
 }
 
 // SetRules : Allow user to set Rules
-func (options *CreateSegmentOptions) SetRules(rules []Rule) *CreateSegmentOptions {
-	options.Rules = rules
-	return options
+func (_options *CreateSegmentOptions) SetRules(rules []Rule) *CreateSegmentOptions {
+	_options.Rules = rules
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -2829,7 +2964,7 @@ func (options *CreateSegmentOptions) SetHeaders(param map[string]string) *Create
 // DeleteCollectionOptions : The DeleteCollection options.
 type DeleteCollectionOptions struct {
 	// Collection Id of the collection.
-	CollectionID *string `json:"collection_id" validate:"required,ne="`
+	CollectionID *string `json:"-" validate:"required,ne="`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -2843,9 +2978,9 @@ func (*AppConfigurationV1) NewDeleteCollectionOptions(collectionID string) *Dele
 }
 
 // SetCollectionID : Allow user to set CollectionID
-func (options *DeleteCollectionOptions) SetCollectionID(collectionID string) *DeleteCollectionOptions {
-	options.CollectionID = core.StringPtr(collectionID)
-	return options
+func (_options *DeleteCollectionOptions) SetCollectionID(collectionID string) *DeleteCollectionOptions {
+	_options.CollectionID = core.StringPtr(collectionID)
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -2857,7 +2992,7 @@ func (options *DeleteCollectionOptions) SetHeaders(param map[string]string) *Del
 // DeleteEnvironmentOptions : The DeleteEnvironment options.
 type DeleteEnvironmentOptions struct {
 	// Environment Id.
-	EnvironmentID *string `json:"environment_id" validate:"required,ne="`
+	EnvironmentID *string `json:"-" validate:"required,ne="`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -2871,9 +3006,9 @@ func (*AppConfigurationV1) NewDeleteEnvironmentOptions(environmentID string) *De
 }
 
 // SetEnvironmentID : Allow user to set EnvironmentID
-func (options *DeleteEnvironmentOptions) SetEnvironmentID(environmentID string) *DeleteEnvironmentOptions {
-	options.EnvironmentID = core.StringPtr(environmentID)
-	return options
+func (_options *DeleteEnvironmentOptions) SetEnvironmentID(environmentID string) *DeleteEnvironmentOptions {
+	_options.EnvironmentID = core.StringPtr(environmentID)
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -2885,10 +3020,10 @@ func (options *DeleteEnvironmentOptions) SetHeaders(param map[string]string) *De
 // DeleteFeatureOptions : The DeleteFeature options.
 type DeleteFeatureOptions struct {
 	// Environment Id.
-	EnvironmentID *string `json:"environment_id" validate:"required,ne="`
+	EnvironmentID *string `json:"-" validate:"required,ne="`
 
 	// Feature Id.
-	FeatureID *string `json:"feature_id" validate:"required,ne="`
+	FeatureID *string `json:"-" validate:"required,ne="`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -2903,15 +3038,15 @@ func (*AppConfigurationV1) NewDeleteFeatureOptions(environmentID string, feature
 }
 
 // SetEnvironmentID : Allow user to set EnvironmentID
-func (options *DeleteFeatureOptions) SetEnvironmentID(environmentID string) *DeleteFeatureOptions {
-	options.EnvironmentID = core.StringPtr(environmentID)
-	return options
+func (_options *DeleteFeatureOptions) SetEnvironmentID(environmentID string) *DeleteFeatureOptions {
+	_options.EnvironmentID = core.StringPtr(environmentID)
+	return _options
 }
 
 // SetFeatureID : Allow user to set FeatureID
-func (options *DeleteFeatureOptions) SetFeatureID(featureID string) *DeleteFeatureOptions {
-	options.FeatureID = core.StringPtr(featureID)
-	return options
+func (_options *DeleteFeatureOptions) SetFeatureID(featureID string) *DeleteFeatureOptions {
+	_options.FeatureID = core.StringPtr(featureID)
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -2923,10 +3058,10 @@ func (options *DeleteFeatureOptions) SetHeaders(param map[string]string) *Delete
 // DeletePropertyOptions : The DeleteProperty options.
 type DeletePropertyOptions struct {
 	// Environment Id.
-	EnvironmentID *string `json:"environment_id" validate:"required,ne="`
+	EnvironmentID *string `json:"-" validate:"required,ne="`
 
 	// Property Id.
-	PropertyID *string `json:"property_id" validate:"required,ne="`
+	PropertyID *string `json:"-" validate:"required,ne="`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -2941,15 +3076,15 @@ func (*AppConfigurationV1) NewDeletePropertyOptions(environmentID string, proper
 }
 
 // SetEnvironmentID : Allow user to set EnvironmentID
-func (options *DeletePropertyOptions) SetEnvironmentID(environmentID string) *DeletePropertyOptions {
-	options.EnvironmentID = core.StringPtr(environmentID)
-	return options
+func (_options *DeletePropertyOptions) SetEnvironmentID(environmentID string) *DeletePropertyOptions {
+	_options.EnvironmentID = core.StringPtr(environmentID)
+	return _options
 }
 
 // SetPropertyID : Allow user to set PropertyID
-func (options *DeletePropertyOptions) SetPropertyID(propertyID string) *DeletePropertyOptions {
-	options.PropertyID = core.StringPtr(propertyID)
-	return options
+func (_options *DeletePropertyOptions) SetPropertyID(propertyID string) *DeletePropertyOptions {
+	_options.PropertyID = core.StringPtr(propertyID)
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -2961,7 +3096,7 @@ func (options *DeletePropertyOptions) SetHeaders(param map[string]string) *Delet
 // DeleteSegmentOptions : The DeleteSegment options.
 type DeleteSegmentOptions struct {
 	// Segment Id.
-	SegmentID *string `json:"segment_id" validate:"required,ne="`
+	SegmentID *string `json:"-" validate:"required,ne="`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -2975,9 +3110,9 @@ func (*AppConfigurationV1) NewDeleteSegmentOptions(segmentID string) *DeleteSegm
 }
 
 // SetSegmentID : Allow user to set SegmentID
-func (options *DeleteSegmentOptions) SetSegmentID(segmentID string) *DeleteSegmentOptions {
-	options.SegmentID = core.StringPtr(segmentID)
-	return options
+func (_options *DeleteSegmentOptions) SetSegmentID(segmentID string) *DeleteSegmentOptions {
+	_options.SegmentID = core.StringPtr(segmentID)
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -3020,12 +3155,12 @@ type Environment struct {
 }
 
 // NewEnvironment : Instantiate Environment (Generic Model Constructor)
-func (*AppConfigurationV1) NewEnvironment(name string, environmentID string) (model *Environment, err error) {
-	model = &Environment{
+func (*AppConfigurationV1) NewEnvironment(name string, environmentID string) (_model *Environment, err error) {
+	_model = &Environment{
 		Name:          core.StringPtr(name),
 		EnvironmentID: core.StringPtr(environmentID),
 	}
-	err = core.ValidateStruct(model, "required parameters")
+	err = core.ValidateStruct(_model, "required parameters")
 	return
 }
 
@@ -3142,6 +3277,23 @@ func UnmarshalEnvironmentList(m map[string]json.RawMessage, result interface{}) 
 	return
 }
 
+// Retrieve the value to be passed to a request to access the next page of results
+func (resp *EnvironmentList) GetNextOffset() (*int64, error) {
+	if core.IsNil(resp.Next) {
+		return nil, nil
+	}
+	offset, err := core.GetQueryParam(resp.Next.Href, "offset")
+	if err != nil || offset == nil {
+		return nil, err
+	}
+	var offsetValue int64
+	offsetValue, err = strconv.ParseInt(*offset, 10, 64)
+	if err != nil {
+		return nil, err
+	}
+	return core.Int64Ptr(offsetValue), nil
+}
+
 // Feature : Details of the feature.
 type Feature struct {
 	// Feature name.
@@ -3153,15 +3305,19 @@ type Feature struct {
 	// Feature description.
 	Description *string `json:"description,omitempty"`
 
-	// Type of the feature (BOOLEAN, STRING, NUMERIC).
+	// Type of the feature (BOOLEAN, STRING, NUMERIC) if TYPE is STRING then format attribute is required.
 	Type *string `json:"type" validate:"required"`
 
-	// Value of the feature when it is enabled. The value can be Boolean, String or a Numeric value as per the `type`
-	// attribute.
+	// Format of the feature (TEXT, JSON, YAML) and this is a required attribute when STRING TYPE is used, not required
+	// when BOOLEAN and NUMERIC TYPE is used.
+	Format *string `json:"format,omitempty"`
+
+	// Value of the feature when it is enabled. The value can be Boolean, Numeric, String - TEXT, String - JSON, String -
+	// YAML value as per the `type` and `format` attribute.
 	EnabledValue interface{} `json:"enabled_value" validate:"required"`
 
-	// Value of the feature when it is disabled. The value can be Boolean, String or a Numeric value as per the `type`
-	// attribute.
+	// Value of the feature when it is disabled. The value can be Boolean, Numeric, String - TEXT, String - JSON, String -
+	// YAML value as per the `type` and `format` attribute.
 	DisabledValue interface{} `json:"disabled_value" validate:"required"`
 
 	// The state of the feature flag.
@@ -3193,23 +3349,32 @@ type Feature struct {
 }
 
 // Constants associated with the Feature.Type property.
-// Type of the feature (BOOLEAN, STRING, NUMERIC).
+// Type of the feature (BOOLEAN, STRING, NUMERIC) if TYPE is STRING then format attribute is required.
 const (
 	Feature_Type_Boolean = "BOOLEAN"
 	Feature_Type_Numeric = "NUMERIC"
 	Feature_Type_String  = "STRING"
 )
 
+// Constants associated with the Feature.Format property.
+// Format of the feature (TEXT, JSON, YAML) and this is a required attribute when STRING TYPE is used, not required when
+// BOOLEAN and NUMERIC TYPE is used.
+const (
+	Feature_Format_JSON = "JSON"
+	Feature_Format_Text = "TEXT"
+	Feature_Format_Yaml = "YAML"
+)
+
 // NewFeature : Instantiate Feature (Generic Model Constructor)
-func (*AppConfigurationV1) NewFeature(name string, featureID string, typeVar string, enabledValue interface{}, disabledValue interface{}) (model *Feature, err error) {
-	model = &Feature{
+func (*AppConfigurationV1) NewFeature(name string, featureID string, typeVar string, enabledValue interface{}, disabledValue interface{}) (_model *Feature, err error) {
+	_model = &Feature{
 		Name:          core.StringPtr(name),
 		FeatureID:     core.StringPtr(featureID),
 		Type:          core.StringPtr(typeVar),
 		EnabledValue:  enabledValue,
 		DisabledValue: disabledValue,
 	}
-	err = core.ValidateStruct(model, "required parameters")
+	err = core.ValidateStruct(_model, "required parameters")
 	return
 }
 
@@ -3229,6 +3394,10 @@ func UnmarshalFeature(m map[string]json.RawMessage, result interface{}) (err err
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "type", &obj.Type)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "format", &obj.Format)
 	if err != nil {
 		return
 	}
@@ -3290,12 +3459,12 @@ type FeatureOutput struct {
 }
 
 // NewFeatureOutput : Instantiate FeatureOutput (Generic Model Constructor)
-func (*AppConfigurationV1) NewFeatureOutput(featureID string, name string) (model *FeatureOutput, err error) {
-	model = &FeatureOutput{
+func (*AppConfigurationV1) NewFeatureOutput(featureID string, name string) (_model *FeatureOutput, err error) {
+	_model = &FeatureOutput{
 		FeatureID: core.StringPtr(featureID),
 		Name:      core.StringPtr(name),
 	}
-	err = core.ValidateStruct(model, "required parameters")
+	err = core.ValidateStruct(_model, "required parameters")
 	return
 }
 
@@ -3380,16 +3549,33 @@ func UnmarshalFeaturesList(m map[string]json.RawMessage, result interface{}) (er
 	return
 }
 
+// Retrieve the value to be passed to a request to access the next page of results
+func (resp *FeaturesList) GetNextOffset() (*int64, error) {
+	if core.IsNil(resp.Next) {
+		return nil, nil
+	}
+	offset, err := core.GetQueryParam(resp.Next.Href, "offset")
+	if err != nil || offset == nil {
+		return nil, err
+	}
+	var offsetValue int64
+	offsetValue, err = strconv.ParseInt(*offset, 10, 64)
+	if err != nil {
+		return nil, err
+	}
+	return core.Int64Ptr(offsetValue), nil
+}
+
 // GetCollectionOptions : The GetCollection options.
 type GetCollectionOptions struct {
 	// Collection Id of the collection.
-	CollectionID *string `json:"collection_id" validate:"required,ne="`
+	CollectionID *string `json:"-" validate:"required,ne="`
 
 	// If set to `true`, returns expanded view of the resource details.
-	Expand *bool `json:"expand,omitempty"`
+	Expand *bool `json:"-"`
 
 	// Include feature and property details in the response.
-	Include []string `json:"include,omitempty"`
+	Include []string `json:"-"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -3409,21 +3595,21 @@ func (*AppConfigurationV1) NewGetCollectionOptions(collectionID string) *GetColl
 }
 
 // SetCollectionID : Allow user to set CollectionID
-func (options *GetCollectionOptions) SetCollectionID(collectionID string) *GetCollectionOptions {
-	options.CollectionID = core.StringPtr(collectionID)
-	return options
+func (_options *GetCollectionOptions) SetCollectionID(collectionID string) *GetCollectionOptions {
+	_options.CollectionID = core.StringPtr(collectionID)
+	return _options
 }
 
 // SetExpand : Allow user to set Expand
-func (options *GetCollectionOptions) SetExpand(expand bool) *GetCollectionOptions {
-	options.Expand = core.BoolPtr(expand)
-	return options
+func (_options *GetCollectionOptions) SetExpand(expand bool) *GetCollectionOptions {
+	_options.Expand = core.BoolPtr(expand)
+	return _options
 }
 
 // SetInclude : Allow user to set Include
-func (options *GetCollectionOptions) SetInclude(include []string) *GetCollectionOptions {
-	options.Include = include
-	return options
+func (_options *GetCollectionOptions) SetInclude(include []string) *GetCollectionOptions {
+	_options.Include = include
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -3435,13 +3621,13 @@ func (options *GetCollectionOptions) SetHeaders(param map[string]string) *GetCol
 // GetEnvironmentOptions : The GetEnvironment options.
 type GetEnvironmentOptions struct {
 	// Environment Id.
-	EnvironmentID *string `json:"environment_id" validate:"required,ne="`
+	EnvironmentID *string `json:"-" validate:"required,ne="`
 
 	// If set to `true`, returns expanded view of the resource details.
-	Expand *bool `json:"expand,omitempty"`
+	Expand *bool `json:"-"`
 
 	// Include feature and property details in the response.
-	Include []string `json:"include,omitempty"`
+	Include []string `json:"-"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -3461,21 +3647,21 @@ func (*AppConfigurationV1) NewGetEnvironmentOptions(environmentID string) *GetEn
 }
 
 // SetEnvironmentID : Allow user to set EnvironmentID
-func (options *GetEnvironmentOptions) SetEnvironmentID(environmentID string) *GetEnvironmentOptions {
-	options.EnvironmentID = core.StringPtr(environmentID)
-	return options
+func (_options *GetEnvironmentOptions) SetEnvironmentID(environmentID string) *GetEnvironmentOptions {
+	_options.EnvironmentID = core.StringPtr(environmentID)
+	return _options
 }
 
 // SetExpand : Allow user to set Expand
-func (options *GetEnvironmentOptions) SetExpand(expand bool) *GetEnvironmentOptions {
-	options.Expand = core.BoolPtr(expand)
-	return options
+func (_options *GetEnvironmentOptions) SetExpand(expand bool) *GetEnvironmentOptions {
+	_options.Expand = core.BoolPtr(expand)
+	return _options
 }
 
 // SetInclude : Allow user to set Include
-func (options *GetEnvironmentOptions) SetInclude(include []string) *GetEnvironmentOptions {
-	options.Include = include
-	return options
+func (_options *GetEnvironmentOptions) SetInclude(include []string) *GetEnvironmentOptions {
+	_options.Include = include
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -3487,13 +3673,13 @@ func (options *GetEnvironmentOptions) SetHeaders(param map[string]string) *GetEn
 // GetFeatureOptions : The GetFeature options.
 type GetFeatureOptions struct {
 	// Environment Id.
-	EnvironmentID *string `json:"environment_id" validate:"required,ne="`
+	EnvironmentID *string `json:"-" validate:"required,ne="`
 
 	// Feature Id.
-	FeatureID *string `json:"feature_id" validate:"required,ne="`
+	FeatureID *string `json:"-" validate:"required,ne="`
 
 	// Include the associated collections in the response.
-	Include *string `json:"include,omitempty"`
+	Include *string `json:"-"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -3514,21 +3700,21 @@ func (*AppConfigurationV1) NewGetFeatureOptions(environmentID string, featureID 
 }
 
 // SetEnvironmentID : Allow user to set EnvironmentID
-func (options *GetFeatureOptions) SetEnvironmentID(environmentID string) *GetFeatureOptions {
-	options.EnvironmentID = core.StringPtr(environmentID)
-	return options
+func (_options *GetFeatureOptions) SetEnvironmentID(environmentID string) *GetFeatureOptions {
+	_options.EnvironmentID = core.StringPtr(environmentID)
+	return _options
 }
 
 // SetFeatureID : Allow user to set FeatureID
-func (options *GetFeatureOptions) SetFeatureID(featureID string) *GetFeatureOptions {
-	options.FeatureID = core.StringPtr(featureID)
-	return options
+func (_options *GetFeatureOptions) SetFeatureID(featureID string) *GetFeatureOptions {
+	_options.FeatureID = core.StringPtr(featureID)
+	return _options
 }
 
 // SetInclude : Allow user to set Include
-func (options *GetFeatureOptions) SetInclude(include string) *GetFeatureOptions {
-	options.Include = core.StringPtr(include)
-	return options
+func (_options *GetFeatureOptions) SetInclude(include string) *GetFeatureOptions {
+	_options.Include = core.StringPtr(include)
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -3540,13 +3726,13 @@ func (options *GetFeatureOptions) SetHeaders(param map[string]string) *GetFeatur
 // GetPropertyOptions : The GetProperty options.
 type GetPropertyOptions struct {
 	// Environment Id.
-	EnvironmentID *string `json:"environment_id" validate:"required,ne="`
+	EnvironmentID *string `json:"-" validate:"required,ne="`
 
 	// Property Id.
-	PropertyID *string `json:"property_id" validate:"required,ne="`
+	PropertyID *string `json:"-" validate:"required,ne="`
 
 	// Include the associated collections in the response.
-	Include *string `json:"include,omitempty"`
+	Include *string `json:"-"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -3567,21 +3753,21 @@ func (*AppConfigurationV1) NewGetPropertyOptions(environmentID string, propertyI
 }
 
 // SetEnvironmentID : Allow user to set EnvironmentID
-func (options *GetPropertyOptions) SetEnvironmentID(environmentID string) *GetPropertyOptions {
-	options.EnvironmentID = core.StringPtr(environmentID)
-	return options
+func (_options *GetPropertyOptions) SetEnvironmentID(environmentID string) *GetPropertyOptions {
+	_options.EnvironmentID = core.StringPtr(environmentID)
+	return _options
 }
 
 // SetPropertyID : Allow user to set PropertyID
-func (options *GetPropertyOptions) SetPropertyID(propertyID string) *GetPropertyOptions {
-	options.PropertyID = core.StringPtr(propertyID)
-	return options
+func (_options *GetPropertyOptions) SetPropertyID(propertyID string) *GetPropertyOptions {
+	_options.PropertyID = core.StringPtr(propertyID)
+	return _options
 }
 
 // SetInclude : Allow user to set Include
-func (options *GetPropertyOptions) SetInclude(include string) *GetPropertyOptions {
-	options.Include = core.StringPtr(include)
-	return options
+func (_options *GetPropertyOptions) SetInclude(include string) *GetPropertyOptions {
+	_options.Include = core.StringPtr(include)
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -3593,10 +3779,10 @@ func (options *GetPropertyOptions) SetHeaders(param map[string]string) *GetPrope
 // GetSegmentOptions : The GetSegment options.
 type GetSegmentOptions struct {
 	// Segment Id.
-	SegmentID *string `json:"segment_id" validate:"required,ne="`
+	SegmentID *string `json:"-" validate:"required,ne="`
 
 	// Include feature and property details in the response.
-	Include []string `json:"include,omitempty"`
+	Include []string `json:"-"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -3616,15 +3802,15 @@ func (*AppConfigurationV1) NewGetSegmentOptions(segmentID string) *GetSegmentOpt
 }
 
 // SetSegmentID : Allow user to set SegmentID
-func (options *GetSegmentOptions) SetSegmentID(segmentID string) *GetSegmentOptions {
-	options.SegmentID = core.StringPtr(segmentID)
-	return options
+func (_options *GetSegmentOptions) SetSegmentID(segmentID string) *GetSegmentOptions {
+	_options.SegmentID = core.StringPtr(segmentID)
+	return _options
 }
 
 // SetInclude : Allow user to set Include
-func (options *GetSegmentOptions) SetInclude(include []string) *GetSegmentOptions {
-	options.Include = include
-	return options
+func (_options *GetSegmentOptions) SetInclude(include []string) *GetSegmentOptions {
+	_options.Include = include
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -3636,31 +3822,35 @@ func (options *GetSegmentOptions) SetHeaders(param map[string]string) *GetSegmen
 // ListCollectionsOptions : The ListCollections options.
 type ListCollectionsOptions struct {
 	// If set to `true`, returns expanded view of the resource details.
-	Expand *bool `json:"expand,omitempty"`
+	Expand *bool `json:"-"`
 
 	// Sort the collection details based on the specified attribute.
-	Sort *string `json:"sort,omitempty"`
+	Sort *string `json:"-"`
 
 	// Filter the resources to be returned based on the associated tags. Specify the parameter as a list of comma separated
 	// tags. Returns resources associated with any of the specified tags.
-	Tags *string `json:"tags,omitempty"`
+	Tags *string `json:"-"`
 
 	// Filter collections by a list of comma separated features.
-	Features []string `json:"features,omitempty"`
+	Features []string `json:"-"`
 
 	// Filter collections by a list of comma separated properties.
-	Properties []string `json:"properties,omitempty"`
+	Properties []string `json:"-"`
 
 	// Include feature and property details in the response.
-	Include []string `json:"include,omitempty"`
+	Include []string `json:"-"`
 
 	// The number of records to retrieve. By default, the list operation return the first 10 records. To retrieve different
 	// set of records, use `limit` with `offset` to page through the available records.
-	Limit *int64 `json:"limit,omitempty"`
+	Limit *int64 `json:"-"`
 
 	// The number of records to skip. By specifying `offset`, you retrieve a subset of items that starts with the `offset`
 	// value. Use `offset` with `limit` to page through the available records.
-	Offset *int64 `json:"offset,omitempty"`
+	Offset *int64 `json:"-"`
+
+	// Searches for the provided keyword and returns the appropriate row with that value. Here the search happens on the
+	// '[Name OR Tag]' of the entity.
+	Search *string `json:"-"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -3669,9 +3859,10 @@ type ListCollectionsOptions struct {
 // Constants associated with the ListCollectionsOptions.Sort property.
 // Sort the collection details based on the specified attribute.
 const (
-	ListCollectionsOptions_Sort_CollectionID = "collection_id"
-	ListCollectionsOptions_Sort_CreatedTime  = "created_time"
-	ListCollectionsOptions_Sort_UpdatedTime  = "updated_time"
+	ListCollectionsOptions_Sort_CreatedTime = "created_time"
+	ListCollectionsOptions_Sort_ID          = "id"
+	ListCollectionsOptions_Sort_NameDefault = "name (default)"
+	ListCollectionsOptions_Sort_UpdatedTime = "updated_time"
 )
 
 // Constants associated with the ListCollectionsOptions.Include property.
@@ -3686,51 +3877,57 @@ func (*AppConfigurationV1) NewListCollectionsOptions() *ListCollectionsOptions {
 }
 
 // SetExpand : Allow user to set Expand
-func (options *ListCollectionsOptions) SetExpand(expand bool) *ListCollectionsOptions {
-	options.Expand = core.BoolPtr(expand)
-	return options
+func (_options *ListCollectionsOptions) SetExpand(expand bool) *ListCollectionsOptions {
+	_options.Expand = core.BoolPtr(expand)
+	return _options
 }
 
 // SetSort : Allow user to set Sort
-func (options *ListCollectionsOptions) SetSort(sort string) *ListCollectionsOptions {
-	options.Sort = core.StringPtr(sort)
-	return options
+func (_options *ListCollectionsOptions) SetSort(sort string) *ListCollectionsOptions {
+	_options.Sort = core.StringPtr(sort)
+	return _options
 }
 
 // SetTags : Allow user to set Tags
-func (options *ListCollectionsOptions) SetTags(tags string) *ListCollectionsOptions {
-	options.Tags = core.StringPtr(tags)
-	return options
+func (_options *ListCollectionsOptions) SetTags(tags string) *ListCollectionsOptions {
+	_options.Tags = core.StringPtr(tags)
+	return _options
 }
 
 // SetFeatures : Allow user to set Features
-func (options *ListCollectionsOptions) SetFeatures(features []string) *ListCollectionsOptions {
-	options.Features = features
-	return options
+func (_options *ListCollectionsOptions) SetFeatures(features []string) *ListCollectionsOptions {
+	_options.Features = features
+	return _options
 }
 
 // SetProperties : Allow user to set Properties
-func (options *ListCollectionsOptions) SetProperties(properties []string) *ListCollectionsOptions {
-	options.Properties = properties
-	return options
+func (_options *ListCollectionsOptions) SetProperties(properties []string) *ListCollectionsOptions {
+	_options.Properties = properties
+	return _options
 }
 
 // SetInclude : Allow user to set Include
-func (options *ListCollectionsOptions) SetInclude(include []string) *ListCollectionsOptions {
-	options.Include = include
-	return options
+func (_options *ListCollectionsOptions) SetInclude(include []string) *ListCollectionsOptions {
+	_options.Include = include
+	return _options
 }
 
 // SetLimit : Allow user to set Limit
-func (options *ListCollectionsOptions) SetLimit(limit int64) *ListCollectionsOptions {
-	options.Limit = core.Int64Ptr(limit)
-	return options
+func (_options *ListCollectionsOptions) SetLimit(limit int64) *ListCollectionsOptions {
+	_options.Limit = core.Int64Ptr(limit)
+	return _options
 }
 
 // SetOffset : Allow user to set Offset
-func (options *ListCollectionsOptions) SetOffset(offset int64) *ListCollectionsOptions {
-	options.Offset = core.Int64Ptr(offset)
-	return options
+func (_options *ListCollectionsOptions) SetOffset(offset int64) *ListCollectionsOptions {
+	_options.Offset = core.Int64Ptr(offset)
+	return _options
+}
+
+// SetSearch : Allow user to set Search
+func (_options *ListCollectionsOptions) SetSearch(search string) *ListCollectionsOptions {
+	_options.Search = core.StringPtr(search)
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -3742,25 +3939,29 @@ func (options *ListCollectionsOptions) SetHeaders(param map[string]string) *List
 // ListEnvironmentsOptions : The ListEnvironments options.
 type ListEnvironmentsOptions struct {
 	// If set to `true`, returns expanded view of the resource details.
-	Expand *bool `json:"expand,omitempty"`
+	Expand *bool `json:"-"`
 
 	// Sort the environment details based on the specified attribute.
-	Sort *string `json:"sort,omitempty"`
+	Sort *string `json:"-"`
 
 	// Filter the resources to be returned based on the associated tags. Specify the parameter as a list of comma separated
 	// tags. Returns resources associated with any of the specified tags.
-	Tags *string `json:"tags,omitempty"`
+	Tags *string `json:"-"`
 
 	// Include feature and property details in the response.
-	Include []string `json:"include,omitempty"`
+	Include []string `json:"-"`
 
 	// The number of records to retrieve. By default, the list operation return the first 10 records. To retrieve different
 	// set of records, use `limit` with `offset` to page through the available records.
-	Limit *int64 `json:"limit,omitempty"`
+	Limit *int64 `json:"-"`
 
 	// The number of records to skip. By specifying `offset`, you retrieve a subset of items that starts with the `offset`
 	// value. Use `offset` with `limit` to page through the available records.
-	Offset *int64 `json:"offset,omitempty"`
+	Offset *int64 `json:"-"`
+
+	// Searches for the provided keyword and returns the appropriate row with that value. Here the search happens on the
+	// '[Name OR Tag]' of the entity.
+	Search *string `json:"-"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -3769,9 +3970,10 @@ type ListEnvironmentsOptions struct {
 // Constants associated with the ListEnvironmentsOptions.Sort property.
 // Sort the environment details based on the specified attribute.
 const (
-	ListEnvironmentsOptions_Sort_CreatedTime   = "created_time"
-	ListEnvironmentsOptions_Sort_EnvironmentID = "environment_id"
-	ListEnvironmentsOptions_Sort_UpdatedTime   = "updated_time"
+	ListEnvironmentsOptions_Sort_CreatedTime = "created_time"
+	ListEnvironmentsOptions_Sort_ID          = "id"
+	ListEnvironmentsOptions_Sort_NameDefault = "name (default)"
+	ListEnvironmentsOptions_Sort_UpdatedTime = "updated_time"
 )
 
 // Constants associated with the ListEnvironmentsOptions.Include property.
@@ -3786,39 +3988,45 @@ func (*AppConfigurationV1) NewListEnvironmentsOptions() *ListEnvironmentsOptions
 }
 
 // SetExpand : Allow user to set Expand
-func (options *ListEnvironmentsOptions) SetExpand(expand bool) *ListEnvironmentsOptions {
-	options.Expand = core.BoolPtr(expand)
-	return options
+func (_options *ListEnvironmentsOptions) SetExpand(expand bool) *ListEnvironmentsOptions {
+	_options.Expand = core.BoolPtr(expand)
+	return _options
 }
 
 // SetSort : Allow user to set Sort
-func (options *ListEnvironmentsOptions) SetSort(sort string) *ListEnvironmentsOptions {
-	options.Sort = core.StringPtr(sort)
-	return options
+func (_options *ListEnvironmentsOptions) SetSort(sort string) *ListEnvironmentsOptions {
+	_options.Sort = core.StringPtr(sort)
+	return _options
 }
 
 // SetTags : Allow user to set Tags
-func (options *ListEnvironmentsOptions) SetTags(tags string) *ListEnvironmentsOptions {
-	options.Tags = core.StringPtr(tags)
-	return options
+func (_options *ListEnvironmentsOptions) SetTags(tags string) *ListEnvironmentsOptions {
+	_options.Tags = core.StringPtr(tags)
+	return _options
 }
 
 // SetInclude : Allow user to set Include
-func (options *ListEnvironmentsOptions) SetInclude(include []string) *ListEnvironmentsOptions {
-	options.Include = include
-	return options
+func (_options *ListEnvironmentsOptions) SetInclude(include []string) *ListEnvironmentsOptions {
+	_options.Include = include
+	return _options
 }
 
 // SetLimit : Allow user to set Limit
-func (options *ListEnvironmentsOptions) SetLimit(limit int64) *ListEnvironmentsOptions {
-	options.Limit = core.Int64Ptr(limit)
-	return options
+func (_options *ListEnvironmentsOptions) SetLimit(limit int64) *ListEnvironmentsOptions {
+	_options.Limit = core.Int64Ptr(limit)
+	return _options
 }
 
 // SetOffset : Allow user to set Offset
-func (options *ListEnvironmentsOptions) SetOffset(offset int64) *ListEnvironmentsOptions {
-	options.Offset = core.Int64Ptr(offset)
-	return options
+func (_options *ListEnvironmentsOptions) SetOffset(offset int64) *ListEnvironmentsOptions {
+	_options.Offset = core.Int64Ptr(offset)
+	return _options
+}
+
+// SetSearch : Allow user to set Search
+func (_options *ListEnvironmentsOptions) SetSearch(search string) *ListEnvironmentsOptions {
+	_options.Search = core.StringPtr(search)
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -3830,34 +4038,38 @@ func (options *ListEnvironmentsOptions) SetHeaders(param map[string]string) *Lis
 // ListFeaturesOptions : The ListFeatures options.
 type ListFeaturesOptions struct {
 	// Environment Id.
-	EnvironmentID *string `json:"environment_id" validate:"required,ne="`
+	EnvironmentID *string `json:"-" validate:"required,ne="`
 
 	// If set to `true`, returns expanded view of the resource details.
-	Expand *bool `json:"expand,omitempty"`
+	Expand *bool `json:"-"`
 
 	// Sort the feature details based on the specified attribute.
-	Sort *string `json:"sort,omitempty"`
+	Sort *string `json:"-"`
 
 	// Filter the resources to be returned based on the associated tags. Specify the parameter as a list of comma separated
 	// tags. Returns resources associated with any of the specified tags.
-	Tags *string `json:"tags,omitempty"`
+	Tags *string `json:"-"`
 
 	// Filter features by a list of comma separated collections.
-	Collections []string `json:"collections,omitempty"`
+	Collections []string `json:"-"`
 
 	// Filter features by a list of comma separated segments.
-	Segments []string `json:"segments,omitempty"`
+	Segments []string `json:"-"`
 
 	// Include the associated collections or targeting rules details in the response.
-	Include []string `json:"include,omitempty"`
+	Include []string `json:"-"`
 
 	// The number of records to retrieve. By default, the list operation return the first 10 records. To retrieve different
 	// set of records, use `limit` with `offset` to page through the available records.
-	Limit *int64 `json:"limit,omitempty"`
+	Limit *int64 `json:"-"`
 
 	// The number of records to skip. By specifying `offset`, you retrieve a subset of items that starts with the `offset`
 	// value. Use `offset` with `limit` to page through the available records.
-	Offset *int64 `json:"offset,omitempty"`
+	Offset *int64 `json:"-"`
+
+	// Searches for the provided keyword and returns the appropriate row with that value. Here the search happens on the
+	// '[Name OR Tag]' of the entity.
+	Search *string `json:"-"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -3867,7 +4079,8 @@ type ListFeaturesOptions struct {
 // Sort the feature details based on the specified attribute.
 const (
 	ListFeaturesOptions_Sort_CreatedTime = "created_time"
-	ListFeaturesOptions_Sort_FeatureID   = "feature_id"
+	ListFeaturesOptions_Sort_ID          = "id"
+	ListFeaturesOptions_Sort_NameDefault = "name (default)"
 	ListFeaturesOptions_Sort_UpdatedTime = "updated_time"
 )
 
@@ -3885,57 +4098,63 @@ func (*AppConfigurationV1) NewListFeaturesOptions(environmentID string) *ListFea
 }
 
 // SetEnvironmentID : Allow user to set EnvironmentID
-func (options *ListFeaturesOptions) SetEnvironmentID(environmentID string) *ListFeaturesOptions {
-	options.EnvironmentID = core.StringPtr(environmentID)
-	return options
+func (_options *ListFeaturesOptions) SetEnvironmentID(environmentID string) *ListFeaturesOptions {
+	_options.EnvironmentID = core.StringPtr(environmentID)
+	return _options
 }
 
 // SetExpand : Allow user to set Expand
-func (options *ListFeaturesOptions) SetExpand(expand bool) *ListFeaturesOptions {
-	options.Expand = core.BoolPtr(expand)
-	return options
+func (_options *ListFeaturesOptions) SetExpand(expand bool) *ListFeaturesOptions {
+	_options.Expand = core.BoolPtr(expand)
+	return _options
 }
 
 // SetSort : Allow user to set Sort
-func (options *ListFeaturesOptions) SetSort(sort string) *ListFeaturesOptions {
-	options.Sort = core.StringPtr(sort)
-	return options
+func (_options *ListFeaturesOptions) SetSort(sort string) *ListFeaturesOptions {
+	_options.Sort = core.StringPtr(sort)
+	return _options
 }
 
 // SetTags : Allow user to set Tags
-func (options *ListFeaturesOptions) SetTags(tags string) *ListFeaturesOptions {
-	options.Tags = core.StringPtr(tags)
-	return options
+func (_options *ListFeaturesOptions) SetTags(tags string) *ListFeaturesOptions {
+	_options.Tags = core.StringPtr(tags)
+	return _options
 }
 
 // SetCollections : Allow user to set Collections
-func (options *ListFeaturesOptions) SetCollections(collections []string) *ListFeaturesOptions {
-	options.Collections = collections
-	return options
+func (_options *ListFeaturesOptions) SetCollections(collections []string) *ListFeaturesOptions {
+	_options.Collections = collections
+	return _options
 }
 
 // SetSegments : Allow user to set Segments
-func (options *ListFeaturesOptions) SetSegments(segments []string) *ListFeaturesOptions {
-	options.Segments = segments
-	return options
+func (_options *ListFeaturesOptions) SetSegments(segments []string) *ListFeaturesOptions {
+	_options.Segments = segments
+	return _options
 }
 
 // SetInclude : Allow user to set Include
-func (options *ListFeaturesOptions) SetInclude(include []string) *ListFeaturesOptions {
-	options.Include = include
-	return options
+func (_options *ListFeaturesOptions) SetInclude(include []string) *ListFeaturesOptions {
+	_options.Include = include
+	return _options
 }
 
 // SetLimit : Allow user to set Limit
-func (options *ListFeaturesOptions) SetLimit(limit int64) *ListFeaturesOptions {
-	options.Limit = core.Int64Ptr(limit)
-	return options
+func (_options *ListFeaturesOptions) SetLimit(limit int64) *ListFeaturesOptions {
+	_options.Limit = core.Int64Ptr(limit)
+	return _options
 }
 
 // SetOffset : Allow user to set Offset
-func (options *ListFeaturesOptions) SetOffset(offset int64) *ListFeaturesOptions {
-	options.Offset = core.Int64Ptr(offset)
-	return options
+func (_options *ListFeaturesOptions) SetOffset(offset int64) *ListFeaturesOptions {
+	_options.Offset = core.Int64Ptr(offset)
+	return _options
+}
+
+// SetSearch : Allow user to set Search
+func (_options *ListFeaturesOptions) SetSearch(search string) *ListFeaturesOptions {
+	_options.Search = core.StringPtr(search)
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -3947,34 +4166,38 @@ func (options *ListFeaturesOptions) SetHeaders(param map[string]string) *ListFea
 // ListPropertiesOptions : The ListProperties options.
 type ListPropertiesOptions struct {
 	// Environment Id.
-	EnvironmentID *string `json:"environment_id" validate:"required,ne="`
+	EnvironmentID *string `json:"-" validate:"required,ne="`
 
 	// If set to `true`, returns expanded view of the resource details.
-	Expand *bool `json:"expand,omitempty"`
+	Expand *bool `json:"-"`
 
 	// Sort the property details based on the specified attribute.
-	Sort *string `json:"sort,omitempty"`
+	Sort *string `json:"-"`
 
 	// Filter the resources to be returned based on the associated tags. Specify the parameter as a list of comma separated
 	// tags. Returns resources associated with any of the specified tags.
-	Tags *string `json:"tags,omitempty"`
+	Tags *string `json:"-"`
 
 	// Filter properties by a list of comma separated collections.
-	Collections []string `json:"collections,omitempty"`
+	Collections []string `json:"-"`
 
 	// Filter properties by a list of comma separated segments.
-	Segments []string `json:"segments,omitempty"`
+	Segments []string `json:"-"`
 
 	// Include the associated collections or targeting rules details in the response.
-	Include []string `json:"include,omitempty"`
+	Include []string `json:"-"`
 
 	// The number of records to retrieve. By default, the list operation return the first 10 records. To retrieve different
 	// set of records, use `limit` with `offset` to page through the available records.
-	Limit *int64 `json:"limit,omitempty"`
+	Limit *int64 `json:"-"`
 
 	// The number of records to skip. By specifying `offset`, you retrieve a subset of items that starts with the `offset`
 	// value. Use `offset` with `limit` to page through the available records.
-	Offset *int64 `json:"offset,omitempty"`
+	Offset *int64 `json:"-"`
+
+	// Searches for the provided keyword and returns the appropriate row with that value. Here the search happens on the
+	// '[Name OR Tag]' of the entity.
+	Search *string `json:"-"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -3984,7 +4207,8 @@ type ListPropertiesOptions struct {
 // Sort the property details based on the specified attribute.
 const (
 	ListPropertiesOptions_Sort_CreatedTime = "created_time"
-	ListPropertiesOptions_Sort_PropertyID  = "property_id"
+	ListPropertiesOptions_Sort_ID          = "id"
+	ListPropertiesOptions_Sort_NameDefault = "name (default)"
 	ListPropertiesOptions_Sort_UpdatedTime = "updated_time"
 )
 
@@ -4002,57 +4226,63 @@ func (*AppConfigurationV1) NewListPropertiesOptions(environmentID string) *ListP
 }
 
 // SetEnvironmentID : Allow user to set EnvironmentID
-func (options *ListPropertiesOptions) SetEnvironmentID(environmentID string) *ListPropertiesOptions {
-	options.EnvironmentID = core.StringPtr(environmentID)
-	return options
+func (_options *ListPropertiesOptions) SetEnvironmentID(environmentID string) *ListPropertiesOptions {
+	_options.EnvironmentID = core.StringPtr(environmentID)
+	return _options
 }
 
 // SetExpand : Allow user to set Expand
-func (options *ListPropertiesOptions) SetExpand(expand bool) *ListPropertiesOptions {
-	options.Expand = core.BoolPtr(expand)
-	return options
+func (_options *ListPropertiesOptions) SetExpand(expand bool) *ListPropertiesOptions {
+	_options.Expand = core.BoolPtr(expand)
+	return _options
 }
 
 // SetSort : Allow user to set Sort
-func (options *ListPropertiesOptions) SetSort(sort string) *ListPropertiesOptions {
-	options.Sort = core.StringPtr(sort)
-	return options
+func (_options *ListPropertiesOptions) SetSort(sort string) *ListPropertiesOptions {
+	_options.Sort = core.StringPtr(sort)
+	return _options
 }
 
 // SetTags : Allow user to set Tags
-func (options *ListPropertiesOptions) SetTags(tags string) *ListPropertiesOptions {
-	options.Tags = core.StringPtr(tags)
-	return options
+func (_options *ListPropertiesOptions) SetTags(tags string) *ListPropertiesOptions {
+	_options.Tags = core.StringPtr(tags)
+	return _options
 }
 
 // SetCollections : Allow user to set Collections
-func (options *ListPropertiesOptions) SetCollections(collections []string) *ListPropertiesOptions {
-	options.Collections = collections
-	return options
+func (_options *ListPropertiesOptions) SetCollections(collections []string) *ListPropertiesOptions {
+	_options.Collections = collections
+	return _options
 }
 
 // SetSegments : Allow user to set Segments
-func (options *ListPropertiesOptions) SetSegments(segments []string) *ListPropertiesOptions {
-	options.Segments = segments
-	return options
+func (_options *ListPropertiesOptions) SetSegments(segments []string) *ListPropertiesOptions {
+	_options.Segments = segments
+	return _options
 }
 
 // SetInclude : Allow user to set Include
-func (options *ListPropertiesOptions) SetInclude(include []string) *ListPropertiesOptions {
-	options.Include = include
-	return options
+func (_options *ListPropertiesOptions) SetInclude(include []string) *ListPropertiesOptions {
+	_options.Include = include
+	return _options
 }
 
 // SetLimit : Allow user to set Limit
-func (options *ListPropertiesOptions) SetLimit(limit int64) *ListPropertiesOptions {
-	options.Limit = core.Int64Ptr(limit)
-	return options
+func (_options *ListPropertiesOptions) SetLimit(limit int64) *ListPropertiesOptions {
+	_options.Limit = core.Int64Ptr(limit)
+	return _options
 }
 
 // SetOffset : Allow user to set Offset
-func (options *ListPropertiesOptions) SetOffset(offset int64) *ListPropertiesOptions {
-	options.Offset = core.Int64Ptr(offset)
-	return options
+func (_options *ListPropertiesOptions) SetOffset(offset int64) *ListPropertiesOptions {
+	_options.Offset = core.Int64Ptr(offset)
+	return _options
+}
+
+// SetSearch : Allow user to set Search
+func (_options *ListPropertiesOptions) SetSearch(search string) *ListPropertiesOptions {
+	_options.Search = core.StringPtr(search)
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -4064,25 +4294,29 @@ func (options *ListPropertiesOptions) SetHeaders(param map[string]string) *ListP
 // ListSegmentsOptions : The ListSegments options.
 type ListSegmentsOptions struct {
 	// If set to `true`, returns expanded view of the resource details.
-	Expand *bool `json:"expand,omitempty"`
+	Expand *bool `json:"-"`
 
 	// Sort the segment details based on the specified attribute.
-	Sort *string `json:"sort,omitempty"`
+	Sort *string `json:"-"`
 
 	// Filter the resources to be returned based on the associated tags. Specify the parameter as a list of comma separated
 	// tags. Returns resources associated with any of the specified tags.
-	Tags *string `json:"tags,omitempty"`
+	Tags *string `json:"-"`
 
 	// Segment details to include the associated rules in the response.
-	Include *string `json:"include,omitempty"`
+	Include *string `json:"-"`
 
 	// The number of records to retrieve. By default, the list operation return the first 10 records. To retrieve different
 	// set of records, use `limit` with `offset` to page through the available records.
-	Limit *int64 `json:"limit,omitempty"`
+	Limit *int64 `json:"-"`
 
 	// The number of records to skip. By specifying `offset`, you retrieve a subset of items that starts with the `offset`
 	// value. Use `offset` with `limit` to page through the available records.
-	Offset *int64 `json:"offset,omitempty"`
+	Offset *int64 `json:"-"`
+
+	// Searches for the provided keyword and returns the appropriate row with that value. Here the search happens on the
+	// '[Name OR Tag]' of the entity.
+	Search *string `json:"-"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -4092,7 +4326,8 @@ type ListSegmentsOptions struct {
 // Sort the segment details based on the specified attribute.
 const (
 	ListSegmentsOptions_Sort_CreatedTime = "created_time"
-	ListSegmentsOptions_Sort_SegmentID   = "segment_id"
+	ListSegmentsOptions_Sort_ID          = "id"
+	ListSegmentsOptions_Sort_NameDefault = "name (default)"
 	ListSegmentsOptions_Sort_UpdatedTime = "updated_time"
 )
 
@@ -4108,39 +4343,45 @@ func (*AppConfigurationV1) NewListSegmentsOptions() *ListSegmentsOptions {
 }
 
 // SetExpand : Allow user to set Expand
-func (options *ListSegmentsOptions) SetExpand(expand bool) *ListSegmentsOptions {
-	options.Expand = core.BoolPtr(expand)
-	return options
+func (_options *ListSegmentsOptions) SetExpand(expand bool) *ListSegmentsOptions {
+	_options.Expand = core.BoolPtr(expand)
+	return _options
 }
 
 // SetSort : Allow user to set Sort
-func (options *ListSegmentsOptions) SetSort(sort string) *ListSegmentsOptions {
-	options.Sort = core.StringPtr(sort)
-	return options
+func (_options *ListSegmentsOptions) SetSort(sort string) *ListSegmentsOptions {
+	_options.Sort = core.StringPtr(sort)
+	return _options
 }
 
 // SetTags : Allow user to set Tags
-func (options *ListSegmentsOptions) SetTags(tags string) *ListSegmentsOptions {
-	options.Tags = core.StringPtr(tags)
-	return options
+func (_options *ListSegmentsOptions) SetTags(tags string) *ListSegmentsOptions {
+	_options.Tags = core.StringPtr(tags)
+	return _options
 }
 
 // SetInclude : Allow user to set Include
-func (options *ListSegmentsOptions) SetInclude(include string) *ListSegmentsOptions {
-	options.Include = core.StringPtr(include)
-	return options
+func (_options *ListSegmentsOptions) SetInclude(include string) *ListSegmentsOptions {
+	_options.Include = core.StringPtr(include)
+	return _options
 }
 
 // SetLimit : Allow user to set Limit
-func (options *ListSegmentsOptions) SetLimit(limit int64) *ListSegmentsOptions {
-	options.Limit = core.Int64Ptr(limit)
-	return options
+func (_options *ListSegmentsOptions) SetLimit(limit int64) *ListSegmentsOptions {
+	_options.Limit = core.Int64Ptr(limit)
+	return _options
 }
 
 // SetOffset : Allow user to set Offset
-func (options *ListSegmentsOptions) SetOffset(offset int64) *ListSegmentsOptions {
-	options.Offset = core.Int64Ptr(offset)
-	return options
+func (_options *ListSegmentsOptions) SetOffset(offset int64) *ListSegmentsOptions {
+	_options.Offset = core.Int64Ptr(offset)
+	return _options
+}
+
+// SetSearch : Allow user to set Search
+func (_options *ListSegmentsOptions) SetSearch(search string) *ListSegmentsOptions {
+	_options.Search = core.StringPtr(search)
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -4232,6 +4473,23 @@ func UnmarshalPropertiesList(m map[string]json.RawMessage, result interface{}) (
 	return
 }
 
+// Retrieve the value to be passed to a request to access the next page of results
+func (resp *PropertiesList) GetNextOffset() (*int64, error) {
+	if core.IsNil(resp.Next) {
+		return nil, nil
+	}
+	offset, err := core.GetQueryParam(resp.Next.Href, "offset")
+	if err != nil || offset == nil {
+		return nil, err
+	}
+	var offsetValue int64
+	offsetValue, err = strconv.ParseInt(*offset, 10, 64)
+	if err != nil {
+		return nil, err
+	}
+	return core.Int64Ptr(offsetValue), nil
+}
+
 // Property : Details of the property.
 type Property struct {
 	// Property name.
@@ -4243,10 +4501,15 @@ type Property struct {
 	// Property description.
 	Description *string `json:"description,omitempty"`
 
-	// Type of the Property (BOOLEAN, STRING, NUMERIC).
+	// Type of the Property (BOOLEAN, STRING, NUMERIC), if STRING TYPE is selected then format attribute is required.
 	Type *string `json:"type" validate:"required"`
 
-	// Value of the Property. The value can be Boolean, String or a Numeric value as per the `type` attribute.
+	// Format of the Property (TEXT, JSON, YAML) and this is a required attribute when STRING TYPE is used, not required
+	// when BOOLEAN and NUMERIC TYPE is used.
+	Format *string `json:"format,omitempty"`
+
+	// Value of the Property. The value can be Boolean, Numeric, String - TEXT, String - JSON, String - YAML as per the
+	// `type` and `format` attribute.
 	Value interface{} `json:"value" validate:"required"`
 
 	// Tags associated with the property.
@@ -4275,22 +4538,31 @@ type Property struct {
 }
 
 // Constants associated with the Property.Type property.
-// Type of the Property (BOOLEAN, STRING, NUMERIC).
+// Type of the Property (BOOLEAN, STRING, NUMERIC), if STRING TYPE is selected then format attribute is required.
 const (
 	Property_Type_Boolean = "BOOLEAN"
 	Property_Type_Numeric = "NUMERIC"
 	Property_Type_String  = "STRING"
 )
 
+// Constants associated with the Property.Format property.
+// Format of the Property (TEXT, JSON, YAML) and this is a required attribute when STRING TYPE is used, not required
+// when BOOLEAN and NUMERIC TYPE is used.
+const (
+	Property_Format_JSON = "JSON"
+	Property_Format_Text = "TEXT"
+	Property_Format_Yaml = "YAML"
+)
+
 // NewProperty : Instantiate Property (Generic Model Constructor)
-func (*AppConfigurationV1) NewProperty(name string, propertyID string, typeVar string, value interface{}) (model *Property, err error) {
-	model = &Property{
+func (*AppConfigurationV1) NewProperty(name string, propertyID string, typeVar string, value interface{}) (_model *Property, err error) {
+	_model = &Property{
 		Name:       core.StringPtr(name),
 		PropertyID: core.StringPtr(propertyID),
 		Type:       core.StringPtr(typeVar),
 		Value:      value,
 	}
-	err = core.ValidateStruct(model, "required parameters")
+	err = core.ValidateStruct(_model, "required parameters")
 	return
 }
 
@@ -4310,6 +4582,10 @@ func UnmarshalProperty(m map[string]json.RawMessage, result interface{}) (err er
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "type", &obj.Type)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "format", &obj.Format)
 	if err != nil {
 		return
 	}
@@ -4363,12 +4639,12 @@ type PropertyOutput struct {
 }
 
 // NewPropertyOutput : Instantiate PropertyOutput (Generic Model Constructor)
-func (*AppConfigurationV1) NewPropertyOutput(propertyID string, name string) (model *PropertyOutput, err error) {
-	model = &PropertyOutput{
+func (*AppConfigurationV1) NewPropertyOutput(propertyID string, name string) (_model *PropertyOutput, err error) {
+	_model = &PropertyOutput{
 		PropertyID: core.StringPtr(propertyID),
 		Name:       core.StringPtr(name),
 	}
-	err = core.ValidateStruct(model, "required parameters")
+	err = core.ValidateStruct(_model, "required parameters")
 	return
 }
 
@@ -4413,13 +4689,13 @@ const (
 )
 
 // NewRule : Instantiate Rule (Generic Model Constructor)
-func (*AppConfigurationV1) NewRule(attributeName string, operator string, values []string) (model *Rule, err error) {
-	model = &Rule{
+func (*AppConfigurationV1) NewRule(attributeName string, operator string, values []string) (_model *Rule, err error) {
+	_model = &Rule{
 		AttributeName: core.StringPtr(attributeName),
 		Operator:      core.StringPtr(operator),
 		Values:        values,
 	}
-	err = core.ValidateStruct(model, "required parameters")
+	err = core.ValidateStruct(_model, "required parameters")
 	return
 }
 
@@ -4478,13 +4754,13 @@ type Segment struct {
 }
 
 // NewSegment : Instantiate Segment (Generic Model Constructor)
-func (*AppConfigurationV1) NewSegment(name string, segmentID string, rules []Rule) (model *Segment, err error) {
-	model = &Segment{
+func (*AppConfigurationV1) NewSegment(name string, segmentID string, rules []Rule) (_model *Segment, err error) {
+	_model = &Segment{
 		Name:      core.StringPtr(name),
 		SegmentID: core.StringPtr(segmentID),
 		Rules:     rules,
 	}
-	err = core.ValidateStruct(model, "required parameters")
+	err = core.ValidateStruct(_model, "required parameters")
 	return
 }
 
@@ -4550,13 +4826,13 @@ type SegmentRule struct {
 }
 
 // NewSegmentRule : Instantiate SegmentRule (Generic Model Constructor)
-func (*AppConfigurationV1) NewSegmentRule(rules []TargetSegments, value interface{}, order int64) (model *SegmentRule, err error) {
-	model = &SegmentRule{
+func (*AppConfigurationV1) NewSegmentRule(rules []TargetSegments, value interface{}, order int64) (_model *SegmentRule, err error) {
+	_model = &SegmentRule{
 		Rules: rules,
 		Value: value,
 		Order: core.Int64Ptr(order),
 	}
-	err = core.ValidateStruct(model, "required parameters")
+	err = core.ValidateStruct(_model, "required parameters")
 	return
 }
 
@@ -4645,6 +4921,23 @@ func UnmarshalSegmentsList(m map[string]json.RawMessage, result interface{}) (er
 	return
 }
 
+// Retrieve the value to be passed to a request to access the next page of results
+func (resp *SegmentsList) GetNextOffset() (*int64, error) {
+	if core.IsNil(resp.Next) {
+		return nil, nil
+	}
+	offset, err := core.GetQueryParam(resp.Next.Href, "offset")
+	if err != nil || offset == nil {
+		return nil, err
+	}
+	var offsetValue int64
+	offsetValue, err = strconv.ParseInt(*offset, 10, 64)
+	if err != nil {
+		return nil, err
+	}
+	return core.Int64Ptr(offsetValue), nil
+}
+
 // TargetSegments : TargetSegments struct
 type TargetSegments struct {
 	// List of segment ids that are used for targeting using the rule.
@@ -4652,11 +4945,11 @@ type TargetSegments struct {
 }
 
 // NewTargetSegments : Instantiate TargetSegments (Generic Model Constructor)
-func (*AppConfigurationV1) NewTargetSegments(segments []string) (model *TargetSegments, err error) {
-	model = &TargetSegments{
+func (*AppConfigurationV1) NewTargetSegments(segments []string) (_model *TargetSegments, err error) {
+	_model = &TargetSegments{
 		Segments: segments,
 	}
-	err = core.ValidateStruct(model, "required parameters")
+	err = core.ValidateStruct(_model, "required parameters")
 	return
 }
 
@@ -4674,10 +4967,10 @@ func UnmarshalTargetSegments(m map[string]json.RawMessage, result interface{}) (
 // ToggleFeatureOptions : The ToggleFeature options.
 type ToggleFeatureOptions struct {
 	// Environment Id.
-	EnvironmentID *string `json:"environment_id" validate:"required,ne="`
+	EnvironmentID *string `json:"-" validate:"required,ne="`
 
 	// Feature Id.
-	FeatureID *string `json:"feature_id" validate:"required,ne="`
+	FeatureID *string `json:"-" validate:"required,ne="`
 
 	// The state of the feature flag.
 	Enabled *bool `json:"enabled,omitempty"`
@@ -4695,21 +4988,21 @@ func (*AppConfigurationV1) NewToggleFeatureOptions(environmentID string, feature
 }
 
 // SetEnvironmentID : Allow user to set EnvironmentID
-func (options *ToggleFeatureOptions) SetEnvironmentID(environmentID string) *ToggleFeatureOptions {
-	options.EnvironmentID = core.StringPtr(environmentID)
-	return options
+func (_options *ToggleFeatureOptions) SetEnvironmentID(environmentID string) *ToggleFeatureOptions {
+	_options.EnvironmentID = core.StringPtr(environmentID)
+	return _options
 }
 
 // SetFeatureID : Allow user to set FeatureID
-func (options *ToggleFeatureOptions) SetFeatureID(featureID string) *ToggleFeatureOptions {
-	options.FeatureID = core.StringPtr(featureID)
-	return options
+func (_options *ToggleFeatureOptions) SetFeatureID(featureID string) *ToggleFeatureOptions {
+	_options.FeatureID = core.StringPtr(featureID)
+	return _options
 }
 
 // SetEnabled : Allow user to set Enabled
-func (options *ToggleFeatureOptions) SetEnabled(enabled bool) *ToggleFeatureOptions {
-	options.Enabled = core.BoolPtr(enabled)
-	return options
+func (_options *ToggleFeatureOptions) SetEnabled(enabled bool) *ToggleFeatureOptions {
+	_options.Enabled = core.BoolPtr(enabled)
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -4721,7 +5014,7 @@ func (options *ToggleFeatureOptions) SetHeaders(param map[string]string) *Toggle
 // UpdateCollectionOptions : The UpdateCollection options.
 type UpdateCollectionOptions struct {
 	// Collection Id of the collection.
-	CollectionID *string `json:"collection_id" validate:"required,ne="`
+	CollectionID *string `json:"-" validate:"required,ne="`
 
 	// Collection name.
 	Name *string `json:"name,omitempty"`
@@ -4744,27 +5037,27 @@ func (*AppConfigurationV1) NewUpdateCollectionOptions(collectionID string) *Upda
 }
 
 // SetCollectionID : Allow user to set CollectionID
-func (options *UpdateCollectionOptions) SetCollectionID(collectionID string) *UpdateCollectionOptions {
-	options.CollectionID = core.StringPtr(collectionID)
-	return options
+func (_options *UpdateCollectionOptions) SetCollectionID(collectionID string) *UpdateCollectionOptions {
+	_options.CollectionID = core.StringPtr(collectionID)
+	return _options
 }
 
 // SetName : Allow user to set Name
-func (options *UpdateCollectionOptions) SetName(name string) *UpdateCollectionOptions {
-	options.Name = core.StringPtr(name)
-	return options
+func (_options *UpdateCollectionOptions) SetName(name string) *UpdateCollectionOptions {
+	_options.Name = core.StringPtr(name)
+	return _options
 }
 
 // SetDescription : Allow user to set Description
-func (options *UpdateCollectionOptions) SetDescription(description string) *UpdateCollectionOptions {
-	options.Description = core.StringPtr(description)
-	return options
+func (_options *UpdateCollectionOptions) SetDescription(description string) *UpdateCollectionOptions {
+	_options.Description = core.StringPtr(description)
+	return _options
 }
 
 // SetTags : Allow user to set Tags
-func (options *UpdateCollectionOptions) SetTags(tags string) *UpdateCollectionOptions {
-	options.Tags = core.StringPtr(tags)
-	return options
+func (_options *UpdateCollectionOptions) SetTags(tags string) *UpdateCollectionOptions {
+	_options.Tags = core.StringPtr(tags)
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -4776,7 +5069,7 @@ func (options *UpdateCollectionOptions) SetHeaders(param map[string]string) *Upd
 // UpdateEnvironmentOptions : The UpdateEnvironment options.
 type UpdateEnvironmentOptions struct {
 	// Environment Id.
-	EnvironmentID *string `json:"environment_id" validate:"required,ne="`
+	EnvironmentID *string `json:"-" validate:"required,ne="`
 
 	// Environment name.
 	Name *string `json:"name,omitempty"`
@@ -4802,33 +5095,33 @@ func (*AppConfigurationV1) NewUpdateEnvironmentOptions(environmentID string) *Up
 }
 
 // SetEnvironmentID : Allow user to set EnvironmentID
-func (options *UpdateEnvironmentOptions) SetEnvironmentID(environmentID string) *UpdateEnvironmentOptions {
-	options.EnvironmentID = core.StringPtr(environmentID)
-	return options
+func (_options *UpdateEnvironmentOptions) SetEnvironmentID(environmentID string) *UpdateEnvironmentOptions {
+	_options.EnvironmentID = core.StringPtr(environmentID)
+	return _options
 }
 
 // SetName : Allow user to set Name
-func (options *UpdateEnvironmentOptions) SetName(name string) *UpdateEnvironmentOptions {
-	options.Name = core.StringPtr(name)
-	return options
+func (_options *UpdateEnvironmentOptions) SetName(name string) *UpdateEnvironmentOptions {
+	_options.Name = core.StringPtr(name)
+	return _options
 }
 
 // SetDescription : Allow user to set Description
-func (options *UpdateEnvironmentOptions) SetDescription(description string) *UpdateEnvironmentOptions {
-	options.Description = core.StringPtr(description)
-	return options
+func (_options *UpdateEnvironmentOptions) SetDescription(description string) *UpdateEnvironmentOptions {
+	_options.Description = core.StringPtr(description)
+	return _options
 }
 
 // SetTags : Allow user to set Tags
-func (options *UpdateEnvironmentOptions) SetTags(tags string) *UpdateEnvironmentOptions {
-	options.Tags = core.StringPtr(tags)
-	return options
+func (_options *UpdateEnvironmentOptions) SetTags(tags string) *UpdateEnvironmentOptions {
+	_options.Tags = core.StringPtr(tags)
+	return _options
 }
 
 // SetColorCode : Allow user to set ColorCode
-func (options *UpdateEnvironmentOptions) SetColorCode(colorCode string) *UpdateEnvironmentOptions {
-	options.ColorCode = core.StringPtr(colorCode)
-	return options
+func (_options *UpdateEnvironmentOptions) SetColorCode(colorCode string) *UpdateEnvironmentOptions {
+	_options.ColorCode = core.StringPtr(colorCode)
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -4840,10 +5133,10 @@ func (options *UpdateEnvironmentOptions) SetHeaders(param map[string]string) *Up
 // UpdateFeatureOptions : The UpdateFeature options.
 type UpdateFeatureOptions struct {
 	// Environment Id.
-	EnvironmentID *string `json:"environment_id" validate:"required,ne="`
+	EnvironmentID *string `json:"-" validate:"required,ne="`
 
 	// Feature Id.
-	FeatureID *string `json:"feature_id" validate:"required,ne="`
+	FeatureID *string `json:"-" validate:"required,ne="`
 
 	// Feature name.
 	Name *string `json:"name,omitempty"`
@@ -4851,12 +5144,12 @@ type UpdateFeatureOptions struct {
 	// Feature description.
 	Description *string `json:"description,omitempty"`
 
-	// Value of the feature when it is enabled. The value can be Boolean, String or a Numeric value as per the `type`
-	// attribute.
+	// Value of the feature when it is enabled. The value can be Boolean, Numeric, String - TEXT, String - JSON, String -
+	// YAML value as per the `type` and `format` attribute.
 	EnabledValue interface{} `json:"enabled_value,omitempty"`
 
-	// Value of the feature when it is disabled. The value can be Boolean, String or a Numeric value as per the `type`
-	// attribute.
+	// Value of the feature when it is disabled. The value can be Boolean, Numeric, String - TEXT, String - JSON, String -
+	// YAML value as per the `type` and `format` attribute.
 	DisabledValue interface{} `json:"disabled_value,omitempty"`
 
 	// The state of the feature flag.
@@ -4884,63 +5177,63 @@ func (*AppConfigurationV1) NewUpdateFeatureOptions(environmentID string, feature
 }
 
 // SetEnvironmentID : Allow user to set EnvironmentID
-func (options *UpdateFeatureOptions) SetEnvironmentID(environmentID string) *UpdateFeatureOptions {
-	options.EnvironmentID = core.StringPtr(environmentID)
-	return options
+func (_options *UpdateFeatureOptions) SetEnvironmentID(environmentID string) *UpdateFeatureOptions {
+	_options.EnvironmentID = core.StringPtr(environmentID)
+	return _options
 }
 
 // SetFeatureID : Allow user to set FeatureID
-func (options *UpdateFeatureOptions) SetFeatureID(featureID string) *UpdateFeatureOptions {
-	options.FeatureID = core.StringPtr(featureID)
-	return options
+func (_options *UpdateFeatureOptions) SetFeatureID(featureID string) *UpdateFeatureOptions {
+	_options.FeatureID = core.StringPtr(featureID)
+	return _options
 }
 
 // SetName : Allow user to set Name
-func (options *UpdateFeatureOptions) SetName(name string) *UpdateFeatureOptions {
-	options.Name = core.StringPtr(name)
-	return options
+func (_options *UpdateFeatureOptions) SetName(name string) *UpdateFeatureOptions {
+	_options.Name = core.StringPtr(name)
+	return _options
 }
 
 // SetDescription : Allow user to set Description
-func (options *UpdateFeatureOptions) SetDescription(description string) *UpdateFeatureOptions {
-	options.Description = core.StringPtr(description)
-	return options
+func (_options *UpdateFeatureOptions) SetDescription(description string) *UpdateFeatureOptions {
+	_options.Description = core.StringPtr(description)
+	return _options
 }
 
 // SetEnabledValue : Allow user to set EnabledValue
-func (options *UpdateFeatureOptions) SetEnabledValue(enabledValue interface{}) *UpdateFeatureOptions {
-	options.EnabledValue = enabledValue
-	return options
+func (_options *UpdateFeatureOptions) SetEnabledValue(enabledValue interface{}) *UpdateFeatureOptions {
+	_options.EnabledValue = enabledValue
+	return _options
 }
 
 // SetDisabledValue : Allow user to set DisabledValue
-func (options *UpdateFeatureOptions) SetDisabledValue(disabledValue interface{}) *UpdateFeatureOptions {
-	options.DisabledValue = disabledValue
-	return options
+func (_options *UpdateFeatureOptions) SetDisabledValue(disabledValue interface{}) *UpdateFeatureOptions {
+	_options.DisabledValue = disabledValue
+	return _options
 }
 
 // SetEnabled : Allow user to set Enabled
-func (options *UpdateFeatureOptions) SetEnabled(enabled bool) *UpdateFeatureOptions {
-	options.Enabled = core.BoolPtr(enabled)
-	return options
+func (_options *UpdateFeatureOptions) SetEnabled(enabled bool) *UpdateFeatureOptions {
+	_options.Enabled = core.BoolPtr(enabled)
+	return _options
 }
 
 // SetTags : Allow user to set Tags
-func (options *UpdateFeatureOptions) SetTags(tags string) *UpdateFeatureOptions {
-	options.Tags = core.StringPtr(tags)
-	return options
+func (_options *UpdateFeatureOptions) SetTags(tags string) *UpdateFeatureOptions {
+	_options.Tags = core.StringPtr(tags)
+	return _options
 }
 
 // SetSegmentRules : Allow user to set SegmentRules
-func (options *UpdateFeatureOptions) SetSegmentRules(segmentRules []SegmentRule) *UpdateFeatureOptions {
-	options.SegmentRules = segmentRules
-	return options
+func (_options *UpdateFeatureOptions) SetSegmentRules(segmentRules []SegmentRule) *UpdateFeatureOptions {
+	_options.SegmentRules = segmentRules
+	return _options
 }
 
 // SetCollections : Allow user to set Collections
-func (options *UpdateFeatureOptions) SetCollections(collections []CollectionRef) *UpdateFeatureOptions {
-	options.Collections = collections
-	return options
+func (_options *UpdateFeatureOptions) SetCollections(collections []CollectionRef) *UpdateFeatureOptions {
+	_options.Collections = collections
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -4952,10 +5245,10 @@ func (options *UpdateFeatureOptions) SetHeaders(param map[string]string) *Update
 // UpdateFeatureValuesOptions : The UpdateFeatureValues options.
 type UpdateFeatureValuesOptions struct {
 	// Environment Id.
-	EnvironmentID *string `json:"environment_id" validate:"required,ne="`
+	EnvironmentID *string `json:"-" validate:"required,ne="`
 
 	// Feature Id.
-	FeatureID *string `json:"feature_id" validate:"required,ne="`
+	FeatureID *string `json:"-" validate:"required,ne="`
 
 	// Feature name.
 	Name *string `json:"name,omitempty"`
@@ -4966,12 +5259,12 @@ type UpdateFeatureValuesOptions struct {
 	// Tags associated with the feature.
 	Tags *string `json:"tags,omitempty"`
 
-	// Value of the feature when it is enabled. The value can be Boolean, String or a Numeric value as per the `type`
-	// attribute.
+	// Value of the feature when it is enabled. The value can be Boolean, Numeric, String - TEXT, String - JSON, String -
+	// YAML value as per the `type` and `format` attribute.
 	EnabledValue interface{} `json:"enabled_value,omitempty"`
 
-	// Value of the feature when it is disabled. The value can be Boolean, String or a Numeric value as per the `type`
-	// attribute.
+	// Value of the feature when it is disabled. The value can be Boolean, Numeric, String - TEXT, String - JSON, String -
+	// YAML value as per the `type` and `format` attribute.
 	DisabledValue interface{} `json:"disabled_value,omitempty"`
 
 	// Specify the targeting rules that is used to set different property values for different segments.
@@ -4990,51 +5283,51 @@ func (*AppConfigurationV1) NewUpdateFeatureValuesOptions(environmentID string, f
 }
 
 // SetEnvironmentID : Allow user to set EnvironmentID
-func (options *UpdateFeatureValuesOptions) SetEnvironmentID(environmentID string) *UpdateFeatureValuesOptions {
-	options.EnvironmentID = core.StringPtr(environmentID)
-	return options
+func (_options *UpdateFeatureValuesOptions) SetEnvironmentID(environmentID string) *UpdateFeatureValuesOptions {
+	_options.EnvironmentID = core.StringPtr(environmentID)
+	return _options
 }
 
 // SetFeatureID : Allow user to set FeatureID
-func (options *UpdateFeatureValuesOptions) SetFeatureID(featureID string) *UpdateFeatureValuesOptions {
-	options.FeatureID = core.StringPtr(featureID)
-	return options
+func (_options *UpdateFeatureValuesOptions) SetFeatureID(featureID string) *UpdateFeatureValuesOptions {
+	_options.FeatureID = core.StringPtr(featureID)
+	return _options
 }
 
 // SetName : Allow user to set Name
-func (options *UpdateFeatureValuesOptions) SetName(name string) *UpdateFeatureValuesOptions {
-	options.Name = core.StringPtr(name)
-	return options
+func (_options *UpdateFeatureValuesOptions) SetName(name string) *UpdateFeatureValuesOptions {
+	_options.Name = core.StringPtr(name)
+	return _options
 }
 
 // SetDescription : Allow user to set Description
-func (options *UpdateFeatureValuesOptions) SetDescription(description string) *UpdateFeatureValuesOptions {
-	options.Description = core.StringPtr(description)
-	return options
+func (_options *UpdateFeatureValuesOptions) SetDescription(description string) *UpdateFeatureValuesOptions {
+	_options.Description = core.StringPtr(description)
+	return _options
 }
 
 // SetTags : Allow user to set Tags
-func (options *UpdateFeatureValuesOptions) SetTags(tags string) *UpdateFeatureValuesOptions {
-	options.Tags = core.StringPtr(tags)
-	return options
+func (_options *UpdateFeatureValuesOptions) SetTags(tags string) *UpdateFeatureValuesOptions {
+	_options.Tags = core.StringPtr(tags)
+	return _options
 }
 
 // SetEnabledValue : Allow user to set EnabledValue
-func (options *UpdateFeatureValuesOptions) SetEnabledValue(enabledValue interface{}) *UpdateFeatureValuesOptions {
-	options.EnabledValue = enabledValue
-	return options
+func (_options *UpdateFeatureValuesOptions) SetEnabledValue(enabledValue interface{}) *UpdateFeatureValuesOptions {
+	_options.EnabledValue = enabledValue
+	return _options
 }
 
 // SetDisabledValue : Allow user to set DisabledValue
-func (options *UpdateFeatureValuesOptions) SetDisabledValue(disabledValue interface{}) *UpdateFeatureValuesOptions {
-	options.DisabledValue = disabledValue
-	return options
+func (_options *UpdateFeatureValuesOptions) SetDisabledValue(disabledValue interface{}) *UpdateFeatureValuesOptions {
+	_options.DisabledValue = disabledValue
+	return _options
 }
 
 // SetSegmentRules : Allow user to set SegmentRules
-func (options *UpdateFeatureValuesOptions) SetSegmentRules(segmentRules []SegmentRule) *UpdateFeatureValuesOptions {
-	options.SegmentRules = segmentRules
-	return options
+func (_options *UpdateFeatureValuesOptions) SetSegmentRules(segmentRules []SegmentRule) *UpdateFeatureValuesOptions {
+	_options.SegmentRules = segmentRules
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -5046,10 +5339,10 @@ func (options *UpdateFeatureValuesOptions) SetHeaders(param map[string]string) *
 // UpdatePropertyOptions : The UpdateProperty options.
 type UpdatePropertyOptions struct {
 	// Environment Id.
-	EnvironmentID *string `json:"environment_id" validate:"required,ne="`
+	EnvironmentID *string `json:"-" validate:"required,ne="`
 
 	// Property Id.
-	PropertyID *string `json:"property_id" validate:"required,ne="`
+	PropertyID *string `json:"-" validate:"required,ne="`
 
 	// Property name.
 	Name *string `json:"name,omitempty"`
@@ -5057,7 +5350,8 @@ type UpdatePropertyOptions struct {
 	// Property description.
 	Description *string `json:"description,omitempty"`
 
-	// Value of the property. The value can be Boolean, String or a Numeric value as per the `type` attribute.
+	// Value of the Property. The value can be Boolean, Numeric, String - TEXT, String - JSON, String - YAML as per the
+	// `type` and `format` attribute.
 	Value interface{} `json:"value,omitempty"`
 
 	// Tags associated with the property.
@@ -5082,51 +5376,51 @@ func (*AppConfigurationV1) NewUpdatePropertyOptions(environmentID string, proper
 }
 
 // SetEnvironmentID : Allow user to set EnvironmentID
-func (options *UpdatePropertyOptions) SetEnvironmentID(environmentID string) *UpdatePropertyOptions {
-	options.EnvironmentID = core.StringPtr(environmentID)
-	return options
+func (_options *UpdatePropertyOptions) SetEnvironmentID(environmentID string) *UpdatePropertyOptions {
+	_options.EnvironmentID = core.StringPtr(environmentID)
+	return _options
 }
 
 // SetPropertyID : Allow user to set PropertyID
-func (options *UpdatePropertyOptions) SetPropertyID(propertyID string) *UpdatePropertyOptions {
-	options.PropertyID = core.StringPtr(propertyID)
-	return options
+func (_options *UpdatePropertyOptions) SetPropertyID(propertyID string) *UpdatePropertyOptions {
+	_options.PropertyID = core.StringPtr(propertyID)
+	return _options
 }
 
 // SetName : Allow user to set Name
-func (options *UpdatePropertyOptions) SetName(name string) *UpdatePropertyOptions {
-	options.Name = core.StringPtr(name)
-	return options
+func (_options *UpdatePropertyOptions) SetName(name string) *UpdatePropertyOptions {
+	_options.Name = core.StringPtr(name)
+	return _options
 }
 
 // SetDescription : Allow user to set Description
-func (options *UpdatePropertyOptions) SetDescription(description string) *UpdatePropertyOptions {
-	options.Description = core.StringPtr(description)
-	return options
+func (_options *UpdatePropertyOptions) SetDescription(description string) *UpdatePropertyOptions {
+	_options.Description = core.StringPtr(description)
+	return _options
 }
 
 // SetValue : Allow user to set Value
-func (options *UpdatePropertyOptions) SetValue(value interface{}) *UpdatePropertyOptions {
-	options.Value = value
-	return options
+func (_options *UpdatePropertyOptions) SetValue(value interface{}) *UpdatePropertyOptions {
+	_options.Value = value
+	return _options
 }
 
 // SetTags : Allow user to set Tags
-func (options *UpdatePropertyOptions) SetTags(tags string) *UpdatePropertyOptions {
-	options.Tags = core.StringPtr(tags)
-	return options
+func (_options *UpdatePropertyOptions) SetTags(tags string) *UpdatePropertyOptions {
+	_options.Tags = core.StringPtr(tags)
+	return _options
 }
 
 // SetSegmentRules : Allow user to set SegmentRules
-func (options *UpdatePropertyOptions) SetSegmentRules(segmentRules []SegmentRule) *UpdatePropertyOptions {
-	options.SegmentRules = segmentRules
-	return options
+func (_options *UpdatePropertyOptions) SetSegmentRules(segmentRules []SegmentRule) *UpdatePropertyOptions {
+	_options.SegmentRules = segmentRules
+	return _options
 }
 
 // SetCollections : Allow user to set Collections
-func (options *UpdatePropertyOptions) SetCollections(collections []CollectionRef) *UpdatePropertyOptions {
-	options.Collections = collections
-	return options
+func (_options *UpdatePropertyOptions) SetCollections(collections []CollectionRef) *UpdatePropertyOptions {
+	_options.Collections = collections
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -5138,10 +5432,10 @@ func (options *UpdatePropertyOptions) SetHeaders(param map[string]string) *Updat
 // UpdatePropertyValuesOptions : The UpdatePropertyValues options.
 type UpdatePropertyValuesOptions struct {
 	// Environment Id.
-	EnvironmentID *string `json:"environment_id" validate:"required,ne="`
+	EnvironmentID *string `json:"-" validate:"required,ne="`
 
 	// Property Id.
-	PropertyID *string `json:"property_id" validate:"required,ne="`
+	PropertyID *string `json:"-" validate:"required,ne="`
 
 	// Property name.
 	Name *string `json:"name,omitempty"`
@@ -5152,7 +5446,8 @@ type UpdatePropertyValuesOptions struct {
 	// Tags associated with the property.
 	Tags *string `json:"tags,omitempty"`
 
-	// Value of the property. The value can be Boolean, String or a Numeric value as per the `type` attribute.
+	// Value of the Property. The value can be Boolean, Numeric, String - TEXT, String - JSON, String - YAML as per the
+	// `type` and `format` attribute.
 	Value interface{} `json:"value,omitempty"`
 
 	// Specify the targeting rules that is used to set different property values for different segments.
@@ -5171,45 +5466,45 @@ func (*AppConfigurationV1) NewUpdatePropertyValuesOptions(environmentID string, 
 }
 
 // SetEnvironmentID : Allow user to set EnvironmentID
-func (options *UpdatePropertyValuesOptions) SetEnvironmentID(environmentID string) *UpdatePropertyValuesOptions {
-	options.EnvironmentID = core.StringPtr(environmentID)
-	return options
+func (_options *UpdatePropertyValuesOptions) SetEnvironmentID(environmentID string) *UpdatePropertyValuesOptions {
+	_options.EnvironmentID = core.StringPtr(environmentID)
+	return _options
 }
 
 // SetPropertyID : Allow user to set PropertyID
-func (options *UpdatePropertyValuesOptions) SetPropertyID(propertyID string) *UpdatePropertyValuesOptions {
-	options.PropertyID = core.StringPtr(propertyID)
-	return options
+func (_options *UpdatePropertyValuesOptions) SetPropertyID(propertyID string) *UpdatePropertyValuesOptions {
+	_options.PropertyID = core.StringPtr(propertyID)
+	return _options
 }
 
 // SetName : Allow user to set Name
-func (options *UpdatePropertyValuesOptions) SetName(name string) *UpdatePropertyValuesOptions {
-	options.Name = core.StringPtr(name)
-	return options
+func (_options *UpdatePropertyValuesOptions) SetName(name string) *UpdatePropertyValuesOptions {
+	_options.Name = core.StringPtr(name)
+	return _options
 }
 
 // SetDescription : Allow user to set Description
-func (options *UpdatePropertyValuesOptions) SetDescription(description string) *UpdatePropertyValuesOptions {
-	options.Description = core.StringPtr(description)
-	return options
+func (_options *UpdatePropertyValuesOptions) SetDescription(description string) *UpdatePropertyValuesOptions {
+	_options.Description = core.StringPtr(description)
+	return _options
 }
 
 // SetTags : Allow user to set Tags
-func (options *UpdatePropertyValuesOptions) SetTags(tags string) *UpdatePropertyValuesOptions {
-	options.Tags = core.StringPtr(tags)
-	return options
+func (_options *UpdatePropertyValuesOptions) SetTags(tags string) *UpdatePropertyValuesOptions {
+	_options.Tags = core.StringPtr(tags)
+	return _options
 }
 
 // SetValue : Allow user to set Value
-func (options *UpdatePropertyValuesOptions) SetValue(value interface{}) *UpdatePropertyValuesOptions {
-	options.Value = value
-	return options
+func (_options *UpdatePropertyValuesOptions) SetValue(value interface{}) *UpdatePropertyValuesOptions {
+	_options.Value = value
+	return _options
 }
 
 // SetSegmentRules : Allow user to set SegmentRules
-func (options *UpdatePropertyValuesOptions) SetSegmentRules(segmentRules []SegmentRule) *UpdatePropertyValuesOptions {
-	options.SegmentRules = segmentRules
-	return options
+func (_options *UpdatePropertyValuesOptions) SetSegmentRules(segmentRules []SegmentRule) *UpdatePropertyValuesOptions {
+	_options.SegmentRules = segmentRules
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -5221,7 +5516,7 @@ func (options *UpdatePropertyValuesOptions) SetHeaders(param map[string]string) 
 // UpdateSegmentOptions : The UpdateSegment options.
 type UpdateSegmentOptions struct {
 	// Segment Id.
-	SegmentID *string `json:"segment_id" validate:"required,ne="`
+	SegmentID *string `json:"-" validate:"required,ne="`
 
 	// Segment name.
 	Name *string `json:"name,omitempty"`
@@ -5249,33 +5544,33 @@ func (*AppConfigurationV1) NewUpdateSegmentOptions(segmentID string) *UpdateSegm
 }
 
 // SetSegmentID : Allow user to set SegmentID
-func (options *UpdateSegmentOptions) SetSegmentID(segmentID string) *UpdateSegmentOptions {
-	options.SegmentID = core.StringPtr(segmentID)
-	return options
+func (_options *UpdateSegmentOptions) SetSegmentID(segmentID string) *UpdateSegmentOptions {
+	_options.SegmentID = core.StringPtr(segmentID)
+	return _options
 }
 
 // SetName : Allow user to set Name
-func (options *UpdateSegmentOptions) SetName(name string) *UpdateSegmentOptions {
-	options.Name = core.StringPtr(name)
-	return options
+func (_options *UpdateSegmentOptions) SetName(name string) *UpdateSegmentOptions {
+	_options.Name = core.StringPtr(name)
+	return _options
 }
 
 // SetDescription : Allow user to set Description
-func (options *UpdateSegmentOptions) SetDescription(description string) *UpdateSegmentOptions {
-	options.Description = core.StringPtr(description)
-	return options
+func (_options *UpdateSegmentOptions) SetDescription(description string) *UpdateSegmentOptions {
+	_options.Description = core.StringPtr(description)
+	return _options
 }
 
 // SetTags : Allow user to set Tags
-func (options *UpdateSegmentOptions) SetTags(tags string) *UpdateSegmentOptions {
-	options.Tags = core.StringPtr(tags)
-	return options
+func (_options *UpdateSegmentOptions) SetTags(tags string) *UpdateSegmentOptions {
+	_options.Tags = core.StringPtr(tags)
+	return _options
 }
 
 // SetRules : Allow user to set Rules
-func (options *UpdateSegmentOptions) SetRules(rules []Rule) *UpdateSegmentOptions {
-	options.Rules = rules
-	return options
+func (_options *UpdateSegmentOptions) SetRules(rules []Rule) *UpdateSegmentOptions {
+	_options.Rules = rules
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
