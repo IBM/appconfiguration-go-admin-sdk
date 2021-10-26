@@ -9,3 +9,6 @@ require (
 	github.com/onsi/gomega v1.10.4
 	github.com/stretchr/testify v1.6.1
 )
+
+//Retract v1.x.x versions
+retract [v1.0.0, v1.1.1]

@@ -27,6 +27,8 @@ Use the Go Admin SDK to manage the App Configuration service instance. The Go Ad
 
 ## Installation
 
+**Note: The v1.x.x versions of the App Configuration Go Admin SDK have been retracted. Use the latest available version of the SDK.** 
+
 Install using the command.
 
 ```bash
