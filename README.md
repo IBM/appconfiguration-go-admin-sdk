@@ -17,7 +17,7 @@ The IBM Cloud App Configuration Go Admin SDK allows developers to programmatical
 
 * An [IBM Cloud](https://cloud.ibm.com/registration) account.
 * An [App Configuration](https://cloud.ibm.com/docs/app-configuration) instance.
-* Go version 1.16 or above.
+* Go version(1.17, 1.16.7) or later is recommended
 
 ## Overview
 
@@ -32,7 +32,7 @@ Use the Go Admin SDK to manage the App Configuration service instance. The Go Ad
 Install using the command.
 
 ```bash
-go get -u github.com/IBM/appconfiguration-go-admin-sdk@latest
+go get -u github.com/IBM/appconfiguration-go-admin-sdk
 ```
 
 ## Import the SDK
