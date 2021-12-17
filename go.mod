@@ -2,6 +2,8 @@ module github.com/IBM/appconfiguration-go-admin-sdk
 
 go 1.16
 
+replace github.com/gobuffalo/packr/v2 => github.com/gobuffalo/packr/v2 v2.3.2
+
 require (
 	github.com/IBM/go-sdk-core/v5 v5.7.0
 	github.com/go-openapi/strfmt v0.20.2
