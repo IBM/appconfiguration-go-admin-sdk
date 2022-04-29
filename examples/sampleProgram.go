@@ -89,9 +89,11 @@ func main() {
 	createEnvironment("environmentId", "environmentName", "desc", "tags", "#FDD13A")
 	createCollection("collectionId", "collectionName", "desc", "tags")
 	createSegment("segmentName", "segmentId", "desc", "tags", "email", "endsWith", []string{"@in.ibm.com"})
-	createFeature("environmentId", "booleanFeatureName", "booleanFeatureId", "desc", "BOOLEAN", "true", "false", "tags", []string{"segmentId"}, 1, "collectionId", "true", "")
-	createFeature("environmentId", "numberFeatureName", "numberFeatureId", "desc", "NUMERIC", "1", "2", "tags", []string{"segmentId"}, 1, "collectionId", "3", "")
-	createFeature("environmentId", "stringTextFeatureName", "stringTextFeatureId", "desc", "STRING", "enabled", "disabled", "tags", []string{"segmentId"}, 1, "collectionId", "segmentVal", "TEXT")
+	rolloutPercentage := int64(20)
+	segmentRolloutPercentage := int64(30)
+	createFeature("environmentId", "booleanFeatureName", "booleanFeatureId", "desc", "BOOLEAN", "true", "false", "tags", []string{"segmentId"}, 1, "collectionId", "true", "", &rolloutPercentage, &segmentRolloutPercentage)
+	createFeature("environmentId", "numberFeatureName", "numberFeatureId", "desc", "NUMERIC", "1", "2", "tags", []string{"segmentId"}, 1, "collectionId", "3", "", nil, nil)
+	createFeature("environmentId", "stringTextFeatureName", "stringTextFeatureId", "desc", "STRING", "enabled", "disabled", "tags", []string{"segmentId"}, 1, "collectionId", "segmentVal", "TEXT", nil, nil)
 
 	featureEnabledValMap := make(map[string]interface{})
 	featureEnabledValMap["key"] = "enabled"
@@ -100,8 +102,8 @@ func main() {
 	featureSegmentValMap := make(map[string]interface{})
 	featureSegmentValMap["key"] = "segmentVal"
 
-	createFeature("environmentId", "stringJsonFeatureName", "stringJsonFeatureId", "desc", "STRING", featureEnabledValMap, featureDisabledValMap, "tags", []string{"segmentId"}, 1, "collectionId", featureSegmentValMap, "JSON")
-	createFeature("environmentId", "stringYamlFeatureName", "stringYamlFeatureId", "desc", "STRING", "---\nkey: enabled", "---\nkey: disabled", "tags", []string{"segmentId"}, 1, "collectionId", "---\nkey: segmentVal\n", "YAML")
+	createFeature("environmentId", "stringJsonFeatureName", "stringJsonFeatureId", "desc", "STRING", featureEnabledValMap, featureDisabledValMap, "tags", []string{"segmentId"}, 1, "collectionId", featureSegmentValMap, "JSON", nil, nil)
+	createFeature("environmentId", "stringYamlFeatureName", "stringYamlFeatureId", "desc", "STRING", "---\nkey: enabled", "---\nkey: disabled", "tags", []string{"segmentId"}, 1, "collectionId", "---\nkey: segmentVal\n", "YAML", nil, nil)
 	createProperty("environmentId", "booleanPropertyName", "booleanPropertyId", "desc", "BOOLEAN", "true", "tags", []string{"segmentId"}, "collectionId", 2, "true", "")
 	createProperty("environmentId", "numberPropertyName", "numberPropertyId", "desc", "NUMERIC", "2", "tags", []string{"segmentId"}, "collectionId", 2, "4", "")
 	createProperty("environmentId", "stringTextPropertyName", "stringTextPropertyId", "desc", "STRING", "propertyVal", "tags", []string{"segmentId"}, "collectionId", 2, "segmentVal", "TEXT")
@@ -122,7 +124,10 @@ func main() {
 	getSegments()
 	getProperties("environmentId")
 
-	updateFeature("environmentId", "numberFeatureId", "numberFeatureName", "updatedDesc", "1", "1", "tags", []string{}, 1, "collectionId", "2", true)
+	rolloutPercentage = int64(30)
+	segmentRolloutPercentage = int64(40)
+	updateFeature("environmentId", "booleanFeatureId", "booleanFeatureName", "updatedDesc", "true", "false", "tags", []string{"segmentId"}, 1, "collectionId", "true", true, &rolloutPercentage, &segmentRolloutPercentage)
+	updateFeature("environmentId", "numberFeatureId", "numberFeatureName", "updatedDesc", "1", "1", "tags", []string{}, 1, "collectionId", "2", true, nil, nil)
 	updateCollection("collectionId", "collectionName", "updatedDesc", "updatedTags")
 	updateSegment("segmentId", "segmentName", "updatedDesc", "updatedTags", "email", "endsWith", []string{"@in.ibm.com"})
 	updateProperty("environmentId", "booleanPropertyName", "booleanPropertyId", "updatedDescBoolean", "true", "updatedTags", []string{"segmentId"}, "collectionId", 2, "true")
@@ -134,7 +139,9 @@ func main() {
 	getProperty("environmentId", "booleanPropertyId")
 	getSegment("segmentId")
 
-	patchFeature("environmentId", "booleanFeatureId", "booleanFeatureName", "patchedDesc", "1", "12", "tag", []string{}, 1, "2")
+	rolloutPercentage = int64(50)
+	segmentRolloutPercentage = int64(60)
+	patchFeature("environmentId", "booleanFeatureId", "booleanFeatureName", "patchedDesc", "true", "false", "tag", []string{"segmentId"}, 1, "true", &rolloutPercentage, &segmentRolloutPercentage)
 	patchProperty("environmentId", "numberPropertyName", "numberPropertyId", "desc", "1", "tags", []string{"segmentId"}, 2, "2")
 
 	deleteFeature("environmentId", "numberFeatureId")
@@ -201,16 +208,19 @@ func createSegment(name string, id string, description string, tags string, attr
 	fmt.Println(*result.SegmentID)
 }
 
-func createFeature(environmentId string, name string, id string, description string, typeOfFeature string, enabledValue interface{}, disabledValue interface{}, tags string, segments []string, order int64, collectionId string, value interface{}, format string) {
+func createFeature(environmentId string, name string, id string, description string, typeOfFeature string, enabledValue interface{}, disabledValue interface{}, tags string, segments []string, order int64, collectionId string, value interface{}, format string, featureRolloutPercentage *int64, segmentRolloutPercentage *int64) {
 	fmt.Println("createFeature")
 	ruleArray, _ := appConfigurationServiceInstance.NewTargetSegments(segments)
-	segmentRuleArray, _ := appConfigurationServiceInstance.NewSegmentRule([]appconfigurationv1.TargetSegments{*ruleArray}, value, order)
+	segmentRuleArray, _ := appConfigurationServiceInstance.NewFeatureSegmentRule([]appconfigurationv1.TargetSegments{*ruleArray}, value, order, segmentRolloutPercentage)
 	collectionArray, _ := appConfigurationServiceInstance.NewCollectionRef(collectionId)
 	createFeatureOptionsModel := appConfigurationServiceInstance.NewCreateFeatureOptions(environmentId, name, id, typeOfFeature, enabledValue, disabledValue)
 	createFeatureOptionsModel.SetTags(tags)
 	createFeatureOptionsModel.SetDescription(description)
-	createFeatureOptionsModel.SetSegmentRules([]appconfigurationv1.SegmentRule{*segmentRuleArray})
+	createFeatureOptionsModel.SetSegmentRules([]appconfigurationv1.FeatureSegmentRule{*segmentRuleArray})
 	createFeatureOptionsModel.SetCollections([]appconfigurationv1.CollectionRef{*collectionArray})
+	if featureRolloutPercentage != nil {
+		createFeatureOptionsModel.SetRolloutPercentage(*featureRolloutPercentage)
+	}
 	if len(format) != 0 {
 		createFeatureOptionsModel.SetFormat(format)
 	}
@@ -263,10 +273,10 @@ func updateEnvironment(environmentId string, name string, description string, ta
 	fmt.Println(*result.Description)
 }
 
-func updateFeature(environmentId string, id string, name string, description string, enabledValue string, disabledValue string, tags string, segments []string, order int64, collectionId string, value string, deletedFlag bool) {
+func updateFeature(environmentId string, id string, name string, description string, enabledValue string, disabledValue string, tags string, segments []string, order int64, collectionId string, value string, deletedFlag bool, featureRolloutPercentage *int64, segmentRolloutPercentage *int64) {
 	fmt.Println("updateFeatureWithNumberValue")
 	ruleArray, _ := appConfigurationServiceInstance.NewTargetSegments(segments)
-	segmentRuleArray, _ := appConfigurationServiceInstance.NewSegmentRule([]appconfigurationv1.TargetSegments{*ruleArray}, value, order)
+	segmentRuleArray, _ := appConfigurationServiceInstance.NewFeatureSegmentRule([]appconfigurationv1.TargetSegments{*ruleArray}, value, order, segmentRolloutPercentage)
 	collectionArray, _ := appConfigurationServiceInstance.NewCollectionRef(collectionId)
 	updateFeatureOptionsModel := appConfigurationServiceInstance.NewUpdateFeatureOptions(environmentId, id)
 	updateFeatureOptionsModel.SetName(name)
@@ -274,8 +284,11 @@ func updateFeature(environmentId string, id string, name string, description str
 	updateFeatureOptionsModel.SetTags(tags)
 	updateFeatureOptionsModel.SetDisabledValue(disabledValue)
 	updateFeatureOptionsModel.SetEnabledValue(enabledValue)
-	updateFeatureOptionsModel.SetSegmentRules([]appconfigurationv1.SegmentRule{*segmentRuleArray})
+	updateFeatureOptionsModel.SetSegmentRules([]appconfigurationv1.FeatureSegmentRule{*segmentRuleArray})
 	updateFeatureOptionsModel.SetCollections([]appconfigurationv1.CollectionRef{*collectionArray})
+	if featureRolloutPercentage != nil {
+		updateFeatureOptionsModel.SetRolloutPercentage(*featureRolloutPercentage)
+	}
 	result, response, error := appConfigurationServiceInstance.UpdateFeature(updateFeatureOptionsModel)
 	if error != nil {
 		fmt.Println("Error: " + error.Error())
@@ -300,17 +313,20 @@ func updateCollection(collectionId string, name string, description string, tags
 	fmt.Println(*result.Description)
 }
 
-func patchFeature(environmentId string, id string, name string, description string, enabledValue string, disabledValue string, tags string, segments []string, order int64, value string) {
+func patchFeature(environmentId string, id string, name string, description string, enabledValue string, disabledValue string, tags string, segments []string, order int64, value string, featureRolloutPercentage *int64, segmentRolloutPercentage *int64) {
 	fmt.Println("patchFeatureWithNumberValue")
 	ruleArray, _ := appConfigurationServiceInstance.NewTargetSegments(segments)
-	segmentRuleArray, _ := appConfigurationServiceInstance.NewSegmentRule([]appconfigurationv1.TargetSegments{*ruleArray}, value, order)
+	segmentRuleArray, _ := appConfigurationServiceInstance.NewFeatureSegmentRule([]appconfigurationv1.TargetSegments{*ruleArray}, value, order, segmentRolloutPercentage)
 	patchFeatureOptionsModel := appConfigurationServiceInstance.NewUpdateFeatureValuesOptions(environmentId, id)
 	patchFeatureOptionsModel.SetName(name)
 	patchFeatureOptionsModel.SetDescription(description)
 	patchFeatureOptionsModel.SetTags(tags)
 	patchFeatureOptionsModel.SetDisabledValue(disabledValue)
 	patchFeatureOptionsModel.SetEnabledValue(enabledValue)
-	patchFeatureOptionsModel.SetSegmentRules([]appconfigurationv1.SegmentRule{*segmentRuleArray})
+	patchFeatureOptionsModel.SetSegmentRules([]appconfigurationv1.FeatureSegmentRule{*segmentRuleArray})
+	if featureRolloutPercentage != nil {
+		patchFeatureOptionsModel.SetRolloutPercentage(*featureRolloutPercentage)
+	}
 	result, response, error := appConfigurationServiceInstance.UpdateFeatureValues(patchFeatureOptionsModel)
 	if error != nil {
 		fmt.Println("Error: " + error.Error())

@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2022.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -129,7 +129,7 @@ func (appConfiguration *AppConfigurationV1) Clone() *AppConfigurationV1 {
 	return &clone
 }
 
-// // ConstructServiceURL constructs a service URL from the parameterized URL.
+// ConstructServiceURL constructs a service URL from the parameterized URL.
 func ConstructServiceURL(providedUrlVariables map[string]string) (string, error) {
 	return core.ConstructServiceURL(ParameterizedServiceURL, defaultUrlVariables, providedUrlVariables)
 }
@@ -1015,6 +1015,9 @@ func (appConfiguration *AppConfigurationV1) CreateFeatureWithContext(ctx context
 	if createFeatureOptions.Enabled != nil {
 		body["enabled"] = createFeatureOptions.Enabled
 	}
+	if createFeatureOptions.RolloutPercentage != nil {
+		body["rollout_percentage"] = createFeatureOptions.RolloutPercentage
+	}
 	if createFeatureOptions.Tags != nil {
 		body["tags"] = createFeatureOptions.Tags
 	}
@@ -1106,6 +1109,9 @@ func (appConfiguration *AppConfigurationV1) UpdateFeatureWithContext(ctx context
 	}
 	if updateFeatureOptions.Enabled != nil {
 		body["enabled"] = updateFeatureOptions.Enabled
+	}
+	if updateFeatureOptions.RolloutPercentage != nil {
+		body["rollout_percentage"] = updateFeatureOptions.RolloutPercentage
 	}
 	if updateFeatureOptions.Tags != nil {
 		body["tags"] = updateFeatureOptions.Tags
@@ -1200,6 +1206,9 @@ func (appConfiguration *AppConfigurationV1) UpdateFeatureValuesWithContext(ctx c
 	}
 	if updateFeatureValuesOptions.DisabledValue != nil {
 		body["disabled_value"] = updateFeatureValuesOptions.DisabledValue
+	}
+	if updateFeatureValuesOptions.RolloutPercentage != nil {
+		body["rollout_percentage"] = updateFeatureValuesOptions.RolloutPercentage
 	}
 	if updateFeatureValuesOptions.SegmentRules != nil {
 		body["segment_rules"] = updateFeatureValuesOptions.SegmentRules
@@ -2645,11 +2654,14 @@ type CreateFeatureOptions struct {
 	// The state of the feature flag.
 	Enabled *bool `json:"enabled,omitempty"`
 
+	// rollout_percentage associated with feature flag, max range 0-100.
+	RolloutPercentage *int64 `json:"rollout_percentage,omitempty"`
+
 	// Tags associated with the feature.
 	Tags *string `json:"tags,omitempty"`
 
 	// Specify the targeting rules that is used to set different feature flag values for different segments.
-	SegmentRules []SegmentRule `json:"segment_rules,omitempty"`
+	SegmentRules []FeatureSegmentRule `json:"segment_rules,omitempty"`
 
 	// List of collection id representing the collections that are associated with the specified feature flag.
 	Collections []CollectionRef `json:"collections,omitempty"`
@@ -2741,6 +2753,12 @@ func (_options *CreateFeatureOptions) SetEnabled(enabled bool) *CreateFeatureOpt
 	return _options
 }
 
+// SetRolloutPercentage : Allow user to set RolloutPercentage
+func (_options *CreateFeatureOptions) SetRolloutPercentage(rolloutPercentage int64) *CreateFeatureOptions {
+	_options.RolloutPercentage = core.Int64Ptr(rolloutPercentage)
+	return _options
+}
+
 // SetTags : Allow user to set Tags
 func (_options *CreateFeatureOptions) SetTags(tags string) *CreateFeatureOptions {
 	_options.Tags = core.StringPtr(tags)
@@ -2748,7 +2766,7 @@ func (_options *CreateFeatureOptions) SetTags(tags string) *CreateFeatureOptions
 }
 
 // SetSegmentRules : Allow user to set SegmentRules
-func (_options *CreateFeatureOptions) SetSegmentRules(segmentRules []SegmentRule) *CreateFeatureOptions {
+func (_options *CreateFeatureOptions) SetSegmentRules(segmentRules []FeatureSegmentRule) *CreateFeatureOptions {
 	_options.SegmentRules = segmentRules
 	return _options
 }
@@ -3323,11 +3341,14 @@ type Feature struct {
 	// The state of the feature flag.
 	Enabled *bool `json:"enabled,omitempty"`
 
+	// rollout_percentage associated with feature flag, max range 0-100.
+	RolloutPercentage *int64 `json:"rollout_percentage,omitempty"`
+
 	// Tags associated with the feature.
 	Tags *string `json:"tags,omitempty"`
 
 	// Specify the targeting rules that is used to set different feature flag values for different segments.
-	SegmentRules []SegmentRule `json:"segment_rules,omitempty"`
+	SegmentRules []FeatureSegmentRule `json:"segment_rules,omitempty"`
 
 	// Denotes if the targeting rules are specified for the feature flag.
 	SegmentExists *bool `json:"segment_exists,omitempty"`
@@ -3413,11 +3434,15 @@ func UnmarshalFeature(m map[string]json.RawMessage, result interface{}) (err err
 	if err != nil {
 		return
 	}
+	err = core.UnmarshalPrimitive(m, "rollout_percentage", &obj.RolloutPercentage)
+	if err != nil {
+		return
+	}
 	err = core.UnmarshalPrimitive(m, "tags", &obj.Tags)
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(m, "segment_rules", &obj.SegmentRules, UnmarshalSegmentRule)
+	err = core.UnmarshalModel(m, "segment_rules", &obj.SegmentRules, UnmarshalFeatureSegmentRule)
 	if err != nil {
 		return
 	}
@@ -3476,6 +3501,58 @@ func UnmarshalFeatureOutput(m map[string]json.RawMessage, result interface{}) (e
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// FeatureSegmentRule : FeatureSegmentRule struct
+type FeatureSegmentRule struct {
+	// The list of targeted segments.
+	Rules []TargetSegments `json:"rules" validate:"required"`
+
+	// Value to be used for evaluation for this rule. The value can be Boolean, String - TEXT , String - JSON , String -
+	// YAML or a Numeric value as per the `type` and `format` attribute.
+	Value interface{} `json:"value" validate:"required"`
+
+	// Order of the rule, used during evaluation. The evaluation is performed in the order defined and the value associated
+	// with the first matching rule is used for evaluation.
+	Order *int64 `json:"order" validate:"required"`
+
+	// rollout_percentage associated with segment, max range 0-100.
+	RolloutPercentage *int64 `json:"rollout_percentage,omitempty"`
+}
+
+// NewFeatureSegmentRule : Instantiate FeatureSegmentRule (Generic Model Constructor)
+func (*AppConfigurationV1) NewFeatureSegmentRule(rules []TargetSegments, value interface{}, order int64, rolloutPercentage *int64) (_model *FeatureSegmentRule, err error) {
+	_model = &FeatureSegmentRule{
+		Rules:             rules,
+		Value:             value,
+		Order:             core.Int64Ptr(order),
+		RolloutPercentage: rolloutPercentage,
+	}
+	err = core.ValidateStruct(_model, "required parameters")
+	return
+}
+
+// UnmarshalFeatureSegmentRule unmarshals an instance of FeatureSegmentRule from the specified map of raw messages.
+func UnmarshalFeatureSegmentRule(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(FeatureSegmentRule)
+	err = core.UnmarshalModel(m, "rules", &obj.Rules, UnmarshalTargetSegments)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "value", &obj.Value)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "order", &obj.Order)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "rollout_percentage", &obj.RolloutPercentage)
 	if err != nil {
 		return
 	}
@@ -4813,7 +4890,7 @@ func UnmarshalSegment(m map[string]json.RawMessage, result interface{}) (err err
 
 // SegmentRule : SegmentRule struct
 type SegmentRule struct {
-	// The list of targetted segments.
+	// The list of targeted segments.
 	Rules []TargetSegments `json:"rules" validate:"required"`
 
 	// Value to be used for evaluation for this rule. The value can be Boolean, String or a Numeric value as per the `type`
@@ -5155,11 +5232,13 @@ type UpdateFeatureOptions struct {
 	// The state of the feature flag.
 	Enabled *bool `json:"enabled,omitempty"`
 
+	// rollout_percentage associated with feature flag, max range 0-100.
+	RolloutPercentage *int64 `json:"rollout_percentage,omitempty"`
 	// Tags associated with the feature.
 	Tags *string `json:"tags,omitempty"`
 
 	// Specify the targeting rules that is used to set different property values for different segments.
-	SegmentRules []SegmentRule `json:"segment_rules,omitempty"`
+	SegmentRules []FeatureSegmentRule `json:"segment_rules,omitempty"`
 
 	// List of collection id representing the collections that are associated with the specified property.
 	Collections []CollectionRef `json:"collections,omitempty"`
@@ -5218,6 +5297,12 @@ func (_options *UpdateFeatureOptions) SetEnabled(enabled bool) *UpdateFeatureOpt
 	return _options
 }
 
+// SetRolloutPercentage : Allow user to set RolloutPercentage
+func (_options *UpdateFeatureOptions) SetRolloutPercentage(rolloutPercentage int64) *UpdateFeatureOptions {
+	_options.RolloutPercentage = core.Int64Ptr(rolloutPercentage)
+	return _options
+}
+
 // SetTags : Allow user to set Tags
 func (_options *UpdateFeatureOptions) SetTags(tags string) *UpdateFeatureOptions {
 	_options.Tags = core.StringPtr(tags)
@@ -5225,7 +5310,7 @@ func (_options *UpdateFeatureOptions) SetTags(tags string) *UpdateFeatureOptions
 }
 
 // SetSegmentRules : Allow user to set SegmentRules
-func (_options *UpdateFeatureOptions) SetSegmentRules(segmentRules []SegmentRule) *UpdateFeatureOptions {
+func (_options *UpdateFeatureOptions) SetSegmentRules(segmentRules []FeatureSegmentRule) *UpdateFeatureOptions {
 	_options.SegmentRules = segmentRules
 	return _options
 }
@@ -5267,8 +5352,11 @@ type UpdateFeatureValuesOptions struct {
 	// YAML value as per the `type` and `format` attribute.
 	DisabledValue interface{} `json:"disabled_value,omitempty"`
 
+	// rollout_percentage associated with feature flag, max range 0-100.
+	RolloutPercentage *int64 `json:"rollout_percentage,omitempty"`
+
 	// Specify the targeting rules that is used to set different property values for different segments.
-	SegmentRules []SegmentRule `json:"segment_rules,omitempty"`
+	SegmentRules []FeatureSegmentRule `json:"segment_rules,omitempty"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -5324,8 +5412,14 @@ func (_options *UpdateFeatureValuesOptions) SetDisabledValue(disabledValue inter
 	return _options
 }
 
+// SetRolloutPercentage : Allow user to set RolloutPercentage
+func (_options *UpdateFeatureValuesOptions) SetRolloutPercentage(rolloutPercentage int64) *UpdateFeatureValuesOptions {
+	_options.RolloutPercentage = core.Int64Ptr(rolloutPercentage)
+	return _options
+}
+
 // SetSegmentRules : Allow user to set SegmentRules
-func (_options *UpdateFeatureValuesOptions) SetSegmentRules(segmentRules []SegmentRule) *UpdateFeatureValuesOptions {
+func (_options *UpdateFeatureValuesOptions) SetSegmentRules(segmentRules []FeatureSegmentRule) *UpdateFeatureValuesOptions {
 	_options.SegmentRules = segmentRules
 	return _options
 }

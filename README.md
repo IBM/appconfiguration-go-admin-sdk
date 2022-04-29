@@ -82,6 +82,8 @@ func init() {
 - guid : ID of the App Configuration Instance.
 - region : Region of the App Configuration Instance
 
+**Note: Feature Rollout percentage is applicable only for Lite & Enterprise plans instances.**
+
 ## Using the SDK
 
 ### Note 
@@ -146,20 +148,23 @@ result, response, err := appConfigurationServiceInstance.CreateSegment(createSeg
 
 ```go
 ruleArray, _ := appConfigurationServiceInstance.NewTargetSegments(segments)
-segmentRuleArray, _ := appConfigurationServiceInstance.NewSegmentRule([]appconfigurationv1.TargetSegments{*ruleArray}, value, order)
+segmentRuleArray, _ := appConfigurationServiceInstance.NewFeatureSegmentRule([]appconfigurationv1.TargetSegments{*ruleArray}, value, order, segmentRolloutPercentage)
 collectionArray, _ := appConfigurationServiceInstance.NewCollectionRef(collectionId)
 createFeatureOptionsModel := appConfigurationServiceInstance.NewCreateFeatureOptions(environmentId, name, id, typeOfFeature, enabledValue, disabledValue)
 createFeatureOptionsModel.SetTags(tags)
 createFeatureOptionsModel.SetDescription(description)
-createFeatureOptionsModel.SetSegmentRules([]appconfigurationv1.SegmentRule{*segmentRuleArray})
+createFeatureOptionsModel.SetSegmentRules([]appconfigurationv1.FeatureSegmentRule{*segmentRuleArray})
 createFeatureOptionsModel.SetCollections([]appconfigurationv1.CollectionRef{*collectionArray})
+if featureRolloutPercentage != nil {
+		createFeatureOptionsModel.SetRolloutPercentage(*featureRolloutPercentage)
+}
 result, response, err := appConfigurationServiceInstance.CreateFeature(createFeatureOptionsModel)
 ```
 
 ### Update Feature
 ```go
 ruleArray, _ := appConfigurationServiceInstance.NewTargetSegments(segments)
-segmentRuleArray, _ := appConfigurationServiceInstance.NewSegmentRule([]appconfigurationv1.TargetSegments{*ruleArray}, value, order)
+segmentRuleArray, _ := appConfigurationServiceInstance.NewFeatureSegmentRule([]appconfigurationv1.TargetSegments{*ruleArray}, value, order, segmentRolloutPercentage)
 collectionArray, _ := appConfigurationServiceInstance.NewCollectionRef(collectionId)
 updateFeatureOptionsModel := appConfigurationServiceInstance.NewUpdateFeatureOptions(environmentId, id)
 updateFeatureOptionsModel.SetName(name)
@@ -167,8 +172,11 @@ updateFeatureOptionsModel.SetDescription(description)
 updateFeatureOptionsModel.SetTags(tags)
 updateFeatureOptionsModel.SetDisabledValue(disabledValue)
 updateFeatureOptionsModel.SetEnabledValue(enabledValue)
-updateFeatureOptionsModel.SetSegmentRules([]appconfigurationv1.SegmentRule{*segmentRuleArray})
+updateFeatureOptionsModel.SetSegmentRules([]appconfigurationv1.FeatureSegmentRule{*segmentRuleArray})
 updateFeatureOptionsModel.SetCollections([]appconfigurationv1.CollectionRef{*collectionArray})
+if featureRolloutPercentage != nil {
+		updateFeatureOptionsModel.SetRolloutPercentage(*featureRolloutPercentage)
+}
 result, response, err := appConfigurationServiceInstance.UpdateFeature(updateFeatureOptionsModel)
 ```
 
