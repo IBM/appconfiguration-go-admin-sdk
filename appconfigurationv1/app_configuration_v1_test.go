@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2022.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -2744,11 +2744,12 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
 				targetSegmentsModel.Segments = []string{"betausers", "premiumusers"}
 
-				// Construct an instance of the SegmentRule model
-				segmentRuleModel := new(appconfigurationv1.SegmentRule)
-				segmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
-				segmentRuleModel.Value = core.StringPtr("true")
-				segmentRuleModel.Order = core.Int64Ptr(int64(1))
+				// Construct an instance of the FeatureFeatureSegmentRule model
+				featureSegmentRuleModel := new(appconfigurationv1.FeatureSegmentRule)
+				featureSegmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
+				featureSegmentRuleModel.Value = core.StringPtr("true")
+				featureSegmentRuleModel.Order = core.Int64Ptr(int64(1))
+				featureSegmentRuleModel.RolloutPercentage = core.Int64Ptr(int64(50))
 
 				// Construct an instance of the CollectionRef model
 				collectionRefModel := new(appconfigurationv1.CollectionRef)
@@ -2765,8 +2766,9 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				createFeatureOptionsModel.Description = core.StringPtr("Feature flag to enable Cycle Rentals")
 				createFeatureOptionsModel.Format = core.StringPtr("TEXT")
 				createFeatureOptionsModel.Enabled = core.BoolPtr(true)
+				createFeatureOptionsModel.RolloutPercentage = core.Int64Ptr(int64(100))
 				createFeatureOptionsModel.Tags = core.StringPtr("version: 1.1, pre-release")
-				createFeatureOptionsModel.SegmentRules = []appconfigurationv1.SegmentRule{*segmentRuleModel}
+				createFeatureOptionsModel.SegmentRules = []appconfigurationv1.FeatureSegmentRule{*featureSegmentRuleModel}
 				createFeatureOptionsModel.Collections = []appconfigurationv1.CollectionRef{*collectionRefModel}
 				createFeatureOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
@@ -2820,7 +2822,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
-					fmt.Fprintf(res, "%s", `{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5}], "segment_exists": false, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href"}`)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 17, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 17}], "segment_exists": false, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href"}`)
 				}))
 			})
 			It(`Invoke CreateFeature successfully with retries`, func() {
@@ -2836,11 +2838,12 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
 				targetSegmentsModel.Segments = []string{"betausers", "premiumusers"}
 
-				// Construct an instance of the SegmentRule model
-				segmentRuleModel := new(appconfigurationv1.SegmentRule)
-				segmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
-				segmentRuleModel.Value = core.StringPtr("true")
-				segmentRuleModel.Order = core.Int64Ptr(int64(1))
+				// Construct an instance of the FeatureFeatureSegmentRule model
+				featureSegmentRuleModel := new(appconfigurationv1.FeatureSegmentRule)
+				featureSegmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
+				featureSegmentRuleModel.Value = core.StringPtr("true")
+				featureSegmentRuleModel.Order = core.Int64Ptr(int64(1))
+				featureSegmentRuleModel.RolloutPercentage = core.Int64Ptr(int64(50))
 
 				// Construct an instance of the CollectionRef model
 				collectionRefModel := new(appconfigurationv1.CollectionRef)
@@ -2857,8 +2860,9 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				createFeatureOptionsModel.Description = core.StringPtr("Feature flag to enable Cycle Rentals")
 				createFeatureOptionsModel.Format = core.StringPtr("TEXT")
 				createFeatureOptionsModel.Enabled = core.BoolPtr(true)
+				createFeatureOptionsModel.RolloutPercentage = core.Int64Ptr(int64(100))
 				createFeatureOptionsModel.Tags = core.StringPtr("version: 1.1, pre-release")
-				createFeatureOptionsModel.SegmentRules = []appconfigurationv1.SegmentRule{*segmentRuleModel}
+				createFeatureOptionsModel.SegmentRules = []appconfigurationv1.FeatureSegmentRule{*featureSegmentRuleModel}
 				createFeatureOptionsModel.Collections = []appconfigurationv1.CollectionRef{*collectionRefModel}
 				createFeatureOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
@@ -2915,7 +2919,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
-					fmt.Fprintf(res, "%s", `{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5}], "segment_exists": false, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href"}`)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 17, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 17}], "segment_exists": false, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href"}`)
 				}))
 			})
 			It(`Invoke CreateFeature successfully`, func() {
@@ -2936,11 +2940,12 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
 				targetSegmentsModel.Segments = []string{"betausers", "premiumusers"}
 
-				// Construct an instance of the SegmentRule model
-				segmentRuleModel := new(appconfigurationv1.SegmentRule)
-				segmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
-				segmentRuleModel.Value = core.StringPtr("true")
-				segmentRuleModel.Order = core.Int64Ptr(int64(1))
+				// Construct an instance of the FeatureFeatureSegmentRule model
+				featureSegmentRuleModel := new(appconfigurationv1.FeatureSegmentRule)
+				featureSegmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
+				featureSegmentRuleModel.Value = core.StringPtr("true")
+				featureSegmentRuleModel.Order = core.Int64Ptr(int64(1))
+				featureSegmentRuleModel.RolloutPercentage = core.Int64Ptr(int64(50))
 
 				// Construct an instance of the CollectionRef model
 				collectionRefModel := new(appconfigurationv1.CollectionRef)
@@ -2957,8 +2962,9 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				createFeatureOptionsModel.Description = core.StringPtr("Feature flag to enable Cycle Rentals")
 				createFeatureOptionsModel.Format = core.StringPtr("TEXT")
 				createFeatureOptionsModel.Enabled = core.BoolPtr(true)
+				createFeatureOptionsModel.RolloutPercentage = core.Int64Ptr(int64(100))
 				createFeatureOptionsModel.Tags = core.StringPtr("version: 1.1, pre-release")
-				createFeatureOptionsModel.SegmentRules = []appconfigurationv1.SegmentRule{*segmentRuleModel}
+				createFeatureOptionsModel.SegmentRules = []appconfigurationv1.FeatureSegmentRule{*featureSegmentRuleModel}
 				createFeatureOptionsModel.Collections = []appconfigurationv1.CollectionRef{*collectionRefModel}
 				createFeatureOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
@@ -2981,11 +2987,12 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
 				targetSegmentsModel.Segments = []string{"betausers", "premiumusers"}
 
-				// Construct an instance of the SegmentRule model
-				segmentRuleModel := new(appconfigurationv1.SegmentRule)
-				segmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
-				segmentRuleModel.Value = core.StringPtr("true")
-				segmentRuleModel.Order = core.Int64Ptr(int64(1))
+				// Construct an instance of the FeatureFeatureSegmentRule model
+				featureSegmentRuleModel := new(appconfigurationv1.FeatureSegmentRule)
+				featureSegmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
+				featureSegmentRuleModel.Value = core.StringPtr("true")
+				featureSegmentRuleModel.Order = core.Int64Ptr(int64(1))
+				featureSegmentRuleModel.RolloutPercentage = core.Int64Ptr(int64(50))
 
 				// Construct an instance of the CollectionRef model
 				collectionRefModel := new(appconfigurationv1.CollectionRef)
@@ -3002,8 +3009,9 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				createFeatureOptionsModel.Description = core.StringPtr("Feature flag to enable Cycle Rentals")
 				createFeatureOptionsModel.Format = core.StringPtr("TEXT")
 				createFeatureOptionsModel.Enabled = core.BoolPtr(true)
+				createFeatureOptionsModel.RolloutPercentage = core.Int64Ptr(int64(100))
 				createFeatureOptionsModel.Tags = core.StringPtr("version: 1.1, pre-release")
-				createFeatureOptionsModel.SegmentRules = []appconfigurationv1.SegmentRule{*segmentRuleModel}
+				createFeatureOptionsModel.SegmentRules = []appconfigurationv1.FeatureSegmentRule{*featureSegmentRuleModel}
 				createFeatureOptionsModel.Collections = []appconfigurationv1.CollectionRef{*collectionRefModel}
 				createFeatureOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
@@ -3047,11 +3055,12 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
 				targetSegmentsModel.Segments = []string{"betausers", "premiumusers"}
 
-				// Construct an instance of the SegmentRule model
-				segmentRuleModel := new(appconfigurationv1.SegmentRule)
-				segmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
-				segmentRuleModel.Value = core.StringPtr("true")
-				segmentRuleModel.Order = core.Int64Ptr(int64(1))
+				// Construct an instance of the FeatureFeatureSegmentRule model
+				featureSegmentRuleModel := new(appconfigurationv1.FeatureSegmentRule)
+				featureSegmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
+				featureSegmentRuleModel.Value = core.StringPtr("true")
+				featureSegmentRuleModel.Order = core.Int64Ptr(int64(1))
+				featureSegmentRuleModel.RolloutPercentage = core.Int64Ptr(int64(50))
 
 				// Construct an instance of the CollectionRef model
 				collectionRefModel := new(appconfigurationv1.CollectionRef)
@@ -3068,8 +3077,9 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				createFeatureOptionsModel.Description = core.StringPtr("Feature flag to enable Cycle Rentals")
 				createFeatureOptionsModel.Format = core.StringPtr("TEXT")
 				createFeatureOptionsModel.Enabled = core.BoolPtr(true)
+				createFeatureOptionsModel.RolloutPercentage = core.Int64Ptr(int64(100))
 				createFeatureOptionsModel.Tags = core.StringPtr("version: 1.1, pre-release")
-				createFeatureOptionsModel.SegmentRules = []appconfigurationv1.SegmentRule{*segmentRuleModel}
+				createFeatureOptionsModel.SegmentRules = []appconfigurationv1.FeatureSegmentRule{*featureSegmentRuleModel}
 				createFeatureOptionsModel.Collections = []appconfigurationv1.CollectionRef{*collectionRefModel}
 				createFeatureOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
@@ -3113,11 +3123,12 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
 				targetSegmentsModel.Segments = []string{"betausers", "premiumusers"}
 
-				// Construct an instance of the SegmentRule model
-				segmentRuleModel := new(appconfigurationv1.SegmentRule)
-				segmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
-				segmentRuleModel.Value = core.StringPtr("true")
-				segmentRuleModel.Order = core.Int64Ptr(int64(1))
+				// Construct an instance of the FeatureFeatureSegmentRule model
+				featureSegmentRuleModel := new(appconfigurationv1.FeatureSegmentRule)
+				featureSegmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
+				featureSegmentRuleModel.Value = core.StringPtr("true")
+				featureSegmentRuleModel.Order = core.Int64Ptr(int64(1))
+				featureSegmentRuleModel.RolloutPercentage = core.Int64Ptr(int64(90))
 
 				// Construct an instance of the CollectionRef model
 				collectionRefModel := new(appconfigurationv1.CollectionRef)
@@ -3132,8 +3143,9 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				updateFeatureOptionsModel.EnabledValue = core.StringPtr("true")
 				updateFeatureOptionsModel.DisabledValue = core.StringPtr("false")
 				updateFeatureOptionsModel.Enabled = core.BoolPtr(true)
+				updateFeatureOptionsModel.RolloutPercentage = core.Int64Ptr(int64(100))
 				updateFeatureOptionsModel.Tags = core.StringPtr("version: 1.1, yet-to-release")
-				updateFeatureOptionsModel.SegmentRules = []appconfigurationv1.SegmentRule{*segmentRuleModel}
+				updateFeatureOptionsModel.SegmentRules = []appconfigurationv1.FeatureSegmentRule{*featureSegmentRuleModel}
 				updateFeatureOptionsModel.Collections = []appconfigurationv1.CollectionRef{*collectionRefModel}
 				updateFeatureOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
@@ -3187,7 +3199,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5}], "segment_exists": false, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href"}`)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 17, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 17}], "segment_exists": false, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href"}`)
 				}))
 			})
 			It(`Invoke UpdateFeature successfully with retries`, func() {
@@ -3203,11 +3215,11 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
 				targetSegmentsModel.Segments = []string{"betausers", "premiumusers"}
 
-				// Construct an instance of the SegmentRule model
-				segmentRuleModel := new(appconfigurationv1.SegmentRule)
-				segmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
-				segmentRuleModel.Value = core.StringPtr("true")
-				segmentRuleModel.Order = core.Int64Ptr(int64(1))
+				// Construct an instance of the FeatureSegmentRule model
+				featureSegmentRuleModel := new(appconfigurationv1.FeatureSegmentRule)
+				featureSegmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
+				featureSegmentRuleModel.Value = core.StringPtr("true")
+				featureSegmentRuleModel.Order = core.Int64Ptr(int64(1))
 
 				// Construct an instance of the CollectionRef model
 				collectionRefModel := new(appconfigurationv1.CollectionRef)
@@ -3222,8 +3234,9 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				updateFeatureOptionsModel.EnabledValue = core.StringPtr("true")
 				updateFeatureOptionsModel.DisabledValue = core.StringPtr("false")
 				updateFeatureOptionsModel.Enabled = core.BoolPtr(true)
+				updateFeatureOptionsModel.RolloutPercentage = core.Int64Ptr(int64(100))
 				updateFeatureOptionsModel.Tags = core.StringPtr("version: 1.1, yet-to-release")
-				updateFeatureOptionsModel.SegmentRules = []appconfigurationv1.SegmentRule{*segmentRuleModel}
+				updateFeatureOptionsModel.SegmentRules = []appconfigurationv1.FeatureSegmentRule{*featureSegmentRuleModel}
 				updateFeatureOptionsModel.Collections = []appconfigurationv1.CollectionRef{*collectionRefModel}
 				updateFeatureOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
@@ -3280,7 +3293,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5}], "segment_exists": false, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href"}`)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 17, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 17}], "segment_exists": false, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href"}`)
 				}))
 			})
 			It(`Invoke UpdateFeature successfully`, func() {
@@ -3301,11 +3314,12 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
 				targetSegmentsModel.Segments = []string{"betausers", "premiumusers"}
 
-				// Construct an instance of the SegmentRule model
-				segmentRuleModel := new(appconfigurationv1.SegmentRule)
-				segmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
-				segmentRuleModel.Value = core.StringPtr("true")
-				segmentRuleModel.Order = core.Int64Ptr(int64(1))
+				// Construct an instance of the FeatureSegmentRule model
+				featureSegmentRuleModel := new(appconfigurationv1.FeatureSegmentRule)
+				featureSegmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
+				featureSegmentRuleModel.Value = core.StringPtr("true")
+				featureSegmentRuleModel.Order = core.Int64Ptr(int64(1))
+				featureSegmentRuleModel.RolloutPercentage = core.Int64Ptr(int64(90))
 
 				// Construct an instance of the CollectionRef model
 				collectionRefModel := new(appconfigurationv1.CollectionRef)
@@ -3320,8 +3334,9 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				updateFeatureOptionsModel.EnabledValue = core.StringPtr("true")
 				updateFeatureOptionsModel.DisabledValue = core.StringPtr("false")
 				updateFeatureOptionsModel.Enabled = core.BoolPtr(true)
+				updateFeatureOptionsModel.RolloutPercentage = core.Int64Ptr(int64(100))
 				updateFeatureOptionsModel.Tags = core.StringPtr("version: 1.1, yet-to-release")
-				updateFeatureOptionsModel.SegmentRules = []appconfigurationv1.SegmentRule{*segmentRuleModel}
+				updateFeatureOptionsModel.SegmentRules = []appconfigurationv1.FeatureSegmentRule{*featureSegmentRuleModel}
 				updateFeatureOptionsModel.Collections = []appconfigurationv1.CollectionRef{*collectionRefModel}
 				updateFeatureOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
@@ -3344,11 +3359,12 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
 				targetSegmentsModel.Segments = []string{"betausers", "premiumusers"}
 
-				// Construct an instance of the SegmentRule model
-				segmentRuleModel := new(appconfigurationv1.SegmentRule)
-				segmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
-				segmentRuleModel.Value = core.StringPtr("true")
-				segmentRuleModel.Order = core.Int64Ptr(int64(1))
+				// Construct an instance of the FeatureSegmentRule model
+				featureSegmentRuleModel := new(appconfigurationv1.FeatureSegmentRule)
+				featureSegmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
+				featureSegmentRuleModel.Value = core.StringPtr("true")
+				featureSegmentRuleModel.Order = core.Int64Ptr(int64(1))
+				featureSegmentRuleModel.RolloutPercentage = core.Int64Ptr(int64(90))
 
 				// Construct an instance of the CollectionRef model
 				collectionRefModel := new(appconfigurationv1.CollectionRef)
@@ -3363,8 +3379,9 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				updateFeatureOptionsModel.EnabledValue = core.StringPtr("true")
 				updateFeatureOptionsModel.DisabledValue = core.StringPtr("false")
 				updateFeatureOptionsModel.Enabled = core.BoolPtr(true)
+				updateFeatureOptionsModel.RolloutPercentage = core.Int64Ptr(int64(100))
 				updateFeatureOptionsModel.Tags = core.StringPtr("version: 1.1, yet-to-release")
-				updateFeatureOptionsModel.SegmentRules = []appconfigurationv1.SegmentRule{*segmentRuleModel}
+				updateFeatureOptionsModel.SegmentRules = []appconfigurationv1.FeatureSegmentRule{*featureSegmentRuleModel}
 				updateFeatureOptionsModel.Collections = []appconfigurationv1.CollectionRef{*collectionRefModel}
 				updateFeatureOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
@@ -3408,11 +3425,12 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
 				targetSegmentsModel.Segments = []string{"betausers", "premiumusers"}
 
-				// Construct an instance of the SegmentRule model
-				segmentRuleModel := new(appconfigurationv1.SegmentRule)
-				segmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
-				segmentRuleModel.Value = core.StringPtr("true")
-				segmentRuleModel.Order = core.Int64Ptr(int64(1))
+				// Construct an instance of the FeatureSegmentRule model
+				featureSegmentRuleModel := new(appconfigurationv1.FeatureSegmentRule)
+				featureSegmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
+				featureSegmentRuleModel.Value = core.StringPtr("true")
+				featureSegmentRuleModel.Order = core.Int64Ptr(int64(1))
+				featureSegmentRuleModel.RolloutPercentage = core.Int64Ptr(int64(90))
 
 				// Construct an instance of the CollectionRef model
 				collectionRefModel := new(appconfigurationv1.CollectionRef)
@@ -3427,8 +3445,9 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				updateFeatureOptionsModel.EnabledValue = core.StringPtr("true")
 				updateFeatureOptionsModel.DisabledValue = core.StringPtr("false")
 				updateFeatureOptionsModel.Enabled = core.BoolPtr(true)
+				updateFeatureOptionsModel.RolloutPercentage = core.Int64Ptr(int64(100))
 				updateFeatureOptionsModel.Tags = core.StringPtr("version: 1.1, yet-to-release")
-				updateFeatureOptionsModel.SegmentRules = []appconfigurationv1.SegmentRule{*segmentRuleModel}
+				updateFeatureOptionsModel.SegmentRules = []appconfigurationv1.FeatureSegmentRule{*featureSegmentRuleModel}
 				updateFeatureOptionsModel.Collections = []appconfigurationv1.CollectionRef{*collectionRefModel}
 				updateFeatureOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
@@ -3472,11 +3491,12 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
 				targetSegmentsModel.Segments = []string{"betausers", "premiumusers"}
 
-				// Construct an instance of the SegmentRule model
-				segmentRuleModel := new(appconfigurationv1.SegmentRule)
-				segmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
-				segmentRuleModel.Value = core.StringPtr("true")
-				segmentRuleModel.Order = core.Int64Ptr(int64(1))
+				// Construct an instance of the FeatureSegmentRule model
+				featureSegmentRuleModel := new(appconfigurationv1.FeatureSegmentRule)
+				featureSegmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
+				featureSegmentRuleModel.Value = core.StringPtr("true")
+				featureSegmentRuleModel.Order = core.Int64Ptr(int64(1))
+				featureSegmentRuleModel.RolloutPercentage = core.Int64Ptr(int64(100))
 
 				// Construct an instance of the UpdateFeatureValuesOptions model
 				updateFeatureValuesOptionsModel := new(appconfigurationv1.UpdateFeatureValuesOptions)
@@ -3487,7 +3507,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				updateFeatureValuesOptionsModel.Tags = core.StringPtr("version: 1.1, yet-to-release")
 				updateFeatureValuesOptionsModel.EnabledValue = core.StringPtr("true")
 				updateFeatureValuesOptionsModel.DisabledValue = core.StringPtr("false")
-				updateFeatureValuesOptionsModel.SegmentRules = []appconfigurationv1.SegmentRule{*segmentRuleModel}
+				updateFeatureValuesOptionsModel.RolloutPercentage = core.Int64Ptr(int64(100))
+				updateFeatureValuesOptionsModel.SegmentRules = []appconfigurationv1.FeatureSegmentRule{*featureSegmentRuleModel}
 				updateFeatureValuesOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
 				result, response, operationErr := appConfigurationService.UpdateFeatureValues(updateFeatureValuesOptionsModel)
@@ -3540,7 +3561,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5}], "segment_exists": false, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href"}`)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 17, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 17}], "segment_exists": false, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href"}`)
 				}))
 			})
 			It(`Invoke UpdateFeatureValues successfully with retries`, func() {
@@ -3556,11 +3577,12 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
 				targetSegmentsModel.Segments = []string{"betausers", "premiumusers"}
 
-				// Construct an instance of the SegmentRule model
-				segmentRuleModel := new(appconfigurationv1.SegmentRule)
-				segmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
-				segmentRuleModel.Value = core.StringPtr("true")
-				segmentRuleModel.Order = core.Int64Ptr(int64(1))
+				// Construct an instance of the FeatureSegmentRule model
+				featureSegmentRuleModel := new(appconfigurationv1.FeatureSegmentRule)
+				featureSegmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
+				featureSegmentRuleModel.Value = core.StringPtr("true")
+				featureSegmentRuleModel.Order = core.Int64Ptr(int64(1))
+				featureSegmentRuleModel.RolloutPercentage = core.Int64Ptr(int64(100))
 
 				// Construct an instance of the UpdateFeatureValuesOptions model
 				updateFeatureValuesOptionsModel := new(appconfigurationv1.UpdateFeatureValuesOptions)
@@ -3571,7 +3593,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				updateFeatureValuesOptionsModel.Tags = core.StringPtr("version: 1.1, yet-to-release")
 				updateFeatureValuesOptionsModel.EnabledValue = core.StringPtr("true")
 				updateFeatureValuesOptionsModel.DisabledValue = core.StringPtr("false")
-				updateFeatureValuesOptionsModel.SegmentRules = []appconfigurationv1.SegmentRule{*segmentRuleModel}
+				updateFeatureValuesOptionsModel.RolloutPercentage = core.Int64Ptr(int64(100))
+				updateFeatureValuesOptionsModel.SegmentRules = []appconfigurationv1.FeatureSegmentRule{*featureSegmentRuleModel}
 				updateFeatureValuesOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with a Context to test a timeout error
@@ -3627,7 +3650,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5}], "segment_exists": false, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href"}`)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 17, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 17}], "segment_exists": false, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href"}`)
 				}))
 			})
 			It(`Invoke UpdateFeatureValues successfully`, func() {
@@ -3648,11 +3671,12 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
 				targetSegmentsModel.Segments = []string{"betausers", "premiumusers"}
 
-				// Construct an instance of the SegmentRule model
-				segmentRuleModel := new(appconfigurationv1.SegmentRule)
-				segmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
-				segmentRuleModel.Value = core.StringPtr("true")
-				segmentRuleModel.Order = core.Int64Ptr(int64(1))
+				// Construct an instance of the FeatureSegmentRule model
+				featureSegmentRuleModel := new(appconfigurationv1.FeatureSegmentRule)
+				featureSegmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
+				featureSegmentRuleModel.Value = core.StringPtr("true")
+				featureSegmentRuleModel.Order = core.Int64Ptr(int64(1))
+				featureSegmentRuleModel.RolloutPercentage = core.Int64Ptr(int64(100))
 
 				// Construct an instance of the UpdateFeatureValuesOptions model
 				updateFeatureValuesOptionsModel := new(appconfigurationv1.UpdateFeatureValuesOptions)
@@ -3663,7 +3687,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				updateFeatureValuesOptionsModel.Tags = core.StringPtr("version: 1.1, yet-to-release")
 				updateFeatureValuesOptionsModel.EnabledValue = core.StringPtr("true")
 				updateFeatureValuesOptionsModel.DisabledValue = core.StringPtr("false")
-				updateFeatureValuesOptionsModel.SegmentRules = []appconfigurationv1.SegmentRule{*segmentRuleModel}
+				updateFeatureValuesOptionsModel.RolloutPercentage = core.Int64Ptr(int64(100))
+				updateFeatureValuesOptionsModel.SegmentRules = []appconfigurationv1.FeatureSegmentRule{*featureSegmentRuleModel}
 				updateFeatureValuesOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
@@ -3685,11 +3710,12 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
 				targetSegmentsModel.Segments = []string{"betausers", "premiumusers"}
 
-				// Construct an instance of the SegmentRule model
-				segmentRuleModel := new(appconfigurationv1.SegmentRule)
-				segmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
-				segmentRuleModel.Value = core.StringPtr("true")
-				segmentRuleModel.Order = core.Int64Ptr(int64(1))
+				// Construct an instance of the FeatureSegmentRule model
+				featureSegmentRuleModel := new(appconfigurationv1.FeatureSegmentRule)
+				featureSegmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
+				featureSegmentRuleModel.Value = core.StringPtr("true")
+				featureSegmentRuleModel.Order = core.Int64Ptr(int64(1))
+				featureSegmentRuleModel.RolloutPercentage = core.Int64Ptr(int64(100))
 
 				// Construct an instance of the UpdateFeatureValuesOptions model
 				updateFeatureValuesOptionsModel := new(appconfigurationv1.UpdateFeatureValuesOptions)
@@ -3700,7 +3726,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				updateFeatureValuesOptionsModel.Tags = core.StringPtr("version: 1.1, yet-to-release")
 				updateFeatureValuesOptionsModel.EnabledValue = core.StringPtr("true")
 				updateFeatureValuesOptionsModel.DisabledValue = core.StringPtr("false")
-				updateFeatureValuesOptionsModel.SegmentRules = []appconfigurationv1.SegmentRule{*segmentRuleModel}
+				updateFeatureValuesOptionsModel.RolloutPercentage = core.Int64Ptr(int64(100))
+				updateFeatureValuesOptionsModel.SegmentRules = []appconfigurationv1.FeatureSegmentRule{*featureSegmentRuleModel}
 				updateFeatureValuesOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := appConfigurationService.SetServiceURL("")
@@ -3743,11 +3770,12 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
 				targetSegmentsModel.Segments = []string{"betausers", "premiumusers"}
 
-				// Construct an instance of the SegmentRule model
-				segmentRuleModel := new(appconfigurationv1.SegmentRule)
-				segmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
-				segmentRuleModel.Value = core.StringPtr("true")
-				segmentRuleModel.Order = core.Int64Ptr(int64(1))
+				// Construct an instance of the FeatureSegmentRule model
+				featureSegmentRuleModel := new(appconfigurationv1.FeatureSegmentRule)
+				featureSegmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
+				featureSegmentRuleModel.Value = core.StringPtr("true")
+				featureSegmentRuleModel.Order = core.Int64Ptr(int64(1))
+				featureSegmentRuleModel.RolloutPercentage = core.Int64Ptr(int64(100))
 
 				// Construct an instance of the UpdateFeatureValuesOptions model
 				updateFeatureValuesOptionsModel := new(appconfigurationv1.UpdateFeatureValuesOptions)
@@ -3758,7 +3786,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				updateFeatureValuesOptionsModel.Tags = core.StringPtr("version: 1.1, yet-to-release")
 				updateFeatureValuesOptionsModel.EnabledValue = core.StringPtr("true")
 				updateFeatureValuesOptionsModel.DisabledValue = core.StringPtr("false")
-				updateFeatureValuesOptionsModel.SegmentRules = []appconfigurationv1.SegmentRule{*segmentRuleModel}
+				updateFeatureValuesOptionsModel.RolloutPercentage = core.Int64Ptr(int64(100))
+				updateFeatureValuesOptionsModel.SegmentRules = []appconfigurationv1.FeatureSegmentRule{*featureSegmentRuleModel}
 				updateFeatureValuesOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation
@@ -3840,7 +3869,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5}], "segment_exists": false, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href"}`)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 17, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 17}], "segment_exists": false, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href"}`)
 				}))
 			})
 			It(`Invoke GetFeature successfully with retries`, func() {
@@ -3897,7 +3926,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5}], "segment_exists": false, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href"}`)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 17, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 17}], "segment_exists": false, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href"}`)
 				}))
 			})
 			It(`Invoke GetFeature successfully`, func() {
@@ -4149,7 +4178,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5}], "segment_exists": false, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href"}`)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 17, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 17}], "segment_exists": false, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href"}`)
 				}))
 			})
 			It(`Invoke ToggleFeature successfully with retries`, func() {
@@ -4221,7 +4250,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5}], "segment_exists": false, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href"}`)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 17, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 17}], "segment_exists": false, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href"}`)
 				}))
 			})
 			It(`Invoke ToggleFeature successfully`, func() {
@@ -7187,15 +7216,17 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				targetSegmentsModel.Segments = []string{"betausers", "premiumusers"}
 				Expect(targetSegmentsModel.Segments).To(Equal([]string{"betausers", "premiumusers"}))
 
-				// Construct an instance of the SegmentRule model
-				segmentRuleModel := new(appconfigurationv1.SegmentRule)
-				Expect(segmentRuleModel).ToNot(BeNil())
-				segmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
-				segmentRuleModel.Value = core.StringPtr("true")
-				segmentRuleModel.Order = core.Int64Ptr(int64(1))
-				Expect(segmentRuleModel.Rules).To(Equal([]appconfigurationv1.TargetSegments{*targetSegmentsModel}))
-				Expect(segmentRuleModel.Value).To(Equal(core.StringPtr("true")))
-				Expect(segmentRuleModel.Order).To(Equal(core.Int64Ptr(int64(1))))
+				// Construct an instance of the FeatureSegmentRule model
+				featureSegmentRuleModel := new(appconfigurationv1.FeatureSegmentRule)
+				Expect(featureSegmentRuleModel).ToNot(BeNil())
+				featureSegmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
+				featureSegmentRuleModel.Value = core.StringPtr("true")
+				featureSegmentRuleModel.Order = core.Int64Ptr(int64(1))
+				featureSegmentRuleModel.RolloutPercentage = core.Int64Ptr(int64(50))
+				Expect(featureSegmentRuleModel.Rules).To(Equal([]appconfigurationv1.TargetSegments{*targetSegmentsModel}))
+				Expect(featureSegmentRuleModel.Value).To(Equal(core.StringPtr("true")))
+				Expect(featureSegmentRuleModel.Order).To(Equal(core.Int64Ptr(int64(1))))
+				Expect(featureSegmentRuleModel.RolloutPercentage).To(Equal(core.Int64Ptr(int64(50))))
 
 				// Construct an instance of the CollectionRef model
 				collectionRefModel := new(appconfigurationv1.CollectionRef)
@@ -7220,8 +7251,9 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				createFeatureOptionsModel.SetDescription("Feature flag to enable Cycle Rentals")
 				createFeatureOptionsModel.SetFormat("TEXT")
 				createFeatureOptionsModel.SetEnabled(true)
+				createFeatureOptionsModel.SetRolloutPercentage(int64(100))
 				createFeatureOptionsModel.SetTags("version: 1.1, pre-release")
-				createFeatureOptionsModel.SetSegmentRules([]appconfigurationv1.SegmentRule{*segmentRuleModel})
+				createFeatureOptionsModel.SetSegmentRules([]appconfigurationv1.FeatureSegmentRule{*featureSegmentRuleModel})
 				createFeatureOptionsModel.SetCollections([]appconfigurationv1.CollectionRef{*collectionRefModel})
 				createFeatureOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(createFeatureOptionsModel).ToNot(BeNil())
@@ -7234,133 +7266,9 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(createFeatureOptionsModel.Description).To(Equal(core.StringPtr("Feature flag to enable Cycle Rentals")))
 				Expect(createFeatureOptionsModel.Format).To(Equal(core.StringPtr("TEXT")))
 				Expect(createFeatureOptionsModel.Enabled).To(Equal(core.BoolPtr(true)))
+				Expect(createFeatureOptionsModel.RolloutPercentage).To(Equal(core.Int64Ptr(int64(100))))
 				Expect(createFeatureOptionsModel.Tags).To(Equal(core.StringPtr("version: 1.1, pre-release")))
-				Expect(createFeatureOptionsModel.SegmentRules).To(Equal([]appconfigurationv1.SegmentRule{*segmentRuleModel}))
-				Expect(createFeatureOptionsModel.Collections).To(Equal([]appconfigurationv1.CollectionRef{*collectionRefModel}))
-				Expect(createFeatureOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
-			})
-			It(`Invoke NewCreateYamlFeatureOptions successfully`, func() {
-				// Construct an instance of the TargetSegments model
-				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
-				Expect(targetSegmentsModel).ToNot(BeNil())
-				targetSegmentsModel.Segments = []string{"betausers", "premiumusers"}
-				Expect(targetSegmentsModel.Segments).To(Equal([]string{"betausers", "premiumusers"}))
-
-				// Construct an instance of the SegmentRule model
-				segmentRuleModel := new(appconfigurationv1.SegmentRule)
-				Expect(segmentRuleModel).ToNot(BeNil())
-				segmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
-				segmentRuleModel.Value = core.StringPtr("---\nkey: segmentVal")
-				segmentRuleModel.Order = core.Int64Ptr(int64(1))
-				Expect(segmentRuleModel.Rules).To(Equal([]appconfigurationv1.TargetSegments{*targetSegmentsModel}))
-				Expect(segmentRuleModel.Value).To(Equal(core.StringPtr("---\nkey: segmentVal")))
-				Expect(segmentRuleModel.Order).To(Equal(core.Int64Ptr(int64(1))))
-
-				// Construct an instance of the CollectionRef model
-				collectionRefModel := new(appconfigurationv1.CollectionRef)
-				Expect(collectionRefModel).ToNot(BeNil())
-				collectionRefModel.CollectionID = core.StringPtr("ghzinc")
-				Expect(collectionRefModel.CollectionID).To(Equal(core.StringPtr("ghzinc")))
-
-				// Construct an instance of the CreateFeatureOptions model
-				environmentID := "testString"
-				createFeatureOptionsName := "yaml feature"
-				createFeatureOptionsFeatureID := "yaml-feature"
-				createFeatureOptionsType := "STRING"
-				createFeatureOptionsEnabledValue := core.StringPtr("---\nkey: enabledVal")
-				createFeatureOptionsDisabledValue := core.StringPtr("---\nkey: disabledVal")
-				createFeatureOptionsModel := appConfigurationService.NewCreateFeatureOptions(environmentID, createFeatureOptionsName, createFeatureOptionsFeatureID, createFeatureOptionsType, createFeatureOptionsEnabledValue, createFeatureOptionsDisabledValue)
-				createFeatureOptionsModel.SetEnvironmentID("testString")
-				createFeatureOptionsModel.SetName("yaml feature")
-				createFeatureOptionsModel.SetFeatureID("yaml-feature")
-				createFeatureOptionsModel.SetType("STRING")
-				createFeatureOptionsModel.SetEnabledValue(core.StringPtr("---\nkey: enabledVal"))
-				createFeatureOptionsModel.SetDisabledValue(core.StringPtr("---\nkey: disabledVal"))
-				createFeatureOptionsModel.SetDescription("Feature flag to enable Cycle Rentals")
-				createFeatureOptionsModel.SetFormat("YAML")
-				createFeatureOptionsModel.SetEnabled(true)
-				createFeatureOptionsModel.SetTags("version: 1.1, pre-release")
-				createFeatureOptionsModel.SetSegmentRules([]appconfigurationv1.SegmentRule{*segmentRuleModel})
-				createFeatureOptionsModel.SetCollections([]appconfigurationv1.CollectionRef{*collectionRefModel})
-				createFeatureOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
-				Expect(createFeatureOptionsModel).ToNot(BeNil())
-				Expect(createFeatureOptionsModel.EnvironmentID).To(Equal(core.StringPtr("testString")))
-				Expect(createFeatureOptionsModel.Name).To(Equal(core.StringPtr("yaml feature")))
-				Expect(createFeatureOptionsModel.FeatureID).To(Equal(core.StringPtr("yaml-feature")))
-				Expect(createFeatureOptionsModel.Type).To(Equal(core.StringPtr("STRING")))
-				Expect(createFeatureOptionsModel.EnabledValue).To(Equal(core.StringPtr("---\nkey: enabledVal")))
-				Expect(createFeatureOptionsModel.DisabledValue).To(Equal(core.StringPtr("---\nkey: disabledVal")))
-				Expect(createFeatureOptionsModel.Description).To(Equal(core.StringPtr("Feature flag to enable Cycle Rentals")))
-				Expect(createFeatureOptionsModel.Format).To(Equal(core.StringPtr("YAML")))
-				Expect(createFeatureOptionsModel.Enabled).To(Equal(core.BoolPtr(true)))
-				Expect(createFeatureOptionsModel.Tags).To(Equal(core.StringPtr("version: 1.1, pre-release")))
-				Expect(createFeatureOptionsModel.SegmentRules).To(Equal([]appconfigurationv1.SegmentRule{*segmentRuleModel}))
-				Expect(createFeatureOptionsModel.Collections).To(Equal([]appconfigurationv1.CollectionRef{*collectionRefModel}))
-				Expect(createFeatureOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
-			})
-			It(`Invoke NewCreateJsonFeatureOptions successfully`, func() {
-				// Construct an instance of the TargetSegments model
-				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
-				Expect(targetSegmentsModel).ToNot(BeNil())
-				targetSegmentsModel.Segments = []string{"betausers", "premiumusers"}
-				Expect(targetSegmentsModel.Segments).To(Equal([]string{"betausers", "premiumusers"}))
-
-				featureEnabledValMap := make(map[string]interface{})
-				featureEnabledValMap["key"] = "enabled"
-				featureDisabledValMap := make(map[string]interface{})
-				featureDisabledValMap["key"] = "disabled"
-				featureSegmentValMap := make(map[string]interface{})
-				featureSegmentValMap["key"] = "segmentVal"
-
-				// Construct an instance of the SegmentRule model
-				segmentRuleModel := new(appconfigurationv1.SegmentRule)
-				Expect(segmentRuleModel).ToNot(BeNil())
-				segmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
-				segmentRuleModel.Value = featureSegmentValMap
-				segmentRuleModel.Order = core.Int64Ptr(int64(1))
-				Expect(segmentRuleModel.Rules).To(Equal([]appconfigurationv1.TargetSegments{*targetSegmentsModel}))
-				Expect(segmentRuleModel.Value.(map[string]interface{})["key"]).To(Equal("segmentVal"))
-				Expect(segmentRuleModel.Order).To(Equal(core.Int64Ptr(int64(1))))
-
-				// Construct an instance of the CollectionRef model
-				collectionRefModel := new(appconfigurationv1.CollectionRef)
-				Expect(collectionRefModel).ToNot(BeNil())
-				collectionRefModel.CollectionID = core.StringPtr("ghzinc")
-				Expect(collectionRefModel.CollectionID).To(Equal(core.StringPtr("ghzinc")))
-
-				// Construct an instance of the CreateFeatureOptions model
-				environmentID := "testString"
-				createFeatureOptionsName := "json feature"
-				createFeatureOptionsFeatureID := "json-feature"
-				createFeatureOptionsType := "STRING"
-				createFeatureOptionsEnabledValue := featureEnabledValMap
-				createFeatureOptionsDisabledValue := featureDisabledValMap
-				createFeatureOptionsModel := appConfigurationService.NewCreateFeatureOptions(environmentID, createFeatureOptionsName, createFeatureOptionsFeatureID, createFeatureOptionsType, createFeatureOptionsEnabledValue, createFeatureOptionsDisabledValue)
-				createFeatureOptionsModel.SetEnvironmentID("testString")
-				createFeatureOptionsModel.SetName("json feature")
-				createFeatureOptionsModel.SetFeatureID("json-feature")
-				createFeatureOptionsModel.SetType("STRING")
-				createFeatureOptionsModel.SetEnabledValue(createFeatureOptionsEnabledValue)
-				createFeatureOptionsModel.SetDisabledValue(createFeatureOptionsDisabledValue)
-				createFeatureOptionsModel.SetDescription("Feature flag to enable Cycle Rentals")
-				createFeatureOptionsModel.SetFormat("JSON")
-				createFeatureOptionsModel.SetEnabled(true)
-				createFeatureOptionsModel.SetTags("version: 1.1, pre-release")
-				createFeatureOptionsModel.SetSegmentRules([]appconfigurationv1.SegmentRule{*segmentRuleModel})
-				createFeatureOptionsModel.SetCollections([]appconfigurationv1.CollectionRef{*collectionRefModel})
-				createFeatureOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
-				Expect(createFeatureOptionsModel).ToNot(BeNil())
-				Expect(createFeatureOptionsModel.EnvironmentID).To(Equal(core.StringPtr("testString")))
-				Expect(createFeatureOptionsModel.Name).To(Equal(core.StringPtr("json feature")))
-				Expect(createFeatureOptionsModel.FeatureID).To(Equal(core.StringPtr("json-feature")))
-				Expect(createFeatureOptionsModel.Type).To(Equal(core.StringPtr("STRING")))
-				Expect(createFeatureOptionsModel.EnabledValue.(map[string]interface{})["key"]).To(Equal("enabled"))
-				Expect(createFeatureOptionsModel.DisabledValue.(map[string]interface{})["key"]).To(Equal("disabled"))
-				Expect(createFeatureOptionsModel.Description).To(Equal(core.StringPtr("Feature flag to enable Cycle Rentals")))
-				Expect(createFeatureOptionsModel.Format).To(Equal(core.StringPtr("JSON")))
-				Expect(createFeatureOptionsModel.Enabled).To(Equal(core.BoolPtr(true)))
-				Expect(createFeatureOptionsModel.Tags).To(Equal(core.StringPtr("version: 1.1, pre-release")))
-				Expect(createFeatureOptionsModel.SegmentRules).To(Equal([]appconfigurationv1.SegmentRule{*segmentRuleModel}))
+				Expect(createFeatureOptionsModel.SegmentRules).To(Equal([]appconfigurationv1.FeatureSegmentRule{*featureSegmentRuleModel}))
 				Expect(createFeatureOptionsModel.Collections).To(Equal([]appconfigurationv1.CollectionRef{*collectionRefModel}))
 				Expect(createFeatureOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
@@ -7413,119 +7321,6 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(createPropertyOptionsModel.Value).To(Equal(core.StringPtr("true")))
 				Expect(createPropertyOptionsModel.Description).To(Equal(core.StringPtr("Property for email")))
 				Expect(createPropertyOptionsModel.Format).To(Equal(core.StringPtr("TEXT")))
-				Expect(createPropertyOptionsModel.Tags).To(Equal(core.StringPtr("version: 1.1, pre-release")))
-				Expect(createPropertyOptionsModel.SegmentRules).To(Equal([]appconfigurationv1.SegmentRule{*segmentRuleModel}))
-				Expect(createPropertyOptionsModel.Collections).To(Equal([]appconfigurationv1.CollectionRef{*collectionRefModel}))
-				Expect(createPropertyOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
-			})
-			It(`Invoke NewCreateStringJsonPropertyOptions successfully`, func() {
-				// Construct an instance of the TargetSegments model
-				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
-				Expect(targetSegmentsModel).ToNot(BeNil())
-				targetSegmentsModel.Segments = []string{"betausers", "premiumusers"}
-				Expect(targetSegmentsModel.Segments).To(Equal([]string{"betausers", "premiumusers"}))
-
-				propertyValMap := make(map[string]interface{})
-				propertyValMap["key"] = "propertyVal"
-				propertySegmentValMap := make(map[string]interface{})
-				propertySegmentValMap["key"] = "segmentVal"
-
-				// Construct an instance of the SegmentRule model
-				segmentRuleModel := new(appconfigurationv1.SegmentRule)
-				Expect(segmentRuleModel).ToNot(BeNil())
-				segmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
-				segmentRuleModel.Value = propertySegmentValMap
-				segmentRuleModel.Order = core.Int64Ptr(int64(1))
-				Expect(segmentRuleModel.Rules).To(Equal([]appconfigurationv1.TargetSegments{*targetSegmentsModel}))
-				Expect(segmentRuleModel.Value.(map[string]interface{})["key"]).To(Equal("segmentVal"))
-				Expect(segmentRuleModel.Order).To(Equal(core.Int64Ptr(int64(1))))
-
-				// Construct an instance of the CollectionRef model
-				collectionRefModel := new(appconfigurationv1.CollectionRef)
-				Expect(collectionRefModel).ToNot(BeNil())
-				collectionRefModel.CollectionID = core.StringPtr("ghzinc")
-				Expect(collectionRefModel.CollectionID).To(Equal(core.StringPtr("ghzinc")))
-
-				// Construct an instance of the CreatePropertyOptions model
-				environmentID := "testString"
-				createPropertyOptionsName := "json property"
-				createPropertyOptionsPropertyID := "json-property"
-				createPropertyOptionsType := "STRING"
-				createPropertyOptionsValue := propertyValMap
-				createPropertyOptionsModel := appConfigurationService.NewCreatePropertyOptions(environmentID, createPropertyOptionsName, createPropertyOptionsPropertyID, createPropertyOptionsType, createPropertyOptionsValue)
-				createPropertyOptionsModel.SetEnvironmentID("testString")
-				createPropertyOptionsModel.SetName("json property")
-				createPropertyOptionsModel.SetPropertyID("json-property")
-				createPropertyOptionsModel.SetType("STRING")
-				createPropertyOptionsModel.SetValue(propertyValMap)
-				createPropertyOptionsModel.SetDescription("Property for email")
-				createPropertyOptionsModel.SetFormat("JSON")
-				createPropertyOptionsModel.SetTags("version: 1.1, pre-release")
-				createPropertyOptionsModel.SetSegmentRules([]appconfigurationv1.SegmentRule{*segmentRuleModel})
-				createPropertyOptionsModel.SetCollections([]appconfigurationv1.CollectionRef{*collectionRefModel})
-				createPropertyOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
-				Expect(createPropertyOptionsModel).ToNot(BeNil())
-				Expect(createPropertyOptionsModel.EnvironmentID).To(Equal(core.StringPtr("testString")))
-				Expect(createPropertyOptionsModel.Name).To(Equal(core.StringPtr("json property")))
-				Expect(createPropertyOptionsModel.PropertyID).To(Equal(core.StringPtr("json-property")))
-				Expect(createPropertyOptionsModel.Type).To(Equal(core.StringPtr("STRING")))
-				Expect(createPropertyOptionsModel.Value.(map[string]interface{})["key"]).To(Equal("propertyVal"))
-				Expect(createPropertyOptionsModel.Description).To(Equal(core.StringPtr("Property for email")))
-				Expect(createPropertyOptionsModel.Format).To(Equal(core.StringPtr("JSON")))
-				Expect(createPropertyOptionsModel.Tags).To(Equal(core.StringPtr("version: 1.1, pre-release")))
-				Expect(createPropertyOptionsModel.SegmentRules).To(Equal([]appconfigurationv1.SegmentRule{*segmentRuleModel}))
-				Expect(createPropertyOptionsModel.Collections).To(Equal([]appconfigurationv1.CollectionRef{*collectionRefModel}))
-				Expect(createPropertyOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
-			})
-			It(`Invoke NewCreateStringYamlPropertyOptions successfully`, func() {
-				// Construct an instance of the TargetSegments model
-				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
-				Expect(targetSegmentsModel).ToNot(BeNil())
-				targetSegmentsModel.Segments = []string{"betausers", "premiumusers"}
-				Expect(targetSegmentsModel.Segments).To(Equal([]string{"betausers", "premiumusers"}))
-
-				// Construct an instance of the SegmentRule model
-				segmentRuleModel := new(appconfigurationv1.SegmentRule)
-				Expect(segmentRuleModel).ToNot(BeNil())
-				segmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
-				segmentRuleModel.Value = core.StringPtr("---\nkey: segmentVal")
-				segmentRuleModel.Order = core.Int64Ptr(int64(1))
-				Expect(segmentRuleModel.Rules).To(Equal([]appconfigurationv1.TargetSegments{*targetSegmentsModel}))
-				Expect(segmentRuleModel.Value).To(Equal(core.StringPtr("---\nkey: segmentVal")))
-				Expect(segmentRuleModel.Order).To(Equal(core.Int64Ptr(int64(1))))
-
-				// Construct an instance of the CollectionRef model
-				collectionRefModel := new(appconfigurationv1.CollectionRef)
-				Expect(collectionRefModel).ToNot(BeNil())
-				collectionRefModel.CollectionID = core.StringPtr("ghzinc")
-				Expect(collectionRefModel.CollectionID).To(Equal(core.StringPtr("ghzinc")))
-
-				// Construct an instance of the CreatePropertyOptions model
-				environmentID := "testString"
-				createPropertyOptionsName := "yaml property"
-				createPropertyOptionsPropertyID := "yaml-property"
-				createPropertyOptionsType := "STRING"
-				createPropertyOptionsValue := core.StringPtr("true")
-				createPropertyOptionsModel := appConfigurationService.NewCreatePropertyOptions(environmentID, createPropertyOptionsName, createPropertyOptionsPropertyID, createPropertyOptionsType, createPropertyOptionsValue)
-				createPropertyOptionsModel.SetEnvironmentID("testString")
-				createPropertyOptionsModel.SetName("yaml property")
-				createPropertyOptionsModel.SetPropertyID("yaml-property")
-				createPropertyOptionsModel.SetType("STRING")
-				createPropertyOptionsModel.SetValue(core.StringPtr("---\nkey: propertyVal"))
-				createPropertyOptionsModel.SetDescription("Property for email")
-				createPropertyOptionsModel.SetFormat("YAML")
-				createPropertyOptionsModel.SetTags("version: 1.1, pre-release")
-				createPropertyOptionsModel.SetSegmentRules([]appconfigurationv1.SegmentRule{*segmentRuleModel})
-				createPropertyOptionsModel.SetCollections([]appconfigurationv1.CollectionRef{*collectionRefModel})
-				createPropertyOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
-				Expect(createPropertyOptionsModel).ToNot(BeNil())
-				Expect(createPropertyOptionsModel.EnvironmentID).To(Equal(core.StringPtr("testString")))
-				Expect(createPropertyOptionsModel.Name).To(Equal(core.StringPtr("yaml property")))
-				Expect(createPropertyOptionsModel.PropertyID).To(Equal(core.StringPtr("yaml-property")))
-				Expect(createPropertyOptionsModel.Type).To(Equal(core.StringPtr("STRING")))
-				Expect(createPropertyOptionsModel.Value).To(Equal(core.StringPtr("---\nkey: propertyVal")))
-				Expect(createPropertyOptionsModel.Description).To(Equal(core.StringPtr("Property for email")))
-				Expect(createPropertyOptionsModel.Format).To(Equal(core.StringPtr("YAML")))
 				Expect(createPropertyOptionsModel.Tags).To(Equal(core.StringPtr("version: 1.1, pre-release")))
 				Expect(createPropertyOptionsModel.SegmentRules).To(Equal([]appconfigurationv1.SegmentRule{*segmentRuleModel}))
 				Expect(createPropertyOptionsModel.Collections).To(Equal([]appconfigurationv1.CollectionRef{*collectionRefModel}))
@@ -7635,6 +7430,14 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				featureID := "testString"
 				name := "testString"
 				_model, err := appConfigurationService.NewFeatureOutput(featureID, name)
+				Expect(_model).ToNot(BeNil())
+				Expect(err).To(BeNil())
+			})
+			It(`Invoke NewFeatureSegmentRule successfully`, func() {
+				rules := []appconfigurationv1.TargetSegments{}
+				value := core.StringPtr("testString")
+				order := int64(38)
+				_model, err := appConfigurationService.NewFeatureSegmentRule(rules, value, order)
 				Expect(_model).ToNot(BeNil())
 				Expect(err).To(BeNil())
 			})
@@ -7933,15 +7736,17 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				targetSegmentsModel.Segments = []string{"betausers", "premiumusers"}
 				Expect(targetSegmentsModel.Segments).To(Equal([]string{"betausers", "premiumusers"}))
 
-				// Construct an instance of the SegmentRule model
-				segmentRuleModel := new(appconfigurationv1.SegmentRule)
-				Expect(segmentRuleModel).ToNot(BeNil())
-				segmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
-				segmentRuleModel.Value = core.StringPtr("true")
-				segmentRuleModel.Order = core.Int64Ptr(int64(1))
-				Expect(segmentRuleModel.Rules).To(Equal([]appconfigurationv1.TargetSegments{*targetSegmentsModel}))
-				Expect(segmentRuleModel.Value).To(Equal(core.StringPtr("true")))
-				Expect(segmentRuleModel.Order).To(Equal(core.Int64Ptr(int64(1))))
+				// Construct an instance of the FeatureSegmentRule model
+				featureSegmentRuleModel := new(appconfigurationv1.FeatureSegmentRule)
+				Expect(featureSegmentRuleModel).ToNot(BeNil())
+				featureSegmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
+				featureSegmentRuleModel.Value = core.StringPtr("true")
+				featureSegmentRuleModel.Order = core.Int64Ptr(int64(1))
+				featureSegmentRuleModel.RolloutPercentage = core.Int64Ptr(int64(90))
+				Expect(featureSegmentRuleModel.Rules).To(Equal([]appconfigurationv1.TargetSegments{*targetSegmentsModel}))
+				Expect(featureSegmentRuleModel.Value).To(Equal(core.StringPtr("true")))
+				Expect(featureSegmentRuleModel.Order).To(Equal(core.Int64Ptr(int64(1))))
+				Expect(featureSegmentRuleModel.RolloutPercentage).To(Equal(core.Int64Ptr(int64(90))))
 
 				// Construct an instance of the CollectionRef model
 				collectionRefModel := new(appconfigurationv1.CollectionRef)
@@ -7960,8 +7765,9 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				updateFeatureOptionsModel.SetEnabledValue(core.StringPtr("true"))
 				updateFeatureOptionsModel.SetDisabledValue(core.StringPtr("false"))
 				updateFeatureOptionsModel.SetEnabled(true)
+				updateFeatureOptionsModel.SetRolloutPercentage(int64(100))
 				updateFeatureOptionsModel.SetTags("version: 1.1, yet-to-release")
-				updateFeatureOptionsModel.SetSegmentRules([]appconfigurationv1.SegmentRule{*segmentRuleModel})
+				updateFeatureOptionsModel.SetSegmentRules([]appconfigurationv1.FeatureSegmentRule{*featureSegmentRuleModel})
 				updateFeatureOptionsModel.SetCollections([]appconfigurationv1.CollectionRef{*collectionRefModel})
 				updateFeatureOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(updateFeatureOptionsModel).ToNot(BeNil())
@@ -7972,8 +7778,9 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(updateFeatureOptionsModel.EnabledValue).To(Equal(core.StringPtr("true")))
 				Expect(updateFeatureOptionsModel.DisabledValue).To(Equal(core.StringPtr("false")))
 				Expect(updateFeatureOptionsModel.Enabled).To(Equal(core.BoolPtr(true)))
+				Expect(updateFeatureOptionsModel.RolloutPercentage).To(Equal(core.Int64Ptr(int64(100))))
 				Expect(updateFeatureOptionsModel.Tags).To(Equal(core.StringPtr("version: 1.1, yet-to-release")))
-				Expect(updateFeatureOptionsModel.SegmentRules).To(Equal([]appconfigurationv1.SegmentRule{*segmentRuleModel}))
+				Expect(updateFeatureOptionsModel.SegmentRules).To(Equal([]appconfigurationv1.FeatureSegmentRule{*featureSegmentRuleModel}))
 				Expect(updateFeatureOptionsModel.Collections).To(Equal([]appconfigurationv1.CollectionRef{*collectionRefModel}))
 				Expect(updateFeatureOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
@@ -7984,15 +7791,17 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				targetSegmentsModel.Segments = []string{"betausers", "premiumusers"}
 				Expect(targetSegmentsModel.Segments).To(Equal([]string{"betausers", "premiumusers"}))
 
-				// Construct an instance of the SegmentRule model
-				segmentRuleModel := new(appconfigurationv1.SegmentRule)
-				Expect(segmentRuleModel).ToNot(BeNil())
-				segmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
-				segmentRuleModel.Value = core.StringPtr("true")
-				segmentRuleModel.Order = core.Int64Ptr(int64(1))
-				Expect(segmentRuleModel.Rules).To(Equal([]appconfigurationv1.TargetSegments{*targetSegmentsModel}))
-				Expect(segmentRuleModel.Value).To(Equal(core.StringPtr("true")))
-				Expect(segmentRuleModel.Order).To(Equal(core.Int64Ptr(int64(1))))
+				// Construct an instance of the FeatureSegmentRule model
+				featureSegmentRuleModel := new(appconfigurationv1.FeatureSegmentRule)
+				Expect(featureSegmentRuleModel).ToNot(BeNil())
+				featureSegmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
+				featureSegmentRuleModel.Value = core.StringPtr("true")
+				featureSegmentRuleModel.Order = core.Int64Ptr(int64(1))
+				featureSegmentRuleModel.RolloutPercentage = core.Int64Ptr(int64(100))
+				Expect(featureSegmentRuleModel.Rules).To(Equal([]appconfigurationv1.TargetSegments{*targetSegmentsModel}))
+				Expect(featureSegmentRuleModel.Value).To(Equal(core.StringPtr("true")))
+				Expect(featureSegmentRuleModel.Order).To(Equal(core.Int64Ptr(int64(1))))
+				Expect(featureSegmentRuleModel.RolloutPercentage).To(Equal(core.Int64Ptr(int64(100))))
 
 				// Construct an instance of the UpdateFeatureValuesOptions model
 				environmentID := "testString"
@@ -8005,7 +7814,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				updateFeatureValuesOptionsModel.SetTags("version: 1.1, yet-to-release")
 				updateFeatureValuesOptionsModel.SetEnabledValue(core.StringPtr("true"))
 				updateFeatureValuesOptionsModel.SetDisabledValue(core.StringPtr("false"))
-				updateFeatureValuesOptionsModel.SetSegmentRules([]appconfigurationv1.SegmentRule{*segmentRuleModel})
+				updateFeatureValuesOptionsModel.SetRolloutPercentage(int64(100))
+				updateFeatureValuesOptionsModel.SetSegmentRules([]appconfigurationv1.FeatureSegmentRule{*featureSegmentRuleModel})
 				updateFeatureValuesOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(updateFeatureValuesOptionsModel).ToNot(BeNil())
 				Expect(updateFeatureValuesOptionsModel.EnvironmentID).To(Equal(core.StringPtr("testString")))
@@ -8015,7 +7825,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(updateFeatureValuesOptionsModel.Tags).To(Equal(core.StringPtr("version: 1.1, yet-to-release")))
 				Expect(updateFeatureValuesOptionsModel.EnabledValue).To(Equal(core.StringPtr("true")))
 				Expect(updateFeatureValuesOptionsModel.DisabledValue).To(Equal(core.StringPtr("false")))
-				Expect(updateFeatureValuesOptionsModel.SegmentRules).To(Equal([]appconfigurationv1.SegmentRule{*segmentRuleModel}))
+				Expect(updateFeatureValuesOptionsModel.RolloutPercentage).To(Equal(core.Int64Ptr(int64(100))))
+				Expect(updateFeatureValuesOptionsModel.SegmentRules).To(Equal([]appconfigurationv1.FeatureSegmentRule{*featureSegmentRuleModel}))
 				Expect(updateFeatureValuesOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewUpdatePropertyOptions successfully`, func() {
