@@ -144,6 +144,16 @@ func main() {
 	patchFeature("environmentId", "booleanFeatureId", "booleanFeatureName", "patchedDesc", "true", "false", "tag", []string{"segmentId"}, 1, "true", &rolloutPercentage, &segmentRolloutPercentage)
 	patchProperty("environmentId", "numberPropertyName", "numberPropertyId", "desc", "1", "tags", []string{"segmentId"}, 2, "2")
 
+	gitUrl := "<gitUrl>"
+	gitBranch := "<gitBranch>"
+	gitFilePath := "<gitFilePath>"
+	gitToken := "<gitToken>"
+	createConfiguration(gitUrl, gitBranch, gitFilePath, gitToken)
+	updateConfiguration("snapshotConfigurationId")
+	getConfiguration("snapshotConfigurationId")
+	listConfiguration()
+	createSnapshot("snapshotConfigurationId")
+
 	deleteFeature("environmentId", "numberFeatureId")
 	deleteFeature("environmentId", "booleanFeatureId")
 	deleteFeature("environmentId", "stringTextFeatureId")
@@ -155,6 +165,7 @@ func main() {
 	deleteProperty("environmentId", "stringJsonPropertyId")
 	deleteProperty("environmentId", "stringYamlPropertyId")
 	deleteSegment("segmentId")
+	deleteConfiguration("snapshotConfigurationId")
 	deleteCollection("collectionId")
 	deleteEnvironment("environmentId")
 }
@@ -589,4 +600,81 @@ func toggleFeature(environmentId string, featureId string, enableFlag bool) {
 	}
 	fmt.Println(response.StatusCode)
 	fmt.Println(*result.Name)
+}
+
+func createConfiguration(gitURL string, gitBranch string, gitFilePath string, gitToken string) {
+	fmt.Println("createConfiguration")
+	createConfigurationOptionsModel := appConfigurationServiceInstance.NewCreateGitconfigOptions()
+	createConfigurationOptionsModel.SetGitConfigName("snapshotConfigurationName")
+	createConfigurationOptionsModel.SetGitConfigID("snapshotConfigurationId")
+	createConfigurationOptionsModel.SetCollectionID("collectionId")
+	createConfigurationOptionsModel.SetEnvironmentID("environmentId")
+	createConfigurationOptionsModel.SetGitURL(gitURL)
+	createConfigurationOptionsModel.SetGitBranch(gitBranch)
+	createConfigurationOptionsModel.SetGitFilePath(gitFilePath)
+	createConfigurationOptionsModel.SetGitToken(gitToken)
+
+	result, response, error := appConfigurationServiceInstance.CreateGitconfig(createConfigurationOptionsModel)
+	if error != nil {
+		fmt.Println("Error: " + error.Error())
+		return
+	}
+	fmt.Println(response.StatusCode)
+	fmt.Println(*result.GitConfigID)
+}
+func updateConfiguration(gitConfigId string) {
+	fmt.Println("updateConfiguration")
+	updateConfigurationOptionsModel := appConfigurationServiceInstance.NewUpdateGitconfigOptions(gitConfigId)
+	updateConfigurationOptionsModel.SetGitConfigName("snapshotConfigurationNameUpdate")
+
+	result, response, error := appConfigurationServiceInstance.UpdateGitconfig(updateConfigurationOptionsModel)
+	if error != nil {
+		fmt.Println("Error: " + error.Error())
+		return
+	}
+	fmt.Println(response.StatusCode)
+	fmt.Println(*result.GitConfigID)
+}
+func getConfiguration(gitConfigId string) {
+	fmt.Println("getConfiguration")
+	getGitConfigOptionsModel := appConfigurationServiceInstance.NewGetGitconfigOptions(gitConfigId)
+	result, response, error := appConfigurationServiceInstance.GetGitconfig(getGitConfigOptionsModel)
+	if error != nil {
+		fmt.Println("Error: " + error.Error())
+		return
+	}
+	fmt.Println(response.StatusCode)
+	fmt.Println(*result.GitConfigName)
+}
+func listConfiguration() {
+	fmt.Println("listConfiguration")
+	listSnapshotsOptionsModel := appConfigurationServiceInstance.NewListSnapshotsOptions()
+	result, response, error := appConfigurationServiceInstance.ListSnapshots(listSnapshotsOptionsModel)
+	if error != nil {
+		fmt.Println("Error: " + error.Error())
+		return
+	}
+	fmt.Println(response.StatusCode)
+	fmt.Println(*result.Snapshot[0].GitConfigName)
+}
+func createSnapshot(gitConfigID string) {
+	fmt.Println("createSnapshot")
+	createSnapshotOptionsModel := appConfigurationServiceInstance.NewPromoteGitconfigOptions(gitConfigID)
+	result, response, error := appConfigurationServiceInstance.PromoteGitconfig(createSnapshotOptionsModel)
+	if error != nil {
+		fmt.Println("Error: " + error.Error())
+		return
+	}
+	fmt.Println(response.StatusCode)
+	fmt.Println(*result.GitCommitID)
+}
+func deleteConfiguration(gitConfigId string) {
+	fmt.Println("deleteConfiguration")
+	deleteGitConfigOptionsModel := appConfigurationServiceInstance.NewDeleteGitconfigOptions(gitConfigId)
+	response, error := appConfigurationServiceInstance.DeleteGitconfig(deleteGitConfigOptionsModel)
+	if error != nil {
+		fmt.Println("Error: " + error.Error())
+		return
+	}
+	fmt.Println(response.StatusCode)
 }

@@ -32,7 +32,7 @@ Use the Go Admin SDK to manage the App Configuration service instance. The Go Ad
 Install using the command.
 
 ```bash
-go get -u github.com/IBM/appconfiguration-go-admin-sdk@latest
+go get -u github.com/IBM/appconfiguration-go-admin-sdk
 ```
 
 ## Import the SDK
@@ -220,6 +220,50 @@ patchPropertyOptionsModel.SetTags(tags)
 patchPropertyOptionsModel.SetValue(valueOfProperty)
 patchPropertyOptionsModel.SetSegmentRules([]appconfigurationv1.SegmentRule{*segmentRuleArray})
 result, response, err := appConfigurationServiceInstance.UpdatePropertyValues(patchPropertyOptionsModel)
+```
+### Create config
+```go
+createConfigurationOptionsModel := appConfigurationServiceInstance.NewCreateGitconfigOptions()
+createConfigurationOptionsModel.SetGitConfigName("snapshotConfigurationName")
+createConfigurationOptionsModel.SetGitConfigID("snapshotConfigurationId")
+createConfigurationOptionsModel.SetCollectionID("collectionId")
+createConfigurationOptionsModel.SetEnvironmentID("environmentId")
+createConfigurationOptionsModel.SetGitURL(gitURL)
+createConfigurationOptionsModel.SetGitBranch(gitBranch)
+createConfigurationOptionsModel.SetGitFilePath(gitFilePath)
+createConfigurationOptionsModel.SetGitToken(gitToken)
+result, response, error := appConfigurationServiceInstance.CreateGitconfig(createConfigurationOptionsModel)
+```
+
+### Update config
+```go
+updateConfigurationOptionsModel := appConfigurationServiceInstance.NewUpdateGitconfigOptions(gitConfigId)
+updateConfigurationOptionsModel.SetGitConfigName("snapshotConfigurationNameUpdate")
+result, response, error := appConfigurationServiceInstance.UpdateGitconfig(updateConfigurationOptionsModel)
+```
+
+### Get config
+```go
+getGitConfigOptionsModel := appConfigurationServiceInstance.NewGetGitconfigOptions(gitConfigId)
+result, response, error := appConfigurationServiceInstance.GetGitconfig(getGitConfigOptionsModel)
+```
+
+### List config
+```go
+listSnapshotsOptionsModel := appConfigurationServiceInstance.NewListSnapshotsOptions()
+result, response, error := appConfigurationServiceInstance.ListSnapshots(listSnapshotsOptionsModel)
+```
+
+### Create snapshot
+```go
+createSnapshotOptionsModel := appConfigurationServiceInstance.NewPromoteGitconfigOptions(gitConfigID)
+result, response, error := appConfigurationServiceInstance.PromoteGitconfig(createSnapshotOptionsModel)
+```
+
+### Delete config
+```go
+deleteGitConfigOptionsModel := appConfigurationServiceInstance.NewDeleteGitconfigOptions(gitConfigId)
+response, error := appConfigurationServiceInstance.DeleteGitconfig(deleteGitConfigOptionsModel)
 ```
 
 ## License
