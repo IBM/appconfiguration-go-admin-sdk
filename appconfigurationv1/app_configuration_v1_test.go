@@ -195,7 +195,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					Expect(req.URL.Query()["search"]).To(Equal([]string{"test tag"}))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `} this is not valid json {`)
+					fmt.Fprint(res, `} this is not valid json {`)
 				}))
 			})
 			It(`Invoke ListEnvironments with error: Operation response processing error`, func() {
@@ -481,7 +481,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					Expect(req.Method).To(Equal("POST"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
-					fmt.Fprintf(res, `} this is not valid json {`)
+					fmt.Fprint(res, `} this is not valid json {`)
 				}))
 			})
 			It(`Invoke CreateEnvironment with error: Operation response processing error`, func() {
@@ -745,7 +745,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					Expect(req.Method).To(Equal("PUT"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `} this is not valid json {`)
+					fmt.Fprint(res, `} this is not valid json {`)
 				}))
 			})
 			It(`Invoke UpdateEnvironment with error: Operation response processing error`, func() {
@@ -1010,7 +1010,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// TODO: Add check for expand query parameter
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `} this is not valid json {`)
+					fmt.Fprint(res, `} this is not valid json {`)
 				}))
 			})
 			It(`Invoke GetEnvironment with error: Operation response processing error`, func() {
@@ -1308,7 +1308,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					Expect(req.URL.Query()["search"]).To(Equal([]string{"test tag"}))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `} this is not valid json {`)
+					fmt.Fprint(res, `} this is not valid json {`)
 				}))
 			})
 			It(`Invoke ListCollections with error: Operation response processing error`, func() {
@@ -1604,7 +1604,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					Expect(req.Method).To(Equal("POST"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
-					fmt.Fprintf(res, `} this is not valid json {`)
+					fmt.Fprint(res, `} this is not valid json {`)
 				}))
 			})
 			It(`Invoke CreateCollection with error: Operation response processing error`, func() {
@@ -1863,7 +1863,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					Expect(req.Method).To(Equal("PUT"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `} this is not valid json {`)
+					fmt.Fprint(res, `} this is not valid json {`)
 				}))
 			})
 			It(`Invoke UpdateCollection with error: Operation response processing error`, func() {
@@ -2123,7 +2123,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// TODO: Add check for expand query parameter
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `} this is not valid json {`)
+					fmt.Fprint(res, `} this is not valid json {`)
 				}))
 			})
 			It(`Invoke GetCollection with error: Operation response processing error`, func() {
@@ -2421,7 +2421,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					Expect(req.URL.Query()["search"]).To(Equal([]string{"test tag"}))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `} this is not valid json {`)
+					fmt.Fprint(res, `} this is not valid json {`)
 				}))
 			})
 			It(`Invoke ListFeatures with error: Operation response processing error`, func() {
@@ -2486,7 +2486,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"features": [{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5}], "segment_exists": false, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href"}], "limit": 5, "offset": 6, "total_count": 10, "first": {"href": "Href"}, "previous": {"href": "Href"}, "next": {"href": "Href"}, "last": {"href": "Href"}}`)
+					fmt.Fprintf(res, "%s", `{"features": [{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 17, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 17}], "segment_exists": false, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href"}], "limit": 5, "offset": 6, "total_count": 10, "first": {"href": "Href"}, "previous": {"href": "Href"}, "next": {"href": "Href"}, "last": {"href": "Href"}}`)
 				}))
 			})
 			It(`Invoke ListFeatures successfully with retries`, func() {
@@ -2555,7 +2555,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"features": [{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5}], "segment_exists": false, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href"}], "limit": 5, "offset": 6, "total_count": 10, "first": {"href": "Href"}, "previous": {"href": "Href"}, "next": {"href": "Href"}, "last": {"href": "Href"}}`)
+					fmt.Fprintf(res, "%s", `{"features": [{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 17, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 17}], "segment_exists": false, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href"}], "limit": 5, "offset": 6, "total_count": 10, "first": {"href": "Href"}, "previous": {"href": "Href"}, "next": {"href": "Href"}, "last": {"href": "Href"}}`)
 				}))
 			})
 			It(`Invoke ListFeatures successfully`, func() {
@@ -2729,7 +2729,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					Expect(req.Method).To(Equal("POST"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
-					fmt.Fprintf(res, `} this is not valid json {`)
+					fmt.Fprint(res, `} this is not valid json {`)
 				}))
 			})
 			It(`Invoke CreateFeature with error: Operation response processing error`, func() {
@@ -2744,7 +2744,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
 				targetSegmentsModel.Segments = []string{"betausers", "premiumusers"}
 
-				// Construct an instance of the FeatureFeatureSegmentRule model
+				// Construct an instance of the FeatureSegmentRule model
 				featureSegmentRuleModel := new(appconfigurationv1.FeatureSegmentRule)
 				featureSegmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
 				featureSegmentRuleModel.Value = core.StringPtr("true")
@@ -2838,7 +2838,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
 				targetSegmentsModel.Segments = []string{"betausers", "premiumusers"}
 
-				// Construct an instance of the FeatureFeatureSegmentRule model
+				// Construct an instance of the FeatureSegmentRule model
 				featureSegmentRuleModel := new(appconfigurationv1.FeatureSegmentRule)
 				featureSegmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
 				featureSegmentRuleModel.Value = core.StringPtr("true")
@@ -2940,7 +2940,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
 				targetSegmentsModel.Segments = []string{"betausers", "premiumusers"}
 
-				// Construct an instance of the FeatureFeatureSegmentRule model
+				// Construct an instance of the FeatureSegmentRule model
 				featureSegmentRuleModel := new(appconfigurationv1.FeatureSegmentRule)
 				featureSegmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
 				featureSegmentRuleModel.Value = core.StringPtr("true")
@@ -2987,7 +2987,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
 				targetSegmentsModel.Segments = []string{"betausers", "premiumusers"}
 
-				// Construct an instance of the FeatureFeatureSegmentRule model
+				// Construct an instance of the FeatureSegmentRule model
 				featureSegmentRuleModel := new(appconfigurationv1.FeatureSegmentRule)
 				featureSegmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
 				featureSegmentRuleModel.Value = core.StringPtr("true")
@@ -3055,7 +3055,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
 				targetSegmentsModel.Segments = []string{"betausers", "premiumusers"}
 
-				// Construct an instance of the FeatureFeatureSegmentRule model
+				// Construct an instance of the FeatureSegmentRule model
 				featureSegmentRuleModel := new(appconfigurationv1.FeatureSegmentRule)
 				featureSegmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
 				featureSegmentRuleModel.Value = core.StringPtr("true")
@@ -3108,7 +3108,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					Expect(req.Method).To(Equal("PUT"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `} this is not valid json {`)
+					fmt.Fprint(res, `} this is not valid json {`)
 				}))
 			})
 			It(`Invoke UpdateFeature with error: Operation response processing error`, func() {
@@ -3123,7 +3123,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
 				targetSegmentsModel.Segments = []string{"betausers", "premiumusers"}
 
-				// Construct an instance of the FeatureFeatureSegmentRule model
+				// Construct an instance of the FeatureSegmentRule model
 				featureSegmentRuleModel := new(appconfigurationv1.FeatureSegmentRule)
 				featureSegmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
 				featureSegmentRuleModel.Value = core.StringPtr("true")
@@ -3220,6 +3220,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				featureSegmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
 				featureSegmentRuleModel.Value = core.StringPtr("true")
 				featureSegmentRuleModel.Order = core.Int64Ptr(int64(1))
+				featureSegmentRuleModel.RolloutPercentage = core.Int64Ptr(int64(90))
 
 				// Construct an instance of the CollectionRef model
 				collectionRefModel := new(appconfigurationv1.CollectionRef)
@@ -3476,7 +3477,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					Expect(req.Method).To(Equal("PATCH"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `} this is not valid json {`)
+					fmt.Fprint(res, `} this is not valid json {`)
 				}))
 			})
 			It(`Invoke UpdateFeatureValues with error: Operation response processing error`, func() {
@@ -3816,7 +3817,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					Expect(req.URL.Query()["include"]).To(Equal([]string{"collections"}))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `} this is not valid json {`)
+					fmt.Fprint(res, `} this is not valid json {`)
 				}))
 			})
 			It(`Invoke GetFeature with error: Operation response processing error`, func() {
@@ -4110,7 +4111,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					Expect(req.Method).To(Equal("PUT"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `} this is not valid json {`)
+					fmt.Fprint(res, `} this is not valid json {`)
 				}))
 			})
 			It(`Invoke ToggleFeature with error: Operation response processing error`, func() {
@@ -4370,7 +4371,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					Expect(req.URL.Query()["search"]).To(Equal([]string{"test tag"}))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `} this is not valid json {`)
+					fmt.Fprint(res, `} this is not valid json {`)
 				}))
 			})
 			It(`Invoke ListProperties with error: Operation response processing error`, func() {
@@ -4678,7 +4679,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					Expect(req.Method).To(Equal("POST"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
-					fmt.Fprintf(res, `} this is not valid json {`)
+					fmt.Fprint(res, `} this is not valid json {`)
 				}))
 			})
 			It(`Invoke CreateProperty with error: Operation response processing error`, func() {
@@ -5037,7 +5038,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					Expect(req.Method).To(Equal("PUT"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `} this is not valid json {`)
+					fmt.Fprint(res, `} this is not valid json {`)
 				}))
 			})
 			It(`Invoke UpdateProperty with error: Operation response processing error`, func() {
@@ -5386,7 +5387,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					Expect(req.Method).To(Equal("PATCH"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `} this is not valid json {`)
+					fmt.Fprint(res, `} this is not valid json {`)
 				}))
 			})
 			It(`Invoke UpdatePropertyValues with error: Operation response processing error`, func() {
@@ -5711,7 +5712,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					Expect(req.URL.Query()["include"]).To(Equal([]string{"collections"}))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `} this is not valid json {`)
+					fmt.Fprint(res, `} this is not valid json {`)
 				}))
 			})
 			It(`Invoke GetProperty with error: Operation response processing error`, func() {
@@ -6012,7 +6013,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					Expect(req.URL.Query()["search"]).To(Equal([]string{"test tag"}))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `} this is not valid json {`)
+					fmt.Fprint(res, `} this is not valid json {`)
 				}))
 			})
 			It(`Invoke ListSegments with error: Operation response processing error`, func() {
@@ -6300,7 +6301,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					Expect(req.Method).To(Equal("POST"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
-					fmt.Fprintf(res, `} this is not valid json {`)
+					fmt.Fprint(res, `} this is not valid json {`)
 				}))
 			})
 			It(`Invoke CreateSegment with error: Operation response processing error`, func() {
@@ -6587,7 +6588,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					Expect(req.Method).To(Equal("PUT"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `} this is not valid json {`)
+					fmt.Fprint(res, `} this is not valid json {`)
 				}))
 			})
 			It(`Invoke UpdateSegment with error: Operation response processing error`, func() {
@@ -6881,7 +6882,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					Expect(req.Method).To(Equal("GET"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `} this is not valid json {`)
+					fmt.Fprint(res, `} this is not valid json {`)
 				}))
 			})
 			It(`Invoke GetSegment with error: Operation response processing error`, func() {
@@ -7154,6 +7155,1336 @@ var _ = Describe(`AppConfigurationV1`, func() {
 			})
 		})
 	})
+	Describe(`ListSnapshots(listSnapshotsOptions *ListSnapshotsOptions) - Operation response error`, func() {
+		listSnapshotsPath := "/gitconfigs"
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(listSnapshotsPath))
+					Expect(req.Method).To(Equal("GET"))
+					Expect(req.URL.Query()["sort"]).To(Equal([]string{"created_time"}))
+					Expect(req.URL.Query()["collection_id"]).To(Equal([]string{"collections"}))
+					Expect(req.URL.Query()["environment_id"]).To(Equal([]string{"environments"}))
+					Expect(req.URL.Query()["limit"]).To(Equal([]string{fmt.Sprint(int64(1))}))
+					Expect(req.URL.Query()["offset"]).To(Equal([]string{fmt.Sprint(int64(0))}))
+					Expect(req.URL.Query()["search"]).To(Equal([]string{"search_string"}))
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprint(res, `} this is not valid json {`)
+				}))
+			})
+			It(`Invoke ListSnapshots with error: Operation response processing error`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the ListSnapshotsOptions model
+				listSnapshotsOptionsModel := new(appconfigurationv1.ListSnapshotsOptions)
+				listSnapshotsOptionsModel.Sort = core.StringPtr("created_time")
+				listSnapshotsOptionsModel.CollectionID = core.StringPtr("collections")
+				listSnapshotsOptionsModel.EnvironmentID = core.StringPtr("environments")
+				listSnapshotsOptionsModel.Limit = core.Int64Ptr(int64(1))
+				listSnapshotsOptionsModel.Offset = core.Int64Ptr(int64(0))
+				listSnapshotsOptionsModel.Search = core.StringPtr("search_string")
+				listSnapshotsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Expect response parsing to fail since we are receiving a text/plain response
+				result, response, operationErr := appConfigurationService.ListSnapshots(listSnapshotsOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				appConfigurationService.EnableRetries(0, 0)
+				result, response, operationErr = appConfigurationService.ListSnapshots(listSnapshotsOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`ListSnapshots(listSnapshotsOptions *ListSnapshotsOptions)`, func() {
+		listSnapshotsPath := "/gitconfigs"
+		Context(`Using mock server endpoint with timeout`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(listSnapshotsPath))
+					Expect(req.Method).To(Equal("GET"))
+
+					Expect(req.URL.Query()["sort"]).To(Equal([]string{"created_time"}))
+					Expect(req.URL.Query()["collection_id"]).To(Equal([]string{"collections"}))
+					Expect(req.URL.Query()["environment_id"]).To(Equal([]string{"environments"}))
+					Expect(req.URL.Query()["limit"]).To(Equal([]string{fmt.Sprint(int64(1))}))
+					Expect(req.URL.Query()["offset"]).To(Equal([]string{fmt.Sprint(int64(0))}))
+					Expect(req.URL.Query()["search"]).To(Equal([]string{"search_string"}))
+					// Sleep a short time to support a timeout test
+					time.Sleep(100 * time.Millisecond)
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"Snapshot": [{"git_config_name": "GitConfigName", "git_config_id": "GitConfigID", "collection": {"anyKey": "anyValue"}, "environment": {"anyKey": "anyValue"}, "git_url": "GitURL", "git_branch": "GitBranch", "git_file_path": "GitFilePath", "last_sync_time": "2022-05-27T23:20:50.520Z", "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "href": "Href"}], "limit": 5, "offset": 6, "total_count": 10, "first": {"href": "Href"}, "previous": {"href": "Href"}, "next": {"href": "Href"}, "last": {"href": "Href"}}`)
+				}))
+			})
+			It(`Invoke ListSnapshots successfully with retries`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+				appConfigurationService.EnableRetries(0, 0)
+
+				// Construct an instance of the ListSnapshotsOptions model
+				listSnapshotsOptionsModel := new(appconfigurationv1.ListSnapshotsOptions)
+				listSnapshotsOptionsModel.Sort = core.StringPtr("created_time")
+				listSnapshotsOptionsModel.CollectionID = core.StringPtr("collections")
+				listSnapshotsOptionsModel.EnvironmentID = core.StringPtr("environments")
+				listSnapshotsOptionsModel.Limit = core.Int64Ptr(int64(1))
+				listSnapshotsOptionsModel.Offset = core.Int64Ptr(int64(0))
+				listSnapshotsOptionsModel.Search = core.StringPtr("search_string")
+				listSnapshotsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with a Context to test a timeout error
+				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc()
+				_, _, operationErr := appConfigurationService.ListSnapshotsWithContext(ctx, listSnapshotsOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+
+				// Disable retries and test again
+				appConfigurationService.DisableRetries()
+				result, response, operationErr := appConfigurationService.ListSnapshots(listSnapshotsOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				_, _, operationErr = appConfigurationService.ListSnapshotsWithContext(ctx, listSnapshotsOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(listSnapshotsPath))
+					Expect(req.Method).To(Equal("GET"))
+
+					Expect(req.URL.Query()["sort"]).To(Equal([]string{"created_time"}))
+					Expect(req.URL.Query()["collection_id"]).To(Equal([]string{"collections"}))
+					Expect(req.URL.Query()["environment_id"]).To(Equal([]string{"environments"}))
+					Expect(req.URL.Query()["limit"]).To(Equal([]string{fmt.Sprint(int64(1))}))
+					Expect(req.URL.Query()["offset"]).To(Equal([]string{fmt.Sprint(int64(0))}))
+					Expect(req.URL.Query()["search"]).To(Equal([]string{"search_string"}))
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"Snapshot": [{"git_config_name": "GitConfigName", "git_config_id": "GitConfigID", "collection": {"anyKey": "anyValue"}, "environment": {"anyKey": "anyValue"}, "git_url": "GitURL", "git_branch": "GitBranch", "git_file_path": "GitFilePath", "last_sync_time": "2022-05-27T23:20:50.520Z", "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "href": "Href"}], "limit": 5, "offset": 6, "total_count": 10, "first": {"href": "Href"}, "previous": {"href": "Href"}, "next": {"href": "Href"}, "last": {"href": "Href"}}`)
+				}))
+			})
+			It(`Invoke ListSnapshots successfully`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Invoke operation with nil options model (negative test)
+				result, response, operationErr := appConfigurationService.ListSnapshots(nil)
+				Expect(operationErr).NotTo(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+
+				// Construct an instance of the ListSnapshotsOptions model
+				listSnapshotsOptionsModel := new(appconfigurationv1.ListSnapshotsOptions)
+				listSnapshotsOptionsModel.Sort = core.StringPtr("created_time")
+				listSnapshotsOptionsModel.CollectionID = core.StringPtr("collections")
+				listSnapshotsOptionsModel.EnvironmentID = core.StringPtr("environments")
+				listSnapshotsOptionsModel.Limit = core.Int64Ptr(int64(1))
+				listSnapshotsOptionsModel.Offset = core.Int64Ptr(int64(0))
+				listSnapshotsOptionsModel.Search = core.StringPtr("search_string")
+				listSnapshotsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with valid options model (positive test)
+				result, response, operationErr = appConfigurationService.ListSnapshots(listSnapshotsOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+			})
+			It(`Invoke ListSnapshots with error: Operation request error`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the ListSnapshotsOptions model
+				listSnapshotsOptionsModel := new(appconfigurationv1.ListSnapshotsOptions)
+				listSnapshotsOptionsModel.Sort = core.StringPtr("created_time")
+				listSnapshotsOptionsModel.CollectionID = core.StringPtr("collections")
+				listSnapshotsOptionsModel.EnvironmentID = core.StringPtr("environments")
+				listSnapshotsOptionsModel.Limit = core.Int64Ptr(int64(1))
+				listSnapshotsOptionsModel.Offset = core.Int64Ptr(int64(0))
+				listSnapshotsOptionsModel.Search = core.StringPtr("search_string")
+				listSnapshotsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Invoke operation with empty URL (negative test)
+				err := appConfigurationService.SetServiceURL("")
+				Expect(err).To(BeNil())
+				result, response, operationErr := appConfigurationService.ListSnapshots(listSnapshotsOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke ListSnapshots successfully`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the ListSnapshotsOptions model
+				listSnapshotsOptionsModel := new(appconfigurationv1.ListSnapshotsOptions)
+				listSnapshotsOptionsModel.Sort = core.StringPtr("created_time")
+				listSnapshotsOptionsModel.CollectionID = core.StringPtr("collections")
+				listSnapshotsOptionsModel.EnvironmentID = core.StringPtr("environments")
+				listSnapshotsOptionsModel.Limit = core.Int64Ptr(int64(1))
+				listSnapshotsOptionsModel.Offset = core.Int64Ptr(int64(0))
+				listSnapshotsOptionsModel.Search = core.StringPtr("search_string")
+				listSnapshotsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := appConfigurationService.ListSnapshots(listSnapshotsOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Test pagination helper method on response`, func() {
+			It(`Invoke GetNextOffset successfully`, func() {
+				responseObject := new(appconfigurationv1.SnapshotsList)
+				nextObject := new(appconfigurationv1.PageHrefResponse)
+				nextObject.Href = core.StringPtr("ibm.com?offset=135")
+				responseObject.Next = nextObject
+
+				value, err := responseObject.GetNextOffset()
+				Expect(err).To(BeNil())
+				Expect(value).To(Equal(core.Int64Ptr(int64(135))))
+			})
+			It(`Invoke GetNextOffset without a "Next" property in the response`, func() {
+				responseObject := new(appconfigurationv1.SnapshotsList)
+
+				value, err := responseObject.GetNextOffset()
+				Expect(err).To(BeNil())
+				Expect(value).To(BeNil())
+			})
+			It(`Invoke GetNextOffset without any query params in the "Next" URL`, func() {
+				responseObject := new(appconfigurationv1.SnapshotsList)
+				nextObject := new(appconfigurationv1.PageHrefResponse)
+				nextObject.Href = core.StringPtr("ibm.com")
+				responseObject.Next = nextObject
+
+				value, err := responseObject.GetNextOffset()
+				Expect(err).To(BeNil())
+				Expect(value).To(BeNil())
+			})
+			It(`Invoke GetNextOffset with a non-integer query param in the "Next" URL`, func() {
+				responseObject := new(appconfigurationv1.SnapshotsList)
+				nextObject := new(appconfigurationv1.PageHrefResponse)
+				nextObject.Href = core.StringPtr("ibm.com?offset=tiger")
+				responseObject.Next = nextObject
+
+				value, err := responseObject.GetNextOffset()
+				Expect(err).NotTo(BeNil())
+				Expect(value).To(BeNil())
+			})
+		})
+	})
+	Describe(`CreateGitconfig(createGitconfigOptions *CreateGitconfigOptions) - Operation response error`, func() {
+		createGitconfigPath := "/gitconfigs"
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(createGitconfigPath))
+					Expect(req.Method).To(Equal("POST"))
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(201)
+					fmt.Fprint(res, `} this is not valid json {`)
+				}))
+			})
+			It(`Invoke CreateGitconfig with error: Operation response processing error`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the CreateGitconfigOptions model
+				createGitconfigOptionsModel := new(appconfigurationv1.CreateGitconfigOptions)
+				createGitconfigOptionsModel.GitConfigName = core.StringPtr("boot-strap-configuration")
+				createGitconfigOptionsModel.GitConfigID = core.StringPtr("boot-strap-configuration")
+				createGitconfigOptionsModel.CollectionID = core.StringPtr("web-app-collection")
+				createGitconfigOptionsModel.EnvironmentID = core.StringPtr("dev")
+				createGitconfigOptionsModel.GitURL = core.StringPtr("https://github.com")
+				createGitconfigOptionsModel.GitBranch = core.StringPtr("main")
+				createGitconfigOptionsModel.GitFilePath = core.StringPtr("code/blob/development/README.json")
+				createGitconfigOptionsModel.GitToken = core.StringPtr("61a792eahhGHji223jijb55a6cfdd4d5cde4c8a67esjjhjhHVH")
+				createGitconfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Expect response parsing to fail since we are receiving a text/plain response
+				result, response, operationErr := appConfigurationService.CreateGitconfig(createGitconfigOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				appConfigurationService.EnableRetries(0, 0)
+				result, response, operationErr = appConfigurationService.CreateGitconfig(createGitconfigOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`CreateGitconfig(createGitconfigOptions *CreateGitconfigOptions)`, func() {
+		createGitconfigPath := "/gitconfigs"
+		Context(`Using mock server endpoint with timeout`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(createGitconfigPath))
+					Expect(req.Method).To(Equal("POST"))
+
+					// For gzip-disabled operation, verify Content-Encoding is not set.
+					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+
+					// If there is a body, then make sure we can read it
+					bodyBuf := new(bytes.Buffer)
+					if req.Header.Get("Content-Encoding") == "gzip" {
+						body, err := core.NewGzipDecompressionReader(req.Body)
+						Expect(err).To(BeNil())
+						_, err = bodyBuf.ReadFrom(body)
+						Expect(err).To(BeNil())
+					} else {
+						_, err := bodyBuf.ReadFrom(req.Body)
+						Expect(err).To(BeNil())
+					}
+					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
+
+					// Sleep a short time to support a timeout test
+					time.Sleep(100 * time.Millisecond)
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(201)
+					fmt.Fprintf(res, "%s", `{"git_config_name": "GitConfigName", "git_config_id": "GitConfigID", "collection_id": "CollectionID", "environment_id": "EnvironmentID", "git_url": "GitURL", "git_branch": "GitBranch", "git_file_path": "GitFilePath", "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "href": "Href"}`)
+				}))
+			})
+			It(`Invoke CreateGitconfig successfully with retries`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+				appConfigurationService.EnableRetries(0, 0)
+
+				// Construct an instance of the CreateGitconfigOptions model
+				createGitconfigOptionsModel := new(appconfigurationv1.CreateGitconfigOptions)
+				createGitconfigOptionsModel.GitConfigName = core.StringPtr("boot-strap-configuration")
+				createGitconfigOptionsModel.GitConfigID = core.StringPtr("boot-strap-configuration")
+				createGitconfigOptionsModel.CollectionID = core.StringPtr("web-app-collection")
+				createGitconfigOptionsModel.EnvironmentID = core.StringPtr("dev")
+				createGitconfigOptionsModel.GitURL = core.StringPtr("https://github.com")
+				createGitconfigOptionsModel.GitBranch = core.StringPtr("main")
+				createGitconfigOptionsModel.GitFilePath = core.StringPtr("code/blob/development/README.json")
+				createGitconfigOptionsModel.GitToken = core.StringPtr("61a792eahhGHji223jijb55a6cfdd4d5cde4c8a67esjjhjhHVH")
+				createGitconfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with a Context to test a timeout error
+				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc()
+				_, _, operationErr := appConfigurationService.CreateGitconfigWithContext(ctx, createGitconfigOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+
+				// Disable retries and test again
+				appConfigurationService.DisableRetries()
+				result, response, operationErr := appConfigurationService.CreateGitconfig(createGitconfigOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				_, _, operationErr = appConfigurationService.CreateGitconfigWithContext(ctx, createGitconfigOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(createGitconfigPath))
+					Expect(req.Method).To(Equal("POST"))
+
+					// For gzip-disabled operation, verify Content-Encoding is not set.
+					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+
+					// If there is a body, then make sure we can read it
+					bodyBuf := new(bytes.Buffer)
+					if req.Header.Get("Content-Encoding") == "gzip" {
+						body, err := core.NewGzipDecompressionReader(req.Body)
+						Expect(err).To(BeNil())
+						_, err = bodyBuf.ReadFrom(body)
+						Expect(err).To(BeNil())
+					} else {
+						_, err := bodyBuf.ReadFrom(req.Body)
+						Expect(err).To(BeNil())
+					}
+					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(201)
+					fmt.Fprintf(res, "%s", `{"git_config_name": "GitConfigName", "git_config_id": "GitConfigID", "collection_id": "CollectionID", "environment_id": "EnvironmentID", "git_url": "GitURL", "git_branch": "GitBranch", "git_file_path": "GitFilePath", "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "href": "Href"}`)
+				}))
+			})
+			It(`Invoke CreateGitconfig successfully`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Invoke operation with nil options model (negative test)
+				result, response, operationErr := appConfigurationService.CreateGitconfig(nil)
+				Expect(operationErr).NotTo(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+
+				// Construct an instance of the CreateGitconfigOptions model
+				createGitconfigOptionsModel := new(appconfigurationv1.CreateGitconfigOptions)
+				createGitconfigOptionsModel.GitConfigName = core.StringPtr("boot-strap-configuration")
+				createGitconfigOptionsModel.GitConfigID = core.StringPtr("boot-strap-configuration")
+				createGitconfigOptionsModel.CollectionID = core.StringPtr("web-app-collection")
+				createGitconfigOptionsModel.EnvironmentID = core.StringPtr("dev")
+				createGitconfigOptionsModel.GitURL = core.StringPtr("https://github.com")
+				createGitconfigOptionsModel.GitBranch = core.StringPtr("main")
+				createGitconfigOptionsModel.GitFilePath = core.StringPtr("code/blob/development/README.json")
+				createGitconfigOptionsModel.GitToken = core.StringPtr("61a792eahhGHji223jijb55a6cfdd4d5cde4c8a67esjjhjhHVH")
+				createGitconfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with valid options model (positive test)
+				result, response, operationErr = appConfigurationService.CreateGitconfig(createGitconfigOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+			})
+			It(`Invoke CreateGitconfig with error: Operation request error`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the CreateGitconfigOptions model
+				createGitconfigOptionsModel := new(appconfigurationv1.CreateGitconfigOptions)
+				createGitconfigOptionsModel.GitConfigName = core.StringPtr("boot-strap-configuration")
+				createGitconfigOptionsModel.GitConfigID = core.StringPtr("boot-strap-configuration")
+				createGitconfigOptionsModel.CollectionID = core.StringPtr("web-app-collection")
+				createGitconfigOptionsModel.EnvironmentID = core.StringPtr("dev")
+				createGitconfigOptionsModel.GitURL = core.StringPtr("https://github.com")
+				createGitconfigOptionsModel.GitBranch = core.StringPtr("main")
+				createGitconfigOptionsModel.GitFilePath = core.StringPtr("code/blob/development/README.json")
+				createGitconfigOptionsModel.GitToken = core.StringPtr("61a792eahhGHji223jijb55a6cfdd4d5cde4c8a67esjjhjhHVH")
+				createGitconfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Invoke operation with empty URL (negative test)
+				err := appConfigurationService.SetServiceURL("")
+				Expect(err).To(BeNil())
+				result, response, operationErr := appConfigurationService.CreateGitconfig(createGitconfigOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(201)
+				}))
+			})
+			It(`Invoke CreateGitconfig successfully`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the CreateGitconfigOptions model
+				createGitconfigOptionsModel := new(appconfigurationv1.CreateGitconfigOptions)
+				createGitconfigOptionsModel.GitConfigName = core.StringPtr("boot-strap-configuration")
+				createGitconfigOptionsModel.GitConfigID = core.StringPtr("boot-strap-configuration")
+				createGitconfigOptionsModel.CollectionID = core.StringPtr("web-app-collection")
+				createGitconfigOptionsModel.EnvironmentID = core.StringPtr("dev")
+				createGitconfigOptionsModel.GitURL = core.StringPtr("https://github.com")
+				createGitconfigOptionsModel.GitBranch = core.StringPtr("main")
+				createGitconfigOptionsModel.GitFilePath = core.StringPtr("code/blob/development/README.json")
+				createGitconfigOptionsModel.GitToken = core.StringPtr("61a792eahhGHji223jijb55a6cfdd4d5cde4c8a67esjjhjhHVH")
+				createGitconfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := appConfigurationService.CreateGitconfig(createGitconfigOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`UpdateGitconfig(updateGitconfigOptions *UpdateGitconfigOptions) - Operation response error`, func() {
+		updateGitconfigPath := "/gitconfigs/testString"
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(updateGitconfigPath))
+					Expect(req.Method).To(Equal("PUT"))
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprint(res, `} this is not valid json {`)
+				}))
+			})
+			It(`Invoke UpdateGitconfig with error: Operation response processing error`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the UpdateGitconfigOptions model
+				updateGitconfigOptionsModel := new(appconfigurationv1.UpdateGitconfigOptions)
+				updateGitconfigOptionsModel.GitConfigID = core.StringPtr("testString")
+				updateGitconfigOptionsModel.GitConfigName = core.StringPtr("testString")
+				updateGitconfigOptionsModel.CollectionID = core.StringPtr("testString")
+				updateGitconfigOptionsModel.EnvironmentID = core.StringPtr("testString")
+				updateGitconfigOptionsModel.GitURL = core.StringPtr("testString")
+				updateGitconfigOptionsModel.GitBranch = core.StringPtr("testString")
+				updateGitconfigOptionsModel.GitFilePath = core.StringPtr("testString")
+				updateGitconfigOptionsModel.GitToken = core.StringPtr("testString")
+				updateGitconfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Expect response parsing to fail since we are receiving a text/plain response
+				result, response, operationErr := appConfigurationService.UpdateGitconfig(updateGitconfigOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				appConfigurationService.EnableRetries(0, 0)
+				result, response, operationErr = appConfigurationService.UpdateGitconfig(updateGitconfigOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`UpdateGitconfig(updateGitconfigOptions *UpdateGitconfigOptions)`, func() {
+		updateGitconfigPath := "/gitconfigs/testString"
+		Context(`Using mock server endpoint with timeout`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(updateGitconfigPath))
+					Expect(req.Method).To(Equal("PUT"))
+
+					// For gzip-disabled operation, verify Content-Encoding is not set.
+					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+
+					// If there is a body, then make sure we can read it
+					bodyBuf := new(bytes.Buffer)
+					if req.Header.Get("Content-Encoding") == "gzip" {
+						body, err := core.NewGzipDecompressionReader(req.Body)
+						Expect(err).To(BeNil())
+						_, err = bodyBuf.ReadFrom(body)
+						Expect(err).To(BeNil())
+					} else {
+						_, err := bodyBuf.ReadFrom(req.Body)
+						Expect(err).To(BeNil())
+					}
+					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
+
+					// Sleep a short time to support a timeout test
+					time.Sleep(100 * time.Millisecond)
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"git_config_name": "GitConfigName", "git_config_id": "GitConfigID", "collection_id": "CollectionID", "environment_id": "EnvironmentID", "git_url": "GitURL", "git_branch": "GitBranch", "git_file_path": "GitFilePath", "last_sync_time": "2022-05-27T23:20:50.520Z", "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "href": "Href"}`)
+				}))
+			})
+			It(`Invoke UpdateGitconfig successfully with retries`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+				appConfigurationService.EnableRetries(0, 0)
+
+				// Construct an instance of the UpdateGitconfigOptions model
+				updateGitconfigOptionsModel := new(appconfigurationv1.UpdateGitconfigOptions)
+				updateGitconfigOptionsModel.GitConfigID = core.StringPtr("testString")
+				updateGitconfigOptionsModel.GitConfigName = core.StringPtr("testString")
+				updateGitconfigOptionsModel.CollectionID = core.StringPtr("testString")
+				updateGitconfigOptionsModel.EnvironmentID = core.StringPtr("testString")
+				updateGitconfigOptionsModel.GitURL = core.StringPtr("testString")
+				updateGitconfigOptionsModel.GitBranch = core.StringPtr("testString")
+				updateGitconfigOptionsModel.GitFilePath = core.StringPtr("testString")
+				updateGitconfigOptionsModel.GitToken = core.StringPtr("testString")
+				updateGitconfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with a Context to test a timeout error
+				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc()
+				_, _, operationErr := appConfigurationService.UpdateGitconfigWithContext(ctx, updateGitconfigOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+
+				// Disable retries and test again
+				appConfigurationService.DisableRetries()
+				result, response, operationErr := appConfigurationService.UpdateGitconfig(updateGitconfigOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				_, _, operationErr = appConfigurationService.UpdateGitconfigWithContext(ctx, updateGitconfigOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(updateGitconfigPath))
+					Expect(req.Method).To(Equal("PUT"))
+
+					// For gzip-disabled operation, verify Content-Encoding is not set.
+					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+
+					// If there is a body, then make sure we can read it
+					bodyBuf := new(bytes.Buffer)
+					if req.Header.Get("Content-Encoding") == "gzip" {
+						body, err := core.NewGzipDecompressionReader(req.Body)
+						Expect(err).To(BeNil())
+						_, err = bodyBuf.ReadFrom(body)
+						Expect(err).To(BeNil())
+					} else {
+						_, err := bodyBuf.ReadFrom(req.Body)
+						Expect(err).To(BeNil())
+					}
+					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"git_config_name": "GitConfigName", "git_config_id": "GitConfigID", "collection_id": "CollectionID", "environment_id": "EnvironmentID", "git_url": "GitURL", "git_branch": "GitBranch", "git_file_path": "GitFilePath", "last_sync_time": "2022-05-27T23:20:50.520Z", "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "href": "Href"}`)
+				}))
+			})
+			It(`Invoke UpdateGitconfig successfully`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Invoke operation with nil options model (negative test)
+				result, response, operationErr := appConfigurationService.UpdateGitconfig(nil)
+				Expect(operationErr).NotTo(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+
+				// Construct an instance of the UpdateGitconfigOptions model
+				updateGitconfigOptionsModel := new(appconfigurationv1.UpdateGitconfigOptions)
+				updateGitconfigOptionsModel.GitConfigID = core.StringPtr("testString")
+				updateGitconfigOptionsModel.GitConfigName = core.StringPtr("testString")
+				updateGitconfigOptionsModel.CollectionID = core.StringPtr("testString")
+				updateGitconfigOptionsModel.EnvironmentID = core.StringPtr("testString")
+				updateGitconfigOptionsModel.GitURL = core.StringPtr("testString")
+				updateGitconfigOptionsModel.GitBranch = core.StringPtr("testString")
+				updateGitconfigOptionsModel.GitFilePath = core.StringPtr("testString")
+				updateGitconfigOptionsModel.GitToken = core.StringPtr("testString")
+				updateGitconfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with valid options model (positive test)
+				result, response, operationErr = appConfigurationService.UpdateGitconfig(updateGitconfigOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+			})
+			It(`Invoke UpdateGitconfig with error: Operation validation and request error`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the UpdateGitconfigOptions model
+				updateGitconfigOptionsModel := new(appconfigurationv1.UpdateGitconfigOptions)
+				updateGitconfigOptionsModel.GitConfigID = core.StringPtr("testString")
+				updateGitconfigOptionsModel.GitConfigName = core.StringPtr("testString")
+				updateGitconfigOptionsModel.CollectionID = core.StringPtr("testString")
+				updateGitconfigOptionsModel.EnvironmentID = core.StringPtr("testString")
+				updateGitconfigOptionsModel.GitURL = core.StringPtr("testString")
+				updateGitconfigOptionsModel.GitBranch = core.StringPtr("testString")
+				updateGitconfigOptionsModel.GitFilePath = core.StringPtr("testString")
+				updateGitconfigOptionsModel.GitToken = core.StringPtr("testString")
+				updateGitconfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Invoke operation with empty URL (negative test)
+				err := appConfigurationService.SetServiceURL("")
+				Expect(err).To(BeNil())
+				result, response, operationErr := appConfigurationService.UpdateGitconfig(updateGitconfigOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+				// Construct a second instance of the UpdateGitconfigOptions model with no property values
+				updateGitconfigOptionsModelNew := new(appconfigurationv1.UpdateGitconfigOptions)
+				// Invoke operation with invalid model (negative test)
+				result, response, operationErr = appConfigurationService.UpdateGitconfig(updateGitconfigOptionsModelNew)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke UpdateGitconfig successfully`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the UpdateGitconfigOptions model
+				updateGitconfigOptionsModel := new(appconfigurationv1.UpdateGitconfigOptions)
+				updateGitconfigOptionsModel.GitConfigID = core.StringPtr("testString")
+				updateGitconfigOptionsModel.GitConfigName = core.StringPtr("testString")
+				updateGitconfigOptionsModel.CollectionID = core.StringPtr("testString")
+				updateGitconfigOptionsModel.EnvironmentID = core.StringPtr("testString")
+				updateGitconfigOptionsModel.GitURL = core.StringPtr("testString")
+				updateGitconfigOptionsModel.GitBranch = core.StringPtr("testString")
+				updateGitconfigOptionsModel.GitFilePath = core.StringPtr("testString")
+				updateGitconfigOptionsModel.GitToken = core.StringPtr("testString")
+				updateGitconfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := appConfigurationService.UpdateGitconfig(updateGitconfigOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`GetGitconfig(getGitconfigOptions *GetGitconfigOptions) - Operation response error`, func() {
+		getGitconfigPath := "/gitconfigs/testString"
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(getGitconfigPath))
+					Expect(req.Method).To(Equal("GET"))
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprint(res, `} this is not valid json {`)
+				}))
+			})
+			It(`Invoke GetGitconfig with error: Operation response processing error`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the GetGitconfigOptions model
+				getGitconfigOptionsModel := new(appconfigurationv1.GetGitconfigOptions)
+				getGitconfigOptionsModel.GitConfigID = core.StringPtr("testString")
+				getGitconfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Expect response parsing to fail since we are receiving a text/plain response
+				result, response, operationErr := appConfigurationService.GetGitconfig(getGitconfigOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				appConfigurationService.EnableRetries(0, 0)
+				result, response, operationErr = appConfigurationService.GetGitconfig(getGitconfigOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`GetGitconfig(getGitconfigOptions *GetGitconfigOptions)`, func() {
+		getGitconfigPath := "/gitconfigs/testString"
+		Context(`Using mock server endpoint with timeout`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(getGitconfigPath))
+					Expect(req.Method).To(Equal("GET"))
+
+					// Sleep a short time to support a timeout test
+					time.Sleep(100 * time.Millisecond)
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"git_config_name": "GitConfigName", "git_config_id": "GitConfigID", "collection": {"anyKey": "anyValue"}, "environment": {"anyKey": "anyValue"}, "git_url": "GitURL", "git_branch": "GitBranch", "git_file_path": "GitFilePath", "last_sync_time": "2022-05-27T23:20:50.520Z", "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "href": "Href"}`)
+				}))
+			})
+			It(`Invoke GetGitconfig successfully with retries`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+				appConfigurationService.EnableRetries(0, 0)
+
+				// Construct an instance of the GetGitconfigOptions model
+				getGitconfigOptionsModel := new(appconfigurationv1.GetGitconfigOptions)
+				getGitconfigOptionsModel.GitConfigID = core.StringPtr("testString")
+				getGitconfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with a Context to test a timeout error
+				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc()
+				_, _, operationErr := appConfigurationService.GetGitconfigWithContext(ctx, getGitconfigOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+
+				// Disable retries and test again
+				appConfigurationService.DisableRetries()
+				result, response, operationErr := appConfigurationService.GetGitconfig(getGitconfigOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				_, _, operationErr = appConfigurationService.GetGitconfigWithContext(ctx, getGitconfigOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(getGitconfigPath))
+					Expect(req.Method).To(Equal("GET"))
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"git_config_name": "GitConfigName", "git_config_id": "GitConfigID", "collection": {"anyKey": "anyValue"}, "environment": {"anyKey": "anyValue"}, "git_url": "GitURL", "git_branch": "GitBranch", "git_file_path": "GitFilePath", "last_sync_time": "2022-05-27T23:20:50.520Z", "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "href": "Href"}`)
+				}))
+			})
+			It(`Invoke GetGitconfig successfully`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Invoke operation with nil options model (negative test)
+				result, response, operationErr := appConfigurationService.GetGitconfig(nil)
+				Expect(operationErr).NotTo(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+
+				// Construct an instance of the GetGitconfigOptions model
+				getGitconfigOptionsModel := new(appconfigurationv1.GetGitconfigOptions)
+				getGitconfigOptionsModel.GitConfigID = core.StringPtr("testString")
+				getGitconfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with valid options model (positive test)
+				result, response, operationErr = appConfigurationService.GetGitconfig(getGitconfigOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+			})
+			It(`Invoke GetGitconfig with error: Operation validation and request error`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the GetGitconfigOptions model
+				getGitconfigOptionsModel := new(appconfigurationv1.GetGitconfigOptions)
+				getGitconfigOptionsModel.GitConfigID = core.StringPtr("testString")
+				getGitconfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Invoke operation with empty URL (negative test)
+				err := appConfigurationService.SetServiceURL("")
+				Expect(err).To(BeNil())
+				result, response, operationErr := appConfigurationService.GetGitconfig(getGitconfigOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+				// Construct a second instance of the GetGitconfigOptions model with no property values
+				getGitconfigOptionsModelNew := new(appconfigurationv1.GetGitconfigOptions)
+				// Invoke operation with invalid model (negative test)
+				result, response, operationErr = appConfigurationService.GetGitconfig(getGitconfigOptionsModelNew)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke GetGitconfig successfully`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the GetGitconfigOptions model
+				getGitconfigOptionsModel := new(appconfigurationv1.GetGitconfigOptions)
+				getGitconfigOptionsModel.GitConfigID = core.StringPtr("testString")
+				getGitconfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := appConfigurationService.GetGitconfig(getGitconfigOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`DeleteGitconfig(deleteGitconfigOptions *DeleteGitconfigOptions)`, func() {
+		deleteGitconfigPath := "/gitconfigs/testString"
+		Context(`Using mock server endpoint`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(deleteGitconfigPath))
+					Expect(req.Method).To(Equal("DELETE"))
+
+					res.WriteHeader(204)
+				}))
+			})
+			It(`Invoke DeleteGitconfig successfully`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Invoke operation with nil options model (negative test)
+				response, operationErr := appConfigurationService.DeleteGitconfig(nil)
+				Expect(operationErr).NotTo(BeNil())
+				Expect(response).To(BeNil())
+
+				// Construct an instance of the DeleteGitconfigOptions model
+				deleteGitconfigOptionsModel := new(appconfigurationv1.DeleteGitconfigOptions)
+				deleteGitconfigOptionsModel.GitConfigID = core.StringPtr("testString")
+				deleteGitconfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with valid options model (positive test)
+				response, operationErr = appConfigurationService.DeleteGitconfig(deleteGitconfigOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+			})
+			It(`Invoke DeleteGitconfig with error: Operation validation and request error`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the DeleteGitconfigOptions model
+				deleteGitconfigOptionsModel := new(appconfigurationv1.DeleteGitconfigOptions)
+				deleteGitconfigOptionsModel.GitConfigID = core.StringPtr("testString")
+				deleteGitconfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Invoke operation with empty URL (negative test)
+				err := appConfigurationService.SetServiceURL("")
+				Expect(err).To(BeNil())
+				response, operationErr := appConfigurationService.DeleteGitconfig(deleteGitconfigOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
+				Expect(response).To(BeNil())
+				// Construct a second instance of the DeleteGitconfigOptions model with no property values
+				deleteGitconfigOptionsModelNew := new(appconfigurationv1.DeleteGitconfigOptions)
+				// Invoke operation with invalid model (negative test)
+				response, operationErr = appConfigurationService.DeleteGitconfig(deleteGitconfigOptionsModelNew)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`PromoteGitconfig(promoteGitconfigOptions *PromoteGitconfigOptions) - Operation response error`, func() {
+		promoteGitconfigPath := "/gitconfigs/testString/promote"
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(promoteGitconfigPath))
+					Expect(req.Method).To(Equal("PUT"))
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprint(res, `} this is not valid json {`)
+				}))
+			})
+			It(`Invoke PromoteGitconfig with error: Operation response processing error`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the PromoteGitconfigOptions model
+				promoteGitconfigOptionsModel := new(appconfigurationv1.PromoteGitconfigOptions)
+				promoteGitconfigOptionsModel.GitConfigID = core.StringPtr("testString")
+				promoteGitconfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Expect response parsing to fail since we are receiving a text/plain response
+				result, response, operationErr := appConfigurationService.PromoteGitconfig(promoteGitconfigOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				appConfigurationService.EnableRetries(0, 0)
+				result, response, operationErr = appConfigurationService.PromoteGitconfig(promoteGitconfigOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`PromoteGitconfig(promoteGitconfigOptions *PromoteGitconfigOptions)`, func() {
+		promoteGitconfigPath := "/gitconfigs/testString/promote"
+		Context(`Using mock server endpoint with timeout`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(promoteGitconfigPath))
+					Expect(req.Method).To(Equal("PUT"))
+
+					// Sleep a short time to support a timeout test
+					time.Sleep(100 * time.Millisecond)
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"git_commit_id": "GitCommitID", "message": "Message", "last_sync_time": "2022-05-27T23:20:50.520Z"}`)
+				}))
+			})
+			It(`Invoke PromoteGitconfig successfully with retries`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+				appConfigurationService.EnableRetries(0, 0)
+
+				// Construct an instance of the PromoteGitconfigOptions model
+				promoteGitconfigOptionsModel := new(appconfigurationv1.PromoteGitconfigOptions)
+				promoteGitconfigOptionsModel.GitConfigID = core.StringPtr("testString")
+				promoteGitconfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with a Context to test a timeout error
+				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc()
+				_, _, operationErr := appConfigurationService.PromoteGitconfigWithContext(ctx, promoteGitconfigOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+
+				// Disable retries and test again
+				appConfigurationService.DisableRetries()
+				result, response, operationErr := appConfigurationService.PromoteGitconfig(promoteGitconfigOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				_, _, operationErr = appConfigurationService.PromoteGitconfigWithContext(ctx, promoteGitconfigOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(promoteGitconfigPath))
+					Expect(req.Method).To(Equal("PUT"))
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"git_commit_id": "GitCommitID", "message": "Message", "last_sync_time": "2022-05-27T23:20:50.520Z"}`)
+				}))
+			})
+			It(`Invoke PromoteGitconfig successfully`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Invoke operation with nil options model (negative test)
+				result, response, operationErr := appConfigurationService.PromoteGitconfig(nil)
+				Expect(operationErr).NotTo(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+
+				// Construct an instance of the PromoteGitconfigOptions model
+				promoteGitconfigOptionsModel := new(appconfigurationv1.PromoteGitconfigOptions)
+				promoteGitconfigOptionsModel.GitConfigID = core.StringPtr("testString")
+				promoteGitconfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with valid options model (positive test)
+				result, response, operationErr = appConfigurationService.PromoteGitconfig(promoteGitconfigOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+			})
+			It(`Invoke PromoteGitconfig with error: Operation validation and request error`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the PromoteGitconfigOptions model
+				promoteGitconfigOptionsModel := new(appconfigurationv1.PromoteGitconfigOptions)
+				promoteGitconfigOptionsModel.GitConfigID = core.StringPtr("testString")
+				promoteGitconfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Invoke operation with empty URL (negative test)
+				err := appConfigurationService.SetServiceURL("")
+				Expect(err).To(BeNil())
+				result, response, operationErr := appConfigurationService.PromoteGitconfig(promoteGitconfigOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+				// Construct a second instance of the PromoteGitconfigOptions model with no property values
+				promoteGitconfigOptionsModelNew := new(appconfigurationv1.PromoteGitconfigOptions)
+				// Invoke operation with invalid model (negative test)
+				result, response, operationErr = appConfigurationService.PromoteGitconfig(promoteGitconfigOptionsModelNew)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke PromoteGitconfig successfully`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the PromoteGitconfigOptions model
+				promoteGitconfigOptionsModel := new(appconfigurationv1.PromoteGitconfigOptions)
+				promoteGitconfigOptionsModel.GitConfigID = core.StringPtr("testString")
+				promoteGitconfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := appConfigurationService.PromoteGitconfig(promoteGitconfigOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
 	Describe(`Model constructor tests`, func() {
 		Context(`Using a service client instance`, func() {
 			appConfigurationService, _ := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
@@ -7272,6 +8603,29 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(createFeatureOptionsModel.Collections).To(Equal([]appconfigurationv1.CollectionRef{*collectionRefModel}))
 				Expect(createFeatureOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
+			It(`Invoke NewCreateGitconfigOptions successfully`, func() {
+				// Construct an instance of the CreateGitconfigOptions model
+				createGitconfigOptionsModel := appConfigurationService.NewCreateGitconfigOptions()
+				createGitconfigOptionsModel.SetGitConfigName("boot-strap-configuration")
+				createGitconfigOptionsModel.SetGitConfigID("boot-strap-configuration")
+				createGitconfigOptionsModel.SetCollectionID("web-app-collection")
+				createGitconfigOptionsModel.SetEnvironmentID("dev")
+				createGitconfigOptionsModel.SetGitURL("https://github.com")
+				createGitconfigOptionsModel.SetGitBranch("main")
+				createGitconfigOptionsModel.SetGitFilePath("code/blob/development/README.json")
+				createGitconfigOptionsModel.SetGitToken("61a792eahhGHji223jijb55a6cfdd4d5cde4c8a67esjjhjhHVH")
+				createGitconfigOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
+				Expect(createGitconfigOptionsModel).ToNot(BeNil())
+				Expect(createGitconfigOptionsModel.GitConfigName).To(Equal(core.StringPtr("boot-strap-configuration")))
+				Expect(createGitconfigOptionsModel.GitConfigID).To(Equal(core.StringPtr("boot-strap-configuration")))
+				Expect(createGitconfigOptionsModel.CollectionID).To(Equal(core.StringPtr("web-app-collection")))
+				Expect(createGitconfigOptionsModel.EnvironmentID).To(Equal(core.StringPtr("dev")))
+				Expect(createGitconfigOptionsModel.GitURL).To(Equal(core.StringPtr("https://github.com")))
+				Expect(createGitconfigOptionsModel.GitBranch).To(Equal(core.StringPtr("main")))
+				Expect(createGitconfigOptionsModel.GitFilePath).To(Equal(core.StringPtr("code/blob/development/README.json")))
+				Expect(createGitconfigOptionsModel.GitToken).To(Equal(core.StringPtr("61a792eahhGHji223jijb55a6cfdd4d5cde4c8a67esjjhjhHVH")))
+				Expect(createGitconfigOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
+			})
 			It(`Invoke NewCreatePropertyOptions successfully`, func() {
 				// Construct an instance of the TargetSegments model
 				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
@@ -7386,6 +8740,16 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(deleteFeatureOptionsModel.FeatureID).To(Equal(core.StringPtr("testString")))
 				Expect(deleteFeatureOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
+			It(`Invoke NewDeleteGitconfigOptions successfully`, func() {
+				// Construct an instance of the DeleteGitconfigOptions model
+				gitConfigID := "testString"
+				deleteGitconfigOptionsModel := appConfigurationService.NewDeleteGitconfigOptions(gitConfigID)
+				deleteGitconfigOptionsModel.SetGitConfigID("testString")
+				deleteGitconfigOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
+				Expect(deleteGitconfigOptionsModel).ToNot(BeNil())
+				Expect(deleteGitconfigOptionsModel.GitConfigID).To(Equal(core.StringPtr("testString")))
+				Expect(deleteGitconfigOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
+			})
 			It(`Invoke NewDeletePropertyOptions successfully`, func() {
 				// Construct an instance of the DeletePropertyOptions model
 				environmentID := "testString"
@@ -7437,7 +8801,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				rules := []appconfigurationv1.TargetSegments{}
 				value := core.StringPtr("testString")
 				order := int64(38)
-				_model, err := appConfigurationService.NewFeatureSegmentRule(rules, value, order)
+				rolloutPercentage := int64(100)
+				_model, err := appConfigurationService.NewFeatureSegmentRule(rules, value, order, &rolloutPercentage)
 				Expect(_model).ToNot(BeNil())
 				Expect(err).To(BeNil())
 			})
@@ -7483,6 +8848,16 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(getFeatureOptionsModel.FeatureID).To(Equal(core.StringPtr("testString")))
 				Expect(getFeatureOptionsModel.Include).To(Equal(core.StringPtr("collections")))
 				Expect(getFeatureOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
+			})
+			It(`Invoke NewGetGitconfigOptions successfully`, func() {
+				// Construct an instance of the GetGitconfigOptions model
+				gitConfigID := "testString"
+				getGitconfigOptionsModel := appConfigurationService.NewGetGitconfigOptions(gitConfigID)
+				getGitconfigOptionsModel.SetGitConfigID("testString")
+				getGitconfigOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
+				Expect(getGitconfigOptionsModel).ToNot(BeNil())
+				Expect(getGitconfigOptionsModel.GitConfigID).To(Equal(core.StringPtr("testString")))
+				Expect(getGitconfigOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewGetPropertyOptions successfully`, func() {
 				// Construct an instance of the GetPropertyOptions model
@@ -7633,6 +9008,35 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(listSegmentsOptionsModel.Offset).To(Equal(core.Int64Ptr(int64(0))))
 				Expect(listSegmentsOptionsModel.Search).To(Equal(core.StringPtr("test tag")))
 				Expect(listSegmentsOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
+			})
+			It(`Invoke NewListSnapshotsOptions successfully`, func() {
+				// Construct an instance of the ListSnapshotsOptions model
+				listSnapshotsOptionsModel := appConfigurationService.NewListSnapshotsOptions()
+				listSnapshotsOptionsModel.SetSort("created_time")
+				listSnapshotsOptionsModel.SetCollectionID("collections")
+				listSnapshotsOptionsModel.SetEnvironmentID("environments")
+				listSnapshotsOptionsModel.SetLimit(int64(1))
+				listSnapshotsOptionsModel.SetOffset(int64(0))
+				listSnapshotsOptionsModel.SetSearch("search_string")
+				listSnapshotsOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
+				Expect(listSnapshotsOptionsModel).ToNot(BeNil())
+				Expect(listSnapshotsOptionsModel.Sort).To(Equal(core.StringPtr("created_time")))
+				Expect(listSnapshotsOptionsModel.CollectionID).To(Equal(core.StringPtr("collections")))
+				Expect(listSnapshotsOptionsModel.EnvironmentID).To(Equal(core.StringPtr("environments")))
+				Expect(listSnapshotsOptionsModel.Limit).To(Equal(core.Int64Ptr(int64(1))))
+				Expect(listSnapshotsOptionsModel.Offset).To(Equal(core.Int64Ptr(int64(0))))
+				Expect(listSnapshotsOptionsModel.Search).To(Equal(core.StringPtr("search_string")))
+				Expect(listSnapshotsOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
+			})
+			It(`Invoke NewPromoteGitconfigOptions successfully`, func() {
+				// Construct an instance of the PromoteGitconfigOptions model
+				gitConfigID := "testString"
+				promoteGitconfigOptionsModel := appConfigurationService.NewPromoteGitconfigOptions(gitConfigID)
+				promoteGitconfigOptionsModel.SetGitConfigID("testString")
+				promoteGitconfigOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
+				Expect(promoteGitconfigOptionsModel).ToNot(BeNil())
+				Expect(promoteGitconfigOptionsModel.GitConfigID).To(Equal(core.StringPtr("testString")))
+				Expect(promoteGitconfigOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewProperty successfully`, func() {
 				name := "testString"
@@ -7828,6 +9232,30 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(updateFeatureValuesOptionsModel.RolloutPercentage).To(Equal(core.Int64Ptr(int64(100))))
 				Expect(updateFeatureValuesOptionsModel.SegmentRules).To(Equal([]appconfigurationv1.FeatureSegmentRule{*featureSegmentRuleModel}))
 				Expect(updateFeatureValuesOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
+			})
+			It(`Invoke NewUpdateGitconfigOptions successfully`, func() {
+				// Construct an instance of the UpdateGitconfigOptions model
+				gitConfigID := "testString"
+				updateGitconfigOptionsModel := appConfigurationService.NewUpdateGitconfigOptions(gitConfigID)
+				updateGitconfigOptionsModel.SetGitConfigID("testString")
+				updateGitconfigOptionsModel.SetGitConfigName("testString")
+				updateGitconfigOptionsModel.SetCollectionID("testString")
+				updateGitconfigOptionsModel.SetEnvironmentID("testString")
+				updateGitconfigOptionsModel.SetGitURL("testString")
+				updateGitconfigOptionsModel.SetGitBranch("testString")
+				updateGitconfigOptionsModel.SetGitFilePath("testString")
+				updateGitconfigOptionsModel.SetGitToken("testString")
+				updateGitconfigOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
+				Expect(updateGitconfigOptionsModel).ToNot(BeNil())
+				Expect(updateGitconfigOptionsModel.GitConfigID).To(Equal(core.StringPtr("testString")))
+				Expect(updateGitconfigOptionsModel.GitConfigName).To(Equal(core.StringPtr("testString")))
+				Expect(updateGitconfigOptionsModel.CollectionID).To(Equal(core.StringPtr("testString")))
+				Expect(updateGitconfigOptionsModel.EnvironmentID).To(Equal(core.StringPtr("testString")))
+				Expect(updateGitconfigOptionsModel.GitURL).To(Equal(core.StringPtr("testString")))
+				Expect(updateGitconfigOptionsModel.GitBranch).To(Equal(core.StringPtr("testString")))
+				Expect(updateGitconfigOptionsModel.GitFilePath).To(Equal(core.StringPtr("testString")))
+				Expect(updateGitconfigOptionsModel.GitToken).To(Equal(core.StringPtr("testString")))
+				Expect(updateGitconfigOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewUpdatePropertyOptions successfully`, func() {
 				// Construct an instance of the TargetSegments model
