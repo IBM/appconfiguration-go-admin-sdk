@@ -190,7 +190,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// TODO: Add check for expand query parameter
 					Expect(req.URL.Query()["sort"]).To(Equal([]string{"created_time"}))
 					Expect(req.URL.Query()["tags"]).To(Equal([]string{"version 1.1, pre-release"}))
-					Expect(req.URL.Query()["limit"]).To(Equal([]string{fmt.Sprint(int64(1))}))
+					Expect(req.URL.Query()["limit"]).To(Equal([]string{fmt.Sprint(int64(10))}))
 					Expect(req.URL.Query()["offset"]).To(Equal([]string{fmt.Sprint(int64(0))}))
 					Expect(req.URL.Query()["search"]).To(Equal([]string{"test tag"}))
 					res.Header().Set("Content-type", "application/json")
@@ -212,7 +212,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				listEnvironmentsOptionsModel.Sort = core.StringPtr("created_time")
 				listEnvironmentsOptionsModel.Tags = core.StringPtr("version 1.1, pre-release")
 				listEnvironmentsOptionsModel.Include = []string{"features"}
-				listEnvironmentsOptionsModel.Limit = core.Int64Ptr(int64(1))
+				listEnvironmentsOptionsModel.Limit = core.Int64Ptr(int64(10))
 				listEnvironmentsOptionsModel.Offset = core.Int64Ptr(int64(0))
 				listEnvironmentsOptionsModel.Search = core.StringPtr("test tag")
 				listEnvironmentsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -248,7 +248,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// TODO: Add check for expand query parameter
 					Expect(req.URL.Query()["sort"]).To(Equal([]string{"created_time"}))
 					Expect(req.URL.Query()["tags"]).To(Equal([]string{"version 1.1, pre-release"}))
-					Expect(req.URL.Query()["limit"]).To(Equal([]string{fmt.Sprint(int64(1))}))
+					Expect(req.URL.Query()["limit"]).To(Equal([]string{fmt.Sprint(int64(10))}))
 					Expect(req.URL.Query()["offset"]).To(Equal([]string{fmt.Sprint(int64(0))}))
 					Expect(req.URL.Query()["search"]).To(Equal([]string{"test tag"}))
 					// Sleep a short time to support a timeout test
@@ -257,7 +257,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"environments": [{"name": "Name", "environment_id": "EnvironmentID", "description": "Description", "tags": "Tags", "color_code": "#FDD13A", "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "href": "Href", "features": [{"feature_id": "FeatureID", "name": "Name"}], "properties": [{"property_id": "PropertyID", "name": "Name"}]}], "limit": 5, "offset": 6, "total_count": 10, "first": {"href": "Href"}, "previous": {"href": "Href"}, "next": {"href": "Href"}, "last": {"href": "Href"}}`)
+					fmt.Fprintf(res, "%s", `{"environments": [{"name": "Name", "environment_id": "EnvironmentID", "description": "Description", "tags": "Tags", "color_code": "#FDD13A", "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "href": "Href", "features": [{"feature_id": "FeatureID", "name": "Name"}], "properties": [{"property_id": "PropertyID", "name": "Name"}], "snapshots": [{"git_config_id": "GitConfigID", "name": "Name"}]}], "limit": 5, "offset": 6, "total_count": 10, "first": {"href": "Href"}, "previous": {"href": "Href"}, "next": {"href": "Href"}, "last": {"href": "Href"}}`)
 				}))
 			})
 			It(`Invoke ListEnvironments successfully with retries`, func() {
@@ -275,7 +275,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				listEnvironmentsOptionsModel.Sort = core.StringPtr("created_time")
 				listEnvironmentsOptionsModel.Tags = core.StringPtr("version 1.1, pre-release")
 				listEnvironmentsOptionsModel.Include = []string{"features"}
-				listEnvironmentsOptionsModel.Limit = core.Int64Ptr(int64(1))
+				listEnvironmentsOptionsModel.Limit = core.Int64Ptr(int64(10))
 				listEnvironmentsOptionsModel.Offset = core.Int64Ptr(int64(0))
 				listEnvironmentsOptionsModel.Search = core.StringPtr("test tag")
 				listEnvironmentsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -317,13 +317,13 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// TODO: Add check for expand query parameter
 					Expect(req.URL.Query()["sort"]).To(Equal([]string{"created_time"}))
 					Expect(req.URL.Query()["tags"]).To(Equal([]string{"version 1.1, pre-release"}))
-					Expect(req.URL.Query()["limit"]).To(Equal([]string{fmt.Sprint(int64(1))}))
+					Expect(req.URL.Query()["limit"]).To(Equal([]string{fmt.Sprint(int64(10))}))
 					Expect(req.URL.Query()["offset"]).To(Equal([]string{fmt.Sprint(int64(0))}))
 					Expect(req.URL.Query()["search"]).To(Equal([]string{"test tag"}))
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"environments": [{"name": "Name", "environment_id": "EnvironmentID", "description": "Description", "tags": "Tags", "color_code": "#FDD13A", "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "href": "Href", "features": [{"feature_id": "FeatureID", "name": "Name"}], "properties": [{"property_id": "PropertyID", "name": "Name"}]}], "limit": 5, "offset": 6, "total_count": 10, "first": {"href": "Href"}, "previous": {"href": "Href"}, "next": {"href": "Href"}, "last": {"href": "Href"}}`)
+					fmt.Fprintf(res, "%s", `{"environments": [{"name": "Name", "environment_id": "EnvironmentID", "description": "Description", "tags": "Tags", "color_code": "#FDD13A", "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "href": "Href", "features": [{"feature_id": "FeatureID", "name": "Name"}], "properties": [{"property_id": "PropertyID", "name": "Name"}], "snapshots": [{"git_config_id": "GitConfigID", "name": "Name"}]}], "limit": 5, "offset": 6, "total_count": 10, "first": {"href": "Href"}, "previous": {"href": "Href"}, "next": {"href": "Href"}, "last": {"href": "Href"}}`)
 				}))
 			})
 			It(`Invoke ListEnvironments successfully`, func() {
@@ -346,7 +346,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				listEnvironmentsOptionsModel.Sort = core.StringPtr("created_time")
 				listEnvironmentsOptionsModel.Tags = core.StringPtr("version 1.1, pre-release")
 				listEnvironmentsOptionsModel.Include = []string{"features"}
-				listEnvironmentsOptionsModel.Limit = core.Int64Ptr(int64(1))
+				listEnvironmentsOptionsModel.Limit = core.Int64Ptr(int64(10))
 				listEnvironmentsOptionsModel.Offset = core.Int64Ptr(int64(0))
 				listEnvironmentsOptionsModel.Search = core.StringPtr("test tag")
 				listEnvironmentsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -372,7 +372,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				listEnvironmentsOptionsModel.Sort = core.StringPtr("created_time")
 				listEnvironmentsOptionsModel.Tags = core.StringPtr("version 1.1, pre-release")
 				listEnvironmentsOptionsModel.Include = []string{"features"}
-				listEnvironmentsOptionsModel.Limit = core.Int64Ptr(int64(1))
+				listEnvironmentsOptionsModel.Limit = core.Int64Ptr(int64(10))
 				listEnvironmentsOptionsModel.Offset = core.Int64Ptr(int64(0))
 				listEnvironmentsOptionsModel.Search = core.StringPtr("test tag")
 				listEnvironmentsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -412,7 +412,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				listEnvironmentsOptionsModel.Sort = core.StringPtr("created_time")
 				listEnvironmentsOptionsModel.Tags = core.StringPtr("version 1.1, pre-release")
 				listEnvironmentsOptionsModel.Include = []string{"features"}
-				listEnvironmentsOptionsModel.Limit = core.Int64Ptr(int64(1))
+				listEnvironmentsOptionsModel.Limit = core.Int64Ptr(int64(10))
 				listEnvironmentsOptionsModel.Offset = core.Int64Ptr(int64(0))
 				listEnvironmentsOptionsModel.Search = core.StringPtr("test tag")
 				listEnvironmentsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -466,6 +466,86 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				value, err := responseObject.GetNextOffset()
 				Expect(err).NotTo(BeNil())
 				Expect(value).To(BeNil())
+			})
+		})
+		Context(`Using mock server endpoint - paginated response`, func() {
+			BeforeEach(func() {
+				var requestNumber int = 0
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(listEnvironmentsPath))
+					Expect(req.Method).To(Equal("GET"))
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					requestNumber++
+					if requestNumber == 1 {
+						fmt.Fprintf(res, "%s", `{"next":{"href":"https://myhost.com/somePath?offset=1"},"environments":[{"name":"Name","environment_id":"EnvironmentID","description":"Description","tags":"Tags","color_code":"#FDD13A","created_time":"2021-05-12T23:20:50.520Z","updated_time":"2021-05-12T23:20:50.520Z","href":"Href","features":[{"feature_id":"FeatureID","name":"Name"}],"properties":[{"property_id":"PropertyID","name":"Name"}],"snapshots":[{"git_config_id":"GitConfigID","name":"Name"}]}],"total_count":2,"limit":1}`)
+					} else if requestNumber == 2 {
+						fmt.Fprintf(res, "%s", `{"environments":[{"name":"Name","environment_id":"EnvironmentID","description":"Description","tags":"Tags","color_code":"#FDD13A","created_time":"2021-05-12T23:20:50.520Z","updated_time":"2021-05-12T23:20:50.520Z","href":"Href","features":[{"feature_id":"FeatureID","name":"Name"}],"properties":[{"property_id":"PropertyID","name":"Name"}],"snapshots":[{"git_config_id":"GitConfigID","name":"Name"}]}],"total_count":2,"limit":1}`)
+					} else {
+						res.WriteHeader(400)
+					}
+				}))
+			})
+			It(`Use EnvironmentsPager.GetNext successfully`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				listEnvironmentsOptionsModel := &appconfigurationv1.ListEnvironmentsOptions{
+					Expand:  core.BoolPtr(true),
+					Sort:    core.StringPtr("created_time"),
+					Tags:    core.StringPtr("version 1.1, pre-release"),
+					Include: []string{"features"},
+					Limit:   core.Int64Ptr(int64(10)),
+					Search:  core.StringPtr("test tag"),
+				}
+
+				pager, err := appConfigurationService.NewEnvironmentsPager(listEnvironmentsOptionsModel)
+				Expect(err).To(BeNil())
+				Expect(pager).ToNot(BeNil())
+
+				var allResults []appconfigurationv1.Environment
+				for pager.HasNext() {
+					nextPage, err := pager.GetNext()
+					Expect(err).To(BeNil())
+					Expect(nextPage).ToNot(BeNil())
+					allResults = append(allResults, nextPage...)
+				}
+				Expect(len(allResults)).To(Equal(2))
+			})
+			It(`Use EnvironmentsPager.GetAll successfully`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				listEnvironmentsOptionsModel := &appconfigurationv1.ListEnvironmentsOptions{
+					Expand:  core.BoolPtr(true),
+					Sort:    core.StringPtr("created_time"),
+					Tags:    core.StringPtr("version 1.1, pre-release"),
+					Include: []string{"features"},
+					Limit:   core.Int64Ptr(int64(10)),
+					Search:  core.StringPtr("test tag"),
+				}
+
+				pager, err := appConfigurationService.NewEnvironmentsPager(listEnvironmentsOptionsModel)
+				Expect(err).To(BeNil())
+				Expect(pager).ToNot(BeNil())
+
+				allResults, err := pager.GetAll()
+				Expect(err).To(BeNil())
+				Expect(allResults).ToNot(BeNil())
+				Expect(len(allResults)).To(Equal(2))
 			})
 		})
 	})
@@ -551,7 +631,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
-					fmt.Fprintf(res, "%s", `{"name": "Name", "environment_id": "EnvironmentID", "description": "Description", "tags": "Tags", "color_code": "#FDD13A", "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "href": "Href", "features": [{"feature_id": "FeatureID", "name": "Name"}], "properties": [{"property_id": "PropertyID", "name": "Name"}]}`)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "environment_id": "EnvironmentID", "description": "Description", "tags": "Tags", "color_code": "#FDD13A", "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "href": "Href", "features": [{"feature_id": "FeatureID", "name": "Name"}], "properties": [{"property_id": "PropertyID", "name": "Name"}], "snapshots": [{"git_config_id": "GitConfigID", "name": "Name"}]}`)
 				}))
 			})
 			It(`Invoke CreateEnvironment successfully with retries`, func() {
@@ -625,7 +705,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
-					fmt.Fprintf(res, "%s", `{"name": "Name", "environment_id": "EnvironmentID", "description": "Description", "tags": "Tags", "color_code": "#FDD13A", "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "href": "Href", "features": [{"feature_id": "FeatureID", "name": "Name"}], "properties": [{"property_id": "PropertyID", "name": "Name"}]}`)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "environment_id": "EnvironmentID", "description": "Description", "tags": "Tags", "color_code": "#FDD13A", "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "href": "Href", "features": [{"feature_id": "FeatureID", "name": "Name"}], "properties": [{"property_id": "PropertyID", "name": "Name"}], "snapshots": [{"git_config_id": "GitConfigID", "name": "Name"}]}`)
 				}))
 			})
 			It(`Invoke CreateEnvironment successfully`, func() {
@@ -815,7 +895,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"name": "Name", "environment_id": "EnvironmentID", "description": "Description", "tags": "Tags", "color_code": "#FDD13A", "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "href": "Href", "features": [{"feature_id": "FeatureID", "name": "Name"}], "properties": [{"property_id": "PropertyID", "name": "Name"}]}`)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "environment_id": "EnvironmentID", "description": "Description", "tags": "Tags", "color_code": "#FDD13A", "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "href": "Href", "features": [{"feature_id": "FeatureID", "name": "Name"}], "properties": [{"property_id": "PropertyID", "name": "Name"}], "snapshots": [{"git_config_id": "GitConfigID", "name": "Name"}]}`)
 				}))
 			})
 			It(`Invoke UpdateEnvironment successfully with retries`, func() {
@@ -889,7 +969,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"name": "Name", "environment_id": "EnvironmentID", "description": "Description", "tags": "Tags", "color_code": "#FDD13A", "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "href": "Href", "features": [{"feature_id": "FeatureID", "name": "Name"}], "properties": [{"property_id": "PropertyID", "name": "Name"}]}`)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "environment_id": "EnvironmentID", "description": "Description", "tags": "Tags", "color_code": "#FDD13A", "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "href": "Href", "features": [{"feature_id": "FeatureID", "name": "Name"}], "properties": [{"property_id": "PropertyID", "name": "Name"}], "snapshots": [{"git_config_id": "GitConfigID", "name": "Name"}]}`)
 				}))
 			})
 			It(`Invoke UpdateEnvironment successfully`, func() {
@@ -1063,7 +1143,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"name": "Name", "environment_id": "EnvironmentID", "description": "Description", "tags": "Tags", "color_code": "#FDD13A", "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "href": "Href", "features": [{"feature_id": "FeatureID", "name": "Name"}], "properties": [{"property_id": "PropertyID", "name": "Name"}]}`)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "environment_id": "EnvironmentID", "description": "Description", "tags": "Tags", "color_code": "#FDD13A", "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "href": "Href", "features": [{"feature_id": "FeatureID", "name": "Name"}], "properties": [{"property_id": "PropertyID", "name": "Name"}], "snapshots": [{"git_config_id": "GitConfigID", "name": "Name"}]}`)
 				}))
 			})
 			It(`Invoke GetEnvironment successfully with retries`, func() {
@@ -1120,7 +1200,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"name": "Name", "environment_id": "EnvironmentID", "description": "Description", "tags": "Tags", "color_code": "#FDD13A", "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "href": "Href", "features": [{"feature_id": "FeatureID", "name": "Name"}], "properties": [{"property_id": "PropertyID", "name": "Name"}]}`)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "environment_id": "EnvironmentID", "description": "Description", "tags": "Tags", "color_code": "#FDD13A", "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "href": "Href", "features": [{"feature_id": "FeatureID", "name": "Name"}], "properties": [{"property_id": "PropertyID", "name": "Name"}], "snapshots": [{"git_config_id": "GitConfigID", "name": "Name"}]}`)
 				}))
 			})
 			It(`Invoke GetEnvironment successfully`, func() {
@@ -1303,7 +1383,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// TODO: Add check for expand query parameter
 					Expect(req.URL.Query()["sort"]).To(Equal([]string{"created_time"}))
 					Expect(req.URL.Query()["tags"]).To(Equal([]string{"version 1.1, pre-release"}))
-					Expect(req.URL.Query()["limit"]).To(Equal([]string{fmt.Sprint(int64(1))}))
+					Expect(req.URL.Query()["limit"]).To(Equal([]string{fmt.Sprint(int64(10))}))
 					Expect(req.URL.Query()["offset"]).To(Equal([]string{fmt.Sprint(int64(0))}))
 					Expect(req.URL.Query()["search"]).To(Equal([]string{"test tag"}))
 					res.Header().Set("Content-type", "application/json")
@@ -1327,7 +1407,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				listCollectionsOptionsModel.Features = []string{"testString"}
 				listCollectionsOptionsModel.Properties = []string{"testString"}
 				listCollectionsOptionsModel.Include = []string{"features"}
-				listCollectionsOptionsModel.Limit = core.Int64Ptr(int64(1))
+				listCollectionsOptionsModel.Limit = core.Int64Ptr(int64(10))
 				listCollectionsOptionsModel.Offset = core.Int64Ptr(int64(0))
 				listCollectionsOptionsModel.Search = core.StringPtr("test tag")
 				listCollectionsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -1363,7 +1443,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// TODO: Add check for expand query parameter
 					Expect(req.URL.Query()["sort"]).To(Equal([]string{"created_time"}))
 					Expect(req.URL.Query()["tags"]).To(Equal([]string{"version 1.1, pre-release"}))
-					Expect(req.URL.Query()["limit"]).To(Equal([]string{fmt.Sprint(int64(1))}))
+					Expect(req.URL.Query()["limit"]).To(Equal([]string{fmt.Sprint(int64(10))}))
 					Expect(req.URL.Query()["offset"]).To(Equal([]string{fmt.Sprint(int64(0))}))
 					Expect(req.URL.Query()["search"]).To(Equal([]string{"test tag"}))
 					// Sleep a short time to support a timeout test
@@ -1372,7 +1452,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"collections": [{"name": "Name", "collection_id": "CollectionID", "description": "Description", "tags": "Tags", "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "href": "Href", "features": [{"feature_id": "FeatureID", "name": "Name"}], "properties": [{"property_id": "PropertyID", "name": "Name"}], "features_count": 13, "properties_count": 15}], "limit": 5, "offset": 6, "total_count": 10, "first": {"href": "Href"}, "previous": {"href": "Href"}, "next": {"href": "Href"}, "last": {"href": "Href"}}`)
+					fmt.Fprintf(res, "%s", `{"collections": [{"name": "Name", "collection_id": "CollectionID", "description": "Description", "tags": "Tags", "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "href": "Href", "features": [{"feature_id": "FeatureID", "name": "Name"}], "properties": [{"property_id": "PropertyID", "name": "Name"}], "snapshots": [{"git_config_id": "GitConfigID", "name": "Name"}], "features_count": 13, "properties_count": 15, "snapshot_count": 13}], "limit": 5, "offset": 6, "total_count": 10, "first": {"href": "Href"}, "previous": {"href": "Href"}, "next": {"href": "Href"}, "last": {"href": "Href"}}`)
 				}))
 			})
 			It(`Invoke ListCollections successfully with retries`, func() {
@@ -1392,7 +1472,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				listCollectionsOptionsModel.Features = []string{"testString"}
 				listCollectionsOptionsModel.Properties = []string{"testString"}
 				listCollectionsOptionsModel.Include = []string{"features"}
-				listCollectionsOptionsModel.Limit = core.Int64Ptr(int64(1))
+				listCollectionsOptionsModel.Limit = core.Int64Ptr(int64(10))
 				listCollectionsOptionsModel.Offset = core.Int64Ptr(int64(0))
 				listCollectionsOptionsModel.Search = core.StringPtr("test tag")
 				listCollectionsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -1434,13 +1514,13 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// TODO: Add check for expand query parameter
 					Expect(req.URL.Query()["sort"]).To(Equal([]string{"created_time"}))
 					Expect(req.URL.Query()["tags"]).To(Equal([]string{"version 1.1, pre-release"}))
-					Expect(req.URL.Query()["limit"]).To(Equal([]string{fmt.Sprint(int64(1))}))
+					Expect(req.URL.Query()["limit"]).To(Equal([]string{fmt.Sprint(int64(10))}))
 					Expect(req.URL.Query()["offset"]).To(Equal([]string{fmt.Sprint(int64(0))}))
 					Expect(req.URL.Query()["search"]).To(Equal([]string{"test tag"}))
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"collections": [{"name": "Name", "collection_id": "CollectionID", "description": "Description", "tags": "Tags", "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "href": "Href", "features": [{"feature_id": "FeatureID", "name": "Name"}], "properties": [{"property_id": "PropertyID", "name": "Name"}], "features_count": 13, "properties_count": 15}], "limit": 5, "offset": 6, "total_count": 10, "first": {"href": "Href"}, "previous": {"href": "Href"}, "next": {"href": "Href"}, "last": {"href": "Href"}}`)
+					fmt.Fprintf(res, "%s", `{"collections": [{"name": "Name", "collection_id": "CollectionID", "description": "Description", "tags": "Tags", "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "href": "Href", "features": [{"feature_id": "FeatureID", "name": "Name"}], "properties": [{"property_id": "PropertyID", "name": "Name"}], "snapshots": [{"git_config_id": "GitConfigID", "name": "Name"}], "features_count": 13, "properties_count": 15, "snapshot_count": 13}], "limit": 5, "offset": 6, "total_count": 10, "first": {"href": "Href"}, "previous": {"href": "Href"}, "next": {"href": "Href"}, "last": {"href": "Href"}}`)
 				}))
 			})
 			It(`Invoke ListCollections successfully`, func() {
@@ -1465,7 +1545,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				listCollectionsOptionsModel.Features = []string{"testString"}
 				listCollectionsOptionsModel.Properties = []string{"testString"}
 				listCollectionsOptionsModel.Include = []string{"features"}
-				listCollectionsOptionsModel.Limit = core.Int64Ptr(int64(1))
+				listCollectionsOptionsModel.Limit = core.Int64Ptr(int64(10))
 				listCollectionsOptionsModel.Offset = core.Int64Ptr(int64(0))
 				listCollectionsOptionsModel.Search = core.StringPtr("test tag")
 				listCollectionsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -1493,7 +1573,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				listCollectionsOptionsModel.Features = []string{"testString"}
 				listCollectionsOptionsModel.Properties = []string{"testString"}
 				listCollectionsOptionsModel.Include = []string{"features"}
-				listCollectionsOptionsModel.Limit = core.Int64Ptr(int64(1))
+				listCollectionsOptionsModel.Limit = core.Int64Ptr(int64(10))
 				listCollectionsOptionsModel.Offset = core.Int64Ptr(int64(0))
 				listCollectionsOptionsModel.Search = core.StringPtr("test tag")
 				listCollectionsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -1535,7 +1615,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				listCollectionsOptionsModel.Features = []string{"testString"}
 				listCollectionsOptionsModel.Properties = []string{"testString"}
 				listCollectionsOptionsModel.Include = []string{"features"}
-				listCollectionsOptionsModel.Limit = core.Int64Ptr(int64(1))
+				listCollectionsOptionsModel.Limit = core.Int64Ptr(int64(10))
 				listCollectionsOptionsModel.Offset = core.Int64Ptr(int64(0))
 				listCollectionsOptionsModel.Search = core.StringPtr("test tag")
 				listCollectionsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -1589,6 +1669,90 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				value, err := responseObject.GetNextOffset()
 				Expect(err).NotTo(BeNil())
 				Expect(value).To(BeNil())
+			})
+		})
+		Context(`Using mock server endpoint - paginated response`, func() {
+			BeforeEach(func() {
+				var requestNumber int = 0
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(listCollectionsPath))
+					Expect(req.Method).To(Equal("GET"))
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					requestNumber++
+					if requestNumber == 1 {
+						fmt.Fprintf(res, "%s", `{"next":{"href":"https://myhost.com/somePath?offset=1"},"collections":[{"name":"Name","collection_id":"CollectionID","description":"Description","tags":"Tags","created_time":"2021-05-12T23:20:50.520Z","updated_time":"2021-05-12T23:20:50.520Z","href":"Href","features":[{"feature_id":"FeatureID","name":"Name"}],"properties":[{"property_id":"PropertyID","name":"Name"}],"snapshots":[{"git_config_id":"GitConfigID","name":"Name"}],"features_count":13,"properties_count":15,"snapshot_count":13}],"total_count":2,"limit":1}`)
+					} else if requestNumber == 2 {
+						fmt.Fprintf(res, "%s", `{"collections":[{"name":"Name","collection_id":"CollectionID","description":"Description","tags":"Tags","created_time":"2021-05-12T23:20:50.520Z","updated_time":"2021-05-12T23:20:50.520Z","href":"Href","features":[{"feature_id":"FeatureID","name":"Name"}],"properties":[{"property_id":"PropertyID","name":"Name"}],"snapshots":[{"git_config_id":"GitConfigID","name":"Name"}],"features_count":13,"properties_count":15,"snapshot_count":13}],"total_count":2,"limit":1}`)
+					} else {
+						res.WriteHeader(400)
+					}
+				}))
+			})
+			It(`Use CollectionsPager.GetNext successfully`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				listCollectionsOptionsModel := &appconfigurationv1.ListCollectionsOptions{
+					Expand:     core.BoolPtr(true),
+					Sort:       core.StringPtr("created_time"),
+					Tags:       core.StringPtr("version 1.1, pre-release"),
+					Features:   []string{"testString"},
+					Properties: []string{"testString"},
+					Include:    []string{"features"},
+					Limit:      core.Int64Ptr(int64(10)),
+					Search:     core.StringPtr("test tag"),
+				}
+
+				pager, err := appConfigurationService.NewCollectionsPager(listCollectionsOptionsModel)
+				Expect(err).To(BeNil())
+				Expect(pager).ToNot(BeNil())
+
+				var allResults []appconfigurationv1.Collection
+				for pager.HasNext() {
+					nextPage, err := pager.GetNext()
+					Expect(err).To(BeNil())
+					Expect(nextPage).ToNot(BeNil())
+					allResults = append(allResults, nextPage...)
+				}
+				Expect(len(allResults)).To(Equal(2))
+			})
+			It(`Use CollectionsPager.GetAll successfully`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				listCollectionsOptionsModel := &appconfigurationv1.ListCollectionsOptions{
+					Expand:     core.BoolPtr(true),
+					Sort:       core.StringPtr("created_time"),
+					Tags:       core.StringPtr("version 1.1, pre-release"),
+					Features:   []string{"testString"},
+					Properties: []string{"testString"},
+					Include:    []string{"features"},
+					Limit:      core.Int64Ptr(int64(10)),
+					Search:     core.StringPtr("test tag"),
+				}
+
+				pager, err := appConfigurationService.NewCollectionsPager(listCollectionsOptionsModel)
+				Expect(err).To(BeNil())
+				Expect(pager).ToNot(BeNil())
+
+				allResults, err := pager.GetAll()
+				Expect(err).To(BeNil())
+				Expect(allResults).ToNot(BeNil())
+				Expect(len(allResults)).To(Equal(2))
 			})
 		})
 	})
@@ -2176,7 +2340,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"name": "Name", "collection_id": "CollectionID", "description": "Description", "tags": "Tags", "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "href": "Href", "features": [{"feature_id": "FeatureID", "name": "Name"}], "properties": [{"property_id": "PropertyID", "name": "Name"}], "features_count": 13, "properties_count": 15}`)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "collection_id": "CollectionID", "description": "Description", "tags": "Tags", "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "href": "Href", "features": [{"feature_id": "FeatureID", "name": "Name"}], "properties": [{"property_id": "PropertyID", "name": "Name"}], "snapshots": [{"git_config_id": "GitConfigID", "name": "Name"}], "features_count": 13, "properties_count": 15, "snapshot_count": 13}`)
 				}))
 			})
 			It(`Invoke GetCollection successfully with retries`, func() {
@@ -2233,7 +2397,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"name": "Name", "collection_id": "CollectionID", "description": "Description", "tags": "Tags", "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "href": "Href", "features": [{"feature_id": "FeatureID", "name": "Name"}], "properties": [{"property_id": "PropertyID", "name": "Name"}], "features_count": 13, "properties_count": 15}`)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "collection_id": "CollectionID", "description": "Description", "tags": "Tags", "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "href": "Href", "features": [{"feature_id": "FeatureID", "name": "Name"}], "properties": [{"property_id": "PropertyID", "name": "Name"}], "snapshots": [{"git_config_id": "GitConfigID", "name": "Name"}], "features_count": 13, "properties_count": 15, "snapshot_count": 13}`)
 				}))
 			})
 			It(`Invoke GetCollection successfully`, func() {
@@ -2416,7 +2580,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// TODO: Add check for expand query parameter
 					Expect(req.URL.Query()["sort"]).To(Equal([]string{"created_time"}))
 					Expect(req.URL.Query()["tags"]).To(Equal([]string{"version 1.1, pre-release"}))
-					Expect(req.URL.Query()["limit"]).To(Equal([]string{fmt.Sprint(int64(1))}))
+					Expect(req.URL.Query()["limit"]).To(Equal([]string{fmt.Sprint(int64(10))}))
 					Expect(req.URL.Query()["offset"]).To(Equal([]string{fmt.Sprint(int64(0))}))
 					Expect(req.URL.Query()["search"]).To(Equal([]string{"test tag"}))
 					res.Header().Set("Content-type", "application/json")
@@ -2441,7 +2605,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				listFeaturesOptionsModel.Collections = []string{"testString"}
 				listFeaturesOptionsModel.Segments = []string{"testString"}
 				listFeaturesOptionsModel.Include = []string{"collections"}
-				listFeaturesOptionsModel.Limit = core.Int64Ptr(int64(1))
+				listFeaturesOptionsModel.Limit = core.Int64Ptr(int64(10))
 				listFeaturesOptionsModel.Offset = core.Int64Ptr(int64(0))
 				listFeaturesOptionsModel.Search = core.StringPtr("test tag")
 				listFeaturesOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -2477,7 +2641,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// TODO: Add check for expand query parameter
 					Expect(req.URL.Query()["sort"]).To(Equal([]string{"created_time"}))
 					Expect(req.URL.Query()["tags"]).To(Equal([]string{"version 1.1, pre-release"}))
-					Expect(req.URL.Query()["limit"]).To(Equal([]string{fmt.Sprint(int64(1))}))
+					Expect(req.URL.Query()["limit"]).To(Equal([]string{fmt.Sprint(int64(10))}))
 					Expect(req.URL.Query()["offset"]).To(Equal([]string{fmt.Sprint(int64(0))}))
 					Expect(req.URL.Query()["search"]).To(Equal([]string{"test tag"}))
 					// Sleep a short time to support a timeout test
@@ -2507,7 +2671,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				listFeaturesOptionsModel.Collections = []string{"testString"}
 				listFeaturesOptionsModel.Segments = []string{"testString"}
 				listFeaturesOptionsModel.Include = []string{"collections"}
-				listFeaturesOptionsModel.Limit = core.Int64Ptr(int64(1))
+				listFeaturesOptionsModel.Limit = core.Int64Ptr(int64(10))
 				listFeaturesOptionsModel.Offset = core.Int64Ptr(int64(0))
 				listFeaturesOptionsModel.Search = core.StringPtr("test tag")
 				listFeaturesOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -2549,7 +2713,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// TODO: Add check for expand query parameter
 					Expect(req.URL.Query()["sort"]).To(Equal([]string{"created_time"}))
 					Expect(req.URL.Query()["tags"]).To(Equal([]string{"version 1.1, pre-release"}))
-					Expect(req.URL.Query()["limit"]).To(Equal([]string{fmt.Sprint(int64(1))}))
+					Expect(req.URL.Query()["limit"]).To(Equal([]string{fmt.Sprint(int64(10))}))
 					Expect(req.URL.Query()["offset"]).To(Equal([]string{fmt.Sprint(int64(0))}))
 					Expect(req.URL.Query()["search"]).To(Equal([]string{"test tag"}))
 					// Set mock response
@@ -2581,7 +2745,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				listFeaturesOptionsModel.Collections = []string{"testString"}
 				listFeaturesOptionsModel.Segments = []string{"testString"}
 				listFeaturesOptionsModel.Include = []string{"collections"}
-				listFeaturesOptionsModel.Limit = core.Int64Ptr(int64(1))
+				listFeaturesOptionsModel.Limit = core.Int64Ptr(int64(10))
 				listFeaturesOptionsModel.Offset = core.Int64Ptr(int64(0))
 				listFeaturesOptionsModel.Search = core.StringPtr("test tag")
 				listFeaturesOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -2610,7 +2774,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				listFeaturesOptionsModel.Collections = []string{"testString"}
 				listFeaturesOptionsModel.Segments = []string{"testString"}
 				listFeaturesOptionsModel.Include = []string{"collections"}
-				listFeaturesOptionsModel.Limit = core.Int64Ptr(int64(1))
+				listFeaturesOptionsModel.Limit = core.Int64Ptr(int64(10))
 				listFeaturesOptionsModel.Offset = core.Int64Ptr(int64(0))
 				listFeaturesOptionsModel.Search = core.StringPtr("test tag")
 				listFeaturesOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -2660,7 +2824,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				listFeaturesOptionsModel.Collections = []string{"testString"}
 				listFeaturesOptionsModel.Segments = []string{"testString"}
 				listFeaturesOptionsModel.Include = []string{"collections"}
-				listFeaturesOptionsModel.Limit = core.Int64Ptr(int64(1))
+				listFeaturesOptionsModel.Limit = core.Int64Ptr(int64(10))
 				listFeaturesOptionsModel.Offset = core.Int64Ptr(int64(0))
 				listFeaturesOptionsModel.Search = core.StringPtr("test tag")
 				listFeaturesOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -2714,6 +2878,92 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				value, err := responseObject.GetNextOffset()
 				Expect(err).NotTo(BeNil())
 				Expect(value).To(BeNil())
+			})
+		})
+		Context(`Using mock server endpoint - paginated response`, func() {
+			BeforeEach(func() {
+				var requestNumber int = 0
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(listFeaturesPath))
+					Expect(req.Method).To(Equal("GET"))
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					requestNumber++
+					if requestNumber == 1 {
+						fmt.Fprintf(res, "%s", `{"next":{"href":"https://myhost.com/somePath?offset=1"},"features":[{"name":"Name","feature_id":"FeatureID","description":"Description","type":"BOOLEAN","format":"TEXT","enabled_value":"anyValue","disabled_value":"anyValue","enabled":false,"rollout_percentage":17,"tags":"Tags","segment_rules":[{"rules":[{"segments":["Segments"]}],"value":"anyValue","order":5,"rollout_percentage":17}],"segment_exists":false,"collections":[{"collection_id":"CollectionID","name":"Name"}],"created_time":"2021-05-12T23:20:50.520Z","updated_time":"2021-05-12T23:20:50.520Z","evaluation_time":"2021-05-12T23:20:50.520Z","href":"Href"}],"total_count":2,"limit":1}`)
+					} else if requestNumber == 2 {
+						fmt.Fprintf(res, "%s", `{"features":[{"name":"Name","feature_id":"FeatureID","description":"Description","type":"BOOLEAN","format":"TEXT","enabled_value":"anyValue","disabled_value":"anyValue","enabled":false,"rollout_percentage":17,"tags":"Tags","segment_rules":[{"rules":[{"segments":["Segments"]}],"value":"anyValue","order":5,"rollout_percentage":17}],"segment_exists":false,"collections":[{"collection_id":"CollectionID","name":"Name"}],"created_time":"2021-05-12T23:20:50.520Z","updated_time":"2021-05-12T23:20:50.520Z","evaluation_time":"2021-05-12T23:20:50.520Z","href":"Href"}],"total_count":2,"limit":1}`)
+					} else {
+						res.WriteHeader(400)
+					}
+				}))
+			})
+			It(`Use FeaturesPager.GetNext successfully`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				listFeaturesOptionsModel := &appconfigurationv1.ListFeaturesOptions{
+					EnvironmentID: core.StringPtr("testString"),
+					Expand:        core.BoolPtr(true),
+					Sort:          core.StringPtr("created_time"),
+					Tags:          core.StringPtr("version 1.1, pre-release"),
+					Collections:   []string{"testString"},
+					Segments:      []string{"testString"},
+					Include:       []string{"collections"},
+					Limit:         core.Int64Ptr(int64(10)),
+					Search:        core.StringPtr("test tag"),
+				}
+
+				pager, err := appConfigurationService.NewFeaturesPager(listFeaturesOptionsModel)
+				Expect(err).To(BeNil())
+				Expect(pager).ToNot(BeNil())
+
+				var allResults []appconfigurationv1.Feature
+				for pager.HasNext() {
+					nextPage, err := pager.GetNext()
+					Expect(err).To(BeNil())
+					Expect(nextPage).ToNot(BeNil())
+					allResults = append(allResults, nextPage...)
+				}
+				Expect(len(allResults)).To(Equal(2))
+			})
+			It(`Use FeaturesPager.GetAll successfully`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				listFeaturesOptionsModel := &appconfigurationv1.ListFeaturesOptions{
+					EnvironmentID: core.StringPtr("testString"),
+					Expand:        core.BoolPtr(true),
+					Sort:          core.StringPtr("created_time"),
+					Tags:          core.StringPtr("version 1.1, pre-release"),
+					Collections:   []string{"testString"},
+					Segments:      []string{"testString"},
+					Include:       []string{"collections"},
+					Limit:         core.Int64Ptr(int64(10)),
+					Search:        core.StringPtr("test tag"),
+				}
+
+				pager, err := appConfigurationService.NewFeaturesPager(listFeaturesOptionsModel)
+				Expect(err).To(BeNil())
+				Expect(pager).ToNot(BeNil())
+
+				allResults, err := pager.GetAll()
+				Expect(err).To(BeNil())
+				Expect(allResults).ToNot(BeNil())
+				Expect(len(allResults)).To(Equal(2))
 			})
 		})
 	})
@@ -4366,7 +4616,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// TODO: Add check for expand query parameter
 					Expect(req.URL.Query()["sort"]).To(Equal([]string{"created_time"}))
 					Expect(req.URL.Query()["tags"]).To(Equal([]string{"version 1.1, pre-release"}))
-					Expect(req.URL.Query()["limit"]).To(Equal([]string{fmt.Sprint(int64(1))}))
+					Expect(req.URL.Query()["limit"]).To(Equal([]string{fmt.Sprint(int64(10))}))
 					Expect(req.URL.Query()["offset"]).To(Equal([]string{fmt.Sprint(int64(0))}))
 					Expect(req.URL.Query()["search"]).To(Equal([]string{"test tag"}))
 					res.Header().Set("Content-type", "application/json")
@@ -4391,7 +4641,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				listPropertiesOptionsModel.Collections = []string{"testString"}
 				listPropertiesOptionsModel.Segments = []string{"testString"}
 				listPropertiesOptionsModel.Include = []string{"collections"}
-				listPropertiesOptionsModel.Limit = core.Int64Ptr(int64(1))
+				listPropertiesOptionsModel.Limit = core.Int64Ptr(int64(10))
 				listPropertiesOptionsModel.Offset = core.Int64Ptr(int64(0))
 				listPropertiesOptionsModel.Search = core.StringPtr("test tag")
 				listPropertiesOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -4427,7 +4677,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// TODO: Add check for expand query parameter
 					Expect(req.URL.Query()["sort"]).To(Equal([]string{"created_time"}))
 					Expect(req.URL.Query()["tags"]).To(Equal([]string{"version 1.1, pre-release"}))
-					Expect(req.URL.Query()["limit"]).To(Equal([]string{fmt.Sprint(int64(1))}))
+					Expect(req.URL.Query()["limit"]).To(Equal([]string{fmt.Sprint(int64(10))}))
 					Expect(req.URL.Query()["offset"]).To(Equal([]string{fmt.Sprint(int64(0))}))
 					Expect(req.URL.Query()["search"]).To(Equal([]string{"test tag"}))
 					// Sleep a short time to support a timeout test
@@ -4457,7 +4707,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				listPropertiesOptionsModel.Collections = []string{"testString"}
 				listPropertiesOptionsModel.Segments = []string{"testString"}
 				listPropertiesOptionsModel.Include = []string{"collections"}
-				listPropertiesOptionsModel.Limit = core.Int64Ptr(int64(1))
+				listPropertiesOptionsModel.Limit = core.Int64Ptr(int64(10))
 				listPropertiesOptionsModel.Offset = core.Int64Ptr(int64(0))
 				listPropertiesOptionsModel.Search = core.StringPtr("test tag")
 				listPropertiesOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -4499,7 +4749,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// TODO: Add check for expand query parameter
 					Expect(req.URL.Query()["sort"]).To(Equal([]string{"created_time"}))
 					Expect(req.URL.Query()["tags"]).To(Equal([]string{"version 1.1, pre-release"}))
-					Expect(req.URL.Query()["limit"]).To(Equal([]string{fmt.Sprint(int64(1))}))
+					Expect(req.URL.Query()["limit"]).To(Equal([]string{fmt.Sprint(int64(10))}))
 					Expect(req.URL.Query()["offset"]).To(Equal([]string{fmt.Sprint(int64(0))}))
 					Expect(req.URL.Query()["search"]).To(Equal([]string{"test tag"}))
 					// Set mock response
@@ -4531,7 +4781,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				listPropertiesOptionsModel.Collections = []string{"testString"}
 				listPropertiesOptionsModel.Segments = []string{"testString"}
 				listPropertiesOptionsModel.Include = []string{"collections"}
-				listPropertiesOptionsModel.Limit = core.Int64Ptr(int64(1))
+				listPropertiesOptionsModel.Limit = core.Int64Ptr(int64(10))
 				listPropertiesOptionsModel.Offset = core.Int64Ptr(int64(0))
 				listPropertiesOptionsModel.Search = core.StringPtr("test tag")
 				listPropertiesOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -4560,7 +4810,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				listPropertiesOptionsModel.Collections = []string{"testString"}
 				listPropertiesOptionsModel.Segments = []string{"testString"}
 				listPropertiesOptionsModel.Include = []string{"collections"}
-				listPropertiesOptionsModel.Limit = core.Int64Ptr(int64(1))
+				listPropertiesOptionsModel.Limit = core.Int64Ptr(int64(10))
 				listPropertiesOptionsModel.Offset = core.Int64Ptr(int64(0))
 				listPropertiesOptionsModel.Search = core.StringPtr("test tag")
 				listPropertiesOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -4610,7 +4860,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				listPropertiesOptionsModel.Collections = []string{"testString"}
 				listPropertiesOptionsModel.Segments = []string{"testString"}
 				listPropertiesOptionsModel.Include = []string{"collections"}
-				listPropertiesOptionsModel.Limit = core.Int64Ptr(int64(1))
+				listPropertiesOptionsModel.Limit = core.Int64Ptr(int64(10))
 				listPropertiesOptionsModel.Offset = core.Int64Ptr(int64(0))
 				listPropertiesOptionsModel.Search = core.StringPtr("test tag")
 				listPropertiesOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -4664,6 +4914,92 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				value, err := responseObject.GetNextOffset()
 				Expect(err).NotTo(BeNil())
 				Expect(value).To(BeNil())
+			})
+		})
+		Context(`Using mock server endpoint - paginated response`, func() {
+			BeforeEach(func() {
+				var requestNumber int = 0
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(listPropertiesPath))
+					Expect(req.Method).To(Equal("GET"))
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					requestNumber++
+					if requestNumber == 1 {
+						fmt.Fprintf(res, "%s", `{"next":{"href":"https://myhost.com/somePath?offset=1"},"total_count":2,"limit":1,"properties":[{"name":"Name","property_id":"PropertyID","description":"Description","type":"BOOLEAN","format":"TEXT","value":"anyValue","tags":"Tags","segment_rules":[{"rules":[{"segments":["Segments"]}],"value":"anyValue","order":5}],"segment_exists":false,"collections":[{"collection_id":"CollectionID","name":"Name"}],"created_time":"2021-05-12T23:20:50.520Z","updated_time":"2021-05-12T23:20:50.520Z","evaluation_time":"2021-05-12T23:20:50.520Z","href":"Href"}]}`)
+					} else if requestNumber == 2 {
+						fmt.Fprintf(res, "%s", `{"total_count":2,"limit":1,"properties":[{"name":"Name","property_id":"PropertyID","description":"Description","type":"BOOLEAN","format":"TEXT","value":"anyValue","tags":"Tags","segment_rules":[{"rules":[{"segments":["Segments"]}],"value":"anyValue","order":5}],"segment_exists":false,"collections":[{"collection_id":"CollectionID","name":"Name"}],"created_time":"2021-05-12T23:20:50.520Z","updated_time":"2021-05-12T23:20:50.520Z","evaluation_time":"2021-05-12T23:20:50.520Z","href":"Href"}]}`)
+					} else {
+						res.WriteHeader(400)
+					}
+				}))
+			})
+			It(`Use PropertiesPager.GetNext successfully`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				listPropertiesOptionsModel := &appconfigurationv1.ListPropertiesOptions{
+					EnvironmentID: core.StringPtr("testString"),
+					Expand:        core.BoolPtr(true),
+					Sort:          core.StringPtr("created_time"),
+					Tags:          core.StringPtr("version 1.1, pre-release"),
+					Collections:   []string{"testString"},
+					Segments:      []string{"testString"},
+					Include:       []string{"collections"},
+					Limit:         core.Int64Ptr(int64(10)),
+					Search:        core.StringPtr("test tag"),
+				}
+
+				pager, err := appConfigurationService.NewPropertiesPager(listPropertiesOptionsModel)
+				Expect(err).To(BeNil())
+				Expect(pager).ToNot(BeNil())
+
+				var allResults []appconfigurationv1.Property
+				for pager.HasNext() {
+					nextPage, err := pager.GetNext()
+					Expect(err).To(BeNil())
+					Expect(nextPage).ToNot(BeNil())
+					allResults = append(allResults, nextPage...)
+				}
+				Expect(len(allResults)).To(Equal(2))
+			})
+			It(`Use PropertiesPager.GetAll successfully`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				listPropertiesOptionsModel := &appconfigurationv1.ListPropertiesOptions{
+					EnvironmentID: core.StringPtr("testString"),
+					Expand:        core.BoolPtr(true),
+					Sort:          core.StringPtr("created_time"),
+					Tags:          core.StringPtr("version 1.1, pre-release"),
+					Collections:   []string{"testString"},
+					Segments:      []string{"testString"},
+					Include:       []string{"collections"},
+					Limit:         core.Int64Ptr(int64(10)),
+					Search:        core.StringPtr("test tag"),
+				}
+
+				pager, err := appConfigurationService.NewPropertiesPager(listPropertiesOptionsModel)
+				Expect(err).To(BeNil())
+				Expect(pager).ToNot(BeNil())
+
+				allResults, err := pager.GetAll()
+				Expect(err).To(BeNil())
+				Expect(allResults).ToNot(BeNil())
+				Expect(len(allResults)).To(Equal(2))
 			})
 		})
 	})
@@ -6008,7 +6344,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					Expect(req.URL.Query()["sort"]).To(Equal([]string{"created_time"}))
 					Expect(req.URL.Query()["tags"]).To(Equal([]string{"version 1.1, pre-release"}))
 					Expect(req.URL.Query()["include"]).To(Equal([]string{"rules"}))
-					Expect(req.URL.Query()["limit"]).To(Equal([]string{fmt.Sprint(int64(1))}))
+					Expect(req.URL.Query()["limit"]).To(Equal([]string{fmt.Sprint(int64(10))}))
 					Expect(req.URL.Query()["offset"]).To(Equal([]string{fmt.Sprint(int64(0))}))
 					Expect(req.URL.Query()["search"]).To(Equal([]string{"test tag"}))
 					res.Header().Set("Content-type", "application/json")
@@ -6030,7 +6366,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				listSegmentsOptionsModel.Sort = core.StringPtr("created_time")
 				listSegmentsOptionsModel.Tags = core.StringPtr("version 1.1, pre-release")
 				listSegmentsOptionsModel.Include = core.StringPtr("rules")
-				listSegmentsOptionsModel.Limit = core.Int64Ptr(int64(1))
+				listSegmentsOptionsModel.Limit = core.Int64Ptr(int64(10))
 				listSegmentsOptionsModel.Offset = core.Int64Ptr(int64(0))
 				listSegmentsOptionsModel.Search = core.StringPtr("test tag")
 				listSegmentsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -6067,7 +6403,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					Expect(req.URL.Query()["sort"]).To(Equal([]string{"created_time"}))
 					Expect(req.URL.Query()["tags"]).To(Equal([]string{"version 1.1, pre-release"}))
 					Expect(req.URL.Query()["include"]).To(Equal([]string{"rules"}))
-					Expect(req.URL.Query()["limit"]).To(Equal([]string{fmt.Sprint(int64(1))}))
+					Expect(req.URL.Query()["limit"]).To(Equal([]string{fmt.Sprint(int64(10))}))
 					Expect(req.URL.Query()["offset"]).To(Equal([]string{fmt.Sprint(int64(0))}))
 					Expect(req.URL.Query()["search"]).To(Equal([]string{"test tag"}))
 					// Sleep a short time to support a timeout test
@@ -6094,7 +6430,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				listSegmentsOptionsModel.Sort = core.StringPtr("created_time")
 				listSegmentsOptionsModel.Tags = core.StringPtr("version 1.1, pre-release")
 				listSegmentsOptionsModel.Include = core.StringPtr("rules")
-				listSegmentsOptionsModel.Limit = core.Int64Ptr(int64(1))
+				listSegmentsOptionsModel.Limit = core.Int64Ptr(int64(10))
 				listSegmentsOptionsModel.Offset = core.Int64Ptr(int64(0))
 				listSegmentsOptionsModel.Search = core.StringPtr("test tag")
 				listSegmentsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -6137,7 +6473,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					Expect(req.URL.Query()["sort"]).To(Equal([]string{"created_time"}))
 					Expect(req.URL.Query()["tags"]).To(Equal([]string{"version 1.1, pre-release"}))
 					Expect(req.URL.Query()["include"]).To(Equal([]string{"rules"}))
-					Expect(req.URL.Query()["limit"]).To(Equal([]string{fmt.Sprint(int64(1))}))
+					Expect(req.URL.Query()["limit"]).To(Equal([]string{fmt.Sprint(int64(10))}))
 					Expect(req.URL.Query()["offset"]).To(Equal([]string{fmt.Sprint(int64(0))}))
 					Expect(req.URL.Query()["search"]).To(Equal([]string{"test tag"}))
 					// Set mock response
@@ -6166,7 +6502,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				listSegmentsOptionsModel.Sort = core.StringPtr("created_time")
 				listSegmentsOptionsModel.Tags = core.StringPtr("version 1.1, pre-release")
 				listSegmentsOptionsModel.Include = core.StringPtr("rules")
-				listSegmentsOptionsModel.Limit = core.Int64Ptr(int64(1))
+				listSegmentsOptionsModel.Limit = core.Int64Ptr(int64(10))
 				listSegmentsOptionsModel.Offset = core.Int64Ptr(int64(0))
 				listSegmentsOptionsModel.Search = core.StringPtr("test tag")
 				listSegmentsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -6192,7 +6528,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				listSegmentsOptionsModel.Sort = core.StringPtr("created_time")
 				listSegmentsOptionsModel.Tags = core.StringPtr("version 1.1, pre-release")
 				listSegmentsOptionsModel.Include = core.StringPtr("rules")
-				listSegmentsOptionsModel.Limit = core.Int64Ptr(int64(1))
+				listSegmentsOptionsModel.Limit = core.Int64Ptr(int64(10))
 				listSegmentsOptionsModel.Offset = core.Int64Ptr(int64(0))
 				listSegmentsOptionsModel.Search = core.StringPtr("test tag")
 				listSegmentsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -6232,7 +6568,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				listSegmentsOptionsModel.Sort = core.StringPtr("created_time")
 				listSegmentsOptionsModel.Tags = core.StringPtr("version 1.1, pre-release")
 				listSegmentsOptionsModel.Include = core.StringPtr("rules")
-				listSegmentsOptionsModel.Limit = core.Int64Ptr(int64(1))
+				listSegmentsOptionsModel.Limit = core.Int64Ptr(int64(10))
 				listSegmentsOptionsModel.Offset = core.Int64Ptr(int64(0))
 				listSegmentsOptionsModel.Search = core.StringPtr("test tag")
 				listSegmentsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -6286,6 +6622,86 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				value, err := responseObject.GetNextOffset()
 				Expect(err).NotTo(BeNil())
 				Expect(value).To(BeNil())
+			})
+		})
+		Context(`Using mock server endpoint - paginated response`, func() {
+			BeforeEach(func() {
+				var requestNumber int = 0
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(listSegmentsPath))
+					Expect(req.Method).To(Equal("GET"))
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					requestNumber++
+					if requestNumber == 1 {
+						fmt.Fprintf(res, "%s", `{"next":{"href":"https://myhost.com/somePath?offset=1"},"total_count":2,"limit":1,"segments":[{"name":"Name","segment_id":"SegmentID","description":"Description","tags":"Tags","rules":[{"attribute_name":"AttributeName","operator":"is","values":["Values"]}],"created_time":"2021-05-12T23:20:50.520Z","updated_time":"2021-05-12T23:20:50.520Z","href":"Href","features":[{"feature_id":"FeatureID","name":"Name"}],"properties":[{"property_id":"PropertyID","name":"Name"}]}]}`)
+					} else if requestNumber == 2 {
+						fmt.Fprintf(res, "%s", `{"total_count":2,"limit":1,"segments":[{"name":"Name","segment_id":"SegmentID","description":"Description","tags":"Tags","rules":[{"attribute_name":"AttributeName","operator":"is","values":["Values"]}],"created_time":"2021-05-12T23:20:50.520Z","updated_time":"2021-05-12T23:20:50.520Z","href":"Href","features":[{"feature_id":"FeatureID","name":"Name"}],"properties":[{"property_id":"PropertyID","name":"Name"}]}]}`)
+					} else {
+						res.WriteHeader(400)
+					}
+				}))
+			})
+			It(`Use SegmentsPager.GetNext successfully`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				listSegmentsOptionsModel := &appconfigurationv1.ListSegmentsOptions{
+					Expand:  core.BoolPtr(true),
+					Sort:    core.StringPtr("created_time"),
+					Tags:    core.StringPtr("version 1.1, pre-release"),
+					Include: core.StringPtr("rules"),
+					Limit:   core.Int64Ptr(int64(10)),
+					Search:  core.StringPtr("test tag"),
+				}
+
+				pager, err := appConfigurationService.NewSegmentsPager(listSegmentsOptionsModel)
+				Expect(err).To(BeNil())
+				Expect(pager).ToNot(BeNil())
+
+				var allResults []appconfigurationv1.Segment
+				for pager.HasNext() {
+					nextPage, err := pager.GetNext()
+					Expect(err).To(BeNil())
+					Expect(nextPage).ToNot(BeNil())
+					allResults = append(allResults, nextPage...)
+				}
+				Expect(len(allResults)).To(Equal(2))
+			})
+			It(`Use SegmentsPager.GetAll successfully`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				listSegmentsOptionsModel := &appconfigurationv1.ListSegmentsOptions{
+					Expand:  core.BoolPtr(true),
+					Sort:    core.StringPtr("created_time"),
+					Tags:    core.StringPtr("version 1.1, pre-release"),
+					Include: core.StringPtr("rules"),
+					Limit:   core.Int64Ptr(int64(10)),
+					Search:  core.StringPtr("test tag"),
+				}
+
+				pager, err := appConfigurationService.NewSegmentsPager(listSegmentsOptionsModel)
+				Expect(err).To(BeNil())
+				Expect(pager).ToNot(BeNil())
+
+				allResults, err := pager.GetAll()
+				Expect(err).To(BeNil())
+				Expect(allResults).ToNot(BeNil())
+				Expect(len(allResults)).To(Equal(2))
 			})
 		})
 	})
@@ -7168,7 +7584,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					Expect(req.URL.Query()["sort"]).To(Equal([]string{"created_time"}))
 					Expect(req.URL.Query()["collection_id"]).To(Equal([]string{"collections"}))
 					Expect(req.URL.Query()["environment_id"]).To(Equal([]string{"environments"}))
-					Expect(req.URL.Query()["limit"]).To(Equal([]string{fmt.Sprint(int64(1))}))
+					Expect(req.URL.Query()["limit"]).To(Equal([]string{fmt.Sprint(int64(10))}))
 					Expect(req.URL.Query()["offset"]).To(Equal([]string{fmt.Sprint(int64(0))}))
 					Expect(req.URL.Query()["search"]).To(Equal([]string{"search_string"}))
 					res.Header().Set("Content-type", "application/json")
@@ -7189,7 +7605,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				listSnapshotsOptionsModel.Sort = core.StringPtr("created_time")
 				listSnapshotsOptionsModel.CollectionID = core.StringPtr("collections")
 				listSnapshotsOptionsModel.EnvironmentID = core.StringPtr("environments")
-				listSnapshotsOptionsModel.Limit = core.Int64Ptr(int64(1))
+				listSnapshotsOptionsModel.Limit = core.Int64Ptr(int64(10))
 				listSnapshotsOptionsModel.Offset = core.Int64Ptr(int64(0))
 				listSnapshotsOptionsModel.Search = core.StringPtr("search_string")
 				listSnapshotsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -7225,7 +7641,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					Expect(req.URL.Query()["sort"]).To(Equal([]string{"created_time"}))
 					Expect(req.URL.Query()["collection_id"]).To(Equal([]string{"collections"}))
 					Expect(req.URL.Query()["environment_id"]).To(Equal([]string{"environments"}))
-					Expect(req.URL.Query()["limit"]).To(Equal([]string{fmt.Sprint(int64(1))}))
+					Expect(req.URL.Query()["limit"]).To(Equal([]string{fmt.Sprint(int64(10))}))
 					Expect(req.URL.Query()["offset"]).To(Equal([]string{fmt.Sprint(int64(0))}))
 					Expect(req.URL.Query()["search"]).To(Equal([]string{"search_string"}))
 					// Sleep a short time to support a timeout test
@@ -7251,7 +7667,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				listSnapshotsOptionsModel.Sort = core.StringPtr("created_time")
 				listSnapshotsOptionsModel.CollectionID = core.StringPtr("collections")
 				listSnapshotsOptionsModel.EnvironmentID = core.StringPtr("environments")
-				listSnapshotsOptionsModel.Limit = core.Int64Ptr(int64(1))
+				listSnapshotsOptionsModel.Limit = core.Int64Ptr(int64(10))
 				listSnapshotsOptionsModel.Offset = core.Int64Ptr(int64(0))
 				listSnapshotsOptionsModel.Search = core.StringPtr("search_string")
 				listSnapshotsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -7293,7 +7709,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					Expect(req.URL.Query()["sort"]).To(Equal([]string{"created_time"}))
 					Expect(req.URL.Query()["collection_id"]).To(Equal([]string{"collections"}))
 					Expect(req.URL.Query()["environment_id"]).To(Equal([]string{"environments"}))
-					Expect(req.URL.Query()["limit"]).To(Equal([]string{fmt.Sprint(int64(1))}))
+					Expect(req.URL.Query()["limit"]).To(Equal([]string{fmt.Sprint(int64(10))}))
 					Expect(req.URL.Query()["offset"]).To(Equal([]string{fmt.Sprint(int64(0))}))
 					Expect(req.URL.Query()["search"]).To(Equal([]string{"search_string"}))
 					// Set mock response
@@ -7321,7 +7737,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				listSnapshotsOptionsModel.Sort = core.StringPtr("created_time")
 				listSnapshotsOptionsModel.CollectionID = core.StringPtr("collections")
 				listSnapshotsOptionsModel.EnvironmentID = core.StringPtr("environments")
-				listSnapshotsOptionsModel.Limit = core.Int64Ptr(int64(1))
+				listSnapshotsOptionsModel.Limit = core.Int64Ptr(int64(10))
 				listSnapshotsOptionsModel.Offset = core.Int64Ptr(int64(0))
 				listSnapshotsOptionsModel.Search = core.StringPtr("search_string")
 				listSnapshotsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -7346,7 +7762,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				listSnapshotsOptionsModel.Sort = core.StringPtr("created_time")
 				listSnapshotsOptionsModel.CollectionID = core.StringPtr("collections")
 				listSnapshotsOptionsModel.EnvironmentID = core.StringPtr("environments")
-				listSnapshotsOptionsModel.Limit = core.Int64Ptr(int64(1))
+				listSnapshotsOptionsModel.Limit = core.Int64Ptr(int64(10))
 				listSnapshotsOptionsModel.Offset = core.Int64Ptr(int64(0))
 				listSnapshotsOptionsModel.Search = core.StringPtr("search_string")
 				listSnapshotsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -7385,7 +7801,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				listSnapshotsOptionsModel.Sort = core.StringPtr("created_time")
 				listSnapshotsOptionsModel.CollectionID = core.StringPtr("collections")
 				listSnapshotsOptionsModel.EnvironmentID = core.StringPtr("environments")
-				listSnapshotsOptionsModel.Limit = core.Int64Ptr(int64(1))
+				listSnapshotsOptionsModel.Limit = core.Int64Ptr(int64(10))
 				listSnapshotsOptionsModel.Offset = core.Int64Ptr(int64(0))
 				listSnapshotsOptionsModel.Search = core.StringPtr("search_string")
 				listSnapshotsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -7441,6 +7857,84 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(value).To(BeNil())
 			})
 		})
+		Context(`Using mock server endpoint - paginated response`, func() {
+			BeforeEach(func() {
+				var requestNumber int = 0
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(listSnapshotsPath))
+					Expect(req.Method).To(Equal("GET"))
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					requestNumber++
+					if requestNumber == 1 {
+						fmt.Fprintf(res, "%s", `{"next":{"href":"https://myhost.com/somePath?offset=1"},"Snapshot":[{"git_config_name":"GitConfigName","git_config_id":"GitConfigID","collection":{"anyKey":"anyValue"},"environment":{"anyKey":"anyValue"},"git_url":"GitURL","git_branch":"GitBranch","git_file_path":"GitFilePath","last_sync_time":"2022-05-27T23:20:50.520Z","created_time":"2021-05-12T23:20:50.520Z","updated_time":"2021-05-12T23:20:50.520Z","href":"Href"}],"total_count":2,"limit":1}`)
+					} else if requestNumber == 2 {
+						fmt.Fprintf(res, "%s", `{"Snapshot":[{"git_config_name":"GitConfigName","git_config_id":"GitConfigID","collection":{"anyKey":"anyValue"},"environment":{"anyKey":"anyValue"},"git_url":"GitURL","git_branch":"GitBranch","git_file_path":"GitFilePath","last_sync_time":"2022-05-27T23:20:50.520Z","created_time":"2021-05-12T23:20:50.520Z","updated_time":"2021-05-12T23:20:50.520Z","href":"Href"}],"total_count":2,"limit":1}`)
+					} else {
+						res.WriteHeader(400)
+					}
+				}))
+			})
+			It(`Use SnapshotsPager.GetNext successfully`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				listSnapshotsOptionsModel := &appconfigurationv1.ListSnapshotsOptions{
+					Sort:          core.StringPtr("created_time"),
+					CollectionID:  core.StringPtr("collections"),
+					EnvironmentID: core.StringPtr("environments"),
+					Limit:         core.Int64Ptr(int64(10)),
+					Search:        core.StringPtr("search_string"),
+				}
+
+				pager, err := appConfigurationService.NewSnapshotsPager(listSnapshotsOptionsModel)
+				Expect(err).To(BeNil())
+				Expect(pager).ToNot(BeNil())
+
+				var allResults []appconfigurationv1.SnapshotResponseGetApi
+				for pager.HasNext() {
+					nextPage, err := pager.GetNext()
+					Expect(err).To(BeNil())
+					Expect(nextPage).ToNot(BeNil())
+					allResults = append(allResults, nextPage...)
+				}
+				Expect(len(allResults)).To(Equal(2))
+			})
+			It(`Use SnapshotsPager.GetAll successfully`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				listSnapshotsOptionsModel := &appconfigurationv1.ListSnapshotsOptions{
+					Sort:          core.StringPtr("created_time"),
+					CollectionID:  core.StringPtr("collections"),
+					EnvironmentID: core.StringPtr("environments"),
+					Limit:         core.Int64Ptr(int64(10)),
+					Search:        core.StringPtr("search_string"),
+				}
+
+				pager, err := appConfigurationService.NewSnapshotsPager(listSnapshotsOptionsModel)
+				Expect(err).To(BeNil())
+				Expect(pager).ToNot(BeNil())
+
+				allResults, err := pager.GetAll()
+				Expect(err).To(BeNil())
+				Expect(allResults).ToNot(BeNil())
+				Expect(len(allResults)).To(Equal(2))
+			})
+		})
 	})
 	Describe(`CreateGitconfig(createGitconfigOptions *CreateGitconfigOptions) - Operation response error`, func() {
 		createGitconfigPath := "/gitconfigs"
@@ -7471,9 +7965,9 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				createGitconfigOptionsModel.GitConfigID = core.StringPtr("boot-strap-configuration")
 				createGitconfigOptionsModel.CollectionID = core.StringPtr("web-app-collection")
 				createGitconfigOptionsModel.EnvironmentID = core.StringPtr("dev")
-				createGitconfigOptionsModel.GitURL = core.StringPtr("https://github.com")
+				createGitconfigOptionsModel.GitURL = core.StringPtr("https://api.github.ibm.com/repos/jhondoe-owner/my-test-repo")
 				createGitconfigOptionsModel.GitBranch = core.StringPtr("main")
-				createGitconfigOptionsModel.GitFilePath = core.StringPtr("code/blob/development/README.json")
+				createGitconfigOptionsModel.GitFilePath = core.StringPtr("code/development/README.json")
 				createGitconfigOptionsModel.GitToken = core.StringPtr("61a792eahhGHji223jijb55a6cfdd4d5cde4c8a67esjjhjhHVH")
 				createGitconfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
@@ -7545,9 +8039,9 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				createGitconfigOptionsModel.GitConfigID = core.StringPtr("boot-strap-configuration")
 				createGitconfigOptionsModel.CollectionID = core.StringPtr("web-app-collection")
 				createGitconfigOptionsModel.EnvironmentID = core.StringPtr("dev")
-				createGitconfigOptionsModel.GitURL = core.StringPtr("https://github.com")
+				createGitconfigOptionsModel.GitURL = core.StringPtr("https://api.github.ibm.com/repos/jhondoe-owner/my-test-repo")
 				createGitconfigOptionsModel.GitBranch = core.StringPtr("main")
-				createGitconfigOptionsModel.GitFilePath = core.StringPtr("code/blob/development/README.json")
+				createGitconfigOptionsModel.GitFilePath = core.StringPtr("code/development/README.json")
 				createGitconfigOptionsModel.GitToken = core.StringPtr("61a792eahhGHji223jijb55a6cfdd4d5cde4c8a67esjjhjhHVH")
 				createGitconfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
@@ -7627,9 +8121,9 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				createGitconfigOptionsModel.GitConfigID = core.StringPtr("boot-strap-configuration")
 				createGitconfigOptionsModel.CollectionID = core.StringPtr("web-app-collection")
 				createGitconfigOptionsModel.EnvironmentID = core.StringPtr("dev")
-				createGitconfigOptionsModel.GitURL = core.StringPtr("https://github.com")
+				createGitconfigOptionsModel.GitURL = core.StringPtr("https://api.github.ibm.com/repos/jhondoe-owner/my-test-repo")
 				createGitconfigOptionsModel.GitBranch = core.StringPtr("main")
-				createGitconfigOptionsModel.GitFilePath = core.StringPtr("code/blob/development/README.json")
+				createGitconfigOptionsModel.GitFilePath = core.StringPtr("code/development/README.json")
 				createGitconfigOptionsModel.GitToken = core.StringPtr("61a792eahhGHji223jijb55a6cfdd4d5cde4c8a67esjjhjhHVH")
 				createGitconfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
@@ -7654,9 +8148,9 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				createGitconfigOptionsModel.GitConfigID = core.StringPtr("boot-strap-configuration")
 				createGitconfigOptionsModel.CollectionID = core.StringPtr("web-app-collection")
 				createGitconfigOptionsModel.EnvironmentID = core.StringPtr("dev")
-				createGitconfigOptionsModel.GitURL = core.StringPtr("https://github.com")
+				createGitconfigOptionsModel.GitURL = core.StringPtr("https://api.github.ibm.com/repos/jhondoe-owner/my-test-repo")
 				createGitconfigOptionsModel.GitBranch = core.StringPtr("main")
-				createGitconfigOptionsModel.GitFilePath = core.StringPtr("code/blob/development/README.json")
+				createGitconfigOptionsModel.GitFilePath = core.StringPtr("code/development/README.json")
 				createGitconfigOptionsModel.GitToken = core.StringPtr("61a792eahhGHji223jijb55a6cfdd4d5cde4c8a67esjjhjhHVH")
 				createGitconfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
@@ -7695,9 +8189,9 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				createGitconfigOptionsModel.GitConfigID = core.StringPtr("boot-strap-configuration")
 				createGitconfigOptionsModel.CollectionID = core.StringPtr("web-app-collection")
 				createGitconfigOptionsModel.EnvironmentID = core.StringPtr("dev")
-				createGitconfigOptionsModel.GitURL = core.StringPtr("https://github.com")
+				createGitconfigOptionsModel.GitURL = core.StringPtr("https://api.github.ibm.com/repos/jhondoe-owner/my-test-repo")
 				createGitconfigOptionsModel.GitBranch = core.StringPtr("main")
-				createGitconfigOptionsModel.GitFilePath = core.StringPtr("code/blob/development/README.json")
+				createGitconfigOptionsModel.GitFilePath = core.StringPtr("code/development/README.json")
 				createGitconfigOptionsModel.GitToken = core.StringPtr("61a792eahhGHji223jijb55a6cfdd4d5cde4c8a67esjjhjhHVH")
 				createGitconfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
@@ -7799,7 +8293,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"git_config_name": "GitConfigName", "git_config_id": "GitConfigID", "collection_id": "CollectionID", "environment_id": "EnvironmentID", "git_url": "GitURL", "git_branch": "GitBranch", "git_file_path": "GitFilePath", "last_sync_time": "2022-05-27T23:20:50.520Z", "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "href": "Href"}`)
+					fmt.Fprintf(res, "%s", `{"git_config_name": "GitConfigName", "git_config_id": "GitConfigID", "collection": {"anyKey": "anyValue"}, "environment": {"anyKey": "anyValue"}, "git_url": "GitURL", "git_branch": "GitBranch", "git_file_path": "GitFilePath", "last_sync_time": "2022-05-27T23:20:50.520Z", "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "href": "Href"}`)
 				}))
 			})
 			It(`Invoke UpdateGitconfig successfully with retries`, func() {
@@ -7876,7 +8370,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"git_config_name": "GitConfigName", "git_config_id": "GitConfigID", "collection_id": "CollectionID", "environment_id": "EnvironmentID", "git_url": "GitURL", "git_branch": "GitBranch", "git_file_path": "GitFilePath", "last_sync_time": "2022-05-27T23:20:50.520Z", "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "href": "Href"}`)
+					fmt.Fprintf(res, "%s", `{"git_config_name": "GitConfigName", "git_config_id": "GitConfigID", "collection": {"anyKey": "anyValue"}, "environment": {"anyKey": "anyValue"}, "git_url": "GitURL", "git_branch": "GitBranch", "git_file_path": "GitFilePath", "last_sync_time": "2022-05-27T23:20:50.520Z", "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "href": "Href"}`)
 				}))
 			})
 			It(`Invoke UpdateGitconfig successfully`, func() {
@@ -8335,7 +8829,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"git_commit_id": "GitCommitID", "message": "Message", "last_sync_time": "2022-05-27T23:20:50.520Z"}`)
+					fmt.Fprintf(res, "%s", `{"git_commit_id": "GitCommitID", "git_commit_message": "GitCommitMessage", "last_sync_time": "2022-05-27T23:20:50.520Z"}`)
 				}))
 			})
 			It(`Invoke PromoteGitconfig successfully with retries`, func() {
@@ -8389,7 +8883,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"git_commit_id": "GitCommitID", "message": "Message", "last_sync_time": "2022-05-27T23:20:50.520Z"}`)
+					fmt.Fprintf(res, "%s", `{"git_commit_id": "GitCommitID", "git_commit_message": "GitCommitMessage", "last_sync_time": "2022-05-27T23:20:50.520Z"}`)
 				}))
 			})
 			It(`Invoke PromoteGitconfig successfully`, func() {
@@ -8610,9 +9104,9 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				createGitconfigOptionsModel.SetGitConfigID("boot-strap-configuration")
 				createGitconfigOptionsModel.SetCollectionID("web-app-collection")
 				createGitconfigOptionsModel.SetEnvironmentID("dev")
-				createGitconfigOptionsModel.SetGitURL("https://github.com")
+				createGitconfigOptionsModel.SetGitURL("https://api.github.ibm.com/repos/jhondoe-owner/my-test-repo")
 				createGitconfigOptionsModel.SetGitBranch("main")
-				createGitconfigOptionsModel.SetGitFilePath("code/blob/development/README.json")
+				createGitconfigOptionsModel.SetGitFilePath("code/development/README.json")
 				createGitconfigOptionsModel.SetGitToken("61a792eahhGHji223jijb55a6cfdd4d5cde4c8a67esjjhjhHVH")
 				createGitconfigOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(createGitconfigOptionsModel).ToNot(BeNil())
@@ -8620,9 +9114,9 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(createGitconfigOptionsModel.GitConfigID).To(Equal(core.StringPtr("boot-strap-configuration")))
 				Expect(createGitconfigOptionsModel.CollectionID).To(Equal(core.StringPtr("web-app-collection")))
 				Expect(createGitconfigOptionsModel.EnvironmentID).To(Equal(core.StringPtr("dev")))
-				Expect(createGitconfigOptionsModel.GitURL).To(Equal(core.StringPtr("https://github.com")))
+				Expect(createGitconfigOptionsModel.GitURL).To(Equal(core.StringPtr("https://api.github.ibm.com/repos/jhondoe-owner/my-test-repo")))
 				Expect(createGitconfigOptionsModel.GitBranch).To(Equal(core.StringPtr("main")))
-				Expect(createGitconfigOptionsModel.GitFilePath).To(Equal(core.StringPtr("code/blob/development/README.json")))
+				Expect(createGitconfigOptionsModel.GitFilePath).To(Equal(core.StringPtr("code/development/README.json")))
 				Expect(createGitconfigOptionsModel.GitToken).To(Equal(core.StringPtr("61a792eahhGHji223jijb55a6cfdd4d5cde4c8a67esjjhjhHVH")))
 				Expect(createGitconfigOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
@@ -8895,7 +9389,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				listCollectionsOptionsModel.SetFeatures([]string{"testString"})
 				listCollectionsOptionsModel.SetProperties([]string{"testString"})
 				listCollectionsOptionsModel.SetInclude([]string{"features"})
-				listCollectionsOptionsModel.SetLimit(int64(1))
+				listCollectionsOptionsModel.SetLimit(int64(10))
 				listCollectionsOptionsModel.SetOffset(int64(0))
 				listCollectionsOptionsModel.SetSearch("test tag")
 				listCollectionsOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
@@ -8906,7 +9400,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(listCollectionsOptionsModel.Features).To(Equal([]string{"testString"}))
 				Expect(listCollectionsOptionsModel.Properties).To(Equal([]string{"testString"}))
 				Expect(listCollectionsOptionsModel.Include).To(Equal([]string{"features"}))
-				Expect(listCollectionsOptionsModel.Limit).To(Equal(core.Int64Ptr(int64(1))))
+				Expect(listCollectionsOptionsModel.Limit).To(Equal(core.Int64Ptr(int64(10))))
 				Expect(listCollectionsOptionsModel.Offset).To(Equal(core.Int64Ptr(int64(0))))
 				Expect(listCollectionsOptionsModel.Search).To(Equal(core.StringPtr("test tag")))
 				Expect(listCollectionsOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
@@ -8918,7 +9412,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				listEnvironmentsOptionsModel.SetSort("created_time")
 				listEnvironmentsOptionsModel.SetTags("version 1.1, pre-release")
 				listEnvironmentsOptionsModel.SetInclude([]string{"features"})
-				listEnvironmentsOptionsModel.SetLimit(int64(1))
+				listEnvironmentsOptionsModel.SetLimit(int64(10))
 				listEnvironmentsOptionsModel.SetOffset(int64(0))
 				listEnvironmentsOptionsModel.SetSearch("test tag")
 				listEnvironmentsOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
@@ -8927,7 +9421,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(listEnvironmentsOptionsModel.Sort).To(Equal(core.StringPtr("created_time")))
 				Expect(listEnvironmentsOptionsModel.Tags).To(Equal(core.StringPtr("version 1.1, pre-release")))
 				Expect(listEnvironmentsOptionsModel.Include).To(Equal([]string{"features"}))
-				Expect(listEnvironmentsOptionsModel.Limit).To(Equal(core.Int64Ptr(int64(1))))
+				Expect(listEnvironmentsOptionsModel.Limit).To(Equal(core.Int64Ptr(int64(10))))
 				Expect(listEnvironmentsOptionsModel.Offset).To(Equal(core.Int64Ptr(int64(0))))
 				Expect(listEnvironmentsOptionsModel.Search).To(Equal(core.StringPtr("test tag")))
 				Expect(listEnvironmentsOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
@@ -8943,7 +9437,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				listFeaturesOptionsModel.SetCollections([]string{"testString"})
 				listFeaturesOptionsModel.SetSegments([]string{"testString"})
 				listFeaturesOptionsModel.SetInclude([]string{"collections"})
-				listFeaturesOptionsModel.SetLimit(int64(1))
+				listFeaturesOptionsModel.SetLimit(int64(10))
 				listFeaturesOptionsModel.SetOffset(int64(0))
 				listFeaturesOptionsModel.SetSearch("test tag")
 				listFeaturesOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
@@ -8955,7 +9449,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(listFeaturesOptionsModel.Collections).To(Equal([]string{"testString"}))
 				Expect(listFeaturesOptionsModel.Segments).To(Equal([]string{"testString"}))
 				Expect(listFeaturesOptionsModel.Include).To(Equal([]string{"collections"}))
-				Expect(listFeaturesOptionsModel.Limit).To(Equal(core.Int64Ptr(int64(1))))
+				Expect(listFeaturesOptionsModel.Limit).To(Equal(core.Int64Ptr(int64(10))))
 				Expect(listFeaturesOptionsModel.Offset).To(Equal(core.Int64Ptr(int64(0))))
 				Expect(listFeaturesOptionsModel.Search).To(Equal(core.StringPtr("test tag")))
 				Expect(listFeaturesOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
@@ -8971,7 +9465,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				listPropertiesOptionsModel.SetCollections([]string{"testString"})
 				listPropertiesOptionsModel.SetSegments([]string{"testString"})
 				listPropertiesOptionsModel.SetInclude([]string{"collections"})
-				listPropertiesOptionsModel.SetLimit(int64(1))
+				listPropertiesOptionsModel.SetLimit(int64(10))
 				listPropertiesOptionsModel.SetOffset(int64(0))
 				listPropertiesOptionsModel.SetSearch("test tag")
 				listPropertiesOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
@@ -8983,7 +9477,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(listPropertiesOptionsModel.Collections).To(Equal([]string{"testString"}))
 				Expect(listPropertiesOptionsModel.Segments).To(Equal([]string{"testString"}))
 				Expect(listPropertiesOptionsModel.Include).To(Equal([]string{"collections"}))
-				Expect(listPropertiesOptionsModel.Limit).To(Equal(core.Int64Ptr(int64(1))))
+				Expect(listPropertiesOptionsModel.Limit).To(Equal(core.Int64Ptr(int64(10))))
 				Expect(listPropertiesOptionsModel.Offset).To(Equal(core.Int64Ptr(int64(0))))
 				Expect(listPropertiesOptionsModel.Search).To(Equal(core.StringPtr("test tag")))
 				Expect(listPropertiesOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
@@ -8995,7 +9489,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				listSegmentsOptionsModel.SetSort("created_time")
 				listSegmentsOptionsModel.SetTags("version 1.1, pre-release")
 				listSegmentsOptionsModel.SetInclude("rules")
-				listSegmentsOptionsModel.SetLimit(int64(1))
+				listSegmentsOptionsModel.SetLimit(int64(10))
 				listSegmentsOptionsModel.SetOffset(int64(0))
 				listSegmentsOptionsModel.SetSearch("test tag")
 				listSegmentsOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
@@ -9004,7 +9498,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(listSegmentsOptionsModel.Sort).To(Equal(core.StringPtr("created_time")))
 				Expect(listSegmentsOptionsModel.Tags).To(Equal(core.StringPtr("version 1.1, pre-release")))
 				Expect(listSegmentsOptionsModel.Include).To(Equal(core.StringPtr("rules")))
-				Expect(listSegmentsOptionsModel.Limit).To(Equal(core.Int64Ptr(int64(1))))
+				Expect(listSegmentsOptionsModel.Limit).To(Equal(core.Int64Ptr(int64(10))))
 				Expect(listSegmentsOptionsModel.Offset).To(Equal(core.Int64Ptr(int64(0))))
 				Expect(listSegmentsOptionsModel.Search).To(Equal(core.StringPtr("test tag")))
 				Expect(listSegmentsOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
@@ -9015,7 +9509,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				listSnapshotsOptionsModel.SetSort("created_time")
 				listSnapshotsOptionsModel.SetCollectionID("collections")
 				listSnapshotsOptionsModel.SetEnvironmentID("environments")
-				listSnapshotsOptionsModel.SetLimit(int64(1))
+				listSnapshotsOptionsModel.SetLimit(int64(10))
 				listSnapshotsOptionsModel.SetOffset(int64(0))
 				listSnapshotsOptionsModel.SetSearch("search_string")
 				listSnapshotsOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
@@ -9023,7 +9517,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(listSnapshotsOptionsModel.Sort).To(Equal(core.StringPtr("created_time")))
 				Expect(listSnapshotsOptionsModel.CollectionID).To(Equal(core.StringPtr("collections")))
 				Expect(listSnapshotsOptionsModel.EnvironmentID).To(Equal(core.StringPtr("environments")))
-				Expect(listSnapshotsOptionsModel.Limit).To(Equal(core.Int64Ptr(int64(1))))
+				Expect(listSnapshotsOptionsModel.Limit).To(Equal(core.Int64Ptr(int64(10))))
 				Expect(listSnapshotsOptionsModel.Offset).To(Equal(core.Int64Ptr(int64(0))))
 				Expect(listSnapshotsOptionsModel.Search).To(Equal(core.StringPtr("search_string")))
 				Expect(listSnapshotsOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
@@ -9075,6 +9569,13 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				value := core.StringPtr("testString")
 				order := int64(38)
 				_model, err := appConfigurationService.NewSegmentRule(rules, value, order)
+				Expect(_model).ToNot(BeNil())
+				Expect(err).To(BeNil())
+			})
+			It(`Invoke NewSnapshotOutput successfully`, func() {
+				gitConfigID := "testString"
+				name := "testString"
+				_model, err := appConfigurationService.NewSnapshotOutput(gitConfigID, name)
 				Expect(_model).ToNot(BeNil())
 				Expect(err).To(BeNil())
 			})
