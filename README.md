@@ -209,6 +209,22 @@ toggleFeatureOptionsModel.SetEnabled(enableFlag)
 result, response, err := appConfigurationServiceInstance.ToggleFeature(toggleFeatureOptionsModel)
 ```
 
+### Create Property
+```go
+ruleArray, _ := appConfigurationServiceInstance.NewTargetSegments(segments)
+segmentRuleArray, _ := appConfigurationServiceInstance.NewSegmentRule([]appconfigurationv1.TargetSegments{*ruleArray}, value, order)
+collectionArray, _ := appConfigurationServiceInstance.NewCollectionRef(collectionId)
+createPropertyOptionsModel := appConfigurationServiceInstance.NewCreatePropertyOptions(environmentId, name, propertyId, typeOfProperty, valueOfProperty)
+createPropertyOptionsModel.SetTags(tags)
+createPropertyOptionsModel.SetDescription(description)
+createPropertyOptionsModel.SetSegmentRules([]appconfigurationv1.SegmentRule{*segmentRuleArray})
+createPropertyOptionsModel.SetCollections([]appconfigurationv1.CollectionRef{*collectionArray})
+if len(format) != 0 {
+    createPropertyOptionsModel.SetFormat(format)
+}
+result, response, error := appConfigurationServiceInstance.CreateProperty(createPropertyOptionsModel)
+```
+
 ### Patch Property
 ```go
 ruleArray, _ := appConfigurationServiceInstance.NewTargetSegments(segments)

@@ -115,7 +115,13 @@ func main() {
 
 	createProperty("environmentId", "stringJsonPropertyName", "stringJsonPropertyId", "desc", "STRING", propertyValMap, "tags", []string{"segmentId"}, "collectionId", 2, propertySegmentValMap, "JSON")
 	createProperty("environmentId", "stringYamlPropertyName", "stringYamlPropertyId", "desc", "STRING", "---\nkey: propertyVal", "tags", []string{"segmentId"}, "collectionId", 2, "---\nkey: segmentVal", "YAML")
-
+	propertyValMap = make(map[string]interface{})
+	propertyValMap["secret_type"] = "kv"
+	propertyValMap["id"] = "1312414-12341243fdsf-324dfsg-43fffg"
+	propertyValMap["sm_instance_crn"] = "crn:v1:staging:public:apprapp_dev:us-south:a/7bf663503fc5e2e06b03d2ada843bf54:ssfffgr-f6ee-48a5-a11b-ade4aecfe378::"
+	propertySegmentValMap = make(map[string]interface{})
+	propertySegmentValMap["id"] = "1312414-12341243fdsf-324dfsg-43fffh"
+	createProperty("environmentId", "secretRefPropertyName", "secretRefPropertyId", "desc", "SECRETREF", propertyValMap, "tags", []string{"segmentId"}, "collectionId", 2, propertySegmentValMap, "")
 	toggleFeature("environmentId", "booleanFeatureId", true)
 
 	getEnvironments()
@@ -131,6 +137,13 @@ func main() {
 	updateCollection("collectionId", "collectionName", "updatedDesc", "updatedTags")
 	updateSegment("segmentId", "segmentName", "updatedDesc", "updatedTags", "email", "endsWith", []string{"@in.ibm.com"})
 	updateProperty("environmentId", "booleanPropertyName", "booleanPropertyId", "updatedDescBoolean", "true", "updatedTags", []string{"segmentId"}, "collectionId", 2, "true")
+	propertyValMap = make(map[string]interface{})
+	propertyValMap["secret_type"] = "kv"
+	propertyValMap["id"] = "1312414-12341243fdsf-324dfsg-43fffi"
+	propertyValMap["sm_instance_crn"] = "crn:v1:staging:public:apprapp_dev:us-south:a/7bf663503fc5e2e06b03d2ada843bf54:ssfffgr-f6ee-48a5-a11b-ade4aecfe378::"
+	propertySegmentValMap = make(map[string]interface{})
+	propertySegmentValMap["id"] = "1312414-12341243fdsf-324dfsg-43fffj"
+	updateProperty("environmentId", "secretRefPropertyName", "secretRefPropertyId", "updatedDescSecretRef", propertyValMap, "tags", []string{"segmentId"}, "collectionId", 2, propertySegmentValMap)
 	updateEnvironment("environmentId", "environmentName", "updatedDesc", "tags", "#FDD13A")
 
 	getEnvironment("environmentId")
@@ -164,6 +177,7 @@ func main() {
 	deleteProperty("environmentId", "stringTextPropertyId")
 	deleteProperty("environmentId", "stringJsonPropertyId")
 	deleteProperty("environmentId", "stringYamlPropertyId")
+	deleteProperty("environmentId", "stringRefPropertyId")
 	deleteSegment("segmentId")
 	deleteConfiguration("snapshotConfigurationId")
 	deleteCollection("collectionId")
@@ -364,7 +378,7 @@ func updateSegment(segmentId string, name string, description string, tags strin
 	fmt.Println(*result.Name)
 }
 
-func updateProperty(environmentId string, name string, propertyId string, description string, valueOfProperty string, tags string, segments []string, collectionId string, order int64, value string) {
+func updateProperty(environmentId string, name string, propertyId string, description string, valueOfProperty interface{}, tags string, segments []string, collectionId string, order int64, value interface{}) {
 	fmt.Println("updateProperty")
 	ruleArray, _ := appConfigurationServiceInstance.NewTargetSegments(segments)
 	segmentRuleArray, _ := appConfigurationServiceInstance.NewSegmentRule([]appconfigurationv1.TargetSegments{*ruleArray}, value, order)
