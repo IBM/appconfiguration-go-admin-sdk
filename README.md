@@ -32,7 +32,7 @@ Use the Go Admin SDK to manage the App Configuration service instance. The Go Ad
 Install using the command.
 
 ```bash
-go get -u github.com/IBM/appconfiguration-go-admin-sdk@latest
+go get -u github.com/IBM/appconfiguration-go-admin-sdk
 ```
 
 ## Import the SDK
@@ -83,6 +83,24 @@ func init() {
 - region : Region of the App Configuration Instance
 
 **Note: Feature Rollout percentage is applicable only for Lite & Enterprise plans instances.**
+
+### Using private endpoints
+
+If you enabled service endpoints in your account, you can send API requests over the IBM Cloud private network. In the
+initialisation, the base endpoint URLs of the IAM(authenticator) & App Configuration(service) should be modified to
+point to private endpoints. See below
+
+```go
+    authenticator := &core.IamAuthenticator{
+        ApiKey: authToken,
+        URL: "https://private.iam.cloud.ibm.com",
+    }
+
+    options := &appconfigurationv1.AppConfigurationV1Options{
+        Authenticator: authenticator,
+        URL: "https://private." + region + ".apprapp.cloud.ibm.com/apprapp/feature/v1/instances/" + guid,
+    }
+```
 
 ## Using the SDK
 
