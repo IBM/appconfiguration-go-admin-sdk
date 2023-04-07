@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2023.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -118,7 +118,7 @@ func main() {
 	propertyValMap = make(map[string]interface{})
 	propertyValMap["secret_type"] = "kv"
 	propertyValMap["id"] = "1312414-12341243fdsf-324dfsg-43fffg"
-	propertyValMap["sm_instance_crn"] = "crn:v1:staging:public:apprapp_dev:us-south:a/7bf663503fc5e2e06b03d2ada843bf54:ssfffgr-f6ee-48a5-a11b-ade4aecfe378::"
+	propertyValMap["sm_instance_crn"] = "crn:v1:staging:public:secrets-manager:eu-gb:a/dc42233663e4r5ttt5h:17f17f54-898a-40e6-9aaa-5444555544444::"
 	propertySegmentValMap = make(map[string]interface{})
 	propertySegmentValMap["id"] = "1312414-12341243fdsf-324dfsg-43fffh"
 	createProperty("environmentId", "secretRefPropertyName", "secretRefPropertyId", "desc", "SECRETREF", propertyValMap, "tags", []string{"segmentId"}, "collectionId", 2, propertySegmentValMap, "")
@@ -140,17 +140,19 @@ func main() {
 	propertyValMap = make(map[string]interface{})
 	propertyValMap["secret_type"] = "kv"
 	propertyValMap["id"] = "1312414-12341243fdsf-324dfsg-43fffi"
-	propertyValMap["sm_instance_crn"] = "crn:v1:staging:public:apprapp_dev:us-south:a/7bf663503fc5e2e06b03d2ada843bf54:ssfffgr-f6ee-48a5-a11b-ade4aecfe378::"
+	propertyValMap["sm_instance_crn"] = "crn:v1:staging:public:secrets-manager:eu-gb:a/dc42233663e4r5ttt5h:17f17f54-898a-40e6-9aaa-5444555544444::"
 	propertySegmentValMap = make(map[string]interface{})
 	propertySegmentValMap["id"] = "1312414-12341243fdsf-324dfsg-43fffj"
 	updateProperty("environmentId", "secretRefPropertyName", "secretRefPropertyId", "updatedDescSecretRef", propertyValMap, "tags", []string{"segmentId"}, "collectionId", 2, propertySegmentValMap)
 	updateEnvironment("environmentId", "environmentName", "updatedDesc", "tags", "#FDD13A")
+	updateOriginConfigs([]string{"https://www.bluecharge.com", "https://blog.hubspot.com", "http://127.0.0.1:3000"})
 
 	getEnvironment("environmentId")
 	getCollection("collectionId")
 	getFeature("environmentId", "booleanFeatureId")
 	getProperty("environmentId", "booleanPropertyId")
 	getSegment("segmentId")
+	getOriginConfigs()
 
 	rolloutPercentage = int64(50)
 	segmentRolloutPercentage = int64(60)
@@ -166,6 +168,7 @@ func main() {
 	getConfiguration("snapshotConfigurationId")
 	listConfiguration()
 	createSnapshot("snapshotConfigurationId")
+	restoreSnapshot("snapshotConfigurationId")
 
 	deleteFeature("environmentId", "numberFeatureId")
 	deleteFeature("environmentId", "booleanFeatureId")
@@ -177,7 +180,7 @@ func main() {
 	deleteProperty("environmentId", "stringTextPropertyId")
 	deleteProperty("environmentId", "stringJsonPropertyId")
 	deleteProperty("environmentId", "stringYamlPropertyId")
-	deleteProperty("environmentId", "stringRefPropertyId")
+	deleteProperty("environmentId", "secretRefPropertyId")
 	deleteSegment("segmentId")
 	deleteConfiguration("snapshotConfigurationId")
 	deleteCollection("collectionId")
@@ -417,6 +420,18 @@ func patchProperty(environmentId string, name string, propertyId string, descrip
 	fmt.Println(response.StatusCode)
 	fmt.Println(*result.PropertyID)
 }
+func updateOriginConfigs(origins []string) {
+	fmt.Println("updateOriginConfigs")
+	updateOriginconfigsOptionsModel := appConfigurationServiceInstance.NewUpdateOriginconfigsOptions()
+	updateOriginconfigsOptionsModel.SetAllowedOrigins(origins)
+	result, response, error := appConfigurationServiceInstance.UpdateOriginconfigs(updateOriginconfigsOptionsModel)
+	if error != nil {
+		fmt.Println("Error: " + error.Error())
+		return
+	}
+	fmt.Println(response.StatusCode)
+	fmt.Println(result.AllowedOrigins)
+}
 
 // Delete examples
 
@@ -536,6 +551,18 @@ func getEnvironments() {
 	}
 	fmt.Println(response.StatusCode)
 	fmt.Println(len(result.Environments))
+}
+
+func getOriginConfigs() {
+	fmt.Println("getOriginConfigs")
+	listOriginconfigsOptionsModel := appConfigurationServiceInstance.NewListOriginconfigsOptions()
+	result, response, error := appConfigurationServiceInstance.ListOriginconfigs(listOriginconfigsOptionsModel)
+	if error != nil {
+		fmt.Println("Error: " + error.Error())
+		return
+	}
+	fmt.Println(response.StatusCode)
+	fmt.Println(len(result.AllowedOrigins))
 }
 
 // Get examples
@@ -669,7 +696,7 @@ func listConfiguration() {
 		return
 	}
 	fmt.Println(response.StatusCode)
-	fmt.Println(*result.Snapshot[0].GitConfigName)
+	fmt.Println(result.Snapshot)
 }
 func createSnapshot(gitConfigID string) {
 	fmt.Println("createSnapshot")
@@ -681,6 +708,16 @@ func createSnapshot(gitConfigID string) {
 	}
 	fmt.Println(response.StatusCode)
 	fmt.Println(*result.GitCommitID)
+}
+func restoreSnapshot(gitConfigID string) {
+	fmt.Println("restoreSnapshot")
+	restoreSnapshotOptionsModel := appConfigurationServiceInstance.NewRestoreGitconfigOptions(gitConfigID)
+	_, response, error := appConfigurationServiceInstance.RestoreGitconfig(restoreSnapshotOptionsModel)
+	if error != nil {
+		fmt.Println("Error: " + error.Error())
+		return
+	}
+	fmt.Println(response.StatusCode)
 }
 func deleteConfiguration(gitConfigId string) {
 	fmt.Println("deleteConfiguration")
