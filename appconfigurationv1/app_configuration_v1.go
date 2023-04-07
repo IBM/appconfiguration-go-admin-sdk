@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2022.
+ * (C) Copyright IBM Corp. 2023.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,7 @@
  */
 
 /*
- * IBM OpenAPI SDK Code Generator Version: 3.53.0-9710cac3-20220713-193508
+ * IBM OpenAPI SDK Code Generator Version: 3.69.0-370d6400-20230329-174648
  */
 
 // Package appconfigurationv1 : Operations and models for the AppConfigurationV1 service
@@ -36,7 +36,7 @@ import (
 	"github.com/go-openapi/strfmt"
 )
 
-// AppConfigurationV1 : ReST APIs for App Configuration
+// AppConfigurationV1 : REST APIs for App Configuration
 //
 // API Version: 1.0
 // See: https://{DomainName}/docs/app-configuration/
@@ -2580,7 +2580,7 @@ func (appConfiguration *AppConfigurationV1) DeleteGitconfigWithContext(ctx conte
 }
 
 // PromoteGitconfig : Promote configuration
-// Promote configuration, this api will write or update your chosen configuration to the git hub based on the git url,
+// Promote configuration, this api will write or update your chosen configuration to the GitHub based on the git url,
 // file path and branch data. In simple words this api will create or updates the bootstrap json file.
 func (appConfiguration *AppConfigurationV1) PromoteGitconfig(promoteGitconfigOptions *PromoteGitconfigOptions) (result *SnapshotPromote, response *core.DetailedResponse, err error) {
 	return appConfiguration.PromoteGitconfigWithContext(context.Background(), promoteGitconfigOptions)
@@ -2640,12 +2640,188 @@ func (appConfiguration *AppConfigurationV1) PromoteGitconfigWithContext(ctx cont
 	return
 }
 
+// RestoreGitconfig : Restore configuration
+// Restore configuration, this api will write or update your chosen configuration from the GitHub to App configuration
+// instance. The api will read the contents in the json file that was created using promote API and recreate or updates
+// the App configuration instance with the file contents like properties, features and segments.
+func (appConfiguration *AppConfigurationV1) RestoreGitconfig(restoreGitconfigOptions *RestoreGitconfigOptions) (result *SnapshotRestore, response *core.DetailedResponse, err error) {
+	return appConfiguration.RestoreGitconfigWithContext(context.Background(), restoreGitconfigOptions)
+}
+
+// RestoreGitconfigWithContext is an alternate form of the RestoreGitconfig method which supports a Context parameter
+func (appConfiguration *AppConfigurationV1) RestoreGitconfigWithContext(ctx context.Context, restoreGitconfigOptions *RestoreGitconfigOptions) (result *SnapshotRestore, response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(restoreGitconfigOptions, "restoreGitconfigOptions cannot be nil")
+	if err != nil {
+		return
+	}
+	err = core.ValidateStruct(restoreGitconfigOptions, "restoreGitconfigOptions")
+	if err != nil {
+		return
+	}
+
+	pathParamsMap := map[string]string{
+		"git_config_id": *restoreGitconfigOptions.GitConfigID,
+	}
+
+	builder := core.NewRequestBuilder(core.PUT)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = appConfiguration.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(appConfiguration.Service.Options.URL, `/gitconfigs/{git_config_id}/restore`, pathParamsMap)
+	if err != nil {
+		return
+	}
+
+	for headerName, headerValue := range restoreGitconfigOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "RestoreGitconfig")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+	builder.AddHeader("Accept", "application/json")
+
+	request, err := builder.Build()
+	if err != nil {
+		return
+	}
+
+	var rawResponse map[string]json.RawMessage
+	response, err = appConfiguration.Service.Request(request, &rawResponse)
+	if err != nil {
+		return
+	}
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalSnapshotRestore)
+		if err != nil {
+			return
+		}
+		response.Result = result
+	}
+
+	return
+}
+
+// ListOriginconfigs : Get list of Origin Configs
+// List all the Origin Configs.
+func (appConfiguration *AppConfigurationV1) ListOriginconfigs(listOriginconfigsOptions *ListOriginconfigsOptions) (result *OriginConfigList, response *core.DetailedResponse, err error) {
+	return appConfiguration.ListOriginconfigsWithContext(context.Background(), listOriginconfigsOptions)
+}
+
+// ListOriginconfigsWithContext is an alternate form of the ListOriginconfigs method which supports a Context parameter
+func (appConfiguration *AppConfigurationV1) ListOriginconfigsWithContext(ctx context.Context, listOriginconfigsOptions *ListOriginconfigsOptions) (result *OriginConfigList, response *core.DetailedResponse, err error) {
+	err = core.ValidateStruct(listOriginconfigsOptions, "listOriginconfigsOptions")
+	if err != nil {
+		return
+	}
+
+	builder := core.NewRequestBuilder(core.GET)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = appConfiguration.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(appConfiguration.Service.Options.URL, `/originconfigs`, nil)
+	if err != nil {
+		return
+	}
+
+	for headerName, headerValue := range listOriginconfigsOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "ListOriginconfigs")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+	builder.AddHeader("Accept", "application/json")
+
+	request, err := builder.Build()
+	if err != nil {
+		return
+	}
+
+	var rawResponse map[string]json.RawMessage
+	response, err = appConfiguration.Service.Request(request, &rawResponse)
+	if err != nil {
+		return
+	}
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalOriginConfigList)
+		if err != nil {
+			return
+		}
+		response.Result = result
+	}
+
+	return
+}
+
+// UpdateOriginconfigs : Update Origin Configs
+// Update the Origin Configs.
+func (appConfiguration *AppConfigurationV1) UpdateOriginconfigs(updateOriginconfigsOptions *UpdateOriginconfigsOptions) (result *OriginConfigList, response *core.DetailedResponse, err error) {
+	return appConfiguration.UpdateOriginconfigsWithContext(context.Background(), updateOriginconfigsOptions)
+}
+
+// UpdateOriginconfigsWithContext is an alternate form of the UpdateOriginconfigs method which supports a Context parameter
+func (appConfiguration *AppConfigurationV1) UpdateOriginconfigsWithContext(ctx context.Context, updateOriginconfigsOptions *UpdateOriginconfigsOptions) (result *OriginConfigList, response *core.DetailedResponse, err error) {
+	err = core.ValidateStruct(updateOriginconfigsOptions, "updateOriginconfigsOptions")
+	if err != nil {
+		return
+	}
+
+	builder := core.NewRequestBuilder(core.PUT)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = appConfiguration.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(appConfiguration.Service.Options.URL, `/originconfigs`, nil)
+	if err != nil {
+		return
+	}
+
+	for headerName, headerValue := range updateOriginconfigsOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "UpdateOriginconfigs")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+	builder.AddHeader("Accept", "application/json")
+	builder.AddHeader("Content-Type", "application/json")
+
+	body := make(map[string]interface{})
+	if updateOriginconfigsOptions.AllowedOrigins != nil {
+		body["allowed_origins"] = updateOriginconfigsOptions.AllowedOrigins
+	}
+	_, err = builder.SetBodyContentJSON(body)
+	if err != nil {
+		return
+	}
+
+	request, err := builder.Build()
+	if err != nil {
+		return
+	}
+
+	var rawResponse map[string]json.RawMessage
+	response, err = appConfiguration.Service.Request(request, &rawResponse)
+	if err != nil {
+		return
+	}
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalOriginConfigList)
+		if err != nil {
+			return
+		}
+		response.Result = result
+	}
+
+	return
+}
+
 // Collection : Details of the collection.
 type Collection struct {
-	// Collection name.
+	// Collection name. Allowed special characters are dot ( . ), hyphen( - ), underscore ( _ ) only.
 	Name *string `json:"name" validate:"required"`
 
-	// Collection Id.
+	// Collection Id. Allowed special characters are dot ( . ), hyphen( - ), underscore ( _ ) only.
 	CollectionID *string `json:"collection_id" validate:"required"`
 
 	// Collection description.
@@ -2675,7 +2851,7 @@ type Collection struct {
 	// Number of features associated with the collection.
 	FeaturesCount *int64 `json:"features_count,omitempty"`
 
-	// Number of features associated with the collection.
+	// Number of properties associated with the collection.
 	PropertiesCount *int64 `json:"properties_count,omitempty"`
 
 	// Number of snapshot associated with the collection.
@@ -2836,10 +3012,10 @@ func (resp *CollectionList) GetNextOffset() (*int64, error) {
 
 // CollectionLite : Details of the collection.
 type CollectionLite struct {
-	// Collection name.
+	// Collection name. Allowed special characters are dot ( . ), hyphen( - ), underscore ( _ ) only.
 	Name *string `json:"name" validate:"required"`
 
-	// Collection Id.
+	// Collection Id. Allowed special characters are dot ( . ), hyphen( - ), underscore ( _ ) only.
 	CollectionID *string `json:"collection_id" validate:"required"`
 
 	// Collection description.
@@ -2928,10 +3104,10 @@ func UnmarshalCollectionRef(m map[string]json.RawMessage, result interface{}) (e
 
 // CreateCollectionOptions : The CreateCollection options.
 type CreateCollectionOptions struct {
-	// Collection name.
+	// Collection name. Allowed special characters are dot ( . ), hyphen( - ), underscore ( _ ) only.
 	Name *string `json:"name" validate:"required"`
 
-	// Collection Id.
+	// Collection Id. Allowed special characters are dot ( . ), hyphen( - ), underscore ( _ ) only.
 	CollectionID *string `json:"collection_id" validate:"required"`
 
 	// Collection description.
@@ -2984,10 +3160,10 @@ func (options *CreateCollectionOptions) SetHeaders(param map[string]string) *Cre
 
 // CreateEnvironmentOptions : The CreateEnvironment options.
 type CreateEnvironmentOptions struct {
-	// Environment name.
+	// Environment name. Allowed special characters are dot ( . ), hyphen( - ), underscore ( _ ) only.
 	Name *string `json:"name" validate:"required"`
 
-	// Environment id.
+	// Environment id. Allowed special characters are dot ( . ), hyphen( - ), underscore ( _ ) only.
 	EnvironmentID *string `json:"environment_id" validate:"required"`
 
 	// Environment description.
@@ -3050,38 +3226,37 @@ func (options *CreateEnvironmentOptions) SetHeaders(param map[string]string) *Cr
 // CreateFeatureOptions : The CreateFeature options.
 type CreateFeatureOptions struct {
 	// Environment Id.
-	EnvironmentID *string `json:"-" validate:"required,ne="`
+	EnvironmentID *string `json:"environment_id" validate:"required,ne="`
 
-	// Feature name.
+	// Feature name. Allowed special characters are dot ( . ), hyphen( - ), underscore ( _ ) only.
 	Name *string `json:"name" validate:"required"`
 
-	// Feature id.
+	// Feature id. Allowed special characters are dot ( . ), hyphen( - ), underscore ( _ ) only.
 	FeatureID *string `json:"feature_id" validate:"required"`
 
-	// Type of the feature (BOOLEAN, STRING, NUMERIC) if TYPE is STRING then format attribute is required.
+	// Type of the feature (BOOLEAN, STRING, NUMERIC). If `type` is `STRING`, then `format` attribute is required.
 	Type *string `json:"type" validate:"required"`
 
 	// Value of the feature when it is enabled. The value can be Boolean, Numeric, String - TEXT, String - JSON, String -
-	// YAML value as per the `type` and `format` attribute.
+	// YAML value as per the `type` and `format` attributes.
 	EnabledValue interface{} `json:"enabled_value" validate:"required"`
 
 	// Value of the feature when it is disabled. The value can be Boolean, Numeric, String - TEXT, String - JSON, String -
-	// YAML value as per the `type` and `format` attribute.
+	// YAML value as per the `type` and `format` attributes.
 	DisabledValue interface{} `json:"disabled_value" validate:"required"`
 
 	// Feature description.
 	Description *string `json:"description,omitempty"`
 
-	// Format of the feature (TEXT, JSON, YAML) and this is a required attribute when `TYPE STRING` is used, not required
-	// for `BOOLEAN and NUMERIC` types. This property is populated in the response body of `POST, PUT and GET` calls if the
-	// type `STRING` is used and not populated for `BOOLEAN and NUMERIC` types.
+	// Format of the feature (TEXT, JSON, YAML) and it is a required attribute when `type` is `STRING`. It is not required
+	// for `BOOLEAN` and `NUMERIC` types. This property is populated in the response body of `POST, PUT and GET` calls if
+	// the type `STRING` is used and not populated for `BOOLEAN` and `NUMERIC` types.
 	Format *string `json:"format,omitempty"`
 
 	// The state of the feature flag.
 	Enabled *bool `json:"enabled,omitempty"`
 
-	// Rollout percentage associated with feature flag. Max range 0-100. The Phased rollout feature is available only for
-	// Lite and Enterprise plans.
+	// Rollout percentage associated with feature flag. Supported only for Lite and Enterprise plans.
 	RolloutPercentage *int64 `json:"rollout_percentage,omitempty"`
 
 	// Tags associated with the feature.
@@ -3098,7 +3273,7 @@ type CreateFeatureOptions struct {
 }
 
 // Constants associated with the CreateFeatureOptions.Type property.
-// Type of the feature (BOOLEAN, STRING, NUMERIC) if TYPE is STRING then format attribute is required.
+// Type of the feature (BOOLEAN, STRING, NUMERIC). If `type` is `STRING`, then `format` attribute is required.
 const (
 	CreateFeatureOptions_Type_Boolean = "BOOLEAN"
 	CreateFeatureOptions_Type_Numeric = "NUMERIC"
@@ -3106,9 +3281,9 @@ const (
 )
 
 // Constants associated with the CreateFeatureOptions.Format property.
-// Format of the feature (TEXT, JSON, YAML) and this is a required attribute when `TYPE STRING` is used, not required
-// for `BOOLEAN and NUMERIC` types. This property is populated in the response body of `POST, PUT and GET` calls if the
-// type `STRING` is used and not populated for `BOOLEAN and NUMERIC` types.
+// Format of the feature (TEXT, JSON, YAML) and it is a required attribute when `type` is `STRING`. It is not required
+// for `BOOLEAN` and `NUMERIC` types. This property is populated in the response body of `POST, PUT and GET` calls if
+// the type `STRING` is used and not populated for `BOOLEAN` and `NUMERIC` types.
 const (
 	CreateFeatureOptions_Format_JSON = "JSON"
 	CreateFeatureOptions_Format_Text = "TEXT"
@@ -3309,28 +3484,28 @@ func (options *CreateGitconfigOptions) SetHeaders(param map[string]string) *Crea
 // CreatePropertyOptions : The CreateProperty options.
 type CreatePropertyOptions struct {
 	// Environment Id.
-	EnvironmentID *string `json:"-" validate:"required,ne="`
+	EnvironmentID *string `json:"environment_id" validate:"required,ne="`
 
-	// Property name.
+	// Property name. Allowed special characters are dot ( . ), hyphen( - ), underscore ( _ ) only.
 	Name *string `json:"name" validate:"required"`
 
-	// Property id.
+	// Property id. Allowed special characters are dot ( . ), hyphen( - ), underscore ( _ ) only.
 	PropertyID *string `json:"property_id" validate:"required"`
 
-	// Type of the Property (BOOLEAN, STRING, NUMERIC, SECRETREF), if STRING TYPE is selected then format attribute is
+	// Type of the property (BOOLEAN, STRING, NUMERIC, SECRETREF). If `type` is `STRING`, then `format` attribute is
 	// required.
 	Type *string `json:"type" validate:"required"`
 
 	// Value of the Property. The value can be Boolean, Numeric, SecretRef, String - TEXT, String - JSON, String - YAML as
-	// per the `type` and `format` attribute.
+	// per the `type` and `format` attributes.
 	Value interface{} `json:"value" validate:"required"`
 
 	// Property description.
 	Description *string `json:"description,omitempty"`
 
-	// Format of the feature (TEXT, JSON, YAML) and this is a required attribute when `TYPE STRING` is used, not required
-	// for `BOOLEAN, NUMERIC or SECRETREF` types. This property is populated in the response body of `POST, PUT and GET`
-	// calls if the type `STRING` is used and not populated for `BOOLEAN, NUMERIC and SECRETREF` types.
+	// Format of the property (TEXT, JSON, YAML) and it is a required attribute when `type` is `STRING`. It is not required
+	// for `BOOLEAN`, `NUMERIC` or `SECRETREF` types. This attribute is populated in the response body of `POST, PUT and
+	// GET` calls if the type `STRING` is used and not populated for `BOOLEAN`, `NUMERIC` and `SECRETREF` types.
 	Format *string `json:"format,omitempty"`
 
 	// Tags associated with the property.
@@ -3347,7 +3522,7 @@ type CreatePropertyOptions struct {
 }
 
 // Constants associated with the CreatePropertyOptions.Type property.
-// Type of the Property (BOOLEAN, STRING, NUMERIC, SECRETREF), if STRING TYPE is selected then format attribute is
+// Type of the property (BOOLEAN, STRING, NUMERIC, SECRETREF). If `type` is `STRING`, then `format` attribute is
 // required.
 const (
 	CreatePropertyOptions_Type_Boolean   = "BOOLEAN"
@@ -3357,9 +3532,9 @@ const (
 )
 
 // Constants associated with the CreatePropertyOptions.Format property.
-// Format of the feature (TEXT, JSON, YAML) and this is a required attribute when `TYPE STRING` is used, not required
-// for `BOOLEAN, NUMERIC or SECRETREF` types. This property is populated in the response body of `POST, PUT and GET`
-// calls if the type `STRING` is used and not populated for `BOOLEAN, NUMERIC and SECRETREF` types.
+// Format of the property (TEXT, JSON, YAML) and it is a required attribute when `type` is `STRING`. It is not required
+// for `BOOLEAN`, `NUMERIC` or `SECRETREF` types. This attribute is populated in the response body of `POST, PUT and
+// GET` calls if the type `STRING` is used and not populated for `BOOLEAN`, `NUMERIC` and `SECRETREF` types.
 const (
 	CreatePropertyOptions_Format_JSON = "JSON"
 	CreatePropertyOptions_Format_Text = "TEXT"
@@ -3445,10 +3620,10 @@ func (options *CreatePropertyOptions) SetHeaders(param map[string]string) *Creat
 
 // CreateSegmentOptions : The CreateSegment options.
 type CreateSegmentOptions struct {
-	// Segment name.
+	// Segment name. Allowed special characters are dot ( . ), hyphen( - ), underscore ( _ ) only.
 	Name *string `json:"name,omitempty"`
 
-	// Segment id.
+	// Segment id. Allowed special characters are dot ( . ), hyphen( - ), underscore ( _ ) only.
 	SegmentID *string `json:"segment_id,omitempty"`
 
 	// Segment description.
@@ -3510,7 +3685,7 @@ func (options *CreateSegmentOptions) SetHeaders(param map[string]string) *Create
 // DeleteCollectionOptions : The DeleteCollection options.
 type DeleteCollectionOptions struct {
 	// Collection Id of the collection.
-	CollectionID *string `json:"-" validate:"required,ne="`
+	CollectionID *string `json:"collection_id" validate:"required,ne="`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -3538,7 +3713,7 @@ func (options *DeleteCollectionOptions) SetHeaders(param map[string]string) *Del
 // DeleteEnvironmentOptions : The DeleteEnvironment options.
 type DeleteEnvironmentOptions struct {
 	// Environment Id.
-	EnvironmentID *string `json:"-" validate:"required,ne="`
+	EnvironmentID *string `json:"environment_id" validate:"required,ne="`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -3566,10 +3741,10 @@ func (options *DeleteEnvironmentOptions) SetHeaders(param map[string]string) *De
 // DeleteFeatureOptions : The DeleteFeature options.
 type DeleteFeatureOptions struct {
 	// Environment Id.
-	EnvironmentID *string `json:"-" validate:"required,ne="`
+	EnvironmentID *string `json:"environment_id" validate:"required,ne="`
 
 	// Feature Id.
-	FeatureID *string `json:"-" validate:"required,ne="`
+	FeatureID *string `json:"feature_id" validate:"required,ne="`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -3632,10 +3807,10 @@ func (options *DeleteGitconfigOptions) SetHeaders(param map[string]string) *Dele
 // DeletePropertyOptions : The DeleteProperty options.
 type DeletePropertyOptions struct {
 	// Environment Id.
-	EnvironmentID *string `json:"-" validate:"required,ne="`
+	EnvironmentID *string `json:"environment_id" validate:"required,ne="`
 
 	// Property Id.
-	PropertyID *string `json:"-" validate:"required,ne="`
+	PropertyID *string `json:"property_id" validate:"required,ne="`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -3670,7 +3845,7 @@ func (options *DeletePropertyOptions) SetHeaders(param map[string]string) *Delet
 // DeleteSegmentOptions : The DeleteSegment options.
 type DeleteSegmentOptions struct {
 	// Segment Id.
-	SegmentID *string `json:"-" validate:"required,ne="`
+	SegmentID *string `json:"segment_id" validate:"required,ne="`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -3697,10 +3872,10 @@ func (options *DeleteSegmentOptions) SetHeaders(param map[string]string) *Delete
 
 // Environment : Details of the environment.
 type Environment struct {
-	// Environment name.
+	// Environment name. Allowed special characters are dot ( . ), hyphen( - ), underscore ( _ ) only.
 	Name *string `json:"name" validate:"required"`
 
-	// Environment id.
+	// Environment id. Allowed special characters are dot ( . ), hyphen( - ), underscore ( _ ) only.
 	EnvironmentID *string `json:"environment_id" validate:"required"`
 
 	// Environment description.
@@ -3726,6 +3901,7 @@ type Environment struct {
 
 	// List of properties associated with the environment.
 	Properties []PropertyOutput `json:"properties,omitempty"`
+
 	// List of snapshots associated with the environment.
 	Snapshots []SnapshotOutput `json:"snapshots,omitempty"`
 }
@@ -3876,36 +4052,35 @@ func (resp *EnvironmentList) GetNextOffset() (*int64, error) {
 
 // Feature : Details of the feature.
 type Feature struct {
-	// Feature name.
+	// Feature name. Allowed special characters are dot ( . ), hyphen( - ), underscore ( _ ) only.
 	Name *string `json:"name" validate:"required"`
 
-	// Feature id.
+	// Feature id. Allowed special characters are dot ( . ), hyphen( - ), underscore ( _ ) only.
 	FeatureID *string `json:"feature_id" validate:"required"`
 
 	// Feature description.
 	Description *string `json:"description,omitempty"`
 
-	// Type of the feature (BOOLEAN, STRING, NUMERIC) if TYPE is STRING then format attribute is required.
+	// Type of the feature (BOOLEAN, STRING, NUMERIC). If `type` is `STRING`, then `format` attribute is required.
 	Type *string `json:"type" validate:"required"`
 
-	// Format of the feature (TEXT, JSON, YAML) and this is a required attribute when `TYPE STRING` is used, not required
-	// for `BOOLEAN and NUMERIC` types. This property is populated in the response body of `POST, PUT and GET` calls if the
-	// type `STRING` is used and not populated for `BOOLEAN and NUMERIC` types.
+	// Format of the feature (TEXT, JSON, YAML) and it is a required attribute when `type` is `STRING`. It is not required
+	// for `BOOLEAN` and `NUMERIC` types. This property is populated in the response body of `POST, PUT and GET` calls if
+	// the type `STRING` is used and not populated for `BOOLEAN` and `NUMERIC` types.
 	Format *string `json:"format,omitempty"`
 
 	// Value of the feature when it is enabled. The value can be Boolean, Numeric, String - TEXT, String - JSON, String -
-	// YAML value as per the `type` and `format` attribute.
+	// YAML value as per the `type` and `format` attributes.
 	EnabledValue interface{} `json:"enabled_value" validate:"required"`
 
 	// Value of the feature when it is disabled. The value can be Boolean, Numeric, String - TEXT, String - JSON, String -
-	// YAML value as per the `type` and `format` attribute.
+	// YAML value as per the `type` and `format` attributes.
 	DisabledValue interface{} `json:"disabled_value" validate:"required"`
 
 	// The state of the feature flag.
 	Enabled *bool `json:"enabled,omitempty"`
 
-	// Rollout percentage associated with feature flag. Max range 0-100. The Phased rollout feature is available only for
-	// Lite and Enterprise plans.
+	// Rollout percentage associated with feature flag. Supported only for Lite and Enterprise plans.
 	RolloutPercentage *int64 `json:"rollout_percentage,omitempty"`
 
 	// Tags associated with the feature.
@@ -3934,7 +4109,7 @@ type Feature struct {
 }
 
 // Constants associated with the Feature.Type property.
-// Type of the feature (BOOLEAN, STRING, NUMERIC) if TYPE is STRING then format attribute is required.
+// Type of the feature (BOOLEAN, STRING, NUMERIC). If `type` is `STRING`, then `format` attribute is required.
 const (
 	Feature_Type_Boolean = "BOOLEAN"
 	Feature_Type_Numeric = "NUMERIC"
@@ -3942,9 +4117,9 @@ const (
 )
 
 // Constants associated with the Feature.Format property.
-// Format of the feature (TEXT, JSON, YAML) and this is a required attribute when `TYPE STRING` is used, not required
-// for `BOOLEAN and NUMERIC` types. This property is populated in the response body of `POST, PUT and GET` calls if the
-// type `STRING` is used and not populated for `BOOLEAN and NUMERIC` types.
+// Format of the feature (TEXT, JSON, YAML) and it is a required attribute when `type` is `STRING`. It is not required
+// for `BOOLEAN` and `NUMERIC` types. This property is populated in the response body of `POST, PUT and GET` calls if
+// the type `STRING` is used and not populated for `BOOLEAN` and `NUMERIC` types.
 const (
 	Feature_Format_JSON = "JSON"
 	Feature_Format_Text = "TEXT"
@@ -4078,16 +4253,15 @@ type FeatureSegmentRule struct {
 	// The list of targeted segments.
 	Rules []TargetSegments `json:"rules" validate:"required"`
 
-	// Value to be used for evaluation for this rule. The value can be Boolean, String - TEXT , String - JSON , String -
-	// YAML or a Numeric value as per the `type` and `format` attribute.
+	// Value to be used for evaluation for this rule. The value can be Boolean, SecretRef, String - TEXT , String - JSON ,
+	// String - YAML or a Numeric value as per the `type` and `format` attributes.
 	Value interface{} `json:"value" validate:"required"`
 
 	// Order of the rule, used during evaluation. The evaluation is performed in the order defined and the value associated
 	// with the first matching rule is used for evaluation.
 	Order *int64 `json:"order" validate:"required"`
 
-	// Rollout percentage associated with segment. Max range 0-100. The Phased rollout feature is available only for Lite
-	// and Enterprise plans.
+	// Rollout percentage associated with feature flag. Supported only for Lite and Enterprise plans.
 	RolloutPercentage *int64 `json:"rollout_percentage,omitempty"`
 }
 
@@ -4212,13 +4386,13 @@ func (resp *FeaturesList) GetNextOffset() (*int64, error) {
 // GetCollectionOptions : The GetCollection options.
 type GetCollectionOptions struct {
 	// Collection Id of the collection.
-	CollectionID *string `json:"-" validate:"required,ne="`
+	CollectionID *string `json:"collection_id" validate:"required,ne="`
 
 	// If set to `true`, returns expanded view of the resource details.
-	Expand *bool `json:"-"`
+	Expand *bool `json:"expand,omitempty"`
 
 	// Include feature, property, snapshots details in the response.
-	Include []string `json:"-"`
+	Include []string `json:"include,omitempty"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -4265,13 +4439,13 @@ func (options *GetCollectionOptions) SetHeaders(param map[string]string) *GetCol
 // GetEnvironmentOptions : The GetEnvironment options.
 type GetEnvironmentOptions struct {
 	// Environment Id.
-	EnvironmentID *string `json:"-" validate:"required,ne="`
+	EnvironmentID *string `json:"environment_id" validate:"required,ne="`
 
 	// If set to `true`, returns expanded view of the resource details.
-	Expand *bool `json:"-"`
+	Expand *bool `json:"expand,omitempty"`
 
-	// Include feature and property details in the response.
-	Include []string `json:"-"`
+	// Include feature, property, snapshots details in the response.
+	Include []string `json:"include,omitempty"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -4318,13 +4492,13 @@ func (options *GetEnvironmentOptions) SetHeaders(param map[string]string) *GetEn
 // GetFeatureOptions : The GetFeature options.
 type GetFeatureOptions struct {
 	// Environment Id.
-	EnvironmentID *string `json:"-" validate:"required,ne="`
+	EnvironmentID *string `json:"environment_id" validate:"required,ne="`
 
 	// Feature Id.
-	FeatureID *string `json:"-" validate:"required,ne="`
+	FeatureID *string `json:"feature_id" validate:"required,ne="`
 
 	// Include the associated collections in the response.
-	Include *string `json:"-"`
+	Include *string `json:"include,omitempty"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -4399,13 +4573,13 @@ func (options *GetGitconfigOptions) SetHeaders(param map[string]string) *GetGitc
 // GetPropertyOptions : The GetProperty options.
 type GetPropertyOptions struct {
 	// Environment Id.
-	EnvironmentID *string `json:"-" validate:"required,ne="`
+	EnvironmentID *string `json:"environment_id" validate:"required,ne="`
 
 	// Property Id.
-	PropertyID *string `json:"-" validate:"required,ne="`
+	PropertyID *string `json:"property_id" validate:"required,ne="`
 
 	// Include the associated collections in the response.
-	Include *string `json:"-"`
+	Include *string `json:"include,omitempty"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -4452,10 +4626,10 @@ func (options *GetPropertyOptions) SetHeaders(param map[string]string) *GetPrope
 // GetSegmentOptions : The GetSegment options.
 type GetSegmentOptions struct {
 	// Segment Id.
-	SegmentID *string `json:"-" validate:"required,ne="`
+	SegmentID *string `json:"segment_id" validate:"required,ne="`
 
 	// Include feature and property details in the response.
-	Include []string `json:"-"`
+	Include []string `json:"include,omitempty"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -4495,35 +4669,35 @@ func (options *GetSegmentOptions) SetHeaders(param map[string]string) *GetSegmen
 // ListCollectionsOptions : The ListCollections options.
 type ListCollectionsOptions struct {
 	// If set to `true`, returns expanded view of the resource details.
-	Expand *bool `json:"-"`
+	Expand *bool `json:"expand,omitempty"`
 
 	// Sort the collection details based on the specified attribute.
-	Sort *string `json:"-"`
+	Sort *string `json:"sort,omitempty"`
 
 	// Filter the resources to be returned based on the associated tags. Specify the parameter as a list of comma separated
 	// tags. Returns resources associated with any of the specified tags.
-	Tags *string `json:"-"`
+	Tags *string `json:"tags,omitempty"`
 
 	// Filter collections by a list of comma separated features.
-	Features []string `json:"-"`
+	Features []string `json:"features,omitempty"`
 
 	// Filter collections by a list of comma separated properties.
-	Properties []string `json:"-"`
+	Properties []string `json:"properties,omitempty"`
 
 	// Include feature, property, snapshots details in the response.
-	Include []string `json:"-"`
+	Include []string `json:"include,omitempty"`
 
 	// The number of records to retrieve. By default, the list operation return the first 10 records. To retrieve different
 	// set of records, use `limit` with `offset` to page through the available records.
-	Limit *int64 `json:"-"`
+	Limit *int64 `json:"limit,omitempty"`
 
 	// The number of records to skip. By specifying `offset`, you retrieve a subset of items that starts with the `offset`
 	// value. Use `offset` with `limit` to page through the available records.
-	Offset *int64 `json:"-"`
+	Offset *int64 `json:"offset,omitempty"`
 
 	// Searches for the provided keyword and returns the appropriate row with that value. Here the search happens on the
 	// '[Name OR Tag]' of the entity.
-	Search *string `json:"-"`
+	Search *string `json:"search,omitempty"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -4613,29 +4787,29 @@ func (options *ListCollectionsOptions) SetHeaders(param map[string]string) *List
 // ListEnvironmentsOptions : The ListEnvironments options.
 type ListEnvironmentsOptions struct {
 	// If set to `true`, returns expanded view of the resource details.
-	Expand *bool `json:"-"`
+	Expand *bool `json:"expand,omitempty"`
 
 	// Sort the environment details based on the specified attribute.
-	Sort *string `json:"-"`
+	Sort *string `json:"sort,omitempty"`
 
 	// Filter the resources to be returned based on the associated tags. Specify the parameter as a list of comma separated
 	// tags. Returns resources associated with any of the specified tags.
-	Tags *string `json:"-"`
+	Tags *string `json:"tags,omitempty"`
 
 	// Include feature, property, snapshots details in the response.
-	Include []string `json:"-"`
+	Include []string `json:"include,omitempty"`
 
 	// The number of records to retrieve. By default, the list operation return the first 10 records. To retrieve different
 	// set of records, use `limit` with `offset` to page through the available records.
-	Limit *int64 `json:"-"`
+	Limit *int64 `json:"limit,omitempty"`
 
 	// The number of records to skip. By specifying `offset`, you retrieve a subset of items that starts with the `offset`
 	// value. Use `offset` with `limit` to page through the available records.
-	Offset *int64 `json:"-"`
+	Offset *int64 `json:"offset,omitempty"`
 
 	// Searches for the provided keyword and returns the appropriate row with that value. Here the search happens on the
 	// '[Name OR Tag]' of the entity.
-	Search *string `json:"-"`
+	Search *string `json:"search,omitempty"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -4713,38 +4887,38 @@ func (options *ListEnvironmentsOptions) SetHeaders(param map[string]string) *Lis
 // ListFeaturesOptions : The ListFeatures options.
 type ListFeaturesOptions struct {
 	// Environment Id.
-	EnvironmentID *string `json:"-" validate:"required,ne="`
+	EnvironmentID *string `json:"environment_id" validate:"required,ne="`
 
 	// If set to `true`, returns expanded view of the resource details.
-	Expand *bool `json:"-"`
+	Expand *bool `json:"expand,omitempty"`
 
 	// Sort the feature details based on the specified attribute.
-	Sort *string `json:"-"`
+	Sort *string `json:"sort,omitempty"`
 
 	// Filter the resources to be returned based on the associated tags. Specify the parameter as a list of comma separated
 	// tags. Returns resources associated with any of the specified tags.
 	Tags *string `json:"tags,omitempty"`
 
 	// Filter features by a list of comma separated collections.
-	Collections []string `json:"-"`
+	Collections []string `json:"collections,omitempty"`
 
 	// Filter features by a list of comma separated segments.
-	Segments []string `json:"-"`
+	Segments []string `json:"segments,omitempty"`
 
 	// Include the associated collections or targeting rules details in the response.
-	Include []string `json:"-"`
+	Include []string `json:"include,omitempty"`
 
 	// The number of records to retrieve. By default, the list operation return the first 10 records. To retrieve different
 	// set of records, use `limit` with `offset` to page through the available records.
-	Limit *int64 `json:"-"`
+	Limit *int64 `json:"limit,omitempty"`
 
 	// The number of records to skip. By specifying `offset`, you retrieve a subset of items that starts with the `offset`
 	// value. Use `offset` with `limit` to page through the available records.
-	Offset *int64 `json:"-"`
+	Offset *int64 `json:"offset,omitempty"`
 
 	// Searches for the provided keyword and returns the appropriate row with that value. Here the search happens on the
 	// '[Name OR Tag]' of the entity.
-	Search *string `json:"-"`
+	Search *string `json:"search,omitempty"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -4838,41 +5012,59 @@ func (options *ListFeaturesOptions) SetHeaders(param map[string]string) *ListFea
 	return options
 }
 
+// ListOriginconfigsOptions : The ListOriginconfigs options.
+type ListOriginconfigsOptions struct {
+
+	// Allows users to set headers on API requests
+	Headers map[string]string
+}
+
+// NewListOriginconfigsOptions : Instantiate ListOriginconfigsOptions
+func (*AppConfigurationV1) NewListOriginconfigsOptions() *ListOriginconfigsOptions {
+	return &ListOriginconfigsOptions{}
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *ListOriginconfigsOptions) SetHeaders(param map[string]string) *ListOriginconfigsOptions {
+	options.Headers = param
+	return options
+}
+
 // ListPropertiesOptions : The ListProperties options.
 type ListPropertiesOptions struct {
 	// Environment Id.
-	EnvironmentID *string `json:"-" validate:"required,ne="`
+	EnvironmentID *string `json:"environment_id" validate:"required,ne="`
 
 	// If set to `true`, returns expanded view of the resource details.
-	Expand *bool `json:"-"`
+	Expand *bool `json:"expand,omitempty"`
 
 	// Sort the property details based on the specified attribute.
-	Sort *string `json:"-"`
+	Sort *string `json:"sort,omitempty"`
 
 	// Filter the resources to be returned based on the associated tags. Specify the parameter as a list of comma separated
 	// tags. Returns resources associated with any of the specified tags.
-	Tags *string `json:"-"`
+	Tags *string `json:"tags,omitempty"`
 
 	// Filter properties by a list of comma separated collections.
-	Collections []string `json:"-"`
+	Collections []string `json:"collections,omitempty"`
 
 	// Filter properties by a list of comma separated segments.
-	Segments []string `json:"-"`
+	Segments []string `json:"segments,omitempty"`
 
 	// Include the associated collections or targeting rules details in the response.
-	Include []string `json:"-"`
+	Include []string `json:"include,omitempty"`
 
 	// The number of records to retrieve. By default, the list operation return the first 10 records. To retrieve different
 	// set of records, use `limit` with `offset` to page through the available records.
-	Limit *int64 `json:"-"`
+	Limit *int64 `json:"limit,omitempty"`
 
 	// The number of records to skip. By specifying `offset`, you retrieve a subset of items that starts with the `offset`
 	// value. Use `offset` with `limit` to page through the available records.
-	Offset *int64 `json:"-"`
+	Offset *int64 `json:"offset,omitempty"`
 
 	// Searches for the provided keyword and returns the appropriate row with that value. Here the search happens on the
 	// '[Name OR Tag]' of the entity.
-	Search *string `json:"-"`
+	Search *string `json:"search,omitempty"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -4969,29 +5161,29 @@ func (options *ListPropertiesOptions) SetHeaders(param map[string]string) *ListP
 // ListSegmentsOptions : The ListSegments options.
 type ListSegmentsOptions struct {
 	// If set to `true`, returns expanded view of the resource details.
-	Expand *bool `json:"-"`
+	Expand *bool `json:"expand,omitempty"`
 
 	// Sort the segment details based on the specified attribute.
-	Sort *string `json:"-"`
+	Sort *string `json:"sort,omitempty"`
 
 	// Filter the resources to be returned based on the associated tags. Specify the parameter as a list of comma separated
 	// tags. Returns resources associated with any of the specified tags.
-	Tags *string `json:"-"`
+	Tags *string `json:"tags,omitempty"`
 
 	// Segment details to include the associated rules in the response.
-	Include *string `json:"-"`
+	Include *string `json:"include,omitempty"`
 
 	// The number of records to retrieve. By default, the list operation return the first 10 records. To retrieve different
 	// set of records, use `limit` with `offset` to page through the available records.
-	Limit *int64 `json:"-"`
+	Limit *int64 `json:"limit,omitempty"`
 
 	// The number of records to skip. By specifying `offset`, you retrieve a subset of items that starts with the `offset`
 	// value. Use `offset` with `limit` to page through the available records.
-	Offset *int64 `json:"-"`
+	Offset *int64 `json:"offset,omitempty"`
 
 	// Searches for the provided keyword and returns the appropriate row with that value. Here the search happens on the
 	// '[Name OR Tag]' of the entity.
-	Search *string `json:"-"`
+	Search *string `json:"search,omitempty"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -5160,6 +5352,44 @@ func (options *ListSnapshotsOptions) SetHeaders(param map[string]string) *ListSn
 	return options
 }
 
+// OriginConfigList : List of all origin configs.
+type OriginConfigList struct {
+	// List of allowed origins. Specify the parameter as a list of comma separated origins.
+	AllowedOrigins []string `json:"allowed_origins" validate:"required"`
+
+	// Creation time of the origin configs.
+	CreatedTime *strfmt.DateTime `json:"created_time,omitempty"`
+
+	// Last modified time of the origin configs.
+	UpdatedTime *strfmt.DateTime `json:"updated_time,omitempty"`
+
+	// Origin Config URL.
+	Href *string `json:"href,omitempty"`
+}
+
+// UnmarshalOriginConfigList unmarshals an instance of OriginConfigList from the specified map of raw messages.
+func UnmarshalOriginConfigList(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(OriginConfigList)
+	err = core.UnmarshalPrimitive(m, "allowed_origins", &obj.AllowedOrigins)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "created_time", &obj.CreatedTime)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "updated_time", &obj.UpdatedTime)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "href", &obj.Href)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
 // PageHrefResponse : Response having URL of the page.
 type PageHrefResponse struct {
 	// URL to the page.
@@ -5290,25 +5520,26 @@ func (resp *PropertiesList) GetNextOffset() (*int64, error) {
 
 // Property : Details of the property.
 type Property struct {
-	// Property name.
+	// Property name. Allowed special characters are dot ( . ), hyphen( - ), underscore ( _ ) only.
 	Name *string `json:"name" validate:"required"`
 
-	// Property id.
+	// Property id. Allowed special characters are dot ( . ), hyphen( - ), underscore ( _ ) only.
 	PropertyID *string `json:"property_id" validate:"required"`
 
 	// Property description.
 	Description *string `json:"description,omitempty"`
 
-	// Type of the Property (BOOLEAN, STRING, NUMERIC), if STRING TYPE is selected then format attribute is required.
+	// Type of the property (BOOLEAN, STRING, NUMERIC, SECRETREF). If `type` is `STRING`, then `format` attribute is
+	// required.
 	Type *string `json:"type" validate:"required"`
 
-	// Format of the feature (TEXT, JSON, YAML) and this is a required attribute when `TYPE STRING` is used, not required
-	// for `BOOLEAN, NUMERIC or SECRETREF` types. This property is populated in the response body of `POST, PUT and GET`
-	// calls if the type `STRING` is used and not populated for `BOOLEAN, NUMERIC and SECRETREF` types.
+	// Format of the property (TEXT, JSON, YAML) and it is a required attribute when `type` is `STRING`. It is not required
+	// for `BOOLEAN`, `NUMERIC` or `SECRETREF` types. This attribute is populated in the response body of `POST, PUT and
+	// GET` calls if the type `STRING` is used and not populated for `BOOLEAN`, `NUMERIC` and `SECRETREF` types.
 	Format *string `json:"format,omitempty"`
 
 	// Value of the Property. The value can be Boolean, Numeric, SecretRef, String - TEXT, String - JSON, String - YAML as
-	// per the `type` and `format` attribute.
+	// per the `type` and `format` attributes.
 	Value interface{} `json:"value" validate:"required"`
 
 	// Tags associated with the property.
@@ -5337,7 +5568,7 @@ type Property struct {
 }
 
 // Constants associated with the Property.Type property.
-// Type of the Property (BOOLEAN, STRING, NUMERIC, SECRETREF), if STRING TYPE is selected then format attribute is
+// Type of the property (BOOLEAN, STRING, NUMERIC, SECRETREF). If `type` is `STRING`, then `format` attribute is
 // required.
 const (
 	Property_Type_Boolean   = "BOOLEAN"
@@ -5347,8 +5578,9 @@ const (
 )
 
 // Constants associated with the Property.Format property.
-// Format of the Property (TEXT, JSON, YAML) and this is a required attribute when STRING TYPE is used, not required
-// when BOOLEAN and NUMERIC TYPE is used.
+// Format of the property (TEXT, JSON, YAML) and it is a required attribute when `type` is `STRING`. It is not required
+// for `BOOLEAN`, `NUMERIC` or `SECRETREF` types. This attribute is populated in the response body of `POST, PUT and
+// GET` calls if the type `STRING` is used and not populated for `BOOLEAN`, `NUMERIC` and `SECRETREF` types.
 const (
 	Property_Format_JSON = "JSON"
 	Property_Format_Text = "TEXT"
@@ -5464,6 +5696,34 @@ func UnmarshalPropertyOutput(m map[string]json.RawMessage, result interface{}) (
 	return
 }
 
+// RestoreGitconfigOptions : The RestoreGitconfig options.
+type RestoreGitconfigOptions struct {
+	// Git Config Id.
+	GitConfigID *string `json:"git_config_id" validate:"required,ne="`
+
+	// Allows users to set headers on API requests
+	Headers map[string]string
+}
+
+// NewRestoreGitconfigOptions : Instantiate RestoreGitconfigOptions
+func (*AppConfigurationV1) NewRestoreGitconfigOptions(gitConfigID string) *RestoreGitconfigOptions {
+	return &RestoreGitconfigOptions{
+		GitConfigID: core.StringPtr(gitConfigID),
+	}
+}
+
+// SetGitConfigID : Allow user to set GitConfigID
+func (_options *RestoreGitconfigOptions) SetGitConfigID(gitConfigID string) *RestoreGitconfigOptions {
+	_options.GitConfigID = core.StringPtr(gitConfigID)
+	return _options
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *RestoreGitconfigOptions) SetHeaders(param map[string]string) *RestoreGitconfigOptions {
+	options.Headers = param
+	return options
+}
+
 // Rule : Rule is used to determine if the entity belongs to the segment during feature / property evaluation.
 type Rule struct {
 	// Attribute name.
@@ -5521,10 +5781,10 @@ func UnmarshalRule(m map[string]json.RawMessage, result interface{}) (err error)
 
 // Segment : Details of the segment.
 type Segment struct {
-	// Segment name.
+	// Segment name. Allowed special characters are dot ( . ), hyphen( - ), underscore ( _ ) only.
 	Name *string `json:"name" validate:"required"`
 
-	// Segment id.
+	// Segment id. Allowed special characters are dot ( . ), hyphen( - ), underscore ( _ ) only.
 	SegmentID *string `json:"segment_id" validate:"required"`
 
 	// Segment description.
@@ -5617,8 +5877,8 @@ type SegmentRule struct {
 	// The list of targeted segments.
 	Rules []TargetSegments `json:"rules" validate:"required"`
 
-	// Value to be used for evaluation for this rule. The value can be Boolean, String - TEXT , String - JSON , String -
-	// YAML or a Numeric value as per the `type` and `format` attribute.
+	// Value to be used for evaluation for this rule. The value can be Boolean, SecretRef, String - TEXT , String - JSON ,
+	// String - YAML or a Numeric value as per the `type` and `format` attributes.
 	Value interface{} `json:"value" validate:"required"`
 
 	// Order of the rule, used during evaluation. The evaluation is performed in the order defined and the value associated
@@ -5813,10 +6073,10 @@ type SnapshotResponseGetApi struct {
 	GitConfigID *string `json:"git_config_id" validate:"required"`
 
 	// Collection object will be returned containing attributes collection_id, collection_name.
-	Collection interface{} `json:"collection,omitempty"`
+	Collection map[string]interface{} `json:"collection,omitempty"`
 
 	// Environment object will be returned containing attributes environment_id, environment_name, color_code.
-	Environment interface{} `json:"environment,omitempty"`
+	Environment map[string]interface{} `json:"environment,omitempty"`
 
 	// Git url which will be used to connect to the github account. The url must be formed in this format,
 	// https://api.github.com/repos/{owner}/{repo_name} for the personal git account. If you are using the organization
@@ -5992,10 +6252,10 @@ type SnapshotResponsePutApi struct {
 	GitConfigID *string `json:"git_config_id" validate:"required"`
 
 	// Collection object will be returned containing attributes collection_id, collection_name.
-	Collection interface{} `json:"collection" validate:"required"`
+	Collection map[string]interface{} `json:"collection" validate:"required"`
 
 	// Environment object will be returned containing attributes environment_id, environment_name, color_code.
-	Environment interface{} `json:"environment" validate:"required"`
+	Environment map[string]interface{} `json:"environment" validate:"required"`
 
 	// Git url which will be used to connect to the github account. The url must be formed in this format,
 	// https://api.github.com/repos/{owner}/{repo_name} for the personal git account. If you are using the organization
@@ -6069,6 +6329,125 @@ func UnmarshalSnapshotResponsePutApi(m map[string]json.RawMessage, result interf
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "href", &obj.Href)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// SnapshotRestore : Details of the restore operation.
+type SnapshotRestore struct {
+	// The environments array will contain the environment data and it will also contains properties array and features
+	// array that belongs to that environment.
+	Environments []SnapshotRestoreEnvironmentsItemIntf `json:"environments,omitempty"`
+
+	// Segments that belongs to the features or properties.
+	Segments []UpdateSegment `json:"segments,omitempty"`
+}
+
+// UnmarshalSnapshotRestore unmarshals an instance of SnapshotRestore from the specified map of raw messages.
+func UnmarshalSnapshotRestore(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(SnapshotRestore)
+	err = core.UnmarshalModel(m, "environments", &obj.Environments, UnmarshalSnapshotRestoreEnvironmentsItem)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(m, "segments", &obj.Segments, UnmarshalUpdateSegment)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// SnapshotRestoreEnvironmentsItem : SnapshotRestoreEnvironmentsItem struct
+// Models which "extend" this model:
+// - SnapshotRestoreEnvironmentsItemUpdateFeature
+// - SnapshotRestoreEnvironmentsItemUpdateProperty
+type SnapshotRestoreEnvironmentsItem struct {
+	// Feature name. Allowed special characters are dot ( . ), hyphen( - ), underscore ( _ ) only.
+	Name *string `json:"name,omitempty"`
+
+	// Feature description.
+	Description *string `json:"description,omitempty"`
+
+	// Value of the feature when it is enabled. The value can be Boolean, Numeric, String - TEXT, String - JSON, String -
+	// YAML value as per the `type` and `format` attributes.
+	EnabledValue interface{} `json:"enabled_value,omitempty"`
+
+	// Value of the feature when it is disabled. The value can be Boolean, Numeric, String - TEXT, String - JSON, String -
+	// YAML value as per the `type` and `format` attributes.
+	DisabledValue interface{} `json:"disabled_value,omitempty"`
+
+	// The state of the feature flag.
+	Enabled *bool `json:"enabled,omitempty"`
+
+	// Rollout percentage associated with feature flag. Supported only for Lite and Enterprise plans.
+	RolloutPercentage *int64 `json:"rollout_percentage,omitempty"`
+
+	// Tags associated with the feature.
+	Tags *string `json:"tags,omitempty"`
+
+	// Specify the targeting rules that is used to set different property values for different segments.
+	SegmentRules []FeatureSegmentRule `json:"segment_rules,omitempty"`
+
+	// List of collection id representing the collections that are associated with the specified property.
+	Collections []CollectionRef `json:"collections,omitempty"`
+
+	// Value of the Property. The value can be Boolean, Numeric, SecretRef, String - TEXT, String - JSON, String - YAML as
+	// per the `type` and `format` attributes.
+	Value interface{} `json:"value,omitempty"`
+}
+
+func (*SnapshotRestoreEnvironmentsItem) isaSnapshotRestoreEnvironmentsItem() bool {
+	return true
+}
+
+type SnapshotRestoreEnvironmentsItemIntf interface {
+	isaSnapshotRestoreEnvironmentsItem() bool
+}
+
+// UnmarshalSnapshotRestoreEnvironmentsItem unmarshals an instance of SnapshotRestoreEnvironmentsItem from the specified map of raw messages.
+func UnmarshalSnapshotRestoreEnvironmentsItem(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(SnapshotRestoreEnvironmentsItem)
+	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "description", &obj.Description)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "enabled_value", &obj.EnabledValue)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "disabled_value", &obj.DisabledValue)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "enabled", &obj.Enabled)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "rollout_percentage", &obj.RolloutPercentage)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "tags", &obj.Tags)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(m, "segment_rules", &obj.SegmentRules, UnmarshalFeatureSegmentRule)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(m, "collections", &obj.Collections, UnmarshalCollectionRef)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "value", &obj.Value)
 	if err != nil {
 		return
 	}
@@ -6188,10 +6567,10 @@ func UnmarshalTargetSegments(m map[string]json.RawMessage, result interface{}) (
 // ToggleFeatureOptions : The ToggleFeature options.
 type ToggleFeatureOptions struct {
 	// Environment Id.
-	EnvironmentID *string `json:"-" validate:"required,ne="`
+	EnvironmentID *string `json:"environment_id" validate:"required,ne="`
 
 	// Feature Id.
-	FeatureID *string `json:"-" validate:"required,ne="`
+	FeatureID *string `json:"feature_id" validate:"required,ne="`
 
 	// The state of the feature flag.
 	Enabled *bool `json:"enabled,omitempty"`
@@ -6235,9 +6614,9 @@ func (options *ToggleFeatureOptions) SetHeaders(param map[string]string) *Toggle
 // UpdateCollectionOptions : The UpdateCollection options.
 type UpdateCollectionOptions struct {
 	// Collection Id of the collection.
-	CollectionID *string `json:"-" validate:"required,ne="`
+	CollectionID *string `json:"collection_id" validate:"required,ne="`
 
-	// Collection name.
+	// Collection name. Allowed special characters are dot ( . ), hyphen( - ), underscore ( _ ) only.
 	Name *string `json:"name,omitempty"`
 
 	// Description of the collection.
@@ -6290,9 +6669,9 @@ func (options *UpdateCollectionOptions) SetHeaders(param map[string]string) *Upd
 // UpdateEnvironmentOptions : The UpdateEnvironment options.
 type UpdateEnvironmentOptions struct {
 	// Environment Id.
-	EnvironmentID *string `json:"-" validate:"required,ne="`
+	EnvironmentID *string `json:"environment_id" validate:"required,ne="`
 
-	// Environment name.
+	// Environment name. Allowed special characters are dot ( . ), hyphen( - ), underscore ( _ ) only.
 	Name *string `json:"name,omitempty"`
 
 	// Environment description.
@@ -6354,31 +6733,31 @@ func (options *UpdateEnvironmentOptions) SetHeaders(param map[string]string) *Up
 // UpdateFeatureOptions : The UpdateFeature options.
 type UpdateFeatureOptions struct {
 	// Environment Id.
-	EnvironmentID *string `json:"-" validate:"required,ne="`
+	EnvironmentID *string `json:"environment_id" validate:"required,ne="`
 
 	// Feature Id.
-	FeatureID *string `json:"-" validate:"required,ne="`
+	FeatureID *string `json:"feature_id" validate:"required,ne="`
 
-	// Feature name.
+	// Feature name. Allowed special characters are dot ( . ), hyphen( - ), underscore ( _ ) only.
 	Name *string `json:"name,omitempty"`
 
 	// Feature description.
 	Description *string `json:"description,omitempty"`
 
 	// Value of the feature when it is enabled. The value can be Boolean, Numeric, String - TEXT, String - JSON, String -
-	// YAML value as per the `type` and `format` attribute.
+	// YAML value as per the `type` and `format` attributes.
 	EnabledValue interface{} `json:"enabled_value,omitempty"`
 
 	// Value of the feature when it is disabled. The value can be Boolean, Numeric, String - TEXT, String - JSON, String -
-	// YAML value as per the `type` and `format` attribute.
+	// YAML value as per the `type` and `format` attributes.
 	DisabledValue interface{} `json:"disabled_value,omitempty"`
 
 	// The state of the feature flag.
 	Enabled *bool `json:"enabled,omitempty"`
 
-	// Rollout percentage associated with feature flag. Max range 0-100. The Phased rollout feature is available only for
-	// Lite and Enterprise plans.
+	// Rollout percentage associated with feature flag. Supported only for Lite and Enterprise plans.
 	RolloutPercentage *int64 `json:"rollout_percentage,omitempty"`
+
 	// Tags associated with the feature.
 	Tags *string `json:"tags,omitempty"`
 
@@ -6475,12 +6854,12 @@ func (options *UpdateFeatureOptions) SetHeaders(param map[string]string) *Update
 // UpdateFeatureValuesOptions : The UpdateFeatureValues options.
 type UpdateFeatureValuesOptions struct {
 	// Environment Id.
-	EnvironmentID *string `json:"-" validate:"required,ne="`
+	EnvironmentID *string `json:"environment_id" validate:"required,ne="`
 
 	// Feature Id.
-	FeatureID *string `json:"-" validate:"required,ne="`
+	FeatureID *string `json:"feature_id" validate:"required,ne="`
 
-	// Feature name.
+	// Feature name. Allowed special characters are dot ( . ), hyphen( - ), underscore ( _ ) only.
 	Name *string `json:"name,omitempty"`
 
 	// Feature description.
@@ -6490,15 +6869,14 @@ type UpdateFeatureValuesOptions struct {
 	Tags *string `json:"tags,omitempty"`
 
 	// Value of the feature when it is enabled. The value can be Boolean, Numeric, String - TEXT, String - JSON, String -
-	// YAML value as per the `type` and `format` attribute.
+	// YAML value as per the `type` and `format` attributes.
 	EnabledValue interface{} `json:"enabled_value,omitempty"`
 
 	// Value of the feature when it is disabled. The value can be Boolean, Numeric, String - TEXT, String - JSON, String -
-	// YAML value as per the `type` and `format` attribute.
+	// YAML value as per the `type` and `format` attributes.
 	DisabledValue interface{} `json:"disabled_value,omitempty"`
 
-	// Rollout percentage associated with feature flag. Max range 0-100. The Phased rollout feature is available only for
-	// Lite and Enterprise plans.
+	// Rollout percentage associated with feature flag. Supported only for Lite and Enterprise plans.
 	RolloutPercentage *int64 `json:"rollout_percentage,omitempty"`
 
 	// Specify the targeting rules that is used to set different property values for different segments.
@@ -6673,22 +7051,48 @@ func (options *UpdateGitconfigOptions) SetHeaders(param map[string]string) *Upda
 	return options
 }
 
+// UpdateOriginconfigsOptions : The UpdateOriginconfigs options.
+type UpdateOriginconfigsOptions struct {
+	// List of allowed origins. Specify the parameter as a list of comma separated origins.
+	AllowedOrigins []string `json:"allowed_origins,omitempty"`
+
+	// Allows users to set headers on API requests
+	Headers map[string]string
+}
+
+// NewUpdateOriginconfigsOptions : Instantiate UpdateOriginconfigsOptions
+func (*AppConfigurationV1) NewUpdateOriginconfigsOptions() *UpdateOriginconfigsOptions {
+	return &UpdateOriginconfigsOptions{}
+}
+
+// SetAllowedOrigins : Allow user to set AllowedOrigins
+func (_options *UpdateOriginconfigsOptions) SetAllowedOrigins(allowedOrigins []string) *UpdateOriginconfigsOptions {
+	_options.AllowedOrigins = allowedOrigins
+	return _options
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *UpdateOriginconfigsOptions) SetHeaders(param map[string]string) *UpdateOriginconfigsOptions {
+	options.Headers = param
+	return options
+}
+
 // UpdatePropertyOptions : The UpdateProperty options.
 type UpdatePropertyOptions struct {
 	// Environment Id.
-	EnvironmentID *string `json:"-" validate:"required,ne="`
+	EnvironmentID *string `json:"environment_id" validate:"required,ne="`
 
 	// Property Id.
-	PropertyID *string `json:"-" validate:"required,ne="`
+	PropertyID *string `json:"property_id" validate:"required,ne="`
 
-	// Property name.
+	// Property name. Allowed special characters are dot ( . ), hyphen( - ), underscore ( _ ) only.
 	Name *string `json:"name,omitempty"`
 
 	// Property description.
 	Description *string `json:"description,omitempty"`
 
-	// Value of the Property. The value can be Boolean, Numeric, String - TEXT, String - JSON, String - YAML as per the
-	// `type` and `format` attribute.
+	// Value of the Property. The value can be Boolean, Numeric, SecretRef, String - TEXT, String - JSON, String - YAML as
+	// per the `type` and `format` attributes.
 	Value interface{} `json:"value,omitempty"`
 
 	// Tags associated with the property.
@@ -6769,12 +7173,12 @@ func (options *UpdatePropertyOptions) SetHeaders(param map[string]string) *Updat
 // UpdatePropertyValuesOptions : The UpdatePropertyValues options.
 type UpdatePropertyValuesOptions struct {
 	// Environment Id.
-	EnvironmentID *string `json:"-" validate:"required,ne="`
+	EnvironmentID *string `json:"environment_id" validate:"required,ne="`
 
 	// Property Id.
-	PropertyID *string `json:"-" validate:"required,ne="`
+	PropertyID *string `json:"property_id" validate:"required,ne="`
 
-	// Property name.
+	// Property name. Allowed special characters are dot ( . ), hyphen( - ), underscore ( _ ) only.
 	Name *string `json:"name,omitempty"`
 
 	// Property description.
@@ -6783,8 +7187,8 @@ type UpdatePropertyValuesOptions struct {
 	// Tags associated with the property.
 	Tags *string `json:"tags,omitempty"`
 
-	// Value of the Property. The value can be Boolean, Numeric, String - TEXT, String - JSON, String - YAML as per the
-	// `type` and `format` attribute.
+	// Value of the Property. The value can be Boolean, Numeric, SecretRef, String - TEXT, String - JSON, String - YAML as
+	// per the `type` and `format` attributes.
 	Value interface{} `json:"value,omitempty"`
 
 	// Specify the targeting rules that is used to set different property values for different segments.
@@ -6850,12 +7254,52 @@ func (options *UpdatePropertyValuesOptions) SetHeaders(param map[string]string) 
 	return options
 }
 
+// UpdateSegment : Segment attributes to be updated.
+type UpdateSegment struct {
+	// Segment name. Allowed special characters are dot ( . ), hyphen( - ), underscore ( _ ) only.
+	Name *string `json:"name,omitempty"`
+
+	// Segment description.
+	Description *string `json:"description,omitempty"`
+
+	// Tags associated with segments.
+	Tags *string `json:"tags,omitempty"`
+
+	// List of rules that determine if the entity belongs to the segment during feature / property evaluation. An entity is
+	// identified by an unique identifier and the attributes that it defines. Any feature flag and property value
+	// evaluation is performed in the context of an entity when it is targeted to segments.
+	Rules []Rule `json:"rules,omitempty"`
+}
+
+// UnmarshalUpdateSegment unmarshals an instance of UpdateSegment from the specified map of raw messages.
+func UnmarshalUpdateSegment(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(UpdateSegment)
+	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "description", &obj.Description)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "tags", &obj.Tags)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(m, "rules", &obj.Rules, UnmarshalRule)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
 // UpdateSegmentOptions : The UpdateSegment options.
 type UpdateSegmentOptions struct {
 	// Segment Id.
-	SegmentID *string `json:"-" validate:"required,ne="`
+	SegmentID *string `json:"segment_id" validate:"required,ne="`
 
-	// Segment name.
+	// Segment name. Allowed special characters are dot ( . ), hyphen( - ), underscore ( _ ) only.
 	Name *string `json:"name,omitempty"`
 
 	// Segment description.
@@ -6916,9 +7360,145 @@ func (options *UpdateSegmentOptions) SetHeaders(param map[string]string) *Update
 	return options
 }
 
-//
+// SnapshotRestoreEnvironmentsItemUpdateFeature : Feature flag attributes to be updated.
+// This model "extends" SnapshotRestoreEnvironmentsItem
+type SnapshotRestoreEnvironmentsItemUpdateFeature struct {
+	// Feature name. Allowed special characters are dot ( . ), hyphen( - ), underscore ( _ ) only.
+	Name *string `json:"name,omitempty"`
+
+	// Feature description.
+	Description *string `json:"description,omitempty"`
+
+	// Value of the feature when it is enabled. The value can be Boolean, Numeric, String - TEXT, String - JSON, String -
+	// YAML value as per the `type` and `format` attributes.
+	EnabledValue interface{} `json:"enabled_value,omitempty"`
+
+	// Value of the feature when it is disabled. The value can be Boolean, Numeric, String - TEXT, String - JSON, String -
+	// YAML value as per the `type` and `format` attributes.
+	DisabledValue interface{} `json:"disabled_value,omitempty"`
+
+	// The state of the feature flag.
+	Enabled *bool `json:"enabled,omitempty"`
+
+	// Rollout percentage associated with feature flag. Supported only for Lite and Enterprise plans.
+	RolloutPercentage *int64 `json:"rollout_percentage,omitempty"`
+
+	// Tags associated with the feature.
+	Tags *string `json:"tags,omitempty"`
+
+	// Specify the targeting rules that is used to set different property values for different segments.
+	SegmentRules []FeatureSegmentRule `json:"segment_rules,omitempty"`
+
+	// List of collection id representing the collections that are associated with the specified property.
+	Collections []CollectionRef `json:"collections,omitempty"`
+}
+
+func (*SnapshotRestoreEnvironmentsItemUpdateFeature) isaSnapshotRestoreEnvironmentsItem() bool {
+	return true
+}
+
+// UnmarshalSnapshotRestoreEnvironmentsItemUpdateFeature unmarshals an instance of SnapshotRestoreEnvironmentsItemUpdateFeature from the specified map of raw messages.
+func UnmarshalSnapshotRestoreEnvironmentsItemUpdateFeature(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(SnapshotRestoreEnvironmentsItemUpdateFeature)
+	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "description", &obj.Description)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "enabled_value", &obj.EnabledValue)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "disabled_value", &obj.DisabledValue)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "enabled", &obj.Enabled)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "rollout_percentage", &obj.RolloutPercentage)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "tags", &obj.Tags)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(m, "segment_rules", &obj.SegmentRules, UnmarshalFeatureSegmentRule)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(m, "collections", &obj.Collections, UnmarshalCollectionRef)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// SnapshotRestoreEnvironmentsItemUpdateProperty : Property attributes to be updated.
+// This model "extends" SnapshotRestoreEnvironmentsItem
+type SnapshotRestoreEnvironmentsItemUpdateProperty struct {
+	// Property name. Allowed special characters are dot ( . ), hyphen( - ), underscore ( _ ) only.
+	Name *string `json:"name,omitempty"`
+
+	// Property description.
+	Description *string `json:"description,omitempty"`
+
+	// Value of the Property. The value can be Boolean, Numeric, SecretRef, String - TEXT, String - JSON, String - YAML as
+	// per the `type` and `format` attributes.
+	Value interface{} `json:"value,omitempty"`
+
+	// Tags associated with the property.
+	Tags *string `json:"tags,omitempty"`
+
+	// Specify the targeting rules that is used to set different property values for different segments.
+	SegmentRules []SegmentRule `json:"segment_rules,omitempty"`
+
+	// List of collection id representing the collections that are associated with the specified property.
+	Collections []CollectionRef `json:"collections,omitempty"`
+}
+
+func (*SnapshotRestoreEnvironmentsItemUpdateProperty) isaSnapshotRestoreEnvironmentsItem() bool {
+	return true
+}
+
+// UnmarshalSnapshotRestoreEnvironmentsItemUpdateProperty unmarshals an instance of SnapshotRestoreEnvironmentsItemUpdateProperty from the specified map of raw messages.
+func UnmarshalSnapshotRestoreEnvironmentsItemUpdateProperty(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(SnapshotRestoreEnvironmentsItemUpdateProperty)
+	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "description", &obj.Description)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "value", &obj.Value)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "tags", &obj.Tags)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(m, "segment_rules", &obj.SegmentRules, UnmarshalSegmentRule)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(m, "collections", &obj.Collections, UnmarshalCollectionRef)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
 // EnvironmentsPager can be used to simplify the use of the "ListEnvironments" method.
-//
 type EnvironmentsPager struct {
 	hasNext     bool
 	options     *ListEnvironmentsOptions
@@ -7003,9 +7583,7 @@ func (pager *EnvironmentsPager) GetAll() (allItems []Environment, err error) {
 	return pager.GetAllWithContext(context.Background())
 }
 
-//
 // CollectionsPager can be used to simplify the use of the "ListCollections" method.
-//
 type CollectionsPager struct {
 	hasNext     bool
 	options     *ListCollectionsOptions
@@ -7090,9 +7668,7 @@ func (pager *CollectionsPager) GetAll() (allItems []Collection, err error) {
 	return pager.GetAllWithContext(context.Background())
 }
 
-//
 // FeaturesPager can be used to simplify the use of the "ListFeatures" method.
-//
 type FeaturesPager struct {
 	hasNext     bool
 	options     *ListFeaturesOptions
@@ -7177,9 +7753,7 @@ func (pager *FeaturesPager) GetAll() (allItems []Feature, err error) {
 	return pager.GetAllWithContext(context.Background())
 }
 
-//
 // PropertiesPager can be used to simplify the use of the "ListProperties" method.
-//
 type PropertiesPager struct {
 	hasNext     bool
 	options     *ListPropertiesOptions
@@ -7264,9 +7838,7 @@ func (pager *PropertiesPager) GetAll() (allItems []Property, err error) {
 	return pager.GetAllWithContext(context.Background())
 }
 
-//
 // SegmentsPager can be used to simplify the use of the "ListSegments" method.
-//
 type SegmentsPager struct {
 	hasNext     bool
 	options     *ListSegmentsOptions
@@ -7351,9 +7923,7 @@ func (pager *SegmentsPager) GetAll() (allItems []Segment, err error) {
 	return pager.GetAllWithContext(context.Background())
 }
 
-//
 // SnapshotsPager can be used to simplify the use of the "ListSnapshots" method.
-//
 type SnapshotsPager struct {
 	hasNext     bool
 	options     *ListSnapshotsOptions
@@ -7391,10 +7961,12 @@ func (pager *SnapshotsPager) GetNextWithContext(ctx context.Context) (page []Sna
 	}
 
 	pager.options.Offset = pager.pageContext.next
+
 	result, _, err := pager.client.ListSnapshotsWithContext(ctx, pager.options)
 	if err != nil {
 		return
 	}
+
 	var next *int64
 	if result.Next != nil {
 		var offset *int64

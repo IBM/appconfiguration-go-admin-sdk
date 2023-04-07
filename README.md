@@ -82,11 +82,14 @@ func init() {
 - guid : ID of the App Configuration Instance.
 - region : Region of the App Configuration Instance
 
-**Note: Feature Rollout percentage is applicable only for Lite & Enterprise plans instances.**
+**Note: Some capabilities such as Percentage rollout & Git configs are applicable only for specific
+plans (Lite, Standard & Enterprise). [See here](https://cloud.ibm.com/docs/app-configuration?topic=app-configuration-ac-faqs-usage#faq-ac-capabilities)
+for full list of capabilities that are plan wise.**
 
 ### Using private endpoints
 
-If you enabled service endpoints in your account, you can send API requests over the IBM Cloud private network. In the
+If you enable [service endpoints](https://cloud.ibm.com/docs/account?topic=account-vrf-service-endpoint&interface=ui#service-endpoint)
+in your account, you can send API requests over the IBM Cloud private network. In the SDK
 initialisation, the base endpoint URLs of the IAM(authenticator) & App Configuration(service) should be modified to
 point to private endpoints. See below
 
@@ -125,7 +128,7 @@ SDK Methods to consume ->
 - Update*Item*Values
 - Delete*Item*
 
-where *Item* can be replaced with Collection, Property, Environment, Feature or Segment.
+where *Item* can be replaced with Environment, Collection, Feature, Property, Segments, Git config & Origin config.
 
 Refer [this](https://cloud.ibm.com/apidocs/app-configuration) for details on the input parameters for each SDK method.
 
@@ -255,7 +258,7 @@ patchPropertyOptionsModel.SetValue(valueOfProperty)
 patchPropertyOptionsModel.SetSegmentRules([]appconfigurationv1.SegmentRule{*segmentRuleArray})
 result, response, err := appConfigurationServiceInstance.UpdatePropertyValues(patchPropertyOptionsModel)
 ```
-### Create config
+### Create Git config
 ```go
 createConfigurationOptionsModel := appConfigurationServiceInstance.NewCreateGitconfigOptions()
 createConfigurationOptionsModel.SetGitConfigName("snapshotConfigurationName")
@@ -269,37 +272,50 @@ createConfigurationOptionsModel.SetGitToken(gitToken)
 result, response, error := appConfigurationServiceInstance.CreateGitconfig(createConfigurationOptionsModel)
 ```
 
-### Update config
+### Update Git config
 ```go
 updateConfigurationOptionsModel := appConfigurationServiceInstance.NewUpdateGitconfigOptions(gitConfigId)
 updateConfigurationOptionsModel.SetGitConfigName("snapshotConfigurationNameUpdate")
 result, response, error := appConfigurationServiceInstance.UpdateGitconfig(updateConfigurationOptionsModel)
 ```
 
-### Get config
+### Get Git config
 ```go
 getGitConfigOptionsModel := appConfigurationServiceInstance.NewGetGitconfigOptions(gitConfigId)
 result, response, error := appConfigurationServiceInstance.GetGitconfig(getGitConfigOptionsModel)
 ```
 
-### List config
+### List Git config
 ```go
 listSnapshotsOptionsModel := appConfigurationServiceInstance.NewListSnapshotsOptions()
 result, response, error := appConfigurationServiceInstance.ListSnapshots(listSnapshotsOptionsModel)
 ```
 
-### Create snapshot
+### Create snapshot (Promote to Git)
 ```go
 createSnapshotOptionsModel := appConfigurationServiceInstance.NewPromoteGitconfigOptions(gitConfigID)
 result, response, error := appConfigurationServiceInstance.PromoteGitconfig(createSnapshotOptionsModel)
 ```
 
-### Delete config
+### Restore snapshot (Restore from Git)
+```go
+restoreSnapshotOptionsModel := appConfigurationServiceInstance.NewRestoreGitconfigOptions(gitConfigID)
+result, response, error := appConfigurationServiceInstance.RestoreGitconfig(restoreSnapshotOptionsModel)
+```
+
+### Delete Git config
 ```go
 deleteGitConfigOptionsModel := appConfigurationServiceInstance.NewDeleteGitconfigOptions(gitConfigId)
 response, error := appConfigurationServiceInstance.DeleteGitconfig(deleteGitConfigOptionsModel)
 ```
 
+### Update Origin config
+
+```go
+updateOriginconfigsOptionsModel := appConfigurationServiceInstance.NewUpdateOriginconfigsOptions()
+updateOriginconfigsOptionsModel.SetAllowedOrigins(origins)
+result, response, error := appConfigurationServiceInstance.UpdateOriginconfigs(updateOriginconfigsOptionsModel)
+```
 ## License
 
 This project is released under the Apache 2.0 license. The license's full text can be found in [LICENSE](/LICENSE)
