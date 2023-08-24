@@ -32,7 +32,7 @@ Use the Go Admin SDK to manage the App Configuration service instance. The Go Ad
 Install using the command.
 
 ```bash
-go get -u github.com/IBM/appconfiguration-go-admin-sdk@latest
+go get -u github.com/IBM/appconfiguration-go-admin-sdk
 ```
 
 ## Import the SDK
