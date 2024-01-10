@@ -239,7 +239,7 @@ func createSegment(name string, id string, description string, tags string, attr
 func createFeature(environmentId string, name string, id string, description string, typeOfFeature string, enabledValue interface{}, disabledValue interface{}, tags string, segments []string, order int64, collectionId string, value interface{}, format string, featureRolloutPercentage *int64, segmentRolloutPercentage *int64) {
 	fmt.Println("createFeature")
 	ruleArray, _ := appConfigurationServiceInstance.NewTargetSegments(segments)
-	segmentRuleArray, _ := appConfigurationServiceInstance.NewFeatureSegmentRule([]appconfigurationv1.TargetSegments{*ruleArray}, value, order, segmentRolloutPercentage)
+	segmentRuleArray, _ := appConfigurationServiceInstance.NewFeatureSegmentRule([]appconfigurationv1.TargetSegments{*ruleArray}, value, order)
 	collectionArray, _ := appConfigurationServiceInstance.NewCollectionRef(collectionId)
 	createFeatureOptionsModel := appConfigurationServiceInstance.NewCreateFeatureOptions(environmentId, name, id, typeOfFeature, enabledValue, disabledValue)
 	createFeatureOptionsModel.SetTags(tags)
@@ -304,7 +304,7 @@ func updateEnvironment(environmentId string, name string, description string, ta
 func updateFeature(environmentId string, id string, name string, description string, enabledValue string, disabledValue string, tags string, segments []string, order int64, collectionId string, value string, deletedFlag bool, featureRolloutPercentage *int64, segmentRolloutPercentage *int64) {
 	fmt.Println("updateFeatureWithNumberValue")
 	ruleArray, _ := appConfigurationServiceInstance.NewTargetSegments(segments)
-	segmentRuleArray, _ := appConfigurationServiceInstance.NewFeatureSegmentRule([]appconfigurationv1.TargetSegments{*ruleArray}, value, order, segmentRolloutPercentage)
+	segmentRuleArray, _ := appConfigurationServiceInstance.NewFeatureSegmentRule([]appconfigurationv1.TargetSegments{*ruleArray}, value, order)
 	collectionArray, _ := appConfigurationServiceInstance.NewCollectionRef(collectionId)
 	updateFeatureOptionsModel := appConfigurationServiceInstance.NewUpdateFeatureOptions(environmentId, id)
 	updateFeatureOptionsModel.SetName(name)
@@ -344,7 +344,7 @@ func updateCollection(collectionId string, name string, description string, tags
 func patchFeature(environmentId string, id string, name string, description string, enabledValue string, disabledValue string, tags string, segments []string, order int64, value string, featureRolloutPercentage *int64, segmentRolloutPercentage *int64) {
 	fmt.Println("patchFeatureWithNumberValue")
 	ruleArray, _ := appConfigurationServiceInstance.NewTargetSegments(segments)
-	segmentRuleArray, _ := appConfigurationServiceInstance.NewFeatureSegmentRule([]appconfigurationv1.TargetSegments{*ruleArray}, value, order, segmentRolloutPercentage)
+	segmentRuleArray, _ := appConfigurationServiceInstance.NewFeatureSegmentRule([]appconfigurationv1.TargetSegments{*ruleArray}, value, order)
 	patchFeatureOptionsModel := appConfigurationServiceInstance.NewUpdateFeatureValuesOptions(environmentId, id)
 	patchFeatureOptionsModel.SetName(name)
 	patchFeatureOptionsModel.SetDescription(description)

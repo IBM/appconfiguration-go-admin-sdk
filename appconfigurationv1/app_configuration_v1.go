@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2023.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,7 @@
  */
 
 /*
- * IBM OpenAPI SDK Code Generator Version: 3.69.0-370d6400-20230329-174648
+ * IBM OpenAPI SDK Code Generator Version: 3.84.0-a4533f12-20240103-170852
  */
 
 // Package appconfigurationv1 : Operations and models for the AppConfigurationV1 service
@@ -31,7 +31,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/IBM/appconfiguration-go-admin-sdk/common"
+	common "github.com/IBM/appconfiguration-go-admin-sdk/common"
 	"github.com/IBM/go-sdk-core/v5/core"
 	"github.com/go-openapi/strfmt"
 )
@@ -1072,7 +1072,7 @@ func (appConfiguration *AppConfigurationV1) UpdateFeatureWithContext(ctx context
 
 	pathParamsMap := map[string]string{
 		"environment_id": *updateFeatureOptions.EnvironmentID,
-		"feature_id":     *updateFeatureOptions.FeatureID,
+		"feature_id": *updateFeatureOptions.FeatureID,
 	}
 
 	builder := core.NewRequestBuilder(core.PUT)
@@ -1169,7 +1169,7 @@ func (appConfiguration *AppConfigurationV1) UpdateFeatureValuesWithContext(ctx c
 
 	pathParamsMap := map[string]string{
 		"environment_id": *updateFeatureValuesOptions.EnvironmentID,
-		"feature_id":     *updateFeatureValuesOptions.FeatureID,
+		"feature_id": *updateFeatureValuesOptions.FeatureID,
 	}
 
 	builder := core.NewRequestBuilder(core.PATCH)
@@ -1258,7 +1258,7 @@ func (appConfiguration *AppConfigurationV1) GetFeatureWithContext(ctx context.Co
 
 	pathParamsMap := map[string]string{
 		"environment_id": *getFeatureOptions.EnvironmentID,
-		"feature_id":     *getFeatureOptions.FeatureID,
+		"feature_id": *getFeatureOptions.FeatureID,
 	}
 
 	builder := core.NewRequestBuilder(core.GET)
@@ -1280,7 +1280,7 @@ func (appConfiguration *AppConfigurationV1) GetFeatureWithContext(ctx context.Co
 	builder.AddHeader("Accept", "application/json")
 
 	if getFeatureOptions.Include != nil {
-		builder.AddQuery("include", fmt.Sprint(*getFeatureOptions.Include))
+		builder.AddQuery("include", strings.Join(getFeatureOptions.Include, ","))
 	}
 
 	request, err := builder.Build()
@@ -1323,7 +1323,7 @@ func (appConfiguration *AppConfigurationV1) DeleteFeatureWithContext(ctx context
 
 	pathParamsMap := map[string]string{
 		"environment_id": *deleteFeatureOptions.EnvironmentID,
-		"feature_id":     *deleteFeatureOptions.FeatureID,
+		"feature_id": *deleteFeatureOptions.FeatureID,
 	}
 
 	builder := core.NewRequestBuilder(core.DELETE)
@@ -1372,7 +1372,7 @@ func (appConfiguration *AppConfigurationV1) ToggleFeatureWithContext(ctx context
 
 	pathParamsMap := map[string]string{
 		"environment_id": *toggleFeatureOptions.EnvironmentID,
-		"feature_id":     *toggleFeatureOptions.FeatureID,
+		"feature_id": *toggleFeatureOptions.FeatureID,
 	}
 
 	builder := core.NewRequestBuilder(core.PUT)
@@ -1625,7 +1625,7 @@ func (appConfiguration *AppConfigurationV1) UpdatePropertyWithContext(ctx contex
 
 	pathParamsMap := map[string]string{
 		"environment_id": *updatePropertyOptions.EnvironmentID,
-		"property_id":    *updatePropertyOptions.PropertyID,
+		"property_id": *updatePropertyOptions.PropertyID,
 	}
 
 	builder := core.NewRequestBuilder(core.PUT)
@@ -1712,7 +1712,7 @@ func (appConfiguration *AppConfigurationV1) UpdatePropertyValuesWithContext(ctx 
 
 	pathParamsMap := map[string]string{
 		"environment_id": *updatePropertyValuesOptions.EnvironmentID,
-		"property_id":    *updatePropertyValuesOptions.PropertyID,
+		"property_id": *updatePropertyValuesOptions.PropertyID,
 	}
 
 	builder := core.NewRequestBuilder(core.PATCH)
@@ -1795,7 +1795,7 @@ func (appConfiguration *AppConfigurationV1) GetPropertyWithContext(ctx context.C
 
 	pathParamsMap := map[string]string{
 		"environment_id": *getPropertyOptions.EnvironmentID,
-		"property_id":    *getPropertyOptions.PropertyID,
+		"property_id": *getPropertyOptions.PropertyID,
 	}
 
 	builder := core.NewRequestBuilder(core.GET)
@@ -1860,7 +1860,7 @@ func (appConfiguration *AppConfigurationV1) DeletePropertyWithContext(ctx contex
 
 	pathParamsMap := map[string]string{
 		"environment_id": *deletePropertyOptions.EnvironmentID,
-		"property_id":    *deletePropertyOptions.PropertyID,
+		"property_id": *deletePropertyOptions.PropertyID,
 	}
 
 	builder := core.NewRequestBuilder(core.DELETE)
@@ -2582,12 +2582,15 @@ func (appConfiguration *AppConfigurationV1) DeleteGitconfigWithContext(ctx conte
 // PromoteGitconfig : Promote configuration
 // Promote configuration, this api will write or update your chosen configuration to the GitHub based on the git url,
 // file path and branch data. In simple words this api will create or updates the bootstrap json file.
+// Deprecated: this method is deprecated and may be removed in a future release.
 func (appConfiguration *AppConfigurationV1) PromoteGitconfig(promoteGitconfigOptions *PromoteGitconfigOptions) (result *SnapshotPromote, response *core.DetailedResponse, err error) {
 	return appConfiguration.PromoteGitconfigWithContext(context.Background(), promoteGitconfigOptions)
 }
 
 // PromoteGitconfigWithContext is an alternate form of the PromoteGitconfig method which supports a Context parameter
+// Deprecated: this method is deprecated and may be removed in a future release.
 func (appConfiguration *AppConfigurationV1) PromoteGitconfigWithContext(ctx context.Context, promoteGitconfigOptions *PromoteGitconfigOptions) (result *SnapshotPromote, response *core.DetailedResponse, err error) {
+	core.GetLogger().Warn("A deprecated operation has been invoked: PromoteGitconfig")
 	err = core.ValidateNotNil(promoteGitconfigOptions, "promoteGitconfigOptions cannot be nil")
 	if err != nil {
 		return
@@ -2644,12 +2647,15 @@ func (appConfiguration *AppConfigurationV1) PromoteGitconfigWithContext(ctx cont
 // Restore configuration, this api will write or update your chosen configuration from the GitHub to App configuration
 // instance. The api will read the contents in the json file that was created using promote API and recreate or updates
 // the App configuration instance with the file contents like properties, features and segments.
+// Deprecated: this method is deprecated and may be removed in a future release.
 func (appConfiguration *AppConfigurationV1) RestoreGitconfig(restoreGitconfigOptions *RestoreGitconfigOptions) (result *SnapshotRestore, response *core.DetailedResponse, err error) {
 	return appConfiguration.RestoreGitconfigWithContext(context.Background(), restoreGitconfigOptions)
 }
 
 // RestoreGitconfigWithContext is an alternate form of the RestoreGitconfig method which supports a Context parameter
+// Deprecated: this method is deprecated and may be removed in a future release.
 func (appConfiguration *AppConfigurationV1) RestoreGitconfigWithContext(ctx context.Context, restoreGitconfigOptions *RestoreGitconfigOptions) (result *SnapshotRestore, response *core.DetailedResponse, err error) {
+	core.GetLogger().Warn("A deprecated operation has been invoked: RestoreGitconfig")
 	err = core.ValidateNotNil(restoreGitconfigOptions, "restoreGitconfigOptions cannot be nil")
 	if err != nil {
 		return
@@ -2816,6 +2822,451 @@ func (appConfiguration *AppConfigurationV1) UpdateOriginconfigsWithContext(ctx c
 	return
 }
 
+// ListWorkflowconfig : Get Workflow Config
+// Get the environment specific workflow Configs.
+func (appConfiguration *AppConfigurationV1) ListWorkflowconfig(listWorkflowconfigOptions *ListWorkflowconfigOptions) (result *WorkflowConfigsList, response *core.DetailedResponse, err error) {
+	return appConfiguration.ListWorkflowconfigWithContext(context.Background(), listWorkflowconfigOptions)
+}
+
+// ListWorkflowconfigWithContext is an alternate form of the ListWorkflowconfig method which supports a Context parameter
+func (appConfiguration *AppConfigurationV1) ListWorkflowconfigWithContext(ctx context.Context, listWorkflowconfigOptions *ListWorkflowconfigOptions) (result *WorkflowConfigsList, response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(listWorkflowconfigOptions, "listWorkflowconfigOptions cannot be nil")
+	if err != nil {
+		return
+	}
+	err = core.ValidateStruct(listWorkflowconfigOptions, "listWorkflowconfigOptions")
+	if err != nil {
+		return
+	}
+
+	pathParamsMap := map[string]string{
+		"environment_id": *listWorkflowconfigOptions.EnvironmentID,
+	}
+
+	builder := core.NewRequestBuilder(core.GET)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = appConfiguration.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(appConfiguration.Service.Options.URL, `/environments/{environment_id}/workflowconfigs`, pathParamsMap)
+	if err != nil {
+		return
+	}
+
+	for headerName, headerValue := range listWorkflowconfigOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "ListWorkflowconfig")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+	builder.AddHeader("Accept", "application/json")
+
+	request, err := builder.Build()
+	if err != nil {
+		return
+	}
+
+	var rawResponse map[string]json.RawMessage
+	response, err = appConfiguration.Service.Request(request, &rawResponse)
+	if err != nil {
+		return
+	}
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalWorkflowConfigsList)
+		if err != nil {
+			return
+		}
+		response.Result = result
+	}
+
+	return
+}
+
+// CreateWorkflowconfig : Create Workflow config
+// Create a Workflow.
+func (appConfiguration *AppConfigurationV1) CreateWorkflowconfig(createWorkflowconfigOptions *CreateWorkflowconfigOptions) (result *WorkflowConfigs, response *core.DetailedResponse, err error) {
+	return appConfiguration.CreateWorkflowconfigWithContext(context.Background(), createWorkflowconfigOptions)
+}
+
+// CreateWorkflowconfigWithContext is an alternate form of the CreateWorkflowconfig method which supports a Context parameter
+func (appConfiguration *AppConfigurationV1) CreateWorkflowconfigWithContext(ctx context.Context, createWorkflowconfigOptions *CreateWorkflowconfigOptions) (result *WorkflowConfigs, response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(createWorkflowconfigOptions, "createWorkflowconfigOptions cannot be nil")
+	if err != nil {
+		return
+	}
+	err = core.ValidateStruct(createWorkflowconfigOptions, "createWorkflowconfigOptions")
+	if err != nil {
+		return
+	}
+
+	pathParamsMap := map[string]string{
+		"environment_id": *createWorkflowconfigOptions.EnvironmentID,
+	}
+
+	builder := core.NewRequestBuilder(core.POST)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = appConfiguration.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(appConfiguration.Service.Options.URL, `/environments/{environment_id}/workflowconfigs`, pathParamsMap)
+	if err != nil {
+		return
+	}
+
+	for headerName, headerValue := range createWorkflowconfigOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "CreateWorkflowconfig")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+	builder.AddHeader("Accept", "application/json")
+	builder.AddHeader("Content-Type", "application/json")
+
+	body := make(map[string]interface{})
+	if createWorkflowconfigOptions.WorkflowURL != nil {
+		body["workflow_url"] = createWorkflowconfigOptions.WorkflowURL
+	}
+	if createWorkflowconfigOptions.ApprovalGroupName != nil {
+		body["approval_group_name"] = createWorkflowconfigOptions.ApprovalGroupName
+	}
+	if createWorkflowconfigOptions.ApprovalExpiration != nil {
+		body["approval_expiration"] = createWorkflowconfigOptions.ApprovalExpiration
+	}
+	if createWorkflowconfigOptions.WorkflowCredentials != nil {
+		body["workflow_credentials"] = createWorkflowconfigOptions.WorkflowCredentials
+	}
+	if createWorkflowconfigOptions.Enabled != nil {
+		body["enabled"] = createWorkflowconfigOptions.Enabled
+	}
+	_, err = builder.SetBodyContentJSON(body)
+	if err != nil {
+		return
+	}
+
+	request, err := builder.Build()
+	if err != nil {
+		return
+	}
+
+	var rawResponse map[string]json.RawMessage
+	response, err = appConfiguration.Service.Request(request, &rawResponse)
+	if err != nil {
+		return
+	}
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalWorkflowConfigs)
+		if err != nil {
+			return
+		}
+		response.Result = result
+	}
+
+	return
+}
+
+// UpdateWorkflowconfig : Update Workflow config
+// Update a Workflow.
+func (appConfiguration *AppConfigurationV1) UpdateWorkflowconfig(updateWorkflowconfigOptions *UpdateWorkflowconfigOptions) (result *WorkflowConfigs, response *core.DetailedResponse, err error) {
+	return appConfiguration.UpdateWorkflowconfigWithContext(context.Background(), updateWorkflowconfigOptions)
+}
+
+// UpdateWorkflowconfigWithContext is an alternate form of the UpdateWorkflowconfig method which supports a Context parameter
+func (appConfiguration *AppConfigurationV1) UpdateWorkflowconfigWithContext(ctx context.Context, updateWorkflowconfigOptions *UpdateWorkflowconfigOptions) (result *WorkflowConfigs, response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(updateWorkflowconfigOptions, "updateWorkflowconfigOptions cannot be nil")
+	if err != nil {
+		return
+	}
+	err = core.ValidateStruct(updateWorkflowconfigOptions, "updateWorkflowconfigOptions")
+	if err != nil {
+		return
+	}
+
+	pathParamsMap := map[string]string{
+		"environment_id": *updateWorkflowconfigOptions.EnvironmentID,
+	}
+
+	builder := core.NewRequestBuilder(core.PUT)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = appConfiguration.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(appConfiguration.Service.Options.URL, `/environments/{environment_id}/workflowconfigs`, pathParamsMap)
+	if err != nil {
+		return
+	}
+
+	for headerName, headerValue := range updateWorkflowconfigOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "UpdateWorkflowconfig")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+	builder.AddHeader("Accept", "application/json")
+	builder.AddHeader("Content-Type", "application/json")
+
+	body := make(map[string]interface{})
+	if updateWorkflowconfigOptions.WorkflowURL != nil {
+		body["workflow_url"] = updateWorkflowconfigOptions.WorkflowURL
+	}
+	if updateWorkflowconfigOptions.ApprovalGroupName != nil {
+		body["approval_group_name"] = updateWorkflowconfigOptions.ApprovalGroupName
+	}
+	if updateWorkflowconfigOptions.ApprovalExpiration != nil {
+		body["approval_expiration"] = updateWorkflowconfigOptions.ApprovalExpiration
+	}
+	if updateWorkflowconfigOptions.WorkflowCredentials != nil {
+		body["workflow_credentials"] = updateWorkflowconfigOptions.WorkflowCredentials
+	}
+	if updateWorkflowconfigOptions.Enabled != nil {
+		body["enabled"] = updateWorkflowconfigOptions.Enabled
+	}
+	_, err = builder.SetBodyContentJSON(body)
+	if err != nil {
+		return
+	}
+
+	request, err := builder.Build()
+	if err != nil {
+		return
+	}
+
+	var rawResponse map[string]json.RawMessage
+	response, err = appConfiguration.Service.Request(request, &rawResponse)
+	if err != nil {
+		return
+	}
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalWorkflowConfigs)
+		if err != nil {
+			return
+		}
+		response.Result = result
+	}
+
+	return
+}
+
+// DeleteWorkflowconfig : Delete  Workflow config
+// Delete a  Workflow config.
+func (appConfiguration *AppConfigurationV1) DeleteWorkflowconfig(deleteWorkflowconfigOptions *DeleteWorkflowconfigOptions) (response *core.DetailedResponse, err error) {
+	return appConfiguration.DeleteWorkflowconfigWithContext(context.Background(), deleteWorkflowconfigOptions)
+}
+
+// DeleteWorkflowconfigWithContext is an alternate form of the DeleteWorkflowconfig method which supports a Context parameter
+func (appConfiguration *AppConfigurationV1) DeleteWorkflowconfigWithContext(ctx context.Context, deleteWorkflowconfigOptions *DeleteWorkflowconfigOptions) (response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(deleteWorkflowconfigOptions, "deleteWorkflowconfigOptions cannot be nil")
+	if err != nil {
+		return
+	}
+	err = core.ValidateStruct(deleteWorkflowconfigOptions, "deleteWorkflowconfigOptions")
+	if err != nil {
+		return
+	}
+
+	pathParamsMap := map[string]string{
+		"environment_id": *deleteWorkflowconfigOptions.EnvironmentID,
+	}
+
+	builder := core.NewRequestBuilder(core.DELETE)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = appConfiguration.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(appConfiguration.Service.Options.URL, `/environments/{environment_id}/workflowconfigs`, pathParamsMap)
+	if err != nil {
+		return
+	}
+
+	for headerName, headerValue := range deleteWorkflowconfigOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "DeleteWorkflowconfig")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	request, err := builder.Build()
+	if err != nil {
+		return
+	}
+
+	response, err = appConfiguration.Service.Request(request, nil)
+
+	return
+}
+
+// ImportConfig : Import instance configuration
+// Import configuration to the instance.
+func (appConfiguration *AppConfigurationV1) ImportConfig(importConfigOptions *ImportConfigOptions) (result *ImportConfig, response *core.DetailedResponse, err error) {
+	return appConfiguration.ImportConfigWithContext(context.Background(), importConfigOptions)
+}
+
+// ImportConfigWithContext is an alternate form of the ImportConfig method which supports a Context parameter
+func (appConfiguration *AppConfigurationV1) ImportConfigWithContext(ctx context.Context, importConfigOptions *ImportConfigOptions) (result *ImportConfig, response *core.DetailedResponse, err error) {
+	err = core.ValidateStruct(importConfigOptions, "importConfigOptions")
+	if err != nil {
+		return
+	}
+
+	builder := core.NewRequestBuilder(core.POST)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = appConfiguration.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(appConfiguration.Service.Options.URL, `/config`, nil)
+	if err != nil {
+		return
+	}
+
+	for headerName, headerValue := range importConfigOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "ImportConfig")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+	builder.AddHeader("Accept", "application/json")
+	builder.AddHeader("Content-Type", "application/json")
+
+	if importConfigOptions.Clean != nil {
+		builder.AddQuery("clean", fmt.Sprint(*importConfigOptions.Clean))
+	}
+
+	body := make(map[string]interface{})
+	if importConfigOptions.Environments != nil {
+		body["environments"] = importConfigOptions.Environments
+	}
+	if importConfigOptions.Collections != nil {
+		body["collections"] = importConfigOptions.Collections
+	}
+	if importConfigOptions.Segments != nil {
+		body["segments"] = importConfigOptions.Segments
+	}
+	_, err = builder.SetBodyContentJSON(body)
+	if err != nil {
+		return
+	}
+
+	request, err := builder.Build()
+	if err != nil {
+		return
+	}
+
+	var rawResponse map[string]json.RawMessage
+	response, err = appConfiguration.Service.Request(request, &rawResponse)
+	if err != nil {
+		return
+	}
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalImportConfig)
+		if err != nil {
+			return
+		}
+		response.Result = result
+	}
+
+	return
+}
+
+// ListInstanceConfig : Export instance configuration
+// Get the instance configuration.
+func (appConfiguration *AppConfigurationV1) ListInstanceConfig(listInstanceConfigOptions *ListInstanceConfigOptions) (result *ImportConfig, response *core.DetailedResponse, err error) {
+	return appConfiguration.ListInstanceConfigWithContext(context.Background(), listInstanceConfigOptions)
+}
+
+// ListInstanceConfigWithContext is an alternate form of the ListInstanceConfig method which supports a Context parameter
+func (appConfiguration *AppConfigurationV1) ListInstanceConfigWithContext(ctx context.Context, listInstanceConfigOptions *ListInstanceConfigOptions) (result *ImportConfig, response *core.DetailedResponse, err error) {
+	err = core.ValidateStruct(listInstanceConfigOptions, "listInstanceConfigOptions")
+	if err != nil {
+		return
+	}
+
+	builder := core.NewRequestBuilder(core.GET)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = appConfiguration.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(appConfiguration.Service.Options.URL, `/config`, nil)
+	if err != nil {
+		return
+	}
+
+	for headerName, headerValue := range listInstanceConfigOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "ListInstanceConfig")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+	builder.AddHeader("Accept", "application/json")
+
+	request, err := builder.Build()
+	if err != nil {
+		return
+	}
+
+	var rawResponse map[string]json.RawMessage
+	response, err = appConfiguration.Service.Request(request, &rawResponse)
+	if err != nil {
+		return
+	}
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalImportConfig)
+		if err != nil {
+			return
+		}
+		response.Result = result
+	}
+
+	return
+}
+
+// PromoteRestoreConfig : Promote or Restore snapshot configuration
+// This api will either promote or restore your chosen configuration from or to the GitHub based on the git url, file
+// path and branch data.
+func (appConfiguration *AppConfigurationV1) PromoteRestoreConfig(promoteRestoreConfigOptions *PromoteRestoreConfigOptions) (response *core.DetailedResponse, err error) {
+	return appConfiguration.PromoteRestoreConfigWithContext(context.Background(), promoteRestoreConfigOptions)
+}
+
+// PromoteRestoreConfigWithContext is an alternate form of the PromoteRestoreConfig method which supports a Context parameter
+func (appConfiguration *AppConfigurationV1) PromoteRestoreConfigWithContext(ctx context.Context, promoteRestoreConfigOptions *PromoteRestoreConfigOptions) (response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(promoteRestoreConfigOptions, "promoteRestoreConfigOptions cannot be nil")
+	if err != nil {
+		return
+	}
+	err = core.ValidateStruct(promoteRestoreConfigOptions, "promoteRestoreConfigOptions")
+	if err != nil {
+		return
+	}
+
+	builder := core.NewRequestBuilder(core.PUT)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = appConfiguration.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(appConfiguration.Service.Options.URL, `/config`, nil)
+	if err != nil {
+		return
+	}
+
+	for headerName, headerValue := range promoteRestoreConfigOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "PromoteRestoreConfig")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+	builder.AddHeader("Accept", "application/json")
+
+	builder.AddQuery("git_config_id", fmt.Sprint(*promoteRestoreConfigOptions.GitConfigID))
+	builder.AddQuery("action", fmt.Sprint(*promoteRestoreConfigOptions.Action))
+
+	request, err := builder.Build()
+	if err != nil {
+		return
+	}
+
+	response, err = appConfiguration.Service.Request(request, nil)
+
+	return
+}
+
 // Collection : Details of the collection.
 type Collection struct {
 	// Collection name. Allowed special characters are dot ( . ), hyphen( - ), underscore ( _ ) only.
@@ -2861,7 +3312,7 @@ type Collection struct {
 // NewCollection : Instantiate Collection (Generic Model Constructor)
 func (*AppConfigurationV1) NewCollection(name string, collectionID string) (_model *Collection, err error) {
 	_model = &Collection{
-		Name:         core.StringPtr(name),
+		Name: core.StringPtr(name),
 		CollectionID: core.StringPtr(collectionID),
 	}
 	err = core.ValidateStruct(_model, "required parameters")
@@ -3123,7 +3574,7 @@ type CreateCollectionOptions struct {
 // NewCreateCollectionOptions : Instantiate CreateCollectionOptions
 func (*AppConfigurationV1) NewCreateCollectionOptions(name string, collectionID string) *CreateCollectionOptions {
 	return &CreateCollectionOptions{
-		Name:         core.StringPtr(name),
+		Name: core.StringPtr(name),
 		CollectionID: core.StringPtr(collectionID),
 	}
 }
@@ -3182,7 +3633,7 @@ type CreateEnvironmentOptions struct {
 // NewCreateEnvironmentOptions : Instantiate CreateEnvironmentOptions
 func (*AppConfigurationV1) NewCreateEnvironmentOptions(name string, environmentID string) *CreateEnvironmentOptions {
 	return &CreateEnvironmentOptions{
-		Name:          core.StringPtr(name),
+		Name: core.StringPtr(name),
 		EnvironmentID: core.StringPtr(environmentID),
 	}
 }
@@ -3277,7 +3728,7 @@ type CreateFeatureOptions struct {
 const (
 	CreateFeatureOptions_Type_Boolean = "BOOLEAN"
 	CreateFeatureOptions_Type_Numeric = "NUMERIC"
-	CreateFeatureOptions_Type_String  = "STRING"
+	CreateFeatureOptions_Type_String = "STRING"
 )
 
 // Constants associated with the CreateFeatureOptions.Format property.
@@ -3294,10 +3745,10 @@ const (
 func (*AppConfigurationV1) NewCreateFeatureOptions(environmentID string, name string, featureID string, typeVar string, enabledValue interface{}, disabledValue interface{}) *CreateFeatureOptions {
 	return &CreateFeatureOptions{
 		EnvironmentID: core.StringPtr(environmentID),
-		Name:          core.StringPtr(name),
-		FeatureID:     core.StringPtr(featureID),
-		Type:          core.StringPtr(typeVar),
-		EnabledValue:  enabledValue,
+		Name: core.StringPtr(name),
+		FeatureID: core.StringPtr(featureID),
+		Type: core.StringPtr(typeVar),
+		EnabledValue: enabledValue,
 		DisabledValue: disabledValue,
 	}
 }
@@ -3525,10 +3976,10 @@ type CreatePropertyOptions struct {
 // Type of the property (BOOLEAN, STRING, NUMERIC, SECRETREF). If `type` is `STRING`, then `format` attribute is
 // required.
 const (
-	CreatePropertyOptions_Type_Boolean   = "BOOLEAN"
-	CreatePropertyOptions_Type_Numeric   = "NUMERIC"
+	CreatePropertyOptions_Type_Boolean = "BOOLEAN"
+	CreatePropertyOptions_Type_Numeric = "NUMERIC"
 	CreatePropertyOptions_Type_Secretref = "SECRETREF"
-	CreatePropertyOptions_Type_String    = "STRING"
+	CreatePropertyOptions_Type_String = "STRING"
 )
 
 // Constants associated with the CreatePropertyOptions.Format property.
@@ -3545,10 +3996,10 @@ const (
 func (*AppConfigurationV1) NewCreatePropertyOptions(environmentID string, name string, propertyID string, typeVar string, value interface{}) *CreatePropertyOptions {
 	return &CreatePropertyOptions{
 		EnvironmentID: core.StringPtr(environmentID),
-		Name:          core.StringPtr(name),
-		PropertyID:    core.StringPtr(propertyID),
-		Type:          core.StringPtr(typeVar),
-		Value:         value,
+		Name: core.StringPtr(name),
+		PropertyID: core.StringPtr(propertyID),
+		Type: core.StringPtr(typeVar),
+		Value: value,
 	}
 }
 
@@ -3682,6 +4133,83 @@ func (options *CreateSegmentOptions) SetHeaders(param map[string]string) *Create
 	return options
 }
 
+// CreateWorkflowconfigOptions : The CreateWorkflowconfig options.
+type CreateWorkflowconfigOptions struct {
+	// Environment Id.
+	EnvironmentID *string `json:"environment_id" validate:"required,ne="`
+
+	// Workflow URL, only service now url https://xxxxx.service-now.com allowed, xxxxx is the service now instance id.
+	WorkflowURL *string `json:"workflow_url,omitempty"`
+
+	// Approval Group name, Group name of personals who can approve the Change Request on your Service Now. It must be
+	// first registered in your Service Now then it must be added here.
+	ApprovalGroupName *string `json:"approval_group_name,omitempty"`
+
+	// Approval Expiration, integer number identifies as hours which helps in adding approval start and end time to the
+	// created Change Request.
+	ApprovalExpiration *int64 `json:"approval_expiration,omitempty"`
+
+	// Workflow Credentials, json object is accpeted with mandatory attributes with value. Mandatory attributes in the json
+	// object must be username, password, client_secret, client_id.
+	WorkflowCredentials map[string]interface{} `json:"workflow_credentials,omitempty"`
+
+	// Enabled, this option enables the workflow configuration per environment. User must set it to true if they wish to
+	// create Change Request for flag state changes.
+	Enabled *bool `json:"enabled,omitempty"`
+
+	// Allows users to set headers on API requests
+	Headers map[string]string
+}
+
+// NewCreateWorkflowconfigOptions : Instantiate CreateWorkflowconfigOptions
+func (*AppConfigurationV1) NewCreateWorkflowconfigOptions(environmentID string) *CreateWorkflowconfigOptions {
+	return &CreateWorkflowconfigOptions{
+		EnvironmentID: core.StringPtr(environmentID),
+	}
+}
+
+// SetEnvironmentID : Allow user to set EnvironmentID
+func (_options *CreateWorkflowconfigOptions) SetEnvironmentID(environmentID string) *CreateWorkflowconfigOptions {
+	_options.EnvironmentID = core.StringPtr(environmentID)
+	return _options
+}
+
+// SetWorkflowURL : Allow user to set WorkflowURL
+func (_options *CreateWorkflowconfigOptions) SetWorkflowURL(workflowURL string) *CreateWorkflowconfigOptions {
+	_options.WorkflowURL = core.StringPtr(workflowURL)
+	return _options
+}
+
+// SetApprovalGroupName : Allow user to set ApprovalGroupName
+func (_options *CreateWorkflowconfigOptions) SetApprovalGroupName(approvalGroupName string) *CreateWorkflowconfigOptions {
+	_options.ApprovalGroupName = core.StringPtr(approvalGroupName)
+	return _options
+}
+
+// SetApprovalExpiration : Allow user to set ApprovalExpiration
+func (_options *CreateWorkflowconfigOptions) SetApprovalExpiration(approvalExpiration int64) *CreateWorkflowconfigOptions {
+	_options.ApprovalExpiration = core.Int64Ptr(approvalExpiration)
+	return _options
+}
+
+// SetWorkflowCredentials : Allow user to set WorkflowCredentials
+func (_options *CreateWorkflowconfigOptions) SetWorkflowCredentials(workflowCredentials map[string]interface{}) *CreateWorkflowconfigOptions {
+	_options.WorkflowCredentials = workflowCredentials
+	return _options
+}
+
+// SetEnabled : Allow user to set Enabled
+func (_options *CreateWorkflowconfigOptions) SetEnabled(enabled bool) *CreateWorkflowconfigOptions {
+	_options.Enabled = core.BoolPtr(enabled)
+	return _options
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *CreateWorkflowconfigOptions) SetHeaders(param map[string]string) *CreateWorkflowconfigOptions {
+	options.Headers = param
+	return options
+}
+
 // DeleteCollectionOptions : The DeleteCollection options.
 type DeleteCollectionOptions struct {
 	// Collection Id of the collection.
@@ -3754,7 +4282,7 @@ type DeleteFeatureOptions struct {
 func (*AppConfigurationV1) NewDeleteFeatureOptions(environmentID string, featureID string) *DeleteFeatureOptions {
 	return &DeleteFeatureOptions{
 		EnvironmentID: core.StringPtr(environmentID),
-		FeatureID:     core.StringPtr(featureID),
+		FeatureID: core.StringPtr(featureID),
 	}
 }
 
@@ -3820,7 +4348,7 @@ type DeletePropertyOptions struct {
 func (*AppConfigurationV1) NewDeletePropertyOptions(environmentID string, propertyID string) *DeletePropertyOptions {
 	return &DeletePropertyOptions{
 		EnvironmentID: core.StringPtr(environmentID),
-		PropertyID:    core.StringPtr(propertyID),
+		PropertyID: core.StringPtr(propertyID),
 	}
 }
 
@@ -3870,6 +4398,34 @@ func (options *DeleteSegmentOptions) SetHeaders(param map[string]string) *Delete
 	return options
 }
 
+// DeleteWorkflowconfigOptions : The DeleteWorkflowconfig options.
+type DeleteWorkflowconfigOptions struct {
+	// Environment Id.
+	EnvironmentID *string `json:"environment_id" validate:"required,ne="`
+
+	// Allows users to set headers on API requests
+	Headers map[string]string
+}
+
+// NewDeleteWorkflowconfigOptions : Instantiate DeleteWorkflowconfigOptions
+func (*AppConfigurationV1) NewDeleteWorkflowconfigOptions(environmentID string) *DeleteWorkflowconfigOptions {
+	return &DeleteWorkflowconfigOptions{
+		EnvironmentID: core.StringPtr(environmentID),
+	}
+}
+
+// SetEnvironmentID : Allow user to set EnvironmentID
+func (_options *DeleteWorkflowconfigOptions) SetEnvironmentID(environmentID string) *DeleteWorkflowconfigOptions {
+	_options.EnvironmentID = core.StringPtr(environmentID)
+	return _options
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *DeleteWorkflowconfigOptions) SetHeaders(param map[string]string) *DeleteWorkflowconfigOptions {
+	options.Headers = param
+	return options
+}
+
 // Environment : Details of the environment.
 type Environment struct {
 	// Environment name. Allowed special characters are dot ( . ), hyphen( - ), underscore ( _ ) only.
@@ -3909,7 +4465,7 @@ type Environment struct {
 // NewEnvironment : Instantiate Environment (Generic Model Constructor)
 func (*AppConfigurationV1) NewEnvironment(name string, environmentID string) (_model *Environment, err error) {
 	_model = &Environment{
-		Name:          core.StringPtr(name),
+		Name: core.StringPtr(name),
 		EnvironmentID: core.StringPtr(environmentID),
 	}
 	err = core.ValidateStruct(_model, "required parameters")
@@ -4095,6 +4651,12 @@ type Feature struct {
 	// List of collection id representing the collections that are associated with the specified feature flag.
 	Collections []CollectionRef `json:"collections,omitempty"`
 
+	// If you have enabled the workflow configuration and have a pending CR then this provides the change_request_number.
+	ChangeRequestNumber *string `json:"change_request_number,omitempty"`
+
+	// If you have enabled the workflow configuration and have a pending CR then this provides the change_request_status.
+	ChangeRequestStatus *string `json:"change_request_status,omitempty"`
+
 	// Creation time of the feature flag.
 	CreatedTime *strfmt.DateTime `json:"created_time,omitempty"`
 
@@ -4113,7 +4675,7 @@ type Feature struct {
 const (
 	Feature_Type_Boolean = "BOOLEAN"
 	Feature_Type_Numeric = "NUMERIC"
-	Feature_Type_String  = "STRING"
+	Feature_Type_String = "STRING"
 )
 
 // Constants associated with the Feature.Format property.
@@ -4125,19 +4687,6 @@ const (
 	Feature_Format_Text = "TEXT"
 	Feature_Format_Yaml = "YAML"
 )
-
-// NewFeature : Instantiate Feature (Generic Model Constructor)
-func (*AppConfigurationV1) NewFeature(name string, featureID string, typeVar string, enabledValue interface{}, disabledValue interface{}) (_model *Feature, err error) {
-	_model = &Feature{
-		Name:          core.StringPtr(name),
-		FeatureID:     core.StringPtr(featureID),
-		Type:          core.StringPtr(typeVar),
-		EnabledValue:  enabledValue,
-		DisabledValue: disabledValue,
-	}
-	err = core.ValidateStruct(_model, "required parameters")
-	return
-}
 
 // UnmarshalFeature unmarshals an instance of Feature from the specified map of raw messages.
 func UnmarshalFeature(m map[string]json.RawMessage, result interface{}) (err error) {
@@ -4194,6 +4743,14 @@ func UnmarshalFeature(m map[string]json.RawMessage, result interface{}) (err err
 	if err != nil {
 		return
 	}
+	err = core.UnmarshalPrimitive(m, "change_request_number", &obj.ChangeRequestNumber)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "change_request_status", &obj.ChangeRequestStatus)
+	if err != nil {
+		return
+	}
 	err = core.UnmarshalPrimitive(m, "created_time", &obj.CreatedTime)
 	if err != nil {
 		return
@@ -4227,7 +4784,7 @@ type FeatureOutput struct {
 func (*AppConfigurationV1) NewFeatureOutput(featureID string, name string) (_model *FeatureOutput, err error) {
 	_model = &FeatureOutput{
 		FeatureID: core.StringPtr(featureID),
-		Name:      core.StringPtr(name),
+		Name: core.StringPtr(name),
 	}
 	err = core.ValidateStruct(_model, "required parameters")
 	return
@@ -4266,12 +4823,11 @@ type FeatureSegmentRule struct {
 }
 
 // NewFeatureSegmentRule : Instantiate FeatureSegmentRule (Generic Model Constructor)
-func (*AppConfigurationV1) NewFeatureSegmentRule(rules []TargetSegments, value interface{}, order int64, rolloutPercentage *int64) (_model *FeatureSegmentRule, err error) {
+func (*AppConfigurationV1) NewFeatureSegmentRule(rules []TargetSegments, value interface{}, order int64) (_model *FeatureSegmentRule, err error) {
 	_model = &FeatureSegmentRule{
-		Rules:             rules,
-		Value:             value,
-		Order:             core.Int64Ptr(order),
-		RolloutPercentage: rolloutPercentage,
+		Rules: rules,
+		Value: value,
+		Order: core.Int64Ptr(order),
 	}
 	err = core.ValidateStruct(_model, "required parameters")
 	return
@@ -4400,9 +4956,9 @@ type GetCollectionOptions struct {
 
 // Constants associated with the GetCollectionOptions.Include property.
 const (
-	GetCollectionOptions_Include_Features   = "features"
+	GetCollectionOptions_Include_Features = "features"
 	GetCollectionOptions_Include_Properties = "properties"
-	GetCollectionOptions_Include_Snapshots  = "snapshots"
+	GetCollectionOptions_Include_Snapshots = "snapshots"
 )
 
 // NewGetCollectionOptions : Instantiate GetCollectionOptions
@@ -4453,9 +5009,9 @@ type GetEnvironmentOptions struct {
 
 // Constants associated with the GetEnvironmentOptions.Include property.
 const (
-	GetEnvironmentOptions_Include_Features   = "features"
+	GetEnvironmentOptions_Include_Features = "features"
 	GetEnvironmentOptions_Include_Properties = "properties"
-	GetEnvironmentOptions_Include_Snapshots  = "snapshots"
+	GetEnvironmentOptions_Include_Snapshots = "snapshots"
 )
 
 // NewGetEnvironmentOptions : Instantiate GetEnvironmentOptions
@@ -4497,24 +5053,25 @@ type GetFeatureOptions struct {
 	// Feature Id.
 	FeatureID *string `json:"feature_id" validate:"required,ne="`
 
-	// Include the associated collections in the response.
-	Include *string `json:"include,omitempty"`
+	// Include the associated collections or targeting rules or change request details in the response.
+	Include []string `json:"include,omitempty"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
 }
 
 // Constants associated with the GetFeatureOptions.Include property.
-// Include the associated collections in the response.
 const (
+	GetFeatureOptions_Include_ChangeRequest = "change_request"
 	GetFeatureOptions_Include_Collections = "collections"
+	GetFeatureOptions_Include_Rules = "rules"
 )
 
 // NewGetFeatureOptions : Instantiate GetFeatureOptions
 func (*AppConfigurationV1) NewGetFeatureOptions(environmentID string, featureID string) *GetFeatureOptions {
 	return &GetFeatureOptions{
 		EnvironmentID: core.StringPtr(environmentID),
-		FeatureID:     core.StringPtr(featureID),
+		FeatureID: core.StringPtr(featureID),
 	}
 }
 
@@ -4531,8 +5088,8 @@ func (_options *GetFeatureOptions) SetFeatureID(featureID string) *GetFeatureOpt
 }
 
 // SetInclude : Allow user to set Include
-func (_options *GetFeatureOptions) SetInclude(include string) *GetFeatureOptions {
-	_options.Include = core.StringPtr(include)
+func (_options *GetFeatureOptions) SetInclude(include []string) *GetFeatureOptions {
+	_options.Include = include
 	return _options
 }
 
@@ -4595,7 +5152,7 @@ const (
 func (*AppConfigurationV1) NewGetPropertyOptions(environmentID string, propertyID string) *GetPropertyOptions {
 	return &GetPropertyOptions{
 		EnvironmentID: core.StringPtr(environmentID),
-		PropertyID:    core.StringPtr(propertyID),
+		PropertyID: core.StringPtr(propertyID),
 	}
 }
 
@@ -4637,7 +5194,7 @@ type GetSegmentOptions struct {
 
 // Constants associated with the GetSegmentOptions.Include property.
 const (
-	GetSegmentOptions_Include_Features   = "features"
+	GetSegmentOptions_Include_Features = "features"
 	GetSegmentOptions_Include_Properties = "properties"
 )
 
@@ -4664,6 +5221,508 @@ func (_options *GetSegmentOptions) SetInclude(include []string) *GetSegmentOptio
 func (options *GetSegmentOptions) SetHeaders(param map[string]string) *GetSegmentOptions {
 	options.Headers = param
 	return options
+}
+
+// ImportCollectionSchema : Collection to be created.
+type ImportCollectionSchema struct {
+	// Collection id. Allowed special characters are dot ( . ), hyphen( - ), underscore ( _ ) only.
+	CollectionID *string `json:"collection_id,omitempty"`
+
+	// Collection name. Allowed special characters are dot ( . ), hyphen( - ), underscore ( _ ) only.
+	Name *string `json:"name,omitempty"`
+
+	// Description of the collection.
+	Description *string `json:"description,omitempty"`
+
+	// Tags associated with the collection.
+	Tags *string `json:"tags,omitempty"`
+}
+
+// UnmarshalImportCollectionSchema unmarshals an instance of ImportCollectionSchema from the specified map of raw messages.
+func UnmarshalImportCollectionSchema(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(ImportCollectionSchema)
+	err = core.UnmarshalPrimitive(m, "collection_id", &obj.CollectionID)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "description", &obj.Description)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "tags", &obj.Tags)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// ImportConfig : Full instance configuration.
+type ImportConfig struct {
+	// Array will contain features and properties per environment.
+	Environments []ImportEnvironment `json:"environments" validate:"required"`
+
+	// Array will contain collections details.
+	Collections []ImportCollectionSchema `json:"collections" validate:"required"`
+
+	// Array will contain segments details.
+	Segments []ImportSegmentSchema `json:"segments" validate:"required"`
+}
+
+// NewImportConfig : Instantiate ImportConfig (Generic Model Constructor)
+func (*AppConfigurationV1) NewImportConfig(environments []ImportEnvironment, collections []ImportCollectionSchema, segments []ImportSegmentSchema) (_model *ImportConfig, err error) {
+	_model = &ImportConfig{
+		Environments: environments,
+		Collections: collections,
+		Segments: segments,
+	}
+	err = core.ValidateStruct(_model, "required parameters")
+	return
+}
+
+// UnmarshalImportConfig unmarshals an instance of ImportConfig from the specified map of raw messages.
+func UnmarshalImportConfig(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(ImportConfig)
+	err = core.UnmarshalModel(m, "environments", &obj.Environments, UnmarshalImportEnvironment)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(m, "collections", &obj.Collections, UnmarshalImportCollectionSchema)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(m, "segments", &obj.Segments, UnmarshalImportSegmentSchema)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// ImportConfigOptions : The ImportConfig options.
+type ImportConfigOptions struct {
+	// Array will contain features and properties per environment.
+	Environments []ImportEnvironment `json:"environments,omitempty"`
+
+	// Array will contain collections details.
+	Collections []ImportCollectionSchema `json:"collections,omitempty"`
+
+	// Array will contain segments details.
+	Segments []ImportSegmentSchema `json:"segments,omitempty"`
+
+	// Full instance import requires query parameter `clean=true` to perform wiping of the existing data.
+	Clean *string `json:"clean,omitempty"`
+
+	// Allows users to set headers on API requests
+	Headers map[string]string
+}
+
+// NewImportConfigOptions : Instantiate ImportConfigOptions
+func (*AppConfigurationV1) NewImportConfigOptions() *ImportConfigOptions {
+	return &ImportConfigOptions{}
+}
+
+// SetEnvironments : Allow user to set Environments
+func (_options *ImportConfigOptions) SetEnvironments(environments []ImportEnvironment) *ImportConfigOptions {
+	_options.Environments = environments
+	return _options
+}
+
+// SetCollections : Allow user to set Collections
+func (_options *ImportConfigOptions) SetCollections(collections []ImportCollectionSchema) *ImportConfigOptions {
+	_options.Collections = collections
+	return _options
+}
+
+// SetSegments : Allow user to set Segments
+func (_options *ImportConfigOptions) SetSegments(segments []ImportSegmentSchema) *ImportConfigOptions {
+	_options.Segments = segments
+	return _options
+}
+
+// SetClean : Allow user to set Clean
+func (_options *ImportConfigOptions) SetClean(clean string) *ImportConfigOptions {
+	_options.Clean = core.StringPtr(clean)
+	return _options
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *ImportConfigOptions) SetHeaders(param map[string]string) *ImportConfigOptions {
+	options.Headers = param
+	return options
+}
+
+// ImportEnvironment : Environment attributes to import.
+type ImportEnvironment struct {
+	// Environment name. Allowed special characters are dot ( . ), hyphen( - ), underscore ( _ ) only.
+	Name *string `json:"name,omitempty"`
+
+	// Environment Id. Allowed special characters are dot ( . ), hyphen( - ), underscore ( _ ) only.
+	EnvironmentID *string `json:"environment_id,omitempty"`
+
+	// Environment description.
+	Description *string `json:"description,omitempty"`
+
+	// Tags associated with the environment.
+	Tags *string `json:"tags,omitempty"`
+
+	// Color code to distinguish the environment. The Hex code for the color. For example `#FF0000` for `red`.
+	ColorCode *string `json:"color_code,omitempty"`
+
+	// Requset Body of the feature.
+	Features *ImportFeatureRequestBody `json:"features,omitempty"`
+
+	// Details of the property.
+	Properties *ImportPropertyRequestBody `json:"properties,omitempty"`
+}
+
+// UnmarshalImportEnvironment unmarshals an instance of ImportEnvironment from the specified map of raw messages.
+func UnmarshalImportEnvironment(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(ImportEnvironment)
+	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "environment_id", &obj.EnvironmentID)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "description", &obj.Description)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "tags", &obj.Tags)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "color_code", &obj.ColorCode)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(m, "features", &obj.Features, UnmarshalImportFeatureRequestBody)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(m, "properties", &obj.Properties, UnmarshalImportPropertyRequestBody)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// ImportFeatureRequestBody : Requset Body of the feature.
+type ImportFeatureRequestBody struct {
+	// Feature name. Allowed special characters are dot ( . ), hyphen( - ), underscore ( _ ) only.
+	Name *string `json:"name" validate:"required"`
+
+	// Feature id. Allowed special characters are dot ( . ), hyphen( - ), underscore ( _ ) only.
+	FeatureID *string `json:"feature_id" validate:"required"`
+
+	// Feature description.
+	Description *string `json:"description,omitempty"`
+
+	// Type of the feature (BOOLEAN, STRING, NUMERIC). If `type` is `STRING`, then `format` attribute is required.
+	Type *string `json:"type" validate:"required"`
+
+	// Format of the feature (TEXT, JSON, YAML) and it is a required attribute when `type` is `STRING`. It is not required
+	// for `BOOLEAN` and `NUMERIC` types. This property is populated in the response body of `POST, PUT and GET` calls if
+	// the type `STRING` is used and not populated for `BOOLEAN` and `NUMERIC` types.
+	Format *string `json:"format,omitempty"`
+
+	// Value of the feature when it is enabled. The value can be Boolean, Numeric, String - TEXT, String - JSON, String -
+	// YAML value as per the `type` and `format` attributes.
+	EnabledValue interface{} `json:"enabled_value" validate:"required"`
+
+	// Value of the feature when it is disabled. The value can be Boolean, Numeric, String - TEXT, String - JSON, String -
+	// YAML value as per the `type` and `format` attributes.
+	DisabledValue interface{} `json:"disabled_value" validate:"required"`
+
+	// The state of the feature flag.
+	Enabled *bool `json:"enabled,omitempty"`
+
+	// Rollout percentage associated with feature flag. Supported only for Lite and Enterprise plans.
+	RolloutPercentage *int64 `json:"rollout_percentage,omitempty"`
+
+	// Tags associated with the feature.
+	Tags *string `json:"tags,omitempty"`
+
+	// Specify the targeting rules that is used to set different feature flag values for different segments.
+	SegmentRules []FeatureSegmentRule `json:"segment_rules,omitempty"`
+
+	// List of collection id representing the collections that are associated with the specified feature flag.
+	Collections []CollectionRef `json:"collections,omitempty"`
+
+	// This attribute explains whether the feature has to be imported or not.
+	IsOverridden *bool `json:"isOverridden,omitempty"`
+}
+
+// Constants associated with the ImportFeatureRequestBody.Type property.
+// Type of the feature (BOOLEAN, STRING, NUMERIC). If `type` is `STRING`, then `format` attribute is required.
+const (
+	ImportFeatureRequestBody_Type_Boolean = "BOOLEAN"
+	ImportFeatureRequestBody_Type_Numeric = "NUMERIC"
+	ImportFeatureRequestBody_Type_String = "STRING"
+)
+
+// Constants associated with the ImportFeatureRequestBody.Format property.
+// Format of the feature (TEXT, JSON, YAML) and it is a required attribute when `type` is `STRING`. It is not required
+// for `BOOLEAN` and `NUMERIC` types. This property is populated in the response body of `POST, PUT and GET` calls if
+// the type `STRING` is used and not populated for `BOOLEAN` and `NUMERIC` types.
+const (
+	ImportFeatureRequestBody_Format_JSON = "JSON"
+	ImportFeatureRequestBody_Format_Text = "TEXT"
+	ImportFeatureRequestBody_Format_Yaml = "YAML"
+)
+
+// NewImportFeatureRequestBody : Instantiate ImportFeatureRequestBody (Generic Model Constructor)
+func (*AppConfigurationV1) NewImportFeatureRequestBody(name string, featureID string, typeVar string, enabledValue interface{}, disabledValue interface{}) (_model *ImportFeatureRequestBody, err error) {
+	_model = &ImportFeatureRequestBody{
+		Name: core.StringPtr(name),
+		FeatureID: core.StringPtr(featureID),
+		Type: core.StringPtr(typeVar),
+		EnabledValue: enabledValue,
+		DisabledValue: disabledValue,
+	}
+	err = core.ValidateStruct(_model, "required parameters")
+	return
+}
+
+// UnmarshalImportFeatureRequestBody unmarshals an instance of ImportFeatureRequestBody from the specified map of raw messages.
+func UnmarshalImportFeatureRequestBody(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(ImportFeatureRequestBody)
+	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "feature_id", &obj.FeatureID)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "description", &obj.Description)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "type", &obj.Type)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "format", &obj.Format)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "enabled_value", &obj.EnabledValue)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "disabled_value", &obj.DisabledValue)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "enabled", &obj.Enabled)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "rollout_percentage", &obj.RolloutPercentage)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "tags", &obj.Tags)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(m, "segment_rules", &obj.SegmentRules, UnmarshalFeatureSegmentRule)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(m, "collections", &obj.Collections, UnmarshalCollectionRef)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "isOverridden", &obj.IsOverridden)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// ImportPropertyRequestBody : Details of the property.
+type ImportPropertyRequestBody struct {
+	// Property name. Allowed special characters are dot ( . ), hyphen( - ), underscore ( _ ) only.
+	Name *string `json:"name" validate:"required"`
+
+	// Property id. Allowed special characters are dot ( . ), hyphen( - ), underscore ( _ ) only.
+	PropertyID *string `json:"property_id" validate:"required"`
+
+	// Property description.
+	Description *string `json:"description,omitempty"`
+
+	// Type of the property (BOOLEAN, STRING, NUMERIC, SECRETREF). If `type` is `STRING`, then `format` attribute is
+	// required.
+	Type *string `json:"type" validate:"required"`
+
+	// Format of the property (TEXT, JSON, YAML) and it is a required attribute when `type` is `STRING`. It is not required
+	// for `BOOLEAN`, `NUMERIC` or `SECRETREF` types. This attribute is populated in the response body of `POST, PUT and
+	// GET` calls if the type `STRING` is used and not populated for `BOOLEAN`, `NUMERIC` and `SECRETREF` types.
+	Format *string `json:"format,omitempty"`
+
+	// Value of the Property. The value can be Boolean, Numeric, SecretRef, String - TEXT, String - JSON, String - YAML as
+	// per the `type` and `format` attributes.
+	Value interface{} `json:"value" validate:"required"`
+
+	// Tags associated with the property.
+	Tags *string `json:"tags,omitempty"`
+
+	// Specify the targeting rules that is used to set different property values for different segments.
+	SegmentRules []SegmentRule `json:"segment_rules,omitempty"`
+
+	// List of collection id representing the collections that are associated with the specified property.
+	Collections []CollectionRef `json:"collections,omitempty"`
+
+	// This attribute explains whether the property has to be imported or not.
+	IsOverridden *bool `json:"isOverridden,omitempty"`
+}
+
+// Constants associated with the ImportPropertyRequestBody.Type property.
+// Type of the property (BOOLEAN, STRING, NUMERIC, SECRETREF). If `type` is `STRING`, then `format` attribute is
+// required.
+const (
+	ImportPropertyRequestBody_Type_Boolean = "BOOLEAN"
+	ImportPropertyRequestBody_Type_Numeric = "NUMERIC"
+	ImportPropertyRequestBody_Type_Secretref = "SECRETREF"
+	ImportPropertyRequestBody_Type_String = "STRING"
+)
+
+// Constants associated with the ImportPropertyRequestBody.Format property.
+// Format of the property (TEXT, JSON, YAML) and it is a required attribute when `type` is `STRING`. It is not required
+// for `BOOLEAN`, `NUMERIC` or `SECRETREF` types. This attribute is populated in the response body of `POST, PUT and
+// GET` calls if the type `STRING` is used and not populated for `BOOLEAN`, `NUMERIC` and `SECRETREF` types.
+const (
+	ImportPropertyRequestBody_Format_JSON = "JSON"
+	ImportPropertyRequestBody_Format_Text = "TEXT"
+	ImportPropertyRequestBody_Format_Yaml = "YAML"
+)
+
+// NewImportPropertyRequestBody : Instantiate ImportPropertyRequestBody (Generic Model Constructor)
+func (*AppConfigurationV1) NewImportPropertyRequestBody(name string, propertyID string, typeVar string, value interface{}) (_model *ImportPropertyRequestBody, err error) {
+	_model = &ImportPropertyRequestBody{
+		Name: core.StringPtr(name),
+		PropertyID: core.StringPtr(propertyID),
+		Type: core.StringPtr(typeVar),
+		Value: value,
+	}
+	err = core.ValidateStruct(_model, "required parameters")
+	return
+}
+
+// UnmarshalImportPropertyRequestBody unmarshals an instance of ImportPropertyRequestBody from the specified map of raw messages.
+func UnmarshalImportPropertyRequestBody(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(ImportPropertyRequestBody)
+	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "property_id", &obj.PropertyID)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "description", &obj.Description)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "type", &obj.Type)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "format", &obj.Format)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "value", &obj.Value)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "tags", &obj.Tags)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(m, "segment_rules", &obj.SegmentRules, UnmarshalSegmentRule)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(m, "collections", &obj.Collections, UnmarshalCollectionRef)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "isOverridden", &obj.IsOverridden)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// ImportSegmentSchema : Details of the segment.
+type ImportSegmentSchema struct {
+	// Segment name. Allowed special characters are dot ( . ), hyphen( - ), underscore ( _ ) only.
+	Name *string `json:"name" validate:"required"`
+
+	// Segment id. Allowed special characters are dot ( . ), hyphen( - ), underscore ( _ ) only.
+	SegmentID *string `json:"segment_id" validate:"required"`
+
+	// Segment description.
+	Description *string `json:"description,omitempty"`
+
+	// Tags associated with the segments.
+	Tags *string `json:"tags,omitempty"`
+
+	// List of rules that determine if the entity belongs to the segment during feature / property evaluation. An entity is
+	// identified by an unique identifier and the attributes that it defines. Any feature flag and property value
+	// evaluation is performed in the context of an entity when it is targeted to segments.
+	Rules []Rule `json:"rules" validate:"required"`
+}
+
+// NewImportSegmentSchema : Instantiate ImportSegmentSchema (Generic Model Constructor)
+func (*AppConfigurationV1) NewImportSegmentSchema(name string, segmentID string, rules []Rule) (_model *ImportSegmentSchema, err error) {
+	_model = &ImportSegmentSchema{
+		Name: core.StringPtr(name),
+		SegmentID: core.StringPtr(segmentID),
+		Rules: rules,
+	}
+	err = core.ValidateStruct(_model, "required parameters")
+	return
+}
+
+// UnmarshalImportSegmentSchema unmarshals an instance of ImportSegmentSchema from the specified map of raw messages.
+func UnmarshalImportSegmentSchema(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(ImportSegmentSchema)
+	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "segment_id", &obj.SegmentID)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "description", &obj.Description)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "tags", &obj.Tags)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(m, "rules", &obj.Rules, UnmarshalRule)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
 }
 
 // ListCollectionsOptions : The ListCollections options.
@@ -4707,16 +5766,16 @@ type ListCollectionsOptions struct {
 // Sort the collection details based on the specified attribute.
 const (
 	ListCollectionsOptions_Sort_CreatedTime = "created_time"
-	ListCollectionsOptions_Sort_ID          = "id"
+	ListCollectionsOptions_Sort_ID = "id"
 	ListCollectionsOptions_Sort_NameDefault = "name (default)"
 	ListCollectionsOptions_Sort_UpdatedTime = "updated_time"
 )
 
 // Constants associated with the ListCollectionsOptions.Include property.
 const (
-	ListCollectionsOptions_Include_Features   = "features"
+	ListCollectionsOptions_Include_Features = "features"
 	ListCollectionsOptions_Include_Properties = "properties"
-	ListCollectionsOptions_Include_Snapshots  = "snapshots"
+	ListCollectionsOptions_Include_Snapshots = "snapshots"
 )
 
 // NewListCollectionsOptions : Instantiate ListCollectionsOptions
@@ -4819,16 +5878,16 @@ type ListEnvironmentsOptions struct {
 // Sort the environment details based on the specified attribute.
 const (
 	ListEnvironmentsOptions_Sort_CreatedTime = "created_time"
-	ListEnvironmentsOptions_Sort_ID          = "id"
+	ListEnvironmentsOptions_Sort_ID = "id"
 	ListEnvironmentsOptions_Sort_NameDefault = "name (default)"
 	ListEnvironmentsOptions_Sort_UpdatedTime = "updated_time"
 )
 
 // Constants associated with the ListEnvironmentsOptions.Include property.
 const (
-	ListEnvironmentsOptions_Include_Features   = "features"
+	ListEnvironmentsOptions_Include_Features = "features"
 	ListEnvironmentsOptions_Include_Properties = "properties"
-	ListEnvironmentsOptions_Include_Snapshots  = "snapshots"
+	ListEnvironmentsOptions_Include_Snapshots = "snapshots"
 )
 
 // NewListEnvironmentsOptions : Instantiate ListEnvironmentsOptions
@@ -4905,7 +5964,7 @@ type ListFeaturesOptions struct {
 	// Filter features by a list of comma separated segments.
 	Segments []string `json:"segments,omitempty"`
 
-	// Include the associated collections or targeting rules details in the response.
+	// Include the associated collections or targeting rules or change request details in the response.
 	Include []string `json:"include,omitempty"`
 
 	// The number of records to retrieve. By default, the list operation return the first 10 records. To retrieve different
@@ -4928,15 +5987,16 @@ type ListFeaturesOptions struct {
 // Sort the feature details based on the specified attribute.
 const (
 	ListFeaturesOptions_Sort_CreatedTime = "created_time"
-	ListFeaturesOptions_Sort_ID          = "id"
+	ListFeaturesOptions_Sort_ID = "id"
 	ListFeaturesOptions_Sort_NameDefault = "name (default)"
 	ListFeaturesOptions_Sort_UpdatedTime = "updated_time"
 )
 
 // Constants associated with the ListFeaturesOptions.Include property.
 const (
+	ListFeaturesOptions_Include_ChangeRequest = "change_request"
 	ListFeaturesOptions_Include_Collections = "collections"
-	ListFeaturesOptions_Include_Rules       = " rules"
+	ListFeaturesOptions_Include_Rules = "rules"
 )
 
 // NewListFeaturesOptions : Instantiate ListFeaturesOptions
@@ -5012,6 +6072,24 @@ func (options *ListFeaturesOptions) SetHeaders(param map[string]string) *ListFea
 	return options
 }
 
+// ListInstanceConfigOptions : The ListInstanceConfig options.
+type ListInstanceConfigOptions struct {
+
+	// Allows users to set headers on API requests
+	Headers map[string]string
+}
+
+// NewListInstanceConfigOptions : Instantiate ListInstanceConfigOptions
+func (*AppConfigurationV1) NewListInstanceConfigOptions() *ListInstanceConfigOptions {
+	return &ListInstanceConfigOptions{}
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *ListInstanceConfigOptions) SetHeaders(param map[string]string) *ListInstanceConfigOptions {
+	options.Headers = param
+	return options
+}
+
 // ListOriginconfigsOptions : The ListOriginconfigs options.
 type ListOriginconfigsOptions struct {
 
@@ -5051,7 +6129,7 @@ type ListPropertiesOptions struct {
 	// Filter properties by a list of comma separated segments.
 	Segments []string `json:"segments,omitempty"`
 
-	// Include the associated collections or targeting rules details in the response.
+	// Include the associated collections or targeting rules or change request details in the response.
 	Include []string `json:"include,omitempty"`
 
 	// The number of records to retrieve. By default, the list operation return the first 10 records. To retrieve different
@@ -5074,7 +6152,7 @@ type ListPropertiesOptions struct {
 // Sort the property details based on the specified attribute.
 const (
 	ListPropertiesOptions_Sort_CreatedTime = "created_time"
-	ListPropertiesOptions_Sort_ID          = "id"
+	ListPropertiesOptions_Sort_ID = "id"
 	ListPropertiesOptions_Sort_NameDefault = "name (default)"
 	ListPropertiesOptions_Sort_UpdatedTime = "updated_time"
 )
@@ -5082,7 +6160,7 @@ const (
 // Constants associated with the ListPropertiesOptions.Include property.
 const (
 	ListPropertiesOptions_Include_Collections = "collections"
-	ListPropertiesOptions_Include_Rules       = " rules"
+	ListPropertiesOptions_Include_Rules = "rules"
 )
 
 // NewListPropertiesOptions : Instantiate ListPropertiesOptions
@@ -5193,7 +6271,7 @@ type ListSegmentsOptions struct {
 // Sort the segment details based on the specified attribute.
 const (
 	ListSegmentsOptions_Sort_CreatedTime = "created_time"
-	ListSegmentsOptions_Sort_ID          = "id"
+	ListSegmentsOptions_Sort_ID = "id"
 	ListSegmentsOptions_Sort_NameDefault = "name (default)"
 	ListSegmentsOptions_Sort_UpdatedTime = "updated_time"
 )
@@ -5288,7 +6366,7 @@ type ListSnapshotsOptions struct {
 // Sort the git configurations details based on the specified attribute.
 const (
 	ListSnapshotsOptions_Sort_CreatedTime = "created_time"
-	ListSnapshotsOptions_Sort_ID          = "id"
+	ListSnapshotsOptions_Sort_ID = "id"
 	ListSnapshotsOptions_Sort_NameDefault = "name (default)"
 	ListSnapshotsOptions_Sort_UpdatedTime = "updated_time"
 )
@@ -5348,6 +6426,34 @@ func (_options *ListSnapshotsOptions) SetSearch(search string) *ListSnapshotsOpt
 
 // SetHeaders : Allow user to set Headers
 func (options *ListSnapshotsOptions) SetHeaders(param map[string]string) *ListSnapshotsOptions {
+	options.Headers = param
+	return options
+}
+
+// ListWorkflowconfigOptions : The ListWorkflowconfig options.
+type ListWorkflowconfigOptions struct {
+	// Environment Id.
+	EnvironmentID *string `json:"environment_id" validate:"required,ne="`
+
+	// Allows users to set headers on API requests
+	Headers map[string]string
+}
+
+// NewListWorkflowconfigOptions : Instantiate ListWorkflowconfigOptions
+func (*AppConfigurationV1) NewListWorkflowconfigOptions(environmentID string) *ListWorkflowconfigOptions {
+	return &ListWorkflowconfigOptions{
+		EnvironmentID: core.StringPtr(environmentID),
+	}
+}
+
+// SetEnvironmentID : Allow user to set EnvironmentID
+func (_options *ListWorkflowconfigOptions) SetEnvironmentID(environmentID string) *ListWorkflowconfigOptions {
+	_options.EnvironmentID = core.StringPtr(environmentID)
+	return _options
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *ListWorkflowconfigOptions) SetHeaders(param map[string]string) *ListWorkflowconfigOptions {
 	options.Headers = param
 	return options
 }
@@ -5431,6 +6537,51 @@ func (_options *PromoteGitconfigOptions) SetGitConfigID(gitConfigID string) *Pro
 
 // SetHeaders : Allow user to set Headers
 func (options *PromoteGitconfigOptions) SetHeaders(param map[string]string) *PromoteGitconfigOptions {
+	options.Headers = param
+	return options
+}
+
+// PromoteRestoreConfigOptions : The PromoteRestoreConfig options.
+type PromoteRestoreConfigOptions struct {
+	// Git Config Id.
+	GitConfigID *string `json:"git_config_id" validate:"required"`
+
+	// Promote configuration to Git or Restore configuration from Git.
+	Action *string `json:"action" validate:"required"`
+
+	// Allows users to set headers on API requests
+	Headers map[string]string
+}
+
+// Constants associated with the PromoteRestoreConfigOptions.Action property.
+// Promote configuration to Git or Restore configuration from Git.
+const (
+	PromoteRestoreConfigOptions_Action_Promote = "promote"
+	PromoteRestoreConfigOptions_Action_Restore = "restore"
+)
+
+// NewPromoteRestoreConfigOptions : Instantiate PromoteRestoreConfigOptions
+func (*AppConfigurationV1) NewPromoteRestoreConfigOptions(gitConfigID string, action string) *PromoteRestoreConfigOptions {
+	return &PromoteRestoreConfigOptions{
+		GitConfigID: core.StringPtr(gitConfigID),
+		Action: core.StringPtr(action),
+	}
+}
+
+// SetGitConfigID : Allow user to set GitConfigID
+func (_options *PromoteRestoreConfigOptions) SetGitConfigID(gitConfigID string) *PromoteRestoreConfigOptions {
+	_options.GitConfigID = core.StringPtr(gitConfigID)
+	return _options
+}
+
+// SetAction : Allow user to set Action
+func (_options *PromoteRestoreConfigOptions) SetAction(action string) *PromoteRestoreConfigOptions {
+	_options.Action = core.StringPtr(action)
+	return _options
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *PromoteRestoreConfigOptions) SetHeaders(param map[string]string) *PromoteRestoreConfigOptions {
 	options.Headers = param
 	return options
 }
@@ -5571,10 +6722,10 @@ type Property struct {
 // Type of the property (BOOLEAN, STRING, NUMERIC, SECRETREF). If `type` is `STRING`, then `format` attribute is
 // required.
 const (
-	Property_Type_Boolean   = "BOOLEAN"
-	Property_Type_Numeric   = "NUMERIC"
+	Property_Type_Boolean = "BOOLEAN"
+	Property_Type_Numeric = "NUMERIC"
 	Property_Type_Secretref = "SECRETREF"
-	Property_Type_String    = "STRING"
+	Property_Type_String = "STRING"
 )
 
 // Constants associated with the Property.Format property.
@@ -5590,10 +6741,10 @@ const (
 // NewProperty : Instantiate Property (Generic Model Constructor)
 func (*AppConfigurationV1) NewProperty(name string, propertyID string, typeVar string, value interface{}) (_model *Property, err error) {
 	_model = &Property{
-		Name:       core.StringPtr(name),
+		Name: core.StringPtr(name),
 		PropertyID: core.StringPtr(propertyID),
-		Type:       core.StringPtr(typeVar),
-		Value:      value,
+		Type: core.StringPtr(typeVar),
+		Value: value,
 	}
 	err = core.ValidateStruct(_model, "required parameters")
 	return
@@ -5675,7 +6826,7 @@ type PropertyOutput struct {
 func (*AppConfigurationV1) NewPropertyOutput(propertyID string, name string) (_model *PropertyOutput, err error) {
 	_model = &PropertyOutput{
 		PropertyID: core.StringPtr(propertyID),
-		Name:       core.StringPtr(name),
+		Name: core.StringPtr(name),
 	}
 	err = core.ValidateStruct(_model, "required parameters")
 	return
@@ -5739,22 +6890,22 @@ type Rule struct {
 // Constants associated with the Rule.Operator property.
 // Operator to be used for the evaluation if the entity belongs to the segment.
 const (
-	Rule_Operator_Contains          = "contains"
-	Rule_Operator_Endswith          = "endsWith"
-	Rule_Operator_Greaterthan       = "greaterThan"
+	Rule_Operator_Contains = "contains"
+	Rule_Operator_Endswith = "endsWith"
+	Rule_Operator_Greaterthan = "greaterThan"
 	Rule_Operator_Greaterthanequals = "greaterThanEquals"
-	Rule_Operator_Is                = "is"
-	Rule_Operator_Lesserthan        = "lesserThan"
-	Rule_Operator_Lesserthanequals  = "lesserThanEquals"
-	Rule_Operator_Startswith        = "startsWith"
+	Rule_Operator_Is = "is"
+	Rule_Operator_Lesserthan = "lesserThan"
+	Rule_Operator_Lesserthanequals = "lesserThanEquals"
+	Rule_Operator_Startswith = "startsWith"
 )
 
 // NewRule : Instantiate Rule (Generic Model Constructor)
 func (*AppConfigurationV1) NewRule(attributeName string, operator string, values []string) (_model *Rule, err error) {
 	_model = &Rule{
 		AttributeName: core.StringPtr(attributeName),
-		Operator:      core.StringPtr(operator),
-		Values:        values,
+		Operator: core.StringPtr(operator),
+		Values: values,
 	}
 	err = core.ValidateStruct(_model, "required parameters")
 	return
@@ -5817,9 +6968,9 @@ type Segment struct {
 // NewSegment : Instantiate Segment (Generic Model Constructor)
 func (*AppConfigurationV1) NewSegment(name string, segmentID string, rules []Rule) (_model *Segment, err error) {
 	_model = &Segment{
-		Name:      core.StringPtr(name),
+		Name: core.StringPtr(name),
 		SegmentID: core.StringPtr(segmentID),
-		Rules:     rules,
+		Rules: rules,
 	}
 	err = core.ValidateStruct(_model, "required parameters")
 	return
@@ -6012,7 +7163,7 @@ type SnapshotOutput struct {
 func (*AppConfigurationV1) NewSnapshotOutput(gitConfigID string, name string) (_model *SnapshotOutput, err error) {
 	_model = &SnapshotOutput{
 		GitConfigID: core.StringPtr(gitConfigID),
-		Name:        core.StringPtr(name),
+		Name: core.StringPtr(name),
 	}
 	err = core.ValidateStruct(_model, "required parameters")
 	return
@@ -6399,7 +7550,6 @@ type SnapshotRestoreEnvironmentsItem struct {
 	// per the `type` and `format` attributes.
 	Value interface{} `json:"value,omitempty"`
 }
-
 func (*SnapshotRestoreEnvironmentsItem) isaSnapshotRestoreEnvironmentsItem() bool {
 	return true
 }
@@ -6583,7 +7733,7 @@ type ToggleFeatureOptions struct {
 func (*AppConfigurationV1) NewToggleFeatureOptions(environmentID string, featureID string) *ToggleFeatureOptions {
 	return &ToggleFeatureOptions{
 		EnvironmentID: core.StringPtr(environmentID),
-		FeatureID:     core.StringPtr(featureID),
+		FeatureID: core.StringPtr(featureID),
 	}
 }
 
@@ -6775,7 +7925,7 @@ type UpdateFeatureOptions struct {
 func (*AppConfigurationV1) NewUpdateFeatureOptions(environmentID string, featureID string) *UpdateFeatureOptions {
 	return &UpdateFeatureOptions{
 		EnvironmentID: core.StringPtr(environmentID),
-		FeatureID:     core.StringPtr(featureID),
+		FeatureID: core.StringPtr(featureID),
 	}
 }
 
@@ -6890,7 +8040,7 @@ type UpdateFeatureValuesOptions struct {
 func (*AppConfigurationV1) NewUpdateFeatureValuesOptions(environmentID string, featureID string) *UpdateFeatureValuesOptions {
 	return &UpdateFeatureValuesOptions{
 		EnvironmentID: core.StringPtr(environmentID),
-		FeatureID:     core.StringPtr(featureID),
+		FeatureID: core.StringPtr(featureID),
 	}
 }
 
@@ -7112,7 +8262,7 @@ type UpdatePropertyOptions struct {
 func (*AppConfigurationV1) NewUpdatePropertyOptions(environmentID string, propertyID string) *UpdatePropertyOptions {
 	return &UpdatePropertyOptions{
 		EnvironmentID: core.StringPtr(environmentID),
-		PropertyID:    core.StringPtr(propertyID),
+		PropertyID: core.StringPtr(propertyID),
 	}
 }
 
@@ -7202,7 +8352,7 @@ type UpdatePropertyValuesOptions struct {
 func (*AppConfigurationV1) NewUpdatePropertyValuesOptions(environmentID string, propertyID string) *UpdatePropertyValuesOptions {
 	return &UpdatePropertyValuesOptions{
 		EnvironmentID: core.StringPtr(environmentID),
-		PropertyID:    core.StringPtr(propertyID),
+		PropertyID: core.StringPtr(propertyID),
 	}
 }
 
@@ -7360,6 +8510,229 @@ func (options *UpdateSegmentOptions) SetHeaders(param map[string]string) *Update
 	return options
 }
 
+// UpdateWorkflowconfigOptions : The UpdateWorkflowconfig options.
+type UpdateWorkflowconfigOptions struct {
+	// Environment Id.
+	EnvironmentID *string `json:"environment_id" validate:"required,ne="`
+
+	// Workflow URL, only service now url https://xxxxx.service-now.com allowed, xxxxx is the service now instance id.
+	WorkflowURL *string `json:"workflow_url,omitempty"`
+
+	// Approval Group name, Group name of personals who can approve the Change Request on your Service Now. It must be
+	// first registered in your Service Now then it must be added here.
+	ApprovalGroupName *string `json:"approval_group_name,omitempty"`
+
+	// Approval Expiration, integer number identifies as hours which helps in adding approval start and end time to the
+	// created Change Request.
+	ApprovalExpiration *int64 `json:"approval_expiration,omitempty"`
+
+	// Workflow Credentials, json object is accpeted with mandatory attributes with value. Mandatory attributes in the json
+	// object must be username, password, client_secret, client_id.
+	WorkflowCredentials map[string]interface{} `json:"workflow_credentials,omitempty"`
+
+	// Enabled, this option enables the workflow configuration per environment. User must set it to true if they wish to
+	// create Change Request for flag state changes.
+	Enabled *bool `json:"enabled,omitempty"`
+
+	// Allows users to set headers on API requests
+	Headers map[string]string
+}
+
+// NewUpdateWorkflowconfigOptions : Instantiate UpdateWorkflowconfigOptions
+func (*AppConfigurationV1) NewUpdateWorkflowconfigOptions(environmentID string) *UpdateWorkflowconfigOptions {
+	return &UpdateWorkflowconfigOptions{
+		EnvironmentID: core.StringPtr(environmentID),
+	}
+}
+
+// SetEnvironmentID : Allow user to set EnvironmentID
+func (_options *UpdateWorkflowconfigOptions) SetEnvironmentID(environmentID string) *UpdateWorkflowconfigOptions {
+	_options.EnvironmentID = core.StringPtr(environmentID)
+	return _options
+}
+
+// SetWorkflowURL : Allow user to set WorkflowURL
+func (_options *UpdateWorkflowconfigOptions) SetWorkflowURL(workflowURL string) *UpdateWorkflowconfigOptions {
+	_options.WorkflowURL = core.StringPtr(workflowURL)
+	return _options
+}
+
+// SetApprovalGroupName : Allow user to set ApprovalGroupName
+func (_options *UpdateWorkflowconfigOptions) SetApprovalGroupName(approvalGroupName string) *UpdateWorkflowconfigOptions {
+	_options.ApprovalGroupName = core.StringPtr(approvalGroupName)
+	return _options
+}
+
+// SetApprovalExpiration : Allow user to set ApprovalExpiration
+func (_options *UpdateWorkflowconfigOptions) SetApprovalExpiration(approvalExpiration int64) *UpdateWorkflowconfigOptions {
+	_options.ApprovalExpiration = core.Int64Ptr(approvalExpiration)
+	return _options
+}
+
+// SetWorkflowCredentials : Allow user to set WorkflowCredentials
+func (_options *UpdateWorkflowconfigOptions) SetWorkflowCredentials(workflowCredentials map[string]interface{}) *UpdateWorkflowconfigOptions {
+	_options.WorkflowCredentials = workflowCredentials
+	return _options
+}
+
+// SetEnabled : Allow user to set Enabled
+func (_options *UpdateWorkflowconfigOptions) SetEnabled(enabled bool) *UpdateWorkflowconfigOptions {
+	_options.Enabled = core.BoolPtr(enabled)
+	return _options
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *UpdateWorkflowconfigOptions) SetHeaders(param map[string]string) *UpdateWorkflowconfigOptions {
+	options.Headers = param
+	return options
+}
+
+// WorkflowConfigs : Workflow configuration per environment.
+type WorkflowConfigs struct {
+	// Workflow URL, only service now url https://xxxxx.service-now.com allowed, xxxxx is the service now instance id.
+	WorkflowURL *string `json:"workflow_url" validate:"required"`
+
+	// Approval Group name, Group name of personals who can approve the Change Request on your Service Now. It must be
+	// first registered in your Service Now then it must be added here.
+	ApprovalGroupName *string `json:"approval_group_name" validate:"required"`
+
+	// Approval Expiration, integer number identifies as hours which helps in adding approval start and end time to the
+	// created Change Request.
+	ApprovalExpiration *int64 `json:"approval_expiration" validate:"required"`
+
+	// Workflow Credentials, json object is accpeted with mandatory attributes with value. Mandatory attributes in the json
+	// object must be username, password, client_secret, client_id.
+	WorkflowCredentials map[string]interface{} `json:"workflow_credentials" validate:"required"`
+
+	// Enabled, this option enables the workflow configuration per environment. User must set it to true if they wish to
+	// create Change Request for flag state changes.
+	Enabled *bool `json:"enabled" validate:"required"`
+}
+
+// NewWorkflowConfigs : Instantiate WorkflowConfigs (Generic Model Constructor)
+func (*AppConfigurationV1) NewWorkflowConfigs(workflowURL string, approvalGroupName string, approvalExpiration int64, workflowCredentials map[string]interface{}, enabled bool) (_model *WorkflowConfigs, err error) {
+	_model = &WorkflowConfigs{
+		WorkflowURL: core.StringPtr(workflowURL),
+		ApprovalGroupName: core.StringPtr(approvalGroupName),
+		ApprovalExpiration: core.Int64Ptr(approvalExpiration),
+		WorkflowCredentials: workflowCredentials,
+		Enabled: core.BoolPtr(enabled),
+	}
+	err = core.ValidateStruct(_model, "required parameters")
+	return
+}
+
+// UnmarshalWorkflowConfigs unmarshals an instance of WorkflowConfigs from the specified map of raw messages.
+func UnmarshalWorkflowConfigs(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(WorkflowConfigs)
+	err = core.UnmarshalPrimitive(m, "workflow_url", &obj.WorkflowURL)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "approval_group_name", &obj.ApprovalGroupName)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "approval_expiration", &obj.ApprovalExpiration)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "workflow_credentials", &obj.WorkflowCredentials)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "enabled", &obj.Enabled)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// WorkflowConfigsList : List Workflow configs per environment.
+type WorkflowConfigsList struct {
+	// Environment name, allowed special characters are dot ( . ), hyphen( - ), underscore ( _ ) only.
+	EnvironmentName *string `json:"environment_name" validate:"required"`
+
+	// Environment Id, allowed special characters are dot ( . ), hyphen( - ), underscore ( _ ) only.
+	EnvironmentID *string `json:"environment_id" validate:"required"`
+
+	// Workflow URL, only service now url https://xxxxx.service-now.com allowed, xxxxx is the service now instance id.
+	WorkflowURL *string `json:"workflow_url" validate:"required"`
+
+	// Approval Group name, Group name of personals who can approve the Change Request on your Service Now. It must be
+	// first registered in your Service Now then it must be added here.
+	ApprovalGroupName *string `json:"approval_group_name" validate:"required"`
+
+	// Approval Expiration, integer number identifies as hours which helps in adding approval start and end time to the
+	// created Change Request.
+	ApprovalExpiration *int64 `json:"approval_expiration" validate:"required"`
+
+	// Workflow Credentials, json object is accpeted with mandatory attributes with value. Mandatory attributes in the json
+	// object must be username, password, client_secret, client_id.
+	WorkflowCredentials map[string]interface{} `json:"workflow_credentials" validate:"required"`
+
+	// Enabled, this option enables the workflow configuration per environment. User must set it to true if they wish to
+	// create Change Request for flag state changes.
+	Enabled *bool `json:"enabled" validate:"required"`
+
+	// Creation time of the workflow configs.
+	CreatedTime *strfmt.DateTime `json:"created_time,omitempty"`
+
+	// Last modified time of the workflow configs.
+	UpdatedTime *strfmt.DateTime `json:"updated_time,omitempty"`
+
+	// Workflow Config URL.
+	Href *string `json:"href,omitempty"`
+}
+
+// UnmarshalWorkflowConfigsList unmarshals an instance of WorkflowConfigsList from the specified map of raw messages.
+func UnmarshalWorkflowConfigsList(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(WorkflowConfigsList)
+	err = core.UnmarshalPrimitive(m, "environment_name", &obj.EnvironmentName)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "environment_id", &obj.EnvironmentID)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "workflow_url", &obj.WorkflowURL)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "approval_group_name", &obj.ApprovalGroupName)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "approval_expiration", &obj.ApprovalExpiration)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "workflow_credentials", &obj.WorkflowCredentials)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "enabled", &obj.Enabled)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "created_time", &obj.CreatedTime)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "updated_time", &obj.UpdatedTime)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "href", &obj.Href)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
 // SnapshotRestoreEnvironmentsItemUpdateFeature : Feature flag attributes to be updated.
 // This model "extends" SnapshotRestoreEnvironmentsItem
 type SnapshotRestoreEnvironmentsItemUpdateFeature struct {
@@ -7498,11 +8871,13 @@ func UnmarshalSnapshotRestoreEnvironmentsItemUpdateProperty(m map[string]json.Ra
 	return
 }
 
+//
 // EnvironmentsPager can be used to simplify the use of the "ListEnvironments" method.
+//
 type EnvironmentsPager struct {
-	hasNext     bool
-	options     *ListEnvironmentsOptions
-	client      *AppConfigurationV1
+	hasNext bool
+	options *ListEnvironmentsOptions
+	client  *AppConfigurationV1
 	pageContext struct {
 		next *int64
 	}
@@ -7583,11 +8958,13 @@ func (pager *EnvironmentsPager) GetAll() (allItems []Environment, err error) {
 	return pager.GetAllWithContext(context.Background())
 }
 
+//
 // CollectionsPager can be used to simplify the use of the "ListCollections" method.
+//
 type CollectionsPager struct {
-	hasNext     bool
-	options     *ListCollectionsOptions
-	client      *AppConfigurationV1
+	hasNext bool
+	options *ListCollectionsOptions
+	client  *AppConfigurationV1
 	pageContext struct {
 		next *int64
 	}
@@ -7668,11 +9045,13 @@ func (pager *CollectionsPager) GetAll() (allItems []Collection, err error) {
 	return pager.GetAllWithContext(context.Background())
 }
 
+//
 // FeaturesPager can be used to simplify the use of the "ListFeatures" method.
+//
 type FeaturesPager struct {
-	hasNext     bool
-	options     *ListFeaturesOptions
-	client      *AppConfigurationV1
+	hasNext bool
+	options *ListFeaturesOptions
+	client  *AppConfigurationV1
 	pageContext struct {
 		next *int64
 	}
@@ -7753,11 +9132,13 @@ func (pager *FeaturesPager) GetAll() (allItems []Feature, err error) {
 	return pager.GetAllWithContext(context.Background())
 }
 
+//
 // PropertiesPager can be used to simplify the use of the "ListProperties" method.
+//
 type PropertiesPager struct {
-	hasNext     bool
-	options     *ListPropertiesOptions
-	client      *AppConfigurationV1
+	hasNext bool
+	options *ListPropertiesOptions
+	client  *AppConfigurationV1
 	pageContext struct {
 		next *int64
 	}
@@ -7838,11 +9219,13 @@ func (pager *PropertiesPager) GetAll() (allItems []Property, err error) {
 	return pager.GetAllWithContext(context.Background())
 }
 
+//
 // SegmentsPager can be used to simplify the use of the "ListSegments" method.
+//
 type SegmentsPager struct {
-	hasNext     bool
-	options     *ListSegmentsOptions
-	client      *AppConfigurationV1
+	hasNext bool
+	options *ListSegmentsOptions
+	client  *AppConfigurationV1
 	pageContext struct {
 		next *int64
 	}
@@ -7923,11 +9306,13 @@ func (pager *SegmentsPager) GetAll() (allItems []Segment, err error) {
 	return pager.GetAllWithContext(context.Background())
 }
 
+//
 // SnapshotsPager can be used to simplify the use of the "ListSnapshots" method.
+//
 type SnapshotsPager struct {
-	hasNext     bool
-	options     *ListSnapshotsOptions
-	client      *AppConfigurationV1
+	hasNext bool
+	options *ListSnapshotsOptions
+	client  *AppConfigurationV1
 	pageContext struct {
 		next *int64
 	}
