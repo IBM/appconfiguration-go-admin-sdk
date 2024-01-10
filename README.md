@@ -32,7 +32,7 @@ Use the Go Admin SDK to manage the App Configuration service instance. The Go Ad
 Install using the command.
 
 ```bash
-go get -u github.com/IBM/appconfiguration-go-admin-sdk@latest
+go get -u github.com/IBM/appconfiguration-go-admin-sdk
 ```
 
 ## Import the SDK
@@ -169,7 +169,7 @@ result, response, err := appConfigurationServiceInstance.CreateSegment(createSeg
 
 ```go
 ruleArray, _ := appConfigurationServiceInstance.NewTargetSegments(segments)
-segmentRuleArray, _ := appConfigurationServiceInstance.NewFeatureSegmentRule([]appconfigurationv1.TargetSegments{*ruleArray}, value, order, segmentRolloutPercentage)
+segmentRuleArray, _ := appConfigurationServiceInstance.NewFeatureSegmentRule([]appconfigurationv1.TargetSegments{*ruleArray}, value, order)
 collectionArray, _ := appConfigurationServiceInstance.NewCollectionRef(collectionId)
 createFeatureOptionsModel := appConfigurationServiceInstance.NewCreateFeatureOptions(environmentId, name, id, typeOfFeature, enabledValue, disabledValue)
 createFeatureOptionsModel.SetTags(tags)
@@ -185,7 +185,7 @@ result, response, err := appConfigurationServiceInstance.CreateFeature(createFea
 ### Update Feature
 ```go
 ruleArray, _ := appConfigurationServiceInstance.NewTargetSegments(segments)
-segmentRuleArray, _ := appConfigurationServiceInstance.NewFeatureSegmentRule([]appconfigurationv1.TargetSegments{*ruleArray}, value, order, segmentRolloutPercentage)
+segmentRuleArray, _ := appConfigurationServiceInstance.NewFeatureSegmentRule([]appconfigurationv1.TargetSegments{*ruleArray}, value, order)
 collectionArray, _ := appConfigurationServiceInstance.NewCollectionRef(collectionId)
 updateFeatureOptionsModel := appConfigurationServiceInstance.NewUpdateFeatureOptions(environmentId, id)
 updateFeatureOptionsModel.SetName(name)

@@ -1,0 +1,8 @@
+{
+"settingsInheritedFrom": "whitesource-config/whitesource-config@master",
+"remediateSettings": {
+    "workflowRules": {
+        "enabled": true
+        }
+    }
+} 

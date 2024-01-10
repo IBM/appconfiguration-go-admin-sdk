@@ -5,7 +5,7 @@ go 1.16
 replace github.com/gobuffalo/packr/v2 => github.com/gobuffalo/packr/v2 v2.3.2
 
 require (
-	github.com/IBM/go-sdk-core/v5 v5.14.1
+	github.com/IBM/go-sdk-core/v5 v5.15.0
 	github.com/go-openapi/strfmt v0.21.7
 	github.com/kr/pretty v0.3.0 // indirect
 	github.com/onsi/ginkgo v1.16.5
@@ -13,7 +13,6 @@ require (
 	github.com/rogpeppe/go-internal v1.8.0 // indirect
 	github.com/stretchr/testify v1.8.2
 	go.mongodb.org/mongo-driver v1.11.4 // indirect
-	golang.org/x/net v0.17.0 // indirect
 	gopkg.in/check.v1 v1.0.0-20201130134442-10cb98267c6c // indirect
 )
 
