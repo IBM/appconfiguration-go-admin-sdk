@@ -221,8 +221,7 @@ func createCollection(collectionId string, name string, description string, tags
 func createSegment(name string, id string, description string, tags string, attributeName string, operator string, values []string) {
 	fmt.Println("createSegment")
 	ruleArray, _ := appConfigurationServiceInstance.NewRule(attributeName, operator, values)
-	createSegmentOptionsModel := appConfigurationServiceInstance.NewCreateSegmentOptions()
-	createSegmentOptionsModel.SetName(name)
+	createSegmentOptionsModel := appConfigurationServiceInstance.NewCreateSegmentOptions(name, id, []appconfigurationv1.Rule{*ruleArray})
 	createSegmentOptionsModel.SetDescription(description)
 	createSegmentOptionsModel.SetTags(tags)
 	createSegmentOptionsModel.SetSegmentID(id)
@@ -422,8 +421,7 @@ func patchProperty(environmentId string, name string, propertyId string, descrip
 }
 func updateOriginConfigs(origins []string) {
 	fmt.Println("updateOriginConfigs")
-	updateOriginconfigsOptionsModel := appConfigurationServiceInstance.NewUpdateOriginconfigsOptions()
-	updateOriginconfigsOptionsModel.SetAllowedOrigins(origins)
+	updateOriginconfigsOptionsModel := appConfigurationServiceInstance.NewUpdateOriginconfigsOptions(origins)
 	result, response, error := appConfigurationServiceInstance.UpdateOriginconfigs(updateOriginconfigsOptionsModel)
 	if error != nil {
 		fmt.Println("Error: " + error.Error())
@@ -632,8 +630,7 @@ func getEnvironment(environmentId string) {
 
 func toggleFeature(environmentId string, featureId string, enableFlag bool) {
 	fmt.Println("toggleFeature")
-	toggleFeatureOptionsModel := appConfigurationServiceInstance.NewToggleFeatureOptions(environmentId, featureId)
-	toggleFeatureOptionsModel.SetEnabled(enableFlag)
+	toggleFeatureOptionsModel := appConfigurationServiceInstance.NewToggleFeatureOptions(environmentId, featureId, enableFlag)
 	result, response, error := appConfigurationServiceInstance.ToggleFeature(toggleFeatureOptionsModel)
 	if error != nil {
 		fmt.Println("Error: " + error.Error())
@@ -645,16 +642,16 @@ func toggleFeature(environmentId string, featureId string, enableFlag bool) {
 
 func createConfiguration(gitURL string, gitBranch string, gitFilePath string, gitToken string) {
 	fmt.Println("createConfiguration")
-	createConfigurationOptionsModel := appConfigurationServiceInstance.NewCreateGitconfigOptions()
-	createConfigurationOptionsModel.SetGitConfigName("snapshotConfigurationName")
-	createConfigurationOptionsModel.SetGitConfigID("snapshotConfigurationId")
-	createConfigurationOptionsModel.SetCollectionID("collectionId")
-	createConfigurationOptionsModel.SetEnvironmentID("environmentId")
-	createConfigurationOptionsModel.SetGitURL(gitURL)
-	createConfigurationOptionsModel.SetGitBranch(gitBranch)
-	createConfigurationOptionsModel.SetGitFilePath(gitFilePath)
-	createConfigurationOptionsModel.SetGitToken(gitToken)
-
+	createConfigurationOptionsModel := appConfigurationServiceInstance.NewCreateGitconfigOptions(
+		"snapshotConfigurationName",
+		"snapshotConfigurationId",
+		"collectionId",
+		"environmentId",
+		gitURL,
+		gitBranch,
+		gitFilePath,
+		gitToken,
+	)
 	result, response, error := appConfigurationServiceInstance.CreateGitconfig(createConfigurationOptionsModel)
 	if error != nil {
 		fmt.Println("Error: " + error.Error())
@@ -696,7 +693,7 @@ func listConfiguration() {
 		return
 	}
 	fmt.Println(response.StatusCode)
-	fmt.Println(result.Snapshot)
+	fmt.Println(result.GitConfig)
 }
 func createSnapshot(gitConfigID string) {
 	fmt.Println("createSnapshot")

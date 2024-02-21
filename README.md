@@ -1,321 +1,199 @@
 # IBM Cloud App Configuration Go Admin SDK
 
-The IBM Cloud App Configuration Go Admin SDK allows developers to programmatically manage the [App Configuration](https://cloud.ibm.com/apidocs/app-configuration) service
+Go client library to interact with the
+various [IBM Cloud® App Configuration APIs](https://cloud.ibm.com/apidocs/app-configuration).
 
 ## Table of Contents
 
-  - [Prerequisites](#prerequisites)
-  - [Overview](#overview)
-  - [Installation](#installation)
-  - [Import the SDK](#import-the-sdk)
-  - [Initialize SDK](#initialize-sdk)
-  - [Using the SDK](#using-the-sdk)
-  - [License](#license)
+<!--
+  The TOC below is generated using the `markdown-toc` node package.
 
+      https://github.com/jonschlinkert/markdown-toc
 
-## Prerequisites
+  You should regenerate the TOC after making changes to this file.
 
-* An [IBM Cloud](https://cloud.ibm.com/registration) account.
-* An [App Configuration](https://cloud.ibm.com/docs/app-configuration) instance.
-* Go version 1.16 or newer
+      npx markdown-toc -i README.md
+  -->
+
+<!-- toc -->
+
+- [Overview](#overview)
+- [Prerequisites](#prerequisites)
+- [Installation](#installation)
+    * [Go modules](#go-modules)
+    * [`go get` command](#go-get-command)
+- [Using the SDK](#using-the-sdk)
+- [Questions](#questions)
+- [Issues](#issues)
+- [Open source @ IBM](#open-source--ibm)
+- [Contributing](#contributing)
+- [License](#license)
+
+<!-- tocstop -->
 
 ## Overview
 
-IBM Cloud App Configuration is a centralized feature management and configuration service on [IBM Cloud](https://cloud.ibm.com) for use with web and mobile applications, microservices, and distributed environments.
+The IBM Cloud App Configuration Go SDK allows developers to programmatically manage
+the [App Configuration](https://cloud.ibm.com/apidocs/app-configuration) service. Alternately, you can also use the IBM
+Cloud App Configuration CLI to manage the App Configuration service instance. You can find more information about the
+CLI [here.](https://cloud.ibm.com/docs/app-configuration?topic=app-configuration-app-configuration-cli)
 
-Use the Go Admin SDK to manage the App Configuration service instance. The Go Admin SDK provides APIs to define and manage feature flags, collections and segments. Alternately, you can also use the IBM Cloud App Configuration CLI to manage the App Configuration service instance. You can find more information about the CLI [here.](https://cloud.ibm.com/docs/app-configuration?topic=app-configuration-cli-plugin-app-configuration-cli) 
+## Prerequisites
+
+[ibm-cloud-onboarding]: https://cloud.ibm.com/registration
+
+* An [IBM Cloud][ibm-cloud-onboarding] account.
+* An [App Configuration service instance](https://cloud.ibm.com/catalog/services/app-configuration).
+* An IAM API key to allow the SDK to access your account. Create one [here](https://cloud.ibm.com/iam/apikeys).
+* Go version 1.20 or above.
 
 ## Installation
 
-**Note: The v1.x.x versions of the App Configuration Go Admin SDK have been retracted. Use the latest available version of the SDK.** 
+The current version of this SDK: 0.4.1
 
-Install using the command.
+**Note: The v1.x.x versions of the App Configuration Go Admin SDK have been retracted. Use the latest available version
+of the SDK.**
 
-```bash
-go get -u github.com/IBM/appconfiguration-go-admin-sdk
+### Go modules
+
+If your application uses Go modules for dependency management (recommended), just add the import.
+Here is an example:
+
+```go
+import (
+"github.com/IBM/appconfiguration-go-admin-sdk/appconfigurationv1"
+)
 ```
 
-## Import the SDK
-
-To import the module 
-
-```go	
-import "github.com/IBM/appconfiguration-go-admin-sdk/appconfigurationv1"
-```
-
-then run `go mod tidy` to download and install the new dependency and update your Go application's
+Next, run `go build` or `go mod tidy` to download and install the new dependencies and update your application's
 `go.mod` file.
 
-## Initialize SDK
-Initialize the sdk to connect with your App Configuration service instance.
-```go
-var appConfigurationServiceInstance *appconfigurationv1.AppConfigurationV1
+In the example above, the `appconfigurationv1` part of the import path is the package name
+associated with the App Configuration service.
 
-// Use any one of bearer token or API Key
-func init() {
+### `go get` command
 
-	// Using Bearer Token
-	authenticator := &core.BearerTokenAuthenticator{
-		BearerToken: "<authToken>",
-	}
-	
-	// Using API Key
-	authenticator := &core.IamAuthenticator{
-		ApiKey: "<apikey>",
-	}
-
-	options := &appconfigurationv1.AppConfigurationV1Options{ 
-		Authenticator: authenticator, 
-  		URL: "https://" + region + ".apprapp.cloud.ibm.com/apprapp/feature/v1/instances/" + guid,
-	}
-
-	appConfigurationServiceInstance, err := appconfigurationv1.NewAppConfigurationV1(options)
-
-	if err != nil {
-		panic(err)
-	}
-}
+Alternatively, you can use the `go get` command to download and install the appropriate packages needed by your
+application:
 
 ```
-
-- authToken : authToken of the App Configuration service. Get it from the service credentials section of the dashboard. Choose any option from APIKey or Bearer Token to authenticate.
-- guid : ID of the App Configuration Instance.
-- region : Region of the App Configuration Instance
-
-**Note: Some capabilities such as Percentage rollout & Git configs are applicable only for specific
-plans (Lite, Standard & Enterprise). [See here](https://cloud.ibm.com/docs/app-configuration?topic=app-configuration-ac-faqs-usage#faq-ac-capabilities)
-for full list of capabilities that are plan wise.**
-
-### Using private endpoints
-
-If you enable [service endpoints](https://cloud.ibm.com/docs/account?topic=account-vrf-service-endpoint&interface=ui#service-endpoint)
-in your account, you can send API requests over the IBM Cloud private network. In the SDK
-initialisation, the base endpoint URLs of the IAM(authenticator) & App Configuration(service) should be modified to
-point to private endpoints. See below
-
-```go
-    authenticator := &core.IamAuthenticator{
-        ApiKey: authToken,
-        URL: "https://private.iam.cloud.ibm.com",
-    }
-
-    options := &appconfigurationv1.AppConfigurationV1Options{
-        Authenticator: authenticator,
-        URL: "https://private." + region + ".apprapp.cloud.ibm.com/apprapp/feature/v1/instances/" + guid,
-    }
+go get -u github.com/IBM/appconfiguration-go-admin-sdk
 ```
 
 ## Using the SDK
 
-### Note 
-Every (non-delete) SDK API call gives 3 items in response. 1st item is the result which is the actual item returned from the server available for consumption. 2nd item is the response along with the metadata recieved from the server(including response code). 3rd item is the error (if any). For delete SDK API calls, response and error is received from the server as the result is empty. It is advisable to check if there are no errors and response code from the server is 2XX before using the result for further operations.
+Some capabilities such as Percentage rollout & Git configs are applicable only for specific plans (Lite, Standard &
+enterprise). [See here](https://cloud.ibm.com/docs/app-configuration?topic=app-configuration-ac-faqs-usage#faq-ac-capabilities)
+for full list of capabilities that are plan wise.
 
-Following is how one can access properties of the result object from SDK API call -
-- if the property is a reference, dereference and then use it.
-- if the property is not a reference, use it as it is.
+### Basic usage
 
+- All methods return a response and an error. The response contains the body, the headers, the status code, and the
+  status text.
+- Use the `URL` parameter to set
+  the [Endpoint URL](https://test.cloud.ibm.com/apidocs/app-configuration?code=go#endpoint-url) that is specific to your
+  App Configuration service instance.
 
-Steps to use the SDK method's -
-- Create the input request object with all needed parameters either from Constructors or from struct
-- call the API.
-- Check for error from 'error' and status code from 'response' & consume 'result' accordingly.
+#### Examples
 
-SDK Methods to consume ->
-- Create*Item*
-- List*Item*
-- Get*Item*
-- Update*Item*
-- Update*Item*Values
-- Delete*Item*
+Construct a service client and use it to create, retrieve and manage resources from your App Configuration instance.
 
-where *Item* can be replaced with Environment, Collection, Feature, Property, Segments, Git config & Origin config.
-
-Refer [this](https://cloud.ibm.com/apidocs/app-configuration) for details on the input parameters for each SDK method.
-
-Note -> You need to have the required access (READER/WRITER/MANAGER/CONFIG_OPERATOR) to the instances for respective APIs.
-
-**For more details on the above points, refer 'sampleProgram.go' in 'examples' directory.**
-### Create Collection
+Here's an example `main.go` file:
 
 ```go
-createCollectionOptionsModel := appConfigurationServiceInstance.NewCreateCollectionOptions(name, collectionId)
-createCollectionOptionsModel.SetDescription(description)
-createCollectionOptionsModel.SetTags(tags)
-result, response, err := appConfigurationServiceInstance.CreateCollection(createCollectionOptionsModel)
+package main
+
+import (
+	"encoding/json"
+	"fmt"
+
+	"github.com/IBM/appconfiguration-go-admin-sdk/appconfigurationv1"
+	"github.com/IBM/go-sdk-core/v5/core"
+)
+
+func main() {
+
+	authenticator := &core.IamAuthenticator{
+		ApiKey: "<IBM_CLOUD_API_KEY>",
+	}
+	options := &appconfigurationv1.AppConfigurationV1Options{
+		Authenticator: authenticator,
+		URL:           "https://" + region + ".apprapp.cloud.ibm.com/apprapp/feature/v1/instances/" + guid,
+	}
+	appConfigurationService, err := appconfigurationv1.NewAppConfigurationV1(options)
+	if err != nil {
+		panic(err)
+	}
+
+	createEnvironmentOptions := appConfigurationService.NewCreateEnvironmentOptions(
+		"Dev environment",
+		"dev",
+	)
+	createEnvironmentOptions.SetDescription("Dev environment description")
+	createEnvironmentOptions.SetTags("development")
+	createEnvironmentOptions.SetColorCode("#FDD13A")
+
+	environment, response, err := appConfigurationService.CreateEnvironment(createEnvironmentOptions)
+	if err != nil {
+		panic(err)
+	}
+	b, _ := json.MarshalIndent(environment, "", "  ")
+	fmt.Println(string(b))
+
 ```
 
-### List Collections 
-You can list all collections with expand as true
-```go
-getCollectionsOptionsModel := appConfigurationServiceInstance.NewListCollectionsOptions()
-getCollectionsOptionsModel.SetExpand(true)   // setting expand option as "true"
-result, response, err := appConfigurationServiceInstance.ListCollections(getCollectionsOptionsModel)
-```
+- guid : Instance ID of the App Configuration instance.
+- region : Region of the App Configuration instance.
 
-### Create segment
+Replace the `URL` and `ApiKey` values. Then run the `go run main.go` command to compile and run your Go program.
 
-```go
-ruleArray, _ := appConfigurationServiceInstance.NewRule(attributeName, operator, values)
-createSegmentOptionsModel := appConfigurationServiceInstance.NewCreateSegmentOptions()
-createSegmentOptionsModel.SetName(name)
-createSegmentOptionsModel.SetDescription(description)
-createSegmentOptionsModel.SetTags(tags)
-createSegmentOptionsModel.SetSegmentID(id)
-createSegmentOptionsModel.SetRules([]appconfigurationv1.Rule{*ruleArray})
-result, response, err := appConfigurationServiceInstance.CreateSegment(createSegmentOptionsModel)
-```
+Examples for rest APIs can be found [here](https://cloud.ibm.com/apidocs/app-configuration?code=go).
 
-### Create Feature
+Also, more examples are documented in [sampleProgram.go](examples/sampleProgram.go) file of this repo.
 
-```go
-ruleArray, _ := appConfigurationServiceInstance.NewTargetSegments(segments)
-segmentRuleArray, _ := appConfigurationServiceInstance.NewFeatureSegmentRule([]appconfigurationv1.TargetSegments{*ruleArray}, value, order)
-collectionArray, _ := appConfigurationServiceInstance.NewCollectionRef(collectionId)
-createFeatureOptionsModel := appConfigurationServiceInstance.NewCreateFeatureOptions(environmentId, name, id, typeOfFeature, enabledValue, disabledValue)
-createFeatureOptionsModel.SetTags(tags)
-createFeatureOptionsModel.SetDescription(description)
-createFeatureOptionsModel.SetSegmentRules([]appconfigurationv1.FeatureSegmentRule{*segmentRuleArray})
-createFeatureOptionsModel.SetCollections([]appconfigurationv1.CollectionRef{*collectionArray})
-if featureRolloutPercentage != nil {
-		createFeatureOptionsModel.SetRolloutPercentage(*featureRolloutPercentage)
-}
-result, response, err := appConfigurationServiceInstance.CreateFeature(createFeatureOptionsModel)
-```
+For more information and IBM Cloud SDK usage examples for Go, see
+the [IBM Cloud SDK Common documentation](https://github.com/IBM/ibm-cloud-sdk-common/blob/master/README.md).
 
-### Update Feature
-```go
-ruleArray, _ := appConfigurationServiceInstance.NewTargetSegments(segments)
-segmentRuleArray, _ := appConfigurationServiceInstance.NewFeatureSegmentRule([]appconfigurationv1.TargetSegments{*ruleArray}, value, order)
-collectionArray, _ := appConfigurationServiceInstance.NewCollectionRef(collectionId)
-updateFeatureOptionsModel := appConfigurationServiceInstance.NewUpdateFeatureOptions(environmentId, id)
-updateFeatureOptionsModel.SetName(name)
-updateFeatureOptionsModel.SetDescription(description)
-updateFeatureOptionsModel.SetTags(tags)
-updateFeatureOptionsModel.SetDisabledValue(disabledValue)
-updateFeatureOptionsModel.SetEnabledValue(enabledValue)
-updateFeatureOptionsModel.SetSegmentRules([]appconfigurationv1.FeatureSegmentRule{*segmentRuleArray})
-updateFeatureOptionsModel.SetCollections([]appconfigurationv1.CollectionRef{*collectionArray})
-if featureRolloutPercentage != nil {
-		updateFeatureOptionsModel.SetRolloutPercentage(*featureRolloutPercentage)
-}
-result, response, err := appConfigurationServiceInstance.UpdateFeature(updateFeatureOptionsModel)
-```
+### Using private endpoints
 
-### Update Environment
-```go
-updateEnvironmentOptionsModel := appConfigurationServiceInstance.NewUpdateEnvironmentOptions(environmentId)
-updateEnvironmentOptionsModel.SetName(name)
-updateEnvironmentOptionsModel.SetDescription(description)
-updateEnvironmentOptionsModel.SetTags(tags)
-updateEnvironmentOptionsModel.SetColorCode(colorCode)
-result, response, err := appConfigurationServiceInstance.UpdateEnvironment(updateEnvironmentOptionsModel)
-```
-
-### Get Feature 
-```go
-getFeatureOptionsModel := appConfigurationServiceInstance.NewGetFeatureOptions(environmentId, featureId)
-result, response, err := appConfigurationServiceInstance.GetFeature(getFeatureOptionsModel)
-```
-
-### Delete Segment
-```go
-deleteSegmentOptionsModel := appConfigurationServiceInstance.NewDeleteSegmentOptions(segmentId)
-response, err := appConfigurationServiceInstance.DeleteSegment(deleteSegmentOptionsModel)
-```
-
-### Toggle Feature
-```go
-toggleFeatureOptionsModel := appConfigurationServiceInstance.NewToggleFeatureOptions(environmentId, featureId)
-toggleFeatureOptionsModel.SetEnabled(enableFlag)
-result, response, err := appConfigurationServiceInstance.ToggleFeature(toggleFeatureOptionsModel)
-```
-
-### Create Property
-```go
-ruleArray, _ := appConfigurationServiceInstance.NewTargetSegments(segments)
-segmentRuleArray, _ := appConfigurationServiceInstance.NewSegmentRule([]appconfigurationv1.TargetSegments{*ruleArray}, value, order)
-collectionArray, _ := appConfigurationServiceInstance.NewCollectionRef(collectionId)
-createPropertyOptionsModel := appConfigurationServiceInstance.NewCreatePropertyOptions(environmentId, name, propertyId, typeOfProperty, valueOfProperty)
-createPropertyOptionsModel.SetTags(tags)
-createPropertyOptionsModel.SetDescription(description)
-createPropertyOptionsModel.SetSegmentRules([]appconfigurationv1.SegmentRule{*segmentRuleArray})
-createPropertyOptionsModel.SetCollections([]appconfigurationv1.CollectionRef{*collectionArray})
-if len(format) != 0 {
-    createPropertyOptionsModel.SetFormat(format)
-}
-result, response, error := appConfigurationServiceInstance.CreateProperty(createPropertyOptionsModel)
-```
-
-### Patch Property
-```go
-ruleArray, _ := appConfigurationServiceInstance.NewTargetSegments(segments)
-segmentRuleArray, _ := appConfigurationServiceInstance.NewSegmentRule([]appconfigurationv1.TargetSegments{*ruleArray}, value, order)
-patchPropertyOptionsModel := appConfigurationServiceInstance.NewUpdatePropertyValuesOptions(environmentId, propertyId)
-patchPropertyOptionsModel.SetName(name)
-patchPropertyOptionsModel.SetDescription(description)
-patchPropertyOptionsModel.SetTags(tags)
-patchPropertyOptionsModel.SetValue(valueOfProperty)
-patchPropertyOptionsModel.SetSegmentRules([]appconfigurationv1.SegmentRule{*segmentRuleArray})
-result, response, err := appConfigurationServiceInstance.UpdatePropertyValues(patchPropertyOptionsModel)
-```
-### Create Git config
-```go
-createConfigurationOptionsModel := appConfigurationServiceInstance.NewCreateGitconfigOptions()
-createConfigurationOptionsModel.SetGitConfigName("snapshotConfigurationName")
-createConfigurationOptionsModel.SetGitConfigID("snapshotConfigurationId")
-createConfigurationOptionsModel.SetCollectionID("collectionId")
-createConfigurationOptionsModel.SetEnvironmentID("environmentId")
-createConfigurationOptionsModel.SetGitURL(gitURL)
-createConfigurationOptionsModel.SetGitBranch(gitBranch)
-createConfigurationOptionsModel.SetGitFilePath(gitFilePath)
-createConfigurationOptionsModel.SetGitToken(gitToken)
-result, response, error := appConfigurationServiceInstance.CreateGitconfig(createConfigurationOptionsModel)
-```
-
-### Update Git config
-```go
-updateConfigurationOptionsModel := appConfigurationServiceInstance.NewUpdateGitconfigOptions(gitConfigId)
-updateConfigurationOptionsModel.SetGitConfigName("snapshotConfigurationNameUpdate")
-result, response, error := appConfigurationServiceInstance.UpdateGitconfig(updateConfigurationOptionsModel)
-```
-
-### Get Git config
-```go
-getGitConfigOptionsModel := appConfigurationServiceInstance.NewGetGitconfigOptions(gitConfigId)
-result, response, error := appConfigurationServiceInstance.GetGitconfig(getGitConfigOptionsModel)
-```
-
-### List Git config
-```go
-listSnapshotsOptionsModel := appConfigurationServiceInstance.NewListSnapshotsOptions()
-result, response, error := appConfigurationServiceInstance.ListSnapshots(listSnapshotsOptionsModel)
-```
-
-### Create snapshot (Promote to Git)
-```go
-createSnapshotOptionsModel := appConfigurationServiceInstance.NewPromoteGitconfigOptions(gitConfigID)
-result, response, error := appConfigurationServiceInstance.PromoteGitconfig(createSnapshotOptionsModel)
-```
-
-### Restore snapshot (Restore from Git)
-```go
-restoreSnapshotOptionsModel := appConfigurationServiceInstance.NewRestoreGitconfigOptions(gitConfigID)
-result, response, error := appConfigurationServiceInstance.RestoreGitconfig(restoreSnapshotOptionsModel)
-```
-
-### Delete Git config
-```go
-deleteGitConfigOptionsModel := appConfigurationServiceInstance.NewDeleteGitconfigOptions(gitConfigId)
-response, error := appConfigurationServiceInstance.DeleteGitconfig(deleteGitConfigOptionsModel)
-```
-
-### Update Origin config
+If you
+enable [service endpoints](https://cloud.ibm.com/docs/account?topic=account-vrf-service-endpoint&interface=ui#service-endpoint)
+in your account, you can send API requests over the IBM Cloud private network. While constructing the service client the
+endpoint URLs of the IAM(authenticator) & App Configuration(service) should be modified to
+point to private endpoints. See below
 
 ```go
-updateOriginconfigsOptionsModel := appConfigurationServiceInstance.NewUpdateOriginconfigsOptions()
-updateOriginconfigsOptionsModel.SetAllowedOrigins(origins)
-result, response, error := appConfigurationServiceInstance.UpdateOriginconfigs(updateOriginconfigsOptionsModel)
+    authenticator := &core.IamAuthenticator{
+        ApiKey: "<IBM_CLOUD_API_KEY>",
+        URL: "https://private.iam.cloud.ibm.com",
+    }
+    options := &appconfigurationv1.AppConfigurationV1Options{
+        Authenticator: authenticator,
+        URL:           "https://private." + region + ".apprapp.cloud.ibm.com/apprapp/feature/v1/instances/" + guid,
+	}
 ```
+
+## Questions
+
+If you are having difficulties using this SDK or have a question about the IBM Cloud services,
+please ask a question at
+[Stack Overflow](http://stackoverflow.com/questions/ask?tags=ibm-cloud).
+
+## Issues
+
+If you encounter an issue with the project, you are welcome to submit a
+[bug report](https://github.com/IBM/appconfiguration-go-admin-sdk/issues).
+Before that, please search for similar issues. It's possible that someone has already reported the problem.
+
+## Open source @ IBM
+
+Find more open source projects on the [IBM Github Page](http://ibm.github.io/)
+
+## Contributing
+
+See [CONTRIBUTING](CONTRIBUTING.md).
+
 ## License
 
-This project is released under the Apache 2.0 license. The license's full text can be found in [LICENSE](/LICENSE)
+This SDK project is released under the Apache 2.0 license.
+The license's full text can be found in [LICENSE](LICENSE).

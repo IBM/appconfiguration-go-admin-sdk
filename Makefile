@@ -1,23 +1,30 @@
 # Makefile to build appconfiguration-go-admin-sdk
+GO=go
+LINT=golangci-lint
+GOSEC=gosec
+TEST_TAGS=
+COVERAGE = -coverprofile=coverage.txt -covermode=atomic
 
-build:
-	go build ./...
+all: tidy test lint
+travis-ci: tidy test-cov lint scan-gosec
+
+test:
+	${GO} test ./... ${TEST_TAGS}
+
+test-cov:
+	${GO} test ./... ${TEST_TAGS} ${COVERAGE}
+
+test-int:
+	${GO} test ./... -tags=integration
+
+test-int-cov:
+	${GO} test ./... -tags=integration ${COVERAGE}
 
 lint:
-	golangci-lint run
+	${LINT} run --build-tags=integration,examples --timeout 3m
 
-runUnitTests:
-	make build
-	cd appconfigurationv1 && go test
-	cd common && go test
+scan-gosec:
+	${GOSEC} ./...
 
 tidy:
-	go mod tidy
-
-vendor:
-	go mod vendor
-
-runCoverage:
-	make build
-	cd appconfigurationv1 && go test -coverprofile=coverage.out
-	cd common && go test -coverprofile=coverage.out
+	${GO} mod tidy
