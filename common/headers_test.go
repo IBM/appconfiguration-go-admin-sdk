@@ -17,9 +17,19 @@
 package common
 
 import (
-	"testing"
 	"github.com/stretchr/testify/assert"
+	"strings"
+	"testing"
 )
+
+func TestGetSystemInfo(t *testing.T) {
+	var sysinfo = GetSystemInfo()
+	assert.NotNil(t, sysinfo)
+	assert.True(t, strings.Contains(sysinfo, "lang="))
+	assert.True(t, strings.Contains(sysinfo, "arch="))
+	assert.True(t, strings.Contains(sysinfo, "os="))
+	assert.True(t, strings.Contains(sysinfo, "go.version="))
+}
 
 func TestGetSdkHeaders(t *testing.T) {
 	var headers = GetSdkHeaders("myService", "v123", "myOperation")
@@ -27,7 +37,7 @@ func TestGetSdkHeaders(t *testing.T) {
 
 	var foundIt bool
 
-	_, foundIt = headers[GetHeaderNameUserAgent()]
+	_, foundIt = headers[headerNameUserAgent]
 	assert.True(t, foundIt)
-	t.Logf("user agent: %s\n", headers[GetHeaderNameUserAgent()])
+	t.Logf("user agent: %s\n", headers[headerNameUserAgent])
 }
