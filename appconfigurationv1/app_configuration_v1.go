@@ -1823,7 +1823,7 @@ func (appConfiguration *AppConfigurationV1) GetPropertyWithContext(ctx context.C
 	builder.AddHeader("Accept", "application/json")
 
 	if getPropertyOptions.Include != nil {
-		builder.AddQuery("include", fmt.Sprint(*getPropertyOptions.Include))
+		builder.AddQuery("include", strings.Join(getPropertyOptions.Include, ","))
 	}
 
 	request, err := builder.Build()
@@ -5321,17 +5321,17 @@ type GetPropertyOptions struct {
 	// Property Id.
 	PropertyID *string `json:"property_id" validate:"required,ne="`
 
-	// Include the associated collections in the response.
-	Include *string `json:"include,omitempty"`
+	// Include the associated collections or targeting rules details in the response.
+	Include []string `json:"include,omitempty"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
 }
 
 // Constants associated with the GetPropertyOptions.Include property.
-// Include the associated collections in the response.
 const (
 	GetPropertyOptions_Include_Collections = "collections"
+	GetPropertyOptions_Include_Rules       = "rules"
 )
 
 // NewGetPropertyOptions : Instantiate GetPropertyOptions
@@ -5355,8 +5355,8 @@ func (_options *GetPropertyOptions) SetPropertyID(propertyID string) *GetPropert
 }
 
 // SetInclude : Allow user to set Include
-func (_options *GetPropertyOptions) SetInclude(include string) *GetPropertyOptions {
-	_options.Include = core.StringPtr(include)
+func (_options *GetPropertyOptions) SetInclude(include []string) *GetPropertyOptions {
+	_options.Include = include
 	return _options
 }
 
@@ -6607,7 +6607,7 @@ type ListPropertiesOptions struct {
 	// Filter properties by a list of comma separated segments.
 	Segments []string `json:"segments,omitempty"`
 
-	// Include the associated collections or targeting rules or change request details in the response.
+	// Include the associated collections or targeting rules details in the response.
 	Include []string `json:"include,omitempty"`
 
 	// The number of records to retrieve. By default, the list operation return the first 10 records. To retrieve different
@@ -6847,18 +6847,6 @@ const (
 	ListSnapshotsOptions_Sort_ID          = "id"
 	ListSnapshotsOptions_Sort_Name        = "name"
 	ListSnapshotsOptions_Sort_UpdatedTime = "updated_time"
-)
-
-// Constants associated with the ListSnapshotsOptions.CollectionID property.
-// Filters the response based on the specified collection_id.
-const (
-	ListSnapshotsOptions_CollectionID_CollectionID = "collection_id"
-)
-
-// Constants associated with the ListSnapshotsOptions.EnvironmentID property.
-// Filters the response based on the specified environment_id.
-const (
-	ListSnapshotsOptions_EnvironmentID_EnvironmentID = "environment_id"
 )
 
 // NewListSnapshotsOptions : Instantiate ListSnapshotsOptions
