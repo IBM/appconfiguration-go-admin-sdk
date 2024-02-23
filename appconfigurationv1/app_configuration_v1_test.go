@@ -191,7 +191,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					Expect(req.Method).To(Equal("GET"))
 					// TODO: Add check for expand query parameter
 					Expect(req.URL.Query()["sort"]).To(Equal([]string{"created_time"}))
-					Expect(req.URL.Query()["tags"]).To(Equal([]string{"version 1.1, pre-release"}))
+					Expect(req.URL.Query()["tags"]).To(Equal([]string{"version 1.1,pre-release"}))
 					Expect(req.URL.Query()["limit"]).To(Equal([]string{fmt.Sprint(int64(10))}))
 					Expect(req.URL.Query()["offset"]).To(Equal([]string{fmt.Sprint(int64(0))}))
 					Expect(req.URL.Query()["search"]).To(Equal([]string{"test tag"}))
@@ -212,8 +212,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				listEnvironmentsOptionsModel := new(appconfigurationv1.ListEnvironmentsOptions)
 				listEnvironmentsOptionsModel.Expand = core.BoolPtr(true)
 				listEnvironmentsOptionsModel.Sort = core.StringPtr("created_time")
-				listEnvironmentsOptionsModel.Tags = core.StringPtr("version 1.1, pre-release")
-				listEnvironmentsOptionsModel.Include = []string{"features"}
+				listEnvironmentsOptionsModel.Tags = core.StringPtr("version 1.1,pre-release")
+				listEnvironmentsOptionsModel.Include = []string{"features", "properties", "snapshots"}
 				listEnvironmentsOptionsModel.Limit = core.Int64Ptr(int64(10))
 				listEnvironmentsOptionsModel.Offset = core.Int64Ptr(int64(0))
 				listEnvironmentsOptionsModel.Search = core.StringPtr("test tag")
@@ -249,7 +249,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 					// TODO: Add check for expand query parameter
 					Expect(req.URL.Query()["sort"]).To(Equal([]string{"created_time"}))
-					Expect(req.URL.Query()["tags"]).To(Equal([]string{"version 1.1, pre-release"}))
+					Expect(req.URL.Query()["tags"]).To(Equal([]string{"version 1.1,pre-release"}))
 					Expect(req.URL.Query()["limit"]).To(Equal([]string{fmt.Sprint(int64(10))}))
 					Expect(req.URL.Query()["offset"]).To(Equal([]string{fmt.Sprint(int64(0))}))
 					Expect(req.URL.Query()["search"]).To(Equal([]string{"test tag"}))
@@ -275,8 +275,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				listEnvironmentsOptionsModel := new(appconfigurationv1.ListEnvironmentsOptions)
 				listEnvironmentsOptionsModel.Expand = core.BoolPtr(true)
 				listEnvironmentsOptionsModel.Sort = core.StringPtr("created_time")
-				listEnvironmentsOptionsModel.Tags = core.StringPtr("version 1.1, pre-release")
-				listEnvironmentsOptionsModel.Include = []string{"features"}
+				listEnvironmentsOptionsModel.Tags = core.StringPtr("version 1.1,pre-release")
+				listEnvironmentsOptionsModel.Include = []string{"features", "properties", "snapshots"}
 				listEnvironmentsOptionsModel.Limit = core.Int64Ptr(int64(10))
 				listEnvironmentsOptionsModel.Offset = core.Int64Ptr(int64(0))
 				listEnvironmentsOptionsModel.Search = core.StringPtr("test tag")
@@ -318,7 +318,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 					// TODO: Add check for expand query parameter
 					Expect(req.URL.Query()["sort"]).To(Equal([]string{"created_time"}))
-					Expect(req.URL.Query()["tags"]).To(Equal([]string{"version 1.1, pre-release"}))
+					Expect(req.URL.Query()["tags"]).To(Equal([]string{"version 1.1,pre-release"}))
 					Expect(req.URL.Query()["limit"]).To(Equal([]string{fmt.Sprint(int64(10))}))
 					Expect(req.URL.Query()["offset"]).To(Equal([]string{fmt.Sprint(int64(0))}))
 					Expect(req.URL.Query()["search"]).To(Equal([]string{"test tag"}))
@@ -346,8 +346,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				listEnvironmentsOptionsModel := new(appconfigurationv1.ListEnvironmentsOptions)
 				listEnvironmentsOptionsModel.Expand = core.BoolPtr(true)
 				listEnvironmentsOptionsModel.Sort = core.StringPtr("created_time")
-				listEnvironmentsOptionsModel.Tags = core.StringPtr("version 1.1, pre-release")
-				listEnvironmentsOptionsModel.Include = []string{"features"}
+				listEnvironmentsOptionsModel.Tags = core.StringPtr("version 1.1,pre-release")
+				listEnvironmentsOptionsModel.Include = []string{"features", "properties", "snapshots"}
 				listEnvironmentsOptionsModel.Limit = core.Int64Ptr(int64(10))
 				listEnvironmentsOptionsModel.Offset = core.Int64Ptr(int64(0))
 				listEnvironmentsOptionsModel.Search = core.StringPtr("test tag")
@@ -372,8 +372,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				listEnvironmentsOptionsModel := new(appconfigurationv1.ListEnvironmentsOptions)
 				listEnvironmentsOptionsModel.Expand = core.BoolPtr(true)
 				listEnvironmentsOptionsModel.Sort = core.StringPtr("created_time")
-				listEnvironmentsOptionsModel.Tags = core.StringPtr("version 1.1, pre-release")
-				listEnvironmentsOptionsModel.Include = []string{"features"}
+				listEnvironmentsOptionsModel.Tags = core.StringPtr("version 1.1,pre-release")
+				listEnvironmentsOptionsModel.Include = []string{"features", "properties", "snapshots"}
 				listEnvironmentsOptionsModel.Limit = core.Int64Ptr(int64(10))
 				listEnvironmentsOptionsModel.Offset = core.Int64Ptr(int64(0))
 				listEnvironmentsOptionsModel.Search = core.StringPtr("test tag")
@@ -412,8 +412,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				listEnvironmentsOptionsModel := new(appconfigurationv1.ListEnvironmentsOptions)
 				listEnvironmentsOptionsModel.Expand = core.BoolPtr(true)
 				listEnvironmentsOptionsModel.Sort = core.StringPtr("created_time")
-				listEnvironmentsOptionsModel.Tags = core.StringPtr("version 1.1, pre-release")
-				listEnvironmentsOptionsModel.Include = []string{"features"}
+				listEnvironmentsOptionsModel.Tags = core.StringPtr("version 1.1,pre-release")
+				listEnvironmentsOptionsModel.Include = []string{"features", "properties", "snapshots"}
 				listEnvironmentsOptionsModel.Limit = core.Int64Ptr(int64(10))
 				listEnvironmentsOptionsModel.Offset = core.Int64Ptr(int64(0))
 				listEnvironmentsOptionsModel.Search = core.StringPtr("test tag")
@@ -504,8 +504,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				listEnvironmentsOptionsModel := &appconfigurationv1.ListEnvironmentsOptions{
 					Expand: core.BoolPtr(true),
 					Sort: core.StringPtr("created_time"),
-					Tags: core.StringPtr("version 1.1, pre-release"),
-					Include: []string{"features"},
+					Tags: core.StringPtr("version 1.1,pre-release"),
+					Include: []string{"features", "properties", "snapshots"},
 					Limit: core.Int64Ptr(int64(10)),
 					Search: core.StringPtr("test tag"),
 				}
@@ -534,8 +534,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				listEnvironmentsOptionsModel := &appconfigurationv1.ListEnvironmentsOptions{
 					Expand: core.BoolPtr(true),
 					Sort: core.StringPtr("created_time"),
-					Tags: core.StringPtr("version 1.1, pre-release"),
-					Include: []string{"features"},
+					Tags: core.StringPtr("version 1.1,pre-release"),
+					Include: []string{"features", "properties", "snapshots"},
 					Limit: core.Int64Ptr(int64(10)),
 					Search: core.StringPtr("test tag"),
 				}
@@ -816,7 +816,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 		})
 	})
 	Describe(`UpdateEnvironment(updateEnvironmentOptions *UpdateEnvironmentOptions) - Operation response error`, func() {
-		updateEnvironmentPath := "/environments/testString"
+		updateEnvironmentPath := "/environments/environment_id"
 		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -840,7 +840,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the UpdateEnvironmentOptions model
 				updateEnvironmentOptionsModel := new(appconfigurationv1.UpdateEnvironmentOptions)
-				updateEnvironmentOptionsModel.EnvironmentID = core.StringPtr("testString")
+				updateEnvironmentOptionsModel.EnvironmentID = core.StringPtr("environment_id")
 				updateEnvironmentOptionsModel.Name = core.StringPtr("testString")
 				updateEnvironmentOptionsModel.Description = core.StringPtr("testString")
 				updateEnvironmentOptionsModel.Tags = core.StringPtr("testString")
@@ -865,7 +865,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 		})
 	})
 	Describe(`UpdateEnvironment(updateEnvironmentOptions *UpdateEnvironmentOptions)`, func() {
-		updateEnvironmentPath := "/environments/testString"
+		updateEnvironmentPath := "/environments/environment_id"
 		Context(`Using mock server endpoint with timeout`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -911,7 +911,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the UpdateEnvironmentOptions model
 				updateEnvironmentOptionsModel := new(appconfigurationv1.UpdateEnvironmentOptions)
-				updateEnvironmentOptionsModel.EnvironmentID = core.StringPtr("testString")
+				updateEnvironmentOptionsModel.EnvironmentID = core.StringPtr("environment_id")
 				updateEnvironmentOptionsModel.Name = core.StringPtr("testString")
 				updateEnvironmentOptionsModel.Description = core.StringPtr("testString")
 				updateEnvironmentOptionsModel.Tags = core.StringPtr("testString")
@@ -990,7 +990,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the UpdateEnvironmentOptions model
 				updateEnvironmentOptionsModel := new(appconfigurationv1.UpdateEnvironmentOptions)
-				updateEnvironmentOptionsModel.EnvironmentID = core.StringPtr("testString")
+				updateEnvironmentOptionsModel.EnvironmentID = core.StringPtr("environment_id")
 				updateEnvironmentOptionsModel.Name = core.StringPtr("testString")
 				updateEnvironmentOptionsModel.Description = core.StringPtr("testString")
 				updateEnvironmentOptionsModel.Tags = core.StringPtr("testString")
@@ -1014,7 +1014,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the UpdateEnvironmentOptions model
 				updateEnvironmentOptionsModel := new(appconfigurationv1.UpdateEnvironmentOptions)
-				updateEnvironmentOptionsModel.EnvironmentID = core.StringPtr("testString")
+				updateEnvironmentOptionsModel.EnvironmentID = core.StringPtr("environment_id")
 				updateEnvironmentOptionsModel.Name = core.StringPtr("testString")
 				updateEnvironmentOptionsModel.Description = core.StringPtr("testString")
 				updateEnvironmentOptionsModel.Tags = core.StringPtr("testString")
@@ -1059,7 +1059,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the UpdateEnvironmentOptions model
 				updateEnvironmentOptionsModel := new(appconfigurationv1.UpdateEnvironmentOptions)
-				updateEnvironmentOptionsModel.EnvironmentID = core.StringPtr("testString")
+				updateEnvironmentOptionsModel.EnvironmentID = core.StringPtr("environment_id")
 				updateEnvironmentOptionsModel.Name = core.StringPtr("testString")
 				updateEnvironmentOptionsModel.Description = core.StringPtr("testString")
 				updateEnvironmentOptionsModel.Tags = core.StringPtr("testString")
@@ -1080,7 +1080,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 		})
 	})
 	Describe(`GetEnvironment(getEnvironmentOptions *GetEnvironmentOptions) - Operation response error`, func() {
-		getEnvironmentPath := "/environments/testString"
+		getEnvironmentPath := "/environments/environment_id"
 		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -1105,9 +1105,9 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the GetEnvironmentOptions model
 				getEnvironmentOptionsModel := new(appconfigurationv1.GetEnvironmentOptions)
-				getEnvironmentOptionsModel.EnvironmentID = core.StringPtr("testString")
+				getEnvironmentOptionsModel.EnvironmentID = core.StringPtr("environment_id")
 				getEnvironmentOptionsModel.Expand = core.BoolPtr(true)
-				getEnvironmentOptionsModel.Include = []string{"features"}
+				getEnvironmentOptionsModel.Include = []string{"features", "properties", "snapshots"}
 				getEnvironmentOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
 				result, response, operationErr := appConfigurationService.GetEnvironment(getEnvironmentOptionsModel)
@@ -1128,7 +1128,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 		})
 	})
 	Describe(`GetEnvironment(getEnvironmentOptions *GetEnvironmentOptions)`, func() {
-		getEnvironmentPath := "/environments/testString"
+		getEnvironmentPath := "/environments/environment_id"
 		Context(`Using mock server endpoint with timeout`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -1159,9 +1159,9 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the GetEnvironmentOptions model
 				getEnvironmentOptionsModel := new(appconfigurationv1.GetEnvironmentOptions)
-				getEnvironmentOptionsModel.EnvironmentID = core.StringPtr("testString")
+				getEnvironmentOptionsModel.EnvironmentID = core.StringPtr("environment_id")
 				getEnvironmentOptionsModel.Expand = core.BoolPtr(true)
-				getEnvironmentOptionsModel.Include = []string{"features"}
+				getEnvironmentOptionsModel.Include = []string{"features", "properties", "snapshots"}
 				getEnvironmentOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with a Context to test a timeout error
@@ -1221,9 +1221,9 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the GetEnvironmentOptions model
 				getEnvironmentOptionsModel := new(appconfigurationv1.GetEnvironmentOptions)
-				getEnvironmentOptionsModel.EnvironmentID = core.StringPtr("testString")
+				getEnvironmentOptionsModel.EnvironmentID = core.StringPtr("environment_id")
 				getEnvironmentOptionsModel.Expand = core.BoolPtr(true)
-				getEnvironmentOptionsModel.Include = []string{"features"}
+				getEnvironmentOptionsModel.Include = []string{"features", "properties", "snapshots"}
 				getEnvironmentOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
@@ -1243,9 +1243,9 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the GetEnvironmentOptions model
 				getEnvironmentOptionsModel := new(appconfigurationv1.GetEnvironmentOptions)
-				getEnvironmentOptionsModel.EnvironmentID = core.StringPtr("testString")
+				getEnvironmentOptionsModel.EnvironmentID = core.StringPtr("environment_id")
 				getEnvironmentOptionsModel.Expand = core.BoolPtr(true)
-				getEnvironmentOptionsModel.Include = []string{"features"}
+				getEnvironmentOptionsModel.Include = []string{"features", "properties", "snapshots"}
 				getEnvironmentOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := appConfigurationService.SetServiceURL("")
@@ -1286,9 +1286,9 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the GetEnvironmentOptions model
 				getEnvironmentOptionsModel := new(appconfigurationv1.GetEnvironmentOptions)
-				getEnvironmentOptionsModel.EnvironmentID = core.StringPtr("testString")
+				getEnvironmentOptionsModel.EnvironmentID = core.StringPtr("environment_id")
 				getEnvironmentOptionsModel.Expand = core.BoolPtr(true)
-				getEnvironmentOptionsModel.Include = []string{"features"}
+				getEnvironmentOptionsModel.Include = []string{"features", "properties", "snapshots"}
 				getEnvironmentOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation
@@ -1305,7 +1305,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 		})
 	})
 	Describe(`DeleteEnvironment(deleteEnvironmentOptions *DeleteEnvironmentOptions)`, func() {
-		deleteEnvironmentPath := "/environments/testString"
+		deleteEnvironmentPath := "/environments/environment_id"
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -1333,7 +1333,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the DeleteEnvironmentOptions model
 				deleteEnvironmentOptionsModel := new(appconfigurationv1.DeleteEnvironmentOptions)
-				deleteEnvironmentOptionsModel.EnvironmentID = core.StringPtr("testString")
+				deleteEnvironmentOptionsModel.EnvironmentID = core.StringPtr("environment_id")
 				deleteEnvironmentOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
@@ -1351,7 +1351,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the DeleteEnvironmentOptions model
 				deleteEnvironmentOptionsModel := new(appconfigurationv1.DeleteEnvironmentOptions)
-				deleteEnvironmentOptionsModel.EnvironmentID = core.StringPtr("testString")
+				deleteEnvironmentOptionsModel.EnvironmentID = core.StringPtr("environment_id")
 				deleteEnvironmentOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := appConfigurationService.SetServiceURL("")
@@ -1384,7 +1384,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					Expect(req.Method).To(Equal("GET"))
 					// TODO: Add check for expand query parameter
 					Expect(req.URL.Query()["sort"]).To(Equal([]string{"created_time"}))
-					Expect(req.URL.Query()["tags"]).To(Equal([]string{"version 1.1, pre-release"}))
+					Expect(req.URL.Query()["tags"]).To(Equal([]string{"version 1.1,pre-release"}))
 					Expect(req.URL.Query()["limit"]).To(Equal([]string{fmt.Sprint(int64(10))}))
 					Expect(req.URL.Query()["offset"]).To(Equal([]string{fmt.Sprint(int64(0))}))
 					Expect(req.URL.Query()["search"]).To(Equal([]string{"test tag"}))
@@ -1405,10 +1405,10 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				listCollectionsOptionsModel := new(appconfigurationv1.ListCollectionsOptions)
 				listCollectionsOptionsModel.Expand = core.BoolPtr(true)
 				listCollectionsOptionsModel.Sort = core.StringPtr("created_time")
-				listCollectionsOptionsModel.Tags = core.StringPtr("version 1.1, pre-release")
-				listCollectionsOptionsModel.Features = []string{"testString"}
-				listCollectionsOptionsModel.Properties = []string{"testString"}
-				listCollectionsOptionsModel.Include = []string{"features"}
+				listCollectionsOptionsModel.Tags = core.StringPtr("version 1.1,pre-release")
+				listCollectionsOptionsModel.Features = []string{"my-feature-id", "cycle-rentals"}
+				listCollectionsOptionsModel.Properties = []string{"my-property-id", "email-property"}
+				listCollectionsOptionsModel.Include = []string{"features", "properties", "snapshots"}
 				listCollectionsOptionsModel.Limit = core.Int64Ptr(int64(10))
 				listCollectionsOptionsModel.Offset = core.Int64Ptr(int64(0))
 				listCollectionsOptionsModel.Search = core.StringPtr("test tag")
@@ -1444,7 +1444,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 					// TODO: Add check for expand query parameter
 					Expect(req.URL.Query()["sort"]).To(Equal([]string{"created_time"}))
-					Expect(req.URL.Query()["tags"]).To(Equal([]string{"version 1.1, pre-release"}))
+					Expect(req.URL.Query()["tags"]).To(Equal([]string{"version 1.1,pre-release"}))
 					Expect(req.URL.Query()["limit"]).To(Equal([]string{fmt.Sprint(int64(10))}))
 					Expect(req.URL.Query()["offset"]).To(Equal([]string{fmt.Sprint(int64(0))}))
 					Expect(req.URL.Query()["search"]).To(Equal([]string{"test tag"}))
@@ -1470,10 +1470,10 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				listCollectionsOptionsModel := new(appconfigurationv1.ListCollectionsOptions)
 				listCollectionsOptionsModel.Expand = core.BoolPtr(true)
 				listCollectionsOptionsModel.Sort = core.StringPtr("created_time")
-				listCollectionsOptionsModel.Tags = core.StringPtr("version 1.1, pre-release")
-				listCollectionsOptionsModel.Features = []string{"testString"}
-				listCollectionsOptionsModel.Properties = []string{"testString"}
-				listCollectionsOptionsModel.Include = []string{"features"}
+				listCollectionsOptionsModel.Tags = core.StringPtr("version 1.1,pre-release")
+				listCollectionsOptionsModel.Features = []string{"my-feature-id", "cycle-rentals"}
+				listCollectionsOptionsModel.Properties = []string{"my-property-id", "email-property"}
+				listCollectionsOptionsModel.Include = []string{"features", "properties", "snapshots"}
 				listCollectionsOptionsModel.Limit = core.Int64Ptr(int64(10))
 				listCollectionsOptionsModel.Offset = core.Int64Ptr(int64(0))
 				listCollectionsOptionsModel.Search = core.StringPtr("test tag")
@@ -1515,7 +1515,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 					// TODO: Add check for expand query parameter
 					Expect(req.URL.Query()["sort"]).To(Equal([]string{"created_time"}))
-					Expect(req.URL.Query()["tags"]).To(Equal([]string{"version 1.1, pre-release"}))
+					Expect(req.URL.Query()["tags"]).To(Equal([]string{"version 1.1,pre-release"}))
 					Expect(req.URL.Query()["limit"]).To(Equal([]string{fmt.Sprint(int64(10))}))
 					Expect(req.URL.Query()["offset"]).To(Equal([]string{fmt.Sprint(int64(0))}))
 					Expect(req.URL.Query()["search"]).To(Equal([]string{"test tag"}))
@@ -1543,10 +1543,10 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				listCollectionsOptionsModel := new(appconfigurationv1.ListCollectionsOptions)
 				listCollectionsOptionsModel.Expand = core.BoolPtr(true)
 				listCollectionsOptionsModel.Sort = core.StringPtr("created_time")
-				listCollectionsOptionsModel.Tags = core.StringPtr("version 1.1, pre-release")
-				listCollectionsOptionsModel.Features = []string{"testString"}
-				listCollectionsOptionsModel.Properties = []string{"testString"}
-				listCollectionsOptionsModel.Include = []string{"features"}
+				listCollectionsOptionsModel.Tags = core.StringPtr("version 1.1,pre-release")
+				listCollectionsOptionsModel.Features = []string{"my-feature-id", "cycle-rentals"}
+				listCollectionsOptionsModel.Properties = []string{"my-property-id", "email-property"}
+				listCollectionsOptionsModel.Include = []string{"features", "properties", "snapshots"}
 				listCollectionsOptionsModel.Limit = core.Int64Ptr(int64(10))
 				listCollectionsOptionsModel.Offset = core.Int64Ptr(int64(0))
 				listCollectionsOptionsModel.Search = core.StringPtr("test tag")
@@ -1571,10 +1571,10 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				listCollectionsOptionsModel := new(appconfigurationv1.ListCollectionsOptions)
 				listCollectionsOptionsModel.Expand = core.BoolPtr(true)
 				listCollectionsOptionsModel.Sort = core.StringPtr("created_time")
-				listCollectionsOptionsModel.Tags = core.StringPtr("version 1.1, pre-release")
-				listCollectionsOptionsModel.Features = []string{"testString"}
-				listCollectionsOptionsModel.Properties = []string{"testString"}
-				listCollectionsOptionsModel.Include = []string{"features"}
+				listCollectionsOptionsModel.Tags = core.StringPtr("version 1.1,pre-release")
+				listCollectionsOptionsModel.Features = []string{"my-feature-id", "cycle-rentals"}
+				listCollectionsOptionsModel.Properties = []string{"my-property-id", "email-property"}
+				listCollectionsOptionsModel.Include = []string{"features", "properties", "snapshots"}
 				listCollectionsOptionsModel.Limit = core.Int64Ptr(int64(10))
 				listCollectionsOptionsModel.Offset = core.Int64Ptr(int64(0))
 				listCollectionsOptionsModel.Search = core.StringPtr("test tag")
@@ -1613,10 +1613,10 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				listCollectionsOptionsModel := new(appconfigurationv1.ListCollectionsOptions)
 				listCollectionsOptionsModel.Expand = core.BoolPtr(true)
 				listCollectionsOptionsModel.Sort = core.StringPtr("created_time")
-				listCollectionsOptionsModel.Tags = core.StringPtr("version 1.1, pre-release")
-				listCollectionsOptionsModel.Features = []string{"testString"}
-				listCollectionsOptionsModel.Properties = []string{"testString"}
-				listCollectionsOptionsModel.Include = []string{"features"}
+				listCollectionsOptionsModel.Tags = core.StringPtr("version 1.1,pre-release")
+				listCollectionsOptionsModel.Features = []string{"my-feature-id", "cycle-rentals"}
+				listCollectionsOptionsModel.Properties = []string{"my-property-id", "email-property"}
+				listCollectionsOptionsModel.Include = []string{"features", "properties", "snapshots"}
 				listCollectionsOptionsModel.Limit = core.Int64Ptr(int64(10))
 				listCollectionsOptionsModel.Offset = core.Int64Ptr(int64(0))
 				listCollectionsOptionsModel.Search = core.StringPtr("test tag")
@@ -1707,10 +1707,10 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				listCollectionsOptionsModel := &appconfigurationv1.ListCollectionsOptions{
 					Expand: core.BoolPtr(true),
 					Sort: core.StringPtr("created_time"),
-					Tags: core.StringPtr("version 1.1, pre-release"),
-					Features: []string{"testString"},
-					Properties: []string{"testString"},
-					Include: []string{"features"},
+					Tags: core.StringPtr("version 1.1,pre-release"),
+					Features: []string{"my-feature-id", "cycle-rentals"},
+					Properties: []string{"my-property-id", "email-property"},
+					Include: []string{"features", "properties", "snapshots"},
 					Limit: core.Int64Ptr(int64(10)),
 					Search: core.StringPtr("test tag"),
 				}
@@ -1739,10 +1739,10 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				listCollectionsOptionsModel := &appconfigurationv1.ListCollectionsOptions{
 					Expand: core.BoolPtr(true),
 					Sort: core.StringPtr("created_time"),
-					Tags: core.StringPtr("version 1.1, pre-release"),
-					Features: []string{"testString"},
-					Properties: []string{"testString"},
-					Include: []string{"features"},
+					Tags: core.StringPtr("version 1.1,pre-release"),
+					Features: []string{"my-feature-id", "cycle-rentals"},
+					Properties: []string{"my-property-id", "email-property"},
+					Include: []string{"features", "properties", "snapshots"},
 					Limit: core.Int64Ptr(int64(10)),
 					Search: core.StringPtr("test tag"),
 				}
@@ -2018,7 +2018,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 		})
 	})
 	Describe(`UpdateCollection(updateCollectionOptions *UpdateCollectionOptions) - Operation response error`, func() {
-		updateCollectionPath := "/collections/testString"
+		updateCollectionPath := "/collections/collection_id"
 		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -2042,7 +2042,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the UpdateCollectionOptions model
 				updateCollectionOptionsModel := new(appconfigurationv1.UpdateCollectionOptions)
-				updateCollectionOptionsModel.CollectionID = core.StringPtr("testString")
+				updateCollectionOptionsModel.CollectionID = core.StringPtr("collection_id")
 				updateCollectionOptionsModel.Name = core.StringPtr("testString")
 				updateCollectionOptionsModel.Description = core.StringPtr("testString")
 				updateCollectionOptionsModel.Tags = core.StringPtr("testString")
@@ -2066,7 +2066,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 		})
 	})
 	Describe(`UpdateCollection(updateCollectionOptions *UpdateCollectionOptions)`, func() {
-		updateCollectionPath := "/collections/testString"
+		updateCollectionPath := "/collections/collection_id"
 		Context(`Using mock server endpoint with timeout`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -2112,7 +2112,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the UpdateCollectionOptions model
 				updateCollectionOptionsModel := new(appconfigurationv1.UpdateCollectionOptions)
-				updateCollectionOptionsModel.CollectionID = core.StringPtr("testString")
+				updateCollectionOptionsModel.CollectionID = core.StringPtr("collection_id")
 				updateCollectionOptionsModel.Name = core.StringPtr("testString")
 				updateCollectionOptionsModel.Description = core.StringPtr("testString")
 				updateCollectionOptionsModel.Tags = core.StringPtr("testString")
@@ -2190,7 +2190,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the UpdateCollectionOptions model
 				updateCollectionOptionsModel := new(appconfigurationv1.UpdateCollectionOptions)
-				updateCollectionOptionsModel.CollectionID = core.StringPtr("testString")
+				updateCollectionOptionsModel.CollectionID = core.StringPtr("collection_id")
 				updateCollectionOptionsModel.Name = core.StringPtr("testString")
 				updateCollectionOptionsModel.Description = core.StringPtr("testString")
 				updateCollectionOptionsModel.Tags = core.StringPtr("testString")
@@ -2213,7 +2213,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the UpdateCollectionOptions model
 				updateCollectionOptionsModel := new(appconfigurationv1.UpdateCollectionOptions)
-				updateCollectionOptionsModel.CollectionID = core.StringPtr("testString")
+				updateCollectionOptionsModel.CollectionID = core.StringPtr("collection_id")
 				updateCollectionOptionsModel.Name = core.StringPtr("testString")
 				updateCollectionOptionsModel.Description = core.StringPtr("testString")
 				updateCollectionOptionsModel.Tags = core.StringPtr("testString")
@@ -2257,7 +2257,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the UpdateCollectionOptions model
 				updateCollectionOptionsModel := new(appconfigurationv1.UpdateCollectionOptions)
-				updateCollectionOptionsModel.CollectionID = core.StringPtr("testString")
+				updateCollectionOptionsModel.CollectionID = core.StringPtr("collection_id")
 				updateCollectionOptionsModel.Name = core.StringPtr("testString")
 				updateCollectionOptionsModel.Description = core.StringPtr("testString")
 				updateCollectionOptionsModel.Tags = core.StringPtr("testString")
@@ -2277,7 +2277,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 		})
 	})
 	Describe(`GetCollection(getCollectionOptions *GetCollectionOptions) - Operation response error`, func() {
-		getCollectionPath := "/collections/testString"
+		getCollectionPath := "/collections/collection_id"
 		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -2302,9 +2302,9 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the GetCollectionOptions model
 				getCollectionOptionsModel := new(appconfigurationv1.GetCollectionOptions)
-				getCollectionOptionsModel.CollectionID = core.StringPtr("testString")
+				getCollectionOptionsModel.CollectionID = core.StringPtr("collection_id")
 				getCollectionOptionsModel.Expand = core.BoolPtr(true)
-				getCollectionOptionsModel.Include = []string{"features"}
+				getCollectionOptionsModel.Include = []string{"features", "properties", "snapshots"}
 				getCollectionOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
 				result, response, operationErr := appConfigurationService.GetCollection(getCollectionOptionsModel)
@@ -2325,7 +2325,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 		})
 	})
 	Describe(`GetCollection(getCollectionOptions *GetCollectionOptions)`, func() {
-		getCollectionPath := "/collections/testString"
+		getCollectionPath := "/collections/collection_id"
 		Context(`Using mock server endpoint with timeout`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -2356,9 +2356,9 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the GetCollectionOptions model
 				getCollectionOptionsModel := new(appconfigurationv1.GetCollectionOptions)
-				getCollectionOptionsModel.CollectionID = core.StringPtr("testString")
+				getCollectionOptionsModel.CollectionID = core.StringPtr("collection_id")
 				getCollectionOptionsModel.Expand = core.BoolPtr(true)
-				getCollectionOptionsModel.Include = []string{"features"}
+				getCollectionOptionsModel.Include = []string{"features", "properties", "snapshots"}
 				getCollectionOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with a Context to test a timeout error
@@ -2418,9 +2418,9 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the GetCollectionOptions model
 				getCollectionOptionsModel := new(appconfigurationv1.GetCollectionOptions)
-				getCollectionOptionsModel.CollectionID = core.StringPtr("testString")
+				getCollectionOptionsModel.CollectionID = core.StringPtr("collection_id")
 				getCollectionOptionsModel.Expand = core.BoolPtr(true)
-				getCollectionOptionsModel.Include = []string{"features"}
+				getCollectionOptionsModel.Include = []string{"features", "properties", "snapshots"}
 				getCollectionOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
@@ -2440,9 +2440,9 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the GetCollectionOptions model
 				getCollectionOptionsModel := new(appconfigurationv1.GetCollectionOptions)
-				getCollectionOptionsModel.CollectionID = core.StringPtr("testString")
+				getCollectionOptionsModel.CollectionID = core.StringPtr("collection_id")
 				getCollectionOptionsModel.Expand = core.BoolPtr(true)
-				getCollectionOptionsModel.Include = []string{"features"}
+				getCollectionOptionsModel.Include = []string{"features", "properties", "snapshots"}
 				getCollectionOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := appConfigurationService.SetServiceURL("")
@@ -2483,9 +2483,9 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the GetCollectionOptions model
 				getCollectionOptionsModel := new(appconfigurationv1.GetCollectionOptions)
-				getCollectionOptionsModel.CollectionID = core.StringPtr("testString")
+				getCollectionOptionsModel.CollectionID = core.StringPtr("collection_id")
 				getCollectionOptionsModel.Expand = core.BoolPtr(true)
-				getCollectionOptionsModel.Include = []string{"features"}
+				getCollectionOptionsModel.Include = []string{"features", "properties", "snapshots"}
 				getCollectionOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation
@@ -2502,7 +2502,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 		})
 	})
 	Describe(`DeleteCollection(deleteCollectionOptions *DeleteCollectionOptions)`, func() {
-		deleteCollectionPath := "/collections/testString"
+		deleteCollectionPath := "/collections/collection_id"
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -2530,7 +2530,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the DeleteCollectionOptions model
 				deleteCollectionOptionsModel := new(appconfigurationv1.DeleteCollectionOptions)
-				deleteCollectionOptionsModel.CollectionID = core.StringPtr("testString")
+				deleteCollectionOptionsModel.CollectionID = core.StringPtr("collection_id")
 				deleteCollectionOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
@@ -2548,7 +2548,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the DeleteCollectionOptions model
 				deleteCollectionOptionsModel := new(appconfigurationv1.DeleteCollectionOptions)
-				deleteCollectionOptionsModel.CollectionID = core.StringPtr("testString")
+				deleteCollectionOptionsModel.CollectionID = core.StringPtr("collection_id")
 				deleteCollectionOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := appConfigurationService.SetServiceURL("")
@@ -2570,7 +2570,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 		})
 	})
 	Describe(`ListFeatures(listFeaturesOptions *ListFeaturesOptions) - Operation response error`, func() {
-		listFeaturesPath := "/environments/testString/features"
+		listFeaturesPath := "/environments/environment_id/features"
 		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -2581,7 +2581,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					Expect(req.Method).To(Equal("GET"))
 					// TODO: Add check for expand query parameter
 					Expect(req.URL.Query()["sort"]).To(Equal([]string{"created_time"}))
-					Expect(req.URL.Query()["tags"]).To(Equal([]string{"version 1.1, pre-release"}))
+					Expect(req.URL.Query()["tags"]).To(Equal([]string{"version 1.1,pre-release"}))
 					Expect(req.URL.Query()["limit"]).To(Equal([]string{fmt.Sprint(int64(10))}))
 					Expect(req.URL.Query()["offset"]).To(Equal([]string{fmt.Sprint(int64(0))}))
 					Expect(req.URL.Query()["search"]).To(Equal([]string{"test tag"}))
@@ -2600,13 +2600,13 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the ListFeaturesOptions model
 				listFeaturesOptionsModel := new(appconfigurationv1.ListFeaturesOptions)
-				listFeaturesOptionsModel.EnvironmentID = core.StringPtr("testString")
+				listFeaturesOptionsModel.EnvironmentID = core.StringPtr("environment_id")
 				listFeaturesOptionsModel.Expand = core.BoolPtr(true)
 				listFeaturesOptionsModel.Sort = core.StringPtr("created_time")
-				listFeaturesOptionsModel.Tags = core.StringPtr("version 1.1, pre-release")
-				listFeaturesOptionsModel.Collections = []string{"testString"}
-				listFeaturesOptionsModel.Segments = []string{"testString"}
-				listFeaturesOptionsModel.Include = []string{"collections"}
+				listFeaturesOptionsModel.Tags = core.StringPtr("version 1.1,pre-release")
+				listFeaturesOptionsModel.Collections = []string{"my-collection-id", "ghzindiapvtltd"}
+				listFeaturesOptionsModel.Segments = []string{"my-segment-id", "beta-users"}
+				listFeaturesOptionsModel.Include = []string{"collections", "rules", "change_request"}
 				listFeaturesOptionsModel.Limit = core.Int64Ptr(int64(10))
 				listFeaturesOptionsModel.Offset = core.Int64Ptr(int64(0))
 				listFeaturesOptionsModel.Search = core.StringPtr("test tag")
@@ -2630,7 +2630,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 		})
 	})
 	Describe(`ListFeatures(listFeaturesOptions *ListFeaturesOptions)`, func() {
-		listFeaturesPath := "/environments/testString/features"
+		listFeaturesPath := "/environments/environment_id/features"
 		Context(`Using mock server endpoint with timeout`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -2642,7 +2642,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 					// TODO: Add check for expand query parameter
 					Expect(req.URL.Query()["sort"]).To(Equal([]string{"created_time"}))
-					Expect(req.URL.Query()["tags"]).To(Equal([]string{"version 1.1, pre-release"}))
+					Expect(req.URL.Query()["tags"]).To(Equal([]string{"version 1.1,pre-release"}))
 					Expect(req.URL.Query()["limit"]).To(Equal([]string{fmt.Sprint(int64(10))}))
 					Expect(req.URL.Query()["offset"]).To(Equal([]string{fmt.Sprint(int64(0))}))
 					Expect(req.URL.Query()["search"]).To(Equal([]string{"test tag"}))
@@ -2666,13 +2666,13 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the ListFeaturesOptions model
 				listFeaturesOptionsModel := new(appconfigurationv1.ListFeaturesOptions)
-				listFeaturesOptionsModel.EnvironmentID = core.StringPtr("testString")
+				listFeaturesOptionsModel.EnvironmentID = core.StringPtr("environment_id")
 				listFeaturesOptionsModel.Expand = core.BoolPtr(true)
 				listFeaturesOptionsModel.Sort = core.StringPtr("created_time")
-				listFeaturesOptionsModel.Tags = core.StringPtr("version 1.1, pre-release")
-				listFeaturesOptionsModel.Collections = []string{"testString"}
-				listFeaturesOptionsModel.Segments = []string{"testString"}
-				listFeaturesOptionsModel.Include = []string{"collections"}
+				listFeaturesOptionsModel.Tags = core.StringPtr("version 1.1,pre-release")
+				listFeaturesOptionsModel.Collections = []string{"my-collection-id", "ghzindiapvtltd"}
+				listFeaturesOptionsModel.Segments = []string{"my-segment-id", "beta-users"}
+				listFeaturesOptionsModel.Include = []string{"collections", "rules", "change_request"}
 				listFeaturesOptionsModel.Limit = core.Int64Ptr(int64(10))
 				listFeaturesOptionsModel.Offset = core.Int64Ptr(int64(0))
 				listFeaturesOptionsModel.Search = core.StringPtr("test tag")
@@ -2714,7 +2714,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 					// TODO: Add check for expand query parameter
 					Expect(req.URL.Query()["sort"]).To(Equal([]string{"created_time"}))
-					Expect(req.URL.Query()["tags"]).To(Equal([]string{"version 1.1, pre-release"}))
+					Expect(req.URL.Query()["tags"]).To(Equal([]string{"version 1.1,pre-release"}))
 					Expect(req.URL.Query()["limit"]).To(Equal([]string{fmt.Sprint(int64(10))}))
 					Expect(req.URL.Query()["offset"]).To(Equal([]string{fmt.Sprint(int64(0))}))
 					Expect(req.URL.Query()["search"]).To(Equal([]string{"test tag"}))
@@ -2740,13 +2740,13 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the ListFeaturesOptions model
 				listFeaturesOptionsModel := new(appconfigurationv1.ListFeaturesOptions)
-				listFeaturesOptionsModel.EnvironmentID = core.StringPtr("testString")
+				listFeaturesOptionsModel.EnvironmentID = core.StringPtr("environment_id")
 				listFeaturesOptionsModel.Expand = core.BoolPtr(true)
 				listFeaturesOptionsModel.Sort = core.StringPtr("created_time")
-				listFeaturesOptionsModel.Tags = core.StringPtr("version 1.1, pre-release")
-				listFeaturesOptionsModel.Collections = []string{"testString"}
-				listFeaturesOptionsModel.Segments = []string{"testString"}
-				listFeaturesOptionsModel.Include = []string{"collections"}
+				listFeaturesOptionsModel.Tags = core.StringPtr("version 1.1,pre-release")
+				listFeaturesOptionsModel.Collections = []string{"my-collection-id", "ghzindiapvtltd"}
+				listFeaturesOptionsModel.Segments = []string{"my-segment-id", "beta-users"}
+				listFeaturesOptionsModel.Include = []string{"collections", "rules", "change_request"}
 				listFeaturesOptionsModel.Limit = core.Int64Ptr(int64(10))
 				listFeaturesOptionsModel.Offset = core.Int64Ptr(int64(0))
 				listFeaturesOptionsModel.Search = core.StringPtr("test tag")
@@ -2769,13 +2769,13 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the ListFeaturesOptions model
 				listFeaturesOptionsModel := new(appconfigurationv1.ListFeaturesOptions)
-				listFeaturesOptionsModel.EnvironmentID = core.StringPtr("testString")
+				listFeaturesOptionsModel.EnvironmentID = core.StringPtr("environment_id")
 				listFeaturesOptionsModel.Expand = core.BoolPtr(true)
 				listFeaturesOptionsModel.Sort = core.StringPtr("created_time")
-				listFeaturesOptionsModel.Tags = core.StringPtr("version 1.1, pre-release")
-				listFeaturesOptionsModel.Collections = []string{"testString"}
-				listFeaturesOptionsModel.Segments = []string{"testString"}
-				listFeaturesOptionsModel.Include = []string{"collections"}
+				listFeaturesOptionsModel.Tags = core.StringPtr("version 1.1,pre-release")
+				listFeaturesOptionsModel.Collections = []string{"my-collection-id", "ghzindiapvtltd"}
+				listFeaturesOptionsModel.Segments = []string{"my-segment-id", "beta-users"}
+				listFeaturesOptionsModel.Include = []string{"collections", "rules", "change_request"}
 				listFeaturesOptionsModel.Limit = core.Int64Ptr(int64(10))
 				listFeaturesOptionsModel.Offset = core.Int64Ptr(int64(0))
 				listFeaturesOptionsModel.Search = core.StringPtr("test tag")
@@ -2819,13 +2819,13 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the ListFeaturesOptions model
 				listFeaturesOptionsModel := new(appconfigurationv1.ListFeaturesOptions)
-				listFeaturesOptionsModel.EnvironmentID = core.StringPtr("testString")
+				listFeaturesOptionsModel.EnvironmentID = core.StringPtr("environment_id")
 				listFeaturesOptionsModel.Expand = core.BoolPtr(true)
 				listFeaturesOptionsModel.Sort = core.StringPtr("created_time")
-				listFeaturesOptionsModel.Tags = core.StringPtr("version 1.1, pre-release")
-				listFeaturesOptionsModel.Collections = []string{"testString"}
-				listFeaturesOptionsModel.Segments = []string{"testString"}
-				listFeaturesOptionsModel.Include = []string{"collections"}
+				listFeaturesOptionsModel.Tags = core.StringPtr("version 1.1,pre-release")
+				listFeaturesOptionsModel.Collections = []string{"my-collection-id", "ghzindiapvtltd"}
+				listFeaturesOptionsModel.Segments = []string{"my-segment-id", "beta-users"}
+				listFeaturesOptionsModel.Include = []string{"collections", "rules", "change_request"}
 				listFeaturesOptionsModel.Limit = core.Int64Ptr(int64(10))
 				listFeaturesOptionsModel.Offset = core.Int64Ptr(int64(0))
 				listFeaturesOptionsModel.Search = core.StringPtr("test tag")
@@ -2914,13 +2914,13 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(appConfigurationService).ToNot(BeNil())
 
 				listFeaturesOptionsModel := &appconfigurationv1.ListFeaturesOptions{
-					EnvironmentID: core.StringPtr("testString"),
+					EnvironmentID: core.StringPtr("environment_id"),
 					Expand: core.BoolPtr(true),
 					Sort: core.StringPtr("created_time"),
-					Tags: core.StringPtr("version 1.1, pre-release"),
-					Collections: []string{"testString"},
-					Segments: []string{"testString"},
-					Include: []string{"collections"},
+					Tags: core.StringPtr("version 1.1,pre-release"),
+					Collections: []string{"my-collection-id", "ghzindiapvtltd"},
+					Segments: []string{"my-segment-id", "beta-users"},
+					Include: []string{"collections", "rules", "change_request"},
 					Limit: core.Int64Ptr(int64(10)),
 					Search: core.StringPtr("test tag"),
 				}
@@ -2947,13 +2947,13 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(appConfigurationService).ToNot(BeNil())
 
 				listFeaturesOptionsModel := &appconfigurationv1.ListFeaturesOptions{
-					EnvironmentID: core.StringPtr("testString"),
+					EnvironmentID: core.StringPtr("environment_id"),
 					Expand: core.BoolPtr(true),
 					Sort: core.StringPtr("created_time"),
-					Tags: core.StringPtr("version 1.1, pre-release"),
-					Collections: []string{"testString"},
-					Segments: []string{"testString"},
-					Include: []string{"collections"},
+					Tags: core.StringPtr("version 1.1,pre-release"),
+					Collections: []string{"my-collection-id", "ghzindiapvtltd"},
+					Segments: []string{"my-segment-id", "beta-users"},
+					Include: []string{"collections", "rules", "change_request"},
 					Limit: core.Int64Ptr(int64(10)),
 					Search: core.StringPtr("test tag"),
 				}
@@ -2970,7 +2970,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 		})
 	})
 	Describe(`CreateFeature(createFeatureOptions *CreateFeatureOptions) - Operation response error`, func() {
-		createFeaturePath := "/environments/testString/features"
+		createFeaturePath := "/environments/environment_id/features"
 		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -3009,7 +3009,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the CreateFeatureOptions model
 				createFeatureOptionsModel := new(appconfigurationv1.CreateFeatureOptions)
-				createFeatureOptionsModel.EnvironmentID = core.StringPtr("testString")
+				createFeatureOptionsModel.EnvironmentID = core.StringPtr("environment_id")
 				createFeatureOptionsModel.Name = core.StringPtr("Cycle Rentals")
 				createFeatureOptionsModel.FeatureID = core.StringPtr("cycle-rentals")
 				createFeatureOptionsModel.Type = core.StringPtr("BOOLEAN")
@@ -3042,7 +3042,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 		})
 	})
 	Describe(`CreateFeature(createFeatureOptions *CreateFeatureOptions)`, func() {
-		createFeaturePath := "/environments/testString/features"
+		createFeaturePath := "/environments/environment_id/features"
 		Context(`Using mock server endpoint with timeout`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -3103,7 +3103,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the CreateFeatureOptions model
 				createFeatureOptionsModel := new(appconfigurationv1.CreateFeatureOptions)
-				createFeatureOptionsModel.EnvironmentID = core.StringPtr("testString")
+				createFeatureOptionsModel.EnvironmentID = core.StringPtr("environment_id")
 				createFeatureOptionsModel.Name = core.StringPtr("Cycle Rentals")
 				createFeatureOptionsModel.FeatureID = core.StringPtr("cycle-rentals")
 				createFeatureOptionsModel.Type = core.StringPtr("BOOLEAN")
@@ -3205,7 +3205,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the CreateFeatureOptions model
 				createFeatureOptionsModel := new(appconfigurationv1.CreateFeatureOptions)
-				createFeatureOptionsModel.EnvironmentID = core.StringPtr("testString")
+				createFeatureOptionsModel.EnvironmentID = core.StringPtr("environment_id")
 				createFeatureOptionsModel.Name = core.StringPtr("Cycle Rentals")
 				createFeatureOptionsModel.FeatureID = core.StringPtr("cycle-rentals")
 				createFeatureOptionsModel.Type = core.StringPtr("BOOLEAN")
@@ -3252,7 +3252,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the CreateFeatureOptions model
 				createFeatureOptionsModel := new(appconfigurationv1.CreateFeatureOptions)
-				createFeatureOptionsModel.EnvironmentID = core.StringPtr("testString")
+				createFeatureOptionsModel.EnvironmentID = core.StringPtr("environment_id")
 				createFeatureOptionsModel.Name = core.StringPtr("Cycle Rentals")
 				createFeatureOptionsModel.FeatureID = core.StringPtr("cycle-rentals")
 				createFeatureOptionsModel.Type = core.StringPtr("BOOLEAN")
@@ -3320,7 +3320,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the CreateFeatureOptions model
 				createFeatureOptionsModel := new(appconfigurationv1.CreateFeatureOptions)
-				createFeatureOptionsModel.EnvironmentID = core.StringPtr("testString")
+				createFeatureOptionsModel.EnvironmentID = core.StringPtr("environment_id")
 				createFeatureOptionsModel.Name = core.StringPtr("Cycle Rentals")
 				createFeatureOptionsModel.FeatureID = core.StringPtr("cycle-rentals")
 				createFeatureOptionsModel.Type = core.StringPtr("BOOLEAN")
@@ -3349,7 +3349,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 		})
 	})
 	Describe(`UpdateFeature(updateFeatureOptions *UpdateFeatureOptions) - Operation response error`, func() {
-		updateFeaturePath := "/environments/testString/features/testString"
+		updateFeaturePath := "/environments/environment_id/features/feature_id"
 		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -3388,8 +3388,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the UpdateFeatureOptions model
 				updateFeatureOptionsModel := new(appconfigurationv1.UpdateFeatureOptions)
-				updateFeatureOptionsModel.EnvironmentID = core.StringPtr("testString")
-				updateFeatureOptionsModel.FeatureID = core.StringPtr("testString")
+				updateFeatureOptionsModel.EnvironmentID = core.StringPtr("environment_id")
+				updateFeatureOptionsModel.FeatureID = core.StringPtr("feature_id")
 				updateFeatureOptionsModel.Name = core.StringPtr("Cycle Rentals")
 				updateFeatureOptionsModel.Description = core.StringPtr("Feature flags to enable Cycle Rentals")
 				updateFeatureOptionsModel.EnabledValue = core.StringPtr("true")
@@ -3419,7 +3419,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 		})
 	})
 	Describe(`UpdateFeature(updateFeatureOptions *UpdateFeatureOptions)`, func() {
-		updateFeaturePath := "/environments/testString/features/testString"
+		updateFeaturePath := "/environments/environment_id/features/feature_id"
 		Context(`Using mock server endpoint with timeout`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -3480,8 +3480,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the UpdateFeatureOptions model
 				updateFeatureOptionsModel := new(appconfigurationv1.UpdateFeatureOptions)
-				updateFeatureOptionsModel.EnvironmentID = core.StringPtr("testString")
-				updateFeatureOptionsModel.FeatureID = core.StringPtr("testString")
+				updateFeatureOptionsModel.EnvironmentID = core.StringPtr("environment_id")
+				updateFeatureOptionsModel.FeatureID = core.StringPtr("feature_id")
 				updateFeatureOptionsModel.Name = core.StringPtr("Cycle Rentals")
 				updateFeatureOptionsModel.Description = core.StringPtr("Feature flags to enable Cycle Rentals")
 				updateFeatureOptionsModel.EnabledValue = core.StringPtr("true")
@@ -3580,8 +3580,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the UpdateFeatureOptions model
 				updateFeatureOptionsModel := new(appconfigurationv1.UpdateFeatureOptions)
-				updateFeatureOptionsModel.EnvironmentID = core.StringPtr("testString")
-				updateFeatureOptionsModel.FeatureID = core.StringPtr("testString")
+				updateFeatureOptionsModel.EnvironmentID = core.StringPtr("environment_id")
+				updateFeatureOptionsModel.FeatureID = core.StringPtr("feature_id")
 				updateFeatureOptionsModel.Name = core.StringPtr("Cycle Rentals")
 				updateFeatureOptionsModel.Description = core.StringPtr("Feature flags to enable Cycle Rentals")
 				updateFeatureOptionsModel.EnabledValue = core.StringPtr("true")
@@ -3625,8 +3625,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the UpdateFeatureOptions model
 				updateFeatureOptionsModel := new(appconfigurationv1.UpdateFeatureOptions)
-				updateFeatureOptionsModel.EnvironmentID = core.StringPtr("testString")
-				updateFeatureOptionsModel.FeatureID = core.StringPtr("testString")
+				updateFeatureOptionsModel.EnvironmentID = core.StringPtr("environment_id")
+				updateFeatureOptionsModel.FeatureID = core.StringPtr("feature_id")
 				updateFeatureOptionsModel.Name = core.StringPtr("Cycle Rentals")
 				updateFeatureOptionsModel.Description = core.StringPtr("Feature flags to enable Cycle Rentals")
 				updateFeatureOptionsModel.EnabledValue = core.StringPtr("true")
@@ -3691,8 +3691,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the UpdateFeatureOptions model
 				updateFeatureOptionsModel := new(appconfigurationv1.UpdateFeatureOptions)
-				updateFeatureOptionsModel.EnvironmentID = core.StringPtr("testString")
-				updateFeatureOptionsModel.FeatureID = core.StringPtr("testString")
+				updateFeatureOptionsModel.EnvironmentID = core.StringPtr("environment_id")
+				updateFeatureOptionsModel.FeatureID = core.StringPtr("feature_id")
 				updateFeatureOptionsModel.Name = core.StringPtr("Cycle Rentals")
 				updateFeatureOptionsModel.Description = core.StringPtr("Feature flags to enable Cycle Rentals")
 				updateFeatureOptionsModel.EnabledValue = core.StringPtr("true")
@@ -3718,7 +3718,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 		})
 	})
 	Describe(`UpdateFeatureValues(updateFeatureValuesOptions *UpdateFeatureValuesOptions) - Operation response error`, func() {
-		updateFeatureValuesPath := "/environments/testString/features/testString"
+		updateFeatureValuesPath := "/environments/environment_id/features/feature_id"
 		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -3753,8 +3753,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the UpdateFeatureValuesOptions model
 				updateFeatureValuesOptionsModel := new(appconfigurationv1.UpdateFeatureValuesOptions)
-				updateFeatureValuesOptionsModel.EnvironmentID = core.StringPtr("testString")
-				updateFeatureValuesOptionsModel.FeatureID = core.StringPtr("testString")
+				updateFeatureValuesOptionsModel.EnvironmentID = core.StringPtr("environment_id")
+				updateFeatureValuesOptionsModel.FeatureID = core.StringPtr("feature_id")
 				updateFeatureValuesOptionsModel.Name = core.StringPtr("Cycle Rentals")
 				updateFeatureValuesOptionsModel.Description = core.StringPtr("Feature flags to enable Cycle Rentals")
 				updateFeatureValuesOptionsModel.Tags = core.StringPtr("version: 1.1, yet-to-release")
@@ -3782,7 +3782,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 		})
 	})
 	Describe(`UpdateFeatureValues(updateFeatureValuesOptions *UpdateFeatureValuesOptions)`, func() {
-		updateFeatureValuesPath := "/environments/testString/features/testString"
+		updateFeatureValuesPath := "/environments/environment_id/features/feature_id"
 		Context(`Using mock server endpoint with timeout`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -3839,8 +3839,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the UpdateFeatureValuesOptions model
 				updateFeatureValuesOptionsModel := new(appconfigurationv1.UpdateFeatureValuesOptions)
-				updateFeatureValuesOptionsModel.EnvironmentID = core.StringPtr("testString")
-				updateFeatureValuesOptionsModel.FeatureID = core.StringPtr("testString")
+				updateFeatureValuesOptionsModel.EnvironmentID = core.StringPtr("environment_id")
+				updateFeatureValuesOptionsModel.FeatureID = core.StringPtr("feature_id")
 				updateFeatureValuesOptionsModel.Name = core.StringPtr("Cycle Rentals")
 				updateFeatureValuesOptionsModel.Description = core.StringPtr("Feature flags to enable Cycle Rentals")
 				updateFeatureValuesOptionsModel.Tags = core.StringPtr("version: 1.1, yet-to-release")
@@ -3933,8 +3933,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the UpdateFeatureValuesOptions model
 				updateFeatureValuesOptionsModel := new(appconfigurationv1.UpdateFeatureValuesOptions)
-				updateFeatureValuesOptionsModel.EnvironmentID = core.StringPtr("testString")
-				updateFeatureValuesOptionsModel.FeatureID = core.StringPtr("testString")
+				updateFeatureValuesOptionsModel.EnvironmentID = core.StringPtr("environment_id")
+				updateFeatureValuesOptionsModel.FeatureID = core.StringPtr("feature_id")
 				updateFeatureValuesOptionsModel.Name = core.StringPtr("Cycle Rentals")
 				updateFeatureValuesOptionsModel.Description = core.StringPtr("Feature flags to enable Cycle Rentals")
 				updateFeatureValuesOptionsModel.Tags = core.StringPtr("version: 1.1, yet-to-release")
@@ -3972,8 +3972,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the UpdateFeatureValuesOptions model
 				updateFeatureValuesOptionsModel := new(appconfigurationv1.UpdateFeatureValuesOptions)
-				updateFeatureValuesOptionsModel.EnvironmentID = core.StringPtr("testString")
-				updateFeatureValuesOptionsModel.FeatureID = core.StringPtr("testString")
+				updateFeatureValuesOptionsModel.EnvironmentID = core.StringPtr("environment_id")
+				updateFeatureValuesOptionsModel.FeatureID = core.StringPtr("feature_id")
 				updateFeatureValuesOptionsModel.Name = core.StringPtr("Cycle Rentals")
 				updateFeatureValuesOptionsModel.Description = core.StringPtr("Feature flags to enable Cycle Rentals")
 				updateFeatureValuesOptionsModel.Tags = core.StringPtr("version: 1.1, yet-to-release")
@@ -4032,8 +4032,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the UpdateFeatureValuesOptions model
 				updateFeatureValuesOptionsModel := new(appconfigurationv1.UpdateFeatureValuesOptions)
-				updateFeatureValuesOptionsModel.EnvironmentID = core.StringPtr("testString")
-				updateFeatureValuesOptionsModel.FeatureID = core.StringPtr("testString")
+				updateFeatureValuesOptionsModel.EnvironmentID = core.StringPtr("environment_id")
+				updateFeatureValuesOptionsModel.FeatureID = core.StringPtr("feature_id")
 				updateFeatureValuesOptionsModel.Name = core.StringPtr("Cycle Rentals")
 				updateFeatureValuesOptionsModel.Description = core.StringPtr("Feature flags to enable Cycle Rentals")
 				updateFeatureValuesOptionsModel.Tags = core.StringPtr("version: 1.1, yet-to-release")
@@ -4057,7 +4057,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 		})
 	})
 	Describe(`GetFeature(getFeatureOptions *GetFeatureOptions) - Operation response error`, func() {
-		getFeaturePath := "/environments/testString/features/testString"
+		getFeaturePath := "/environments/environment_id/features/feature_id"
 		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -4081,9 +4081,9 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the GetFeatureOptions model
 				getFeatureOptionsModel := new(appconfigurationv1.GetFeatureOptions)
-				getFeatureOptionsModel.EnvironmentID = core.StringPtr("testString")
-				getFeatureOptionsModel.FeatureID = core.StringPtr("testString")
-				getFeatureOptionsModel.Include = []string{"collections"}
+				getFeatureOptionsModel.EnvironmentID = core.StringPtr("environment_id")
+				getFeatureOptionsModel.FeatureID = core.StringPtr("feature_id")
+				getFeatureOptionsModel.Include = []string{"collections", "rules", "change_request"}
 				getFeatureOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
 				result, response, operationErr := appConfigurationService.GetFeature(getFeatureOptionsModel)
@@ -4104,7 +4104,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 		})
 	})
 	Describe(`GetFeature(getFeatureOptions *GetFeatureOptions)`, func() {
-		getFeaturePath := "/environments/testString/features/testString"
+		getFeaturePath := "/environments/environment_id/features/feature_id"
 		Context(`Using mock server endpoint with timeout`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -4134,9 +4134,9 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the GetFeatureOptions model
 				getFeatureOptionsModel := new(appconfigurationv1.GetFeatureOptions)
-				getFeatureOptionsModel.EnvironmentID = core.StringPtr("testString")
-				getFeatureOptionsModel.FeatureID = core.StringPtr("testString")
-				getFeatureOptionsModel.Include = []string{"collections"}
+				getFeatureOptionsModel.EnvironmentID = core.StringPtr("environment_id")
+				getFeatureOptionsModel.FeatureID = core.StringPtr("feature_id")
+				getFeatureOptionsModel.Include = []string{"collections", "rules", "change_request"}
 				getFeatureOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with a Context to test a timeout error
@@ -4195,9 +4195,9 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the GetFeatureOptions model
 				getFeatureOptionsModel := new(appconfigurationv1.GetFeatureOptions)
-				getFeatureOptionsModel.EnvironmentID = core.StringPtr("testString")
-				getFeatureOptionsModel.FeatureID = core.StringPtr("testString")
-				getFeatureOptionsModel.Include = []string{"collections"}
+				getFeatureOptionsModel.EnvironmentID = core.StringPtr("environment_id")
+				getFeatureOptionsModel.FeatureID = core.StringPtr("feature_id")
+				getFeatureOptionsModel.Include = []string{"collections", "rules", "change_request"}
 				getFeatureOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
@@ -4217,9 +4217,9 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the GetFeatureOptions model
 				getFeatureOptionsModel := new(appconfigurationv1.GetFeatureOptions)
-				getFeatureOptionsModel.EnvironmentID = core.StringPtr("testString")
-				getFeatureOptionsModel.FeatureID = core.StringPtr("testString")
-				getFeatureOptionsModel.Include = []string{"collections"}
+				getFeatureOptionsModel.EnvironmentID = core.StringPtr("environment_id")
+				getFeatureOptionsModel.FeatureID = core.StringPtr("feature_id")
+				getFeatureOptionsModel.Include = []string{"collections", "rules", "change_request"}
 				getFeatureOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := appConfigurationService.SetServiceURL("")
@@ -4260,9 +4260,9 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the GetFeatureOptions model
 				getFeatureOptionsModel := new(appconfigurationv1.GetFeatureOptions)
-				getFeatureOptionsModel.EnvironmentID = core.StringPtr("testString")
-				getFeatureOptionsModel.FeatureID = core.StringPtr("testString")
-				getFeatureOptionsModel.Include = []string{"collections"}
+				getFeatureOptionsModel.EnvironmentID = core.StringPtr("environment_id")
+				getFeatureOptionsModel.FeatureID = core.StringPtr("feature_id")
+				getFeatureOptionsModel.Include = []string{"collections", "rules", "change_request"}
 				getFeatureOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation
@@ -4279,7 +4279,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 		})
 	})
 	Describe(`DeleteFeature(deleteFeatureOptions *DeleteFeatureOptions)`, func() {
-		deleteFeaturePath := "/environments/testString/features/testString"
+		deleteFeaturePath := "/environments/environment_id/features/feature_id"
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -4307,8 +4307,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the DeleteFeatureOptions model
 				deleteFeatureOptionsModel := new(appconfigurationv1.DeleteFeatureOptions)
-				deleteFeatureOptionsModel.EnvironmentID = core.StringPtr("testString")
-				deleteFeatureOptionsModel.FeatureID = core.StringPtr("testString")
+				deleteFeatureOptionsModel.EnvironmentID = core.StringPtr("environment_id")
+				deleteFeatureOptionsModel.FeatureID = core.StringPtr("feature_id")
 				deleteFeatureOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
@@ -4326,8 +4326,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the DeleteFeatureOptions model
 				deleteFeatureOptionsModel := new(appconfigurationv1.DeleteFeatureOptions)
-				deleteFeatureOptionsModel.EnvironmentID = core.StringPtr("testString")
-				deleteFeatureOptionsModel.FeatureID = core.StringPtr("testString")
+				deleteFeatureOptionsModel.EnvironmentID = core.StringPtr("environment_id")
+				deleteFeatureOptionsModel.FeatureID = core.StringPtr("feature_id")
 				deleteFeatureOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := appConfigurationService.SetServiceURL("")
@@ -4349,7 +4349,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 		})
 	})
 	Describe(`ToggleFeature(toggleFeatureOptions *ToggleFeatureOptions) - Operation response error`, func() {
-		toggleFeaturePath := "/environments/testString/features/testString/toggle"
+		toggleFeaturePath := "/environments/environment_id/features/feature_id/toggle"
 		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -4373,8 +4373,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the ToggleFeatureOptions model
 				toggleFeatureOptionsModel := new(appconfigurationv1.ToggleFeatureOptions)
-				toggleFeatureOptionsModel.EnvironmentID = core.StringPtr("testString")
-				toggleFeatureOptionsModel.FeatureID = core.StringPtr("testString")
+				toggleFeatureOptionsModel.EnvironmentID = core.StringPtr("environment_id")
+				toggleFeatureOptionsModel.FeatureID = core.StringPtr("feature_id")
 				toggleFeatureOptionsModel.Enabled = core.BoolPtr(true)
 				toggleFeatureOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
@@ -4396,7 +4396,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 		})
 	})
 	Describe(`ToggleFeature(toggleFeatureOptions *ToggleFeatureOptions)`, func() {
-		toggleFeaturePath := "/environments/testString/features/testString/toggle"
+		toggleFeaturePath := "/environments/environment_id/features/feature_id/toggle"
 		Context(`Using mock server endpoint with timeout`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -4442,8 +4442,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the ToggleFeatureOptions model
 				toggleFeatureOptionsModel := new(appconfigurationv1.ToggleFeatureOptions)
-				toggleFeatureOptionsModel.EnvironmentID = core.StringPtr("testString")
-				toggleFeatureOptionsModel.FeatureID = core.StringPtr("testString")
+				toggleFeatureOptionsModel.EnvironmentID = core.StringPtr("environment_id")
+				toggleFeatureOptionsModel.FeatureID = core.StringPtr("feature_id")
 				toggleFeatureOptionsModel.Enabled = core.BoolPtr(true)
 				toggleFeatureOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
@@ -4519,8 +4519,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the ToggleFeatureOptions model
 				toggleFeatureOptionsModel := new(appconfigurationv1.ToggleFeatureOptions)
-				toggleFeatureOptionsModel.EnvironmentID = core.StringPtr("testString")
-				toggleFeatureOptionsModel.FeatureID = core.StringPtr("testString")
+				toggleFeatureOptionsModel.EnvironmentID = core.StringPtr("environment_id")
+				toggleFeatureOptionsModel.FeatureID = core.StringPtr("feature_id")
 				toggleFeatureOptionsModel.Enabled = core.BoolPtr(true)
 				toggleFeatureOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
@@ -4541,8 +4541,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the ToggleFeatureOptions model
 				toggleFeatureOptionsModel := new(appconfigurationv1.ToggleFeatureOptions)
-				toggleFeatureOptionsModel.EnvironmentID = core.StringPtr("testString")
-				toggleFeatureOptionsModel.FeatureID = core.StringPtr("testString")
+				toggleFeatureOptionsModel.EnvironmentID = core.StringPtr("environment_id")
+				toggleFeatureOptionsModel.FeatureID = core.StringPtr("feature_id")
 				toggleFeatureOptionsModel.Enabled = core.BoolPtr(true)
 				toggleFeatureOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
@@ -4584,8 +4584,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the ToggleFeatureOptions model
 				toggleFeatureOptionsModel := new(appconfigurationv1.ToggleFeatureOptions)
-				toggleFeatureOptionsModel.EnvironmentID = core.StringPtr("testString")
-				toggleFeatureOptionsModel.FeatureID = core.StringPtr("testString")
+				toggleFeatureOptionsModel.EnvironmentID = core.StringPtr("environment_id")
+				toggleFeatureOptionsModel.FeatureID = core.StringPtr("feature_id")
 				toggleFeatureOptionsModel.Enabled = core.BoolPtr(true)
 				toggleFeatureOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
@@ -4603,7 +4603,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 		})
 	})
 	Describe(`ListProperties(listPropertiesOptions *ListPropertiesOptions) - Operation response error`, func() {
-		listPropertiesPath := "/environments/testString/properties"
+		listPropertiesPath := "/environments/environment_id/properties"
 		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -4614,7 +4614,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					Expect(req.Method).To(Equal("GET"))
 					// TODO: Add check for expand query parameter
 					Expect(req.URL.Query()["sort"]).To(Equal([]string{"created_time"}))
-					Expect(req.URL.Query()["tags"]).To(Equal([]string{"version 1.1, pre-release"}))
+					Expect(req.URL.Query()["tags"]).To(Equal([]string{"version 1.1,pre-release"}))
 					Expect(req.URL.Query()["limit"]).To(Equal([]string{fmt.Sprint(int64(10))}))
 					Expect(req.URL.Query()["offset"]).To(Equal([]string{fmt.Sprint(int64(0))}))
 					Expect(req.URL.Query()["search"]).To(Equal([]string{"test tag"}))
@@ -4633,13 +4633,13 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the ListPropertiesOptions model
 				listPropertiesOptionsModel := new(appconfigurationv1.ListPropertiesOptions)
-				listPropertiesOptionsModel.EnvironmentID = core.StringPtr("testString")
+				listPropertiesOptionsModel.EnvironmentID = core.StringPtr("environment_id")
 				listPropertiesOptionsModel.Expand = core.BoolPtr(true)
 				listPropertiesOptionsModel.Sort = core.StringPtr("created_time")
-				listPropertiesOptionsModel.Tags = core.StringPtr("version 1.1, pre-release")
-				listPropertiesOptionsModel.Collections = []string{"testString"}
-				listPropertiesOptionsModel.Segments = []string{"testString"}
-				listPropertiesOptionsModel.Include = []string{"collections"}
+				listPropertiesOptionsModel.Tags = core.StringPtr("version 1.1,pre-release")
+				listPropertiesOptionsModel.Collections = []string{"my-collection-id", "ghzindiapvtltd"}
+				listPropertiesOptionsModel.Segments = []string{"my-segment-id", "beta-users"}
+				listPropertiesOptionsModel.Include = []string{"collections", "rules"}
 				listPropertiesOptionsModel.Limit = core.Int64Ptr(int64(10))
 				listPropertiesOptionsModel.Offset = core.Int64Ptr(int64(0))
 				listPropertiesOptionsModel.Search = core.StringPtr("test tag")
@@ -4663,7 +4663,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 		})
 	})
 	Describe(`ListProperties(listPropertiesOptions *ListPropertiesOptions)`, func() {
-		listPropertiesPath := "/environments/testString/properties"
+		listPropertiesPath := "/environments/environment_id/properties"
 		Context(`Using mock server endpoint with timeout`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -4675,7 +4675,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 					// TODO: Add check for expand query parameter
 					Expect(req.URL.Query()["sort"]).To(Equal([]string{"created_time"}))
-					Expect(req.URL.Query()["tags"]).To(Equal([]string{"version 1.1, pre-release"}))
+					Expect(req.URL.Query()["tags"]).To(Equal([]string{"version 1.1,pre-release"}))
 					Expect(req.URL.Query()["limit"]).To(Equal([]string{fmt.Sprint(int64(10))}))
 					Expect(req.URL.Query()["offset"]).To(Equal([]string{fmt.Sprint(int64(0))}))
 					Expect(req.URL.Query()["search"]).To(Equal([]string{"test tag"}))
@@ -4699,13 +4699,13 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the ListPropertiesOptions model
 				listPropertiesOptionsModel := new(appconfigurationv1.ListPropertiesOptions)
-				listPropertiesOptionsModel.EnvironmentID = core.StringPtr("testString")
+				listPropertiesOptionsModel.EnvironmentID = core.StringPtr("environment_id")
 				listPropertiesOptionsModel.Expand = core.BoolPtr(true)
 				listPropertiesOptionsModel.Sort = core.StringPtr("created_time")
-				listPropertiesOptionsModel.Tags = core.StringPtr("version 1.1, pre-release")
-				listPropertiesOptionsModel.Collections = []string{"testString"}
-				listPropertiesOptionsModel.Segments = []string{"testString"}
-				listPropertiesOptionsModel.Include = []string{"collections"}
+				listPropertiesOptionsModel.Tags = core.StringPtr("version 1.1,pre-release")
+				listPropertiesOptionsModel.Collections = []string{"my-collection-id", "ghzindiapvtltd"}
+				listPropertiesOptionsModel.Segments = []string{"my-segment-id", "beta-users"}
+				listPropertiesOptionsModel.Include = []string{"collections", "rules"}
 				listPropertiesOptionsModel.Limit = core.Int64Ptr(int64(10))
 				listPropertiesOptionsModel.Offset = core.Int64Ptr(int64(0))
 				listPropertiesOptionsModel.Search = core.StringPtr("test tag")
@@ -4747,7 +4747,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 					// TODO: Add check for expand query parameter
 					Expect(req.URL.Query()["sort"]).To(Equal([]string{"created_time"}))
-					Expect(req.URL.Query()["tags"]).To(Equal([]string{"version 1.1, pre-release"}))
+					Expect(req.URL.Query()["tags"]).To(Equal([]string{"version 1.1,pre-release"}))
 					Expect(req.URL.Query()["limit"]).To(Equal([]string{fmt.Sprint(int64(10))}))
 					Expect(req.URL.Query()["offset"]).To(Equal([]string{fmt.Sprint(int64(0))}))
 					Expect(req.URL.Query()["search"]).To(Equal([]string{"test tag"}))
@@ -4773,13 +4773,13 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the ListPropertiesOptions model
 				listPropertiesOptionsModel := new(appconfigurationv1.ListPropertiesOptions)
-				listPropertiesOptionsModel.EnvironmentID = core.StringPtr("testString")
+				listPropertiesOptionsModel.EnvironmentID = core.StringPtr("environment_id")
 				listPropertiesOptionsModel.Expand = core.BoolPtr(true)
 				listPropertiesOptionsModel.Sort = core.StringPtr("created_time")
-				listPropertiesOptionsModel.Tags = core.StringPtr("version 1.1, pre-release")
-				listPropertiesOptionsModel.Collections = []string{"testString"}
-				listPropertiesOptionsModel.Segments = []string{"testString"}
-				listPropertiesOptionsModel.Include = []string{"collections"}
+				listPropertiesOptionsModel.Tags = core.StringPtr("version 1.1,pre-release")
+				listPropertiesOptionsModel.Collections = []string{"my-collection-id", "ghzindiapvtltd"}
+				listPropertiesOptionsModel.Segments = []string{"my-segment-id", "beta-users"}
+				listPropertiesOptionsModel.Include = []string{"collections", "rules"}
 				listPropertiesOptionsModel.Limit = core.Int64Ptr(int64(10))
 				listPropertiesOptionsModel.Offset = core.Int64Ptr(int64(0))
 				listPropertiesOptionsModel.Search = core.StringPtr("test tag")
@@ -4802,13 +4802,13 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the ListPropertiesOptions model
 				listPropertiesOptionsModel := new(appconfigurationv1.ListPropertiesOptions)
-				listPropertiesOptionsModel.EnvironmentID = core.StringPtr("testString")
+				listPropertiesOptionsModel.EnvironmentID = core.StringPtr("environment_id")
 				listPropertiesOptionsModel.Expand = core.BoolPtr(true)
 				listPropertiesOptionsModel.Sort = core.StringPtr("created_time")
-				listPropertiesOptionsModel.Tags = core.StringPtr("version 1.1, pre-release")
-				listPropertiesOptionsModel.Collections = []string{"testString"}
-				listPropertiesOptionsModel.Segments = []string{"testString"}
-				listPropertiesOptionsModel.Include = []string{"collections"}
+				listPropertiesOptionsModel.Tags = core.StringPtr("version 1.1,pre-release")
+				listPropertiesOptionsModel.Collections = []string{"my-collection-id", "ghzindiapvtltd"}
+				listPropertiesOptionsModel.Segments = []string{"my-segment-id", "beta-users"}
+				listPropertiesOptionsModel.Include = []string{"collections", "rules"}
 				listPropertiesOptionsModel.Limit = core.Int64Ptr(int64(10))
 				listPropertiesOptionsModel.Offset = core.Int64Ptr(int64(0))
 				listPropertiesOptionsModel.Search = core.StringPtr("test tag")
@@ -4852,13 +4852,13 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the ListPropertiesOptions model
 				listPropertiesOptionsModel := new(appconfigurationv1.ListPropertiesOptions)
-				listPropertiesOptionsModel.EnvironmentID = core.StringPtr("testString")
+				listPropertiesOptionsModel.EnvironmentID = core.StringPtr("environment_id")
 				listPropertiesOptionsModel.Expand = core.BoolPtr(true)
 				listPropertiesOptionsModel.Sort = core.StringPtr("created_time")
-				listPropertiesOptionsModel.Tags = core.StringPtr("version 1.1, pre-release")
-				listPropertiesOptionsModel.Collections = []string{"testString"}
-				listPropertiesOptionsModel.Segments = []string{"testString"}
-				listPropertiesOptionsModel.Include = []string{"collections"}
+				listPropertiesOptionsModel.Tags = core.StringPtr("version 1.1,pre-release")
+				listPropertiesOptionsModel.Collections = []string{"my-collection-id", "ghzindiapvtltd"}
+				listPropertiesOptionsModel.Segments = []string{"my-segment-id", "beta-users"}
+				listPropertiesOptionsModel.Include = []string{"collections", "rules"}
 				listPropertiesOptionsModel.Limit = core.Int64Ptr(int64(10))
 				listPropertiesOptionsModel.Offset = core.Int64Ptr(int64(0))
 				listPropertiesOptionsModel.Search = core.StringPtr("test tag")
@@ -4947,13 +4947,13 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(appConfigurationService).ToNot(BeNil())
 
 				listPropertiesOptionsModel := &appconfigurationv1.ListPropertiesOptions{
-					EnvironmentID: core.StringPtr("testString"),
+					EnvironmentID: core.StringPtr("environment_id"),
 					Expand: core.BoolPtr(true),
 					Sort: core.StringPtr("created_time"),
-					Tags: core.StringPtr("version 1.1, pre-release"),
-					Collections: []string{"testString"},
-					Segments: []string{"testString"},
-					Include: []string{"collections"},
+					Tags: core.StringPtr("version 1.1,pre-release"),
+					Collections: []string{"my-collection-id", "ghzindiapvtltd"},
+					Segments: []string{"my-segment-id", "beta-users"},
+					Include: []string{"collections", "rules"},
 					Limit: core.Int64Ptr(int64(10)),
 					Search: core.StringPtr("test tag"),
 				}
@@ -4980,13 +4980,13 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(appConfigurationService).ToNot(BeNil())
 
 				listPropertiesOptionsModel := &appconfigurationv1.ListPropertiesOptions{
-					EnvironmentID: core.StringPtr("testString"),
+					EnvironmentID: core.StringPtr("environment_id"),
 					Expand: core.BoolPtr(true),
 					Sort: core.StringPtr("created_time"),
-					Tags: core.StringPtr("version 1.1, pre-release"),
-					Collections: []string{"testString"},
-					Segments: []string{"testString"},
-					Include: []string{"collections"},
+					Tags: core.StringPtr("version 1.1,pre-release"),
+					Collections: []string{"my-collection-id", "ghzindiapvtltd"},
+					Segments: []string{"my-segment-id", "beta-users"},
+					Include: []string{"collections", "rules"},
 					Limit: core.Int64Ptr(int64(10)),
 					Search: core.StringPtr("test tag"),
 				}
@@ -5003,7 +5003,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 		})
 	})
 	Describe(`CreateProperty(createPropertyOptions *CreatePropertyOptions) - Operation response error`, func() {
-		createPropertyPath := "/environments/testString/properties"
+		createPropertyPath := "/environments/environment_id/properties"
 		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -5041,7 +5041,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the CreatePropertyOptions model
 				createPropertyOptionsModel := new(appconfigurationv1.CreatePropertyOptions)
-				createPropertyOptionsModel.EnvironmentID = core.StringPtr("testString")
+				createPropertyOptionsModel.EnvironmentID = core.StringPtr("environment_id")
 				createPropertyOptionsModel.Name = core.StringPtr("Email property")
 				createPropertyOptionsModel.PropertyID = core.StringPtr("email-property")
 				createPropertyOptionsModel.Type = core.StringPtr("BOOLEAN")
@@ -5071,7 +5071,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 		})
 	})
 	Describe(`CreateProperty(createPropertyOptions *CreatePropertyOptions)`, func() {
-		createPropertyPath := "/environments/testString/properties"
+		createPropertyPath := "/environments/environment_id/properties"
 		Context(`Using mock server endpoint with timeout`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -5131,7 +5131,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the CreatePropertyOptions model
 				createPropertyOptionsModel := new(appconfigurationv1.CreatePropertyOptions)
-				createPropertyOptionsModel.EnvironmentID = core.StringPtr("testString")
+				createPropertyOptionsModel.EnvironmentID = core.StringPtr("environment_id")
 				createPropertyOptionsModel.Name = core.StringPtr("Email property")
 				createPropertyOptionsModel.PropertyID = core.StringPtr("email-property")
 				createPropertyOptionsModel.Type = core.StringPtr("BOOLEAN")
@@ -5229,7 +5229,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the CreatePropertyOptions model
 				createPropertyOptionsModel := new(appconfigurationv1.CreatePropertyOptions)
-				createPropertyOptionsModel.EnvironmentID = core.StringPtr("testString")
+				createPropertyOptionsModel.EnvironmentID = core.StringPtr("environment_id")
 				createPropertyOptionsModel.Name = core.StringPtr("Email property")
 				createPropertyOptionsModel.PropertyID = core.StringPtr("email-property")
 				createPropertyOptionsModel.Type = core.StringPtr("BOOLEAN")
@@ -5272,7 +5272,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the CreatePropertyOptions model
 				createPropertyOptionsModel := new(appconfigurationv1.CreatePropertyOptions)
-				createPropertyOptionsModel.EnvironmentID = core.StringPtr("testString")
+				createPropertyOptionsModel.EnvironmentID = core.StringPtr("environment_id")
 				createPropertyOptionsModel.Name = core.StringPtr("Email property")
 				createPropertyOptionsModel.PropertyID = core.StringPtr("email-property")
 				createPropertyOptionsModel.Type = core.StringPtr("BOOLEAN")
@@ -5336,7 +5336,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the CreatePropertyOptions model
 				createPropertyOptionsModel := new(appconfigurationv1.CreatePropertyOptions)
-				createPropertyOptionsModel.EnvironmentID = core.StringPtr("testString")
+				createPropertyOptionsModel.EnvironmentID = core.StringPtr("environment_id")
 				createPropertyOptionsModel.Name = core.StringPtr("Email property")
 				createPropertyOptionsModel.PropertyID = core.StringPtr("email-property")
 				createPropertyOptionsModel.Type = core.StringPtr("BOOLEAN")
@@ -5362,7 +5362,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 		})
 	})
 	Describe(`UpdateProperty(updatePropertyOptions *UpdatePropertyOptions) - Operation response error`, func() {
-		updatePropertyPath := "/environments/testString/properties/testString"
+		updatePropertyPath := "/environments/environment_id/properties/property_id"
 		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -5400,8 +5400,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the UpdatePropertyOptions model
 				updatePropertyOptionsModel := new(appconfigurationv1.UpdatePropertyOptions)
-				updatePropertyOptionsModel.EnvironmentID = core.StringPtr("testString")
-				updatePropertyOptionsModel.PropertyID = core.StringPtr("testString")
+				updatePropertyOptionsModel.EnvironmentID = core.StringPtr("environment_id")
+				updatePropertyOptionsModel.PropertyID = core.StringPtr("property_id")
 				updatePropertyOptionsModel.Name = core.StringPtr("Email property")
 				updatePropertyOptionsModel.Description = core.StringPtr("Property for email")
 				updatePropertyOptionsModel.Value = core.StringPtr("true")
@@ -5428,7 +5428,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 		})
 	})
 	Describe(`UpdateProperty(updatePropertyOptions *UpdatePropertyOptions)`, func() {
-		updatePropertyPath := "/environments/testString/properties/testString"
+		updatePropertyPath := "/environments/environment_id/properties/property_id"
 		Context(`Using mock server endpoint with timeout`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -5488,8 +5488,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the UpdatePropertyOptions model
 				updatePropertyOptionsModel := new(appconfigurationv1.UpdatePropertyOptions)
-				updatePropertyOptionsModel.EnvironmentID = core.StringPtr("testString")
-				updatePropertyOptionsModel.PropertyID = core.StringPtr("testString")
+				updatePropertyOptionsModel.EnvironmentID = core.StringPtr("environment_id")
+				updatePropertyOptionsModel.PropertyID = core.StringPtr("property_id")
 				updatePropertyOptionsModel.Name = core.StringPtr("Email property")
 				updatePropertyOptionsModel.Description = core.StringPtr("Property for email")
 				updatePropertyOptionsModel.Value = core.StringPtr("true")
@@ -5584,8 +5584,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the UpdatePropertyOptions model
 				updatePropertyOptionsModel := new(appconfigurationv1.UpdatePropertyOptions)
-				updatePropertyOptionsModel.EnvironmentID = core.StringPtr("testString")
-				updatePropertyOptionsModel.PropertyID = core.StringPtr("testString")
+				updatePropertyOptionsModel.EnvironmentID = core.StringPtr("environment_id")
+				updatePropertyOptionsModel.PropertyID = core.StringPtr("property_id")
 				updatePropertyOptionsModel.Name = core.StringPtr("Email property")
 				updatePropertyOptionsModel.Description = core.StringPtr("Property for email")
 				updatePropertyOptionsModel.Value = core.StringPtr("true")
@@ -5625,8 +5625,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the UpdatePropertyOptions model
 				updatePropertyOptionsModel := new(appconfigurationv1.UpdatePropertyOptions)
-				updatePropertyOptionsModel.EnvironmentID = core.StringPtr("testString")
-				updatePropertyOptionsModel.PropertyID = core.StringPtr("testString")
+				updatePropertyOptionsModel.EnvironmentID = core.StringPtr("environment_id")
+				updatePropertyOptionsModel.PropertyID = core.StringPtr("property_id")
 				updatePropertyOptionsModel.Name = core.StringPtr("Email property")
 				updatePropertyOptionsModel.Description = core.StringPtr("Property for email")
 				updatePropertyOptionsModel.Value = core.StringPtr("true")
@@ -5687,8 +5687,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the UpdatePropertyOptions model
 				updatePropertyOptionsModel := new(appconfigurationv1.UpdatePropertyOptions)
-				updatePropertyOptionsModel.EnvironmentID = core.StringPtr("testString")
-				updatePropertyOptionsModel.PropertyID = core.StringPtr("testString")
+				updatePropertyOptionsModel.EnvironmentID = core.StringPtr("environment_id")
+				updatePropertyOptionsModel.PropertyID = core.StringPtr("property_id")
 				updatePropertyOptionsModel.Name = core.StringPtr("Email property")
 				updatePropertyOptionsModel.Description = core.StringPtr("Property for email")
 				updatePropertyOptionsModel.Value = core.StringPtr("true")
@@ -5711,7 +5711,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 		})
 	})
 	Describe(`UpdatePropertyValues(updatePropertyValuesOptions *UpdatePropertyValuesOptions) - Operation response error`, func() {
-		updatePropertyValuesPath := "/environments/testString/properties/testString"
+		updatePropertyValuesPath := "/environments/environment_id/properties/property_id"
 		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -5745,8 +5745,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the UpdatePropertyValuesOptions model
 				updatePropertyValuesOptionsModel := new(appconfigurationv1.UpdatePropertyValuesOptions)
-				updatePropertyValuesOptionsModel.EnvironmentID = core.StringPtr("testString")
-				updatePropertyValuesOptionsModel.PropertyID = core.StringPtr("testString")
+				updatePropertyValuesOptionsModel.EnvironmentID = core.StringPtr("environment_id")
+				updatePropertyValuesOptionsModel.PropertyID = core.StringPtr("property_id")
 				updatePropertyValuesOptionsModel.Name = core.StringPtr("Email property")
 				updatePropertyValuesOptionsModel.Description = core.StringPtr("Property for email")
 				updatePropertyValuesOptionsModel.Tags = core.StringPtr("version: 1.1, pre-release")
@@ -5772,7 +5772,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 		})
 	})
 	Describe(`UpdatePropertyValues(updatePropertyValuesOptions *UpdatePropertyValuesOptions)`, func() {
-		updatePropertyValuesPath := "/environments/testString/properties/testString"
+		updatePropertyValuesPath := "/environments/environment_id/properties/property_id"
 		Context(`Using mock server endpoint with timeout`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -5828,8 +5828,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the UpdatePropertyValuesOptions model
 				updatePropertyValuesOptionsModel := new(appconfigurationv1.UpdatePropertyValuesOptions)
-				updatePropertyValuesOptionsModel.EnvironmentID = core.StringPtr("testString")
-				updatePropertyValuesOptionsModel.PropertyID = core.StringPtr("testString")
+				updatePropertyValuesOptionsModel.EnvironmentID = core.StringPtr("environment_id")
+				updatePropertyValuesOptionsModel.PropertyID = core.StringPtr("property_id")
 				updatePropertyValuesOptionsModel.Name = core.StringPtr("Email property")
 				updatePropertyValuesOptionsModel.Description = core.StringPtr("Property for email")
 				updatePropertyValuesOptionsModel.Tags = core.StringPtr("version: 1.1, pre-release")
@@ -5919,8 +5919,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the UpdatePropertyValuesOptions model
 				updatePropertyValuesOptionsModel := new(appconfigurationv1.UpdatePropertyValuesOptions)
-				updatePropertyValuesOptionsModel.EnvironmentID = core.StringPtr("testString")
-				updatePropertyValuesOptionsModel.PropertyID = core.StringPtr("testString")
+				updatePropertyValuesOptionsModel.EnvironmentID = core.StringPtr("environment_id")
+				updatePropertyValuesOptionsModel.PropertyID = core.StringPtr("property_id")
 				updatePropertyValuesOptionsModel.Name = core.StringPtr("Email property")
 				updatePropertyValuesOptionsModel.Description = core.StringPtr("Property for email")
 				updatePropertyValuesOptionsModel.Tags = core.StringPtr("version: 1.1, pre-release")
@@ -5955,8 +5955,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the UpdatePropertyValuesOptions model
 				updatePropertyValuesOptionsModel := new(appconfigurationv1.UpdatePropertyValuesOptions)
-				updatePropertyValuesOptionsModel.EnvironmentID = core.StringPtr("testString")
-				updatePropertyValuesOptionsModel.PropertyID = core.StringPtr("testString")
+				updatePropertyValuesOptionsModel.EnvironmentID = core.StringPtr("environment_id")
+				updatePropertyValuesOptionsModel.PropertyID = core.StringPtr("property_id")
 				updatePropertyValuesOptionsModel.Name = core.StringPtr("Email property")
 				updatePropertyValuesOptionsModel.Description = core.StringPtr("Property for email")
 				updatePropertyValuesOptionsModel.Tags = core.StringPtr("version: 1.1, pre-release")
@@ -6012,8 +6012,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the UpdatePropertyValuesOptions model
 				updatePropertyValuesOptionsModel := new(appconfigurationv1.UpdatePropertyValuesOptions)
-				updatePropertyValuesOptionsModel.EnvironmentID = core.StringPtr("testString")
-				updatePropertyValuesOptionsModel.PropertyID = core.StringPtr("testString")
+				updatePropertyValuesOptionsModel.EnvironmentID = core.StringPtr("environment_id")
+				updatePropertyValuesOptionsModel.PropertyID = core.StringPtr("property_id")
 				updatePropertyValuesOptionsModel.Name = core.StringPtr("Email property")
 				updatePropertyValuesOptionsModel.Description = core.StringPtr("Property for email")
 				updatePropertyValuesOptionsModel.Tags = core.StringPtr("version: 1.1, pre-release")
@@ -6035,7 +6035,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 		})
 	})
 	Describe(`GetProperty(getPropertyOptions *GetPropertyOptions) - Operation response error`, func() {
-		getPropertyPath := "/environments/testString/properties/testString"
+		getPropertyPath := "/environments/environment_id/properties/property_id"
 		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -6044,7 +6044,6 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Verify the contents of the request
 					Expect(req.URL.EscapedPath()).To(Equal(getPropertyPath))
 					Expect(req.Method).To(Equal("GET"))
-					Expect(req.URL.Query()["include"]).To(Equal([]string{"collections"}))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
 					fmt.Fprint(res, `} this is not valid json {`)
@@ -6060,9 +6059,9 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the GetPropertyOptions model
 				getPropertyOptionsModel := new(appconfigurationv1.GetPropertyOptions)
-				getPropertyOptionsModel.EnvironmentID = core.StringPtr("testString")
-				getPropertyOptionsModel.PropertyID = core.StringPtr("testString")
-				getPropertyOptionsModel.Include = core.StringPtr("collections")
+				getPropertyOptionsModel.EnvironmentID = core.StringPtr("environment_id")
+				getPropertyOptionsModel.PropertyID = core.StringPtr("property_id")
+				getPropertyOptionsModel.Include = []string{"collections", "rules"}
 				getPropertyOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
 				result, response, operationErr := appConfigurationService.GetProperty(getPropertyOptionsModel)
@@ -6083,7 +6082,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 		})
 	})
 	Describe(`GetProperty(getPropertyOptions *GetPropertyOptions)`, func() {
-		getPropertyPath := "/environments/testString/properties/testString"
+		getPropertyPath := "/environments/environment_id/properties/property_id"
 		Context(`Using mock server endpoint with timeout`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -6093,7 +6092,6 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(getPropertyPath))
 					Expect(req.Method).To(Equal("GET"))
 
-					Expect(req.URL.Query()["include"]).To(Equal([]string{"collections"}))
 					// Sleep a short time to support a timeout test
 					time.Sleep(100 * time.Millisecond)
 
@@ -6114,9 +6112,9 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the GetPropertyOptions model
 				getPropertyOptionsModel := new(appconfigurationv1.GetPropertyOptions)
-				getPropertyOptionsModel.EnvironmentID = core.StringPtr("testString")
-				getPropertyOptionsModel.PropertyID = core.StringPtr("testString")
-				getPropertyOptionsModel.Include = core.StringPtr("collections")
+				getPropertyOptionsModel.EnvironmentID = core.StringPtr("environment_id")
+				getPropertyOptionsModel.PropertyID = core.StringPtr("property_id")
+				getPropertyOptionsModel.Include = []string{"collections", "rules"}
 				getPropertyOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with a Context to test a timeout error
@@ -6153,7 +6151,6 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(getPropertyPath))
 					Expect(req.Method).To(Equal("GET"))
 
-					Expect(req.URL.Query()["include"]).To(Equal([]string{"collections"}))
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -6176,9 +6173,9 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the GetPropertyOptions model
 				getPropertyOptionsModel := new(appconfigurationv1.GetPropertyOptions)
-				getPropertyOptionsModel.EnvironmentID = core.StringPtr("testString")
-				getPropertyOptionsModel.PropertyID = core.StringPtr("testString")
-				getPropertyOptionsModel.Include = core.StringPtr("collections")
+				getPropertyOptionsModel.EnvironmentID = core.StringPtr("environment_id")
+				getPropertyOptionsModel.PropertyID = core.StringPtr("property_id")
+				getPropertyOptionsModel.Include = []string{"collections", "rules"}
 				getPropertyOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
@@ -6198,9 +6195,9 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the GetPropertyOptions model
 				getPropertyOptionsModel := new(appconfigurationv1.GetPropertyOptions)
-				getPropertyOptionsModel.EnvironmentID = core.StringPtr("testString")
-				getPropertyOptionsModel.PropertyID = core.StringPtr("testString")
-				getPropertyOptionsModel.Include = core.StringPtr("collections")
+				getPropertyOptionsModel.EnvironmentID = core.StringPtr("environment_id")
+				getPropertyOptionsModel.PropertyID = core.StringPtr("property_id")
+				getPropertyOptionsModel.Include = []string{"collections", "rules"}
 				getPropertyOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := appConfigurationService.SetServiceURL("")
@@ -6241,9 +6238,9 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the GetPropertyOptions model
 				getPropertyOptionsModel := new(appconfigurationv1.GetPropertyOptions)
-				getPropertyOptionsModel.EnvironmentID = core.StringPtr("testString")
-				getPropertyOptionsModel.PropertyID = core.StringPtr("testString")
-				getPropertyOptionsModel.Include = core.StringPtr("collections")
+				getPropertyOptionsModel.EnvironmentID = core.StringPtr("environment_id")
+				getPropertyOptionsModel.PropertyID = core.StringPtr("property_id")
+				getPropertyOptionsModel.Include = []string{"collections", "rules"}
 				getPropertyOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation
@@ -6260,7 +6257,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 		})
 	})
 	Describe(`DeleteProperty(deletePropertyOptions *DeletePropertyOptions)`, func() {
-		deletePropertyPath := "/environments/testString/properties/testString"
+		deletePropertyPath := "/environments/environment_id/properties/property_id"
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -6288,8 +6285,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the DeletePropertyOptions model
 				deletePropertyOptionsModel := new(appconfigurationv1.DeletePropertyOptions)
-				deletePropertyOptionsModel.EnvironmentID = core.StringPtr("testString")
-				deletePropertyOptionsModel.PropertyID = core.StringPtr("testString")
+				deletePropertyOptionsModel.EnvironmentID = core.StringPtr("environment_id")
+				deletePropertyOptionsModel.PropertyID = core.StringPtr("property_id")
 				deletePropertyOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
@@ -6307,8 +6304,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the DeletePropertyOptions model
 				deletePropertyOptionsModel := new(appconfigurationv1.DeletePropertyOptions)
-				deletePropertyOptionsModel.EnvironmentID = core.StringPtr("testString")
-				deletePropertyOptionsModel.PropertyID = core.StringPtr("testString")
+				deletePropertyOptionsModel.EnvironmentID = core.StringPtr("environment_id")
+				deletePropertyOptionsModel.PropertyID = core.StringPtr("property_id")
 				deletePropertyOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := appConfigurationService.SetServiceURL("")
@@ -6341,7 +6338,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					Expect(req.Method).To(Equal("GET"))
 					// TODO: Add check for expand query parameter
 					Expect(req.URL.Query()["sort"]).To(Equal([]string{"created_time"}))
-					Expect(req.URL.Query()["tags"]).To(Equal([]string{"version 1.1, pre-release"}))
+					Expect(req.URL.Query()["tags"]).To(Equal([]string{"version 1.1,pre-release"}))
 					Expect(req.URL.Query()["include"]).To(Equal([]string{"rules"}))
 					Expect(req.URL.Query()["limit"]).To(Equal([]string{fmt.Sprint(int64(10))}))
 					Expect(req.URL.Query()["offset"]).To(Equal([]string{fmt.Sprint(int64(0))}))
@@ -6363,7 +6360,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				listSegmentsOptionsModel := new(appconfigurationv1.ListSegmentsOptions)
 				listSegmentsOptionsModel.Expand = core.BoolPtr(true)
 				listSegmentsOptionsModel.Sort = core.StringPtr("created_time")
-				listSegmentsOptionsModel.Tags = core.StringPtr("version 1.1, pre-release")
+				listSegmentsOptionsModel.Tags = core.StringPtr("version 1.1,pre-release")
 				listSegmentsOptionsModel.Include = core.StringPtr("rules")
 				listSegmentsOptionsModel.Limit = core.Int64Ptr(int64(10))
 				listSegmentsOptionsModel.Offset = core.Int64Ptr(int64(0))
@@ -6400,7 +6397,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 					// TODO: Add check for expand query parameter
 					Expect(req.URL.Query()["sort"]).To(Equal([]string{"created_time"}))
-					Expect(req.URL.Query()["tags"]).To(Equal([]string{"version 1.1, pre-release"}))
+					Expect(req.URL.Query()["tags"]).To(Equal([]string{"version 1.1,pre-release"}))
 					Expect(req.URL.Query()["include"]).To(Equal([]string{"rules"}))
 					Expect(req.URL.Query()["limit"]).To(Equal([]string{fmt.Sprint(int64(10))}))
 					Expect(req.URL.Query()["offset"]).To(Equal([]string{fmt.Sprint(int64(0))}))
@@ -6427,7 +6424,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				listSegmentsOptionsModel := new(appconfigurationv1.ListSegmentsOptions)
 				listSegmentsOptionsModel.Expand = core.BoolPtr(true)
 				listSegmentsOptionsModel.Sort = core.StringPtr("created_time")
-				listSegmentsOptionsModel.Tags = core.StringPtr("version 1.1, pre-release")
+				listSegmentsOptionsModel.Tags = core.StringPtr("version 1.1,pre-release")
 				listSegmentsOptionsModel.Include = core.StringPtr("rules")
 				listSegmentsOptionsModel.Limit = core.Int64Ptr(int64(10))
 				listSegmentsOptionsModel.Offset = core.Int64Ptr(int64(0))
@@ -6470,7 +6467,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 					// TODO: Add check for expand query parameter
 					Expect(req.URL.Query()["sort"]).To(Equal([]string{"created_time"}))
-					Expect(req.URL.Query()["tags"]).To(Equal([]string{"version 1.1, pre-release"}))
+					Expect(req.URL.Query()["tags"]).To(Equal([]string{"version 1.1,pre-release"}))
 					Expect(req.URL.Query()["include"]).To(Equal([]string{"rules"}))
 					Expect(req.URL.Query()["limit"]).To(Equal([]string{fmt.Sprint(int64(10))}))
 					Expect(req.URL.Query()["offset"]).To(Equal([]string{fmt.Sprint(int64(0))}))
@@ -6499,7 +6496,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				listSegmentsOptionsModel := new(appconfigurationv1.ListSegmentsOptions)
 				listSegmentsOptionsModel.Expand = core.BoolPtr(true)
 				listSegmentsOptionsModel.Sort = core.StringPtr("created_time")
-				listSegmentsOptionsModel.Tags = core.StringPtr("version 1.1, pre-release")
+				listSegmentsOptionsModel.Tags = core.StringPtr("version 1.1,pre-release")
 				listSegmentsOptionsModel.Include = core.StringPtr("rules")
 				listSegmentsOptionsModel.Limit = core.Int64Ptr(int64(10))
 				listSegmentsOptionsModel.Offset = core.Int64Ptr(int64(0))
@@ -6525,7 +6522,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				listSegmentsOptionsModel := new(appconfigurationv1.ListSegmentsOptions)
 				listSegmentsOptionsModel.Expand = core.BoolPtr(true)
 				listSegmentsOptionsModel.Sort = core.StringPtr("created_time")
-				listSegmentsOptionsModel.Tags = core.StringPtr("version 1.1, pre-release")
+				listSegmentsOptionsModel.Tags = core.StringPtr("version 1.1,pre-release")
 				listSegmentsOptionsModel.Include = core.StringPtr("rules")
 				listSegmentsOptionsModel.Limit = core.Int64Ptr(int64(10))
 				listSegmentsOptionsModel.Offset = core.Int64Ptr(int64(0))
@@ -6565,7 +6562,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				listSegmentsOptionsModel := new(appconfigurationv1.ListSegmentsOptions)
 				listSegmentsOptionsModel.Expand = core.BoolPtr(true)
 				listSegmentsOptionsModel.Sort = core.StringPtr("created_time")
-				listSegmentsOptionsModel.Tags = core.StringPtr("version 1.1, pre-release")
+				listSegmentsOptionsModel.Tags = core.StringPtr("version 1.1,pre-release")
 				listSegmentsOptionsModel.Include = core.StringPtr("rules")
 				listSegmentsOptionsModel.Limit = core.Int64Ptr(int64(10))
 				listSegmentsOptionsModel.Offset = core.Int64Ptr(int64(0))
@@ -6657,7 +6654,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				listSegmentsOptionsModel := &appconfigurationv1.ListSegmentsOptions{
 					Expand: core.BoolPtr(true),
 					Sort: core.StringPtr("created_time"),
-					Tags: core.StringPtr("version 1.1, pre-release"),
+					Tags: core.StringPtr("version 1.1,pre-release"),
 					Include: core.StringPtr("rules"),
 					Limit: core.Int64Ptr(int64(10)),
 					Search: core.StringPtr("test tag"),
@@ -6687,7 +6684,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				listSegmentsOptionsModel := &appconfigurationv1.ListSegmentsOptions{
 					Expand: core.BoolPtr(true),
 					Sort: core.StringPtr("created_time"),
-					Tags: core.StringPtr("version 1.1, pre-release"),
+					Tags: core.StringPtr("version 1.1,pre-release"),
 					Include: core.StringPtr("rules"),
 					Limit: core.Int64Ptr(int64(10)),
 					Search: core.StringPtr("test tag"),
@@ -6999,7 +6996,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 		})
 	})
 	Describe(`UpdateSegment(updateSegmentOptions *UpdateSegmentOptions) - Operation response error`, func() {
-		updateSegmentPath := "/segments/testString"
+		updateSegmentPath := "/segments/segment_id"
 		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -7029,7 +7026,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the UpdateSegmentOptions model
 				updateSegmentOptionsModel := new(appconfigurationv1.UpdateSegmentOptions)
-				updateSegmentOptionsModel.SegmentID = core.StringPtr("testString")
+				updateSegmentOptionsModel.SegmentID = core.StringPtr("segment_id")
 				updateSegmentOptionsModel.Name = core.StringPtr("testString")
 				updateSegmentOptionsModel.Description = core.StringPtr("testString")
 				updateSegmentOptionsModel.Tags = core.StringPtr("testString")
@@ -7054,7 +7051,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 		})
 	})
 	Describe(`UpdateSegment(updateSegmentOptions *UpdateSegmentOptions)`, func() {
-		updateSegmentPath := "/segments/testString"
+		updateSegmentPath := "/segments/segment_id"
 		Context(`Using mock server endpoint with timeout`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -7106,7 +7103,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the UpdateSegmentOptions model
 				updateSegmentOptionsModel := new(appconfigurationv1.UpdateSegmentOptions)
-				updateSegmentOptionsModel.SegmentID = core.StringPtr("testString")
+				updateSegmentOptionsModel.SegmentID = core.StringPtr("segment_id")
 				updateSegmentOptionsModel.Name = core.StringPtr("testString")
 				updateSegmentOptionsModel.Description = core.StringPtr("testString")
 				updateSegmentOptionsModel.Tags = core.StringPtr("testString")
@@ -7191,7 +7188,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the UpdateSegmentOptions model
 				updateSegmentOptionsModel := new(appconfigurationv1.UpdateSegmentOptions)
-				updateSegmentOptionsModel.SegmentID = core.StringPtr("testString")
+				updateSegmentOptionsModel.SegmentID = core.StringPtr("segment_id")
 				updateSegmentOptionsModel.Name = core.StringPtr("testString")
 				updateSegmentOptionsModel.Description = core.StringPtr("testString")
 				updateSegmentOptionsModel.Tags = core.StringPtr("testString")
@@ -7221,7 +7218,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the UpdateSegmentOptions model
 				updateSegmentOptionsModel := new(appconfigurationv1.UpdateSegmentOptions)
-				updateSegmentOptionsModel.SegmentID = core.StringPtr("testString")
+				updateSegmentOptionsModel.SegmentID = core.StringPtr("segment_id")
 				updateSegmentOptionsModel.Name = core.StringPtr("testString")
 				updateSegmentOptionsModel.Description = core.StringPtr("testString")
 				updateSegmentOptionsModel.Tags = core.StringPtr("testString")
@@ -7272,7 +7269,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the UpdateSegmentOptions model
 				updateSegmentOptionsModel := new(appconfigurationv1.UpdateSegmentOptions)
-				updateSegmentOptionsModel.SegmentID = core.StringPtr("testString")
+				updateSegmentOptionsModel.SegmentID = core.StringPtr("segment_id")
 				updateSegmentOptionsModel.Name = core.StringPtr("testString")
 				updateSegmentOptionsModel.Description = core.StringPtr("testString")
 				updateSegmentOptionsModel.Tags = core.StringPtr("testString")
@@ -7293,7 +7290,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 		})
 	})
 	Describe(`GetSegment(getSegmentOptions *GetSegmentOptions) - Operation response error`, func() {
-		getSegmentPath := "/segments/testString"
+		getSegmentPath := "/segments/segment_id"
 		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -7317,8 +7314,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the GetSegmentOptions model
 				getSegmentOptionsModel := new(appconfigurationv1.GetSegmentOptions)
-				getSegmentOptionsModel.SegmentID = core.StringPtr("testString")
-				getSegmentOptionsModel.Include = []string{"features"}
+				getSegmentOptionsModel.SegmentID = core.StringPtr("segment_id")
+				getSegmentOptionsModel.Include = []string{"features", "properties"}
 				getSegmentOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
 				result, response, operationErr := appConfigurationService.GetSegment(getSegmentOptionsModel)
@@ -7339,7 +7336,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 		})
 	})
 	Describe(`GetSegment(getSegmentOptions *GetSegmentOptions)`, func() {
-		getSegmentPath := "/segments/testString"
+		getSegmentPath := "/segments/segment_id"
 		Context(`Using mock server endpoint with timeout`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -7369,8 +7366,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the GetSegmentOptions model
 				getSegmentOptionsModel := new(appconfigurationv1.GetSegmentOptions)
-				getSegmentOptionsModel.SegmentID = core.StringPtr("testString")
-				getSegmentOptionsModel.Include = []string{"features"}
+				getSegmentOptionsModel.SegmentID = core.StringPtr("segment_id")
+				getSegmentOptionsModel.Include = []string{"features", "properties"}
 				getSegmentOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with a Context to test a timeout error
@@ -7429,8 +7426,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the GetSegmentOptions model
 				getSegmentOptionsModel := new(appconfigurationv1.GetSegmentOptions)
-				getSegmentOptionsModel.SegmentID = core.StringPtr("testString")
-				getSegmentOptionsModel.Include = []string{"features"}
+				getSegmentOptionsModel.SegmentID = core.StringPtr("segment_id")
+				getSegmentOptionsModel.Include = []string{"features", "properties"}
 				getSegmentOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
@@ -7450,8 +7447,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the GetSegmentOptions model
 				getSegmentOptionsModel := new(appconfigurationv1.GetSegmentOptions)
-				getSegmentOptionsModel.SegmentID = core.StringPtr("testString")
-				getSegmentOptionsModel.Include = []string{"features"}
+				getSegmentOptionsModel.SegmentID = core.StringPtr("segment_id")
+				getSegmentOptionsModel.Include = []string{"features", "properties"}
 				getSegmentOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := appConfigurationService.SetServiceURL("")
@@ -7492,8 +7489,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the GetSegmentOptions model
 				getSegmentOptionsModel := new(appconfigurationv1.GetSegmentOptions)
-				getSegmentOptionsModel.SegmentID = core.StringPtr("testString")
-				getSegmentOptionsModel.Include = []string{"features"}
+				getSegmentOptionsModel.SegmentID = core.StringPtr("segment_id")
+				getSegmentOptionsModel.Include = []string{"features", "properties"}
 				getSegmentOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation
@@ -7510,7 +7507,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 		})
 	})
 	Describe(`DeleteSegment(deleteSegmentOptions *DeleteSegmentOptions)`, func() {
-		deleteSegmentPath := "/segments/testString"
+		deleteSegmentPath := "/segments/segment_id"
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -7538,7 +7535,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the DeleteSegmentOptions model
 				deleteSegmentOptionsModel := new(appconfigurationv1.DeleteSegmentOptions)
-				deleteSegmentOptionsModel.SegmentID = core.StringPtr("testString")
+				deleteSegmentOptionsModel.SegmentID = core.StringPtr("segment_id")
 				deleteSegmentOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
@@ -7556,7 +7553,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the DeleteSegmentOptions model
 				deleteSegmentOptionsModel := new(appconfigurationv1.DeleteSegmentOptions)
-				deleteSegmentOptionsModel.SegmentID = core.StringPtr("testString")
+				deleteSegmentOptionsModel.SegmentID = core.StringPtr("segment_id")
 				deleteSegmentOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := appConfigurationService.SetServiceURL("")
@@ -8222,7 +8219,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 		})
 	})
 	Describe(`UpdateGitconfig(updateGitconfigOptions *UpdateGitconfigOptions) - Operation response error`, func() {
-		updateGitconfigPath := "/gitconfigs/testString"
+		updateGitconfigPath := "/gitconfigs/git_config_id"
 		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -8246,7 +8243,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the UpdateGitconfigOptions model
 				updateGitconfigOptionsModel := new(appconfigurationv1.UpdateGitconfigOptions)
-				updateGitconfigOptionsModel.GitConfigID = core.StringPtr("testString")
+				updateGitconfigOptionsModel.GitConfigID = core.StringPtr("git_config_id")
 				updateGitconfigOptionsModel.GitConfigName = core.StringPtr("testString")
 				updateGitconfigOptionsModel.CollectionID = core.StringPtr("testString")
 				updateGitconfigOptionsModel.EnvironmentID = core.StringPtr("testString")
@@ -8274,7 +8271,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 		})
 	})
 	Describe(`UpdateGitconfig(updateGitconfigOptions *UpdateGitconfigOptions)`, func() {
-		updateGitconfigPath := "/gitconfigs/testString"
+		updateGitconfigPath := "/gitconfigs/git_config_id"
 		Context(`Using mock server endpoint with timeout`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -8320,7 +8317,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the UpdateGitconfigOptions model
 				updateGitconfigOptionsModel := new(appconfigurationv1.UpdateGitconfigOptions)
-				updateGitconfigOptionsModel.GitConfigID = core.StringPtr("testString")
+				updateGitconfigOptionsModel.GitConfigID = core.StringPtr("git_config_id")
 				updateGitconfigOptionsModel.GitConfigName = core.StringPtr("testString")
 				updateGitconfigOptionsModel.CollectionID = core.StringPtr("testString")
 				updateGitconfigOptionsModel.EnvironmentID = core.StringPtr("testString")
@@ -8402,7 +8399,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the UpdateGitconfigOptions model
 				updateGitconfigOptionsModel := new(appconfigurationv1.UpdateGitconfigOptions)
-				updateGitconfigOptionsModel.GitConfigID = core.StringPtr("testString")
+				updateGitconfigOptionsModel.GitConfigID = core.StringPtr("git_config_id")
 				updateGitconfigOptionsModel.GitConfigName = core.StringPtr("testString")
 				updateGitconfigOptionsModel.CollectionID = core.StringPtr("testString")
 				updateGitconfigOptionsModel.EnvironmentID = core.StringPtr("testString")
@@ -8429,7 +8426,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the UpdateGitconfigOptions model
 				updateGitconfigOptionsModel := new(appconfigurationv1.UpdateGitconfigOptions)
-				updateGitconfigOptionsModel.GitConfigID = core.StringPtr("testString")
+				updateGitconfigOptionsModel.GitConfigID = core.StringPtr("git_config_id")
 				updateGitconfigOptionsModel.GitConfigName = core.StringPtr("testString")
 				updateGitconfigOptionsModel.CollectionID = core.StringPtr("testString")
 				updateGitconfigOptionsModel.EnvironmentID = core.StringPtr("testString")
@@ -8477,7 +8474,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the UpdateGitconfigOptions model
 				updateGitconfigOptionsModel := new(appconfigurationv1.UpdateGitconfigOptions)
-				updateGitconfigOptionsModel.GitConfigID = core.StringPtr("testString")
+				updateGitconfigOptionsModel.GitConfigID = core.StringPtr("git_config_id")
 				updateGitconfigOptionsModel.GitConfigName = core.StringPtr("testString")
 				updateGitconfigOptionsModel.CollectionID = core.StringPtr("testString")
 				updateGitconfigOptionsModel.EnvironmentID = core.StringPtr("testString")
@@ -8501,7 +8498,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 		})
 	})
 	Describe(`GetGitconfig(getGitconfigOptions *GetGitconfigOptions) - Operation response error`, func() {
-		getGitconfigPath := "/gitconfigs/testString"
+		getGitconfigPath := "/gitconfigs/git_config_id"
 		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -8525,7 +8522,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the GetGitconfigOptions model
 				getGitconfigOptionsModel := new(appconfigurationv1.GetGitconfigOptions)
-				getGitconfigOptionsModel.GitConfigID = core.StringPtr("testString")
+				getGitconfigOptionsModel.GitConfigID = core.StringPtr("git_config_id")
 				getGitconfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
 				result, response, operationErr := appConfigurationService.GetGitconfig(getGitconfigOptionsModel)
@@ -8546,7 +8543,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 		})
 	})
 	Describe(`GetGitconfig(getGitconfigOptions *GetGitconfigOptions)`, func() {
-		getGitconfigPath := "/gitconfigs/testString"
+		getGitconfigPath := "/gitconfigs/git_config_id"
 		Context(`Using mock server endpoint with timeout`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -8576,7 +8573,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the GetGitconfigOptions model
 				getGitconfigOptionsModel := new(appconfigurationv1.GetGitconfigOptions)
-				getGitconfigOptionsModel.GitConfigID = core.StringPtr("testString")
+				getGitconfigOptionsModel.GitConfigID = core.StringPtr("git_config_id")
 				getGitconfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with a Context to test a timeout error
@@ -8635,7 +8632,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the GetGitconfigOptions model
 				getGitconfigOptionsModel := new(appconfigurationv1.GetGitconfigOptions)
-				getGitconfigOptionsModel.GitConfigID = core.StringPtr("testString")
+				getGitconfigOptionsModel.GitConfigID = core.StringPtr("git_config_id")
 				getGitconfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
@@ -8655,7 +8652,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the GetGitconfigOptions model
 				getGitconfigOptionsModel := new(appconfigurationv1.GetGitconfigOptions)
-				getGitconfigOptionsModel.GitConfigID = core.StringPtr("testString")
+				getGitconfigOptionsModel.GitConfigID = core.StringPtr("git_config_id")
 				getGitconfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := appConfigurationService.SetServiceURL("")
@@ -8696,7 +8693,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the GetGitconfigOptions model
 				getGitconfigOptionsModel := new(appconfigurationv1.GetGitconfigOptions)
-				getGitconfigOptionsModel.GitConfigID = core.StringPtr("testString")
+				getGitconfigOptionsModel.GitConfigID = core.StringPtr("git_config_id")
 				getGitconfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation
@@ -8713,7 +8710,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 		})
 	})
 	Describe(`DeleteGitconfig(deleteGitconfigOptions *DeleteGitconfigOptions)`, func() {
-		deleteGitconfigPath := "/gitconfigs/testString"
+		deleteGitconfigPath := "/gitconfigs/git_config_id"
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -8741,7 +8738,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the DeleteGitconfigOptions model
 				deleteGitconfigOptionsModel := new(appconfigurationv1.DeleteGitconfigOptions)
-				deleteGitconfigOptionsModel.GitConfigID = core.StringPtr("testString")
+				deleteGitconfigOptionsModel.GitConfigID = core.StringPtr("git_config_id")
 				deleteGitconfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
@@ -8759,7 +8756,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the DeleteGitconfigOptions model
 				deleteGitconfigOptionsModel := new(appconfigurationv1.DeleteGitconfigOptions)
-				deleteGitconfigOptionsModel.GitConfigID = core.StringPtr("testString")
+				deleteGitconfigOptionsModel.GitConfigID = core.StringPtr("git_config_id")
 				deleteGitconfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := appConfigurationService.SetServiceURL("")
@@ -8781,7 +8778,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 		})
 	})
 	Describe(`PromoteGitconfig(promoteGitconfigOptions *PromoteGitconfigOptions) - Operation response error`, func() {
-		promoteGitconfigPath := "/gitconfigs/testString/promote"
+		promoteGitconfigPath := "/gitconfigs/git_config_id/promote"
 		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -8805,7 +8802,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the PromoteGitconfigOptions model
 				promoteGitconfigOptionsModel := new(appconfigurationv1.PromoteGitconfigOptions)
-				promoteGitconfigOptionsModel.GitConfigID = core.StringPtr("testString")
+				promoteGitconfigOptionsModel.GitConfigID = core.StringPtr("git_config_id")
 				promoteGitconfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
 				result, response, operationErr := appConfigurationService.PromoteGitconfig(promoteGitconfigOptionsModel)
@@ -8826,7 +8823,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 		})
 	})
 	Describe(`PromoteGitconfig(promoteGitconfigOptions *PromoteGitconfigOptions)`, func() {
-		promoteGitconfigPath := "/gitconfigs/testString/promote"
+		promoteGitconfigPath := "/gitconfigs/git_config_id/promote"
 		Context(`Using mock server endpoint with timeout`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -8856,7 +8853,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the PromoteGitconfigOptions model
 				promoteGitconfigOptionsModel := new(appconfigurationv1.PromoteGitconfigOptions)
-				promoteGitconfigOptionsModel.GitConfigID = core.StringPtr("testString")
+				promoteGitconfigOptionsModel.GitConfigID = core.StringPtr("git_config_id")
 				promoteGitconfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with a Context to test a timeout error
@@ -8915,7 +8912,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the PromoteGitconfigOptions model
 				promoteGitconfigOptionsModel := new(appconfigurationv1.PromoteGitconfigOptions)
-				promoteGitconfigOptionsModel.GitConfigID = core.StringPtr("testString")
+				promoteGitconfigOptionsModel.GitConfigID = core.StringPtr("git_config_id")
 				promoteGitconfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
@@ -8935,7 +8932,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the PromoteGitconfigOptions model
 				promoteGitconfigOptionsModel := new(appconfigurationv1.PromoteGitconfigOptions)
-				promoteGitconfigOptionsModel.GitConfigID = core.StringPtr("testString")
+				promoteGitconfigOptionsModel.GitConfigID = core.StringPtr("git_config_id")
 				promoteGitconfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := appConfigurationService.SetServiceURL("")
@@ -8976,7 +8973,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the PromoteGitconfigOptions model
 				promoteGitconfigOptionsModel := new(appconfigurationv1.PromoteGitconfigOptions)
-				promoteGitconfigOptionsModel.GitConfigID = core.StringPtr("testString")
+				promoteGitconfigOptionsModel.GitConfigID = core.StringPtr("git_config_id")
 				promoteGitconfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation
@@ -8993,7 +8990,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 		})
 	})
 	Describe(`RestoreGitconfig(restoreGitconfigOptions *RestoreGitconfigOptions) - Operation response error`, func() {
-		restoreGitconfigPath := "/gitconfigs/testString/restore"
+		restoreGitconfigPath := "/gitconfigs/git_config_id/restore"
 		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -9017,7 +9014,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the RestoreGitconfigOptions model
 				restoreGitconfigOptionsModel := new(appconfigurationv1.RestoreGitconfigOptions)
-				restoreGitconfigOptionsModel.GitConfigID = core.StringPtr("testString")
+				restoreGitconfigOptionsModel.GitConfigID = core.StringPtr("git_config_id")
 				restoreGitconfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
 				result, response, operationErr := appConfigurationService.RestoreGitconfig(restoreGitconfigOptionsModel)
@@ -9038,7 +9035,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 		})
 	})
 	Describe(`RestoreGitconfig(restoreGitconfigOptions *RestoreGitconfigOptions)`, func() {
-		restoreGitconfigPath := "/gitconfigs/testString/restore"
+		restoreGitconfigPath := "/gitconfigs/git_config_id/restore"
 		Context(`Using mock server endpoint with timeout`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -9068,7 +9065,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the RestoreGitconfigOptions model
 				restoreGitconfigOptionsModel := new(appconfigurationv1.RestoreGitconfigOptions)
-				restoreGitconfigOptionsModel.GitConfigID = core.StringPtr("testString")
+				restoreGitconfigOptionsModel.GitConfigID = core.StringPtr("git_config_id")
 				restoreGitconfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with a Context to test a timeout error
@@ -9127,7 +9124,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the RestoreGitconfigOptions model
 				restoreGitconfigOptionsModel := new(appconfigurationv1.RestoreGitconfigOptions)
-				restoreGitconfigOptionsModel.GitConfigID = core.StringPtr("testString")
+				restoreGitconfigOptionsModel.GitConfigID = core.StringPtr("git_config_id")
 				restoreGitconfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
@@ -9147,7 +9144,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the RestoreGitconfigOptions model
 				restoreGitconfigOptionsModel := new(appconfigurationv1.RestoreGitconfigOptions)
-				restoreGitconfigOptionsModel.GitConfigID = core.StringPtr("testString")
+				restoreGitconfigOptionsModel.GitConfigID = core.StringPtr("git_config_id")
 				restoreGitconfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := appConfigurationService.SetServiceURL("")
@@ -9188,7 +9185,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the RestoreGitconfigOptions model
 				restoreGitconfigOptionsModel := new(appconfigurationv1.RestoreGitconfigOptions)
-				restoreGitconfigOptionsModel.GitConfigID = core.StringPtr("testString")
+				restoreGitconfigOptionsModel.GitConfigID = core.StringPtr("git_config_id")
 				restoreGitconfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation
@@ -9649,7 +9646,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 		})
 	})
 	Describe(`ListWorkflowconfig(listWorkflowconfigOptions *ListWorkflowconfigOptions) - Operation response error`, func() {
-		listWorkflowconfigPath := "/environments/testString/workflowconfigs"
+		listWorkflowconfigPath := "/environments/environment_id/workflowconfigs"
 		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -9673,7 +9670,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the ListWorkflowconfigOptions model
 				listWorkflowconfigOptionsModel := new(appconfigurationv1.ListWorkflowconfigOptions)
-				listWorkflowconfigOptionsModel.EnvironmentID = core.StringPtr("testString")
+				listWorkflowconfigOptionsModel.EnvironmentID = core.StringPtr("environment_id")
 				listWorkflowconfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
 				result, response, operationErr := appConfigurationService.ListWorkflowconfig(listWorkflowconfigOptionsModel)
@@ -9694,7 +9691,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 		})
 	})
 	Describe(`ListWorkflowconfig(listWorkflowconfigOptions *ListWorkflowconfigOptions)`, func() {
-		listWorkflowconfigPath := "/environments/testString/workflowconfigs"
+		listWorkflowconfigPath := "/environments/environment_id/workflowconfigs"
 		Context(`Using mock server endpoint with timeout`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -9724,7 +9721,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the ListWorkflowconfigOptions model
 				listWorkflowconfigOptionsModel := new(appconfigurationv1.ListWorkflowconfigOptions)
-				listWorkflowconfigOptionsModel.EnvironmentID = core.StringPtr("testString")
+				listWorkflowconfigOptionsModel.EnvironmentID = core.StringPtr("environment_id")
 				listWorkflowconfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with a Context to test a timeout error
@@ -9783,7 +9780,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the ListWorkflowconfigOptions model
 				listWorkflowconfigOptionsModel := new(appconfigurationv1.ListWorkflowconfigOptions)
-				listWorkflowconfigOptionsModel.EnvironmentID = core.StringPtr("testString")
+				listWorkflowconfigOptionsModel.EnvironmentID = core.StringPtr("environment_id")
 				listWorkflowconfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
@@ -9803,7 +9800,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the ListWorkflowconfigOptions model
 				listWorkflowconfigOptionsModel := new(appconfigurationv1.ListWorkflowconfigOptions)
-				listWorkflowconfigOptionsModel.EnvironmentID = core.StringPtr("testString")
+				listWorkflowconfigOptionsModel.EnvironmentID = core.StringPtr("environment_id")
 				listWorkflowconfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := appConfigurationService.SetServiceURL("")
@@ -9844,7 +9841,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the ListWorkflowconfigOptions model
 				listWorkflowconfigOptionsModel := new(appconfigurationv1.ListWorkflowconfigOptions)
-				listWorkflowconfigOptionsModel.EnvironmentID = core.StringPtr("testString")
+				listWorkflowconfigOptionsModel.EnvironmentID = core.StringPtr("environment_id")
 				listWorkflowconfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation
@@ -9861,7 +9858,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 		})
 	})
 	Describe(`CreateWorkflowconfig(createWorkflowconfigOptions *CreateWorkflowconfigOptions) - Operation response error`, func() {
-		createWorkflowconfigPath := "/environments/testString/workflowconfigs"
+		createWorkflowconfigPath := "/environments/environment_id/workflowconfigs"
 		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -9892,7 +9889,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the CreateWorkflowconfigOptions model
 				createWorkflowconfigOptionsModel := new(appconfigurationv1.CreateWorkflowconfigOptions)
-				createWorkflowconfigOptionsModel.EnvironmentID = core.StringPtr("testString")
+				createWorkflowconfigOptionsModel.EnvironmentID = core.StringPtr("environment_id")
 				createWorkflowconfigOptionsModel.WorkflowURL = core.StringPtr("https://xxxxx.service-now.com")
 				createWorkflowconfigOptionsModel.ApprovalGroupName = core.StringPtr("WorkflowCRApprovers")
 				createWorkflowconfigOptionsModel.ApprovalExpiration = core.Int64Ptr(int64(10))
@@ -9918,7 +9915,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 		})
 	})
 	Describe(`CreateWorkflowconfig(createWorkflowconfigOptions *CreateWorkflowconfigOptions)`, func() {
-		createWorkflowconfigPath := "/environments/testString/workflowconfigs"
+		createWorkflowconfigPath := "/environments/environment_id/workflowconfigs"
 		Context(`Using mock server endpoint with timeout`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -9971,7 +9968,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the CreateWorkflowconfigOptions model
 				createWorkflowconfigOptionsModel := new(appconfigurationv1.CreateWorkflowconfigOptions)
-				createWorkflowconfigOptionsModel.EnvironmentID = core.StringPtr("testString")
+				createWorkflowconfigOptionsModel.EnvironmentID = core.StringPtr("environment_id")
 				createWorkflowconfigOptionsModel.WorkflowURL = core.StringPtr("https://xxxxx.service-now.com")
 				createWorkflowconfigOptionsModel.ApprovalGroupName = core.StringPtr("WorkflowCRApprovers")
 				createWorkflowconfigOptionsModel.ApprovalExpiration = core.Int64Ptr(int64(10))
@@ -10058,7 +10055,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the CreateWorkflowconfigOptions model
 				createWorkflowconfigOptionsModel := new(appconfigurationv1.CreateWorkflowconfigOptions)
-				createWorkflowconfigOptionsModel.EnvironmentID = core.StringPtr("testString")
+				createWorkflowconfigOptionsModel.EnvironmentID = core.StringPtr("environment_id")
 				createWorkflowconfigOptionsModel.WorkflowURL = core.StringPtr("https://xxxxx.service-now.com")
 				createWorkflowconfigOptionsModel.ApprovalGroupName = core.StringPtr("WorkflowCRApprovers")
 				createWorkflowconfigOptionsModel.ApprovalExpiration = core.Int64Ptr(int64(10))
@@ -10090,7 +10087,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the CreateWorkflowconfigOptions model
 				createWorkflowconfigOptionsModel := new(appconfigurationv1.CreateWorkflowconfigOptions)
-				createWorkflowconfigOptionsModel.EnvironmentID = core.StringPtr("testString")
+				createWorkflowconfigOptionsModel.EnvironmentID = core.StringPtr("environment_id")
 				createWorkflowconfigOptionsModel.WorkflowURL = core.StringPtr("https://xxxxx.service-now.com")
 				createWorkflowconfigOptionsModel.ApprovalGroupName = core.StringPtr("WorkflowCRApprovers")
 				createWorkflowconfigOptionsModel.ApprovalExpiration = core.Int64Ptr(int64(10))
@@ -10143,7 +10140,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the CreateWorkflowconfigOptions model
 				createWorkflowconfigOptionsModel := new(appconfigurationv1.CreateWorkflowconfigOptions)
-				createWorkflowconfigOptionsModel.EnvironmentID = core.StringPtr("testString")
+				createWorkflowconfigOptionsModel.EnvironmentID = core.StringPtr("environment_id")
 				createWorkflowconfigOptionsModel.WorkflowURL = core.StringPtr("https://xxxxx.service-now.com")
 				createWorkflowconfigOptionsModel.ApprovalGroupName = core.StringPtr("WorkflowCRApprovers")
 				createWorkflowconfigOptionsModel.ApprovalExpiration = core.Int64Ptr(int64(10))
@@ -10165,7 +10162,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 		})
 	})
 	Describe(`UpdateWorkflowconfig(updateWorkflowconfigOptions *UpdateWorkflowconfigOptions) - Operation response error`, func() {
-		updateWorkflowconfigPath := "/environments/testString/workflowconfigs"
+		updateWorkflowconfigPath := "/environments/environment_id/workflowconfigs"
 		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -10196,7 +10193,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the UpdateWorkflowconfigOptions model
 				updateWorkflowconfigOptionsModel := new(appconfigurationv1.UpdateWorkflowconfigOptions)
-				updateWorkflowconfigOptionsModel.EnvironmentID = core.StringPtr("testString")
+				updateWorkflowconfigOptionsModel.EnvironmentID = core.StringPtr("environment_id")
 				updateWorkflowconfigOptionsModel.WorkflowURL = core.StringPtr("testString")
 				updateWorkflowconfigOptionsModel.ApprovalGroupName = core.StringPtr("testString")
 				updateWorkflowconfigOptionsModel.ApprovalExpiration = core.Int64Ptr(int64(1))
@@ -10222,7 +10219,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 		})
 	})
 	Describe(`UpdateWorkflowconfig(updateWorkflowconfigOptions *UpdateWorkflowconfigOptions)`, func() {
-		updateWorkflowconfigPath := "/environments/testString/workflowconfigs"
+		updateWorkflowconfigPath := "/environments/environment_id/workflowconfigs"
 		Context(`Using mock server endpoint with timeout`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -10275,7 +10272,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the UpdateWorkflowconfigOptions model
 				updateWorkflowconfigOptionsModel := new(appconfigurationv1.UpdateWorkflowconfigOptions)
-				updateWorkflowconfigOptionsModel.EnvironmentID = core.StringPtr("testString")
+				updateWorkflowconfigOptionsModel.EnvironmentID = core.StringPtr("environment_id")
 				updateWorkflowconfigOptionsModel.WorkflowURL = core.StringPtr("testString")
 				updateWorkflowconfigOptionsModel.ApprovalGroupName = core.StringPtr("testString")
 				updateWorkflowconfigOptionsModel.ApprovalExpiration = core.Int64Ptr(int64(1))
@@ -10362,7 +10359,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the UpdateWorkflowconfigOptions model
 				updateWorkflowconfigOptionsModel := new(appconfigurationv1.UpdateWorkflowconfigOptions)
-				updateWorkflowconfigOptionsModel.EnvironmentID = core.StringPtr("testString")
+				updateWorkflowconfigOptionsModel.EnvironmentID = core.StringPtr("environment_id")
 				updateWorkflowconfigOptionsModel.WorkflowURL = core.StringPtr("testString")
 				updateWorkflowconfigOptionsModel.ApprovalGroupName = core.StringPtr("testString")
 				updateWorkflowconfigOptionsModel.ApprovalExpiration = core.Int64Ptr(int64(1))
@@ -10394,7 +10391,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the UpdateWorkflowconfigOptions model
 				updateWorkflowconfigOptionsModel := new(appconfigurationv1.UpdateWorkflowconfigOptions)
-				updateWorkflowconfigOptionsModel.EnvironmentID = core.StringPtr("testString")
+				updateWorkflowconfigOptionsModel.EnvironmentID = core.StringPtr("environment_id")
 				updateWorkflowconfigOptionsModel.WorkflowURL = core.StringPtr("testString")
 				updateWorkflowconfigOptionsModel.ApprovalGroupName = core.StringPtr("testString")
 				updateWorkflowconfigOptionsModel.ApprovalExpiration = core.Int64Ptr(int64(1))
@@ -10447,7 +10444,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the UpdateWorkflowconfigOptions model
 				updateWorkflowconfigOptionsModel := new(appconfigurationv1.UpdateWorkflowconfigOptions)
-				updateWorkflowconfigOptionsModel.EnvironmentID = core.StringPtr("testString")
+				updateWorkflowconfigOptionsModel.EnvironmentID = core.StringPtr("environment_id")
 				updateWorkflowconfigOptionsModel.WorkflowURL = core.StringPtr("testString")
 				updateWorkflowconfigOptionsModel.ApprovalGroupName = core.StringPtr("testString")
 				updateWorkflowconfigOptionsModel.ApprovalExpiration = core.Int64Ptr(int64(1))
@@ -10469,7 +10466,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 		})
 	})
 	Describe(`DeleteWorkflowconfig(deleteWorkflowconfigOptions *DeleteWorkflowconfigOptions)`, func() {
-		deleteWorkflowconfigPath := "/environments/testString/workflowconfigs"
+		deleteWorkflowconfigPath := "/environments/environment_id/workflowconfigs"
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -10497,7 +10494,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the DeleteWorkflowconfigOptions model
 				deleteWorkflowconfigOptionsModel := new(appconfigurationv1.DeleteWorkflowconfigOptions)
-				deleteWorkflowconfigOptionsModel.EnvironmentID = core.StringPtr("testString")
+				deleteWorkflowconfigOptionsModel.EnvironmentID = core.StringPtr("environment_id")
 				deleteWorkflowconfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
@@ -10515,7 +10512,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the DeleteWorkflowconfigOptions model
 				deleteWorkflowconfigOptionsModel := new(appconfigurationv1.DeleteWorkflowconfigOptions)
-				deleteWorkflowconfigOptionsModel.EnvironmentID = core.StringPtr("testString")
+				deleteWorkflowconfigOptionsModel.EnvironmentID = core.StringPtr("environment_id")
 				deleteWorkflowconfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := appConfigurationService.SetServiceURL("")
@@ -10546,7 +10543,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Verify the contents of the request
 					Expect(req.URL.EscapedPath()).To(Equal(importConfigPath))
 					Expect(req.Method).To(Equal("POST"))
-					Expect(req.URL.Query()["clean"]).To(Equal([]string{"testString"}))
+					Expect(req.URL.Query()["clean"]).To(Equal([]string{"true"}))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
 					fmt.Fprint(res, `} this is not valid json {`)
@@ -10646,7 +10643,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				importConfigOptionsModel.Environments = []appconfigurationv1.ImportEnvironmentSchema{*importEnvironmentSchemaModel}
 				importConfigOptionsModel.Collections = []appconfigurationv1.ImportCollectionSchema{*importCollectionSchemaModel}
 				importConfigOptionsModel.Segments = []appconfigurationv1.ImportSegmentSchema{*importSegmentSchemaModel}
-				importConfigOptionsModel.Clean = core.StringPtr("testString")
+				importConfigOptionsModel.Clean = core.StringPtr("true")
 				importConfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
 				result, response, operationErr := appConfigurationService.ImportConfig(importConfigOptionsModel)
@@ -10693,7 +10690,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					}
 					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
 
-					Expect(req.URL.Query()["clean"]).To(Equal([]string{"testString"}))
+					Expect(req.URL.Query()["clean"]).To(Equal([]string{"true"}))
 					// Sleep a short time to support a timeout test
 					time.Sleep(100 * time.Millisecond)
 
@@ -10798,7 +10795,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				importConfigOptionsModel.Environments = []appconfigurationv1.ImportEnvironmentSchema{*importEnvironmentSchemaModel}
 				importConfigOptionsModel.Collections = []appconfigurationv1.ImportCollectionSchema{*importCollectionSchemaModel}
 				importConfigOptionsModel.Segments = []appconfigurationv1.ImportSegmentSchema{*importSegmentSchemaModel}
-				importConfigOptionsModel.Clean = core.StringPtr("testString")
+				importConfigOptionsModel.Clean = core.StringPtr("true")
 				importConfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with a Context to test a timeout error
@@ -10851,7 +10848,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					}
 					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
 
-					Expect(req.URL.Query()["clean"]).To(Equal([]string{"testString"}))
+					Expect(req.URL.Query()["clean"]).To(Equal([]string{"true"}))
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
@@ -10958,7 +10955,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				importConfigOptionsModel.Environments = []appconfigurationv1.ImportEnvironmentSchema{*importEnvironmentSchemaModel}
 				importConfigOptionsModel.Collections = []appconfigurationv1.ImportCollectionSchema{*importCollectionSchemaModel}
 				importConfigOptionsModel.Segments = []appconfigurationv1.ImportSegmentSchema{*importSegmentSchemaModel}
-				importConfigOptionsModel.Clean = core.StringPtr("testString")
+				importConfigOptionsModel.Clean = core.StringPtr("true")
 				importConfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
@@ -11062,7 +11059,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				importConfigOptionsModel.Environments = []appconfigurationv1.ImportEnvironmentSchema{*importEnvironmentSchemaModel}
 				importConfigOptionsModel.Collections = []appconfigurationv1.ImportCollectionSchema{*importCollectionSchemaModel}
 				importConfigOptionsModel.Segments = []appconfigurationv1.ImportSegmentSchema{*importSegmentSchemaModel}
-				importConfigOptionsModel.Clean = core.StringPtr("testString")
+				importConfigOptionsModel.Clean = core.StringPtr("true")
 				importConfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := appConfigurationService.SetServiceURL("")
@@ -11180,7 +11177,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				importConfigOptionsModel.Environments = []appconfigurationv1.ImportEnvironmentSchema{*importEnvironmentSchemaModel}
 				importConfigOptionsModel.Collections = []appconfigurationv1.ImportCollectionSchema{*importCollectionSchemaModel}
 				importConfigOptionsModel.Segments = []appconfigurationv1.ImportSegmentSchema{*importSegmentSchemaModel}
-				importConfigOptionsModel.Clean = core.StringPtr("testString")
+				importConfigOptionsModel.Clean = core.StringPtr("true")
 				importConfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation
@@ -11406,7 +11403,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Verify the contents of the request
 					Expect(req.URL.EscapedPath()).To(Equal(promoteRestoreConfigPath))
 					Expect(req.Method).To(Equal("PUT"))
-					Expect(req.URL.Query()["git_config_id"]).To(Equal([]string{"testString"}))
+					Expect(req.URL.Query()["git_config_id"]).To(Equal([]string{"git_config_id"}))
 					Expect(req.URL.Query()["action"]).To(Equal([]string{"promote"}))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -11423,7 +11420,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the PromoteRestoreConfigOptions model
 				promoteRestoreConfigOptionsModel := new(appconfigurationv1.PromoteRestoreConfigOptions)
-				promoteRestoreConfigOptionsModel.GitConfigID = core.StringPtr("testString")
+				promoteRestoreConfigOptionsModel.GitConfigID = core.StringPtr("git_config_id")
 				promoteRestoreConfigOptionsModel.Action = core.StringPtr("promote")
 				promoteRestoreConfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
@@ -11455,7 +11452,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(promoteRestoreConfigPath))
 					Expect(req.Method).To(Equal("PUT"))
 
-					Expect(req.URL.Query()["git_config_id"]).To(Equal([]string{"testString"}))
+					Expect(req.URL.Query()["git_config_id"]).To(Equal([]string{"git_config_id"}))
 					Expect(req.URL.Query()["action"]).To(Equal([]string{"promote"}))
 					// Sleep a short time to support a timeout test
 					time.Sleep(100 * time.Millisecond)
@@ -11477,7 +11474,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the PromoteRestoreConfigOptions model
 				promoteRestoreConfigOptionsModel := new(appconfigurationv1.PromoteRestoreConfigOptions)
-				promoteRestoreConfigOptionsModel.GitConfigID = core.StringPtr("testString")
+				promoteRestoreConfigOptionsModel.GitConfigID = core.StringPtr("git_config_id")
 				promoteRestoreConfigOptionsModel.Action = core.StringPtr("promote")
 				promoteRestoreConfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
@@ -11515,7 +11512,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(promoteRestoreConfigPath))
 					Expect(req.Method).To(Equal("PUT"))
 
-					Expect(req.URL.Query()["git_config_id"]).To(Equal([]string{"testString"}))
+					Expect(req.URL.Query()["git_config_id"]).To(Equal([]string{"git_config_id"}))
 					Expect(req.URL.Query()["action"]).To(Equal([]string{"promote"}))
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
@@ -11539,7 +11536,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the PromoteRestoreConfigOptions model
 				promoteRestoreConfigOptionsModel := new(appconfigurationv1.PromoteRestoreConfigOptions)
-				promoteRestoreConfigOptionsModel.GitConfigID = core.StringPtr("testString")
+				promoteRestoreConfigOptionsModel.GitConfigID = core.StringPtr("git_config_id")
 				promoteRestoreConfigOptionsModel.Action = core.StringPtr("promote")
 				promoteRestoreConfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
@@ -11560,7 +11557,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the PromoteRestoreConfigOptions model
 				promoteRestoreConfigOptionsModel := new(appconfigurationv1.PromoteRestoreConfigOptions)
-				promoteRestoreConfigOptionsModel.GitConfigID = core.StringPtr("testString")
+				promoteRestoreConfigOptionsModel.GitConfigID = core.StringPtr("git_config_id")
 				promoteRestoreConfigOptionsModel.Action = core.StringPtr("promote")
 				promoteRestoreConfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
@@ -11602,7 +11599,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the PromoteRestoreConfigOptions model
 				promoteRestoreConfigOptionsModel := new(appconfigurationv1.PromoteRestoreConfigOptions)
-				promoteRestoreConfigOptionsModel.GitConfigID = core.StringPtr("testString")
+				promoteRestoreConfigOptionsModel.GitConfigID = core.StringPtr("git_config_id")
 				promoteRestoreConfigOptionsModel.Action = core.StringPtr("promote")
 				promoteRestoreConfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
@@ -11700,14 +11697,14 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(collectionRefModel.CollectionID).To(Equal(core.StringPtr("ghzinc")))
 
 				// Construct an instance of the CreateFeatureOptions model
-				environmentID := "testString"
+				environmentID := "environment_id"
 				createFeatureOptionsName := "Cycle Rentals"
 				createFeatureOptionsFeatureID := "cycle-rentals"
 				createFeatureOptionsType := "BOOLEAN"
 				createFeatureOptionsEnabledValue := core.StringPtr("true")
 				createFeatureOptionsDisabledValue := core.StringPtr("false")
 				createFeatureOptionsModel := appConfigurationService.NewCreateFeatureOptions(environmentID, createFeatureOptionsName, createFeatureOptionsFeatureID, createFeatureOptionsType, createFeatureOptionsEnabledValue, createFeatureOptionsDisabledValue)
-				createFeatureOptionsModel.SetEnvironmentID("testString")
+				createFeatureOptionsModel.SetEnvironmentID("environment_id")
 				createFeatureOptionsModel.SetName("Cycle Rentals")
 				createFeatureOptionsModel.SetFeatureID("cycle-rentals")
 				createFeatureOptionsModel.SetType("BOOLEAN")
@@ -11722,7 +11719,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				createFeatureOptionsModel.SetCollections([]appconfigurationv1.CollectionRef{*collectionRefModel})
 				createFeatureOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(createFeatureOptionsModel).ToNot(BeNil())
-				Expect(createFeatureOptionsModel.EnvironmentID).To(Equal(core.StringPtr("testString")))
+				Expect(createFeatureOptionsModel.EnvironmentID).To(Equal(core.StringPtr("environment_id")))
 				Expect(createFeatureOptionsModel.Name).To(Equal(core.StringPtr("Cycle Rentals")))
 				Expect(createFeatureOptionsModel.FeatureID).To(Equal(core.StringPtr("cycle-rentals")))
 				Expect(createFeatureOptionsModel.Type).To(Equal(core.StringPtr("BOOLEAN")))
@@ -11792,13 +11789,13 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(collectionRefModel.CollectionID).To(Equal(core.StringPtr("ghzinc")))
 
 				// Construct an instance of the CreatePropertyOptions model
-				environmentID := "testString"
+				environmentID := "environment_id"
 				createPropertyOptionsName := "Email property"
 				createPropertyOptionsPropertyID := "email-property"
 				createPropertyOptionsType := "BOOLEAN"
 				createPropertyOptionsValue := core.StringPtr("true")
 				createPropertyOptionsModel := appConfigurationService.NewCreatePropertyOptions(environmentID, createPropertyOptionsName, createPropertyOptionsPropertyID, createPropertyOptionsType, createPropertyOptionsValue)
-				createPropertyOptionsModel.SetEnvironmentID("testString")
+				createPropertyOptionsModel.SetEnvironmentID("environment_id")
 				createPropertyOptionsModel.SetName("Email property")
 				createPropertyOptionsModel.SetPropertyID("email-property")
 				createPropertyOptionsModel.SetType("BOOLEAN")
@@ -11810,7 +11807,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				createPropertyOptionsModel.SetCollections([]appconfigurationv1.CollectionRef{*collectionRefModel})
 				createPropertyOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(createPropertyOptionsModel).ToNot(BeNil())
-				Expect(createPropertyOptionsModel.EnvironmentID).To(Equal(core.StringPtr("testString")))
+				Expect(createPropertyOptionsModel.EnvironmentID).To(Equal(core.StringPtr("environment_id")))
 				Expect(createPropertyOptionsModel.Name).To(Equal(core.StringPtr("Email property")))
 				Expect(createPropertyOptionsModel.PropertyID).To(Equal(core.StringPtr("email-property")))
 				Expect(createPropertyOptionsModel.Type).To(Equal(core.StringPtr("BOOLEAN")))
@@ -11866,14 +11863,14 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(workflowCredentialsModel.ClientSecret).To(Equal(core.StringPtr("clientsecret")))
 
 				// Construct an instance of the CreateWorkflowconfigOptions model
-				environmentID := "testString"
+				environmentID := "environment_id"
 				createWorkflowconfigOptionsWorkflowURL := "https://xxxxx.service-now.com"
 				createWorkflowconfigOptionsApprovalGroupName := "WorkflowCRApprovers"
 				createWorkflowconfigOptionsApprovalExpiration := int64(10)
 				var createWorkflowconfigOptionsWorkflowCredentials *appconfigurationv1.WorkflowCredentials = nil
 				createWorkflowconfigOptionsEnabled := true
 				createWorkflowconfigOptionsModel := appConfigurationService.NewCreateWorkflowconfigOptions(environmentID, createWorkflowconfigOptionsWorkflowURL, createWorkflowconfigOptionsApprovalGroupName, createWorkflowconfigOptionsApprovalExpiration, createWorkflowconfigOptionsWorkflowCredentials, createWorkflowconfigOptionsEnabled)
-				createWorkflowconfigOptionsModel.SetEnvironmentID("testString")
+				createWorkflowconfigOptionsModel.SetEnvironmentID("environment_id")
 				createWorkflowconfigOptionsModel.SetWorkflowURL("https://xxxxx.service-now.com")
 				createWorkflowconfigOptionsModel.SetApprovalGroupName("WorkflowCRApprovers")
 				createWorkflowconfigOptionsModel.SetApprovalExpiration(int64(10))
@@ -11881,7 +11878,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				createWorkflowconfigOptionsModel.SetEnabled(true)
 				createWorkflowconfigOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(createWorkflowconfigOptionsModel).ToNot(BeNil())
-				Expect(createWorkflowconfigOptionsModel.EnvironmentID).To(Equal(core.StringPtr("testString")))
+				Expect(createWorkflowconfigOptionsModel.EnvironmentID).To(Equal(core.StringPtr("environment_id")))
 				Expect(createWorkflowconfigOptionsModel.WorkflowURL).To(Equal(core.StringPtr("https://xxxxx.service-now.com")))
 				Expect(createWorkflowconfigOptionsModel.ApprovalGroupName).To(Equal(core.StringPtr("WorkflowCRApprovers")))
 				Expect(createWorkflowconfigOptionsModel.ApprovalExpiration).To(Equal(core.Int64Ptr(int64(10))))
@@ -11891,78 +11888,78 @@ var _ = Describe(`AppConfigurationV1`, func() {
 			})
 			It(`Invoke NewDeleteCollectionOptions successfully`, func() {
 				// Construct an instance of the DeleteCollectionOptions model
-				collectionID := "testString"
+				collectionID := "collection_id"
 				deleteCollectionOptionsModel := appConfigurationService.NewDeleteCollectionOptions(collectionID)
-				deleteCollectionOptionsModel.SetCollectionID("testString")
+				deleteCollectionOptionsModel.SetCollectionID("collection_id")
 				deleteCollectionOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(deleteCollectionOptionsModel).ToNot(BeNil())
-				Expect(deleteCollectionOptionsModel.CollectionID).To(Equal(core.StringPtr("testString")))
+				Expect(deleteCollectionOptionsModel.CollectionID).To(Equal(core.StringPtr("collection_id")))
 				Expect(deleteCollectionOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewDeleteEnvironmentOptions successfully`, func() {
 				// Construct an instance of the DeleteEnvironmentOptions model
-				environmentID := "testString"
+				environmentID := "environment_id"
 				deleteEnvironmentOptionsModel := appConfigurationService.NewDeleteEnvironmentOptions(environmentID)
-				deleteEnvironmentOptionsModel.SetEnvironmentID("testString")
+				deleteEnvironmentOptionsModel.SetEnvironmentID("environment_id")
 				deleteEnvironmentOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(deleteEnvironmentOptionsModel).ToNot(BeNil())
-				Expect(deleteEnvironmentOptionsModel.EnvironmentID).To(Equal(core.StringPtr("testString")))
+				Expect(deleteEnvironmentOptionsModel.EnvironmentID).To(Equal(core.StringPtr("environment_id")))
 				Expect(deleteEnvironmentOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewDeleteFeatureOptions successfully`, func() {
 				// Construct an instance of the DeleteFeatureOptions model
-				environmentID := "testString"
-				featureID := "testString"
+				environmentID := "environment_id"
+				featureID := "feature_id"
 				deleteFeatureOptionsModel := appConfigurationService.NewDeleteFeatureOptions(environmentID, featureID)
-				deleteFeatureOptionsModel.SetEnvironmentID("testString")
-				deleteFeatureOptionsModel.SetFeatureID("testString")
+				deleteFeatureOptionsModel.SetEnvironmentID("environment_id")
+				deleteFeatureOptionsModel.SetFeatureID("feature_id")
 				deleteFeatureOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(deleteFeatureOptionsModel).ToNot(BeNil())
-				Expect(deleteFeatureOptionsModel.EnvironmentID).To(Equal(core.StringPtr("testString")))
-				Expect(deleteFeatureOptionsModel.FeatureID).To(Equal(core.StringPtr("testString")))
+				Expect(deleteFeatureOptionsModel.EnvironmentID).To(Equal(core.StringPtr("environment_id")))
+				Expect(deleteFeatureOptionsModel.FeatureID).To(Equal(core.StringPtr("feature_id")))
 				Expect(deleteFeatureOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewDeleteGitconfigOptions successfully`, func() {
 				// Construct an instance of the DeleteGitconfigOptions model
-				gitConfigID := "testString"
+				gitConfigID := "git_config_id"
 				deleteGitconfigOptionsModel := appConfigurationService.NewDeleteGitconfigOptions(gitConfigID)
-				deleteGitconfigOptionsModel.SetGitConfigID("testString")
+				deleteGitconfigOptionsModel.SetGitConfigID("git_config_id")
 				deleteGitconfigOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(deleteGitconfigOptionsModel).ToNot(BeNil())
-				Expect(deleteGitconfigOptionsModel.GitConfigID).To(Equal(core.StringPtr("testString")))
+				Expect(deleteGitconfigOptionsModel.GitConfigID).To(Equal(core.StringPtr("git_config_id")))
 				Expect(deleteGitconfigOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewDeletePropertyOptions successfully`, func() {
 				// Construct an instance of the DeletePropertyOptions model
-				environmentID := "testString"
-				propertyID := "testString"
+				environmentID := "environment_id"
+				propertyID := "property_id"
 				deletePropertyOptionsModel := appConfigurationService.NewDeletePropertyOptions(environmentID, propertyID)
-				deletePropertyOptionsModel.SetEnvironmentID("testString")
-				deletePropertyOptionsModel.SetPropertyID("testString")
+				deletePropertyOptionsModel.SetEnvironmentID("environment_id")
+				deletePropertyOptionsModel.SetPropertyID("property_id")
 				deletePropertyOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(deletePropertyOptionsModel).ToNot(BeNil())
-				Expect(deletePropertyOptionsModel.EnvironmentID).To(Equal(core.StringPtr("testString")))
-				Expect(deletePropertyOptionsModel.PropertyID).To(Equal(core.StringPtr("testString")))
+				Expect(deletePropertyOptionsModel.EnvironmentID).To(Equal(core.StringPtr("environment_id")))
+				Expect(deletePropertyOptionsModel.PropertyID).To(Equal(core.StringPtr("property_id")))
 				Expect(deletePropertyOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewDeleteSegmentOptions successfully`, func() {
 				// Construct an instance of the DeleteSegmentOptions model
-				segmentID := "testString"
+				segmentID := "segment_id"
 				deleteSegmentOptionsModel := appConfigurationService.NewDeleteSegmentOptions(segmentID)
-				deleteSegmentOptionsModel.SetSegmentID("testString")
+				deleteSegmentOptionsModel.SetSegmentID("segment_id")
 				deleteSegmentOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(deleteSegmentOptionsModel).ToNot(BeNil())
-				Expect(deleteSegmentOptionsModel.SegmentID).To(Equal(core.StringPtr("testString")))
+				Expect(deleteSegmentOptionsModel.SegmentID).To(Equal(core.StringPtr("segment_id")))
 				Expect(deleteSegmentOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewDeleteWorkflowconfigOptions successfully`, func() {
 				// Construct an instance of the DeleteWorkflowconfigOptions model
-				environmentID := "testString"
+				environmentID := "environment_id"
 				deleteWorkflowconfigOptionsModel := appConfigurationService.NewDeleteWorkflowconfigOptions(environmentID)
-				deleteWorkflowconfigOptionsModel.SetEnvironmentID("testString")
+				deleteWorkflowconfigOptionsModel.SetEnvironmentID("environment_id")
 				deleteWorkflowconfigOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(deleteWorkflowconfigOptionsModel).ToNot(BeNil())
-				Expect(deleteWorkflowconfigOptionsModel.EnvironmentID).To(Equal(core.StringPtr("testString")))
+				Expect(deleteWorkflowconfigOptionsModel.EnvironmentID).To(Equal(core.StringPtr("environment_id")))
 				Expect(deleteWorkflowconfigOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewEnvironment successfully`, func() {
@@ -11989,82 +11986,82 @@ var _ = Describe(`AppConfigurationV1`, func() {
 			})
 			It(`Invoke NewGetCollectionOptions successfully`, func() {
 				// Construct an instance of the GetCollectionOptions model
-				collectionID := "testString"
+				collectionID := "collection_id"
 				getCollectionOptionsModel := appConfigurationService.NewGetCollectionOptions(collectionID)
-				getCollectionOptionsModel.SetCollectionID("testString")
+				getCollectionOptionsModel.SetCollectionID("collection_id")
 				getCollectionOptionsModel.SetExpand(true)
-				getCollectionOptionsModel.SetInclude([]string{"features"})
+				getCollectionOptionsModel.SetInclude([]string{"features", "properties", "snapshots"})
 				getCollectionOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(getCollectionOptionsModel).ToNot(BeNil())
-				Expect(getCollectionOptionsModel.CollectionID).To(Equal(core.StringPtr("testString")))
+				Expect(getCollectionOptionsModel.CollectionID).To(Equal(core.StringPtr("collection_id")))
 				Expect(getCollectionOptionsModel.Expand).To(Equal(core.BoolPtr(true)))
-				Expect(getCollectionOptionsModel.Include).To(Equal([]string{"features"}))
+				Expect(getCollectionOptionsModel.Include).To(Equal([]string{"features", "properties", "snapshots"}))
 				Expect(getCollectionOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewGetEnvironmentOptions successfully`, func() {
 				// Construct an instance of the GetEnvironmentOptions model
-				environmentID := "testString"
+				environmentID := "environment_id"
 				getEnvironmentOptionsModel := appConfigurationService.NewGetEnvironmentOptions(environmentID)
-				getEnvironmentOptionsModel.SetEnvironmentID("testString")
+				getEnvironmentOptionsModel.SetEnvironmentID("environment_id")
 				getEnvironmentOptionsModel.SetExpand(true)
-				getEnvironmentOptionsModel.SetInclude([]string{"features"})
+				getEnvironmentOptionsModel.SetInclude([]string{"features", "properties", "snapshots"})
 				getEnvironmentOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(getEnvironmentOptionsModel).ToNot(BeNil())
-				Expect(getEnvironmentOptionsModel.EnvironmentID).To(Equal(core.StringPtr("testString")))
+				Expect(getEnvironmentOptionsModel.EnvironmentID).To(Equal(core.StringPtr("environment_id")))
 				Expect(getEnvironmentOptionsModel.Expand).To(Equal(core.BoolPtr(true)))
-				Expect(getEnvironmentOptionsModel.Include).To(Equal([]string{"features"}))
+				Expect(getEnvironmentOptionsModel.Include).To(Equal([]string{"features", "properties", "snapshots"}))
 				Expect(getEnvironmentOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewGetFeatureOptions successfully`, func() {
 				// Construct an instance of the GetFeatureOptions model
-				environmentID := "testString"
-				featureID := "testString"
+				environmentID := "environment_id"
+				featureID := "feature_id"
 				getFeatureOptionsModel := appConfigurationService.NewGetFeatureOptions(environmentID, featureID)
-				getFeatureOptionsModel.SetEnvironmentID("testString")
-				getFeatureOptionsModel.SetFeatureID("testString")
-				getFeatureOptionsModel.SetInclude([]string{"collections"})
+				getFeatureOptionsModel.SetEnvironmentID("environment_id")
+				getFeatureOptionsModel.SetFeatureID("feature_id")
+				getFeatureOptionsModel.SetInclude([]string{"collections", "rules", "change_request"})
 				getFeatureOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(getFeatureOptionsModel).ToNot(BeNil())
-				Expect(getFeatureOptionsModel.EnvironmentID).To(Equal(core.StringPtr("testString")))
-				Expect(getFeatureOptionsModel.FeatureID).To(Equal(core.StringPtr("testString")))
-				Expect(getFeatureOptionsModel.Include).To(Equal([]string{"collections"}))
+				Expect(getFeatureOptionsModel.EnvironmentID).To(Equal(core.StringPtr("environment_id")))
+				Expect(getFeatureOptionsModel.FeatureID).To(Equal(core.StringPtr("feature_id")))
+				Expect(getFeatureOptionsModel.Include).To(Equal([]string{"collections", "rules", "change_request"}))
 				Expect(getFeatureOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewGetGitconfigOptions successfully`, func() {
 				// Construct an instance of the GetGitconfigOptions model
-				gitConfigID := "testString"
+				gitConfigID := "git_config_id"
 				getGitconfigOptionsModel := appConfigurationService.NewGetGitconfigOptions(gitConfigID)
-				getGitconfigOptionsModel.SetGitConfigID("testString")
+				getGitconfigOptionsModel.SetGitConfigID("git_config_id")
 				getGitconfigOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(getGitconfigOptionsModel).ToNot(BeNil())
-				Expect(getGitconfigOptionsModel.GitConfigID).To(Equal(core.StringPtr("testString")))
+				Expect(getGitconfigOptionsModel.GitConfigID).To(Equal(core.StringPtr("git_config_id")))
 				Expect(getGitconfigOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewGetPropertyOptions successfully`, func() {
 				// Construct an instance of the GetPropertyOptions model
-				environmentID := "testString"
-				propertyID := "testString"
+				environmentID := "environment_id"
+				propertyID := "property_id"
 				getPropertyOptionsModel := appConfigurationService.NewGetPropertyOptions(environmentID, propertyID)
-				getPropertyOptionsModel.SetEnvironmentID("testString")
-				getPropertyOptionsModel.SetPropertyID("testString")
-				getPropertyOptionsModel.SetInclude("collections")
+				getPropertyOptionsModel.SetEnvironmentID("environment_id")
+				getPropertyOptionsModel.SetPropertyID("property_id")
+				getPropertyOptionsModel.SetInclude([]string{"collections", "rules"})
 				getPropertyOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(getPropertyOptionsModel).ToNot(BeNil())
-				Expect(getPropertyOptionsModel.EnvironmentID).To(Equal(core.StringPtr("testString")))
-				Expect(getPropertyOptionsModel.PropertyID).To(Equal(core.StringPtr("testString")))
-				Expect(getPropertyOptionsModel.Include).To(Equal(core.StringPtr("collections")))
+				Expect(getPropertyOptionsModel.EnvironmentID).To(Equal(core.StringPtr("environment_id")))
+				Expect(getPropertyOptionsModel.PropertyID).To(Equal(core.StringPtr("property_id")))
+				Expect(getPropertyOptionsModel.Include).To(Equal([]string{"collections", "rules"}))
 				Expect(getPropertyOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewGetSegmentOptions successfully`, func() {
 				// Construct an instance of the GetSegmentOptions model
-				segmentID := "testString"
+				segmentID := "segment_id"
 				getSegmentOptionsModel := appConfigurationService.NewGetSegmentOptions(segmentID)
-				getSegmentOptionsModel.SetSegmentID("testString")
-				getSegmentOptionsModel.SetInclude([]string{"features"})
+				getSegmentOptionsModel.SetSegmentID("segment_id")
+				getSegmentOptionsModel.SetInclude([]string{"features", "properties"})
 				getSegmentOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(getSegmentOptionsModel).ToNot(BeNil())
-				Expect(getSegmentOptionsModel.SegmentID).To(Equal(core.StringPtr("testString")))
-				Expect(getSegmentOptionsModel.Include).To(Equal([]string{"features"}))
+				Expect(getSegmentOptionsModel.SegmentID).To(Equal(core.StringPtr("segment_id")))
+				Expect(getSegmentOptionsModel.Include).To(Equal([]string{"features", "properties"}))
 				Expect(getSegmentOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewImportCollectionSchema successfully`, func() {
@@ -12222,13 +12219,13 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				importConfigOptionsModel.SetEnvironments([]appconfigurationv1.ImportEnvironmentSchema{*importEnvironmentSchemaModel})
 				importConfigOptionsModel.SetCollections([]appconfigurationv1.ImportCollectionSchema{*importCollectionSchemaModel})
 				importConfigOptionsModel.SetSegments([]appconfigurationv1.ImportSegmentSchema{*importSegmentSchemaModel})
-				importConfigOptionsModel.SetClean("testString")
+				importConfigOptionsModel.SetClean("true")
 				importConfigOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(importConfigOptionsModel).ToNot(BeNil())
 				Expect(importConfigOptionsModel.Environments).To(Equal([]appconfigurationv1.ImportEnvironmentSchema{*importEnvironmentSchemaModel}))
 				Expect(importConfigOptionsModel.Collections).To(Equal([]appconfigurationv1.ImportCollectionSchema{*importCollectionSchemaModel}))
 				Expect(importConfigOptionsModel.Segments).To(Equal([]appconfigurationv1.ImportSegmentSchema{*importSegmentSchemaModel}))
-				Expect(importConfigOptionsModel.Clean).To(Equal(core.StringPtr("testString")))
+				Expect(importConfigOptionsModel.Clean).To(Equal(core.StringPtr("true")))
 				Expect(importConfigOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewImportEnvironmentSchema successfully`, func() {
@@ -12272,10 +12269,10 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				listCollectionsOptionsModel := appConfigurationService.NewListCollectionsOptions()
 				listCollectionsOptionsModel.SetExpand(true)
 				listCollectionsOptionsModel.SetSort("created_time")
-				listCollectionsOptionsModel.SetTags("version 1.1, pre-release")
-				listCollectionsOptionsModel.SetFeatures([]string{"testString"})
-				listCollectionsOptionsModel.SetProperties([]string{"testString"})
-				listCollectionsOptionsModel.SetInclude([]string{"features"})
+				listCollectionsOptionsModel.SetTags("version 1.1,pre-release")
+				listCollectionsOptionsModel.SetFeatures([]string{"my-feature-id", "cycle-rentals"})
+				listCollectionsOptionsModel.SetProperties([]string{"my-property-id", "email-property"})
+				listCollectionsOptionsModel.SetInclude([]string{"features", "properties", "snapshots"})
 				listCollectionsOptionsModel.SetLimit(int64(10))
 				listCollectionsOptionsModel.SetOffset(int64(0))
 				listCollectionsOptionsModel.SetSearch("test tag")
@@ -12283,10 +12280,10 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(listCollectionsOptionsModel).ToNot(BeNil())
 				Expect(listCollectionsOptionsModel.Expand).To(Equal(core.BoolPtr(true)))
 				Expect(listCollectionsOptionsModel.Sort).To(Equal(core.StringPtr("created_time")))
-				Expect(listCollectionsOptionsModel.Tags).To(Equal(core.StringPtr("version 1.1, pre-release")))
-				Expect(listCollectionsOptionsModel.Features).To(Equal([]string{"testString"}))
-				Expect(listCollectionsOptionsModel.Properties).To(Equal([]string{"testString"}))
-				Expect(listCollectionsOptionsModel.Include).To(Equal([]string{"features"}))
+				Expect(listCollectionsOptionsModel.Tags).To(Equal(core.StringPtr("version 1.1,pre-release")))
+				Expect(listCollectionsOptionsModel.Features).To(Equal([]string{"my-feature-id", "cycle-rentals"}))
+				Expect(listCollectionsOptionsModel.Properties).To(Equal([]string{"my-property-id", "email-property"}))
+				Expect(listCollectionsOptionsModel.Include).To(Equal([]string{"features", "properties", "snapshots"}))
 				Expect(listCollectionsOptionsModel.Limit).To(Equal(core.Int64Ptr(int64(10))))
 				Expect(listCollectionsOptionsModel.Offset).To(Equal(core.Int64Ptr(int64(0))))
 				Expect(listCollectionsOptionsModel.Search).To(Equal(core.StringPtr("test tag")))
@@ -12297,8 +12294,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				listEnvironmentsOptionsModel := appConfigurationService.NewListEnvironmentsOptions()
 				listEnvironmentsOptionsModel.SetExpand(true)
 				listEnvironmentsOptionsModel.SetSort("created_time")
-				listEnvironmentsOptionsModel.SetTags("version 1.1, pre-release")
-				listEnvironmentsOptionsModel.SetInclude([]string{"features"})
+				listEnvironmentsOptionsModel.SetTags("version 1.1,pre-release")
+				listEnvironmentsOptionsModel.SetInclude([]string{"features", "properties", "snapshots"})
 				listEnvironmentsOptionsModel.SetLimit(int64(10))
 				listEnvironmentsOptionsModel.SetOffset(int64(0))
 				listEnvironmentsOptionsModel.SetSearch("test tag")
@@ -12306,8 +12303,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(listEnvironmentsOptionsModel).ToNot(BeNil())
 				Expect(listEnvironmentsOptionsModel.Expand).To(Equal(core.BoolPtr(true)))
 				Expect(listEnvironmentsOptionsModel.Sort).To(Equal(core.StringPtr("created_time")))
-				Expect(listEnvironmentsOptionsModel.Tags).To(Equal(core.StringPtr("version 1.1, pre-release")))
-				Expect(listEnvironmentsOptionsModel.Include).To(Equal([]string{"features"}))
+				Expect(listEnvironmentsOptionsModel.Tags).To(Equal(core.StringPtr("version 1.1,pre-release")))
+				Expect(listEnvironmentsOptionsModel.Include).To(Equal([]string{"features", "properties", "snapshots"}))
 				Expect(listEnvironmentsOptionsModel.Limit).To(Equal(core.Int64Ptr(int64(10))))
 				Expect(listEnvironmentsOptionsModel.Offset).To(Equal(core.Int64Ptr(int64(0))))
 				Expect(listEnvironmentsOptionsModel.Search).To(Equal(core.StringPtr("test tag")))
@@ -12315,27 +12312,27 @@ var _ = Describe(`AppConfigurationV1`, func() {
 			})
 			It(`Invoke NewListFeaturesOptions successfully`, func() {
 				// Construct an instance of the ListFeaturesOptions model
-				environmentID := "testString"
+				environmentID := "environment_id"
 				listFeaturesOptionsModel := appConfigurationService.NewListFeaturesOptions(environmentID)
-				listFeaturesOptionsModel.SetEnvironmentID("testString")
+				listFeaturesOptionsModel.SetEnvironmentID("environment_id")
 				listFeaturesOptionsModel.SetExpand(true)
 				listFeaturesOptionsModel.SetSort("created_time")
-				listFeaturesOptionsModel.SetTags("version 1.1, pre-release")
-				listFeaturesOptionsModel.SetCollections([]string{"testString"})
-				listFeaturesOptionsModel.SetSegments([]string{"testString"})
-				listFeaturesOptionsModel.SetInclude([]string{"collections"})
+				listFeaturesOptionsModel.SetTags("version 1.1,pre-release")
+				listFeaturesOptionsModel.SetCollections([]string{"my-collection-id", "ghzindiapvtltd"})
+				listFeaturesOptionsModel.SetSegments([]string{"my-segment-id", "beta-users"})
+				listFeaturesOptionsModel.SetInclude([]string{"collections", "rules", "change_request"})
 				listFeaturesOptionsModel.SetLimit(int64(10))
 				listFeaturesOptionsModel.SetOffset(int64(0))
 				listFeaturesOptionsModel.SetSearch("test tag")
 				listFeaturesOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(listFeaturesOptionsModel).ToNot(BeNil())
-				Expect(listFeaturesOptionsModel.EnvironmentID).To(Equal(core.StringPtr("testString")))
+				Expect(listFeaturesOptionsModel.EnvironmentID).To(Equal(core.StringPtr("environment_id")))
 				Expect(listFeaturesOptionsModel.Expand).To(Equal(core.BoolPtr(true)))
 				Expect(listFeaturesOptionsModel.Sort).To(Equal(core.StringPtr("created_time")))
-				Expect(listFeaturesOptionsModel.Tags).To(Equal(core.StringPtr("version 1.1, pre-release")))
-				Expect(listFeaturesOptionsModel.Collections).To(Equal([]string{"testString"}))
-				Expect(listFeaturesOptionsModel.Segments).To(Equal([]string{"testString"}))
-				Expect(listFeaturesOptionsModel.Include).To(Equal([]string{"collections"}))
+				Expect(listFeaturesOptionsModel.Tags).To(Equal(core.StringPtr("version 1.1,pre-release")))
+				Expect(listFeaturesOptionsModel.Collections).To(Equal([]string{"my-collection-id", "ghzindiapvtltd"}))
+				Expect(listFeaturesOptionsModel.Segments).To(Equal([]string{"my-segment-id", "beta-users"}))
+				Expect(listFeaturesOptionsModel.Include).To(Equal([]string{"collections", "rules", "change_request"}))
 				Expect(listFeaturesOptionsModel.Limit).To(Equal(core.Int64Ptr(int64(10))))
 				Expect(listFeaturesOptionsModel.Offset).To(Equal(core.Int64Ptr(int64(0))))
 				Expect(listFeaturesOptionsModel.Search).To(Equal(core.StringPtr("test tag")))
@@ -12357,27 +12354,27 @@ var _ = Describe(`AppConfigurationV1`, func() {
 			})
 			It(`Invoke NewListPropertiesOptions successfully`, func() {
 				// Construct an instance of the ListPropertiesOptions model
-				environmentID := "testString"
+				environmentID := "environment_id"
 				listPropertiesOptionsModel := appConfigurationService.NewListPropertiesOptions(environmentID)
-				listPropertiesOptionsModel.SetEnvironmentID("testString")
+				listPropertiesOptionsModel.SetEnvironmentID("environment_id")
 				listPropertiesOptionsModel.SetExpand(true)
 				listPropertiesOptionsModel.SetSort("created_time")
-				listPropertiesOptionsModel.SetTags("version 1.1, pre-release")
-				listPropertiesOptionsModel.SetCollections([]string{"testString"})
-				listPropertiesOptionsModel.SetSegments([]string{"testString"})
-				listPropertiesOptionsModel.SetInclude([]string{"collections"})
+				listPropertiesOptionsModel.SetTags("version 1.1,pre-release")
+				listPropertiesOptionsModel.SetCollections([]string{"my-collection-id", "ghzindiapvtltd"})
+				listPropertiesOptionsModel.SetSegments([]string{"my-segment-id", "beta-users"})
+				listPropertiesOptionsModel.SetInclude([]string{"collections", "rules"})
 				listPropertiesOptionsModel.SetLimit(int64(10))
 				listPropertiesOptionsModel.SetOffset(int64(0))
 				listPropertiesOptionsModel.SetSearch("test tag")
 				listPropertiesOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(listPropertiesOptionsModel).ToNot(BeNil())
-				Expect(listPropertiesOptionsModel.EnvironmentID).To(Equal(core.StringPtr("testString")))
+				Expect(listPropertiesOptionsModel.EnvironmentID).To(Equal(core.StringPtr("environment_id")))
 				Expect(listPropertiesOptionsModel.Expand).To(Equal(core.BoolPtr(true)))
 				Expect(listPropertiesOptionsModel.Sort).To(Equal(core.StringPtr("created_time")))
-				Expect(listPropertiesOptionsModel.Tags).To(Equal(core.StringPtr("version 1.1, pre-release")))
-				Expect(listPropertiesOptionsModel.Collections).To(Equal([]string{"testString"}))
-				Expect(listPropertiesOptionsModel.Segments).To(Equal([]string{"testString"}))
-				Expect(listPropertiesOptionsModel.Include).To(Equal([]string{"collections"}))
+				Expect(listPropertiesOptionsModel.Tags).To(Equal(core.StringPtr("version 1.1,pre-release")))
+				Expect(listPropertiesOptionsModel.Collections).To(Equal([]string{"my-collection-id", "ghzindiapvtltd"}))
+				Expect(listPropertiesOptionsModel.Segments).To(Equal([]string{"my-segment-id", "beta-users"}))
+				Expect(listPropertiesOptionsModel.Include).To(Equal([]string{"collections", "rules"}))
 				Expect(listPropertiesOptionsModel.Limit).To(Equal(core.Int64Ptr(int64(10))))
 				Expect(listPropertiesOptionsModel.Offset).To(Equal(core.Int64Ptr(int64(0))))
 				Expect(listPropertiesOptionsModel.Search).To(Equal(core.StringPtr("test tag")))
@@ -12388,7 +12385,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				listSegmentsOptionsModel := appConfigurationService.NewListSegmentsOptions()
 				listSegmentsOptionsModel.SetExpand(true)
 				listSegmentsOptionsModel.SetSort("created_time")
-				listSegmentsOptionsModel.SetTags("version 1.1, pre-release")
+				listSegmentsOptionsModel.SetTags("version 1.1,pre-release")
 				listSegmentsOptionsModel.SetInclude("rules")
 				listSegmentsOptionsModel.SetLimit(int64(10))
 				listSegmentsOptionsModel.SetOffset(int64(0))
@@ -12397,7 +12394,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(listSegmentsOptionsModel).ToNot(BeNil())
 				Expect(listSegmentsOptionsModel.Expand).To(Equal(core.BoolPtr(true)))
 				Expect(listSegmentsOptionsModel.Sort).To(Equal(core.StringPtr("created_time")))
-				Expect(listSegmentsOptionsModel.Tags).To(Equal(core.StringPtr("version 1.1, pre-release")))
+				Expect(listSegmentsOptionsModel.Tags).To(Equal(core.StringPtr("version 1.1,pre-release")))
 				Expect(listSegmentsOptionsModel.Include).To(Equal(core.StringPtr("rules")))
 				Expect(listSegmentsOptionsModel.Limit).To(Equal(core.Int64Ptr(int64(10))))
 				Expect(listSegmentsOptionsModel.Offset).To(Equal(core.Int64Ptr(int64(0))))
@@ -12425,34 +12422,34 @@ var _ = Describe(`AppConfigurationV1`, func() {
 			})
 			It(`Invoke NewListWorkflowconfigOptions successfully`, func() {
 				// Construct an instance of the ListWorkflowconfigOptions model
-				environmentID := "testString"
+				environmentID := "environment_id"
 				listWorkflowconfigOptionsModel := appConfigurationService.NewListWorkflowconfigOptions(environmentID)
-				listWorkflowconfigOptionsModel.SetEnvironmentID("testString")
+				listWorkflowconfigOptionsModel.SetEnvironmentID("environment_id")
 				listWorkflowconfigOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(listWorkflowconfigOptionsModel).ToNot(BeNil())
-				Expect(listWorkflowconfigOptionsModel.EnvironmentID).To(Equal(core.StringPtr("testString")))
+				Expect(listWorkflowconfigOptionsModel.EnvironmentID).To(Equal(core.StringPtr("environment_id")))
 				Expect(listWorkflowconfigOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewPromoteGitconfigOptions successfully`, func() {
 				// Construct an instance of the PromoteGitconfigOptions model
-				gitConfigID := "testString"
+				gitConfigID := "git_config_id"
 				promoteGitconfigOptionsModel := appConfigurationService.NewPromoteGitconfigOptions(gitConfigID)
-				promoteGitconfigOptionsModel.SetGitConfigID("testString")
+				promoteGitconfigOptionsModel.SetGitConfigID("git_config_id")
 				promoteGitconfigOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(promoteGitconfigOptionsModel).ToNot(BeNil())
-				Expect(promoteGitconfigOptionsModel.GitConfigID).To(Equal(core.StringPtr("testString")))
+				Expect(promoteGitconfigOptionsModel.GitConfigID).To(Equal(core.StringPtr("git_config_id")))
 				Expect(promoteGitconfigOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewPromoteRestoreConfigOptions successfully`, func() {
 				// Construct an instance of the PromoteRestoreConfigOptions model
-				gitConfigID := "testString"
+				gitConfigID := "git_config_id"
 				action := "promote"
 				promoteRestoreConfigOptionsModel := appConfigurationService.NewPromoteRestoreConfigOptions(gitConfigID, action)
-				promoteRestoreConfigOptionsModel.SetGitConfigID("testString")
+				promoteRestoreConfigOptionsModel.SetGitConfigID("git_config_id")
 				promoteRestoreConfigOptionsModel.SetAction("promote")
 				promoteRestoreConfigOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(promoteRestoreConfigOptionsModel).ToNot(BeNil())
-				Expect(promoteRestoreConfigOptionsModel.GitConfigID).To(Equal(core.StringPtr("testString")))
+				Expect(promoteRestoreConfigOptionsModel.GitConfigID).To(Equal(core.StringPtr("git_config_id")))
 				Expect(promoteRestoreConfigOptionsModel.Action).To(Equal(core.StringPtr("promote")))
 				Expect(promoteRestoreConfigOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
@@ -12474,12 +12471,12 @@ var _ = Describe(`AppConfigurationV1`, func() {
 			})
 			It(`Invoke NewRestoreGitconfigOptions successfully`, func() {
 				// Construct an instance of the RestoreGitconfigOptions model
-				gitConfigID := "testString"
+				gitConfigID := "git_config_id"
 				restoreGitconfigOptionsModel := appConfigurationService.NewRestoreGitconfigOptions(gitConfigID)
-				restoreGitconfigOptionsModel.SetGitConfigID("testString")
+				restoreGitconfigOptionsModel.SetGitConfigID("git_config_id")
 				restoreGitconfigOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(restoreGitconfigOptionsModel).ToNot(BeNil())
-				Expect(restoreGitconfigOptionsModel.GitConfigID).To(Equal(core.StringPtr("testString")))
+				Expect(restoreGitconfigOptionsModel.GitConfigID).To(Equal(core.StringPtr("git_config_id")))
 				Expect(restoreGitconfigOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewRule successfully`, func() {
@@ -12521,31 +12518,31 @@ var _ = Describe(`AppConfigurationV1`, func() {
 			})
 			It(`Invoke NewToggleFeatureOptions successfully`, func() {
 				// Construct an instance of the ToggleFeatureOptions model
-				environmentID := "testString"
-				featureID := "testString"
+				environmentID := "environment_id"
+				featureID := "feature_id"
 				toggleFeatureOptionsEnabled := true
 				toggleFeatureOptionsModel := appConfigurationService.NewToggleFeatureOptions(environmentID, featureID, toggleFeatureOptionsEnabled)
-				toggleFeatureOptionsModel.SetEnvironmentID("testString")
-				toggleFeatureOptionsModel.SetFeatureID("testString")
+				toggleFeatureOptionsModel.SetEnvironmentID("environment_id")
+				toggleFeatureOptionsModel.SetFeatureID("feature_id")
 				toggleFeatureOptionsModel.SetEnabled(true)
 				toggleFeatureOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(toggleFeatureOptionsModel).ToNot(BeNil())
-				Expect(toggleFeatureOptionsModel.EnvironmentID).To(Equal(core.StringPtr("testString")))
-				Expect(toggleFeatureOptionsModel.FeatureID).To(Equal(core.StringPtr("testString")))
+				Expect(toggleFeatureOptionsModel.EnvironmentID).To(Equal(core.StringPtr("environment_id")))
+				Expect(toggleFeatureOptionsModel.FeatureID).To(Equal(core.StringPtr("feature_id")))
 				Expect(toggleFeatureOptionsModel.Enabled).To(Equal(core.BoolPtr(true)))
 				Expect(toggleFeatureOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewUpdateCollectionOptions successfully`, func() {
 				// Construct an instance of the UpdateCollectionOptions model
-				collectionID := "testString"
+				collectionID := "collection_id"
 				updateCollectionOptionsModel := appConfigurationService.NewUpdateCollectionOptions(collectionID)
-				updateCollectionOptionsModel.SetCollectionID("testString")
+				updateCollectionOptionsModel.SetCollectionID("collection_id")
 				updateCollectionOptionsModel.SetName("testString")
 				updateCollectionOptionsModel.SetDescription("testString")
 				updateCollectionOptionsModel.SetTags("testString")
 				updateCollectionOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(updateCollectionOptionsModel).ToNot(BeNil())
-				Expect(updateCollectionOptionsModel.CollectionID).To(Equal(core.StringPtr("testString")))
+				Expect(updateCollectionOptionsModel.CollectionID).To(Equal(core.StringPtr("collection_id")))
 				Expect(updateCollectionOptionsModel.Name).To(Equal(core.StringPtr("testString")))
 				Expect(updateCollectionOptionsModel.Description).To(Equal(core.StringPtr("testString")))
 				Expect(updateCollectionOptionsModel.Tags).To(Equal(core.StringPtr("testString")))
@@ -12553,16 +12550,16 @@ var _ = Describe(`AppConfigurationV1`, func() {
 			})
 			It(`Invoke NewUpdateEnvironmentOptions successfully`, func() {
 				// Construct an instance of the UpdateEnvironmentOptions model
-				environmentID := "testString"
+				environmentID := "environment_id"
 				updateEnvironmentOptionsModel := appConfigurationService.NewUpdateEnvironmentOptions(environmentID)
-				updateEnvironmentOptionsModel.SetEnvironmentID("testString")
+				updateEnvironmentOptionsModel.SetEnvironmentID("environment_id")
 				updateEnvironmentOptionsModel.SetName("testString")
 				updateEnvironmentOptionsModel.SetDescription("testString")
 				updateEnvironmentOptionsModel.SetTags("testString")
 				updateEnvironmentOptionsModel.SetColorCode("#FDD13A")
 				updateEnvironmentOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(updateEnvironmentOptionsModel).ToNot(BeNil())
-				Expect(updateEnvironmentOptionsModel.EnvironmentID).To(Equal(core.StringPtr("testString")))
+				Expect(updateEnvironmentOptionsModel.EnvironmentID).To(Equal(core.StringPtr("environment_id")))
 				Expect(updateEnvironmentOptionsModel.Name).To(Equal(core.StringPtr("testString")))
 				Expect(updateEnvironmentOptionsModel.Description).To(Equal(core.StringPtr("testString")))
 				Expect(updateEnvironmentOptionsModel.Tags).To(Equal(core.StringPtr("testString")))
@@ -12595,11 +12592,11 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(collectionRefModel.CollectionID).To(Equal(core.StringPtr("ghzinc")))
 
 				// Construct an instance of the UpdateFeatureOptions model
-				environmentID := "testString"
-				featureID := "testString"
+				environmentID := "environment_id"
+				featureID := "feature_id"
 				updateFeatureOptionsModel := appConfigurationService.NewUpdateFeatureOptions(environmentID, featureID)
-				updateFeatureOptionsModel.SetEnvironmentID("testString")
-				updateFeatureOptionsModel.SetFeatureID("testString")
+				updateFeatureOptionsModel.SetEnvironmentID("environment_id")
+				updateFeatureOptionsModel.SetFeatureID("feature_id")
 				updateFeatureOptionsModel.SetName("Cycle Rentals")
 				updateFeatureOptionsModel.SetDescription("Feature flags to enable Cycle Rentals")
 				updateFeatureOptionsModel.SetEnabledValue(core.StringPtr("true"))
@@ -12611,8 +12608,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				updateFeatureOptionsModel.SetCollections([]appconfigurationv1.CollectionRef{*collectionRefModel})
 				updateFeatureOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(updateFeatureOptionsModel).ToNot(BeNil())
-				Expect(updateFeatureOptionsModel.EnvironmentID).To(Equal(core.StringPtr("testString")))
-				Expect(updateFeatureOptionsModel.FeatureID).To(Equal(core.StringPtr("testString")))
+				Expect(updateFeatureOptionsModel.EnvironmentID).To(Equal(core.StringPtr("environment_id")))
+				Expect(updateFeatureOptionsModel.FeatureID).To(Equal(core.StringPtr("feature_id")))
 				Expect(updateFeatureOptionsModel.Name).To(Equal(core.StringPtr("Cycle Rentals")))
 				Expect(updateFeatureOptionsModel.Description).To(Equal(core.StringPtr("Feature flags to enable Cycle Rentals")))
 				Expect(updateFeatureOptionsModel.EnabledValue).To(Equal(core.StringPtr("true")))
@@ -12644,11 +12641,11 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(featureSegmentRuleModel.RolloutPercentage).To(Equal(core.Int64Ptr(int64(100))))
 
 				// Construct an instance of the UpdateFeatureValuesOptions model
-				environmentID := "testString"
-				featureID := "testString"
+				environmentID := "environment_id"
+				featureID := "feature_id"
 				updateFeatureValuesOptionsModel := appConfigurationService.NewUpdateFeatureValuesOptions(environmentID, featureID)
-				updateFeatureValuesOptionsModel.SetEnvironmentID("testString")
-				updateFeatureValuesOptionsModel.SetFeatureID("testString")
+				updateFeatureValuesOptionsModel.SetEnvironmentID("environment_id")
+				updateFeatureValuesOptionsModel.SetFeatureID("feature_id")
 				updateFeatureValuesOptionsModel.SetName("Cycle Rentals")
 				updateFeatureValuesOptionsModel.SetDescription("Feature flags to enable Cycle Rentals")
 				updateFeatureValuesOptionsModel.SetTags("version: 1.1, yet-to-release")
@@ -12658,8 +12655,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				updateFeatureValuesOptionsModel.SetSegmentRules([]appconfigurationv1.FeatureSegmentRule{*featureSegmentRuleModel})
 				updateFeatureValuesOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(updateFeatureValuesOptionsModel).ToNot(BeNil())
-				Expect(updateFeatureValuesOptionsModel.EnvironmentID).To(Equal(core.StringPtr("testString")))
-				Expect(updateFeatureValuesOptionsModel.FeatureID).To(Equal(core.StringPtr("testString")))
+				Expect(updateFeatureValuesOptionsModel.EnvironmentID).To(Equal(core.StringPtr("environment_id")))
+				Expect(updateFeatureValuesOptionsModel.FeatureID).To(Equal(core.StringPtr("feature_id")))
 				Expect(updateFeatureValuesOptionsModel.Name).To(Equal(core.StringPtr("Cycle Rentals")))
 				Expect(updateFeatureValuesOptionsModel.Description).To(Equal(core.StringPtr("Feature flags to enable Cycle Rentals")))
 				Expect(updateFeatureValuesOptionsModel.Tags).To(Equal(core.StringPtr("version: 1.1, yet-to-release")))
@@ -12671,9 +12668,9 @@ var _ = Describe(`AppConfigurationV1`, func() {
 			})
 			It(`Invoke NewUpdateGitconfigOptions successfully`, func() {
 				// Construct an instance of the UpdateGitconfigOptions model
-				gitConfigID := "testString"
+				gitConfigID := "git_config_id"
 				updateGitconfigOptionsModel := appConfigurationService.NewUpdateGitconfigOptions(gitConfigID)
-				updateGitconfigOptionsModel.SetGitConfigID("testString")
+				updateGitconfigOptionsModel.SetGitConfigID("git_config_id")
 				updateGitconfigOptionsModel.SetGitConfigName("testString")
 				updateGitconfigOptionsModel.SetCollectionID("testString")
 				updateGitconfigOptionsModel.SetEnvironmentID("testString")
@@ -12683,7 +12680,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				updateGitconfigOptionsModel.SetGitToken("testString")
 				updateGitconfigOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(updateGitconfigOptionsModel).ToNot(BeNil())
-				Expect(updateGitconfigOptionsModel.GitConfigID).To(Equal(core.StringPtr("testString")))
+				Expect(updateGitconfigOptionsModel.GitConfigID).To(Equal(core.StringPtr("git_config_id")))
 				Expect(updateGitconfigOptionsModel.GitConfigName).To(Equal(core.StringPtr("testString")))
 				Expect(updateGitconfigOptionsModel.CollectionID).To(Equal(core.StringPtr("testString")))
 				Expect(updateGitconfigOptionsModel.EnvironmentID).To(Equal(core.StringPtr("testString")))
@@ -12727,11 +12724,11 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(collectionRefModel.CollectionID).To(Equal(core.StringPtr("ghzinc")))
 
 				// Construct an instance of the UpdatePropertyOptions model
-				environmentID := "testString"
-				propertyID := "testString"
+				environmentID := "environment_id"
+				propertyID := "property_id"
 				updatePropertyOptionsModel := appConfigurationService.NewUpdatePropertyOptions(environmentID, propertyID)
-				updatePropertyOptionsModel.SetEnvironmentID("testString")
-				updatePropertyOptionsModel.SetPropertyID("testString")
+				updatePropertyOptionsModel.SetEnvironmentID("environment_id")
+				updatePropertyOptionsModel.SetPropertyID("property_id")
 				updatePropertyOptionsModel.SetName("Email property")
 				updatePropertyOptionsModel.SetDescription("Property for email")
 				updatePropertyOptionsModel.SetValue(core.StringPtr("true"))
@@ -12740,8 +12737,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				updatePropertyOptionsModel.SetCollections([]appconfigurationv1.CollectionRef{*collectionRefModel})
 				updatePropertyOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(updatePropertyOptionsModel).ToNot(BeNil())
-				Expect(updatePropertyOptionsModel.EnvironmentID).To(Equal(core.StringPtr("testString")))
-				Expect(updatePropertyOptionsModel.PropertyID).To(Equal(core.StringPtr("testString")))
+				Expect(updatePropertyOptionsModel.EnvironmentID).To(Equal(core.StringPtr("environment_id")))
+				Expect(updatePropertyOptionsModel.PropertyID).To(Equal(core.StringPtr("property_id")))
 				Expect(updatePropertyOptionsModel.Name).To(Equal(core.StringPtr("Email property")))
 				Expect(updatePropertyOptionsModel.Description).To(Equal(core.StringPtr("Property for email")))
 				Expect(updatePropertyOptionsModel.Value).To(Equal(core.StringPtr("true")))
@@ -12768,11 +12765,11 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(segmentRuleModel.Order).To(Equal(core.Int64Ptr(int64(1))))
 
 				// Construct an instance of the UpdatePropertyValuesOptions model
-				environmentID := "testString"
-				propertyID := "testString"
+				environmentID := "environment_id"
+				propertyID := "property_id"
 				updatePropertyValuesOptionsModel := appConfigurationService.NewUpdatePropertyValuesOptions(environmentID, propertyID)
-				updatePropertyValuesOptionsModel.SetEnvironmentID("testString")
-				updatePropertyValuesOptionsModel.SetPropertyID("testString")
+				updatePropertyValuesOptionsModel.SetEnvironmentID("environment_id")
+				updatePropertyValuesOptionsModel.SetPropertyID("property_id")
 				updatePropertyValuesOptionsModel.SetName("Email property")
 				updatePropertyValuesOptionsModel.SetDescription("Property for email")
 				updatePropertyValuesOptionsModel.SetTags("version: 1.1, pre-release")
@@ -12780,8 +12777,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				updatePropertyValuesOptionsModel.SetSegmentRules([]appconfigurationv1.SegmentRule{*segmentRuleModel})
 				updatePropertyValuesOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(updatePropertyValuesOptionsModel).ToNot(BeNil())
-				Expect(updatePropertyValuesOptionsModel.EnvironmentID).To(Equal(core.StringPtr("testString")))
-				Expect(updatePropertyValuesOptionsModel.PropertyID).To(Equal(core.StringPtr("testString")))
+				Expect(updatePropertyValuesOptionsModel.EnvironmentID).To(Equal(core.StringPtr("environment_id")))
+				Expect(updatePropertyValuesOptionsModel.PropertyID).To(Equal(core.StringPtr("property_id")))
 				Expect(updatePropertyValuesOptionsModel.Name).To(Equal(core.StringPtr("Email property")))
 				Expect(updatePropertyValuesOptionsModel.Description).To(Equal(core.StringPtr("Property for email")))
 				Expect(updatePropertyValuesOptionsModel.Tags).To(Equal(core.StringPtr("version: 1.1, pre-release")))
@@ -12801,16 +12798,16 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(ruleModel.Values).To(Equal([]string{"testString"}))
 
 				// Construct an instance of the UpdateSegmentOptions model
-				segmentID := "testString"
+				segmentID := "segment_id"
 				updateSegmentOptionsModel := appConfigurationService.NewUpdateSegmentOptions(segmentID)
-				updateSegmentOptionsModel.SetSegmentID("testString")
+				updateSegmentOptionsModel.SetSegmentID("segment_id")
 				updateSegmentOptionsModel.SetName("testString")
 				updateSegmentOptionsModel.SetDescription("testString")
 				updateSegmentOptionsModel.SetTags("testString")
 				updateSegmentOptionsModel.SetRules([]appconfigurationv1.Rule{*ruleModel})
 				updateSegmentOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(updateSegmentOptionsModel).ToNot(BeNil())
-				Expect(updateSegmentOptionsModel.SegmentID).To(Equal(core.StringPtr("testString")))
+				Expect(updateSegmentOptionsModel.SegmentID).To(Equal(core.StringPtr("segment_id")))
 				Expect(updateSegmentOptionsModel.Name).To(Equal(core.StringPtr("testString")))
 				Expect(updateSegmentOptionsModel.Description).To(Equal(core.StringPtr("testString")))
 				Expect(updateSegmentOptionsModel.Tags).To(Equal(core.StringPtr("testString")))
@@ -12831,9 +12828,9 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(workflowCredentialsModel.ClientSecret).To(Equal(core.StringPtr("testString")))
 
 				// Construct an instance of the UpdateWorkflowconfigOptions model
-				environmentID := "testString"
+				environmentID := "environment_id"
 				updateWorkflowconfigOptionsModel := appConfigurationService.NewUpdateWorkflowconfigOptions(environmentID)
-				updateWorkflowconfigOptionsModel.SetEnvironmentID("testString")
+				updateWorkflowconfigOptionsModel.SetEnvironmentID("environment_id")
 				updateWorkflowconfigOptionsModel.SetWorkflowURL("testString")
 				updateWorkflowconfigOptionsModel.SetApprovalGroupName("testString")
 				updateWorkflowconfigOptionsModel.SetApprovalExpiration(int64(1))
@@ -12841,7 +12838,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				updateWorkflowconfigOptionsModel.SetEnabled(false)
 				updateWorkflowconfigOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(updateWorkflowconfigOptionsModel).ToNot(BeNil())
-				Expect(updateWorkflowconfigOptionsModel.EnvironmentID).To(Equal(core.StringPtr("testString")))
+				Expect(updateWorkflowconfigOptionsModel.EnvironmentID).To(Equal(core.StringPtr("environment_id")))
 				Expect(updateWorkflowconfigOptionsModel.WorkflowURL).To(Equal(core.StringPtr("testString")))
 				Expect(updateWorkflowconfigOptionsModel.ApprovalGroupName).To(Equal(core.StringPtr("testString")))
 				Expect(updateWorkflowconfigOptionsModel.ApprovalExpiration).To(Equal(core.Int64Ptr(int64(1))))

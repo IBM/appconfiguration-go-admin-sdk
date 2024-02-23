@@ -99,8 +99,8 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 			listEnvironmentsOptions := &appconfigurationv1.ListEnvironmentsOptions{
 				Expand: core.BoolPtr(true),
 				Sort: core.StringPtr("created_time"),
-				Tags: core.StringPtr("version 1.1, pre-release"),
-				Include: []string{"features"},
+				Tags: core.StringPtr("version 1.1,pre-release"),
+				Include: []string{"features", "properties", "snapshots"},
 				Limit: core.Int64Ptr(int64(10)),
 				Offset: core.Int64Ptr(int64(0)),
 				Search: core.StringPtr("test tag"),
@@ -130,8 +130,8 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 			listEnvironmentsOptions := &appconfigurationv1.ListEnvironmentsOptions{
 				Expand: core.BoolPtr(true),
 				Sort: core.StringPtr("created_time"),
-				Tags: core.StringPtr("version 1.1, pre-release"),
-				Include: []string{"features"},
+				Tags: core.StringPtr("version 1.1,pre-release"),
+				Include: []string{"features", "properties", "snapshots"},
 				Limit: core.Int64Ptr(int64(10)),
 				Search: core.StringPtr("test tag"),
 			}
@@ -189,7 +189,7 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 		})
 		It(`UpdateEnvironment(updateEnvironmentOptions *UpdateEnvironmentOptions)`, func() {
 			updateEnvironmentOptions := &appconfigurationv1.UpdateEnvironmentOptions{
-				EnvironmentID: core.StringPtr("testString"),
+				EnvironmentID: core.StringPtr("environment_id"),
 				Name: core.StringPtr("testString"),
 				Description: core.StringPtr("testString"),
 				Tags: core.StringPtr("testString"),
@@ -209,9 +209,9 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 		})
 		It(`GetEnvironment(getEnvironmentOptions *GetEnvironmentOptions)`, func() {
 			getEnvironmentOptions := &appconfigurationv1.GetEnvironmentOptions{
-				EnvironmentID: core.StringPtr("testString"),
+				EnvironmentID: core.StringPtr("environment_id"),
 				Expand: core.BoolPtr(true),
-				Include: []string{"features"},
+				Include: []string{"features", "properties", "snapshots"},
 			}
 
 			environment, response, err := appConfigurationService.GetEnvironment(getEnvironmentOptions)
@@ -229,10 +229,10 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 			listCollectionsOptions := &appconfigurationv1.ListCollectionsOptions{
 				Expand: core.BoolPtr(true),
 				Sort: core.StringPtr("created_time"),
-				Tags: core.StringPtr("version 1.1, pre-release"),
-				Features: []string{"testString"},
-				Properties: []string{"testString"},
-				Include: []string{"features"},
+				Tags: core.StringPtr("version 1.1,pre-release"),
+				Features: []string{"my-feature-id", "cycle-rentals"},
+				Properties: []string{"my-property-id", "email-property"},
+				Include: []string{"features", "properties", "snapshots"},
 				Limit: core.Int64Ptr(int64(10)),
 				Offset: core.Int64Ptr(int64(0)),
 				Search: core.StringPtr("test tag"),
@@ -262,10 +262,10 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 			listCollectionsOptions := &appconfigurationv1.ListCollectionsOptions{
 				Expand: core.BoolPtr(true),
 				Sort: core.StringPtr("created_time"),
-				Tags: core.StringPtr("version 1.1, pre-release"),
-				Features: []string{"testString"},
-				Properties: []string{"testString"},
-				Include: []string{"features"},
+				Tags: core.StringPtr("version 1.1,pre-release"),
+				Features: []string{"my-feature-id", "cycle-rentals"},
+				Properties: []string{"my-property-id", "email-property"},
+				Include: []string{"features", "properties", "snapshots"},
 				Limit: core.Int64Ptr(int64(10)),
 				Search: core.StringPtr("test tag"),
 			}
@@ -322,7 +322,7 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 		})
 		It(`UpdateCollection(updateCollectionOptions *UpdateCollectionOptions)`, func() {
 			updateCollectionOptions := &appconfigurationv1.UpdateCollectionOptions{
-				CollectionID: core.StringPtr("testString"),
+				CollectionID: core.StringPtr("collection_id"),
 				Name: core.StringPtr("testString"),
 				Description: core.StringPtr("testString"),
 				Tags: core.StringPtr("testString"),
@@ -341,9 +341,9 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 		})
 		It(`GetCollection(getCollectionOptions *GetCollectionOptions)`, func() {
 			getCollectionOptions := &appconfigurationv1.GetCollectionOptions{
-				CollectionID: core.StringPtr("testString"),
+				CollectionID: core.StringPtr("collection_id"),
 				Expand: core.BoolPtr(true),
-				Include: []string{"features"},
+				Include: []string{"features", "properties", "snapshots"},
 			}
 
 			collection, response, err := appConfigurationService.GetCollection(getCollectionOptions)
@@ -359,13 +359,13 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 		})
 		It(`ListFeatures(listFeaturesOptions *ListFeaturesOptions) with pagination`, func(){
 			listFeaturesOptions := &appconfigurationv1.ListFeaturesOptions{
-				EnvironmentID: core.StringPtr("testString"),
+				EnvironmentID: core.StringPtr("environment_id"),
 				Expand: core.BoolPtr(true),
 				Sort: core.StringPtr("created_time"),
-				Tags: core.StringPtr("version 1.1, pre-release"),
-				Collections: []string{"testString"},
-				Segments: []string{"testString"},
-				Include: []string{"collections"},
+				Tags: core.StringPtr("version 1.1,pre-release"),
+				Collections: []string{"my-collection-id", "ghzindiapvtltd"},
+				Segments: []string{"my-segment-id", "beta-users"},
+				Include: []string{"collections", "rules", "change_request"},
 				Limit: core.Int64Ptr(int64(10)),
 				Offset: core.Int64Ptr(int64(0)),
 				Search: core.StringPtr("test tag"),
@@ -393,13 +393,13 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 		})
 		It(`ListFeatures(listFeaturesOptions *ListFeaturesOptions) using FeaturesPager`, func(){
 			listFeaturesOptions := &appconfigurationv1.ListFeaturesOptions{
-				EnvironmentID: core.StringPtr("testString"),
+				EnvironmentID: core.StringPtr("environment_id"),
 				Expand: core.BoolPtr(true),
 				Sort: core.StringPtr("created_time"),
-				Tags: core.StringPtr("version 1.1, pre-release"),
-				Collections: []string{"testString"},
-				Segments: []string{"testString"},
-				Include: []string{"collections"},
+				Tags: core.StringPtr("version 1.1,pre-release"),
+				Collections: []string{"my-collection-id", "ghzindiapvtltd"},
+				Segments: []string{"my-segment-id", "beta-users"},
+				Include: []string{"collections", "rules", "change_request"},
 				Limit: core.Int64Ptr(int64(10)),
 				Search: core.StringPtr("test tag"),
 			}
@@ -452,7 +452,7 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 			}
 
 			createFeatureOptions := &appconfigurationv1.CreateFeatureOptions{
-				EnvironmentID: core.StringPtr("testString"),
+				EnvironmentID: core.StringPtr("environment_id"),
 				Name: core.StringPtr("Cycle Rentals"),
 				FeatureID: core.StringPtr("cycle-rentals"),
 				Type: core.StringPtr("BOOLEAN"),
@@ -495,8 +495,8 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 			}
 
 			updateFeatureOptions := &appconfigurationv1.UpdateFeatureOptions{
-				EnvironmentID: core.StringPtr("testString"),
-				FeatureID: core.StringPtr("testString"),
+				EnvironmentID: core.StringPtr("environment_id"),
+				FeatureID: core.StringPtr("feature_id"),
 				Name: core.StringPtr("Cycle Rentals"),
 				Description: core.StringPtr("Feature flags to enable Cycle Rentals"),
 				EnabledValue: core.StringPtr("true"),
@@ -532,8 +532,8 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 			}
 
 			updateFeatureValuesOptions := &appconfigurationv1.UpdateFeatureValuesOptions{
-				EnvironmentID: core.StringPtr("testString"),
-				FeatureID: core.StringPtr("testString"),
+				EnvironmentID: core.StringPtr("environment_id"),
+				FeatureID: core.StringPtr("feature_id"),
 				Name: core.StringPtr("Cycle Rentals"),
 				Description: core.StringPtr("Feature flags to enable Cycle Rentals"),
 				Tags: core.StringPtr("version: 1.1, yet-to-release"),
@@ -556,9 +556,9 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 		})
 		It(`GetFeature(getFeatureOptions *GetFeatureOptions)`, func() {
 			getFeatureOptions := &appconfigurationv1.GetFeatureOptions{
-				EnvironmentID: core.StringPtr("testString"),
-				FeatureID: core.StringPtr("testString"),
-				Include: []string{"collections"},
+				EnvironmentID: core.StringPtr("environment_id"),
+				FeatureID: core.StringPtr("feature_id"),
+				Include: []string{"collections", "rules", "change_request"},
 			}
 
 			feature, response, err := appConfigurationService.GetFeature(getFeatureOptions)
@@ -574,8 +574,8 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 		})
 		It(`ToggleFeature(toggleFeatureOptions *ToggleFeatureOptions)`, func() {
 			toggleFeatureOptions := &appconfigurationv1.ToggleFeatureOptions{
-				EnvironmentID: core.StringPtr("testString"),
-				FeatureID: core.StringPtr("testString"),
+				EnvironmentID: core.StringPtr("environment_id"),
+				FeatureID: core.StringPtr("feature_id"),
 				Enabled: core.BoolPtr(true),
 			}
 
@@ -592,13 +592,13 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 		})
 		It(`ListProperties(listPropertiesOptions *ListPropertiesOptions) with pagination`, func(){
 			listPropertiesOptions := &appconfigurationv1.ListPropertiesOptions{
-				EnvironmentID: core.StringPtr("testString"),
+				EnvironmentID: core.StringPtr("environment_id"),
 				Expand: core.BoolPtr(true),
 				Sort: core.StringPtr("created_time"),
-				Tags: core.StringPtr("version 1.1, pre-release"),
-				Collections: []string{"testString"},
-				Segments: []string{"testString"},
-				Include: []string{"collections"},
+				Tags: core.StringPtr("version 1.1,pre-release"),
+				Collections: []string{"my-collection-id", "ghzindiapvtltd"},
+				Segments: []string{"my-segment-id", "beta-users"},
+				Include: []string{"collections", "rules"},
 				Limit: core.Int64Ptr(int64(10)),
 				Offset: core.Int64Ptr(int64(0)),
 				Search: core.StringPtr("test tag"),
@@ -626,13 +626,13 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 		})
 		It(`ListProperties(listPropertiesOptions *ListPropertiesOptions) using PropertiesPager`, func(){
 			listPropertiesOptions := &appconfigurationv1.ListPropertiesOptions{
-				EnvironmentID: core.StringPtr("testString"),
+				EnvironmentID: core.StringPtr("environment_id"),
 				Expand: core.BoolPtr(true),
 				Sort: core.StringPtr("created_time"),
-				Tags: core.StringPtr("version 1.1, pre-release"),
-				Collections: []string{"testString"},
-				Segments: []string{"testString"},
-				Include: []string{"collections"},
+				Tags: core.StringPtr("version 1.1,pre-release"),
+				Collections: []string{"my-collection-id", "ghzindiapvtltd"},
+				Segments: []string{"my-segment-id", "beta-users"},
+				Include: []string{"collections", "rules"},
 				Limit: core.Int64Ptr(int64(10)),
 				Search: core.StringPtr("test tag"),
 			}
@@ -684,7 +684,7 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 			}
 
 			createPropertyOptions := &appconfigurationv1.CreatePropertyOptions{
-				EnvironmentID: core.StringPtr("testString"),
+				EnvironmentID: core.StringPtr("environment_id"),
 				Name: core.StringPtr("Email property"),
 				PropertyID: core.StringPtr("email-property"),
 				Type: core.StringPtr("BOOLEAN"),
@@ -723,8 +723,8 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 			}
 
 			updatePropertyOptions := &appconfigurationv1.UpdatePropertyOptions{
-				EnvironmentID: core.StringPtr("testString"),
-				PropertyID: core.StringPtr("testString"),
+				EnvironmentID: core.StringPtr("environment_id"),
+				PropertyID: core.StringPtr("property_id"),
 				Name: core.StringPtr("Email property"),
 				Description: core.StringPtr("Property for email"),
 				Value: core.StringPtr("true"),
@@ -756,8 +756,8 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 			}
 
 			updatePropertyValuesOptions := &appconfigurationv1.UpdatePropertyValuesOptions{
-				EnvironmentID: core.StringPtr("testString"),
-				PropertyID: core.StringPtr("testString"),
+				EnvironmentID: core.StringPtr("environment_id"),
+				PropertyID: core.StringPtr("property_id"),
 				Name: core.StringPtr("Email property"),
 				Description: core.StringPtr("Property for email"),
 				Tags: core.StringPtr("version: 1.1, pre-release"),
@@ -778,9 +778,9 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 		})
 		It(`GetProperty(getPropertyOptions *GetPropertyOptions)`, func() {
 			getPropertyOptions := &appconfigurationv1.GetPropertyOptions{
-				EnvironmentID: core.StringPtr("testString"),
-				PropertyID: core.StringPtr("testString"),
-				Include: core.StringPtr("collections"),
+				EnvironmentID: core.StringPtr("environment_id"),
+				PropertyID: core.StringPtr("property_id"),
+				Include: []string{"collections", "rules"},
 			}
 
 			property, response, err := appConfigurationService.GetProperty(getPropertyOptions)
@@ -798,7 +798,7 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 			listSegmentsOptions := &appconfigurationv1.ListSegmentsOptions{
 				Expand: core.BoolPtr(true),
 				Sort: core.StringPtr("created_time"),
-				Tags: core.StringPtr("version 1.1, pre-release"),
+				Tags: core.StringPtr("version 1.1,pre-release"),
 				Include: core.StringPtr("rules"),
 				Limit: core.Int64Ptr(int64(10)),
 				Offset: core.Int64Ptr(int64(0)),
@@ -829,7 +829,7 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 			listSegmentsOptions := &appconfigurationv1.ListSegmentsOptions{
 				Expand: core.BoolPtr(true),
 				Sort: core.StringPtr("created_time"),
-				Tags: core.StringPtr("version 1.1, pre-release"),
+				Tags: core.StringPtr("version 1.1,pre-release"),
 				Include: core.StringPtr("rules"),
 				Limit: core.Int64Ptr(int64(10)),
 				Search: core.StringPtr("test tag"),
@@ -900,7 +900,7 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 			}
 
 			updateSegmentOptions := &appconfigurationv1.UpdateSegmentOptions{
-				SegmentID: core.StringPtr("testString"),
+				SegmentID: core.StringPtr("segment_id"),
 				Name: core.StringPtr("testString"),
 				Description: core.StringPtr("testString"),
 				Tags: core.StringPtr("testString"),
@@ -920,8 +920,8 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 		})
 		It(`GetSegment(getSegmentOptions *GetSegmentOptions)`, func() {
 			getSegmentOptions := &appconfigurationv1.GetSegmentOptions{
-				SegmentID: core.StringPtr("testString"),
-				Include: []string{"features"},
+				SegmentID: core.StringPtr("segment_id"),
+				Include: []string{"features", "properties"},
 			}
 
 			segment, response, err := appConfigurationService.GetSegment(getSegmentOptions)
@@ -1030,7 +1030,7 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 		})
 		It(`UpdateGitconfig(updateGitconfigOptions *UpdateGitconfigOptions)`, func() {
 			updateGitconfigOptions := &appconfigurationv1.UpdateGitconfigOptions{
-				GitConfigID: core.StringPtr("testString"),
+				GitConfigID: core.StringPtr("git_config_id"),
 				GitConfigName: core.StringPtr("testString"),
 				CollectionID: core.StringPtr("testString"),
 				EnvironmentID: core.StringPtr("testString"),
@@ -1053,7 +1053,7 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 		})
 		It(`GetGitconfig(getGitconfigOptions *GetGitconfigOptions)`, func() {
 			getGitconfigOptions := &appconfigurationv1.GetGitconfigOptions{
-				GitConfigID: core.StringPtr("testString"),
+				GitConfigID: core.StringPtr("git_config_id"),
 			}
 
 			gitConfig, response, err := appConfigurationService.GetGitconfig(getGitconfigOptions)
@@ -1069,7 +1069,7 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 		})
 		It(`PromoteGitconfig(promoteGitconfigOptions *PromoteGitconfigOptions)`, func() {
 			promoteGitconfigOptions := &appconfigurationv1.PromoteGitconfigOptions{
-				GitConfigID: core.StringPtr("testString"),
+				GitConfigID: core.StringPtr("git_config_id"),
 			}
 
 			gitConfigPromote, response, err := appConfigurationService.PromoteGitconfig(promoteGitconfigOptions)
@@ -1085,7 +1085,7 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 		})
 		It(`RestoreGitconfig(restoreGitconfigOptions *RestoreGitconfigOptions)`, func() {
 			restoreGitconfigOptions := &appconfigurationv1.RestoreGitconfigOptions{
-				GitConfigID: core.StringPtr("testString"),
+				GitConfigID: core.StringPtr("git_config_id"),
 			}
 
 			gitConfigRestore, response, err := appConfigurationService.RestoreGitconfig(restoreGitconfigOptions)
@@ -1132,7 +1132,7 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 		})
 		It(`ListWorkflowconfig(listWorkflowconfigOptions *ListWorkflowconfigOptions)`, func() {
 			listWorkflowconfigOptions := &appconfigurationv1.ListWorkflowconfigOptions{
-				EnvironmentID: core.StringPtr("testString"),
+				EnvironmentID: core.StringPtr("environment_id"),
 			}
 
 			workflowConfig, response, err := appConfigurationService.ListWorkflowconfig(listWorkflowconfigOptions)
@@ -1155,7 +1155,7 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 			}
 
 			createWorkflowconfigOptions := &appconfigurationv1.CreateWorkflowconfigOptions{
-				EnvironmentID: core.StringPtr("testString"),
+				EnvironmentID: core.StringPtr("environment_id"),
 				WorkflowURL: core.StringPtr("https://xxxxx.service-now.com"),
 				ApprovalGroupName: core.StringPtr("WorkflowCRApprovers"),
 				ApprovalExpiration: core.Int64Ptr(int64(10)),
@@ -1183,7 +1183,7 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 			}
 
 			updateWorkflowconfigOptions := &appconfigurationv1.UpdateWorkflowconfigOptions{
-				EnvironmentID: core.StringPtr("testString"),
+				EnvironmentID: core.StringPtr("environment_id"),
 				WorkflowURL: core.StringPtr("testString"),
 				ApprovalGroupName: core.StringPtr("testString"),
 				ApprovalExpiration: core.Int64Ptr(int64(1)),
@@ -1288,7 +1288,7 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 				Environments: []appconfigurationv1.ImportEnvironmentSchema{*importEnvironmentSchemaModel},
 				Collections: []appconfigurationv1.ImportCollectionSchema{*importCollectionSchemaModel},
 				Segments: []appconfigurationv1.ImportSegmentSchema{*importSegmentSchemaModel},
-				Clean: core.StringPtr("testString"),
+				Clean: core.StringPtr("true"),
 			}
 
 			importConfig, response, err := appConfigurationService.ImportConfig(importConfigOptions)
@@ -1319,7 +1319,7 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 		})
 		It(`PromoteRestoreConfig(promoteRestoreConfigOptions *PromoteRestoreConfigOptions)`, func() {
 			promoteRestoreConfigOptions := &appconfigurationv1.PromoteRestoreConfigOptions{
-				GitConfigID: core.StringPtr("testString"),
+				GitConfigID: core.StringPtr("git_config_id"),
 				Action: core.StringPtr("promote"),
 			}
 
@@ -1336,7 +1336,7 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 		})
 		It(`DeleteEnvironment(deleteEnvironmentOptions *DeleteEnvironmentOptions)`, func() {
 			deleteEnvironmentOptions := &appconfigurationv1.DeleteEnvironmentOptions{
-				EnvironmentID: core.StringPtr("testString"),
+				EnvironmentID: core.StringPtr("environment_id"),
 			}
 
 			response, err := appConfigurationService.DeleteEnvironment(deleteEnvironmentOptions)
@@ -1351,7 +1351,7 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 		})
 		It(`DeleteCollection(deleteCollectionOptions *DeleteCollectionOptions)`, func() {
 			deleteCollectionOptions := &appconfigurationv1.DeleteCollectionOptions{
-				CollectionID: core.StringPtr("testString"),
+				CollectionID: core.StringPtr("collection_id"),
 			}
 
 			response, err := appConfigurationService.DeleteCollection(deleteCollectionOptions)
@@ -1366,8 +1366,8 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 		})
 		It(`DeleteFeature(deleteFeatureOptions *DeleteFeatureOptions)`, func() {
 			deleteFeatureOptions := &appconfigurationv1.DeleteFeatureOptions{
-				EnvironmentID: core.StringPtr("testString"),
-				FeatureID: core.StringPtr("testString"),
+				EnvironmentID: core.StringPtr("environment_id"),
+				FeatureID: core.StringPtr("feature_id"),
 			}
 
 			response, err := appConfigurationService.DeleteFeature(deleteFeatureOptions)
@@ -1382,8 +1382,8 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 		})
 		It(`DeleteProperty(deletePropertyOptions *DeletePropertyOptions)`, func() {
 			deletePropertyOptions := &appconfigurationv1.DeletePropertyOptions{
-				EnvironmentID: core.StringPtr("testString"),
-				PropertyID: core.StringPtr("testString"),
+				EnvironmentID: core.StringPtr("environment_id"),
+				PropertyID: core.StringPtr("property_id"),
 			}
 
 			response, err := appConfigurationService.DeleteProperty(deletePropertyOptions)
@@ -1398,7 +1398,7 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 		})
 		It(`DeleteSegment(deleteSegmentOptions *DeleteSegmentOptions)`, func() {
 			deleteSegmentOptions := &appconfigurationv1.DeleteSegmentOptions{
-				SegmentID: core.StringPtr("testString"),
+				SegmentID: core.StringPtr("segment_id"),
 			}
 
 			response, err := appConfigurationService.DeleteSegment(deleteSegmentOptions)
@@ -1413,7 +1413,7 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 		})
 		It(`DeleteGitconfig(deleteGitconfigOptions *DeleteGitconfigOptions)`, func() {
 			deleteGitconfigOptions := &appconfigurationv1.DeleteGitconfigOptions{
-				GitConfigID: core.StringPtr("testString"),
+				GitConfigID: core.StringPtr("git_config_id"),
 			}
 
 			response, err := appConfigurationService.DeleteGitconfig(deleteGitconfigOptions)
@@ -1428,7 +1428,7 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 		})
 		It(`DeleteWorkflowconfig(deleteWorkflowconfigOptions *DeleteWorkflowconfigOptions)`, func() {
 			deleteWorkflowconfigOptions := &appconfigurationv1.DeleteWorkflowconfigOptions{
-				EnvironmentID: core.StringPtr("testString"),
+				EnvironmentID: core.StringPtr("environment_id"),
 			}
 
 			response, err := appConfigurationService.DeleteWorkflowconfig(deleteWorkflowconfigOptions)

@@ -108,8 +108,8 @@ var _ = Describe(`AppConfigurationV1 Examples Tests`, func() {
 			listEnvironmentsOptions := &appconfigurationv1.ListEnvironmentsOptions{
 				Expand: core.BoolPtr(true),
 				Sort: core.StringPtr("created_time"),
-				Tags: core.StringPtr("version 1.1, pre-release"),
-				Include: []string{"features"},
+				Tags: core.StringPtr("version 1.1,pre-release"),
+				Include: []string{"features", "properties", "snapshots"},
 				Limit: core.Int64Ptr(int64(10)),
 				Search: core.StringPtr("test tag"),
 			}
@@ -161,7 +161,7 @@ var _ = Describe(`AppConfigurationV1 Examples Tests`, func() {
 			// begin-update_environment
 
 			updateEnvironmentOptions := appConfigurationService.NewUpdateEnvironmentOptions(
-				"testString",
+				"environment_id",
 			)
 
 			environment, response, err := appConfigurationService.UpdateEnvironment(updateEnvironmentOptions)
@@ -182,8 +182,10 @@ var _ = Describe(`AppConfigurationV1 Examples Tests`, func() {
 			// begin-get_environment
 
 			getEnvironmentOptions := appConfigurationService.NewGetEnvironmentOptions(
-				"testString",
+				"environment_id",
 			)
+			getEnvironmentOptions.SetExpand(true)
+			getEnvironmentOptions.SetInclude([]string{"features", "properties", "snapshots"})
 
 			environment, response, err := appConfigurationService.GetEnvironment(getEnvironmentOptions)
 			if err != nil {
@@ -204,10 +206,10 @@ var _ = Describe(`AppConfigurationV1 Examples Tests`, func() {
 			listCollectionsOptions := &appconfigurationv1.ListCollectionsOptions{
 				Expand: core.BoolPtr(true),
 				Sort: core.StringPtr("created_time"),
-				Tags: core.StringPtr("version 1.1, pre-release"),
-				Features: []string{"testString"},
-				Properties: []string{"testString"},
-				Include: []string{"features"},
+				Tags: core.StringPtr("version 1.1,pre-release"),
+				Features: []string{"my-feature-id", "cycle-rentals"},
+				Properties: []string{"my-property-id", "email-property"},
+				Include: []string{"features", "properties", "snapshots"},
 				Limit: core.Int64Ptr(int64(10)),
 				Search: core.StringPtr("test tag"),
 			}
@@ -258,7 +260,7 @@ var _ = Describe(`AppConfigurationV1 Examples Tests`, func() {
 			// begin-update_collection
 
 			updateCollectionOptions := appConfigurationService.NewUpdateCollectionOptions(
-				"testString",
+				"collection_id",
 			)
 
 			collectionLite, response, err := appConfigurationService.UpdateCollection(updateCollectionOptions)
@@ -279,8 +281,10 @@ var _ = Describe(`AppConfigurationV1 Examples Tests`, func() {
 			// begin-get_collection
 
 			getCollectionOptions := appConfigurationService.NewGetCollectionOptions(
-				"testString",
+				"collection_id",
 			)
+			getCollectionOptions.SetExpand(true)
+			getCollectionOptions.SetInclude([]string{"features", "properties", "snapshots"})
 
 			collection, response, err := appConfigurationService.GetCollection(getCollectionOptions)
 			if err != nil {
@@ -299,13 +303,13 @@ var _ = Describe(`AppConfigurationV1 Examples Tests`, func() {
 			fmt.Println("\nListFeatures() result:")
 			// begin-list_features
 			listFeaturesOptions := &appconfigurationv1.ListFeaturesOptions{
-				EnvironmentID: core.StringPtr("testString"),
+				EnvironmentID: core.StringPtr("environment_id"),
 				Expand: core.BoolPtr(true),
 				Sort: core.StringPtr("created_time"),
-				Tags: core.StringPtr("version 1.1, pre-release"),
-				Collections: []string{"testString"},
-				Segments: []string{"testString"},
-				Include: []string{"collections"},
+				Tags: core.StringPtr("version 1.1,pre-release"),
+				Collections: []string{"my-collection-id", "ghzindiapvtltd"},
+				Segments: []string{"my-segment-id", "beta-users"},
+				Include: []string{"collections", "rules", "change_request"},
 				Limit: core.Int64Ptr(int64(10)),
 				Search: core.StringPtr("test tag"),
 			}
@@ -347,7 +351,7 @@ var _ = Describe(`AppConfigurationV1 Examples Tests`, func() {
 			}
 
 			createFeatureOptions := appConfigurationService.NewCreateFeatureOptions(
-				"testString",
+				"environment_id",
 				"Cycle Rentals",
 				"cycle-rentals",
 				"BOOLEAN",
@@ -394,8 +398,8 @@ var _ = Describe(`AppConfigurationV1 Examples Tests`, func() {
 			}
 
 			updateFeatureOptions := appConfigurationService.NewUpdateFeatureOptions(
-				"testString",
-				"testString",
+				"environment_id",
+				"feature_id",
 			)
 			updateFeatureOptions.SetName("Cycle Rentals")
 			updateFeatureOptions.SetDescription("Feature flags to enable Cycle Rentals")
@@ -436,8 +440,8 @@ var _ = Describe(`AppConfigurationV1 Examples Tests`, func() {
 			}
 
 			updateFeatureValuesOptions := appConfigurationService.NewUpdateFeatureValuesOptions(
-				"testString",
-				"testString",
+				"environment_id",
+				"feature_id",
 			)
 			updateFeatureValuesOptions.SetName("Cycle Rentals")
 			updateFeatureValuesOptions.SetDescription("Feature flags to enable Cycle Rentals")
@@ -465,9 +469,10 @@ var _ = Describe(`AppConfigurationV1 Examples Tests`, func() {
 			// begin-get_feature
 
 			getFeatureOptions := appConfigurationService.NewGetFeatureOptions(
-				"testString",
-				"testString",
+				"environment_id",
+				"feature_id",
 			)
+			getFeatureOptions.SetInclude([]string{"collections", "rules", "change_request"})
 
 			feature, response, err := appConfigurationService.GetFeature(getFeatureOptions)
 			if err != nil {
@@ -487,8 +492,8 @@ var _ = Describe(`AppConfigurationV1 Examples Tests`, func() {
 			// begin-toggle_feature
 
 			toggleFeatureOptions := appConfigurationService.NewToggleFeatureOptions(
-				"testString",
-				"testString",
+				"environment_id",
+				"feature_id",
 				true,
 			)
 
@@ -509,13 +514,13 @@ var _ = Describe(`AppConfigurationV1 Examples Tests`, func() {
 			fmt.Println("\nListProperties() result:")
 			// begin-list_properties
 			listPropertiesOptions := &appconfigurationv1.ListPropertiesOptions{
-				EnvironmentID: core.StringPtr("testString"),
+				EnvironmentID: core.StringPtr("environment_id"),
 				Expand: core.BoolPtr(true),
 				Sort: core.StringPtr("created_time"),
-				Tags: core.StringPtr("version 1.1, pre-release"),
-				Collections: []string{"testString"},
-				Segments: []string{"testString"},
-				Include: []string{"collections"},
+				Tags: core.StringPtr("version 1.1,pre-release"),
+				Collections: []string{"my-collection-id", "ghzindiapvtltd"},
+				Segments: []string{"my-segment-id", "beta-users"},
+				Include: []string{"collections", "rules"},
 				Limit: core.Int64Ptr(int64(10)),
 				Search: core.StringPtr("test tag"),
 			}
@@ -556,7 +561,7 @@ var _ = Describe(`AppConfigurationV1 Examples Tests`, func() {
 			}
 
 			createPropertyOptions := appConfigurationService.NewCreatePropertyOptions(
-				"testString",
+				"environment_id",
 				"Email property",
 				"email-property",
 				"BOOLEAN",
@@ -599,8 +604,8 @@ var _ = Describe(`AppConfigurationV1 Examples Tests`, func() {
 			}
 
 			updatePropertyOptions := appConfigurationService.NewUpdatePropertyOptions(
-				"testString",
-				"testString",
+				"environment_id",
+				"property_id",
 			)
 			updatePropertyOptions.SetName("Email property")
 			updatePropertyOptions.SetDescription("Property for email")
@@ -637,8 +642,8 @@ var _ = Describe(`AppConfigurationV1 Examples Tests`, func() {
 			}
 
 			updatePropertyValuesOptions := appConfigurationService.NewUpdatePropertyValuesOptions(
-				"testString",
-				"testString",
+				"environment_id",
+				"property_id",
 			)
 			updatePropertyValuesOptions.SetName("Email property")
 			updatePropertyValuesOptions.SetDescription("Property for email")
@@ -664,9 +669,10 @@ var _ = Describe(`AppConfigurationV1 Examples Tests`, func() {
 			// begin-get_property
 
 			getPropertyOptions := appConfigurationService.NewGetPropertyOptions(
-				"testString",
-				"testString",
+				"environment_id",
+				"property_id",
 			)
+			getPropertyOptions.SetInclude([]string{"collections", "rules"})
 
 			property, response, err := appConfigurationService.GetProperty(getPropertyOptions)
 			if err != nil {
@@ -687,7 +693,7 @@ var _ = Describe(`AppConfigurationV1 Examples Tests`, func() {
 			listSegmentsOptions := &appconfigurationv1.ListSegmentsOptions{
 				Expand: core.BoolPtr(true),
 				Sort: core.StringPtr("created_time"),
-				Tags: core.StringPtr("version 1.1, pre-release"),
+				Tags: core.StringPtr("version 1.1,pre-release"),
 				Include: core.StringPtr("rules"),
 				Limit: core.Int64Ptr(int64(10)),
 				Search: core.StringPtr("test tag"),
@@ -746,7 +752,7 @@ var _ = Describe(`AppConfigurationV1 Examples Tests`, func() {
 			// begin-update_segment
 
 			updateSegmentOptions := appConfigurationService.NewUpdateSegmentOptions(
-				"testString",
+				"segment_id",
 			)
 
 			segment, response, err := appConfigurationService.UpdateSegment(updateSegmentOptions)
@@ -767,8 +773,9 @@ var _ = Describe(`AppConfigurationV1 Examples Tests`, func() {
 			// begin-get_segment
 
 			getSegmentOptions := appConfigurationService.NewGetSegmentOptions(
-				"testString",
+				"segment_id",
 			)
+			getSegmentOptions.SetInclude([]string{"features", "properties"})
 
 			segment, response, err := appConfigurationService.GetSegment(getSegmentOptions)
 			if err != nil {
@@ -844,7 +851,7 @@ var _ = Describe(`AppConfigurationV1 Examples Tests`, func() {
 			// begin-update_gitconfig
 
 			updateGitconfigOptions := appConfigurationService.NewUpdateGitconfigOptions(
-				"testString",
+				"git_config_id",
 			)
 
 			gitConfig, response, err := appConfigurationService.UpdateGitconfig(updateGitconfigOptions)
@@ -865,7 +872,7 @@ var _ = Describe(`AppConfigurationV1 Examples Tests`, func() {
 			// begin-get_gitconfig
 
 			getGitconfigOptions := appConfigurationService.NewGetGitconfigOptions(
-				"testString",
+				"git_config_id",
 			)
 
 			gitConfig, response, err := appConfigurationService.GetGitconfig(getGitconfigOptions)
@@ -886,7 +893,7 @@ var _ = Describe(`AppConfigurationV1 Examples Tests`, func() {
 			// begin-promote_gitconfig
 
 			promoteGitconfigOptions := appConfigurationService.NewPromoteGitconfigOptions(
-				"testString",
+				"git_config_id",
 			)
 
 			gitConfigPromote, response, err := appConfigurationService.PromoteGitconfig(promoteGitconfigOptions)
@@ -907,7 +914,7 @@ var _ = Describe(`AppConfigurationV1 Examples Tests`, func() {
 			// begin-restore_gitconfig
 
 			restoreGitconfigOptions := appConfigurationService.NewRestoreGitconfigOptions(
-				"testString",
+				"git_config_id",
 			)
 
 			gitConfigRestore, response, err := appConfigurationService.RestoreGitconfig(restoreGitconfigOptions)
@@ -968,7 +975,7 @@ var _ = Describe(`AppConfigurationV1 Examples Tests`, func() {
 			// begin-list_workflowconfig
 
 			listWorkflowconfigOptions := appConfigurationService.NewListWorkflowconfigOptions(
-				"testString",
+				"environment_id",
 			)
 
 			workflowConfig, response, err := appConfigurationService.ListWorkflowconfig(listWorkflowconfigOptions)
@@ -996,7 +1003,7 @@ var _ = Describe(`AppConfigurationV1 Examples Tests`, func() {
 			}
 
 			createWorkflowconfigOptions := appConfigurationService.NewCreateWorkflowconfigOptions(
-				"testString",
+				"environment_id",
 				"https://xxxxx.service-now.com",
 				"WorkflowCRApprovers",
 				int64(10),
@@ -1022,7 +1029,7 @@ var _ = Describe(`AppConfigurationV1 Examples Tests`, func() {
 			// begin-update_Workflowconfig
 
 			updateWorkflowconfigOptions := appConfigurationService.NewUpdateWorkflowconfigOptions(
-				"testString",
+				"environment_id",
 			)
 
 			workflowConfig, response, err := appConfigurationService.UpdateWorkflowconfig(updateWorkflowconfigOptions)
@@ -1120,6 +1127,7 @@ var _ = Describe(`AppConfigurationV1 Examples Tests`, func() {
 			importConfigOptions.SetEnvironments([]appconfigurationv1.ImportEnvironmentSchema{*importEnvironmentSchemaModel})
 			importConfigOptions.SetCollections([]appconfigurationv1.ImportCollectionSchema{*importCollectionSchemaModel})
 			importConfigOptions.SetSegments([]appconfigurationv1.ImportSegmentSchema{*importSegmentSchemaModel})
+			importConfigOptions.SetClean("true")
 
 			importConfig, response, err := appConfigurationService.ImportConfig(importConfigOptions)
 			if err != nil {
@@ -1158,7 +1166,7 @@ var _ = Describe(`AppConfigurationV1 Examples Tests`, func() {
 			// begin-promote_restore_config
 
 			promoteRestoreConfigOptions := appConfigurationService.NewPromoteRestoreConfigOptions(
-				"testString",
+				"git_config_id",
 				"promote",
 			)
 
@@ -1179,7 +1187,7 @@ var _ = Describe(`AppConfigurationV1 Examples Tests`, func() {
 			// begin-delete_environment
 
 			deleteEnvironmentOptions := appConfigurationService.NewDeleteEnvironmentOptions(
-				"testString",
+				"environment_id",
 			)
 
 			response, err := appConfigurationService.DeleteEnvironment(deleteEnvironmentOptions)
@@ -1199,7 +1207,7 @@ var _ = Describe(`AppConfigurationV1 Examples Tests`, func() {
 			// begin-delete_collection
 
 			deleteCollectionOptions := appConfigurationService.NewDeleteCollectionOptions(
-				"testString",
+				"collection_id",
 			)
 
 			response, err := appConfigurationService.DeleteCollection(deleteCollectionOptions)
@@ -1219,8 +1227,8 @@ var _ = Describe(`AppConfigurationV1 Examples Tests`, func() {
 			// begin-delete_feature
 
 			deleteFeatureOptions := appConfigurationService.NewDeleteFeatureOptions(
-				"testString",
-				"testString",
+				"environment_id",
+				"feature_id",
 			)
 
 			response, err := appConfigurationService.DeleteFeature(deleteFeatureOptions)
@@ -1240,8 +1248,8 @@ var _ = Describe(`AppConfigurationV1 Examples Tests`, func() {
 			// begin-delete_property
 
 			deletePropertyOptions := appConfigurationService.NewDeletePropertyOptions(
-				"testString",
-				"testString",
+				"environment_id",
+				"property_id",
 			)
 
 			response, err := appConfigurationService.DeleteProperty(deletePropertyOptions)
@@ -1261,7 +1269,7 @@ var _ = Describe(`AppConfigurationV1 Examples Tests`, func() {
 			// begin-delete_segment
 
 			deleteSegmentOptions := appConfigurationService.NewDeleteSegmentOptions(
-				"testString",
+				"segment_id",
 			)
 
 			response, err := appConfigurationService.DeleteSegment(deleteSegmentOptions)
@@ -1281,7 +1289,7 @@ var _ = Describe(`AppConfigurationV1 Examples Tests`, func() {
 			// begin-delete_gitconfig
 
 			deleteGitconfigOptions := appConfigurationService.NewDeleteGitconfigOptions(
-				"testString",
+				"git_config_id",
 			)
 
 			response, err := appConfigurationService.DeleteGitconfig(deleteGitconfigOptions)
@@ -1301,7 +1309,7 @@ var _ = Describe(`AppConfigurationV1 Examples Tests`, func() {
 			// begin-delete_workflowconfig
 
 			deleteWorkflowconfigOptions := appConfigurationService.NewDeleteWorkflowconfigOptions(
-				"testString",
+				"environment_id",
 			)
 
 			response, err := appConfigurationService.DeleteWorkflowconfig(deleteWorkflowconfigOptions)
