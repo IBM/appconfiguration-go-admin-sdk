@@ -978,18 +978,18 @@ var _ = Describe(`AppConfigurationV1 Examples Tests`, func() {
 				"environment_id",
 			)
 
-			workflowConfig, response, err := appConfigurationService.ListWorkflowconfig(listWorkflowconfigOptions)
+			listWorkflowconfigResponse, response, err := appConfigurationService.ListWorkflowconfig(listWorkflowconfigOptions)
 			if err != nil {
 				panic(err)
 			}
-			b, _ := json.MarshalIndent(workflowConfig, "", "  ")
+			b, _ := json.MarshalIndent(listWorkflowconfigResponse, "", "  ")
 			fmt.Println(string(b))
 
 			// end-list_workflowconfig
 
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(200))
-			Expect(workflowConfig).ToNot(BeNil())
+			Expect(listWorkflowconfigResponse).ToNot(BeNil())
 		})
 		It(`CreateWorkflowconfig request example`, func() {
 			fmt.Println("\nCreateWorkflowconfig() result:")
@@ -1002,48 +1002,68 @@ var _ = Describe(`AppConfigurationV1 Examples Tests`, func() {
 				ClientSecret: core.StringPtr("clientsecret"),
 			}
 
+			createWorkflowconfigRequestModel := &appconfigurationv1.CreateWorkflowconfigRequestWorkflowConfig{
+				WorkflowURL: core.StringPtr("https://xxxxx.service-now.com"),
+				ApprovalGroupName: core.StringPtr("WorkflowCRApprovers"),
+				ApprovalExpiration: core.Int64Ptr(int64(10)),
+				WorkflowCredentials: workflowCredentialsModel,
+				Enabled: core.BoolPtr(true),
+			}
+
 			createWorkflowconfigOptions := appConfigurationService.NewCreateWorkflowconfigOptions(
 				"environment_id",
-				"https://xxxxx.service-now.com",
-				"WorkflowCRApprovers",
-				int64(10),
-				workflowCredentialsModel,
-				true,
+				createWorkflowconfigRequestModel,
 			)
 
-			workflowConfig, response, err := appConfigurationService.CreateWorkflowconfig(createWorkflowconfigOptions)
+			createWorkflowconfigResponse, response, err := appConfigurationService.CreateWorkflowconfig(createWorkflowconfigOptions)
 			if err != nil {
 				panic(err)
 			}
-			b, _ := json.MarshalIndent(workflowConfig, "", "  ")
+			b, _ := json.MarshalIndent(createWorkflowconfigResponse, "", "  ")
 			fmt.Println(string(b))
 
 			// end-create_Workflowconfig
 
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(201))
-			Expect(workflowConfig).ToNot(BeNil())
+			Expect(createWorkflowconfigResponse).ToNot(BeNil())
 		})
 		It(`UpdateWorkflowconfig request example`, func() {
 			fmt.Println("\nUpdateWorkflowconfig() result:")
 			// begin-update_Workflowconfig
 
+			workflowCredentialsModel := &appconfigurationv1.WorkflowCredentials{
+				Username: core.StringPtr("user"),
+				Password: core.StringPtr("updated password"),
+				ClientID: core.StringPtr("client id value"),
+				ClientSecret: core.StringPtr("updated client secret"),
+			}
+
+			updateWorkflowconfigRequestModel := &appconfigurationv1.UpdateWorkflowconfigRequestUpdateWorkflowConfig{
+				WorkflowURL: core.StringPtr("https://xxxxx.service-now.com"),
+				ApprovalGroupName: core.StringPtr("WorkflowCRApprovers"),
+				ApprovalExpiration: core.Int64Ptr(int64(5)),
+				WorkflowCredentials: workflowCredentialsModel,
+				Enabled: core.BoolPtr(true),
+			}
+
 			updateWorkflowconfigOptions := appConfigurationService.NewUpdateWorkflowconfigOptions(
 				"environment_id",
+				updateWorkflowconfigRequestModel,
 			)
 
-			workflowConfig, response, err := appConfigurationService.UpdateWorkflowconfig(updateWorkflowconfigOptions)
+			updateWorkflowconfigResponse, response, err := appConfigurationService.UpdateWorkflowconfig(updateWorkflowconfigOptions)
 			if err != nil {
 				panic(err)
 			}
-			b, _ := json.MarshalIndent(workflowConfig, "", "  ")
+			b, _ := json.MarshalIndent(updateWorkflowconfigResponse, "", "  ")
 			fmt.Println(string(b))
 
 			// end-update_Workflowconfig
 
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(201))
-			Expect(workflowConfig).ToNot(BeNil())
+			Expect(updateWorkflowconfigResponse).ToNot(BeNil())
 		})
 		It(`ImportConfig request example`, func() {
 			fmt.Println("\nImportConfig() result:")
@@ -1055,7 +1075,7 @@ var _ = Describe(`AppConfigurationV1 Examples Tests`, func() {
 
 			featureSegmentRuleModel := &appconfigurationv1.FeatureSegmentRule{
 				Rules: []appconfigurationv1.TargetSegments{*targetSegmentsModel},
-				Value: core.StringPtr("testString"),
+				Value: "testString",
 				Order: core.Int64Ptr(int64(38)),
 			}
 

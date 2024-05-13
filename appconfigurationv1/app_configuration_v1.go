@@ -15,7 +15,7 @@
  */
 
 /*
- * IBM OpenAPI SDK Code Generator Version: 3.85.0-75c38f8f-20240206-210220
+ * IBM OpenAPI SDK Code Generator Version: 3.89.1-ed9d96f4-20240417-193115
  */
 
 // Package appconfigurationv1 : Operations and models for the AppConfigurationV1 service
@@ -55,7 +55,7 @@ const ParameterizedServiceURL = "https://{region}.apprapp.cloud.ibm.com/apprapp/
 
 var defaultUrlVariables = map[string]string{
 	"region": "us-south",
-	"guid":   "provide-here-your-appconfig-instance-uuid",
+	"guid": "provide-here-your-appconfig-instance-uuid",
 }
 
 // AppConfigurationV1Options : Service options
@@ -74,22 +74,26 @@ func NewAppConfigurationV1UsingExternalConfig(options *AppConfigurationV1Options
 	if options.Authenticator == nil {
 		options.Authenticator, err = core.GetAuthenticatorFromEnvironment(options.ServiceName)
 		if err != nil {
+			err = core.SDKErrorf(err, "", "env-auth-error", common.GetComponentInfo())
 			return
 		}
 	}
 
 	appConfiguration, err = NewAppConfigurationV1(options)
+	err = core.RepurposeSDKProblem(err, "new-client-error")
 	if err != nil {
 		return
 	}
 
 	err = appConfiguration.Service.ConfigureService(options.ServiceName)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "client-config-error", common.GetComponentInfo())
 		return
 	}
 
 	if options.URL != "" {
 		err = appConfiguration.Service.SetServiceURL(options.URL)
+		err = core.RepurposeSDKProblem(err, "url-set-error")
 	}
 	return
 }
@@ -103,12 +107,14 @@ func NewAppConfigurationV1(options *AppConfigurationV1Options) (service *AppConf
 
 	baseService, err := core.NewBaseService(serviceOptions)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "new-base-error", common.GetComponentInfo())
 		return
 	}
 
 	if options.URL != "" {
 		err = baseService.SetServiceURL(options.URL)
 		if err != nil {
+			err = core.SDKErrorf(err, "", "set-url-error", common.GetComponentInfo())
 			return
 		}
 	}
@@ -122,7 +128,7 @@ func NewAppConfigurationV1(options *AppConfigurationV1Options) (service *AppConf
 
 // GetServiceURLForRegion returns the service URL to be used for the specified region
 func GetServiceURLForRegion(region string) (string, error) {
-	return "", fmt.Errorf("service does not support regional URLs")
+	return "", core.SDKErrorf(nil, "service does not support regional URLs", "no-regional-support", common.GetComponentInfo())
 }
 
 // Clone makes a copy of "appConfiguration" suitable for processing requests.
@@ -142,7 +148,11 @@ func ConstructServiceURL(providedUrlVariables map[string]string) (string, error)
 
 // SetServiceURL sets the service URL
 func (appConfiguration *AppConfigurationV1) SetServiceURL(url string) error {
-	return appConfiguration.Service.SetServiceURL(url)
+	err := appConfiguration.Service.SetServiceURL(url)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "url-set-error", common.GetComponentInfo())
+	}
+	return err
 }
 
 // GetServiceURL returns the service URL
@@ -179,13 +189,16 @@ func (appConfiguration *AppConfigurationV1) DisableRetries() {
 // ListEnvironments : Get list of Environments
 // List all the environments in the App Configuration service instance.
 func (appConfiguration *AppConfigurationV1) ListEnvironments(listEnvironmentsOptions *ListEnvironmentsOptions) (result *EnvironmentList, response *core.DetailedResponse, err error) {
-	return appConfiguration.ListEnvironmentsWithContext(context.Background(), listEnvironmentsOptions)
+	result, response, err = appConfiguration.ListEnvironmentsWithContext(context.Background(), listEnvironmentsOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
 }
 
 // ListEnvironmentsWithContext is an alternate form of the ListEnvironments method which supports a Context parameter
 func (appConfiguration *AppConfigurationV1) ListEnvironmentsWithContext(ctx context.Context, listEnvironmentsOptions *ListEnvironmentsOptions) (result *EnvironmentList, response *core.DetailedResponse, err error) {
 	err = core.ValidateStruct(listEnvironmentsOptions, "listEnvironmentsOptions")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
 		return
 	}
 
@@ -194,6 +207,7 @@ func (appConfiguration *AppConfigurationV1) ListEnvironmentsWithContext(ctx cont
 	builder.EnableGzipCompression = appConfiguration.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(appConfiguration.Service.Options.URL, `/environments`, nil)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
 		return
 	}
 
@@ -231,17 +245,21 @@ func (appConfiguration *AppConfigurationV1) ListEnvironmentsWithContext(ctx cont
 
 	request, err := builder.Build()
 	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
 		return
 	}
 
 	var rawResponse map[string]json.RawMessage
 	response, err = appConfiguration.Service.Request(request, &rawResponse)
 	if err != nil {
+		core.EnrichHTTPProblem(err, "list_environments", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
 		return
 	}
 	if rawResponse != nil {
 		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalEnvironmentList)
 		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-resp-error", common.GetComponentInfo())
 			return
 		}
 		response.Result = result
@@ -253,17 +271,21 @@ func (appConfiguration *AppConfigurationV1) ListEnvironmentsWithContext(ctx cont
 // CreateEnvironment : Create Environment
 // Create an environment.
 func (appConfiguration *AppConfigurationV1) CreateEnvironment(createEnvironmentOptions *CreateEnvironmentOptions) (result *Environment, response *core.DetailedResponse, err error) {
-	return appConfiguration.CreateEnvironmentWithContext(context.Background(), createEnvironmentOptions)
+	result, response, err = appConfiguration.CreateEnvironmentWithContext(context.Background(), createEnvironmentOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
 }
 
 // CreateEnvironmentWithContext is an alternate form of the CreateEnvironment method which supports a Context parameter
 func (appConfiguration *AppConfigurationV1) CreateEnvironmentWithContext(ctx context.Context, createEnvironmentOptions *CreateEnvironmentOptions) (result *Environment, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(createEnvironmentOptions, "createEnvironmentOptions cannot be nil")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "unexpected-nil-param", common.GetComponentInfo())
 		return
 	}
 	err = core.ValidateStruct(createEnvironmentOptions, "createEnvironmentOptions")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
 		return
 	}
 
@@ -272,6 +294,7 @@ func (appConfiguration *AppConfigurationV1) CreateEnvironmentWithContext(ctx con
 	builder.EnableGzipCompression = appConfiguration.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(appConfiguration.Service.Options.URL, `/environments`, nil)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
 		return
 	}
 
@@ -304,22 +327,27 @@ func (appConfiguration *AppConfigurationV1) CreateEnvironmentWithContext(ctx con
 	}
 	_, err = builder.SetBodyContentJSON(body)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "set-json-body-error", common.GetComponentInfo())
 		return
 	}
 
 	request, err := builder.Build()
 	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
 		return
 	}
 
 	var rawResponse map[string]json.RawMessage
 	response, err = appConfiguration.Service.Request(request, &rawResponse)
 	if err != nil {
+		core.EnrichHTTPProblem(err, "create_environment", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
 		return
 	}
 	if rawResponse != nil {
 		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalEnvironment)
 		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-resp-error", common.GetComponentInfo())
 			return
 		}
 		response.Result = result
@@ -331,17 +359,21 @@ func (appConfiguration *AppConfigurationV1) CreateEnvironmentWithContext(ctx con
 // UpdateEnvironment : Update Environment
 // Update an environment.
 func (appConfiguration *AppConfigurationV1) UpdateEnvironment(updateEnvironmentOptions *UpdateEnvironmentOptions) (result *Environment, response *core.DetailedResponse, err error) {
-	return appConfiguration.UpdateEnvironmentWithContext(context.Background(), updateEnvironmentOptions)
+	result, response, err = appConfiguration.UpdateEnvironmentWithContext(context.Background(), updateEnvironmentOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
 }
 
 // UpdateEnvironmentWithContext is an alternate form of the UpdateEnvironment method which supports a Context parameter
 func (appConfiguration *AppConfigurationV1) UpdateEnvironmentWithContext(ctx context.Context, updateEnvironmentOptions *UpdateEnvironmentOptions) (result *Environment, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(updateEnvironmentOptions, "updateEnvironmentOptions cannot be nil")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "unexpected-nil-param", common.GetComponentInfo())
 		return
 	}
 	err = core.ValidateStruct(updateEnvironmentOptions, "updateEnvironmentOptions")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
 		return
 	}
 
@@ -354,6 +386,7 @@ func (appConfiguration *AppConfigurationV1) UpdateEnvironmentWithContext(ctx con
 	builder.EnableGzipCompression = appConfiguration.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(appConfiguration.Service.Options.URL, `/environments/{environment_id}`, pathParamsMap)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
 		return
 	}
 
@@ -383,22 +416,27 @@ func (appConfiguration *AppConfigurationV1) UpdateEnvironmentWithContext(ctx con
 	}
 	_, err = builder.SetBodyContentJSON(body)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "set-json-body-error", common.GetComponentInfo())
 		return
 	}
 
 	request, err := builder.Build()
 	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
 		return
 	}
 
 	var rawResponse map[string]json.RawMessage
 	response, err = appConfiguration.Service.Request(request, &rawResponse)
 	if err != nil {
+		core.EnrichHTTPProblem(err, "update_environment", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
 		return
 	}
 	if rawResponse != nil {
 		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalEnvironment)
 		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-resp-error", common.GetComponentInfo())
 			return
 		}
 		response.Result = result
@@ -410,17 +448,21 @@ func (appConfiguration *AppConfigurationV1) UpdateEnvironmentWithContext(ctx con
 // GetEnvironment : Get Environment
 // Retrieve the details of the environment.
 func (appConfiguration *AppConfigurationV1) GetEnvironment(getEnvironmentOptions *GetEnvironmentOptions) (result *Environment, response *core.DetailedResponse, err error) {
-	return appConfiguration.GetEnvironmentWithContext(context.Background(), getEnvironmentOptions)
+	result, response, err = appConfiguration.GetEnvironmentWithContext(context.Background(), getEnvironmentOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
 }
 
 // GetEnvironmentWithContext is an alternate form of the GetEnvironment method which supports a Context parameter
 func (appConfiguration *AppConfigurationV1) GetEnvironmentWithContext(ctx context.Context, getEnvironmentOptions *GetEnvironmentOptions) (result *Environment, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(getEnvironmentOptions, "getEnvironmentOptions cannot be nil")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "unexpected-nil-param", common.GetComponentInfo())
 		return
 	}
 	err = core.ValidateStruct(getEnvironmentOptions, "getEnvironmentOptions")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
 		return
 	}
 
@@ -433,6 +475,7 @@ func (appConfiguration *AppConfigurationV1) GetEnvironmentWithContext(ctx contex
 	builder.EnableGzipCompression = appConfiguration.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(appConfiguration.Service.Options.URL, `/environments/{environment_id}`, pathParamsMap)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
 		return
 	}
 
@@ -455,17 +498,21 @@ func (appConfiguration *AppConfigurationV1) GetEnvironmentWithContext(ctx contex
 
 	request, err := builder.Build()
 	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
 		return
 	}
 
 	var rawResponse map[string]json.RawMessage
 	response, err = appConfiguration.Service.Request(request, &rawResponse)
 	if err != nil {
+		core.EnrichHTTPProblem(err, "get_environment", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
 		return
 	}
 	if rawResponse != nil {
 		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalEnvironment)
 		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-resp-error", common.GetComponentInfo())
 			return
 		}
 		response.Result = result
@@ -477,17 +524,21 @@ func (appConfiguration *AppConfigurationV1) GetEnvironmentWithContext(ctx contex
 // DeleteEnvironment : Delete Environment
 // Delete an Environment.
 func (appConfiguration *AppConfigurationV1) DeleteEnvironment(deleteEnvironmentOptions *DeleteEnvironmentOptions) (response *core.DetailedResponse, err error) {
-	return appConfiguration.DeleteEnvironmentWithContext(context.Background(), deleteEnvironmentOptions)
+	response, err = appConfiguration.DeleteEnvironmentWithContext(context.Background(), deleteEnvironmentOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
 }
 
 // DeleteEnvironmentWithContext is an alternate form of the DeleteEnvironment method which supports a Context parameter
 func (appConfiguration *AppConfigurationV1) DeleteEnvironmentWithContext(ctx context.Context, deleteEnvironmentOptions *DeleteEnvironmentOptions) (response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(deleteEnvironmentOptions, "deleteEnvironmentOptions cannot be nil")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "unexpected-nil-param", common.GetComponentInfo())
 		return
 	}
 	err = core.ValidateStruct(deleteEnvironmentOptions, "deleteEnvironmentOptions")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
 		return
 	}
 
@@ -500,6 +551,7 @@ func (appConfiguration *AppConfigurationV1) DeleteEnvironmentWithContext(ctx con
 	builder.EnableGzipCompression = appConfiguration.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(appConfiguration.Service.Options.URL, `/environments/{environment_id}`, pathParamsMap)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
 		return
 	}
 
@@ -514,10 +566,16 @@ func (appConfiguration *AppConfigurationV1) DeleteEnvironmentWithContext(ctx con
 
 	request, err := builder.Build()
 	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
 		return
 	}
 
 	response, err = appConfiguration.Service.Request(request, nil)
+	if err != nil {
+		core.EnrichHTTPProblem(err, "delete_environment", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
+		return
+	}
 
 	return
 }
@@ -525,13 +583,16 @@ func (appConfiguration *AppConfigurationV1) DeleteEnvironmentWithContext(ctx con
 // ListCollections : Get list of Collections
 // List of all the collections in the App Configuration service instance.
 func (appConfiguration *AppConfigurationV1) ListCollections(listCollectionsOptions *ListCollectionsOptions) (result *CollectionList, response *core.DetailedResponse, err error) {
-	return appConfiguration.ListCollectionsWithContext(context.Background(), listCollectionsOptions)
+	result, response, err = appConfiguration.ListCollectionsWithContext(context.Background(), listCollectionsOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
 }
 
 // ListCollectionsWithContext is an alternate form of the ListCollections method which supports a Context parameter
 func (appConfiguration *AppConfigurationV1) ListCollectionsWithContext(ctx context.Context, listCollectionsOptions *ListCollectionsOptions) (result *CollectionList, response *core.DetailedResponse, err error) {
 	err = core.ValidateStruct(listCollectionsOptions, "listCollectionsOptions")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
 		return
 	}
 
@@ -540,6 +601,7 @@ func (appConfiguration *AppConfigurationV1) ListCollectionsWithContext(ctx conte
 	builder.EnableGzipCompression = appConfiguration.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(appConfiguration.Service.Options.URL, `/collections`, nil)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
 		return
 	}
 
@@ -583,17 +645,21 @@ func (appConfiguration *AppConfigurationV1) ListCollectionsWithContext(ctx conte
 
 	request, err := builder.Build()
 	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
 		return
 	}
 
 	var rawResponse map[string]json.RawMessage
 	response, err = appConfiguration.Service.Request(request, &rawResponse)
 	if err != nil {
+		core.EnrichHTTPProblem(err, "list_collections", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
 		return
 	}
 	if rawResponse != nil {
 		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalCollectionList)
 		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-resp-error", common.GetComponentInfo())
 			return
 		}
 		response.Result = result
@@ -605,17 +671,21 @@ func (appConfiguration *AppConfigurationV1) ListCollectionsWithContext(ctx conte
 // CreateCollection : Create Collection
 // Create a collection.
 func (appConfiguration *AppConfigurationV1) CreateCollection(createCollectionOptions *CreateCollectionOptions) (result *CollectionLite, response *core.DetailedResponse, err error) {
-	return appConfiguration.CreateCollectionWithContext(context.Background(), createCollectionOptions)
+	result, response, err = appConfiguration.CreateCollectionWithContext(context.Background(), createCollectionOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
 }
 
 // CreateCollectionWithContext is an alternate form of the CreateCollection method which supports a Context parameter
 func (appConfiguration *AppConfigurationV1) CreateCollectionWithContext(ctx context.Context, createCollectionOptions *CreateCollectionOptions) (result *CollectionLite, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(createCollectionOptions, "createCollectionOptions cannot be nil")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "unexpected-nil-param", common.GetComponentInfo())
 		return
 	}
 	err = core.ValidateStruct(createCollectionOptions, "createCollectionOptions")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
 		return
 	}
 
@@ -624,6 +694,7 @@ func (appConfiguration *AppConfigurationV1) CreateCollectionWithContext(ctx cont
 	builder.EnableGzipCompression = appConfiguration.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(appConfiguration.Service.Options.URL, `/collections`, nil)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
 		return
 	}
 
@@ -653,22 +724,27 @@ func (appConfiguration *AppConfigurationV1) CreateCollectionWithContext(ctx cont
 	}
 	_, err = builder.SetBodyContentJSON(body)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "set-json-body-error", common.GetComponentInfo())
 		return
 	}
 
 	request, err := builder.Build()
 	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
 		return
 	}
 
 	var rawResponse map[string]json.RawMessage
 	response, err = appConfiguration.Service.Request(request, &rawResponse)
 	if err != nil {
+		core.EnrichHTTPProblem(err, "create_collection", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
 		return
 	}
 	if rawResponse != nil {
 		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalCollectionLite)
 		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-resp-error", common.GetComponentInfo())
 			return
 		}
 		response.Result = result
@@ -680,17 +756,21 @@ func (appConfiguration *AppConfigurationV1) CreateCollectionWithContext(ctx cont
 // UpdateCollection : Update Collection
 // Update the collection name, tags and description. Collection Id cannot be updated.
 func (appConfiguration *AppConfigurationV1) UpdateCollection(updateCollectionOptions *UpdateCollectionOptions) (result *CollectionLite, response *core.DetailedResponse, err error) {
-	return appConfiguration.UpdateCollectionWithContext(context.Background(), updateCollectionOptions)
+	result, response, err = appConfiguration.UpdateCollectionWithContext(context.Background(), updateCollectionOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
 }
 
 // UpdateCollectionWithContext is an alternate form of the UpdateCollection method which supports a Context parameter
 func (appConfiguration *AppConfigurationV1) UpdateCollectionWithContext(ctx context.Context, updateCollectionOptions *UpdateCollectionOptions) (result *CollectionLite, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(updateCollectionOptions, "updateCollectionOptions cannot be nil")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "unexpected-nil-param", common.GetComponentInfo())
 		return
 	}
 	err = core.ValidateStruct(updateCollectionOptions, "updateCollectionOptions")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
 		return
 	}
 
@@ -703,6 +783,7 @@ func (appConfiguration *AppConfigurationV1) UpdateCollectionWithContext(ctx cont
 	builder.EnableGzipCompression = appConfiguration.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(appConfiguration.Service.Options.URL, `/collections/{collection_id}`, pathParamsMap)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
 		return
 	}
 
@@ -729,22 +810,27 @@ func (appConfiguration *AppConfigurationV1) UpdateCollectionWithContext(ctx cont
 	}
 	_, err = builder.SetBodyContentJSON(body)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "set-json-body-error", common.GetComponentInfo())
 		return
 	}
 
 	request, err := builder.Build()
 	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
 		return
 	}
 
 	var rawResponse map[string]json.RawMessage
 	response, err = appConfiguration.Service.Request(request, &rawResponse)
 	if err != nil {
+		core.EnrichHTTPProblem(err, "update_collection", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
 		return
 	}
 	if rawResponse != nil {
 		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalCollectionLite)
 		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-resp-error", common.GetComponentInfo())
 			return
 		}
 		response.Result = result
@@ -756,17 +842,21 @@ func (appConfiguration *AppConfigurationV1) UpdateCollectionWithContext(ctx cont
 // GetCollection : Get Collection
 // Retrieve the details of the collection.
 func (appConfiguration *AppConfigurationV1) GetCollection(getCollectionOptions *GetCollectionOptions) (result *Collection, response *core.DetailedResponse, err error) {
-	return appConfiguration.GetCollectionWithContext(context.Background(), getCollectionOptions)
+	result, response, err = appConfiguration.GetCollectionWithContext(context.Background(), getCollectionOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
 }
 
 // GetCollectionWithContext is an alternate form of the GetCollection method which supports a Context parameter
 func (appConfiguration *AppConfigurationV1) GetCollectionWithContext(ctx context.Context, getCollectionOptions *GetCollectionOptions) (result *Collection, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(getCollectionOptions, "getCollectionOptions cannot be nil")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "unexpected-nil-param", common.GetComponentInfo())
 		return
 	}
 	err = core.ValidateStruct(getCollectionOptions, "getCollectionOptions")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
 		return
 	}
 
@@ -779,6 +869,7 @@ func (appConfiguration *AppConfigurationV1) GetCollectionWithContext(ctx context
 	builder.EnableGzipCompression = appConfiguration.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(appConfiguration.Service.Options.URL, `/collections/{collection_id}`, pathParamsMap)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
 		return
 	}
 
@@ -801,17 +892,21 @@ func (appConfiguration *AppConfigurationV1) GetCollectionWithContext(ctx context
 
 	request, err := builder.Build()
 	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
 		return
 	}
 
 	var rawResponse map[string]json.RawMessage
 	response, err = appConfiguration.Service.Request(request, &rawResponse)
 	if err != nil {
+		core.EnrichHTTPProblem(err, "get_collection", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
 		return
 	}
 	if rawResponse != nil {
 		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalCollection)
 		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-resp-error", common.GetComponentInfo())
 			return
 		}
 		response.Result = result
@@ -823,17 +918,21 @@ func (appConfiguration *AppConfigurationV1) GetCollectionWithContext(ctx context
 // DeleteCollection : Delete Collection
 // Delete the collection.
 func (appConfiguration *AppConfigurationV1) DeleteCollection(deleteCollectionOptions *DeleteCollectionOptions) (response *core.DetailedResponse, err error) {
-	return appConfiguration.DeleteCollectionWithContext(context.Background(), deleteCollectionOptions)
+	response, err = appConfiguration.DeleteCollectionWithContext(context.Background(), deleteCollectionOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
 }
 
 // DeleteCollectionWithContext is an alternate form of the DeleteCollection method which supports a Context parameter
 func (appConfiguration *AppConfigurationV1) DeleteCollectionWithContext(ctx context.Context, deleteCollectionOptions *DeleteCollectionOptions) (response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(deleteCollectionOptions, "deleteCollectionOptions cannot be nil")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "unexpected-nil-param", common.GetComponentInfo())
 		return
 	}
 	err = core.ValidateStruct(deleteCollectionOptions, "deleteCollectionOptions")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
 		return
 	}
 
@@ -846,6 +945,7 @@ func (appConfiguration *AppConfigurationV1) DeleteCollectionWithContext(ctx cont
 	builder.EnableGzipCompression = appConfiguration.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(appConfiguration.Service.Options.URL, `/collections/{collection_id}`, pathParamsMap)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
 		return
 	}
 
@@ -860,10 +960,16 @@ func (appConfiguration *AppConfigurationV1) DeleteCollectionWithContext(ctx cont
 
 	request, err := builder.Build()
 	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
 		return
 	}
 
 	response, err = appConfiguration.Service.Request(request, nil)
+	if err != nil {
+		core.EnrichHTTPProblem(err, "delete_collection", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
+		return
+	}
 
 	return
 }
@@ -871,17 +977,21 @@ func (appConfiguration *AppConfigurationV1) DeleteCollectionWithContext(ctx cont
 // ListFeatures : Get list of Features
 // List all the feature flags in the specified environment.
 func (appConfiguration *AppConfigurationV1) ListFeatures(listFeaturesOptions *ListFeaturesOptions) (result *FeaturesList, response *core.DetailedResponse, err error) {
-	return appConfiguration.ListFeaturesWithContext(context.Background(), listFeaturesOptions)
+	result, response, err = appConfiguration.ListFeaturesWithContext(context.Background(), listFeaturesOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
 }
 
 // ListFeaturesWithContext is an alternate form of the ListFeatures method which supports a Context parameter
 func (appConfiguration *AppConfigurationV1) ListFeaturesWithContext(ctx context.Context, listFeaturesOptions *ListFeaturesOptions) (result *FeaturesList, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(listFeaturesOptions, "listFeaturesOptions cannot be nil")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "unexpected-nil-param", common.GetComponentInfo())
 		return
 	}
 	err = core.ValidateStruct(listFeaturesOptions, "listFeaturesOptions")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
 		return
 	}
 
@@ -894,6 +1004,7 @@ func (appConfiguration *AppConfigurationV1) ListFeaturesWithContext(ctx context.
 	builder.EnableGzipCompression = appConfiguration.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(appConfiguration.Service.Options.URL, `/environments/{environment_id}/features`, pathParamsMap)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
 		return
 	}
 
@@ -937,17 +1048,21 @@ func (appConfiguration *AppConfigurationV1) ListFeaturesWithContext(ctx context.
 
 	request, err := builder.Build()
 	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
 		return
 	}
 
 	var rawResponse map[string]json.RawMessage
 	response, err = appConfiguration.Service.Request(request, &rawResponse)
 	if err != nil {
+		core.EnrichHTTPProblem(err, "list_features", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
 		return
 	}
 	if rawResponse != nil {
 		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalFeaturesList)
 		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-resp-error", common.GetComponentInfo())
 			return
 		}
 		response.Result = result
@@ -959,17 +1074,21 @@ func (appConfiguration *AppConfigurationV1) ListFeaturesWithContext(ctx context.
 // CreateFeature : Create Feature
 // Create a feature flag.
 func (appConfiguration *AppConfigurationV1) CreateFeature(createFeatureOptions *CreateFeatureOptions) (result *Feature, response *core.DetailedResponse, err error) {
-	return appConfiguration.CreateFeatureWithContext(context.Background(), createFeatureOptions)
+	result, response, err = appConfiguration.CreateFeatureWithContext(context.Background(), createFeatureOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
 }
 
 // CreateFeatureWithContext is an alternate form of the CreateFeature method which supports a Context parameter
 func (appConfiguration *AppConfigurationV1) CreateFeatureWithContext(ctx context.Context, createFeatureOptions *CreateFeatureOptions) (result *Feature, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(createFeatureOptions, "createFeatureOptions cannot be nil")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "unexpected-nil-param", common.GetComponentInfo())
 		return
 	}
 	err = core.ValidateStruct(createFeatureOptions, "createFeatureOptions")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
 		return
 	}
 
@@ -982,6 +1101,7 @@ func (appConfiguration *AppConfigurationV1) CreateFeatureWithContext(ctx context
 	builder.EnableGzipCompression = appConfiguration.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(appConfiguration.Service.Options.URL, `/environments/{environment_id}/features`, pathParamsMap)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
 		return
 	}
 
@@ -1035,22 +1155,27 @@ func (appConfiguration *AppConfigurationV1) CreateFeatureWithContext(ctx context
 	}
 	_, err = builder.SetBodyContentJSON(body)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "set-json-body-error", common.GetComponentInfo())
 		return
 	}
 
 	request, err := builder.Build()
 	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
 		return
 	}
 
 	var rawResponse map[string]json.RawMessage
 	response, err = appConfiguration.Service.Request(request, &rawResponse)
 	if err != nil {
+		core.EnrichHTTPProblem(err, "create_feature", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
 		return
 	}
 	if rawResponse != nil {
 		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalFeature)
 		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-resp-error", common.GetComponentInfo())
 			return
 		}
 		response.Result = result
@@ -1062,23 +1187,27 @@ func (appConfiguration *AppConfigurationV1) CreateFeatureWithContext(ctx context
 // UpdateFeature : Update Feature
 // Update a feature flag details.
 func (appConfiguration *AppConfigurationV1) UpdateFeature(updateFeatureOptions *UpdateFeatureOptions) (result *Feature, response *core.DetailedResponse, err error) {
-	return appConfiguration.UpdateFeatureWithContext(context.Background(), updateFeatureOptions)
+	result, response, err = appConfiguration.UpdateFeatureWithContext(context.Background(), updateFeatureOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
 }
 
 // UpdateFeatureWithContext is an alternate form of the UpdateFeature method which supports a Context parameter
 func (appConfiguration *AppConfigurationV1) UpdateFeatureWithContext(ctx context.Context, updateFeatureOptions *UpdateFeatureOptions) (result *Feature, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(updateFeatureOptions, "updateFeatureOptions cannot be nil")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "unexpected-nil-param", common.GetComponentInfo())
 		return
 	}
 	err = core.ValidateStruct(updateFeatureOptions, "updateFeatureOptions")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
 		return
 	}
 
 	pathParamsMap := map[string]string{
 		"environment_id": *updateFeatureOptions.EnvironmentID,
-		"feature_id":     *updateFeatureOptions.FeatureID,
+		"feature_id": *updateFeatureOptions.FeatureID,
 	}
 
 	builder := core.NewRequestBuilder(core.PUT)
@@ -1086,6 +1215,7 @@ func (appConfiguration *AppConfigurationV1) UpdateFeatureWithContext(ctx context
 	builder.EnableGzipCompression = appConfiguration.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(appConfiguration.Service.Options.URL, `/environments/{environment_id}/features/{feature_id}`, pathParamsMap)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
 		return
 	}
 
@@ -1130,22 +1260,27 @@ func (appConfiguration *AppConfigurationV1) UpdateFeatureWithContext(ctx context
 	}
 	_, err = builder.SetBodyContentJSON(body)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "set-json-body-error", common.GetComponentInfo())
 		return
 	}
 
 	request, err := builder.Build()
 	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
 		return
 	}
 
 	var rawResponse map[string]json.RawMessage
 	response, err = appConfiguration.Service.Request(request, &rawResponse)
 	if err != nil {
+		core.EnrichHTTPProblem(err, "update_feature", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
 		return
 	}
 	if rawResponse != nil {
 		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalFeature)
 		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-resp-error", common.GetComponentInfo())
 			return
 		}
 		response.Result = result
@@ -1159,23 +1294,27 @@ func (appConfiguration *AppConfigurationV1) UpdateFeatureWithContext(ctx context
 // feature name, feature enabled_value, feature disabled_value, tags, description and feature segment rules, however
 // this method does not allow toggling the feature flag and assigning feature to a collection.
 func (appConfiguration *AppConfigurationV1) UpdateFeatureValues(updateFeatureValuesOptions *UpdateFeatureValuesOptions) (result *Feature, response *core.DetailedResponse, err error) {
-	return appConfiguration.UpdateFeatureValuesWithContext(context.Background(), updateFeatureValuesOptions)
+	result, response, err = appConfiguration.UpdateFeatureValuesWithContext(context.Background(), updateFeatureValuesOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
 }
 
 // UpdateFeatureValuesWithContext is an alternate form of the UpdateFeatureValues method which supports a Context parameter
 func (appConfiguration *AppConfigurationV1) UpdateFeatureValuesWithContext(ctx context.Context, updateFeatureValuesOptions *UpdateFeatureValuesOptions) (result *Feature, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(updateFeatureValuesOptions, "updateFeatureValuesOptions cannot be nil")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "unexpected-nil-param", common.GetComponentInfo())
 		return
 	}
 	err = core.ValidateStruct(updateFeatureValuesOptions, "updateFeatureValuesOptions")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
 		return
 	}
 
 	pathParamsMap := map[string]string{
 		"environment_id": *updateFeatureValuesOptions.EnvironmentID,
-		"feature_id":     *updateFeatureValuesOptions.FeatureID,
+		"feature_id": *updateFeatureValuesOptions.FeatureID,
 	}
 
 	builder := core.NewRequestBuilder(core.PATCH)
@@ -1183,6 +1322,7 @@ func (appConfiguration *AppConfigurationV1) UpdateFeatureValuesWithContext(ctx c
 	builder.EnableGzipCompression = appConfiguration.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(appConfiguration.Service.Options.URL, `/environments/{environment_id}/features/{feature_id}`, pathParamsMap)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
 		return
 	}
 
@@ -1221,22 +1361,27 @@ func (appConfiguration *AppConfigurationV1) UpdateFeatureValuesWithContext(ctx c
 	}
 	_, err = builder.SetBodyContentJSON(body)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "set-json-body-error", common.GetComponentInfo())
 		return
 	}
 
 	request, err := builder.Build()
 	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
 		return
 	}
 
 	var rawResponse map[string]json.RawMessage
 	response, err = appConfiguration.Service.Request(request, &rawResponse)
 	if err != nil {
+		core.EnrichHTTPProblem(err, "update_feature_values", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
 		return
 	}
 	if rawResponse != nil {
 		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalFeature)
 		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-resp-error", common.GetComponentInfo())
 			return
 		}
 		response.Result = result
@@ -1248,23 +1393,27 @@ func (appConfiguration *AppConfigurationV1) UpdateFeatureValuesWithContext(ctx c
 // GetFeature : Get Feature
 // Retrieve details of a feature.
 func (appConfiguration *AppConfigurationV1) GetFeature(getFeatureOptions *GetFeatureOptions) (result *Feature, response *core.DetailedResponse, err error) {
-	return appConfiguration.GetFeatureWithContext(context.Background(), getFeatureOptions)
+	result, response, err = appConfiguration.GetFeatureWithContext(context.Background(), getFeatureOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
 }
 
 // GetFeatureWithContext is an alternate form of the GetFeature method which supports a Context parameter
 func (appConfiguration *AppConfigurationV1) GetFeatureWithContext(ctx context.Context, getFeatureOptions *GetFeatureOptions) (result *Feature, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(getFeatureOptions, "getFeatureOptions cannot be nil")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "unexpected-nil-param", common.GetComponentInfo())
 		return
 	}
 	err = core.ValidateStruct(getFeatureOptions, "getFeatureOptions")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
 		return
 	}
 
 	pathParamsMap := map[string]string{
 		"environment_id": *getFeatureOptions.EnvironmentID,
-		"feature_id":     *getFeatureOptions.FeatureID,
+		"feature_id": *getFeatureOptions.FeatureID,
 	}
 
 	builder := core.NewRequestBuilder(core.GET)
@@ -1272,6 +1421,7 @@ func (appConfiguration *AppConfigurationV1) GetFeatureWithContext(ctx context.Co
 	builder.EnableGzipCompression = appConfiguration.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(appConfiguration.Service.Options.URL, `/environments/{environment_id}/features/{feature_id}`, pathParamsMap)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
 		return
 	}
 
@@ -1291,17 +1441,21 @@ func (appConfiguration *AppConfigurationV1) GetFeatureWithContext(ctx context.Co
 
 	request, err := builder.Build()
 	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
 		return
 	}
 
 	var rawResponse map[string]json.RawMessage
 	response, err = appConfiguration.Service.Request(request, &rawResponse)
 	if err != nil {
+		core.EnrichHTTPProblem(err, "get_feature", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
 		return
 	}
 	if rawResponse != nil {
 		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalFeature)
 		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-resp-error", common.GetComponentInfo())
 			return
 		}
 		response.Result = result
@@ -1313,23 +1467,27 @@ func (appConfiguration *AppConfigurationV1) GetFeatureWithContext(ctx context.Co
 // DeleteFeature : Delete Feature
 // Delete a feature flag.
 func (appConfiguration *AppConfigurationV1) DeleteFeature(deleteFeatureOptions *DeleteFeatureOptions) (response *core.DetailedResponse, err error) {
-	return appConfiguration.DeleteFeatureWithContext(context.Background(), deleteFeatureOptions)
+	response, err = appConfiguration.DeleteFeatureWithContext(context.Background(), deleteFeatureOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
 }
 
 // DeleteFeatureWithContext is an alternate form of the DeleteFeature method which supports a Context parameter
 func (appConfiguration *AppConfigurationV1) DeleteFeatureWithContext(ctx context.Context, deleteFeatureOptions *DeleteFeatureOptions) (response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(deleteFeatureOptions, "deleteFeatureOptions cannot be nil")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "unexpected-nil-param", common.GetComponentInfo())
 		return
 	}
 	err = core.ValidateStruct(deleteFeatureOptions, "deleteFeatureOptions")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
 		return
 	}
 
 	pathParamsMap := map[string]string{
 		"environment_id": *deleteFeatureOptions.EnvironmentID,
-		"feature_id":     *deleteFeatureOptions.FeatureID,
+		"feature_id": *deleteFeatureOptions.FeatureID,
 	}
 
 	builder := core.NewRequestBuilder(core.DELETE)
@@ -1337,6 +1495,7 @@ func (appConfiguration *AppConfigurationV1) DeleteFeatureWithContext(ctx context
 	builder.EnableGzipCompression = appConfiguration.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(appConfiguration.Service.Options.URL, `/environments/{environment_id}/features/{feature_id}`, pathParamsMap)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
 		return
 	}
 
@@ -1351,10 +1510,16 @@ func (appConfiguration *AppConfigurationV1) DeleteFeatureWithContext(ctx context
 
 	request, err := builder.Build()
 	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
 		return
 	}
 
 	response, err = appConfiguration.Service.Request(request, nil)
+	if err != nil {
+		core.EnrichHTTPProblem(err, "delete_feature", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
+		return
+	}
 
 	return
 }
@@ -1362,23 +1527,27 @@ func (appConfiguration *AppConfigurationV1) DeleteFeatureWithContext(ctx context
 // ToggleFeature : Toggle Feature
 // Toggle a feature.
 func (appConfiguration *AppConfigurationV1) ToggleFeature(toggleFeatureOptions *ToggleFeatureOptions) (result *Feature, response *core.DetailedResponse, err error) {
-	return appConfiguration.ToggleFeatureWithContext(context.Background(), toggleFeatureOptions)
+	result, response, err = appConfiguration.ToggleFeatureWithContext(context.Background(), toggleFeatureOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
 }
 
 // ToggleFeatureWithContext is an alternate form of the ToggleFeature method which supports a Context parameter
 func (appConfiguration *AppConfigurationV1) ToggleFeatureWithContext(ctx context.Context, toggleFeatureOptions *ToggleFeatureOptions) (result *Feature, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(toggleFeatureOptions, "toggleFeatureOptions cannot be nil")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "unexpected-nil-param", common.GetComponentInfo())
 		return
 	}
 	err = core.ValidateStruct(toggleFeatureOptions, "toggleFeatureOptions")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
 		return
 	}
 
 	pathParamsMap := map[string]string{
 		"environment_id": *toggleFeatureOptions.EnvironmentID,
-		"feature_id":     *toggleFeatureOptions.FeatureID,
+		"feature_id": *toggleFeatureOptions.FeatureID,
 	}
 
 	builder := core.NewRequestBuilder(core.PUT)
@@ -1386,6 +1555,7 @@ func (appConfiguration *AppConfigurationV1) ToggleFeatureWithContext(ctx context
 	builder.EnableGzipCompression = appConfiguration.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(appConfiguration.Service.Options.URL, `/environments/{environment_id}/features/{feature_id}/toggle`, pathParamsMap)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
 		return
 	}
 
@@ -1406,22 +1576,27 @@ func (appConfiguration *AppConfigurationV1) ToggleFeatureWithContext(ctx context
 	}
 	_, err = builder.SetBodyContentJSON(body)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "set-json-body-error", common.GetComponentInfo())
 		return
 	}
 
 	request, err := builder.Build()
 	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
 		return
 	}
 
 	var rawResponse map[string]json.RawMessage
 	response, err = appConfiguration.Service.Request(request, &rawResponse)
 	if err != nil {
+		core.EnrichHTTPProblem(err, "toggle_feature", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
 		return
 	}
 	if rawResponse != nil {
 		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalFeature)
 		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-resp-error", common.GetComponentInfo())
 			return
 		}
 		response.Result = result
@@ -1433,17 +1608,21 @@ func (appConfiguration *AppConfigurationV1) ToggleFeatureWithContext(ctx context
 // ListProperties : Get list of Properties
 // List all the properties in the specified environment.
 func (appConfiguration *AppConfigurationV1) ListProperties(listPropertiesOptions *ListPropertiesOptions) (result *PropertiesList, response *core.DetailedResponse, err error) {
-	return appConfiguration.ListPropertiesWithContext(context.Background(), listPropertiesOptions)
+	result, response, err = appConfiguration.ListPropertiesWithContext(context.Background(), listPropertiesOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
 }
 
 // ListPropertiesWithContext is an alternate form of the ListProperties method which supports a Context parameter
 func (appConfiguration *AppConfigurationV1) ListPropertiesWithContext(ctx context.Context, listPropertiesOptions *ListPropertiesOptions) (result *PropertiesList, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(listPropertiesOptions, "listPropertiesOptions cannot be nil")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "unexpected-nil-param", common.GetComponentInfo())
 		return
 	}
 	err = core.ValidateStruct(listPropertiesOptions, "listPropertiesOptions")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
 		return
 	}
 
@@ -1456,6 +1635,7 @@ func (appConfiguration *AppConfigurationV1) ListPropertiesWithContext(ctx contex
 	builder.EnableGzipCompression = appConfiguration.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(appConfiguration.Service.Options.URL, `/environments/{environment_id}/properties`, pathParamsMap)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
 		return
 	}
 
@@ -1499,17 +1679,21 @@ func (appConfiguration *AppConfigurationV1) ListPropertiesWithContext(ctx contex
 
 	request, err := builder.Build()
 	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
 		return
 	}
 
 	var rawResponse map[string]json.RawMessage
 	response, err = appConfiguration.Service.Request(request, &rawResponse)
 	if err != nil {
+		core.EnrichHTTPProblem(err, "list_properties", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
 		return
 	}
 	if rawResponse != nil {
 		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalPropertiesList)
 		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-resp-error", common.GetComponentInfo())
 			return
 		}
 		response.Result = result
@@ -1521,17 +1705,21 @@ func (appConfiguration *AppConfigurationV1) ListPropertiesWithContext(ctx contex
 // CreateProperty : Create Property
 // Create a Property.
 func (appConfiguration *AppConfigurationV1) CreateProperty(createPropertyOptions *CreatePropertyOptions) (result *Property, response *core.DetailedResponse, err error) {
-	return appConfiguration.CreatePropertyWithContext(context.Background(), createPropertyOptions)
+	result, response, err = appConfiguration.CreatePropertyWithContext(context.Background(), createPropertyOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
 }
 
 // CreatePropertyWithContext is an alternate form of the CreateProperty method which supports a Context parameter
 func (appConfiguration *AppConfigurationV1) CreatePropertyWithContext(ctx context.Context, createPropertyOptions *CreatePropertyOptions) (result *Property, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(createPropertyOptions, "createPropertyOptions cannot be nil")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "unexpected-nil-param", common.GetComponentInfo())
 		return
 	}
 	err = core.ValidateStruct(createPropertyOptions, "createPropertyOptions")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
 		return
 	}
 
@@ -1544,6 +1732,7 @@ func (appConfiguration *AppConfigurationV1) CreatePropertyWithContext(ctx contex
 	builder.EnableGzipCompression = appConfiguration.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(appConfiguration.Service.Options.URL, `/environments/{environment_id}/properties`, pathParamsMap)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
 		return
 	}
 
@@ -1588,22 +1777,27 @@ func (appConfiguration *AppConfigurationV1) CreatePropertyWithContext(ctx contex
 	}
 	_, err = builder.SetBodyContentJSON(body)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "set-json-body-error", common.GetComponentInfo())
 		return
 	}
 
 	request, err := builder.Build()
 	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
 		return
 	}
 
 	var rawResponse map[string]json.RawMessage
 	response, err = appConfiguration.Service.Request(request, &rawResponse)
 	if err != nil {
+		core.EnrichHTTPProblem(err, "create_property", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
 		return
 	}
 	if rawResponse != nil {
 		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalProperty)
 		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-resp-error", common.GetComponentInfo())
 			return
 		}
 		response.Result = result
@@ -1615,23 +1809,27 @@ func (appConfiguration *AppConfigurationV1) CreatePropertyWithContext(ctx contex
 // UpdateProperty : Update Property
 // Update a Property.
 func (appConfiguration *AppConfigurationV1) UpdateProperty(updatePropertyOptions *UpdatePropertyOptions) (result *Property, response *core.DetailedResponse, err error) {
-	return appConfiguration.UpdatePropertyWithContext(context.Background(), updatePropertyOptions)
+	result, response, err = appConfiguration.UpdatePropertyWithContext(context.Background(), updatePropertyOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
 }
 
 // UpdatePropertyWithContext is an alternate form of the UpdateProperty method which supports a Context parameter
 func (appConfiguration *AppConfigurationV1) UpdatePropertyWithContext(ctx context.Context, updatePropertyOptions *UpdatePropertyOptions) (result *Property, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(updatePropertyOptions, "updatePropertyOptions cannot be nil")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "unexpected-nil-param", common.GetComponentInfo())
 		return
 	}
 	err = core.ValidateStruct(updatePropertyOptions, "updatePropertyOptions")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
 		return
 	}
 
 	pathParamsMap := map[string]string{
 		"environment_id": *updatePropertyOptions.EnvironmentID,
-		"property_id":    *updatePropertyOptions.PropertyID,
+		"property_id": *updatePropertyOptions.PropertyID,
 	}
 
 	builder := core.NewRequestBuilder(core.PUT)
@@ -1639,6 +1837,7 @@ func (appConfiguration *AppConfigurationV1) UpdatePropertyWithContext(ctx contex
 	builder.EnableGzipCompression = appConfiguration.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(appConfiguration.Service.Options.URL, `/environments/{environment_id}/properties/{property_id}`, pathParamsMap)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
 		return
 	}
 
@@ -1674,22 +1873,27 @@ func (appConfiguration *AppConfigurationV1) UpdatePropertyWithContext(ctx contex
 	}
 	_, err = builder.SetBodyContentJSON(body)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "set-json-body-error", common.GetComponentInfo())
 		return
 	}
 
 	request, err := builder.Build()
 	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
 		return
 	}
 
 	var rawResponse map[string]json.RawMessage
 	response, err = appConfiguration.Service.Request(request, &rawResponse)
 	if err != nil {
+		core.EnrichHTTPProblem(err, "update_property", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
 		return
 	}
 	if rawResponse != nil {
 		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalProperty)
 		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-resp-error", common.GetComponentInfo())
 			return
 		}
 		response.Result = result
@@ -1702,23 +1906,27 @@ func (appConfiguration *AppConfigurationV1) UpdatePropertyWithContext(ctx contex
 // Update the property values. This method can be executed by the `writer` role. Property value and targeting rules can
 // be updated, however this method does not allow assigning property to a collection.
 func (appConfiguration *AppConfigurationV1) UpdatePropertyValues(updatePropertyValuesOptions *UpdatePropertyValuesOptions) (result *Property, response *core.DetailedResponse, err error) {
-	return appConfiguration.UpdatePropertyValuesWithContext(context.Background(), updatePropertyValuesOptions)
+	result, response, err = appConfiguration.UpdatePropertyValuesWithContext(context.Background(), updatePropertyValuesOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
 }
 
 // UpdatePropertyValuesWithContext is an alternate form of the UpdatePropertyValues method which supports a Context parameter
 func (appConfiguration *AppConfigurationV1) UpdatePropertyValuesWithContext(ctx context.Context, updatePropertyValuesOptions *UpdatePropertyValuesOptions) (result *Property, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(updatePropertyValuesOptions, "updatePropertyValuesOptions cannot be nil")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "unexpected-nil-param", common.GetComponentInfo())
 		return
 	}
 	err = core.ValidateStruct(updatePropertyValuesOptions, "updatePropertyValuesOptions")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
 		return
 	}
 
 	pathParamsMap := map[string]string{
 		"environment_id": *updatePropertyValuesOptions.EnvironmentID,
-		"property_id":    *updatePropertyValuesOptions.PropertyID,
+		"property_id": *updatePropertyValuesOptions.PropertyID,
 	}
 
 	builder := core.NewRequestBuilder(core.PATCH)
@@ -1726,6 +1934,7 @@ func (appConfiguration *AppConfigurationV1) UpdatePropertyValuesWithContext(ctx 
 	builder.EnableGzipCompression = appConfiguration.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(appConfiguration.Service.Options.URL, `/environments/{environment_id}/properties/{property_id}`, pathParamsMap)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
 		return
 	}
 
@@ -1758,22 +1967,27 @@ func (appConfiguration *AppConfigurationV1) UpdatePropertyValuesWithContext(ctx 
 	}
 	_, err = builder.SetBodyContentJSON(body)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "set-json-body-error", common.GetComponentInfo())
 		return
 	}
 
 	request, err := builder.Build()
 	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
 		return
 	}
 
 	var rawResponse map[string]json.RawMessage
 	response, err = appConfiguration.Service.Request(request, &rawResponse)
 	if err != nil {
+		core.EnrichHTTPProblem(err, "update_property_values", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
 		return
 	}
 	if rawResponse != nil {
 		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalProperty)
 		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-resp-error", common.GetComponentInfo())
 			return
 		}
 		response.Result = result
@@ -1785,23 +1999,27 @@ func (appConfiguration *AppConfigurationV1) UpdatePropertyValuesWithContext(ctx 
 // GetProperty : Get Property
 // Retrieve details of a property.
 func (appConfiguration *AppConfigurationV1) GetProperty(getPropertyOptions *GetPropertyOptions) (result *Property, response *core.DetailedResponse, err error) {
-	return appConfiguration.GetPropertyWithContext(context.Background(), getPropertyOptions)
+	result, response, err = appConfiguration.GetPropertyWithContext(context.Background(), getPropertyOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
 }
 
 // GetPropertyWithContext is an alternate form of the GetProperty method which supports a Context parameter
 func (appConfiguration *AppConfigurationV1) GetPropertyWithContext(ctx context.Context, getPropertyOptions *GetPropertyOptions) (result *Property, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(getPropertyOptions, "getPropertyOptions cannot be nil")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "unexpected-nil-param", common.GetComponentInfo())
 		return
 	}
 	err = core.ValidateStruct(getPropertyOptions, "getPropertyOptions")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
 		return
 	}
 
 	pathParamsMap := map[string]string{
 		"environment_id": *getPropertyOptions.EnvironmentID,
-		"property_id":    *getPropertyOptions.PropertyID,
+		"property_id": *getPropertyOptions.PropertyID,
 	}
 
 	builder := core.NewRequestBuilder(core.GET)
@@ -1809,6 +2027,7 @@ func (appConfiguration *AppConfigurationV1) GetPropertyWithContext(ctx context.C
 	builder.EnableGzipCompression = appConfiguration.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(appConfiguration.Service.Options.URL, `/environments/{environment_id}/properties/{property_id}`, pathParamsMap)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
 		return
 	}
 
@@ -1828,17 +2047,21 @@ func (appConfiguration *AppConfigurationV1) GetPropertyWithContext(ctx context.C
 
 	request, err := builder.Build()
 	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
 		return
 	}
 
 	var rawResponse map[string]json.RawMessage
 	response, err = appConfiguration.Service.Request(request, &rawResponse)
 	if err != nil {
+		core.EnrichHTTPProblem(err, "get_property", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
 		return
 	}
 	if rawResponse != nil {
 		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalProperty)
 		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-resp-error", common.GetComponentInfo())
 			return
 		}
 		response.Result = result
@@ -1850,23 +2073,27 @@ func (appConfiguration *AppConfigurationV1) GetPropertyWithContext(ctx context.C
 // DeleteProperty : Delete Property
 // Delete a Property.
 func (appConfiguration *AppConfigurationV1) DeleteProperty(deletePropertyOptions *DeletePropertyOptions) (response *core.DetailedResponse, err error) {
-	return appConfiguration.DeletePropertyWithContext(context.Background(), deletePropertyOptions)
+	response, err = appConfiguration.DeletePropertyWithContext(context.Background(), deletePropertyOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
 }
 
 // DeletePropertyWithContext is an alternate form of the DeleteProperty method which supports a Context parameter
 func (appConfiguration *AppConfigurationV1) DeletePropertyWithContext(ctx context.Context, deletePropertyOptions *DeletePropertyOptions) (response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(deletePropertyOptions, "deletePropertyOptions cannot be nil")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "unexpected-nil-param", common.GetComponentInfo())
 		return
 	}
 	err = core.ValidateStruct(deletePropertyOptions, "deletePropertyOptions")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
 		return
 	}
 
 	pathParamsMap := map[string]string{
 		"environment_id": *deletePropertyOptions.EnvironmentID,
-		"property_id":    *deletePropertyOptions.PropertyID,
+		"property_id": *deletePropertyOptions.PropertyID,
 	}
 
 	builder := core.NewRequestBuilder(core.DELETE)
@@ -1874,6 +2101,7 @@ func (appConfiguration *AppConfigurationV1) DeletePropertyWithContext(ctx contex
 	builder.EnableGzipCompression = appConfiguration.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(appConfiguration.Service.Options.URL, `/environments/{environment_id}/properties/{property_id}`, pathParamsMap)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
 		return
 	}
 
@@ -1888,10 +2116,16 @@ func (appConfiguration *AppConfigurationV1) DeletePropertyWithContext(ctx contex
 
 	request, err := builder.Build()
 	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
 		return
 	}
 
 	response, err = appConfiguration.Service.Request(request, nil)
+	if err != nil {
+		core.EnrichHTTPProblem(err, "delete_property", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
+		return
+	}
 
 	return
 }
@@ -1899,13 +2133,16 @@ func (appConfiguration *AppConfigurationV1) DeletePropertyWithContext(ctx contex
 // ListSegments : Get list of Segments
 // List all the segments.
 func (appConfiguration *AppConfigurationV1) ListSegments(listSegmentsOptions *ListSegmentsOptions) (result *SegmentsList, response *core.DetailedResponse, err error) {
-	return appConfiguration.ListSegmentsWithContext(context.Background(), listSegmentsOptions)
+	result, response, err = appConfiguration.ListSegmentsWithContext(context.Background(), listSegmentsOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
 }
 
 // ListSegmentsWithContext is an alternate form of the ListSegments method which supports a Context parameter
 func (appConfiguration *AppConfigurationV1) ListSegmentsWithContext(ctx context.Context, listSegmentsOptions *ListSegmentsOptions) (result *SegmentsList, response *core.DetailedResponse, err error) {
 	err = core.ValidateStruct(listSegmentsOptions, "listSegmentsOptions")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
 		return
 	}
 
@@ -1914,6 +2151,7 @@ func (appConfiguration *AppConfigurationV1) ListSegmentsWithContext(ctx context.
 	builder.EnableGzipCompression = appConfiguration.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(appConfiguration.Service.Options.URL, `/segments`, nil)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
 		return
 	}
 
@@ -1951,17 +2189,21 @@ func (appConfiguration *AppConfigurationV1) ListSegmentsWithContext(ctx context.
 
 	request, err := builder.Build()
 	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
 		return
 	}
 
 	var rawResponse map[string]json.RawMessage
 	response, err = appConfiguration.Service.Request(request, &rawResponse)
 	if err != nil {
+		core.EnrichHTTPProblem(err, "list_segments", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
 		return
 	}
 	if rawResponse != nil {
 		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalSegmentsList)
 		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-resp-error", common.GetComponentInfo())
 			return
 		}
 		response.Result = result
@@ -1973,17 +2215,21 @@ func (appConfiguration *AppConfigurationV1) ListSegmentsWithContext(ctx context.
 // CreateSegment : Create Segment
 // Create a segment.
 func (appConfiguration *AppConfigurationV1) CreateSegment(createSegmentOptions *CreateSegmentOptions) (result *Segment, response *core.DetailedResponse, err error) {
-	return appConfiguration.CreateSegmentWithContext(context.Background(), createSegmentOptions)
+	result, response, err = appConfiguration.CreateSegmentWithContext(context.Background(), createSegmentOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
 }
 
 // CreateSegmentWithContext is an alternate form of the CreateSegment method which supports a Context parameter
 func (appConfiguration *AppConfigurationV1) CreateSegmentWithContext(ctx context.Context, createSegmentOptions *CreateSegmentOptions) (result *Segment, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(createSegmentOptions, "createSegmentOptions cannot be nil")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "unexpected-nil-param", common.GetComponentInfo())
 		return
 	}
 	err = core.ValidateStruct(createSegmentOptions, "createSegmentOptions")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
 		return
 	}
 
@@ -1992,6 +2238,7 @@ func (appConfiguration *AppConfigurationV1) CreateSegmentWithContext(ctx context
 	builder.EnableGzipCompression = appConfiguration.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(appConfiguration.Service.Options.URL, `/segments`, nil)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
 		return
 	}
 
@@ -2024,22 +2271,27 @@ func (appConfiguration *AppConfigurationV1) CreateSegmentWithContext(ctx context
 	}
 	_, err = builder.SetBodyContentJSON(body)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "set-json-body-error", common.GetComponentInfo())
 		return
 	}
 
 	request, err := builder.Build()
 	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
 		return
 	}
 
 	var rawResponse map[string]json.RawMessage
 	response, err = appConfiguration.Service.Request(request, &rawResponse)
 	if err != nil {
+		core.EnrichHTTPProblem(err, "create_segment", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
 		return
 	}
 	if rawResponse != nil {
 		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalSegment)
 		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-resp-error", common.GetComponentInfo())
 			return
 		}
 		response.Result = result
@@ -2051,17 +2303,21 @@ func (appConfiguration *AppConfigurationV1) CreateSegmentWithContext(ctx context
 // UpdateSegment : Update Segment
 // Update the segment properties.
 func (appConfiguration *AppConfigurationV1) UpdateSegment(updateSegmentOptions *UpdateSegmentOptions) (result *Segment, response *core.DetailedResponse, err error) {
-	return appConfiguration.UpdateSegmentWithContext(context.Background(), updateSegmentOptions)
+	result, response, err = appConfiguration.UpdateSegmentWithContext(context.Background(), updateSegmentOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
 }
 
 // UpdateSegmentWithContext is an alternate form of the UpdateSegment method which supports a Context parameter
 func (appConfiguration *AppConfigurationV1) UpdateSegmentWithContext(ctx context.Context, updateSegmentOptions *UpdateSegmentOptions) (result *Segment, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(updateSegmentOptions, "updateSegmentOptions cannot be nil")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "unexpected-nil-param", common.GetComponentInfo())
 		return
 	}
 	err = core.ValidateStruct(updateSegmentOptions, "updateSegmentOptions")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
 		return
 	}
 
@@ -2074,6 +2330,7 @@ func (appConfiguration *AppConfigurationV1) UpdateSegmentWithContext(ctx context
 	builder.EnableGzipCompression = appConfiguration.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(appConfiguration.Service.Options.URL, `/segments/{segment_id}`, pathParamsMap)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
 		return
 	}
 
@@ -2103,22 +2360,27 @@ func (appConfiguration *AppConfigurationV1) UpdateSegmentWithContext(ctx context
 	}
 	_, err = builder.SetBodyContentJSON(body)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "set-json-body-error", common.GetComponentInfo())
 		return
 	}
 
 	request, err := builder.Build()
 	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
 		return
 	}
 
 	var rawResponse map[string]json.RawMessage
 	response, err = appConfiguration.Service.Request(request, &rawResponse)
 	if err != nil {
+		core.EnrichHTTPProblem(err, "update_segment", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
 		return
 	}
 	if rawResponse != nil {
 		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalSegment)
 		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-resp-error", common.GetComponentInfo())
 			return
 		}
 		response.Result = result
@@ -2130,17 +2392,21 @@ func (appConfiguration *AppConfigurationV1) UpdateSegmentWithContext(ctx context
 // GetSegment : Get Segment
 // Retrieve details of a segment.
 func (appConfiguration *AppConfigurationV1) GetSegment(getSegmentOptions *GetSegmentOptions) (result *Segment, response *core.DetailedResponse, err error) {
-	return appConfiguration.GetSegmentWithContext(context.Background(), getSegmentOptions)
+	result, response, err = appConfiguration.GetSegmentWithContext(context.Background(), getSegmentOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
 }
 
 // GetSegmentWithContext is an alternate form of the GetSegment method which supports a Context parameter
 func (appConfiguration *AppConfigurationV1) GetSegmentWithContext(ctx context.Context, getSegmentOptions *GetSegmentOptions) (result *Segment, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(getSegmentOptions, "getSegmentOptions cannot be nil")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "unexpected-nil-param", common.GetComponentInfo())
 		return
 	}
 	err = core.ValidateStruct(getSegmentOptions, "getSegmentOptions")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
 		return
 	}
 
@@ -2153,6 +2419,7 @@ func (appConfiguration *AppConfigurationV1) GetSegmentWithContext(ctx context.Co
 	builder.EnableGzipCompression = appConfiguration.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(appConfiguration.Service.Options.URL, `/segments/{segment_id}`, pathParamsMap)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
 		return
 	}
 
@@ -2172,17 +2439,21 @@ func (appConfiguration *AppConfigurationV1) GetSegmentWithContext(ctx context.Co
 
 	request, err := builder.Build()
 	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
 		return
 	}
 
 	var rawResponse map[string]json.RawMessage
 	response, err = appConfiguration.Service.Request(request, &rawResponse)
 	if err != nil {
+		core.EnrichHTTPProblem(err, "get_segment", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
 		return
 	}
 	if rawResponse != nil {
 		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalSegment)
 		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-resp-error", common.GetComponentInfo())
 			return
 		}
 		response.Result = result
@@ -2194,17 +2465,21 @@ func (appConfiguration *AppConfigurationV1) GetSegmentWithContext(ctx context.Co
 // DeleteSegment : Delete Segment
 // Delete a segment.
 func (appConfiguration *AppConfigurationV1) DeleteSegment(deleteSegmentOptions *DeleteSegmentOptions) (response *core.DetailedResponse, err error) {
-	return appConfiguration.DeleteSegmentWithContext(context.Background(), deleteSegmentOptions)
+	response, err = appConfiguration.DeleteSegmentWithContext(context.Background(), deleteSegmentOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
 }
 
 // DeleteSegmentWithContext is an alternate form of the DeleteSegment method which supports a Context parameter
 func (appConfiguration *AppConfigurationV1) DeleteSegmentWithContext(ctx context.Context, deleteSegmentOptions *DeleteSegmentOptions) (response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(deleteSegmentOptions, "deleteSegmentOptions cannot be nil")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "unexpected-nil-param", common.GetComponentInfo())
 		return
 	}
 	err = core.ValidateStruct(deleteSegmentOptions, "deleteSegmentOptions")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
 		return
 	}
 
@@ -2217,6 +2492,7 @@ func (appConfiguration *AppConfigurationV1) DeleteSegmentWithContext(ctx context
 	builder.EnableGzipCompression = appConfiguration.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(appConfiguration.Service.Options.URL, `/segments/{segment_id}`, pathParamsMap)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
 		return
 	}
 
@@ -2231,10 +2507,16 @@ func (appConfiguration *AppConfigurationV1) DeleteSegmentWithContext(ctx context
 
 	request, err := builder.Build()
 	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
 		return
 	}
 
 	response, err = appConfiguration.Service.Request(request, nil)
+	if err != nil {
+		core.EnrichHTTPProblem(err, "delete_segment", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
+		return
+	}
 
 	return
 }
@@ -2242,13 +2524,16 @@ func (appConfiguration *AppConfigurationV1) DeleteSegmentWithContext(ctx context
 // ListSnapshots : Get list of Git configs
 // List all the Git configs.
 func (appConfiguration *AppConfigurationV1) ListSnapshots(listSnapshotsOptions *ListSnapshotsOptions) (result *GitConfigList, response *core.DetailedResponse, err error) {
-	return appConfiguration.ListSnapshotsWithContext(context.Background(), listSnapshotsOptions)
+	result, response, err = appConfiguration.ListSnapshotsWithContext(context.Background(), listSnapshotsOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
 }
 
 // ListSnapshotsWithContext is an alternate form of the ListSnapshots method which supports a Context parameter
 func (appConfiguration *AppConfigurationV1) ListSnapshotsWithContext(ctx context.Context, listSnapshotsOptions *ListSnapshotsOptions) (result *GitConfigList, response *core.DetailedResponse, err error) {
 	err = core.ValidateStruct(listSnapshotsOptions, "listSnapshotsOptions")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
 		return
 	}
 
@@ -2257,6 +2542,7 @@ func (appConfiguration *AppConfigurationV1) ListSnapshotsWithContext(ctx context
 	builder.EnableGzipCompression = appConfiguration.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(appConfiguration.Service.Options.URL, `/gitconfigs`, nil)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
 		return
 	}
 
@@ -2291,17 +2577,21 @@ func (appConfiguration *AppConfigurationV1) ListSnapshotsWithContext(ctx context
 
 	request, err := builder.Build()
 	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
 		return
 	}
 
 	var rawResponse map[string]json.RawMessage
 	response, err = appConfiguration.Service.Request(request, &rawResponse)
 	if err != nil {
+		core.EnrichHTTPProblem(err, "list_snapshots", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
 		return
 	}
 	if rawResponse != nil {
 		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalGitConfigList)
 		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-resp-error", common.GetComponentInfo())
 			return
 		}
 		response.Result = result
@@ -2313,17 +2603,21 @@ func (appConfiguration *AppConfigurationV1) ListSnapshotsWithContext(ctx context
 // CreateGitconfig : Create Git config
 // Create a Git config.
 func (appConfiguration *AppConfigurationV1) CreateGitconfig(createGitconfigOptions *CreateGitconfigOptions) (result *CreateGitConfigResponse, response *core.DetailedResponse, err error) {
-	return appConfiguration.CreateGitconfigWithContext(context.Background(), createGitconfigOptions)
+	result, response, err = appConfiguration.CreateGitconfigWithContext(context.Background(), createGitconfigOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
 }
 
 // CreateGitconfigWithContext is an alternate form of the CreateGitconfig method which supports a Context parameter
 func (appConfiguration *AppConfigurationV1) CreateGitconfigWithContext(ctx context.Context, createGitconfigOptions *CreateGitconfigOptions) (result *CreateGitConfigResponse, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(createGitconfigOptions, "createGitconfigOptions cannot be nil")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "unexpected-nil-param", common.GetComponentInfo())
 		return
 	}
 	err = core.ValidateStruct(createGitconfigOptions, "createGitconfigOptions")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
 		return
 	}
 
@@ -2332,6 +2626,7 @@ func (appConfiguration *AppConfigurationV1) CreateGitconfigWithContext(ctx conte
 	builder.EnableGzipCompression = appConfiguration.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(appConfiguration.Service.Options.URL, `/gitconfigs`, nil)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
 		return
 	}
 
@@ -2373,22 +2668,27 @@ func (appConfiguration *AppConfigurationV1) CreateGitconfigWithContext(ctx conte
 	}
 	_, err = builder.SetBodyContentJSON(body)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "set-json-body-error", common.GetComponentInfo())
 		return
 	}
 
 	request, err := builder.Build()
 	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
 		return
 	}
 
 	var rawResponse map[string]json.RawMessage
 	response, err = appConfiguration.Service.Request(request, &rawResponse)
 	if err != nil {
+		core.EnrichHTTPProblem(err, "create_gitconfig", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
 		return
 	}
 	if rawResponse != nil {
 		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalCreateGitConfigResponse)
 		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-resp-error", common.GetComponentInfo())
 			return
 		}
 		response.Result = result
@@ -2400,17 +2700,21 @@ func (appConfiguration *AppConfigurationV1) CreateGitconfigWithContext(ctx conte
 // UpdateGitconfig : Update Git Config
 // Update the gitconfig properties.
 func (appConfiguration *AppConfigurationV1) UpdateGitconfig(updateGitconfigOptions *UpdateGitconfigOptions) (result *GitConfig, response *core.DetailedResponse, err error) {
-	return appConfiguration.UpdateGitconfigWithContext(context.Background(), updateGitconfigOptions)
+	result, response, err = appConfiguration.UpdateGitconfigWithContext(context.Background(), updateGitconfigOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
 }
 
 // UpdateGitconfigWithContext is an alternate form of the UpdateGitconfig method which supports a Context parameter
 func (appConfiguration *AppConfigurationV1) UpdateGitconfigWithContext(ctx context.Context, updateGitconfigOptions *UpdateGitconfigOptions) (result *GitConfig, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(updateGitconfigOptions, "updateGitconfigOptions cannot be nil")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "unexpected-nil-param", common.GetComponentInfo())
 		return
 	}
 	err = core.ValidateStruct(updateGitconfigOptions, "updateGitconfigOptions")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
 		return
 	}
 
@@ -2423,6 +2727,7 @@ func (appConfiguration *AppConfigurationV1) UpdateGitconfigWithContext(ctx conte
 	builder.EnableGzipCompression = appConfiguration.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(appConfiguration.Service.Options.URL, `/gitconfigs/{git_config_id}`, pathParamsMap)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
 		return
 	}
 
@@ -2461,22 +2766,27 @@ func (appConfiguration *AppConfigurationV1) UpdateGitconfigWithContext(ctx conte
 	}
 	_, err = builder.SetBodyContentJSON(body)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "set-json-body-error", common.GetComponentInfo())
 		return
 	}
 
 	request, err := builder.Build()
 	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
 		return
 	}
 
 	var rawResponse map[string]json.RawMessage
 	response, err = appConfiguration.Service.Request(request, &rawResponse)
 	if err != nil {
+		core.EnrichHTTPProblem(err, "update_gitconfig", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
 		return
 	}
 	if rawResponse != nil {
 		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalGitConfig)
 		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-resp-error", common.GetComponentInfo())
 			return
 		}
 		response.Result = result
@@ -2488,17 +2798,21 @@ func (appConfiguration *AppConfigurationV1) UpdateGitconfigWithContext(ctx conte
 // GetGitconfig : Get Git Config
 // Retrieve details of a gitconfig.
 func (appConfiguration *AppConfigurationV1) GetGitconfig(getGitconfigOptions *GetGitconfigOptions) (result *GitConfig, response *core.DetailedResponse, err error) {
-	return appConfiguration.GetGitconfigWithContext(context.Background(), getGitconfigOptions)
+	result, response, err = appConfiguration.GetGitconfigWithContext(context.Background(), getGitconfigOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
 }
 
 // GetGitconfigWithContext is an alternate form of the GetGitconfig method which supports a Context parameter
 func (appConfiguration *AppConfigurationV1) GetGitconfigWithContext(ctx context.Context, getGitconfigOptions *GetGitconfigOptions) (result *GitConfig, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(getGitconfigOptions, "getGitconfigOptions cannot be nil")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "unexpected-nil-param", common.GetComponentInfo())
 		return
 	}
 	err = core.ValidateStruct(getGitconfigOptions, "getGitconfigOptions")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
 		return
 	}
 
@@ -2511,6 +2825,7 @@ func (appConfiguration *AppConfigurationV1) GetGitconfigWithContext(ctx context.
 	builder.EnableGzipCompression = appConfiguration.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(appConfiguration.Service.Options.URL, `/gitconfigs/{git_config_id}`, pathParamsMap)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
 		return
 	}
 
@@ -2526,17 +2841,21 @@ func (appConfiguration *AppConfigurationV1) GetGitconfigWithContext(ctx context.
 
 	request, err := builder.Build()
 	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
 		return
 	}
 
 	var rawResponse map[string]json.RawMessage
 	response, err = appConfiguration.Service.Request(request, &rawResponse)
 	if err != nil {
+		core.EnrichHTTPProblem(err, "get_gitconfig", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
 		return
 	}
 	if rawResponse != nil {
 		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalGitConfig)
 		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-resp-error", common.GetComponentInfo())
 			return
 		}
 		response.Result = result
@@ -2548,17 +2867,21 @@ func (appConfiguration *AppConfigurationV1) GetGitconfigWithContext(ctx context.
 // DeleteGitconfig : Delete Git Config
 // Delete a gitconfig.
 func (appConfiguration *AppConfigurationV1) DeleteGitconfig(deleteGitconfigOptions *DeleteGitconfigOptions) (response *core.DetailedResponse, err error) {
-	return appConfiguration.DeleteGitconfigWithContext(context.Background(), deleteGitconfigOptions)
+	response, err = appConfiguration.DeleteGitconfigWithContext(context.Background(), deleteGitconfigOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
 }
 
 // DeleteGitconfigWithContext is an alternate form of the DeleteGitconfig method which supports a Context parameter
 func (appConfiguration *AppConfigurationV1) DeleteGitconfigWithContext(ctx context.Context, deleteGitconfigOptions *DeleteGitconfigOptions) (response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(deleteGitconfigOptions, "deleteGitconfigOptions cannot be nil")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "unexpected-nil-param", common.GetComponentInfo())
 		return
 	}
 	err = core.ValidateStruct(deleteGitconfigOptions, "deleteGitconfigOptions")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
 		return
 	}
 
@@ -2571,6 +2894,7 @@ func (appConfiguration *AppConfigurationV1) DeleteGitconfigWithContext(ctx conte
 	builder.EnableGzipCompression = appConfiguration.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(appConfiguration.Service.Options.URL, `/gitconfigs/{git_config_id}`, pathParamsMap)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
 		return
 	}
 
@@ -2585,10 +2909,16 @@ func (appConfiguration *AppConfigurationV1) DeleteGitconfigWithContext(ctx conte
 
 	request, err := builder.Build()
 	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
 		return
 	}
 
 	response, err = appConfiguration.Service.Request(request, nil)
+	if err != nil {
+		core.EnrichHTTPProblem(err, "delete_gitconfig", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
+		return
+	}
 
 	return
 }
@@ -2598,7 +2928,9 @@ func (appConfiguration *AppConfigurationV1) DeleteGitconfigWithContext(ctx conte
 // file path and branch data. In simple words this api will create or updates the bootstrap json file.
 // Deprecated: this method is deprecated and may be removed in a future release.
 func (appConfiguration *AppConfigurationV1) PromoteGitconfig(promoteGitconfigOptions *PromoteGitconfigOptions) (result *GitConfigPromote, response *core.DetailedResponse, err error) {
-	return appConfiguration.PromoteGitconfigWithContext(context.Background(), promoteGitconfigOptions)
+	result, response, err = appConfiguration.PromoteGitconfigWithContext(context.Background(), promoteGitconfigOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
 }
 
 // PromoteGitconfigWithContext is an alternate form of the PromoteGitconfig method which supports a Context parameter
@@ -2607,10 +2939,12 @@ func (appConfiguration *AppConfigurationV1) PromoteGitconfigWithContext(ctx cont
 	core.GetLogger().Warn("A deprecated operation has been invoked: PromoteGitconfig")
 	err = core.ValidateNotNil(promoteGitconfigOptions, "promoteGitconfigOptions cannot be nil")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "unexpected-nil-param", common.GetComponentInfo())
 		return
 	}
 	err = core.ValidateStruct(promoteGitconfigOptions, "promoteGitconfigOptions")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
 		return
 	}
 
@@ -2623,6 +2957,7 @@ func (appConfiguration *AppConfigurationV1) PromoteGitconfigWithContext(ctx cont
 	builder.EnableGzipCompression = appConfiguration.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(appConfiguration.Service.Options.URL, `/gitconfigs/{git_config_id}/promote`, pathParamsMap)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
 		return
 	}
 
@@ -2638,17 +2973,21 @@ func (appConfiguration *AppConfigurationV1) PromoteGitconfigWithContext(ctx cont
 
 	request, err := builder.Build()
 	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
 		return
 	}
 
 	var rawResponse map[string]json.RawMessage
 	response, err = appConfiguration.Service.Request(request, &rawResponse)
 	if err != nil {
+		core.EnrichHTTPProblem(err, "promote_gitconfig", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
 		return
 	}
 	if rawResponse != nil {
 		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalGitConfigPromote)
 		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-resp-error", common.GetComponentInfo())
 			return
 		}
 		response.Result = result
@@ -2663,7 +3002,9 @@ func (appConfiguration *AppConfigurationV1) PromoteGitconfigWithContext(ctx cont
 // the App configuration instance with the file contents like properties, features and segments.
 // Deprecated: this method is deprecated and may be removed in a future release.
 func (appConfiguration *AppConfigurationV1) RestoreGitconfig(restoreGitconfigOptions *RestoreGitconfigOptions) (result *GitConfigRestore, response *core.DetailedResponse, err error) {
-	return appConfiguration.RestoreGitconfigWithContext(context.Background(), restoreGitconfigOptions)
+	result, response, err = appConfiguration.RestoreGitconfigWithContext(context.Background(), restoreGitconfigOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
 }
 
 // RestoreGitconfigWithContext is an alternate form of the RestoreGitconfig method which supports a Context parameter
@@ -2672,10 +3013,12 @@ func (appConfiguration *AppConfigurationV1) RestoreGitconfigWithContext(ctx cont
 	core.GetLogger().Warn("A deprecated operation has been invoked: RestoreGitconfig")
 	err = core.ValidateNotNil(restoreGitconfigOptions, "restoreGitconfigOptions cannot be nil")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "unexpected-nil-param", common.GetComponentInfo())
 		return
 	}
 	err = core.ValidateStruct(restoreGitconfigOptions, "restoreGitconfigOptions")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
 		return
 	}
 
@@ -2688,6 +3031,7 @@ func (appConfiguration *AppConfigurationV1) RestoreGitconfigWithContext(ctx cont
 	builder.EnableGzipCompression = appConfiguration.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(appConfiguration.Service.Options.URL, `/gitconfigs/{git_config_id}/restore`, pathParamsMap)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
 		return
 	}
 
@@ -2703,17 +3047,21 @@ func (appConfiguration *AppConfigurationV1) RestoreGitconfigWithContext(ctx cont
 
 	request, err := builder.Build()
 	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
 		return
 	}
 
 	var rawResponse map[string]json.RawMessage
 	response, err = appConfiguration.Service.Request(request, &rawResponse)
 	if err != nil {
+		core.EnrichHTTPProblem(err, "restore_gitconfig", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
 		return
 	}
 	if rawResponse != nil {
 		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalGitConfigRestore)
 		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-resp-error", common.GetComponentInfo())
 			return
 		}
 		response.Result = result
@@ -2725,13 +3073,16 @@ func (appConfiguration *AppConfigurationV1) RestoreGitconfigWithContext(ctx cont
 // ListOriginconfigs : Get list of Origin Configs
 // List all the Origin Configs.
 func (appConfiguration *AppConfigurationV1) ListOriginconfigs(listOriginconfigsOptions *ListOriginconfigsOptions) (result *OriginConfigList, response *core.DetailedResponse, err error) {
-	return appConfiguration.ListOriginconfigsWithContext(context.Background(), listOriginconfigsOptions)
+	result, response, err = appConfiguration.ListOriginconfigsWithContext(context.Background(), listOriginconfigsOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
 }
 
 // ListOriginconfigsWithContext is an alternate form of the ListOriginconfigs method which supports a Context parameter
 func (appConfiguration *AppConfigurationV1) ListOriginconfigsWithContext(ctx context.Context, listOriginconfigsOptions *ListOriginconfigsOptions) (result *OriginConfigList, response *core.DetailedResponse, err error) {
 	err = core.ValidateStruct(listOriginconfigsOptions, "listOriginconfigsOptions")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
 		return
 	}
 
@@ -2740,6 +3091,7 @@ func (appConfiguration *AppConfigurationV1) ListOriginconfigsWithContext(ctx con
 	builder.EnableGzipCompression = appConfiguration.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(appConfiguration.Service.Options.URL, `/originconfigs`, nil)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
 		return
 	}
 
@@ -2755,17 +3107,21 @@ func (appConfiguration *AppConfigurationV1) ListOriginconfigsWithContext(ctx con
 
 	request, err := builder.Build()
 	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
 		return
 	}
 
 	var rawResponse map[string]json.RawMessage
 	response, err = appConfiguration.Service.Request(request, &rawResponse)
 	if err != nil {
+		core.EnrichHTTPProblem(err, "list_originconfigs", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
 		return
 	}
 	if rawResponse != nil {
 		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalOriginConfigList)
 		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-resp-error", common.GetComponentInfo())
 			return
 		}
 		response.Result = result
@@ -2777,17 +3133,21 @@ func (appConfiguration *AppConfigurationV1) ListOriginconfigsWithContext(ctx con
 // UpdateOriginconfigs : Update Origin Configs
 // Update the Origin Configs.
 func (appConfiguration *AppConfigurationV1) UpdateOriginconfigs(updateOriginconfigsOptions *UpdateOriginconfigsOptions) (result *OriginConfigList, response *core.DetailedResponse, err error) {
-	return appConfiguration.UpdateOriginconfigsWithContext(context.Background(), updateOriginconfigsOptions)
+	result, response, err = appConfiguration.UpdateOriginconfigsWithContext(context.Background(), updateOriginconfigsOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
 }
 
 // UpdateOriginconfigsWithContext is an alternate form of the UpdateOriginconfigs method which supports a Context parameter
 func (appConfiguration *AppConfigurationV1) UpdateOriginconfigsWithContext(ctx context.Context, updateOriginconfigsOptions *UpdateOriginconfigsOptions) (result *OriginConfigList, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(updateOriginconfigsOptions, "updateOriginconfigsOptions cannot be nil")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "unexpected-nil-param", common.GetComponentInfo())
 		return
 	}
 	err = core.ValidateStruct(updateOriginconfigsOptions, "updateOriginconfigsOptions")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
 		return
 	}
 
@@ -2796,6 +3156,7 @@ func (appConfiguration *AppConfigurationV1) UpdateOriginconfigsWithContext(ctx c
 	builder.EnableGzipCompression = appConfiguration.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(appConfiguration.Service.Options.URL, `/originconfigs`, nil)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
 		return
 	}
 
@@ -2816,22 +3177,27 @@ func (appConfiguration *AppConfigurationV1) UpdateOriginconfigsWithContext(ctx c
 	}
 	_, err = builder.SetBodyContentJSON(body)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "set-json-body-error", common.GetComponentInfo())
 		return
 	}
 
 	request, err := builder.Build()
 	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
 		return
 	}
 
 	var rawResponse map[string]json.RawMessage
 	response, err = appConfiguration.Service.Request(request, &rawResponse)
 	if err != nil {
+		core.EnrichHTTPProblem(err, "update_originconfigs", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
 		return
 	}
 	if rawResponse != nil {
 		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalOriginConfigList)
 		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-resp-error", common.GetComponentInfo())
 			return
 		}
 		response.Result = result
@@ -2842,18 +3208,22 @@ func (appConfiguration *AppConfigurationV1) UpdateOriginconfigsWithContext(ctx c
 
 // ListWorkflowconfig : Get Workflow Config
 // Get the environment specific workflow Configs.
-func (appConfiguration *AppConfigurationV1) ListWorkflowconfig(listWorkflowconfigOptions *ListWorkflowconfigOptions) (result *WorkflowConfig, response *core.DetailedResponse, err error) {
-	return appConfiguration.ListWorkflowconfigWithContext(context.Background(), listWorkflowconfigOptions)
+func (appConfiguration *AppConfigurationV1) ListWorkflowconfig(listWorkflowconfigOptions *ListWorkflowconfigOptions) (result ListWorkflowconfigResponseIntf, response *core.DetailedResponse, err error) {
+	result, response, err = appConfiguration.ListWorkflowconfigWithContext(context.Background(), listWorkflowconfigOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
 }
 
 // ListWorkflowconfigWithContext is an alternate form of the ListWorkflowconfig method which supports a Context parameter
-func (appConfiguration *AppConfigurationV1) ListWorkflowconfigWithContext(ctx context.Context, listWorkflowconfigOptions *ListWorkflowconfigOptions) (result *WorkflowConfig, response *core.DetailedResponse, err error) {
+func (appConfiguration *AppConfigurationV1) ListWorkflowconfigWithContext(ctx context.Context, listWorkflowconfigOptions *ListWorkflowconfigOptions) (result ListWorkflowconfigResponseIntf, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(listWorkflowconfigOptions, "listWorkflowconfigOptions cannot be nil")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "unexpected-nil-param", common.GetComponentInfo())
 		return
 	}
 	err = core.ValidateStruct(listWorkflowconfigOptions, "listWorkflowconfigOptions")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
 		return
 	}
 
@@ -2866,6 +3236,7 @@ func (appConfiguration *AppConfigurationV1) ListWorkflowconfigWithContext(ctx co
 	builder.EnableGzipCompression = appConfiguration.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(appConfiguration.Service.Options.URL, `/environments/{environment_id}/workflowconfigs`, pathParamsMap)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
 		return
 	}
 
@@ -2881,17 +3252,21 @@ func (appConfiguration *AppConfigurationV1) ListWorkflowconfigWithContext(ctx co
 
 	request, err := builder.Build()
 	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
 		return
 	}
 
 	var rawResponse map[string]json.RawMessage
 	response, err = appConfiguration.Service.Request(request, &rawResponse)
 	if err != nil {
+		core.EnrichHTTPProblem(err, "list_workflowconfig", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
 		return
 	}
 	if rawResponse != nil {
-		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalWorkflowConfig)
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalListWorkflowconfigResponse)
 		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-resp-error", common.GetComponentInfo())
 			return
 		}
 		response.Result = result
@@ -2902,18 +3277,22 @@ func (appConfiguration *AppConfigurationV1) ListWorkflowconfigWithContext(ctx co
 
 // CreateWorkflowconfig : Create Workflow config
 // Create a Workflow.
-func (appConfiguration *AppConfigurationV1) CreateWorkflowconfig(createWorkflowconfigOptions *CreateWorkflowconfigOptions) (result *WorkflowConfig, response *core.DetailedResponse, err error) {
-	return appConfiguration.CreateWorkflowconfigWithContext(context.Background(), createWorkflowconfigOptions)
+func (appConfiguration *AppConfigurationV1) CreateWorkflowconfig(createWorkflowconfigOptions *CreateWorkflowconfigOptions) (result CreateWorkflowconfigResponseIntf, response *core.DetailedResponse, err error) {
+	result, response, err = appConfiguration.CreateWorkflowconfigWithContext(context.Background(), createWorkflowconfigOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
 }
 
 // CreateWorkflowconfigWithContext is an alternate form of the CreateWorkflowconfig method which supports a Context parameter
-func (appConfiguration *AppConfigurationV1) CreateWorkflowconfigWithContext(ctx context.Context, createWorkflowconfigOptions *CreateWorkflowconfigOptions) (result *WorkflowConfig, response *core.DetailedResponse, err error) {
+func (appConfiguration *AppConfigurationV1) CreateWorkflowconfigWithContext(ctx context.Context, createWorkflowconfigOptions *CreateWorkflowconfigOptions) (result CreateWorkflowconfigResponseIntf, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(createWorkflowconfigOptions, "createWorkflowconfigOptions cannot be nil")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "unexpected-nil-param", common.GetComponentInfo())
 		return
 	}
 	err = core.ValidateStruct(createWorkflowconfigOptions, "createWorkflowconfigOptions")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
 		return
 	}
 
@@ -2926,6 +3305,7 @@ func (appConfiguration *AppConfigurationV1) CreateWorkflowconfigWithContext(ctx 
 	builder.EnableGzipCompression = appConfiguration.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(appConfiguration.Service.Options.URL, `/environments/{environment_id}/workflowconfigs`, pathParamsMap)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
 		return
 	}
 
@@ -2940,40 +3320,29 @@ func (appConfiguration *AppConfigurationV1) CreateWorkflowconfigWithContext(ctx 
 	builder.AddHeader("Accept", "application/json")
 	builder.AddHeader("Content-Type", "application/json")
 
-	body := make(map[string]interface{})
-	if createWorkflowconfigOptions.WorkflowURL != nil {
-		body["workflow_url"] = createWorkflowconfigOptions.WorkflowURL
-	}
-	if createWorkflowconfigOptions.ApprovalGroupName != nil {
-		body["approval_group_name"] = createWorkflowconfigOptions.ApprovalGroupName
-	}
-	if createWorkflowconfigOptions.ApprovalExpiration != nil {
-		body["approval_expiration"] = createWorkflowconfigOptions.ApprovalExpiration
-	}
-	if createWorkflowconfigOptions.WorkflowCredentials != nil {
-		body["workflow_credentials"] = createWorkflowconfigOptions.WorkflowCredentials
-	}
-	if createWorkflowconfigOptions.Enabled != nil {
-		body["enabled"] = createWorkflowconfigOptions.Enabled
-	}
-	_, err = builder.SetBodyContentJSON(body)
+	_, err = builder.SetBodyContentJSON(createWorkflowconfigOptions.WorkflowConfig)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "set-json-body-error", common.GetComponentInfo())
 		return
 	}
 
 	request, err := builder.Build()
 	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
 		return
 	}
 
 	var rawResponse map[string]json.RawMessage
 	response, err = appConfiguration.Service.Request(request, &rawResponse)
 	if err != nil {
+		core.EnrichHTTPProblem(err, "create_Workflowconfig", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
 		return
 	}
 	if rawResponse != nil {
-		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalWorkflowConfig)
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalCreateWorkflowconfigResponse)
 		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-resp-error", common.GetComponentInfo())
 			return
 		}
 		response.Result = result
@@ -2984,18 +3353,22 @@ func (appConfiguration *AppConfigurationV1) CreateWorkflowconfigWithContext(ctx 
 
 // UpdateWorkflowconfig : Update Workflow config
 // Update a Workflow.
-func (appConfiguration *AppConfigurationV1) UpdateWorkflowconfig(updateWorkflowconfigOptions *UpdateWorkflowconfigOptions) (result *WorkflowConfig, response *core.DetailedResponse, err error) {
-	return appConfiguration.UpdateWorkflowconfigWithContext(context.Background(), updateWorkflowconfigOptions)
+func (appConfiguration *AppConfigurationV1) UpdateWorkflowconfig(updateWorkflowconfigOptions *UpdateWorkflowconfigOptions) (result UpdateWorkflowconfigResponseIntf, response *core.DetailedResponse, err error) {
+	result, response, err = appConfiguration.UpdateWorkflowconfigWithContext(context.Background(), updateWorkflowconfigOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
 }
 
 // UpdateWorkflowconfigWithContext is an alternate form of the UpdateWorkflowconfig method which supports a Context parameter
-func (appConfiguration *AppConfigurationV1) UpdateWorkflowconfigWithContext(ctx context.Context, updateWorkflowconfigOptions *UpdateWorkflowconfigOptions) (result *WorkflowConfig, response *core.DetailedResponse, err error) {
+func (appConfiguration *AppConfigurationV1) UpdateWorkflowconfigWithContext(ctx context.Context, updateWorkflowconfigOptions *UpdateWorkflowconfigOptions) (result UpdateWorkflowconfigResponseIntf, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(updateWorkflowconfigOptions, "updateWorkflowconfigOptions cannot be nil")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "unexpected-nil-param", common.GetComponentInfo())
 		return
 	}
 	err = core.ValidateStruct(updateWorkflowconfigOptions, "updateWorkflowconfigOptions")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
 		return
 	}
 
@@ -3008,6 +3381,7 @@ func (appConfiguration *AppConfigurationV1) UpdateWorkflowconfigWithContext(ctx 
 	builder.EnableGzipCompression = appConfiguration.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(appConfiguration.Service.Options.URL, `/environments/{environment_id}/workflowconfigs`, pathParamsMap)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
 		return
 	}
 
@@ -3022,40 +3396,29 @@ func (appConfiguration *AppConfigurationV1) UpdateWorkflowconfigWithContext(ctx 
 	builder.AddHeader("Accept", "application/json")
 	builder.AddHeader("Content-Type", "application/json")
 
-	body := make(map[string]interface{})
-	if updateWorkflowconfigOptions.WorkflowURL != nil {
-		body["workflow_url"] = updateWorkflowconfigOptions.WorkflowURL
-	}
-	if updateWorkflowconfigOptions.ApprovalGroupName != nil {
-		body["approval_group_name"] = updateWorkflowconfigOptions.ApprovalGroupName
-	}
-	if updateWorkflowconfigOptions.ApprovalExpiration != nil {
-		body["approval_expiration"] = updateWorkflowconfigOptions.ApprovalExpiration
-	}
-	if updateWorkflowconfigOptions.WorkflowCredentials != nil {
-		body["workflow_credentials"] = updateWorkflowconfigOptions.WorkflowCredentials
-	}
-	if updateWorkflowconfigOptions.Enabled != nil {
-		body["enabled"] = updateWorkflowconfigOptions.Enabled
-	}
-	_, err = builder.SetBodyContentJSON(body)
+	_, err = builder.SetBodyContentJSON(updateWorkflowconfigOptions.UpdateWorkflowConfig)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "set-json-body-error", common.GetComponentInfo())
 		return
 	}
 
 	request, err := builder.Build()
 	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
 		return
 	}
 
 	var rawResponse map[string]json.RawMessage
 	response, err = appConfiguration.Service.Request(request, &rawResponse)
 	if err != nil {
+		core.EnrichHTTPProblem(err, "update_Workflowconfig", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
 		return
 	}
 	if rawResponse != nil {
-		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalWorkflowConfig)
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalUpdateWorkflowconfigResponse)
 		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-resp-error", common.GetComponentInfo())
 			return
 		}
 		response.Result = result
@@ -3067,17 +3430,21 @@ func (appConfiguration *AppConfigurationV1) UpdateWorkflowconfigWithContext(ctx 
 // DeleteWorkflowconfig : Delete  Workflow config
 // Delete a  Workflow config.
 func (appConfiguration *AppConfigurationV1) DeleteWorkflowconfig(deleteWorkflowconfigOptions *DeleteWorkflowconfigOptions) (response *core.DetailedResponse, err error) {
-	return appConfiguration.DeleteWorkflowconfigWithContext(context.Background(), deleteWorkflowconfigOptions)
+	response, err = appConfiguration.DeleteWorkflowconfigWithContext(context.Background(), deleteWorkflowconfigOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
 }
 
 // DeleteWorkflowconfigWithContext is an alternate form of the DeleteWorkflowconfig method which supports a Context parameter
 func (appConfiguration *AppConfigurationV1) DeleteWorkflowconfigWithContext(ctx context.Context, deleteWorkflowconfigOptions *DeleteWorkflowconfigOptions) (response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(deleteWorkflowconfigOptions, "deleteWorkflowconfigOptions cannot be nil")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "unexpected-nil-param", common.GetComponentInfo())
 		return
 	}
 	err = core.ValidateStruct(deleteWorkflowconfigOptions, "deleteWorkflowconfigOptions")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
 		return
 	}
 
@@ -3090,6 +3457,7 @@ func (appConfiguration *AppConfigurationV1) DeleteWorkflowconfigWithContext(ctx 
 	builder.EnableGzipCompression = appConfiguration.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(appConfiguration.Service.Options.URL, `/environments/{environment_id}/workflowconfigs`, pathParamsMap)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
 		return
 	}
 
@@ -3104,10 +3472,16 @@ func (appConfiguration *AppConfigurationV1) DeleteWorkflowconfigWithContext(ctx 
 
 	request, err := builder.Build()
 	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
 		return
 	}
 
 	response, err = appConfiguration.Service.Request(request, nil)
+	if err != nil {
+		core.EnrichHTTPProblem(err, "delete_workflowconfig", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
+		return
+	}
 
 	return
 }
@@ -3115,17 +3489,21 @@ func (appConfiguration *AppConfigurationV1) DeleteWorkflowconfigWithContext(ctx 
 // ImportConfig : Import instance configuration
 // Import configuration to the instance.
 func (appConfiguration *AppConfigurationV1) ImportConfig(importConfigOptions *ImportConfigOptions) (result *ImportConfig, response *core.DetailedResponse, err error) {
-	return appConfiguration.ImportConfigWithContext(context.Background(), importConfigOptions)
+	result, response, err = appConfiguration.ImportConfigWithContext(context.Background(), importConfigOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
 }
 
 // ImportConfigWithContext is an alternate form of the ImportConfig method which supports a Context parameter
 func (appConfiguration *AppConfigurationV1) ImportConfigWithContext(ctx context.Context, importConfigOptions *ImportConfigOptions) (result *ImportConfig, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(importConfigOptions, "importConfigOptions cannot be nil")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "unexpected-nil-param", common.GetComponentInfo())
 		return
 	}
 	err = core.ValidateStruct(importConfigOptions, "importConfigOptions")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
 		return
 	}
 
@@ -3134,6 +3512,7 @@ func (appConfiguration *AppConfigurationV1) ImportConfigWithContext(ctx context.
 	builder.EnableGzipCompression = appConfiguration.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(appConfiguration.Service.Options.URL, `/config`, nil)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
 		return
 	}
 
@@ -3164,22 +3543,27 @@ func (appConfiguration *AppConfigurationV1) ImportConfigWithContext(ctx context.
 	}
 	_, err = builder.SetBodyContentJSON(body)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "set-json-body-error", common.GetComponentInfo())
 		return
 	}
 
 	request, err := builder.Build()
 	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
 		return
 	}
 
 	var rawResponse map[string]json.RawMessage
 	response, err = appConfiguration.Service.Request(request, &rawResponse)
 	if err != nil {
+		core.EnrichHTTPProblem(err, "import_config", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
 		return
 	}
 	if rawResponse != nil {
 		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalImportConfig)
 		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-resp-error", common.GetComponentInfo())
 			return
 		}
 		response.Result = result
@@ -3191,13 +3575,16 @@ func (appConfiguration *AppConfigurationV1) ImportConfigWithContext(ctx context.
 // ListInstanceConfig : Export instance configuration
 // Get the instance configuration.
 func (appConfiguration *AppConfigurationV1) ListInstanceConfig(listInstanceConfigOptions *ListInstanceConfigOptions) (result *ImportConfig, response *core.DetailedResponse, err error) {
-	return appConfiguration.ListInstanceConfigWithContext(context.Background(), listInstanceConfigOptions)
+	result, response, err = appConfiguration.ListInstanceConfigWithContext(context.Background(), listInstanceConfigOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
 }
 
 // ListInstanceConfigWithContext is an alternate form of the ListInstanceConfig method which supports a Context parameter
 func (appConfiguration *AppConfigurationV1) ListInstanceConfigWithContext(ctx context.Context, listInstanceConfigOptions *ListInstanceConfigOptions) (result *ImportConfig, response *core.DetailedResponse, err error) {
 	err = core.ValidateStruct(listInstanceConfigOptions, "listInstanceConfigOptions")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
 		return
 	}
 
@@ -3206,6 +3593,7 @@ func (appConfiguration *AppConfigurationV1) ListInstanceConfigWithContext(ctx co
 	builder.EnableGzipCompression = appConfiguration.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(appConfiguration.Service.Options.URL, `/config`, nil)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
 		return
 	}
 
@@ -3221,17 +3609,21 @@ func (appConfiguration *AppConfigurationV1) ListInstanceConfigWithContext(ctx co
 
 	request, err := builder.Build()
 	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
 		return
 	}
 
 	var rawResponse map[string]json.RawMessage
 	response, err = appConfiguration.Service.Request(request, &rawResponse)
 	if err != nil {
+		core.EnrichHTTPProblem(err, "list_instance_config", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
 		return
 	}
 	if rawResponse != nil {
 		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalImportConfig)
 		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-resp-error", common.GetComponentInfo())
 			return
 		}
 		response.Result = result
@@ -3244,17 +3636,21 @@ func (appConfiguration *AppConfigurationV1) ListInstanceConfigWithContext(ctx co
 // This api will either promote or restore your chosen configuration from or to the GitHub based on the git url, file
 // path and branch data.
 func (appConfiguration *AppConfigurationV1) PromoteRestoreConfig(promoteRestoreConfigOptions *PromoteRestoreConfigOptions) (result ConfigActionIntf, response *core.DetailedResponse, err error) {
-	return appConfiguration.PromoteRestoreConfigWithContext(context.Background(), promoteRestoreConfigOptions)
+	result, response, err = appConfiguration.PromoteRestoreConfigWithContext(context.Background(), promoteRestoreConfigOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
 }
 
 // PromoteRestoreConfigWithContext is an alternate form of the PromoteRestoreConfig method which supports a Context parameter
 func (appConfiguration *AppConfigurationV1) PromoteRestoreConfigWithContext(ctx context.Context, promoteRestoreConfigOptions *PromoteRestoreConfigOptions) (result ConfigActionIntf, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(promoteRestoreConfigOptions, "promoteRestoreConfigOptions cannot be nil")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "unexpected-nil-param", common.GetComponentInfo())
 		return
 	}
 	err = core.ValidateStruct(promoteRestoreConfigOptions, "promoteRestoreConfigOptions")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
 		return
 	}
 
@@ -3263,6 +3659,7 @@ func (appConfiguration *AppConfigurationV1) PromoteRestoreConfigWithContext(ctx 
 	builder.EnableGzipCompression = appConfiguration.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(appConfiguration.Service.Options.URL, `/config`, nil)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
 		return
 	}
 
@@ -3281,23 +3678,30 @@ func (appConfiguration *AppConfigurationV1) PromoteRestoreConfigWithContext(ctx 
 
 	request, err := builder.Build()
 	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
 		return
 	}
 
 	var rawResponse map[string]json.RawMessage
 	response, err = appConfiguration.Service.Request(request, &rawResponse)
 	if err != nil {
+		core.EnrichHTTPProblem(err, "promote_restore_config", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
 		return
 	}
 	if rawResponse != nil {
 		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalConfigAction)
 		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-resp-error", common.GetComponentInfo())
 			return
 		}
 		response.Result = result
 	}
 
 	return
+}
+func getServiceComponentInfo() *core.ProblemComponent {
+	return core.NewProblemComponent(DefaultServiceName, "1.0")
 }
 
 // Collection : Details of the collection.
@@ -3345,10 +3749,13 @@ type Collection struct {
 // NewCollection : Instantiate Collection (Generic Model Constructor)
 func (*AppConfigurationV1) NewCollection(name string, collectionID string) (_model *Collection, err error) {
 	_model = &Collection{
-		Name:         core.StringPtr(name),
+		Name: core.StringPtr(name),
 		CollectionID: core.StringPtr(collectionID),
 	}
 	err = core.ValidateStruct(_model, "required parameters")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "model-missing-required", common.GetComponentInfo())
+	}
 	return
 }
 
@@ -3357,54 +3764,67 @@ func UnmarshalCollection(m map[string]json.RawMessage, result interface{}) (err 
 	obj := new(Collection)
 	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "collection_id", &obj.CollectionID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "collection_id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "description", &obj.Description)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "description-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "tags", &obj.Tags)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "tags-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "created_time", &obj.CreatedTime)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "created_time-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "updated_time", &obj.UpdatedTime)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "updated_time-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "href", &obj.Href)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "href-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "features", &obj.Features, UnmarshalFeatureOutput)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "features-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "properties", &obj.Properties, UnmarshalPropertyOutput)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "properties-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "snapshots", &obj.Snapshots, UnmarshalSnapshotOutput)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "snapshots-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "features_count", &obj.FeaturesCount)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "features_count-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "properties_count", &obj.PropertiesCount)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "properties_count-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "snapshot_count", &obj.SnapshotCount)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "snapshot_count-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -3443,34 +3863,42 @@ func UnmarshalCollectionList(m map[string]json.RawMessage, result interface{}) (
 	obj := new(CollectionList)
 	err = core.UnmarshalModel(m, "collections", &obj.Collections, UnmarshalCollection)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "collections-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "limit", &obj.Limit)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "limit-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "offset", &obj.Offset)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "offset-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "total_count", &obj.TotalCount)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "total_count-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "first", &obj.First, UnmarshalPaginatedListFirst)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "first-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "previous", &obj.Previous, UnmarshalPaginatedListPrevious)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "previous-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "next", &obj.Next, UnmarshalPaginatedListNext)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "next-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "last", &obj.Last, UnmarshalPaginatedListLast)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "last-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -3483,12 +3911,16 @@ func (resp *CollectionList) GetNextOffset() (*int64, error) {
 		return nil, nil
 	}
 	offset, err := core.GetQueryParam(resp.Next.Href, "offset")
-	if err != nil || offset == nil {
+	if err != nil {
+		err = core.SDKErrorf(err, "", "read-query-param-error", common.GetComponentInfo())
 		return nil, err
+	} else if offset == nil {
+		return nil, nil
 	}
 	var offsetValue int64
 	offsetValue, err = strconv.ParseInt(*offset, 10, 64)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "parse-int-query-error", common.GetComponentInfo())
 		return nil, err
 	}
 	return core.Int64Ptr(offsetValue), nil
@@ -3523,30 +3955,37 @@ func UnmarshalCollectionLite(m map[string]json.RawMessage, result interface{}) (
 	obj := new(CollectionLite)
 	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "collection_id", &obj.CollectionID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "collection_id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "description", &obj.Description)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "description-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "tags", &obj.Tags)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "tags-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "created_time", &obj.CreatedTime)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "created_time-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "updated_time", &obj.UpdatedTime)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "updated_time-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "href", &obj.Href)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "href-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -3568,6 +4007,9 @@ func (*AppConfigurationV1) NewCollectionRef(collectionID string) (_model *Collec
 		CollectionID: core.StringPtr(collectionID),
 	}
 	err = core.ValidateStruct(_model, "required parameters")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "model-missing-required", common.GetComponentInfo())
+	}
 	return
 }
 
@@ -3576,10 +4018,12 @@ func UnmarshalCollectionRef(m map[string]json.RawMessage, result interface{}) (e
 	obj := new(CollectionRef)
 	err = core.UnmarshalPrimitive(m, "collection_id", &obj.CollectionID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "collection_id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "name-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -3607,7 +4051,6 @@ type ConfigAction struct {
 	// Segments that belongs to the features or properties.
 	Segments []ImportSegmentSchema `json:"segments,omitempty"`
 }
-
 func (*ConfigAction) isaConfigAction() bool {
 	return true
 }
@@ -3621,22 +4064,27 @@ func UnmarshalConfigAction(m map[string]json.RawMessage, result interface{}) (er
 	obj := new(ConfigAction)
 	err = core.UnmarshalPrimitive(m, "git_commit_id", &obj.GitCommitID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "git_commit_id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "git_commit_message", &obj.GitCommitMessage)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "git_commit_message-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "last_sync_time", &obj.LastSyncTime)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "last_sync_time-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "environments", &obj.Environments, UnmarshalImportEnvironmentSchema)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "environments-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "segments", &obj.Segments, UnmarshalImportSegmentSchema)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "segments-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -3664,7 +4112,7 @@ type CreateCollectionOptions struct {
 // NewCreateCollectionOptions : Instantiate CreateCollectionOptions
 func (*AppConfigurationV1) NewCreateCollectionOptions(name string, collectionID string) *CreateCollectionOptions {
 	return &CreateCollectionOptions{
-		Name:         core.StringPtr(name),
+		Name: core.StringPtr(name),
 		CollectionID: core.StringPtr(collectionID),
 	}
 }
@@ -3723,7 +4171,7 @@ type CreateEnvironmentOptions struct {
 // NewCreateEnvironmentOptions : Instantiate CreateEnvironmentOptions
 func (*AppConfigurationV1) NewCreateEnvironmentOptions(name string, environmentID string) *CreateEnvironmentOptions {
 	return &CreateEnvironmentOptions{
-		Name:          core.StringPtr(name),
+		Name: core.StringPtr(name),
 		EnvironmentID: core.StringPtr(environmentID),
 	}
 }
@@ -3818,7 +4266,7 @@ type CreateFeatureOptions struct {
 const (
 	CreateFeatureOptions_Type_Boolean = "BOOLEAN"
 	CreateFeatureOptions_Type_Numeric = "NUMERIC"
-	CreateFeatureOptions_Type_String  = "STRING"
+	CreateFeatureOptions_Type_String = "STRING"
 )
 
 // Constants associated with the CreateFeatureOptions.Format property.
@@ -3835,10 +4283,10 @@ const (
 func (*AppConfigurationV1) NewCreateFeatureOptions(environmentID string, name string, featureID string, typeVar string, enabledValue interface{}, disabledValue interface{}) *CreateFeatureOptions {
 	return &CreateFeatureOptions{
 		EnvironmentID: core.StringPtr(environmentID),
-		Name:          core.StringPtr(name),
-		FeatureID:     core.StringPtr(featureID),
-		Type:          core.StringPtr(typeVar),
-		EnabledValue:  enabledValue,
+		Name: core.StringPtr(name),
+		FeatureID: core.StringPtr(featureID),
+		Type: core.StringPtr(typeVar),
+		EnabledValue: enabledValue,
 		DisabledValue: disabledValue,
 	}
 }
@@ -3965,42 +4413,52 @@ func UnmarshalCreateGitConfigResponse(m map[string]json.RawMessage, result inter
 	obj := new(CreateGitConfigResponse)
 	err = core.UnmarshalPrimitive(m, "git_config_name", &obj.GitConfigName)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "git_config_name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "git_config_id", &obj.GitConfigID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "git_config_id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "collection_id", &obj.CollectionID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "collection_id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "environment_id", &obj.EnvironmentID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "environment_id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "git_url", &obj.GitURL)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "git_url-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "git_branch", &obj.GitBranch)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "git_branch-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "git_file_path", &obj.GitFilePath)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "git_file_path-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "created_time", &obj.CreatedTime)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "created_time-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "updated_time", &obj.UpdatedTime)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "updated_time-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "href", &obj.Href)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "href-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -4047,13 +4505,13 @@ type CreateGitconfigOptions struct {
 func (*AppConfigurationV1) NewCreateGitconfigOptions(gitConfigName string, gitConfigID string, collectionID string, environmentID string, gitURL string, gitBranch string, gitFilePath string, gitToken string) *CreateGitconfigOptions {
 	return &CreateGitconfigOptions{
 		GitConfigName: core.StringPtr(gitConfigName),
-		GitConfigID:   core.StringPtr(gitConfigID),
-		CollectionID:  core.StringPtr(collectionID),
+		GitConfigID: core.StringPtr(gitConfigID),
+		CollectionID: core.StringPtr(collectionID),
 		EnvironmentID: core.StringPtr(environmentID),
-		GitURL:        core.StringPtr(gitURL),
-		GitBranch:     core.StringPtr(gitBranch),
-		GitFilePath:   core.StringPtr(gitFilePath),
-		GitToken:      core.StringPtr(gitToken),
+		GitURL: core.StringPtr(gitURL),
+		GitBranch: core.StringPtr(gitBranch),
+		GitFilePath: core.StringPtr(gitFilePath),
+		GitToken: core.StringPtr(gitToken),
 	}
 }
 
@@ -4155,10 +4613,10 @@ type CreatePropertyOptions struct {
 // Type of the property (BOOLEAN, STRING, NUMERIC, SECRETREF). If `type` is `STRING`, then `format` attribute is
 // required.
 const (
-	CreatePropertyOptions_Type_Boolean   = "BOOLEAN"
-	CreatePropertyOptions_Type_Numeric   = "NUMERIC"
+	CreatePropertyOptions_Type_Boolean = "BOOLEAN"
+	CreatePropertyOptions_Type_Numeric = "NUMERIC"
 	CreatePropertyOptions_Type_Secretref = "SECRETREF"
-	CreatePropertyOptions_Type_String    = "STRING"
+	CreatePropertyOptions_Type_String = "STRING"
 )
 
 // Constants associated with the CreatePropertyOptions.Format property.
@@ -4175,10 +4633,10 @@ const (
 func (*AppConfigurationV1) NewCreatePropertyOptions(environmentID string, name string, propertyID string, typeVar string, value interface{}) *CreatePropertyOptions {
 	return &CreatePropertyOptions{
 		EnvironmentID: core.StringPtr(environmentID),
-		Name:          core.StringPtr(name),
-		PropertyID:    core.StringPtr(propertyID),
-		Type:          core.StringPtr(typeVar),
-		Value:         value,
+		Name: core.StringPtr(name),
+		PropertyID: core.StringPtr(propertyID),
+		Type: core.StringPtr(typeVar),
+		Value: value,
 	}
 }
 
@@ -4274,9 +4732,9 @@ type CreateSegmentOptions struct {
 // NewCreateSegmentOptions : Instantiate CreateSegmentOptions
 func (*AppConfigurationV1) NewCreateSegmentOptions(name string, segmentID string, rules []Rule) *CreateSegmentOptions {
 	return &CreateSegmentOptions{
-		Name:      core.StringPtr(name),
+		Name: core.StringPtr(name),
 		SegmentID: core.StringPtr(segmentID),
-		Rules:     rules,
+		Rules: rules,
 	}
 }
 
@@ -4321,36 +4779,18 @@ type CreateWorkflowconfigOptions struct {
 	// Environment Id.
 	EnvironmentID *string `json:"environment_id" validate:"required,ne="`
 
-	// Only service now url https://xxxxx.service-now.com allowed, xxxxx is the service now instance id.
-	WorkflowURL *string `json:"workflow_url" validate:"required"`
-
-	// Group name of personals who can approve the Change Request on your Service Now. It must be first registered in your
-	// Service Now then it must be added here.
-	ApprovalGroupName *string `json:"approval_group_name" validate:"required"`
-
-	// Integer number identifies as hours which helps in adding approval start and end time to the created Change Request.
-	ApprovalExpiration *int64 `json:"approval_expiration" validate:"required"`
-
-	// The credentials of the Service Now instance.
-	WorkflowCredentials *WorkflowCredentials `json:"workflow_credentials" validate:"required"`
-
-	// This option enables the workflow configuration per environment. User must set it to true if they wish to create
-	// Change Request for flag state changes.
-	Enabled *bool `json:"enabled" validate:"required"`
+	// The request body to create a new external workflow config.
+	WorkflowConfig CreateWorkflowconfigRequestIntf `json:"WorkflowConfig" validate:"required"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
 }
 
 // NewCreateWorkflowconfigOptions : Instantiate CreateWorkflowconfigOptions
-func (*AppConfigurationV1) NewCreateWorkflowconfigOptions(environmentID string, workflowURL string, approvalGroupName string, approvalExpiration int64, workflowCredentials *WorkflowCredentials, enabled bool) *CreateWorkflowconfigOptions {
+func (*AppConfigurationV1) NewCreateWorkflowconfigOptions(environmentID string, workflowConfig CreateWorkflowconfigRequestIntf) *CreateWorkflowconfigOptions {
 	return &CreateWorkflowconfigOptions{
-		EnvironmentID:       core.StringPtr(environmentID),
-		WorkflowURL:         core.StringPtr(workflowURL),
-		ApprovalGroupName:   core.StringPtr(approvalGroupName),
-		ApprovalExpiration:  core.Int64Ptr(approvalExpiration),
-		WorkflowCredentials: workflowCredentials,
-		Enabled:             core.BoolPtr(enabled),
+		EnvironmentID: core.StringPtr(environmentID),
+		WorkflowConfig: workflowConfig,
 	}
 }
 
@@ -4360,33 +4800,9 @@ func (_options *CreateWorkflowconfigOptions) SetEnvironmentID(environmentID stri
 	return _options
 }
 
-// SetWorkflowURL : Allow user to set WorkflowURL
-func (_options *CreateWorkflowconfigOptions) SetWorkflowURL(workflowURL string) *CreateWorkflowconfigOptions {
-	_options.WorkflowURL = core.StringPtr(workflowURL)
-	return _options
-}
-
-// SetApprovalGroupName : Allow user to set ApprovalGroupName
-func (_options *CreateWorkflowconfigOptions) SetApprovalGroupName(approvalGroupName string) *CreateWorkflowconfigOptions {
-	_options.ApprovalGroupName = core.StringPtr(approvalGroupName)
-	return _options
-}
-
-// SetApprovalExpiration : Allow user to set ApprovalExpiration
-func (_options *CreateWorkflowconfigOptions) SetApprovalExpiration(approvalExpiration int64) *CreateWorkflowconfigOptions {
-	_options.ApprovalExpiration = core.Int64Ptr(approvalExpiration)
-	return _options
-}
-
-// SetWorkflowCredentials : Allow user to set WorkflowCredentials
-func (_options *CreateWorkflowconfigOptions) SetWorkflowCredentials(workflowCredentials *WorkflowCredentials) *CreateWorkflowconfigOptions {
-	_options.WorkflowCredentials = workflowCredentials
-	return _options
-}
-
-// SetEnabled : Allow user to set Enabled
-func (_options *CreateWorkflowconfigOptions) SetEnabled(enabled bool) *CreateWorkflowconfigOptions {
-	_options.Enabled = core.BoolPtr(enabled)
+// SetWorkflowConfig : Allow user to set WorkflowConfig
+func (_options *CreateWorkflowconfigOptions) SetWorkflowConfig(workflowConfig CreateWorkflowconfigRequestIntf) *CreateWorkflowconfigOptions {
+	_options.WorkflowConfig = workflowConfig
 	return _options
 }
 
@@ -4394,6 +4810,278 @@ func (_options *CreateWorkflowconfigOptions) SetEnabled(enabled bool) *CreateWor
 func (options *CreateWorkflowconfigOptions) SetHeaders(param map[string]string) *CreateWorkflowconfigOptions {
 	options.Headers = param
 	return options
+}
+
+// CreateWorkflowconfigRequest : CreateWorkflowconfigRequest struct
+// Models which "extend" this model:
+// - CreateWorkflowconfigRequestWorkflowConfig
+// - CreateWorkflowconfigRequestIbmWorkflowConfig
+type CreateWorkflowconfigRequest struct {
+	// Environment name of workflow config in which it is created.
+	EnvironmentName *string `json:"environment_name,omitempty"`
+
+	// Environment ID of workflow config in which it is created.
+	EnvironmentID *string `json:"environment_id,omitempty"`
+
+	// Only service now url https://xxxxx.service-now.com allowed, xxxxx is the service now instance id.
+	WorkflowURL *string `json:"workflow_url,omitempty"`
+
+	// Group name of personals who can approve the Change Request on your Service Now. It must be first registered in your
+	// Service Now then it must be added here.
+	ApprovalGroupName *string `json:"approval_group_name,omitempty"`
+
+	// Integer number identifies as hours which helps in adding approval start and end time to the created Change Request.
+	ApprovalExpiration *int64 `json:"approval_expiration,omitempty"`
+
+	// The credentials of the Service Now instance.
+	WorkflowCredentials *WorkflowCredentials `json:"workflow_credentials,omitempty"`
+
+	// This option enables the workflow configuration per environment. User must set it to true if they wish to create
+	// Change Request for flag state changes.
+	Enabled *bool `json:"enabled,omitempty"`
+
+	// Creation time of the workflow configs.
+	CreatedTime *strfmt.DateTime `json:"created_time,omitempty"`
+
+	// Last modified time of the workflow configs.
+	UpdatedTime *strfmt.DateTime `json:"updated_time,omitempty"`
+
+	// Workflow Config URL.
+	Href *string `json:"href,omitempty"`
+
+	// Only service crn will be allowed. Example: `crn:v1:staging:staging:appservice:us-south::::`.
+	ServiceCrn *string `json:"service_crn,omitempty"`
+
+	// Allowed value is `SERVICENOW_IBM` case-sensitive.
+	WorkflowType *string `json:"workflow_type,omitempty"`
+
+	// Only Secret Manager instance crn will be allowed. Example:
+	// `crn:v1:staging:public:secrets-manager:eu-gb:a/3268cfe9e25d411122f9a731a:0a23274-92d0a-4d42-b1fa-d15b4293cd::`.
+	SmInstanceCrn *string `json:"sm_instance_crn,omitempty"`
+
+	// Provide the arbitary secret key id which holds the api key to interact with service now. This is required to perform
+	// action on ServiceNow like Create CR or Close CR.
+	SecretID *string `json:"secret_id,omitempty"`
+}
+func (*CreateWorkflowconfigRequest) isaCreateWorkflowconfigRequest() bool {
+	return true
+}
+
+type CreateWorkflowconfigRequestIntf interface {
+	isaCreateWorkflowconfigRequest() bool
+}
+
+// UnmarshalCreateWorkflowconfigRequest unmarshals an instance of CreateWorkflowconfigRequest from the specified map of raw messages.
+func UnmarshalCreateWorkflowconfigRequest(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(CreateWorkflowconfigRequest)
+	err = core.UnmarshalPrimitive(m, "environment_name", &obj.EnvironmentName)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "environment_name-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "environment_id", &obj.EnvironmentID)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "environment_id-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "workflow_url", &obj.WorkflowURL)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "workflow_url-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "approval_group_name", &obj.ApprovalGroupName)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "approval_group_name-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "approval_expiration", &obj.ApprovalExpiration)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "approval_expiration-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalModel(m, "workflow_credentials", &obj.WorkflowCredentials, UnmarshalWorkflowCredentials)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "workflow_credentials-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "enabled", &obj.Enabled)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "enabled-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "created_time", &obj.CreatedTime)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "created_time-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "updated_time", &obj.UpdatedTime)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "updated_time-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "href", &obj.Href)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "href-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "service_crn", &obj.ServiceCrn)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "service_crn-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "workflow_type", &obj.WorkflowType)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "workflow_type-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "sm_instance_crn", &obj.SmInstanceCrn)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "sm_instance_crn-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "secret_id", &obj.SecretID)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_id-error", common.GetComponentInfo())
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// CreateWorkflowconfigResponse : CreateWorkflowconfigResponse struct
+// Models which "extend" this model:
+// - CreateWorkflowconfigResponseWorkflowConfig
+// - CreateWorkflowconfigResponseIbmWorkflowConfig
+type CreateWorkflowconfigResponse struct {
+	// Environment name of workflow config in which it is created.
+	EnvironmentName *string `json:"environment_name,omitempty"`
+
+	// Environment ID of workflow config in which it is created.
+	EnvironmentID *string `json:"environment_id,omitempty"`
+
+	// Only service now url https://xxxxx.service-now.com allowed, xxxxx is the service now instance id.
+	WorkflowURL *string `json:"workflow_url,omitempty"`
+
+	// Group name of personals who can approve the Change Request on your Service Now. It must be first registered in your
+	// Service Now then it must be added here.
+	ApprovalGroupName *string `json:"approval_group_name,omitempty"`
+
+	// Integer number identifies as hours which helps in adding approval start and end time to the created Change Request.
+	ApprovalExpiration *int64 `json:"approval_expiration,omitempty"`
+
+	// The credentials of the Service Now instance.
+	WorkflowCredentials *WorkflowCredentials `json:"workflow_credentials,omitempty"`
+
+	// This option enables the workflow configuration per environment. User must set it to true if they wish to create
+	// Change Request for flag state changes.
+	Enabled *bool `json:"enabled,omitempty"`
+
+	// Creation time of the workflow configs.
+	CreatedTime *strfmt.DateTime `json:"created_time,omitempty"`
+
+	// Last modified time of the workflow configs.
+	UpdatedTime *strfmt.DateTime `json:"updated_time,omitempty"`
+
+	// Workflow Config URL.
+	Href *string `json:"href,omitempty"`
+
+	// Only service crn will be allowed. Example: `crn:v1:staging:staging:appservice:us-south::::`.
+	ServiceCrn *string `json:"service_crn,omitempty"`
+
+	// Allowed value is `SERVICENOW_IBM` case-sensitive.
+	WorkflowType *string `json:"workflow_type,omitempty"`
+
+	// Only Secret Manager instance crn will be allowed. Example:
+	// `crn:v1:staging:public:secrets-manager:eu-gb:a/3268cfe9e25d411122f9a731a:0a23274-92d0a-4d42-b1fa-d15b4293cd::`.
+	SmInstanceCrn *string `json:"sm_instance_crn,omitempty"`
+
+	// Provide the arbitary secret key id which holds the api key to interact with service now. This is required to perform
+	// action on ServiceNow like Create CR or Close CR.
+	SecretID *string `json:"secret_id,omitempty"`
+}
+func (*CreateWorkflowconfigResponse) isaCreateWorkflowconfigResponse() bool {
+	return true
+}
+
+type CreateWorkflowconfigResponseIntf interface {
+	isaCreateWorkflowconfigResponse() bool
+}
+
+// UnmarshalCreateWorkflowconfigResponse unmarshals an instance of CreateWorkflowconfigResponse from the specified map of raw messages.
+func UnmarshalCreateWorkflowconfigResponse(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(CreateWorkflowconfigResponse)
+	err = core.UnmarshalPrimitive(m, "environment_name", &obj.EnvironmentName)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "environment_name-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "environment_id", &obj.EnvironmentID)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "environment_id-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "workflow_url", &obj.WorkflowURL)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "workflow_url-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "approval_group_name", &obj.ApprovalGroupName)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "approval_group_name-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "approval_expiration", &obj.ApprovalExpiration)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "approval_expiration-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalModel(m, "workflow_credentials", &obj.WorkflowCredentials, UnmarshalWorkflowCredentials)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "workflow_credentials-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "enabled", &obj.Enabled)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "enabled-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "created_time", &obj.CreatedTime)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "created_time-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "updated_time", &obj.UpdatedTime)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "updated_time-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "href", &obj.Href)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "href-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "service_crn", &obj.ServiceCrn)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "service_crn-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "workflow_type", &obj.WorkflowType)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "workflow_type-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "sm_instance_crn", &obj.SmInstanceCrn)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "sm_instance_crn-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "secret_id", &obj.SecretID)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_id-error", common.GetComponentInfo())
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
 }
 
 // DeleteCollectionOptions : The DeleteCollection options.
@@ -4468,7 +5156,7 @@ type DeleteFeatureOptions struct {
 func (*AppConfigurationV1) NewDeleteFeatureOptions(environmentID string, featureID string) *DeleteFeatureOptions {
 	return &DeleteFeatureOptions{
 		EnvironmentID: core.StringPtr(environmentID),
-		FeatureID:     core.StringPtr(featureID),
+		FeatureID: core.StringPtr(featureID),
 	}
 }
 
@@ -4534,7 +5222,7 @@ type DeletePropertyOptions struct {
 func (*AppConfigurationV1) NewDeletePropertyOptions(environmentID string, propertyID string) *DeletePropertyOptions {
 	return &DeletePropertyOptions{
 		EnvironmentID: core.StringPtr(environmentID),
-		PropertyID:    core.StringPtr(propertyID),
+		PropertyID: core.StringPtr(propertyID),
 	}
 }
 
@@ -4651,10 +5339,13 @@ type Environment struct {
 // NewEnvironment : Instantiate Environment (Generic Model Constructor)
 func (*AppConfigurationV1) NewEnvironment(name string, environmentID string) (_model *Environment, err error) {
 	_model = &Environment{
-		Name:          core.StringPtr(name),
+		Name: core.StringPtr(name),
 		EnvironmentID: core.StringPtr(environmentID),
 	}
 	err = core.ValidateStruct(_model, "required parameters")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "model-missing-required", common.GetComponentInfo())
+	}
 	return
 }
 
@@ -4663,46 +5354,57 @@ func UnmarshalEnvironment(m map[string]json.RawMessage, result interface{}) (err
 	obj := new(Environment)
 	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "environment_id", &obj.EnvironmentID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "environment_id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "description", &obj.Description)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "description-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "tags", &obj.Tags)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "tags-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "color_code", &obj.ColorCode)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "color_code-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "created_time", &obj.CreatedTime)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "created_time-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "updated_time", &obj.UpdatedTime)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "updated_time-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "href", &obj.Href)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "href-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "features", &obj.Features, UnmarshalFeatureOutput)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "features-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "properties", &obj.Properties, UnmarshalPropertyOutput)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "properties-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "snapshots", &obj.Snapshots, UnmarshalSnapshotOutput)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "snapshots-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -4741,34 +5443,42 @@ func UnmarshalEnvironmentList(m map[string]json.RawMessage, result interface{}) 
 	obj := new(EnvironmentList)
 	err = core.UnmarshalModel(m, "environments", &obj.Environments, UnmarshalEnvironment)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "environments-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "limit", &obj.Limit)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "limit-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "offset", &obj.Offset)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "offset-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "total_count", &obj.TotalCount)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "total_count-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "first", &obj.First, UnmarshalPaginatedListFirst)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "first-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "previous", &obj.Previous, UnmarshalPaginatedListPrevious)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "previous-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "next", &obj.Next, UnmarshalPaginatedListNext)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "next-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "last", &obj.Last, UnmarshalPaginatedListLast)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "last-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -4781,12 +5491,16 @@ func (resp *EnvironmentList) GetNextOffset() (*int64, error) {
 		return nil, nil
 	}
 	offset, err := core.GetQueryParam(resp.Next.Href, "offset")
-	if err != nil || offset == nil {
+	if err != nil {
+		err = core.SDKErrorf(err, "", "read-query-param-error", common.GetComponentInfo())
 		return nil, err
+	} else if offset == nil {
+		return nil, nil
 	}
 	var offsetValue int64
 	offsetValue, err = strconv.ParseInt(*offset, 10, 64)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "parse-int-query-error", common.GetComponentInfo())
 		return nil, err
 	}
 	return core.Int64Ptr(offsetValue), nil
@@ -4861,7 +5575,7 @@ type Feature struct {
 const (
 	Feature_Type_Boolean = "BOOLEAN"
 	Feature_Type_Numeric = "NUMERIC"
-	Feature_Type_String  = "STRING"
+	Feature_Type_String = "STRING"
 )
 
 // Constants associated with the Feature.Format property.
@@ -4879,78 +5593,97 @@ func UnmarshalFeature(m map[string]json.RawMessage, result interface{}) (err err
 	obj := new(Feature)
 	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "feature_id", &obj.FeatureID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "feature_id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "description", &obj.Description)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "description-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "type", &obj.Type)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "type-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "format", &obj.Format)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "format-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "enabled_value", &obj.EnabledValue)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "enabled_value-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "disabled_value", &obj.DisabledValue)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "disabled_value-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "enabled", &obj.Enabled)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "enabled-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "rollout_percentage", &obj.RolloutPercentage)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "rollout_percentage-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "tags", &obj.Tags)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "tags-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "segment_rules", &obj.SegmentRules, UnmarshalFeatureSegmentRule)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "segment_rules-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "segment_exists", &obj.SegmentExists)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "segment_exists-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "collections", &obj.Collections, UnmarshalCollectionRef)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "collections-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "change_request_number", &obj.ChangeRequestNumber)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "change_request_number-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "change_request_status", &obj.ChangeRequestStatus)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "change_request_status-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "created_time", &obj.CreatedTime)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "created_time-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "updated_time", &obj.UpdatedTime)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "updated_time-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "evaluation_time", &obj.EvaluationTime)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "evaluation_time-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "href", &obj.Href)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "href-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -4970,9 +5703,12 @@ type FeatureOutput struct {
 func (*AppConfigurationV1) NewFeatureOutput(featureID string, name string) (_model *FeatureOutput, err error) {
 	_model = &FeatureOutput{
 		FeatureID: core.StringPtr(featureID),
-		Name:      core.StringPtr(name),
+		Name: core.StringPtr(name),
 	}
 	err = core.ValidateStruct(_model, "required parameters")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "model-missing-required", common.GetComponentInfo())
+	}
 	return
 }
 
@@ -4981,10 +5717,12 @@ func UnmarshalFeatureOutput(m map[string]json.RawMessage, result interface{}) (e
 	obj := new(FeatureOutput)
 	err = core.UnmarshalPrimitive(m, "feature_id", &obj.FeatureID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "feature_id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "name-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -5016,6 +5754,9 @@ func (*AppConfigurationV1) NewFeatureSegmentRule(rules []TargetSegments, value i
 		Order: core.Int64Ptr(order),
 	}
 	err = core.ValidateStruct(_model, "required parameters")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "model-missing-required", common.GetComponentInfo())
+	}
 	return
 }
 
@@ -5024,18 +5765,22 @@ func UnmarshalFeatureSegmentRule(m map[string]json.RawMessage, result interface{
 	obj := new(FeatureSegmentRule)
 	err = core.UnmarshalModel(m, "rules", &obj.Rules, UnmarshalTargetSegments)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "rules-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "value", &obj.Value)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "value-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "order", &obj.Order)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "order-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "rollout_percentage", &obj.RolloutPercentage)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "rollout_percentage-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -5074,34 +5819,42 @@ func UnmarshalFeaturesList(m map[string]json.RawMessage, result interface{}) (er
 	obj := new(FeaturesList)
 	err = core.UnmarshalModel(m, "features", &obj.Features, UnmarshalFeature)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "features-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "limit", &obj.Limit)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "limit-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "offset", &obj.Offset)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "offset-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "total_count", &obj.TotalCount)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "total_count-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "first", &obj.First, UnmarshalPaginatedListFirst)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "first-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "previous", &obj.Previous, UnmarshalPaginatedListPrevious)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "previous-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "next", &obj.Next, UnmarshalPaginatedListNext)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "next-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "last", &obj.Last, UnmarshalPaginatedListLast)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "last-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -5114,12 +5867,16 @@ func (resp *FeaturesList) GetNextOffset() (*int64, error) {
 		return nil, nil
 	}
 	offset, err := core.GetQueryParam(resp.Next.Href, "offset")
-	if err != nil || offset == nil {
+	if err != nil {
+		err = core.SDKErrorf(err, "", "read-query-param-error", common.GetComponentInfo())
 		return nil, err
+	} else if offset == nil {
+		return nil, nil
 	}
 	var offsetValue int64
 	offsetValue, err = strconv.ParseInt(*offset, 10, 64)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "parse-int-query-error", common.GetComponentInfo())
 		return nil, err
 	}
 	return core.Int64Ptr(offsetValue), nil
@@ -5142,9 +5899,9 @@ type GetCollectionOptions struct {
 
 // Constants associated with the GetCollectionOptions.Include property.
 const (
-	GetCollectionOptions_Include_Features   = "features"
+	GetCollectionOptions_Include_Features = "features"
 	GetCollectionOptions_Include_Properties = "properties"
-	GetCollectionOptions_Include_Snapshots  = "snapshots"
+	GetCollectionOptions_Include_Snapshots = "snapshots"
 )
 
 // NewGetCollectionOptions : Instantiate GetCollectionOptions
@@ -5195,9 +5952,9 @@ type GetEnvironmentOptions struct {
 
 // Constants associated with the GetEnvironmentOptions.Include property.
 const (
-	GetEnvironmentOptions_Include_Features   = "features"
+	GetEnvironmentOptions_Include_Features = "features"
 	GetEnvironmentOptions_Include_Properties = "properties"
-	GetEnvironmentOptions_Include_Snapshots  = "snapshots"
+	GetEnvironmentOptions_Include_Snapshots = "snapshots"
 )
 
 // NewGetEnvironmentOptions : Instantiate GetEnvironmentOptions
@@ -5249,15 +6006,15 @@ type GetFeatureOptions struct {
 // Constants associated with the GetFeatureOptions.Include property.
 const (
 	GetFeatureOptions_Include_ChangeRequest = "change_request"
-	GetFeatureOptions_Include_Collections   = "collections"
-	GetFeatureOptions_Include_Rules         = "rules"
+	GetFeatureOptions_Include_Collections = "collections"
+	GetFeatureOptions_Include_Rules = "rules"
 )
 
 // NewGetFeatureOptions : Instantiate GetFeatureOptions
 func (*AppConfigurationV1) NewGetFeatureOptions(environmentID string, featureID string) *GetFeatureOptions {
 	return &GetFeatureOptions{
 		EnvironmentID: core.StringPtr(environmentID),
-		FeatureID:     core.StringPtr(featureID),
+		FeatureID: core.StringPtr(featureID),
 	}
 }
 
@@ -5331,14 +6088,14 @@ type GetPropertyOptions struct {
 // Constants associated with the GetPropertyOptions.Include property.
 const (
 	GetPropertyOptions_Include_Collections = "collections"
-	GetPropertyOptions_Include_Rules       = "rules"
+	GetPropertyOptions_Include_Rules = "rules"
 )
 
 // NewGetPropertyOptions : Instantiate GetPropertyOptions
 func (*AppConfigurationV1) NewGetPropertyOptions(environmentID string, propertyID string) *GetPropertyOptions {
 	return &GetPropertyOptions{
 		EnvironmentID: core.StringPtr(environmentID),
-		PropertyID:    core.StringPtr(propertyID),
+		PropertyID: core.StringPtr(propertyID),
 	}
 }
 
@@ -5380,7 +6137,7 @@ type GetSegmentOptions struct {
 
 // Constants associated with the GetSegmentOptions.Include property.
 const (
-	GetSegmentOptions_Include_Features   = "features"
+	GetSegmentOptions_Include_Features = "features"
 	GetSegmentOptions_Include_Properties = "properties"
 )
 
@@ -5450,46 +6207,57 @@ func UnmarshalGitConfig(m map[string]json.RawMessage, result interface{}) (err e
 	obj := new(GitConfig)
 	err = core.UnmarshalPrimitive(m, "git_config_name", &obj.GitConfigName)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "git_config_name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "git_config_id", &obj.GitConfigID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "git_config_id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "collection", &obj.Collection, UnmarshalGitConfigCollection)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "collection-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "environment", &obj.Environment, UnmarshalGitConfigEnvironment)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "environment-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "git_url", &obj.GitURL)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "git_url-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "git_branch", &obj.GitBranch)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "git_branch-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "git_file_path", &obj.GitFilePath)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "git_file_path-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "last_sync_time", &obj.LastSyncTime)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "last_sync_time-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "created_time", &obj.CreatedTime)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "created_time-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "updated_time", &obj.UpdatedTime)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "updated_time-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "href", &obj.Href)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "href-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -5510,10 +6278,12 @@ func UnmarshalGitConfigCollection(m map[string]json.RawMessage, result interface
 	obj := new(GitConfigCollection)
 	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "collection_id", &obj.CollectionID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "collection_id-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -5537,14 +6307,17 @@ func UnmarshalGitConfigEnvironment(m map[string]json.RawMessage, result interfac
 	obj := new(GitConfigEnvironment)
 	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "environment_id", &obj.EnvironmentID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "environment_id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "color_code", &obj.ColorCode)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "color_code-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -5583,34 +6356,42 @@ func UnmarshalGitConfigList(m map[string]json.RawMessage, result interface{}) (e
 	obj := new(GitConfigList)
 	err = core.UnmarshalModel(m, "git_config", &obj.GitConfig, UnmarshalGitConfig)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "git_config-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "limit", &obj.Limit)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "limit-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "offset", &obj.Offset)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "offset-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "total_count", &obj.TotalCount)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "total_count-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "first", &obj.First, UnmarshalPaginatedListFirst)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "first-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "previous", &obj.Previous, UnmarshalPaginatedListPrevious)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "previous-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "next", &obj.Next, UnmarshalPaginatedListNext)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "next-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "last", &obj.Last, UnmarshalPaginatedListLast)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "last-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -5623,12 +6404,16 @@ func (resp *GitConfigList) GetNextOffset() (*int64, error) {
 		return nil, nil
 	}
 	offset, err := core.GetQueryParam(resp.Next.Href, "offset")
-	if err != nil || offset == nil {
+	if err != nil {
+		err = core.SDKErrorf(err, "", "read-query-param-error", common.GetComponentInfo())
 		return nil, err
+	} else if offset == nil {
+		return nil, nil
 	}
 	var offsetValue int64
 	offsetValue, err = strconv.ParseInt(*offset, 10, 64)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "parse-int-query-error", common.GetComponentInfo())
 		return nil, err
 	}
 	return core.Int64Ptr(offsetValue), nil
@@ -5651,14 +6436,17 @@ func UnmarshalGitConfigPromote(m map[string]json.RawMessage, result interface{})
 	obj := new(GitConfigPromote)
 	err = core.UnmarshalPrimitive(m, "git_commit_id", &obj.GitCommitID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "git_commit_id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "git_commit_message", &obj.GitCommitMessage)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "git_commit_message-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "last_sync_time", &obj.LastSyncTime)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "last_sync_time-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -5680,10 +6468,12 @@ func UnmarshalGitConfigRestore(m map[string]json.RawMessage, result interface{})
 	obj := new(GitConfigRestore)
 	err = core.UnmarshalModel(m, "environments", &obj.Environments, UnmarshalImportEnvironmentSchema)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "environments-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "segments", &obj.Segments, UnmarshalImportSegmentSchema)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "segments-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -5709,9 +6499,12 @@ type ImportCollectionSchema struct {
 func (*AppConfigurationV1) NewImportCollectionSchema(collectionID string, name string) (_model *ImportCollectionSchema, err error) {
 	_model = &ImportCollectionSchema{
 		CollectionID: core.StringPtr(collectionID),
-		Name:         core.StringPtr(name),
+		Name: core.StringPtr(name),
 	}
 	err = core.ValidateStruct(_model, "required parameters")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "model-missing-required", common.GetComponentInfo())
+	}
 	return
 }
 
@@ -5720,18 +6513,22 @@ func UnmarshalImportCollectionSchema(m map[string]json.RawMessage, result interf
 	obj := new(ImportCollectionSchema)
 	err = core.UnmarshalPrimitive(m, "collection_id", &obj.CollectionID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "collection_id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "description", &obj.Description)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "description-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "tags", &obj.Tags)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "tags-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -5755,14 +6552,17 @@ func UnmarshalImportConfig(m map[string]json.RawMessage, result interface{}) (er
 	obj := new(ImportConfig)
 	err = core.UnmarshalModel(m, "environments", &obj.Environments, UnmarshalImportEnvironmentSchema)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "environments-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "collections", &obj.Collections, UnmarshalImportCollectionSchema)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "collections-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "segments", &obj.Segments, UnmarshalImportSegmentSchema)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "segments-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -5849,10 +6649,13 @@ type ImportEnvironmentSchema struct {
 // NewImportEnvironmentSchema : Instantiate ImportEnvironmentSchema (Generic Model Constructor)
 func (*AppConfigurationV1) NewImportEnvironmentSchema(name string, environmentID string) (_model *ImportEnvironmentSchema, err error) {
 	_model = &ImportEnvironmentSchema{
-		Name:          core.StringPtr(name),
+		Name: core.StringPtr(name),
 		EnvironmentID: core.StringPtr(environmentID),
 	}
 	err = core.ValidateStruct(_model, "required parameters")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "model-missing-required", common.GetComponentInfo())
+	}
 	return
 }
 
@@ -5861,30 +6664,37 @@ func UnmarshalImportEnvironmentSchema(m map[string]json.RawMessage, result inter
 	obj := new(ImportEnvironmentSchema)
 	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "environment_id", &obj.EnvironmentID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "environment_id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "description", &obj.Description)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "description-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "tags", &obj.Tags)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "tags-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "color_code", &obj.ColorCode)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "color_code-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "features", &obj.Features, UnmarshalImportFeatureRequestBody)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "features-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "properties", &obj.Properties, UnmarshalImportPropertyRequestBody)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "properties-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -5942,7 +6752,7 @@ type ImportFeatureRequestBody struct {
 const (
 	ImportFeatureRequestBody_Type_Boolean = "BOOLEAN"
 	ImportFeatureRequestBody_Type_Numeric = "NUMERIC"
-	ImportFeatureRequestBody_Type_String  = "STRING"
+	ImportFeatureRequestBody_Type_String = "STRING"
 )
 
 // Constants associated with the ImportFeatureRequestBody.Format property.
@@ -5958,14 +6768,17 @@ const (
 // NewImportFeatureRequestBody : Instantiate ImportFeatureRequestBody (Generic Model Constructor)
 func (*AppConfigurationV1) NewImportFeatureRequestBody(name string, featureID string, typeVar string, enabledValue interface{}, disabledValue interface{}, isOverridden bool) (_model *ImportFeatureRequestBody, err error) {
 	_model = &ImportFeatureRequestBody{
-		Name:          core.StringPtr(name),
-		FeatureID:     core.StringPtr(featureID),
-		Type:          core.StringPtr(typeVar),
-		EnabledValue:  enabledValue,
+		Name: core.StringPtr(name),
+		FeatureID: core.StringPtr(featureID),
+		Type: core.StringPtr(typeVar),
+		EnabledValue: enabledValue,
 		DisabledValue: disabledValue,
-		IsOverridden:  core.BoolPtr(isOverridden),
+		IsOverridden: core.BoolPtr(isOverridden),
 	}
 	err = core.ValidateStruct(_model, "required parameters")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "model-missing-required", common.GetComponentInfo())
+	}
 	return
 }
 
@@ -5974,54 +6787,67 @@ func UnmarshalImportFeatureRequestBody(m map[string]json.RawMessage, result inte
 	obj := new(ImportFeatureRequestBody)
 	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "feature_id", &obj.FeatureID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "feature_id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "description", &obj.Description)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "description-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "type", &obj.Type)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "type-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "format", &obj.Format)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "format-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "enabled_value", &obj.EnabledValue)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "enabled_value-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "disabled_value", &obj.DisabledValue)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "disabled_value-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "enabled", &obj.Enabled)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "enabled-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "rollout_percentage", &obj.RolloutPercentage)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "rollout_percentage-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "tags", &obj.Tags)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "tags-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "segment_rules", &obj.SegmentRules, UnmarshalFeatureSegmentRule)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "segment_rules-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "collections", &obj.Collections, UnmarshalCollectionRef)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "collections-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "isOverridden", &obj.IsOverridden)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "isOverridden-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -6069,10 +6895,10 @@ type ImportPropertyRequestBody struct {
 // Type of the property (BOOLEAN, STRING, NUMERIC, SECRETREF). If `type` is `STRING`, then `format` attribute is
 // required.
 const (
-	ImportPropertyRequestBody_Type_Boolean   = "BOOLEAN"
-	ImportPropertyRequestBody_Type_Numeric   = "NUMERIC"
+	ImportPropertyRequestBody_Type_Boolean = "BOOLEAN"
+	ImportPropertyRequestBody_Type_Numeric = "NUMERIC"
 	ImportPropertyRequestBody_Type_Secretref = "SECRETREF"
-	ImportPropertyRequestBody_Type_String    = "STRING"
+	ImportPropertyRequestBody_Type_String = "STRING"
 )
 
 // Constants associated with the ImportPropertyRequestBody.Format property.
@@ -6088,13 +6914,16 @@ const (
 // NewImportPropertyRequestBody : Instantiate ImportPropertyRequestBody (Generic Model Constructor)
 func (*AppConfigurationV1) NewImportPropertyRequestBody(name string, propertyID string, typeVar string, value interface{}, isOverridden bool) (_model *ImportPropertyRequestBody, err error) {
 	_model = &ImportPropertyRequestBody{
-		Name:         core.StringPtr(name),
-		PropertyID:   core.StringPtr(propertyID),
-		Type:         core.StringPtr(typeVar),
-		Value:        value,
+		Name: core.StringPtr(name),
+		PropertyID: core.StringPtr(propertyID),
+		Type: core.StringPtr(typeVar),
+		Value: value,
 		IsOverridden: core.BoolPtr(isOverridden),
 	}
 	err = core.ValidateStruct(_model, "required parameters")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "model-missing-required", common.GetComponentInfo())
+	}
 	return
 }
 
@@ -6103,42 +6932,52 @@ func UnmarshalImportPropertyRequestBody(m map[string]json.RawMessage, result int
 	obj := new(ImportPropertyRequestBody)
 	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "property_id", &obj.PropertyID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "property_id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "description", &obj.Description)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "description-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "type", &obj.Type)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "type-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "format", &obj.Format)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "format-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "value", &obj.Value)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "value-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "tags", &obj.Tags)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "tags-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "segment_rules", &obj.SegmentRules, UnmarshalSegmentRule)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "segment_rules-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "collections", &obj.Collections, UnmarshalCollectionRef)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "collections-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "isOverridden", &obj.IsOverridden)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "isOverridden-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -6168,11 +7007,14 @@ type ImportSegmentSchema struct {
 // NewImportSegmentSchema : Instantiate ImportSegmentSchema (Generic Model Constructor)
 func (*AppConfigurationV1) NewImportSegmentSchema(name string, segmentID string, rules []Rule) (_model *ImportSegmentSchema, err error) {
 	_model = &ImportSegmentSchema{
-		Name:      core.StringPtr(name),
+		Name: core.StringPtr(name),
 		SegmentID: core.StringPtr(segmentID),
-		Rules:     rules,
+		Rules: rules,
 	}
 	err = core.ValidateStruct(_model, "required parameters")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "model-missing-required", common.GetComponentInfo())
+	}
 	return
 }
 
@@ -6181,22 +7023,27 @@ func UnmarshalImportSegmentSchema(m map[string]json.RawMessage, result interface
 	obj := new(ImportSegmentSchema)
 	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "segment_id", &obj.SegmentID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "segment_id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "description", &obj.Description)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "description-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "tags", &obj.Tags)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "tags-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "rules", &obj.Rules, UnmarshalRule)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "rules-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -6244,16 +7091,16 @@ type ListCollectionsOptions struct {
 // Sort the collection details based on the specified attribute. By default, items are sorted by name.
 const (
 	ListCollectionsOptions_Sort_CreatedTime = "created_time"
-	ListCollectionsOptions_Sort_ID          = "id"
-	ListCollectionsOptions_Sort_Name        = "name"
+	ListCollectionsOptions_Sort_ID = "id"
+	ListCollectionsOptions_Sort_Name = "name"
 	ListCollectionsOptions_Sort_UpdatedTime = "updated_time"
 )
 
 // Constants associated with the ListCollectionsOptions.Include property.
 const (
-	ListCollectionsOptions_Include_Features   = "features"
+	ListCollectionsOptions_Include_Features = "features"
 	ListCollectionsOptions_Include_Properties = "properties"
-	ListCollectionsOptions_Include_Snapshots  = "snapshots"
+	ListCollectionsOptions_Include_Snapshots = "snapshots"
 )
 
 // NewListCollectionsOptions : Instantiate ListCollectionsOptions
@@ -6356,16 +7203,16 @@ type ListEnvironmentsOptions struct {
 // Sort the environment details based on the specified attribute. By default, items are sorted by name.
 const (
 	ListEnvironmentsOptions_Sort_CreatedTime = "created_time"
-	ListEnvironmentsOptions_Sort_ID          = "id"
-	ListEnvironmentsOptions_Sort_Name        = "name"
+	ListEnvironmentsOptions_Sort_ID = "id"
+	ListEnvironmentsOptions_Sort_Name = "name"
 	ListEnvironmentsOptions_Sort_UpdatedTime = "updated_time"
 )
 
 // Constants associated with the ListEnvironmentsOptions.Include property.
 const (
-	ListEnvironmentsOptions_Include_Features   = "features"
+	ListEnvironmentsOptions_Include_Features = "features"
 	ListEnvironmentsOptions_Include_Properties = "properties"
-	ListEnvironmentsOptions_Include_Snapshots  = "snapshots"
+	ListEnvironmentsOptions_Include_Snapshots = "snapshots"
 )
 
 // NewListEnvironmentsOptions : Instantiate ListEnvironmentsOptions
@@ -6465,16 +7312,16 @@ type ListFeaturesOptions struct {
 // Sort the feature details based on the specified attribute. By default, items are sorted by name.
 const (
 	ListFeaturesOptions_Sort_CreatedTime = "created_time"
-	ListFeaturesOptions_Sort_ID          = "id"
-	ListFeaturesOptions_Sort_Name        = "name"
+	ListFeaturesOptions_Sort_ID = "id"
+	ListFeaturesOptions_Sort_Name = "name"
 	ListFeaturesOptions_Sort_UpdatedTime = "updated_time"
 )
 
 // Constants associated with the ListFeaturesOptions.Include property.
 const (
 	ListFeaturesOptions_Include_ChangeRequest = "change_request"
-	ListFeaturesOptions_Include_Collections   = "collections"
-	ListFeaturesOptions_Include_Rules         = "rules"
+	ListFeaturesOptions_Include_Collections = "collections"
+	ListFeaturesOptions_Include_Rules = "rules"
 )
 
 // NewListFeaturesOptions : Instantiate ListFeaturesOptions
@@ -6630,15 +7477,15 @@ type ListPropertiesOptions struct {
 // Sort the property details based on the specified attribute. By default, items are sorted by name.
 const (
 	ListPropertiesOptions_Sort_CreatedTime = "created_time"
-	ListPropertiesOptions_Sort_ID          = "id"
-	ListPropertiesOptions_Sort_Name        = "name"
+	ListPropertiesOptions_Sort_ID = "id"
+	ListPropertiesOptions_Sort_Name = "name"
 	ListPropertiesOptions_Sort_UpdatedTime = "updated_time"
 )
 
 // Constants associated with the ListPropertiesOptions.Include property.
 const (
 	ListPropertiesOptions_Include_Collections = "collections"
-	ListPropertiesOptions_Include_Rules       = "rules"
+	ListPropertiesOptions_Include_Rules = "rules"
 )
 
 // NewListPropertiesOptions : Instantiate ListPropertiesOptions
@@ -6749,8 +7596,8 @@ type ListSegmentsOptions struct {
 // Sort the segment details based on the specified attribute. By default, items are sorted by name.
 const (
 	ListSegmentsOptions_Sort_CreatedTime = "created_time"
-	ListSegmentsOptions_Sort_ID          = "id"
-	ListSegmentsOptions_Sort_Name        = "name"
+	ListSegmentsOptions_Sort_ID = "id"
+	ListSegmentsOptions_Sort_Name = "name"
 	ListSegmentsOptions_Sort_UpdatedTime = "updated_time"
 )
 
@@ -6844,8 +7691,8 @@ type ListSnapshotsOptions struct {
 // Sort the git configurations details based on the specified attribute. By default, items are sorted by name.
 const (
 	ListSnapshotsOptions_Sort_CreatedTime = "created_time"
-	ListSnapshotsOptions_Sort_ID          = "id"
-	ListSnapshotsOptions_Sort_Name        = "name"
+	ListSnapshotsOptions_Sort_ID = "id"
+	ListSnapshotsOptions_Sort_Name = "name"
 	ListSnapshotsOptions_Sort_UpdatedTime = "updated_time"
 )
 
@@ -6924,6 +7771,142 @@ func (options *ListWorkflowconfigOptions) SetHeaders(param map[string]string) *L
 	return options
 }
 
+// ListWorkflowconfigResponse : ListWorkflowconfigResponse struct
+// Models which "extend" this model:
+// - ListWorkflowconfigResponseWorkflowConfig
+// - ListWorkflowconfigResponseIbmWorkflowConfig
+type ListWorkflowconfigResponse struct {
+	// Environment name of workflow config in which it is created.
+	EnvironmentName *string `json:"environment_name,omitempty"`
+
+	// Environment ID of workflow config in which it is created.
+	EnvironmentID *string `json:"environment_id,omitempty"`
+
+	// Only service now url https://xxxxx.service-now.com allowed, xxxxx is the service now instance id.
+	WorkflowURL *string `json:"workflow_url,omitempty"`
+
+	// Group name of personals who can approve the Change Request on your Service Now. It must be first registered in your
+	// Service Now then it must be added here.
+	ApprovalGroupName *string `json:"approval_group_name,omitempty"`
+
+	// Integer number identifies as hours which helps in adding approval start and end time to the created Change Request.
+	ApprovalExpiration *int64 `json:"approval_expiration,omitempty"`
+
+	// The credentials of the Service Now instance.
+	WorkflowCredentials *WorkflowCredentials `json:"workflow_credentials,omitempty"`
+
+	// This option enables the workflow configuration per environment. User must set it to true if they wish to create
+	// Change Request for flag state changes.
+	Enabled *bool `json:"enabled,omitempty"`
+
+	// Creation time of the workflow configs.
+	CreatedTime *strfmt.DateTime `json:"created_time,omitempty"`
+
+	// Last modified time of the workflow configs.
+	UpdatedTime *strfmt.DateTime `json:"updated_time,omitempty"`
+
+	// Workflow Config URL.
+	Href *string `json:"href,omitempty"`
+
+	// Only service crn will be allowed. Example: `crn:v1:staging:staging:appservice:us-south::::`.
+	ServiceCrn *string `json:"service_crn,omitempty"`
+
+	// Allowed value is `SERVICENOW_IBM` case-sensitive.
+	WorkflowType *string `json:"workflow_type,omitempty"`
+
+	// Only Secret Manager instance crn will be allowed. Example:
+	// `crn:v1:staging:public:secrets-manager:eu-gb:a/3268cfe9e25d411122f9a731a:0a23274-92d0a-4d42-b1fa-d15b4293cd::`.
+	SmInstanceCrn *string `json:"sm_instance_crn,omitempty"`
+
+	// Provide the arbitary secret key id which holds the api key to interact with service now. This is required to perform
+	// action on ServiceNow like Create CR or Close CR.
+	SecretID *string `json:"secret_id,omitempty"`
+}
+func (*ListWorkflowconfigResponse) isaListWorkflowconfigResponse() bool {
+	return true
+}
+
+type ListWorkflowconfigResponseIntf interface {
+	isaListWorkflowconfigResponse() bool
+}
+
+// UnmarshalListWorkflowconfigResponse unmarshals an instance of ListWorkflowconfigResponse from the specified map of raw messages.
+func UnmarshalListWorkflowconfigResponse(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(ListWorkflowconfigResponse)
+	err = core.UnmarshalPrimitive(m, "environment_name", &obj.EnvironmentName)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "environment_name-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "environment_id", &obj.EnvironmentID)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "environment_id-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "workflow_url", &obj.WorkflowURL)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "workflow_url-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "approval_group_name", &obj.ApprovalGroupName)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "approval_group_name-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "approval_expiration", &obj.ApprovalExpiration)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "approval_expiration-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalModel(m, "workflow_credentials", &obj.WorkflowCredentials, UnmarshalWorkflowCredentials)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "workflow_credentials-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "enabled", &obj.Enabled)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "enabled-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "created_time", &obj.CreatedTime)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "created_time-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "updated_time", &obj.UpdatedTime)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "updated_time-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "href", &obj.Href)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "href-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "service_crn", &obj.ServiceCrn)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "service_crn-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "workflow_type", &obj.WorkflowType)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "workflow_type-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "sm_instance_crn", &obj.SmInstanceCrn)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "sm_instance_crn-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "secret_id", &obj.SecretID)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_id-error", common.GetComponentInfo())
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
 // OriginConfigList : List of all origin configs.
 type OriginConfigList struct {
 	// List of allowed origins. Specify the parameter as a list of comma separated origins.
@@ -6944,18 +7927,22 @@ func UnmarshalOriginConfigList(m map[string]json.RawMessage, result interface{})
 	obj := new(OriginConfigList)
 	err = core.UnmarshalPrimitive(m, "allowed_origins", &obj.AllowedOrigins)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "allowed_origins-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "created_time", &obj.CreatedTime)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "created_time-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "updated_time", &obj.UpdatedTime)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "updated_time-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "href", &obj.Href)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "href-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -6973,6 +7960,7 @@ func UnmarshalPaginatedListFirst(m map[string]json.RawMessage, result interface{
 	obj := new(PaginatedListFirst)
 	err = core.UnmarshalPrimitive(m, "href", &obj.Href)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "href-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -6990,6 +7978,7 @@ func UnmarshalPaginatedListLast(m map[string]json.RawMessage, result interface{}
 	obj := new(PaginatedListLast)
 	err = core.UnmarshalPrimitive(m, "href", &obj.Href)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "href-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -7007,6 +7996,7 @@ func UnmarshalPaginatedListNext(m map[string]json.RawMessage, result interface{}
 	obj := new(PaginatedListNext)
 	err = core.UnmarshalPrimitive(m, "href", &obj.Href)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "href-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -7024,6 +8014,7 @@ func UnmarshalPaginatedListPrevious(m map[string]json.RawMessage, result interfa
 	obj := new(PaginatedListPrevious)
 	err = core.UnmarshalPrimitive(m, "href", &obj.Href)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "href-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -7081,7 +8072,7 @@ const (
 func (*AppConfigurationV1) NewPromoteRestoreConfigOptions(gitConfigID string, action string) *PromoteRestoreConfigOptions {
 	return &PromoteRestoreConfigOptions{
 		GitConfigID: core.StringPtr(gitConfigID),
-		Action:      core.StringPtr(action),
+		Action: core.StringPtr(action),
 	}
 }
 
@@ -7135,34 +8126,42 @@ func UnmarshalPropertiesList(m map[string]json.RawMessage, result interface{}) (
 	obj := new(PropertiesList)
 	err = core.UnmarshalModel(m, "properties", &obj.Properties, UnmarshalProperty)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "properties-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "limit", &obj.Limit)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "limit-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "offset", &obj.Offset)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "offset-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "total_count", &obj.TotalCount)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "total_count-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "first", &obj.First, UnmarshalPaginatedListFirst)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "first-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "previous", &obj.Previous, UnmarshalPaginatedListPrevious)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "previous-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "next", &obj.Next, UnmarshalPaginatedListNext)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "next-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "last", &obj.Last, UnmarshalPaginatedListLast)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "last-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -7175,12 +8174,16 @@ func (resp *PropertiesList) GetNextOffset() (*int64, error) {
 		return nil, nil
 	}
 	offset, err := core.GetQueryParam(resp.Next.Href, "offset")
-	if err != nil || offset == nil {
+	if err != nil {
+		err = core.SDKErrorf(err, "", "read-query-param-error", common.GetComponentInfo())
 		return nil, err
+	} else if offset == nil {
+		return nil, nil
 	}
 	var offsetValue int64
 	offsetValue, err = strconv.ParseInt(*offset, 10, 64)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "parse-int-query-error", common.GetComponentInfo())
 		return nil, err
 	}
 	return core.Int64Ptr(offsetValue), nil
@@ -7239,10 +8242,10 @@ type Property struct {
 // Type of the property (BOOLEAN, STRING, NUMERIC, SECRETREF). If `type` is `STRING`, then `format` attribute is
 // required.
 const (
-	Property_Type_Boolean   = "BOOLEAN"
-	Property_Type_Numeric   = "NUMERIC"
+	Property_Type_Boolean = "BOOLEAN"
+	Property_Type_Numeric = "NUMERIC"
 	Property_Type_Secretref = "SECRETREF"
-	Property_Type_String    = "STRING"
+	Property_Type_String = "STRING"
 )
 
 // Constants associated with the Property.Format property.
@@ -7258,12 +8261,15 @@ const (
 // NewProperty : Instantiate Property (Generic Model Constructor)
 func (*AppConfigurationV1) NewProperty(name string, propertyID string, typeVar string, value interface{}) (_model *Property, err error) {
 	_model = &Property{
-		Name:       core.StringPtr(name),
+		Name: core.StringPtr(name),
 		PropertyID: core.StringPtr(propertyID),
-		Type:       core.StringPtr(typeVar),
-		Value:      value,
+		Type: core.StringPtr(typeVar),
+		Value: value,
 	}
 	err = core.ValidateStruct(_model, "required parameters")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "model-missing-required", common.GetComponentInfo())
+	}
 	return
 }
 
@@ -7272,58 +8278,72 @@ func UnmarshalProperty(m map[string]json.RawMessage, result interface{}) (err er
 	obj := new(Property)
 	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "property_id", &obj.PropertyID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "property_id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "description", &obj.Description)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "description-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "type", &obj.Type)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "type-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "format", &obj.Format)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "format-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "value", &obj.Value)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "value-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "tags", &obj.Tags)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "tags-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "segment_rules", &obj.SegmentRules, UnmarshalSegmentRule)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "segment_rules-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "segment_exists", &obj.SegmentExists)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "segment_exists-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "collections", &obj.Collections, UnmarshalCollectionRef)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "collections-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "created_time", &obj.CreatedTime)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "created_time-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "updated_time", &obj.UpdatedTime)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "updated_time-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "evaluation_time", &obj.EvaluationTime)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "evaluation_time-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "href", &obj.Href)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "href-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -7343,9 +8363,12 @@ type PropertyOutput struct {
 func (*AppConfigurationV1) NewPropertyOutput(propertyID string, name string) (_model *PropertyOutput, err error) {
 	_model = &PropertyOutput{
 		PropertyID: core.StringPtr(propertyID),
-		Name:       core.StringPtr(name),
+		Name: core.StringPtr(name),
 	}
 	err = core.ValidateStruct(_model, "required parameters")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "model-missing-required", common.GetComponentInfo())
+	}
 	return
 }
 
@@ -7354,10 +8377,12 @@ func UnmarshalPropertyOutput(m map[string]json.RawMessage, result interface{}) (
 	obj := new(PropertyOutput)
 	err = core.UnmarshalPrimitive(m, "property_id", &obj.PropertyID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "property_id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "name-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -7407,24 +8432,27 @@ type Rule struct {
 // Constants associated with the Rule.Operator property.
 // Operator to be used for the evaluation if the entity belongs to the segment.
 const (
-	Rule_Operator_Contains          = "contains"
-	Rule_Operator_Endswith          = "endsWith"
-	Rule_Operator_Greaterthan       = "greaterThan"
+	Rule_Operator_Contains = "contains"
+	Rule_Operator_Endswith = "endsWith"
+	Rule_Operator_Greaterthan = "greaterThan"
 	Rule_Operator_Greaterthanequals = "greaterThanEquals"
-	Rule_Operator_Is                = "is"
-	Rule_Operator_Lesserthan        = "lesserThan"
-	Rule_Operator_Lesserthanequals  = "lesserThanEquals"
-	Rule_Operator_Startswith        = "startsWith"
+	Rule_Operator_Is = "is"
+	Rule_Operator_Lesserthan = "lesserThan"
+	Rule_Operator_Lesserthanequals = "lesserThanEquals"
+	Rule_Operator_Startswith = "startsWith"
 )
 
 // NewRule : Instantiate Rule (Generic Model Constructor)
 func (*AppConfigurationV1) NewRule(attributeName string, operator string, values []string) (_model *Rule, err error) {
 	_model = &Rule{
 		AttributeName: core.StringPtr(attributeName),
-		Operator:      core.StringPtr(operator),
-		Values:        values,
+		Operator: core.StringPtr(operator),
+		Values: values,
 	}
 	err = core.ValidateStruct(_model, "required parameters")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "model-missing-required", common.GetComponentInfo())
+	}
 	return
 }
 
@@ -7433,14 +8461,17 @@ func UnmarshalRule(m map[string]json.RawMessage, result interface{}) (err error)
 	obj := new(Rule)
 	err = core.UnmarshalPrimitive(m, "attribute_name", &obj.AttributeName)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "attribute_name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "operator", &obj.Operator)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "operator-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "values", &obj.Values)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "values-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -7485,11 +8516,14 @@ type Segment struct {
 // NewSegment : Instantiate Segment (Generic Model Constructor)
 func (*AppConfigurationV1) NewSegment(name string, segmentID string, rules []Rule) (_model *Segment, err error) {
 	_model = &Segment{
-		Name:      core.StringPtr(name),
+		Name: core.StringPtr(name),
 		SegmentID: core.StringPtr(segmentID),
-		Rules:     rules,
+		Rules: rules,
 	}
 	err = core.ValidateStruct(_model, "required parameters")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "model-missing-required", common.GetComponentInfo())
+	}
 	return
 }
 
@@ -7498,42 +8532,52 @@ func UnmarshalSegment(m map[string]json.RawMessage, result interface{}) (err err
 	obj := new(Segment)
 	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "segment_id", &obj.SegmentID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "segment_id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "description", &obj.Description)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "description-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "tags", &obj.Tags)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "tags-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "rules", &obj.Rules, UnmarshalRule)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "rules-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "created_time", &obj.CreatedTime)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "created_time-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "updated_time", &obj.UpdatedTime)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "updated_time-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "href", &obj.Href)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "href-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "features", &obj.Features, UnmarshalFeatureOutput)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "features-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "properties", &obj.Properties, UnmarshalPropertyOutput)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "properties-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -7562,6 +8606,9 @@ func (*AppConfigurationV1) NewSegmentRule(rules []TargetSegments, value interfac
 		Order: core.Int64Ptr(order),
 	}
 	err = core.ValidateStruct(_model, "required parameters")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "model-missing-required", common.GetComponentInfo())
+	}
 	return
 }
 
@@ -7570,14 +8617,17 @@ func UnmarshalSegmentRule(m map[string]json.RawMessage, result interface{}) (err
 	obj := new(SegmentRule)
 	err = core.UnmarshalModel(m, "rules", &obj.Rules, UnmarshalTargetSegments)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "rules-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "value", &obj.Value)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "value-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "order", &obj.Order)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "order-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -7616,34 +8666,42 @@ func UnmarshalSegmentsList(m map[string]json.RawMessage, result interface{}) (er
 	obj := new(SegmentsList)
 	err = core.UnmarshalModel(m, "segments", &obj.Segments, UnmarshalSegment)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "segments-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "limit", &obj.Limit)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "limit-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "offset", &obj.Offset)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "offset-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "total_count", &obj.TotalCount)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "total_count-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "first", &obj.First, UnmarshalPaginatedListFirst)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "first-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "previous", &obj.Previous, UnmarshalPaginatedListPrevious)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "previous-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "next", &obj.Next, UnmarshalPaginatedListNext)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "next-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "last", &obj.Last, UnmarshalPaginatedListLast)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "last-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -7656,12 +8714,16 @@ func (resp *SegmentsList) GetNextOffset() (*int64, error) {
 		return nil, nil
 	}
 	offset, err := core.GetQueryParam(resp.Next.Href, "offset")
-	if err != nil || offset == nil {
+	if err != nil {
+		err = core.SDKErrorf(err, "", "read-query-param-error", common.GetComponentInfo())
 		return nil, err
+	} else if offset == nil {
+		return nil, nil
 	}
 	var offsetValue int64
 	offsetValue, err = strconv.ParseInt(*offset, 10, 64)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "parse-int-query-error", common.GetComponentInfo())
 		return nil, err
 	}
 	return core.Int64Ptr(offsetValue), nil
@@ -7680,9 +8742,12 @@ type SnapshotOutput struct {
 func (*AppConfigurationV1) NewSnapshotOutput(gitConfigID string, name string) (_model *SnapshotOutput, err error) {
 	_model = &SnapshotOutput{
 		GitConfigID: core.StringPtr(gitConfigID),
-		Name:        core.StringPtr(name),
+		Name: core.StringPtr(name),
 	}
 	err = core.ValidateStruct(_model, "required parameters")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "model-missing-required", common.GetComponentInfo())
+	}
 	return
 }
 
@@ -7691,10 +8756,12 @@ func UnmarshalSnapshotOutput(m map[string]json.RawMessage, result interface{}) (
 	obj := new(SnapshotOutput)
 	err = core.UnmarshalPrimitive(m, "git_config_id", &obj.GitConfigID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "git_config_id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "name-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -7713,6 +8780,9 @@ func (*AppConfigurationV1) NewTargetSegments(segments []string) (_model *TargetS
 		Segments: segments,
 	}
 	err = core.ValidateStruct(_model, "required parameters")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "model-missing-required", common.GetComponentInfo())
+	}
 	return
 }
 
@@ -7721,6 +8791,7 @@ func UnmarshalTargetSegments(m map[string]json.RawMessage, result interface{}) (
 	obj := new(TargetSegments)
 	err = core.UnmarshalPrimitive(m, "segments", &obj.Segments)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "segments-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -7746,8 +8817,8 @@ type ToggleFeatureOptions struct {
 func (*AppConfigurationV1) NewToggleFeatureOptions(environmentID string, featureID string, enabled bool) *ToggleFeatureOptions {
 	return &ToggleFeatureOptions{
 		EnvironmentID: core.StringPtr(environmentID),
-		FeatureID:     core.StringPtr(featureID),
-		Enabled:       core.BoolPtr(enabled),
+		FeatureID: core.StringPtr(featureID),
+		Enabled: core.BoolPtr(enabled),
 	}
 }
 
@@ -7939,7 +9010,7 @@ type UpdateFeatureOptions struct {
 func (*AppConfigurationV1) NewUpdateFeatureOptions(environmentID string, featureID string) *UpdateFeatureOptions {
 	return &UpdateFeatureOptions{
 		EnvironmentID: core.StringPtr(environmentID),
-		FeatureID:     core.StringPtr(featureID),
+		FeatureID: core.StringPtr(featureID),
 	}
 }
 
@@ -8054,7 +9125,7 @@ type UpdateFeatureValuesOptions struct {
 func (*AppConfigurationV1) NewUpdateFeatureValuesOptions(environmentID string, featureID string) *UpdateFeatureValuesOptions {
 	return &UpdateFeatureValuesOptions{
 		EnvironmentID: core.StringPtr(environmentID),
-		FeatureID:     core.StringPtr(featureID),
+		FeatureID: core.StringPtr(featureID),
 	}
 }
 
@@ -8278,7 +9349,7 @@ type UpdatePropertyOptions struct {
 func (*AppConfigurationV1) NewUpdatePropertyOptions(environmentID string, propertyID string) *UpdatePropertyOptions {
 	return &UpdatePropertyOptions{
 		EnvironmentID: core.StringPtr(environmentID),
-		PropertyID:    core.StringPtr(propertyID),
+		PropertyID: core.StringPtr(propertyID),
 	}
 }
 
@@ -8368,7 +9439,7 @@ type UpdatePropertyValuesOptions struct {
 func (*AppConfigurationV1) NewUpdatePropertyValuesOptions(environmentID string, propertyID string) *UpdatePropertyValuesOptions {
 	return &UpdatePropertyValuesOptions{
 		EnvironmentID: core.StringPtr(environmentID),
-		PropertyID:    core.StringPtr(propertyID),
+		PropertyID: core.StringPtr(propertyID),
 	}
 }
 
@@ -8491,6 +9562,44 @@ type UpdateWorkflowconfigOptions struct {
 	// Environment Id.
 	EnvironmentID *string `json:"environment_id" validate:"required,ne="`
 
+	// The request body to update a workflow config.
+	UpdateWorkflowConfig UpdateWorkflowconfigRequestIntf `json:"UpdateWorkflowConfig" validate:"required"`
+
+	// Allows users to set headers on API requests
+	Headers map[string]string
+}
+
+// NewUpdateWorkflowconfigOptions : Instantiate UpdateWorkflowconfigOptions
+func (*AppConfigurationV1) NewUpdateWorkflowconfigOptions(environmentID string, updateWorkflowConfig UpdateWorkflowconfigRequestIntf) *UpdateWorkflowconfigOptions {
+	return &UpdateWorkflowconfigOptions{
+		EnvironmentID: core.StringPtr(environmentID),
+		UpdateWorkflowConfig: updateWorkflowConfig,
+	}
+}
+
+// SetEnvironmentID : Allow user to set EnvironmentID
+func (_options *UpdateWorkflowconfigOptions) SetEnvironmentID(environmentID string) *UpdateWorkflowconfigOptions {
+	_options.EnvironmentID = core.StringPtr(environmentID)
+	return _options
+}
+
+// SetUpdateWorkflowConfig : Allow user to set UpdateWorkflowConfig
+func (_options *UpdateWorkflowconfigOptions) SetUpdateWorkflowConfig(updateWorkflowConfig UpdateWorkflowconfigRequestIntf) *UpdateWorkflowconfigOptions {
+	_options.UpdateWorkflowConfig = updateWorkflowConfig
+	return _options
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *UpdateWorkflowconfigOptions) SetHeaders(param map[string]string) *UpdateWorkflowconfigOptions {
+	options.Headers = param
+	return options
+}
+
+// UpdateWorkflowconfigRequest : UpdateWorkflowconfigRequest struct
+// Models which "extend" this model:
+// - UpdateWorkflowconfigRequestUpdateWorkflowConfig
+// - UpdateWorkflowconfigRequestUpdateIbmWorkflowConfig
+type UpdateWorkflowconfigRequest struct {
 	// Service Now instance URL. Only url https://xxxxx.service-now.com allowed, xxxxx is the service now instance id.
 	WorkflowURL *string `json:"workflow_url,omitempty"`
 
@@ -8508,61 +9617,463 @@ type UpdateWorkflowconfigOptions struct {
 	// Change Request for flag state changes.
 	Enabled *bool `json:"enabled,omitempty"`
 
-	// Allows users to set headers on API requests
-	Headers map[string]string
+	// Only service crn will be allowed. Example: `crn:v1:staging:staging:appservice:us-south::::`.
+	ServiceCrn *string `json:"service_crn,omitempty"`
+
+	// Only Secret Manager instance crn will be allowed. Example:
+	// `crn:v1:staging:public:secrets-manager:eu-gb:a/3268cfe9e25d411122f9a731a:0a23274-92d0a-4d42-b1fa-d15b4293cd::`.
+	SmInstanceCrn *string `json:"sm_instance_crn,omitempty"`
+
+	// Provide the arbitary secret key id which holds the api key to interact with service now. This is required to perform
+	// action on ServiceNow like Create CR or Close CR.
+	SecretID *string `json:"secret_id,omitempty"`
+}
+func (*UpdateWorkflowconfigRequest) isaUpdateWorkflowconfigRequest() bool {
+	return true
 }
 
-// NewUpdateWorkflowconfigOptions : Instantiate UpdateWorkflowconfigOptions
-func (*AppConfigurationV1) NewUpdateWorkflowconfigOptions(environmentID string) *UpdateWorkflowconfigOptions {
-	return &UpdateWorkflowconfigOptions{
-		EnvironmentID: core.StringPtr(environmentID),
+type UpdateWorkflowconfigRequestIntf interface {
+	isaUpdateWorkflowconfigRequest() bool
+}
+
+// UnmarshalUpdateWorkflowconfigRequest unmarshals an instance of UpdateWorkflowconfigRequest from the specified map of raw messages.
+func UnmarshalUpdateWorkflowconfigRequest(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(UpdateWorkflowconfigRequest)
+	err = core.UnmarshalPrimitive(m, "workflow_url", &obj.WorkflowURL)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "workflow_url-error", common.GetComponentInfo())
+		return
 	}
+	err = core.UnmarshalPrimitive(m, "approval_group_name", &obj.ApprovalGroupName)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "approval_group_name-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "approval_expiration", &obj.ApprovalExpiration)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "approval_expiration-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalModel(m, "workflow_credentials", &obj.WorkflowCredentials, UnmarshalWorkflowCredentials)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "workflow_credentials-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "enabled", &obj.Enabled)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "enabled-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "service_crn", &obj.ServiceCrn)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "service_crn-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "sm_instance_crn", &obj.SmInstanceCrn)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "sm_instance_crn-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "secret_id", &obj.SecretID)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_id-error", common.GetComponentInfo())
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
 }
 
-// SetEnvironmentID : Allow user to set EnvironmentID
-func (_options *UpdateWorkflowconfigOptions) SetEnvironmentID(environmentID string) *UpdateWorkflowconfigOptions {
-	_options.EnvironmentID = core.StringPtr(environmentID)
-	return _options
+// UpdateWorkflowconfigResponse : UpdateWorkflowconfigResponse struct
+// Models which "extend" this model:
+// - UpdateWorkflowconfigResponseWorkflowConfig
+// - UpdateWorkflowconfigResponseIbmWorkflowConfig
+type UpdateWorkflowconfigResponse struct {
+	// Environment name of workflow config in which it is created.
+	EnvironmentName *string `json:"environment_name,omitempty"`
+
+	// Environment ID of workflow config in which it is created.
+	EnvironmentID *string `json:"environment_id,omitempty"`
+
+	// Only service now url https://xxxxx.service-now.com allowed, xxxxx is the service now instance id.
+	WorkflowURL *string `json:"workflow_url,omitempty"`
+
+	// Group name of personals who can approve the Change Request on your Service Now. It must be first registered in your
+	// Service Now then it must be added here.
+	ApprovalGroupName *string `json:"approval_group_name,omitempty"`
+
+	// Integer number identifies as hours which helps in adding approval start and end time to the created Change Request.
+	ApprovalExpiration *int64 `json:"approval_expiration,omitempty"`
+
+	// The credentials of the Service Now instance.
+	WorkflowCredentials *WorkflowCredentials `json:"workflow_credentials,omitempty"`
+
+	// This option enables the workflow configuration per environment. User must set it to true if they wish to create
+	// Change Request for flag state changes.
+	Enabled *bool `json:"enabled,omitempty"`
+
+	// Creation time of the workflow configs.
+	CreatedTime *strfmt.DateTime `json:"created_time,omitempty"`
+
+	// Last modified time of the workflow configs.
+	UpdatedTime *strfmt.DateTime `json:"updated_time,omitempty"`
+
+	// Workflow Config URL.
+	Href *string `json:"href,omitempty"`
+
+	// Only service crn will be allowed. Example: `crn:v1:staging:staging:appservice:us-south::::`.
+	ServiceCrn *string `json:"service_crn,omitempty"`
+
+	// Allowed value is `SERVICENOW_IBM` case-sensitive.
+	WorkflowType *string `json:"workflow_type,omitempty"`
+
+	// Only Secret Manager instance crn will be allowed. Example:
+	// `crn:v1:staging:public:secrets-manager:eu-gb:a/3268cfe9e25d411122f9a731a:0a23274-92d0a-4d42-b1fa-d15b4293cd::`.
+	SmInstanceCrn *string `json:"sm_instance_crn,omitempty"`
+
+	// Provide the arbitary secret key id which holds the api key to interact with service now. This is required to perform
+	// action on ServiceNow like Create CR or Close CR.
+	SecretID *string `json:"secret_id,omitempty"`
+}
+func (*UpdateWorkflowconfigResponse) isaUpdateWorkflowconfigResponse() bool {
+	return true
 }
 
-// SetWorkflowURL : Allow user to set WorkflowURL
-func (_options *UpdateWorkflowconfigOptions) SetWorkflowURL(workflowURL string) *UpdateWorkflowconfigOptions {
-	_options.WorkflowURL = core.StringPtr(workflowURL)
-	return _options
+type UpdateWorkflowconfigResponseIntf interface {
+	isaUpdateWorkflowconfigResponse() bool
 }
 
-// SetApprovalGroupName : Allow user to set ApprovalGroupName
-func (_options *UpdateWorkflowconfigOptions) SetApprovalGroupName(approvalGroupName string) *UpdateWorkflowconfigOptions {
-	_options.ApprovalGroupName = core.StringPtr(approvalGroupName)
-	return _options
+// UnmarshalUpdateWorkflowconfigResponse unmarshals an instance of UpdateWorkflowconfigResponse from the specified map of raw messages.
+func UnmarshalUpdateWorkflowconfigResponse(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(UpdateWorkflowconfigResponse)
+	err = core.UnmarshalPrimitive(m, "environment_name", &obj.EnvironmentName)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "environment_name-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "environment_id", &obj.EnvironmentID)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "environment_id-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "workflow_url", &obj.WorkflowURL)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "workflow_url-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "approval_group_name", &obj.ApprovalGroupName)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "approval_group_name-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "approval_expiration", &obj.ApprovalExpiration)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "approval_expiration-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalModel(m, "workflow_credentials", &obj.WorkflowCredentials, UnmarshalWorkflowCredentials)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "workflow_credentials-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "enabled", &obj.Enabled)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "enabled-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "created_time", &obj.CreatedTime)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "created_time-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "updated_time", &obj.UpdatedTime)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "updated_time-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "href", &obj.Href)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "href-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "service_crn", &obj.ServiceCrn)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "service_crn-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "workflow_type", &obj.WorkflowType)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "workflow_type-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "sm_instance_crn", &obj.SmInstanceCrn)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "sm_instance_crn-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "secret_id", &obj.SecretID)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_id-error", common.GetComponentInfo())
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
 }
 
-// SetApprovalExpiration : Allow user to set ApprovalExpiration
-func (_options *UpdateWorkflowconfigOptions) SetApprovalExpiration(approvalExpiration int64) *UpdateWorkflowconfigOptions {
-	_options.ApprovalExpiration = core.Int64Ptr(approvalExpiration)
-	return _options
+// WorkflowCredentials : The credentials of the Service Now instance.
+type WorkflowCredentials struct {
+	// Service Now instance login username.
+	Username *string `json:"username" validate:"required"`
+
+	// Service Now instance login password.
+	Password *string `json:"password" validate:"required"`
+
+	// The auto-generated unique ID of the application in your Service Now instance.
+	ClientID *string `json:"client_id" validate:"required"`
+
+	// The secret string that both the Service Now instance and the client application use to authorize communications with
+	// one another.
+	ClientSecret *string `json:"client_secret" validate:"required"`
 }
 
-// SetWorkflowCredentials : Allow user to set WorkflowCredentials
-func (_options *UpdateWorkflowconfigOptions) SetWorkflowCredentials(workflowCredentials *WorkflowCredentials) *UpdateWorkflowconfigOptions {
-	_options.WorkflowCredentials = workflowCredentials
-	return _options
+// NewWorkflowCredentials : Instantiate WorkflowCredentials (Generic Model Constructor)
+func (*AppConfigurationV1) NewWorkflowCredentials(username string, password string, clientID string, clientSecret string) (_model *WorkflowCredentials, err error) {
+	_model = &WorkflowCredentials{
+		Username: core.StringPtr(username),
+		Password: core.StringPtr(password),
+		ClientID: core.StringPtr(clientID),
+		ClientSecret: core.StringPtr(clientSecret),
+	}
+	err = core.ValidateStruct(_model, "required parameters")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "model-missing-required", common.GetComponentInfo())
+	}
+	return
 }
 
-// SetEnabled : Allow user to set Enabled
-func (_options *UpdateWorkflowconfigOptions) SetEnabled(enabled bool) *UpdateWorkflowconfigOptions {
-	_options.Enabled = core.BoolPtr(enabled)
-	return _options
+// UnmarshalWorkflowCredentials unmarshals an instance of WorkflowCredentials from the specified map of raw messages.
+func UnmarshalWorkflowCredentials(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(WorkflowCredentials)
+	err = core.UnmarshalPrimitive(m, "username", &obj.Username)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "username-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "password", &obj.Password)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "password-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "client_id", &obj.ClientID)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "client_id-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "client_secret", &obj.ClientSecret)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "client_secret-error", common.GetComponentInfo())
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
 }
 
-// SetHeaders : Allow user to set Headers
-func (options *UpdateWorkflowconfigOptions) SetHeaders(param map[string]string) *UpdateWorkflowconfigOptions {
-	options.Headers = param
-	return options
+// ConfigActionGitConfigPromote : Details of the promote operation.
+// This model "extends" ConfigAction
+type ConfigActionGitConfigPromote struct {
+	// Git commit id will be given as part of the response upon successful git operation.
+	GitCommitID *string `json:"git_commit_id" validate:"required"`
+
+	// Git commit message.
+	GitCommitMessage *string `json:"git_commit_message" validate:"required"`
+
+	// Latest time when the snapshot was synced to git.
+	LastSyncTime *strfmt.DateTime `json:"last_sync_time,omitempty"`
 }
 
-// WorkflowConfig : Details of the Workflow configuration.
-type WorkflowConfig struct {
+func (*ConfigActionGitConfigPromote) isaConfigAction() bool {
+	return true
+}
+
+// UnmarshalConfigActionGitConfigPromote unmarshals an instance of ConfigActionGitConfigPromote from the specified map of raw messages.
+func UnmarshalConfigActionGitConfigPromote(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(ConfigActionGitConfigPromote)
+	err = core.UnmarshalPrimitive(m, "git_commit_id", &obj.GitCommitID)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "git_commit_id-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "git_commit_message", &obj.GitCommitMessage)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "git_commit_message-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "last_sync_time", &obj.LastSyncTime)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "last_sync_time-error", common.GetComponentInfo())
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// ConfigActionGitConfigRestore : Details of the restore operation.
+// This model "extends" ConfigAction
+type ConfigActionGitConfigRestore struct {
+	// The environments array will contain the environment data and it will also contains properties array and features
+	// array that belongs to that environment.
+	Environments []ImportEnvironmentSchema `json:"environments" validate:"required"`
+
+	// Segments that belongs to the features or properties.
+	Segments []ImportSegmentSchema `json:"segments" validate:"required"`
+}
+
+func (*ConfigActionGitConfigRestore) isaConfigAction() bool {
+	return true
+}
+
+// UnmarshalConfigActionGitConfigRestore unmarshals an instance of ConfigActionGitConfigRestore from the specified map of raw messages.
+func UnmarshalConfigActionGitConfigRestore(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(ConfigActionGitConfigRestore)
+	err = core.UnmarshalModel(m, "environments", &obj.Environments, UnmarshalImportEnvironmentSchema)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "environments-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalModel(m, "segments", &obj.Segments, UnmarshalImportSegmentSchema)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "segments-error", common.GetComponentInfo())
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// CreateWorkflowconfigRequestIbmWorkflowConfig : Details of the IBM Workflow configuration.
+// This model "extends" CreateWorkflowconfigRequest
+type CreateWorkflowconfigRequestIbmWorkflowConfig struct {
+	// Environment name of workflow config in which it is created.
+	EnvironmentName *string `json:"environment_name,omitempty"`
+
+	// Environment ID of workflow config in which it is created.
+	EnvironmentID *string `json:"environment_id,omitempty"`
+
+	// Only service crn will be allowed. Example: `crn:v1:staging:staging:appservice:us-south::::`.
+	ServiceCrn *string `json:"service_crn" validate:"required"`
+
+	// Allowed value is `SERVICENOW_IBM` case-sensitive.
+	WorkflowType *string `json:"workflow_type" validate:"required"`
+
+	// Integer number identifies as hours which helps in adding approval start and end time to the created Change Request.
+	ApprovalExpiration *int64 `json:"approval_expiration" validate:"required"`
+
+	// Only Secret Manager instance crn will be allowed. Example:
+	// `crn:v1:staging:public:secrets-manager:eu-gb:a/3268cfe9e25d411122f9a731a:0a23274-92d0a-4d42-b1fa-d15b4293cd::`.
+	SmInstanceCrn *string `json:"sm_instance_crn" validate:"required"`
+
+	// Provide the arbitary secret key id which holds the api key to interact with service now. This is required to perform
+	// action on ServiceNow like Create CR or Close CR.
+	SecretID *string `json:"secret_id" validate:"required"`
+
+	// This option enables the workflow configuration per environment. User must set it to true if they wish to create
+	// Change Request for flag state changes.
+	Enabled *bool `json:"enabled" validate:"required"`
+
+	// Creation time of the workflow configs.
+	CreatedTime *strfmt.DateTime `json:"created_time,omitempty"`
+
+	// Last modified time of the workflow configs.
+	UpdatedTime *strfmt.DateTime `json:"updated_time,omitempty"`
+
+	// Workflow Config URL.
+	Href *string `json:"href,omitempty"`
+}
+
+// NewCreateWorkflowconfigRequestIbmWorkflowConfig : Instantiate CreateWorkflowconfigRequestIbmWorkflowConfig (Generic Model Constructor)
+func (*AppConfigurationV1) NewCreateWorkflowconfigRequestIbmWorkflowConfig(serviceCrn string, workflowType string, approvalExpiration int64, smInstanceCrn string, secretID string, enabled bool) (_model *CreateWorkflowconfigRequestIbmWorkflowConfig, err error) {
+	_model = &CreateWorkflowconfigRequestIbmWorkflowConfig{
+		ServiceCrn: core.StringPtr(serviceCrn),
+		WorkflowType: core.StringPtr(workflowType),
+		ApprovalExpiration: core.Int64Ptr(approvalExpiration),
+		SmInstanceCrn: core.StringPtr(smInstanceCrn),
+		SecretID: core.StringPtr(secretID),
+		Enabled: core.BoolPtr(enabled),
+	}
+	err = core.ValidateStruct(_model, "required parameters")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "model-missing-required", common.GetComponentInfo())
+	}
+	return
+}
+
+func (*CreateWorkflowconfigRequestIbmWorkflowConfig) isaCreateWorkflowconfigRequest() bool {
+	return true
+}
+
+// UnmarshalCreateWorkflowconfigRequestIbmWorkflowConfig unmarshals an instance of CreateWorkflowconfigRequestIbmWorkflowConfig from the specified map of raw messages.
+func UnmarshalCreateWorkflowconfigRequestIbmWorkflowConfig(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(CreateWorkflowconfigRequestIbmWorkflowConfig)
+	err = core.UnmarshalPrimitive(m, "environment_name", &obj.EnvironmentName)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "environment_name-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "environment_id", &obj.EnvironmentID)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "environment_id-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "service_crn", &obj.ServiceCrn)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "service_crn-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "workflow_type", &obj.WorkflowType)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "workflow_type-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "approval_expiration", &obj.ApprovalExpiration)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "approval_expiration-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "sm_instance_crn", &obj.SmInstanceCrn)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "sm_instance_crn-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "secret_id", &obj.SecretID)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_id-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "enabled", &obj.Enabled)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "enabled-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "created_time", &obj.CreatedTime)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "created_time-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "updated_time", &obj.UpdatedTime)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "updated_time-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "href", &obj.Href)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "href-error", common.GetComponentInfo())
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// CreateWorkflowconfigRequestWorkflowConfig : Details of the External Workflow configuration.
+// This model "extends" CreateWorkflowconfigRequest
+type CreateWorkflowconfigRequestWorkflowConfig struct {
 	// Environment name of workflow config in which it is created.
 	EnvironmentName *string `json:"environment_name,omitempty"`
 
@@ -8596,188 +10107,814 @@ type WorkflowConfig struct {
 	Href *string `json:"href,omitempty"`
 }
 
-// NewWorkflowConfig : Instantiate WorkflowConfig (Generic Model Constructor)
-func (*AppConfigurationV1) NewWorkflowConfig(workflowURL string, approvalGroupName string, approvalExpiration int64, workflowCredentials *WorkflowCredentials, enabled bool) (_model *WorkflowConfig, err error) {
-	_model = &WorkflowConfig{
-		WorkflowURL:         core.StringPtr(workflowURL),
-		ApprovalGroupName:   core.StringPtr(approvalGroupName),
-		ApprovalExpiration:  core.Int64Ptr(approvalExpiration),
+// NewCreateWorkflowconfigRequestWorkflowConfig : Instantiate CreateWorkflowconfigRequestWorkflowConfig (Generic Model Constructor)
+func (*AppConfigurationV1) NewCreateWorkflowconfigRequestWorkflowConfig(workflowURL string, approvalGroupName string, approvalExpiration int64, workflowCredentials *WorkflowCredentials, enabled bool) (_model *CreateWorkflowconfigRequestWorkflowConfig, err error) {
+	_model = &CreateWorkflowconfigRequestWorkflowConfig{
+		WorkflowURL: core.StringPtr(workflowURL),
+		ApprovalGroupName: core.StringPtr(approvalGroupName),
+		ApprovalExpiration: core.Int64Ptr(approvalExpiration),
 		WorkflowCredentials: workflowCredentials,
-		Enabled:             core.BoolPtr(enabled),
+		Enabled: core.BoolPtr(enabled),
 	}
 	err = core.ValidateStruct(_model, "required parameters")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "model-missing-required", common.GetComponentInfo())
+	}
 	return
 }
 
-// UnmarshalWorkflowConfig unmarshals an instance of WorkflowConfig from the specified map of raw messages.
-func UnmarshalWorkflowConfig(m map[string]json.RawMessage, result interface{}) (err error) {
-	obj := new(WorkflowConfig)
+func (*CreateWorkflowconfigRequestWorkflowConfig) isaCreateWorkflowconfigRequest() bool {
+	return true
+}
+
+// UnmarshalCreateWorkflowconfigRequestWorkflowConfig unmarshals an instance of CreateWorkflowconfigRequestWorkflowConfig from the specified map of raw messages.
+func UnmarshalCreateWorkflowconfigRequestWorkflowConfig(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(CreateWorkflowconfigRequestWorkflowConfig)
 	err = core.UnmarshalPrimitive(m, "environment_name", &obj.EnvironmentName)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "environment_name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "environment_id", &obj.EnvironmentID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "environment_id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "workflow_url", &obj.WorkflowURL)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "workflow_url-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "approval_group_name", &obj.ApprovalGroupName)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "approval_group_name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "approval_expiration", &obj.ApprovalExpiration)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "approval_expiration-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "workflow_credentials", &obj.WorkflowCredentials, UnmarshalWorkflowCredentials)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "workflow_credentials-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "enabled", &obj.Enabled)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "enabled-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "created_time", &obj.CreatedTime)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "created_time-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "updated_time", &obj.UpdatedTime)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "updated_time-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "href", &obj.Href)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "href-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
 	return
 }
 
-// WorkflowCredentials : The credentials of the Service Now instance.
-type WorkflowCredentials struct {
-	// Service Now instance login username.
-	Username *string `json:"username" validate:"required"`
+// CreateWorkflowconfigResponseIbmWorkflowConfig : Details of the IBM Workflow configuration.
+// This model "extends" CreateWorkflowconfigResponse
+type CreateWorkflowconfigResponseIbmWorkflowConfig struct {
+	// Environment name of workflow config in which it is created.
+	EnvironmentName *string `json:"environment_name,omitempty"`
 
-	// Service Now instance login password.
-	Password *string `json:"password" validate:"required"`
+	// Environment ID of workflow config in which it is created.
+	EnvironmentID *string `json:"environment_id,omitempty"`
 
-	// The auto-generated unique ID of the application in your Service Now instance.
-	ClientID *string `json:"client_id" validate:"required"`
+	// Only service crn will be allowed. Example: `crn:v1:staging:staging:appservice:us-south::::`.
+	ServiceCrn *string `json:"service_crn" validate:"required"`
 
-	// The secret string that both the Service Now instance and the client application use to authorize communications with
-	// one another.
-	ClientSecret *string `json:"client_secret" validate:"required"`
+	// Allowed value is `SERVICENOW_IBM` case-sensitive.
+	WorkflowType *string `json:"workflow_type" validate:"required"`
+
+	// Integer number identifies as hours which helps in adding approval start and end time to the created Change Request.
+	ApprovalExpiration *int64 `json:"approval_expiration" validate:"required"`
+
+	// Only Secret Manager instance crn will be allowed. Example:
+	// `crn:v1:staging:public:secrets-manager:eu-gb:a/3268cfe9e25d411122f9a731a:0a23274-92d0a-4d42-b1fa-d15b4293cd::`.
+	SmInstanceCrn *string `json:"sm_instance_crn" validate:"required"`
+
+	// Provide the arbitary secret key id which holds the api key to interact with service now. This is required to perform
+	// action on ServiceNow like Create CR or Close CR.
+	SecretID *string `json:"secret_id" validate:"required"`
+
+	// This option enables the workflow configuration per environment. User must set it to true if they wish to create
+	// Change Request for flag state changes.
+	Enabled *bool `json:"enabled" validate:"required"`
+
+	// Creation time of the workflow configs.
+	CreatedTime *strfmt.DateTime `json:"created_time,omitempty"`
+
+	// Last modified time of the workflow configs.
+	UpdatedTime *strfmt.DateTime `json:"updated_time,omitempty"`
+
+	// Workflow Config URL.
+	Href *string `json:"href,omitempty"`
 }
 
-// NewWorkflowCredentials : Instantiate WorkflowCredentials (Generic Model Constructor)
-func (*AppConfigurationV1) NewWorkflowCredentials(username string, password string, clientID string, clientSecret string) (_model *WorkflowCredentials, err error) {
-	_model = &WorkflowCredentials{
-		Username:     core.StringPtr(username),
-		Password:     core.StringPtr(password),
-		ClientID:     core.StringPtr(clientID),
-		ClientSecret: core.StringPtr(clientSecret),
-	}
-	err = core.ValidateStruct(_model, "required parameters")
-	return
-}
-
-// UnmarshalWorkflowCredentials unmarshals an instance of WorkflowCredentials from the specified map of raw messages.
-func UnmarshalWorkflowCredentials(m map[string]json.RawMessage, result interface{}) (err error) {
-	obj := new(WorkflowCredentials)
-	err = core.UnmarshalPrimitive(m, "username", &obj.Username)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "password", &obj.Password)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "client_id", &obj.ClientID)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "client_secret", &obj.ClientSecret)
-	if err != nil {
-		return
-	}
-	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
-	return
-}
-
-// ConfigActionGitConfigPromote : Details of the promote operation.
-// This model "extends" ConfigAction
-type ConfigActionGitConfigPromote struct {
-	// Git commit id will be given as part of the response upon successful git operation.
-	GitCommitID *string `json:"git_commit_id" validate:"required"`
-
-	// Git commit message.
-	GitCommitMessage *string `json:"git_commit_message" validate:"required"`
-
-	// Latest time when the snapshot was synced to git.
-	LastSyncTime *strfmt.DateTime `json:"last_sync_time,omitempty"`
-}
-
-func (*ConfigActionGitConfigPromote) isaConfigAction() bool {
+func (*CreateWorkflowconfigResponseIbmWorkflowConfig) isaCreateWorkflowconfigResponse() bool {
 	return true
 }
 
-// UnmarshalConfigActionGitConfigPromote unmarshals an instance of ConfigActionGitConfigPromote from the specified map of raw messages.
-func UnmarshalConfigActionGitConfigPromote(m map[string]json.RawMessage, result interface{}) (err error) {
-	obj := new(ConfigActionGitConfigPromote)
-	err = core.UnmarshalPrimitive(m, "git_commit_id", &obj.GitCommitID)
+// UnmarshalCreateWorkflowconfigResponseIbmWorkflowConfig unmarshals an instance of CreateWorkflowconfigResponseIbmWorkflowConfig from the specified map of raw messages.
+func UnmarshalCreateWorkflowconfigResponseIbmWorkflowConfig(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(CreateWorkflowconfigResponseIbmWorkflowConfig)
+	err = core.UnmarshalPrimitive(m, "environment_name", &obj.EnvironmentName)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "environment_name-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "git_commit_message", &obj.GitCommitMessage)
+	err = core.UnmarshalPrimitive(m, "environment_id", &obj.EnvironmentID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "environment_id-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "last_sync_time", &obj.LastSyncTime)
+	err = core.UnmarshalPrimitive(m, "service_crn", &obj.ServiceCrn)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "service_crn-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "workflow_type", &obj.WorkflowType)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "workflow_type-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "approval_expiration", &obj.ApprovalExpiration)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "approval_expiration-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "sm_instance_crn", &obj.SmInstanceCrn)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "sm_instance_crn-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "secret_id", &obj.SecretID)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_id-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "enabled", &obj.Enabled)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "enabled-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "created_time", &obj.CreatedTime)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "created_time-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "updated_time", &obj.UpdatedTime)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "updated_time-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "href", &obj.Href)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "href-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
 	return
 }
 
-// ConfigActionGitConfigRestore : Details of the restore operation.
-// This model "extends" ConfigAction
-type ConfigActionGitConfigRestore struct {
-	// The environments array will contain the environment data and it will also contains properties array and features
-	// array that belongs to that environment.
-	Environments []ImportEnvironmentSchema `json:"environments" validate:"required"`
+// CreateWorkflowconfigResponseWorkflowConfig : Details of the External Workflow configuration.
+// This model "extends" CreateWorkflowconfigResponse
+type CreateWorkflowconfigResponseWorkflowConfig struct {
+	// Environment name of workflow config in which it is created.
+	EnvironmentName *string `json:"environment_name,omitempty"`
 
-	// Segments that belongs to the features or properties.
-	Segments []ImportSegmentSchema `json:"segments" validate:"required"`
+	// Environment ID of workflow config in which it is created.
+	EnvironmentID *string `json:"environment_id,omitempty"`
+
+	// Only service now url https://xxxxx.service-now.com allowed, xxxxx is the service now instance id.
+	WorkflowURL *string `json:"workflow_url" validate:"required"`
+
+	// Group name of personals who can approve the Change Request on your Service Now. It must be first registered in your
+	// Service Now then it must be added here.
+	ApprovalGroupName *string `json:"approval_group_name" validate:"required"`
+
+	// Integer number identifies as hours which helps in adding approval start and end time to the created Change Request.
+	ApprovalExpiration *int64 `json:"approval_expiration" validate:"required"`
+
+	// The credentials of the Service Now instance.
+	WorkflowCredentials *WorkflowCredentials `json:"workflow_credentials" validate:"required"`
+
+	// This option enables the workflow configuration per environment. User must set it to true if they wish to create
+	// Change Request for flag state changes.
+	Enabled *bool `json:"enabled" validate:"required"`
+
+	// Creation time of the workflow configs.
+	CreatedTime *strfmt.DateTime `json:"created_time,omitempty"`
+
+	// Last modified time of the workflow configs.
+	UpdatedTime *strfmt.DateTime `json:"updated_time,omitempty"`
+
+	// Workflow Config URL.
+	Href *string `json:"href,omitempty"`
 }
 
-func (*ConfigActionGitConfigRestore) isaConfigAction() bool {
+func (*CreateWorkflowconfigResponseWorkflowConfig) isaCreateWorkflowconfigResponse() bool {
 	return true
 }
 
-// UnmarshalConfigActionGitConfigRestore unmarshals an instance of ConfigActionGitConfigRestore from the specified map of raw messages.
-func UnmarshalConfigActionGitConfigRestore(m map[string]json.RawMessage, result interface{}) (err error) {
-	obj := new(ConfigActionGitConfigRestore)
-	err = core.UnmarshalModel(m, "environments", &obj.Environments, UnmarshalImportEnvironmentSchema)
+// UnmarshalCreateWorkflowconfigResponseWorkflowConfig unmarshals an instance of CreateWorkflowconfigResponseWorkflowConfig from the specified map of raw messages.
+func UnmarshalCreateWorkflowconfigResponseWorkflowConfig(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(CreateWorkflowconfigResponseWorkflowConfig)
+	err = core.UnmarshalPrimitive(m, "environment_name", &obj.EnvironmentName)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "environment_name-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalModel(m, "segments", &obj.Segments, UnmarshalImportSegmentSchema)
+	err = core.UnmarshalPrimitive(m, "environment_id", &obj.EnvironmentID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "environment_id-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "workflow_url", &obj.WorkflowURL)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "workflow_url-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "approval_group_name", &obj.ApprovalGroupName)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "approval_group_name-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "approval_expiration", &obj.ApprovalExpiration)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "approval_expiration-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalModel(m, "workflow_credentials", &obj.WorkflowCredentials, UnmarshalWorkflowCredentials)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "workflow_credentials-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "enabled", &obj.Enabled)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "enabled-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "created_time", &obj.CreatedTime)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "created_time-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "updated_time", &obj.UpdatedTime)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "updated_time-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "href", &obj.Href)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "href-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
 	return
 }
 
+// ListWorkflowconfigResponseIbmWorkflowConfig : Details of the IBM Workflow configuration.
+// This model "extends" ListWorkflowconfigResponse
+type ListWorkflowconfigResponseIbmWorkflowConfig struct {
+	// Environment name of workflow config in which it is created.
+	EnvironmentName *string `json:"environment_name,omitempty"`
+
+	// Environment ID of workflow config in which it is created.
+	EnvironmentID *string `json:"environment_id,omitempty"`
+
+	// Only service crn will be allowed. Example: `crn:v1:staging:staging:appservice:us-south::::`.
+	ServiceCrn *string `json:"service_crn" validate:"required"`
+
+	// Allowed value is `SERVICENOW_IBM` case-sensitive.
+	WorkflowType *string `json:"workflow_type" validate:"required"`
+
+	// Integer number identifies as hours which helps in adding approval start and end time to the created Change Request.
+	ApprovalExpiration *int64 `json:"approval_expiration" validate:"required"`
+
+	// Only Secret Manager instance crn will be allowed. Example:
+	// `crn:v1:staging:public:secrets-manager:eu-gb:a/3268cfe9e25d411122f9a731a:0a23274-92d0a-4d42-b1fa-d15b4293cd::`.
+	SmInstanceCrn *string `json:"sm_instance_crn" validate:"required"`
+
+	// Provide the arbitary secret key id which holds the api key to interact with service now. This is required to perform
+	// action on ServiceNow like Create CR or Close CR.
+	SecretID *string `json:"secret_id" validate:"required"`
+
+	// This option enables the workflow configuration per environment. User must set it to true if they wish to create
+	// Change Request for flag state changes.
+	Enabled *bool `json:"enabled" validate:"required"`
+
+	// Creation time of the workflow configs.
+	CreatedTime *strfmt.DateTime `json:"created_time,omitempty"`
+
+	// Last modified time of the workflow configs.
+	UpdatedTime *strfmt.DateTime `json:"updated_time,omitempty"`
+
+	// Workflow Config URL.
+	Href *string `json:"href,omitempty"`
+}
+
+func (*ListWorkflowconfigResponseIbmWorkflowConfig) isaListWorkflowconfigResponse() bool {
+	return true
+}
+
+// UnmarshalListWorkflowconfigResponseIbmWorkflowConfig unmarshals an instance of ListWorkflowconfigResponseIbmWorkflowConfig from the specified map of raw messages.
+func UnmarshalListWorkflowconfigResponseIbmWorkflowConfig(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(ListWorkflowconfigResponseIbmWorkflowConfig)
+	err = core.UnmarshalPrimitive(m, "environment_name", &obj.EnvironmentName)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "environment_name-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "environment_id", &obj.EnvironmentID)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "environment_id-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "service_crn", &obj.ServiceCrn)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "service_crn-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "workflow_type", &obj.WorkflowType)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "workflow_type-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "approval_expiration", &obj.ApprovalExpiration)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "approval_expiration-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "sm_instance_crn", &obj.SmInstanceCrn)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "sm_instance_crn-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "secret_id", &obj.SecretID)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_id-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "enabled", &obj.Enabled)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "enabled-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "created_time", &obj.CreatedTime)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "created_time-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "updated_time", &obj.UpdatedTime)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "updated_time-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "href", &obj.Href)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "href-error", common.GetComponentInfo())
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// ListWorkflowconfigResponseWorkflowConfig : Details of the External Workflow configuration.
+// This model "extends" ListWorkflowconfigResponse
+type ListWorkflowconfigResponseWorkflowConfig struct {
+	// Environment name of workflow config in which it is created.
+	EnvironmentName *string `json:"environment_name,omitempty"`
+
+	// Environment ID of workflow config in which it is created.
+	EnvironmentID *string `json:"environment_id,omitempty"`
+
+	// Only service now url https://xxxxx.service-now.com allowed, xxxxx is the service now instance id.
+	WorkflowURL *string `json:"workflow_url" validate:"required"`
+
+	// Group name of personals who can approve the Change Request on your Service Now. It must be first registered in your
+	// Service Now then it must be added here.
+	ApprovalGroupName *string `json:"approval_group_name" validate:"required"`
+
+	// Integer number identifies as hours which helps in adding approval start and end time to the created Change Request.
+	ApprovalExpiration *int64 `json:"approval_expiration" validate:"required"`
+
+	// The credentials of the Service Now instance.
+	WorkflowCredentials *WorkflowCredentials `json:"workflow_credentials" validate:"required"`
+
+	// This option enables the workflow configuration per environment. User must set it to true if they wish to create
+	// Change Request for flag state changes.
+	Enabled *bool `json:"enabled" validate:"required"`
+
+	// Creation time of the workflow configs.
+	CreatedTime *strfmt.DateTime `json:"created_time,omitempty"`
+
+	// Last modified time of the workflow configs.
+	UpdatedTime *strfmt.DateTime `json:"updated_time,omitempty"`
+
+	// Workflow Config URL.
+	Href *string `json:"href,omitempty"`
+}
+
+func (*ListWorkflowconfigResponseWorkflowConfig) isaListWorkflowconfigResponse() bool {
+	return true
+}
+
+// UnmarshalListWorkflowconfigResponseWorkflowConfig unmarshals an instance of ListWorkflowconfigResponseWorkflowConfig from the specified map of raw messages.
+func UnmarshalListWorkflowconfigResponseWorkflowConfig(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(ListWorkflowconfigResponseWorkflowConfig)
+	err = core.UnmarshalPrimitive(m, "environment_name", &obj.EnvironmentName)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "environment_name-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "environment_id", &obj.EnvironmentID)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "environment_id-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "workflow_url", &obj.WorkflowURL)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "workflow_url-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "approval_group_name", &obj.ApprovalGroupName)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "approval_group_name-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "approval_expiration", &obj.ApprovalExpiration)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "approval_expiration-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalModel(m, "workflow_credentials", &obj.WorkflowCredentials, UnmarshalWorkflowCredentials)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "workflow_credentials-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "enabled", &obj.Enabled)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "enabled-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "created_time", &obj.CreatedTime)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "created_time-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "updated_time", &obj.UpdatedTime)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "updated_time-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "href", &obj.Href)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "href-error", common.GetComponentInfo())
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// UpdateWorkflowconfigRequestUpdateIbmWorkflowConfig : IBM Workflow config attributes to be updated.
+// This model "extends" UpdateWorkflowconfigRequest
+type UpdateWorkflowconfigRequestUpdateIbmWorkflowConfig struct {
+	// Only service crn will be allowed. Example: `crn:v1:staging:staging:appservice:us-south::::`.
+	ServiceCrn *string `json:"service_crn,omitempty"`
+
+	// Integer number identifies as hours which helps in adding approval start and end time to the created Change Request.
+	ApprovalExpiration *int64 `json:"approval_expiration,omitempty"`
+
+	// Only Secret Manager instance crn will be allowed. Example:
+	// `crn:v1:staging:public:secrets-manager:eu-gb:a/3268cfe9e25d411122f9a731a:0a23274-92d0a-4d42-b1fa-d15b4293cd::`.
+	SmInstanceCrn *string `json:"sm_instance_crn,omitempty"`
+
+	// Provide the arbitary secret key id which holds the api key to interact with service now. This is required to perform
+	// action on ServiceNow like Create CR or Close CR.
+	SecretID *string `json:"secret_id,omitempty"`
+
+	// This option enables the workflow configuration per environment. User must set it to true if they wish to create
+	// Change Request for flag state changes.
+	Enabled *bool `json:"enabled,omitempty"`
+}
+
+func (*UpdateWorkflowconfigRequestUpdateIbmWorkflowConfig) isaUpdateWorkflowconfigRequest() bool {
+	return true
+}
+
+// UnmarshalUpdateWorkflowconfigRequestUpdateIbmWorkflowConfig unmarshals an instance of UpdateWorkflowconfigRequestUpdateIbmWorkflowConfig from the specified map of raw messages.
+func UnmarshalUpdateWorkflowconfigRequestUpdateIbmWorkflowConfig(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(UpdateWorkflowconfigRequestUpdateIbmWorkflowConfig)
+	err = core.UnmarshalPrimitive(m, "service_crn", &obj.ServiceCrn)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "service_crn-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "approval_expiration", &obj.ApprovalExpiration)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "approval_expiration-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "sm_instance_crn", &obj.SmInstanceCrn)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "sm_instance_crn-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "secret_id", &obj.SecretID)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_id-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "enabled", &obj.Enabled)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "enabled-error", common.GetComponentInfo())
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// UpdateWorkflowconfigRequestUpdateWorkflowConfig : Workflow config attributes to be updated.
+// This model "extends" UpdateWorkflowconfigRequest
+type UpdateWorkflowconfigRequestUpdateWorkflowConfig struct {
+	// Service Now instance URL. Only url https://xxxxx.service-now.com allowed, xxxxx is the service now instance id.
+	WorkflowURL *string `json:"workflow_url,omitempty"`
+
+	// Group name of personals who can approve the Change Request on your Service Now. It must be first registered in your
+	// Service Now then it must be added here.
+	ApprovalGroupName *string `json:"approval_group_name,omitempty"`
+
+	// Integer number identifies as hours which helps in adding approval start and end time to the created Change Request.
+	ApprovalExpiration *int64 `json:"approval_expiration,omitempty"`
+
+	// The credentials of the Service Now instance.
+	WorkflowCredentials *WorkflowCredentials `json:"workflow_credentials,omitempty"`
+
+	// This option enables the workflow configuration per environment. User must set it to true if they wish to create
+	// Change Request for flag state changes.
+	Enabled *bool `json:"enabled,omitempty"`
+}
+
+func (*UpdateWorkflowconfigRequestUpdateWorkflowConfig) isaUpdateWorkflowconfigRequest() bool {
+	return true
+}
+
+// UnmarshalUpdateWorkflowconfigRequestUpdateWorkflowConfig unmarshals an instance of UpdateWorkflowconfigRequestUpdateWorkflowConfig from the specified map of raw messages.
+func UnmarshalUpdateWorkflowconfigRequestUpdateWorkflowConfig(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(UpdateWorkflowconfigRequestUpdateWorkflowConfig)
+	err = core.UnmarshalPrimitive(m, "workflow_url", &obj.WorkflowURL)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "workflow_url-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "approval_group_name", &obj.ApprovalGroupName)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "approval_group_name-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "approval_expiration", &obj.ApprovalExpiration)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "approval_expiration-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalModel(m, "workflow_credentials", &obj.WorkflowCredentials, UnmarshalWorkflowCredentials)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "workflow_credentials-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "enabled", &obj.Enabled)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "enabled-error", common.GetComponentInfo())
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// UpdateWorkflowconfigResponseIbmWorkflowConfig : Details of the IBM Workflow configuration.
+// This model "extends" UpdateWorkflowconfigResponse
+type UpdateWorkflowconfigResponseIbmWorkflowConfig struct {
+	// Environment name of workflow config in which it is created.
+	EnvironmentName *string `json:"environment_name,omitempty"`
+
+	// Environment ID of workflow config in which it is created.
+	EnvironmentID *string `json:"environment_id,omitempty"`
+
+	// Only service crn will be allowed. Example: `crn:v1:staging:staging:appservice:us-south::::`.
+	ServiceCrn *string `json:"service_crn" validate:"required"`
+
+	// Allowed value is `SERVICENOW_IBM` case-sensitive.
+	WorkflowType *string `json:"workflow_type" validate:"required"`
+
+	// Integer number identifies as hours which helps in adding approval start and end time to the created Change Request.
+	ApprovalExpiration *int64 `json:"approval_expiration" validate:"required"`
+
+	// Only Secret Manager instance crn will be allowed. Example:
+	// `crn:v1:staging:public:secrets-manager:eu-gb:a/3268cfe9e25d411122f9a731a:0a23274-92d0a-4d42-b1fa-d15b4293cd::`.
+	SmInstanceCrn *string `json:"sm_instance_crn" validate:"required"`
+
+	// Provide the arbitary secret key id which holds the api key to interact with service now. This is required to perform
+	// action on ServiceNow like Create CR or Close CR.
+	SecretID *string `json:"secret_id" validate:"required"`
+
+	// This option enables the workflow configuration per environment. User must set it to true if they wish to create
+	// Change Request for flag state changes.
+	Enabled *bool `json:"enabled" validate:"required"`
+
+	// Creation time of the workflow configs.
+	CreatedTime *strfmt.DateTime `json:"created_time,omitempty"`
+
+	// Last modified time of the workflow configs.
+	UpdatedTime *strfmt.DateTime `json:"updated_time,omitempty"`
+
+	// Workflow Config URL.
+	Href *string `json:"href,omitempty"`
+}
+
+func (*UpdateWorkflowconfigResponseIbmWorkflowConfig) isaUpdateWorkflowconfigResponse() bool {
+	return true
+}
+
+// UnmarshalUpdateWorkflowconfigResponseIbmWorkflowConfig unmarshals an instance of UpdateWorkflowconfigResponseIbmWorkflowConfig from the specified map of raw messages.
+func UnmarshalUpdateWorkflowconfigResponseIbmWorkflowConfig(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(UpdateWorkflowconfigResponseIbmWorkflowConfig)
+	err = core.UnmarshalPrimitive(m, "environment_name", &obj.EnvironmentName)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "environment_name-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "environment_id", &obj.EnvironmentID)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "environment_id-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "service_crn", &obj.ServiceCrn)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "service_crn-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "workflow_type", &obj.WorkflowType)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "workflow_type-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "approval_expiration", &obj.ApprovalExpiration)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "approval_expiration-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "sm_instance_crn", &obj.SmInstanceCrn)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "sm_instance_crn-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "secret_id", &obj.SecretID)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_id-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "enabled", &obj.Enabled)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "enabled-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "created_time", &obj.CreatedTime)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "created_time-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "updated_time", &obj.UpdatedTime)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "updated_time-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "href", &obj.Href)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "href-error", common.GetComponentInfo())
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// UpdateWorkflowconfigResponseWorkflowConfig : Details of the External Workflow configuration.
+// This model "extends" UpdateWorkflowconfigResponse
+type UpdateWorkflowconfigResponseWorkflowConfig struct {
+	// Environment name of workflow config in which it is created.
+	EnvironmentName *string `json:"environment_name,omitempty"`
+
+	// Environment ID of workflow config in which it is created.
+	EnvironmentID *string `json:"environment_id,omitempty"`
+
+	// Only service now url https://xxxxx.service-now.com allowed, xxxxx is the service now instance id.
+	WorkflowURL *string `json:"workflow_url" validate:"required"`
+
+	// Group name of personals who can approve the Change Request on your Service Now. It must be first registered in your
+	// Service Now then it must be added here.
+	ApprovalGroupName *string `json:"approval_group_name" validate:"required"`
+
+	// Integer number identifies as hours which helps in adding approval start and end time to the created Change Request.
+	ApprovalExpiration *int64 `json:"approval_expiration" validate:"required"`
+
+	// The credentials of the Service Now instance.
+	WorkflowCredentials *WorkflowCredentials `json:"workflow_credentials" validate:"required"`
+
+	// This option enables the workflow configuration per environment. User must set it to true if they wish to create
+	// Change Request for flag state changes.
+	Enabled *bool `json:"enabled" validate:"required"`
+
+	// Creation time of the workflow configs.
+	CreatedTime *strfmt.DateTime `json:"created_time,omitempty"`
+
+	// Last modified time of the workflow configs.
+	UpdatedTime *strfmt.DateTime `json:"updated_time,omitempty"`
+
+	// Workflow Config URL.
+	Href *string `json:"href,omitempty"`
+}
+
+func (*UpdateWorkflowconfigResponseWorkflowConfig) isaUpdateWorkflowconfigResponse() bool {
+	return true
+}
+
+// UnmarshalUpdateWorkflowconfigResponseWorkflowConfig unmarshals an instance of UpdateWorkflowconfigResponseWorkflowConfig from the specified map of raw messages.
+func UnmarshalUpdateWorkflowconfigResponseWorkflowConfig(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(UpdateWorkflowconfigResponseWorkflowConfig)
+	err = core.UnmarshalPrimitive(m, "environment_name", &obj.EnvironmentName)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "environment_name-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "environment_id", &obj.EnvironmentID)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "environment_id-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "workflow_url", &obj.WorkflowURL)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "workflow_url-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "approval_group_name", &obj.ApprovalGroupName)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "approval_group_name-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "approval_expiration", &obj.ApprovalExpiration)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "approval_expiration-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalModel(m, "workflow_credentials", &obj.WorkflowCredentials, UnmarshalWorkflowCredentials)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "workflow_credentials-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "enabled", &obj.Enabled)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "enabled-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "created_time", &obj.CreatedTime)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "created_time-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "updated_time", &obj.UpdatedTime)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "updated_time-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "href", &obj.Href)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "href-error", common.GetComponentInfo())
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+//
 // EnvironmentsPager can be used to simplify the use of the "ListEnvironments" method.
+//
 type EnvironmentsPager struct {
-	hasNext     bool
-	options     *ListEnvironmentsOptions
-	client      *AppConfigurationV1
+	hasNext bool
+	options *ListEnvironmentsOptions
+	client  *AppConfigurationV1
 	pageContext struct {
 		next *int64
 	}
@@ -8786,7 +10923,7 @@ type EnvironmentsPager struct {
 // NewEnvironmentsPager returns a new EnvironmentsPager instance.
 func (appConfiguration *AppConfigurationV1) NewEnvironmentsPager(options *ListEnvironmentsOptions) (pager *EnvironmentsPager, err error) {
 	if options.Offset != nil && *options.Offset != 0 {
-		err = fmt.Errorf("the 'options.Offset' field should not be set")
+		err = core.SDKErrorf(nil, "the 'options.Offset' field should not be set", "no-query-setting", common.GetComponentInfo())
 		return
 	}
 
@@ -8814,6 +10951,7 @@ func (pager *EnvironmentsPager) GetNextWithContext(ctx context.Context) (page []
 
 	result, _, err := pager.client.ListEnvironmentsWithContext(ctx, pager.options)
 	if err != nil {
+		err = core.RepurposeSDKProblem(err, "error-getting-next-page")
 		return
 	}
 
@@ -8822,7 +10960,8 @@ func (pager *EnvironmentsPager) GetNextWithContext(ctx context.Context) (page []
 		var offset *int64
 		offset, err = core.GetQueryParamAsInt(result.Next.Href, "offset")
 		if err != nil {
-			err = fmt.Errorf("error retrieving 'offset' query parameter from URL '%s': %s", *result.Next.Href, err.Error())
+			errMsg := fmt.Sprintf("error retrieving 'offset' query parameter from URL '%s': %s", *result.Next.Href, err.Error())
+			err = core.SDKErrorf(err, errMsg, "get-query-error", common.GetComponentInfo())
 			return
 		}
 		next = offset
@@ -8841,6 +10980,7 @@ func (pager *EnvironmentsPager) GetAllWithContext(ctx context.Context) (allItems
 		var nextPage []Environment
 		nextPage, err = pager.GetNextWithContext(ctx)
 		if err != nil {
+			err = core.RepurposeSDKProblem(err, "error-getting-next-page")
 			return
 		}
 		allItems = append(allItems, nextPage...)
@@ -8850,19 +10990,25 @@ func (pager *EnvironmentsPager) GetAllWithContext(ctx context.Context) (allItems
 
 // GetNext invokes GetNextWithContext() using context.Background() as the Context parameter.
 func (pager *EnvironmentsPager) GetNext() (page []Environment, err error) {
-	return pager.GetNextWithContext(context.Background())
+	page, err = pager.GetNextWithContext(context.Background())
+	err = core.RepurposeSDKProblem(err, "")
+	return
 }
 
 // GetAll invokes GetAllWithContext() using context.Background() as the Context parameter.
 func (pager *EnvironmentsPager) GetAll() (allItems []Environment, err error) {
-	return pager.GetAllWithContext(context.Background())
+	allItems, err = pager.GetAllWithContext(context.Background())
+	err = core.RepurposeSDKProblem(err, "")
+	return
 }
 
+//
 // CollectionsPager can be used to simplify the use of the "ListCollections" method.
+//
 type CollectionsPager struct {
-	hasNext     bool
-	options     *ListCollectionsOptions
-	client      *AppConfigurationV1
+	hasNext bool
+	options *ListCollectionsOptions
+	client  *AppConfigurationV1
 	pageContext struct {
 		next *int64
 	}
@@ -8871,7 +11017,7 @@ type CollectionsPager struct {
 // NewCollectionsPager returns a new CollectionsPager instance.
 func (appConfiguration *AppConfigurationV1) NewCollectionsPager(options *ListCollectionsOptions) (pager *CollectionsPager, err error) {
 	if options.Offset != nil && *options.Offset != 0 {
-		err = fmt.Errorf("the 'options.Offset' field should not be set")
+		err = core.SDKErrorf(nil, "the 'options.Offset' field should not be set", "no-query-setting", common.GetComponentInfo())
 		return
 	}
 
@@ -8899,6 +11045,7 @@ func (pager *CollectionsPager) GetNextWithContext(ctx context.Context) (page []C
 
 	result, _, err := pager.client.ListCollectionsWithContext(ctx, pager.options)
 	if err != nil {
+		err = core.RepurposeSDKProblem(err, "error-getting-next-page")
 		return
 	}
 
@@ -8907,7 +11054,8 @@ func (pager *CollectionsPager) GetNextWithContext(ctx context.Context) (page []C
 		var offset *int64
 		offset, err = core.GetQueryParamAsInt(result.Next.Href, "offset")
 		if err != nil {
-			err = fmt.Errorf("error retrieving 'offset' query parameter from URL '%s': %s", *result.Next.Href, err.Error())
+			errMsg := fmt.Sprintf("error retrieving 'offset' query parameter from URL '%s': %s", *result.Next.Href, err.Error())
+			err = core.SDKErrorf(err, errMsg, "get-query-error", common.GetComponentInfo())
 			return
 		}
 		next = offset
@@ -8926,6 +11074,7 @@ func (pager *CollectionsPager) GetAllWithContext(ctx context.Context) (allItems 
 		var nextPage []Collection
 		nextPage, err = pager.GetNextWithContext(ctx)
 		if err != nil {
+			err = core.RepurposeSDKProblem(err, "error-getting-next-page")
 			return
 		}
 		allItems = append(allItems, nextPage...)
@@ -8935,19 +11084,25 @@ func (pager *CollectionsPager) GetAllWithContext(ctx context.Context) (allItems 
 
 // GetNext invokes GetNextWithContext() using context.Background() as the Context parameter.
 func (pager *CollectionsPager) GetNext() (page []Collection, err error) {
-	return pager.GetNextWithContext(context.Background())
+	page, err = pager.GetNextWithContext(context.Background())
+	err = core.RepurposeSDKProblem(err, "")
+	return
 }
 
 // GetAll invokes GetAllWithContext() using context.Background() as the Context parameter.
 func (pager *CollectionsPager) GetAll() (allItems []Collection, err error) {
-	return pager.GetAllWithContext(context.Background())
+	allItems, err = pager.GetAllWithContext(context.Background())
+	err = core.RepurposeSDKProblem(err, "")
+	return
 }
 
+//
 // FeaturesPager can be used to simplify the use of the "ListFeatures" method.
+//
 type FeaturesPager struct {
-	hasNext     bool
-	options     *ListFeaturesOptions
-	client      *AppConfigurationV1
+	hasNext bool
+	options *ListFeaturesOptions
+	client  *AppConfigurationV1
 	pageContext struct {
 		next *int64
 	}
@@ -8956,7 +11111,7 @@ type FeaturesPager struct {
 // NewFeaturesPager returns a new FeaturesPager instance.
 func (appConfiguration *AppConfigurationV1) NewFeaturesPager(options *ListFeaturesOptions) (pager *FeaturesPager, err error) {
 	if options.Offset != nil && *options.Offset != 0 {
-		err = fmt.Errorf("the 'options.Offset' field should not be set")
+		err = core.SDKErrorf(nil, "the 'options.Offset' field should not be set", "no-query-setting", common.GetComponentInfo())
 		return
 	}
 
@@ -8984,6 +11139,7 @@ func (pager *FeaturesPager) GetNextWithContext(ctx context.Context) (page []Feat
 
 	result, _, err := pager.client.ListFeaturesWithContext(ctx, pager.options)
 	if err != nil {
+		err = core.RepurposeSDKProblem(err, "error-getting-next-page")
 		return
 	}
 
@@ -8992,7 +11148,8 @@ func (pager *FeaturesPager) GetNextWithContext(ctx context.Context) (page []Feat
 		var offset *int64
 		offset, err = core.GetQueryParamAsInt(result.Next.Href, "offset")
 		if err != nil {
-			err = fmt.Errorf("error retrieving 'offset' query parameter from URL '%s': %s", *result.Next.Href, err.Error())
+			errMsg := fmt.Sprintf("error retrieving 'offset' query parameter from URL '%s': %s", *result.Next.Href, err.Error())
+			err = core.SDKErrorf(err, errMsg, "get-query-error", common.GetComponentInfo())
 			return
 		}
 		next = offset
@@ -9011,6 +11168,7 @@ func (pager *FeaturesPager) GetAllWithContext(ctx context.Context) (allItems []F
 		var nextPage []Feature
 		nextPage, err = pager.GetNextWithContext(ctx)
 		if err != nil {
+			err = core.RepurposeSDKProblem(err, "error-getting-next-page")
 			return
 		}
 		allItems = append(allItems, nextPage...)
@@ -9020,19 +11178,25 @@ func (pager *FeaturesPager) GetAllWithContext(ctx context.Context) (allItems []F
 
 // GetNext invokes GetNextWithContext() using context.Background() as the Context parameter.
 func (pager *FeaturesPager) GetNext() (page []Feature, err error) {
-	return pager.GetNextWithContext(context.Background())
+	page, err = pager.GetNextWithContext(context.Background())
+	err = core.RepurposeSDKProblem(err, "")
+	return
 }
 
 // GetAll invokes GetAllWithContext() using context.Background() as the Context parameter.
 func (pager *FeaturesPager) GetAll() (allItems []Feature, err error) {
-	return pager.GetAllWithContext(context.Background())
+	allItems, err = pager.GetAllWithContext(context.Background())
+	err = core.RepurposeSDKProblem(err, "")
+	return
 }
 
+//
 // PropertiesPager can be used to simplify the use of the "ListProperties" method.
+//
 type PropertiesPager struct {
-	hasNext     bool
-	options     *ListPropertiesOptions
-	client      *AppConfigurationV1
+	hasNext bool
+	options *ListPropertiesOptions
+	client  *AppConfigurationV1
 	pageContext struct {
 		next *int64
 	}
@@ -9041,7 +11205,7 @@ type PropertiesPager struct {
 // NewPropertiesPager returns a new PropertiesPager instance.
 func (appConfiguration *AppConfigurationV1) NewPropertiesPager(options *ListPropertiesOptions) (pager *PropertiesPager, err error) {
 	if options.Offset != nil && *options.Offset != 0 {
-		err = fmt.Errorf("the 'options.Offset' field should not be set")
+		err = core.SDKErrorf(nil, "the 'options.Offset' field should not be set", "no-query-setting", common.GetComponentInfo())
 		return
 	}
 
@@ -9069,6 +11233,7 @@ func (pager *PropertiesPager) GetNextWithContext(ctx context.Context) (page []Pr
 
 	result, _, err := pager.client.ListPropertiesWithContext(ctx, pager.options)
 	if err != nil {
+		err = core.RepurposeSDKProblem(err, "error-getting-next-page")
 		return
 	}
 
@@ -9077,7 +11242,8 @@ func (pager *PropertiesPager) GetNextWithContext(ctx context.Context) (page []Pr
 		var offset *int64
 		offset, err = core.GetQueryParamAsInt(result.Next.Href, "offset")
 		if err != nil {
-			err = fmt.Errorf("error retrieving 'offset' query parameter from URL '%s': %s", *result.Next.Href, err.Error())
+			errMsg := fmt.Sprintf("error retrieving 'offset' query parameter from URL '%s': %s", *result.Next.Href, err.Error())
+			err = core.SDKErrorf(err, errMsg, "get-query-error", common.GetComponentInfo())
 			return
 		}
 		next = offset
@@ -9096,6 +11262,7 @@ func (pager *PropertiesPager) GetAllWithContext(ctx context.Context) (allItems [
 		var nextPage []Property
 		nextPage, err = pager.GetNextWithContext(ctx)
 		if err != nil {
+			err = core.RepurposeSDKProblem(err, "error-getting-next-page")
 			return
 		}
 		allItems = append(allItems, nextPage...)
@@ -9105,19 +11272,25 @@ func (pager *PropertiesPager) GetAllWithContext(ctx context.Context) (allItems [
 
 // GetNext invokes GetNextWithContext() using context.Background() as the Context parameter.
 func (pager *PropertiesPager) GetNext() (page []Property, err error) {
-	return pager.GetNextWithContext(context.Background())
+	page, err = pager.GetNextWithContext(context.Background())
+	err = core.RepurposeSDKProblem(err, "")
+	return
 }
 
 // GetAll invokes GetAllWithContext() using context.Background() as the Context parameter.
 func (pager *PropertiesPager) GetAll() (allItems []Property, err error) {
-	return pager.GetAllWithContext(context.Background())
+	allItems, err = pager.GetAllWithContext(context.Background())
+	err = core.RepurposeSDKProblem(err, "")
+	return
 }
 
+//
 // SegmentsPager can be used to simplify the use of the "ListSegments" method.
+//
 type SegmentsPager struct {
-	hasNext     bool
-	options     *ListSegmentsOptions
-	client      *AppConfigurationV1
+	hasNext bool
+	options *ListSegmentsOptions
+	client  *AppConfigurationV1
 	pageContext struct {
 		next *int64
 	}
@@ -9126,7 +11299,7 @@ type SegmentsPager struct {
 // NewSegmentsPager returns a new SegmentsPager instance.
 func (appConfiguration *AppConfigurationV1) NewSegmentsPager(options *ListSegmentsOptions) (pager *SegmentsPager, err error) {
 	if options.Offset != nil && *options.Offset != 0 {
-		err = fmt.Errorf("the 'options.Offset' field should not be set")
+		err = core.SDKErrorf(nil, "the 'options.Offset' field should not be set", "no-query-setting", common.GetComponentInfo())
 		return
 	}
 
@@ -9154,6 +11327,7 @@ func (pager *SegmentsPager) GetNextWithContext(ctx context.Context) (page []Segm
 
 	result, _, err := pager.client.ListSegmentsWithContext(ctx, pager.options)
 	if err != nil {
+		err = core.RepurposeSDKProblem(err, "error-getting-next-page")
 		return
 	}
 
@@ -9162,7 +11336,8 @@ func (pager *SegmentsPager) GetNextWithContext(ctx context.Context) (page []Segm
 		var offset *int64
 		offset, err = core.GetQueryParamAsInt(result.Next.Href, "offset")
 		if err != nil {
-			err = fmt.Errorf("error retrieving 'offset' query parameter from URL '%s': %s", *result.Next.Href, err.Error())
+			errMsg := fmt.Sprintf("error retrieving 'offset' query parameter from URL '%s': %s", *result.Next.Href, err.Error())
+			err = core.SDKErrorf(err, errMsg, "get-query-error", common.GetComponentInfo())
 			return
 		}
 		next = offset
@@ -9181,6 +11356,7 @@ func (pager *SegmentsPager) GetAllWithContext(ctx context.Context) (allItems []S
 		var nextPage []Segment
 		nextPage, err = pager.GetNextWithContext(ctx)
 		if err != nil {
+			err = core.RepurposeSDKProblem(err, "error-getting-next-page")
 			return
 		}
 		allItems = append(allItems, nextPage...)
@@ -9190,19 +11366,25 @@ func (pager *SegmentsPager) GetAllWithContext(ctx context.Context) (allItems []S
 
 // GetNext invokes GetNextWithContext() using context.Background() as the Context parameter.
 func (pager *SegmentsPager) GetNext() (page []Segment, err error) {
-	return pager.GetNextWithContext(context.Background())
+	page, err = pager.GetNextWithContext(context.Background())
+	err = core.RepurposeSDKProblem(err, "")
+	return
 }
 
 // GetAll invokes GetAllWithContext() using context.Background() as the Context parameter.
 func (pager *SegmentsPager) GetAll() (allItems []Segment, err error) {
-	return pager.GetAllWithContext(context.Background())
+	allItems, err = pager.GetAllWithContext(context.Background())
+	err = core.RepurposeSDKProblem(err, "")
+	return
 }
 
+//
 // SnapshotsPager can be used to simplify the use of the "ListSnapshots" method.
+//
 type SnapshotsPager struct {
-	hasNext     bool
-	options     *ListSnapshotsOptions
-	client      *AppConfigurationV1
+	hasNext bool
+	options *ListSnapshotsOptions
+	client  *AppConfigurationV1
 	pageContext struct {
 		next *int64
 	}
@@ -9211,7 +11393,7 @@ type SnapshotsPager struct {
 // NewSnapshotsPager returns a new SnapshotsPager instance.
 func (appConfiguration *AppConfigurationV1) NewSnapshotsPager(options *ListSnapshotsOptions) (pager *SnapshotsPager, err error) {
 	if options.Offset != nil && *options.Offset != 0 {
-		err = fmt.Errorf("the 'options.Offset' field should not be set")
+		err = core.SDKErrorf(nil, "the 'options.Offset' field should not be set", "no-query-setting", common.GetComponentInfo())
 		return
 	}
 
@@ -9239,6 +11421,7 @@ func (pager *SnapshotsPager) GetNextWithContext(ctx context.Context) (page []Git
 
 	result, _, err := pager.client.ListSnapshotsWithContext(ctx, pager.options)
 	if err != nil {
+		err = core.RepurposeSDKProblem(err, "error-getting-next-page")
 		return
 	}
 
@@ -9247,7 +11430,8 @@ func (pager *SnapshotsPager) GetNextWithContext(ctx context.Context) (page []Git
 		var offset *int64
 		offset, err = core.GetQueryParamAsInt(result.Next.Href, "offset")
 		if err != nil {
-			err = fmt.Errorf("error retrieving 'offset' query parameter from URL '%s': %s", *result.Next.Href, err.Error())
+			errMsg := fmt.Sprintf("error retrieving 'offset' query parameter from URL '%s': %s", *result.Next.Href, err.Error())
+			err = core.SDKErrorf(err, errMsg, "get-query-error", common.GetComponentInfo())
 			return
 		}
 		next = offset
@@ -9266,6 +11450,7 @@ func (pager *SnapshotsPager) GetAllWithContext(ctx context.Context) (allItems []
 		var nextPage []GitConfig
 		nextPage, err = pager.GetNextWithContext(ctx)
 		if err != nil {
+			err = core.RepurposeSDKProblem(err, "error-getting-next-page")
 			return
 		}
 		allItems = append(allItems, nextPage...)
@@ -9275,10 +11460,14 @@ func (pager *SnapshotsPager) GetAllWithContext(ctx context.Context) (allItems []
 
 // GetNext invokes GetNextWithContext() using context.Background() as the Context parameter.
 func (pager *SnapshotsPager) GetNext() (page []GitConfig, err error) {
-	return pager.GetNextWithContext(context.Background())
+	page, err = pager.GetNextWithContext(context.Background())
+	err = core.RepurposeSDKProblem(err, "")
+	return
 }
 
 // GetAll invokes GetAllWithContext() using context.Background() as the Context parameter.
 func (pager *SnapshotsPager) GetAll() (allItems []GitConfig, err error) {
-	return pager.GetAllWithContext(context.Background())
+	allItems, err = pager.GetAllWithContext(context.Background())
+	err = core.RepurposeSDKProblem(err, "")
+	return
 }
