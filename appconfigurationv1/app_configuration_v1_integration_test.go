@@ -1135,10 +1135,10 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 				EnvironmentID: core.StringPtr("environment_id"),
 			}
 
-			workflowConfig, response, err := appConfigurationService.ListWorkflowconfig(listWorkflowconfigOptions)
+			listWorkflowconfigResponse, response, err := appConfigurationService.ListWorkflowconfig(listWorkflowconfigOptions)
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(200))
-			Expect(workflowConfig).ToNot(BeNil())
+			Expect(listWorkflowconfigResponse).ToNot(BeNil())
 		})
 	})
 
@@ -1154,8 +1154,7 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 				ClientSecret: core.StringPtr("clientsecret"),
 			}
 
-			createWorkflowconfigOptions := &appconfigurationv1.CreateWorkflowconfigOptions{
-				EnvironmentID: core.StringPtr("environment_id"),
+			createWorkflowconfigRequestModel := &appconfigurationv1.CreateWorkflowconfigRequestWorkflowConfig{
 				WorkflowURL: core.StringPtr("https://xxxxx.service-now.com"),
 				ApprovalGroupName: core.StringPtr("WorkflowCRApprovers"),
 				ApprovalExpiration: core.Int64Ptr(int64(10)),
@@ -1163,10 +1162,15 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 				Enabled: core.BoolPtr(true),
 			}
 
-			workflowConfig, response, err := appConfigurationService.CreateWorkflowconfig(createWorkflowconfigOptions)
+			createWorkflowconfigOptions := &appconfigurationv1.CreateWorkflowconfigOptions{
+				EnvironmentID: core.StringPtr("environment_id"),
+				WorkflowConfig: createWorkflowconfigRequestModel,
+			}
+
+			createWorkflowconfigResponse, response, err := appConfigurationService.CreateWorkflowconfig(createWorkflowconfigOptions)
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(201))
-			Expect(workflowConfig).ToNot(BeNil())
+			Expect(createWorkflowconfigResponse).ToNot(BeNil())
 		})
 	})
 
@@ -1176,25 +1180,29 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 		})
 		It(`UpdateWorkflowconfig(updateWorkflowconfigOptions *UpdateWorkflowconfigOptions)`, func() {
 			workflowCredentialsModel := &appconfigurationv1.WorkflowCredentials{
-				Username: core.StringPtr("admin"),
-				Password: core.StringPtr("testString"),
-				ClientID: core.StringPtr("f7b6379b55d08210f8ree233afc7256d"),
-				ClientSecret: core.StringPtr("testString"),
+				Username: core.StringPtr("user"),
+				Password: core.StringPtr("updated password"),
+				ClientID: core.StringPtr("client id value"),
+				ClientSecret: core.StringPtr("updated client secret"),
+			}
+
+			updateWorkflowconfigRequestModel := &appconfigurationv1.UpdateWorkflowconfigRequestUpdateWorkflowConfig{
+				WorkflowURL: core.StringPtr("https://xxxxx.service-now.com"),
+				ApprovalGroupName: core.StringPtr("WorkflowCRApprovers"),
+				ApprovalExpiration: core.Int64Ptr(int64(5)),
+				WorkflowCredentials: workflowCredentialsModel,
+				Enabled: core.BoolPtr(true),
 			}
 
 			updateWorkflowconfigOptions := &appconfigurationv1.UpdateWorkflowconfigOptions{
 				EnvironmentID: core.StringPtr("environment_id"),
-				WorkflowURL: core.StringPtr("testString"),
-				ApprovalGroupName: core.StringPtr("testString"),
-				ApprovalExpiration: core.Int64Ptr(int64(1)),
-				WorkflowCredentials: workflowCredentialsModel,
-				Enabled: core.BoolPtr(false),
+				UpdateWorkflowConfig: updateWorkflowconfigRequestModel,
 			}
 
-			workflowConfig, response, err := appConfigurationService.UpdateWorkflowconfig(updateWorkflowconfigOptions)
+			updateWorkflowconfigResponse, response, err := appConfigurationService.UpdateWorkflowconfig(updateWorkflowconfigOptions)
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(201))
-			Expect(workflowConfig).ToNot(BeNil())
+			Expect(updateWorkflowconfigResponse).ToNot(BeNil())
 		})
 	})
 
@@ -1209,7 +1217,7 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 
 			featureSegmentRuleModel := &appconfigurationv1.FeatureSegmentRule{
 				Rules: []appconfigurationv1.TargetSegments{*targetSegmentsModel},
-				Value: core.StringPtr("testString"),
+				Value: "testString",
 				Order: core.Int64Ptr(int64(38)),
 				RolloutPercentage: core.Int64Ptr(int64(100)),
 			}

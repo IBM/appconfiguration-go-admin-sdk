@@ -19,11 +19,13 @@ package common
 import (
 	"fmt"
 	"runtime"
+	"github.com/IBM/go-sdk-core/v5/core"
 )
 
 const (
 	sdkName             = "appconfiguration-go-admin-sdk"
 	headerNameUserAgent = "User-Agent"
+	componentName       = "github.com/IBM/appconfiguration-go-admin-sdk"
 )
 
 // GetSdkHeaders - returns the set of SDK-specific headers to be included in an outgoing request.
@@ -79,4 +81,8 @@ var systemInfo = fmt.Sprintf("(lang=go; arch=%s; os=%s; go.version=%s)", runtime
 
 func GetSystemInfo() string {
 	return systemInfo
+}
+
+func GetComponentInfo() *core.ProblemComponent {
+	return core.NewProblemComponent(componentName, Version)
 }

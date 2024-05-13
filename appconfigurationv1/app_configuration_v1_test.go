@@ -19,6 +19,7 @@ package appconfigurationv1_test
 import (
 	"bytes"
 	"context"
+	"encoding/json"
 	"fmt"
 	"io"
 	"net/http"
@@ -2999,7 +3000,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				// Construct an instance of the FeatureSegmentRule model
 				featureSegmentRuleModel := new(appconfigurationv1.FeatureSegmentRule)
 				featureSegmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
-				featureSegmentRuleModel.Value = core.StringPtr("true")
+				featureSegmentRuleModel.Value = "true"
 				featureSegmentRuleModel.Order = core.Int64Ptr(int64(1))
 				featureSegmentRuleModel.RolloutPercentage = core.Int64Ptr(int64(50))
 
@@ -3013,8 +3014,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				createFeatureOptionsModel.Name = core.StringPtr("Cycle Rentals")
 				createFeatureOptionsModel.FeatureID = core.StringPtr("cycle-rentals")
 				createFeatureOptionsModel.Type = core.StringPtr("BOOLEAN")
-				createFeatureOptionsModel.EnabledValue = core.StringPtr("true")
-				createFeatureOptionsModel.DisabledValue = core.StringPtr("false")
+				createFeatureOptionsModel.EnabledValue = "true"
+				createFeatureOptionsModel.DisabledValue = "false"
 				createFeatureOptionsModel.Description = core.StringPtr("Feature flag to enable Cycle Rentals")
 				createFeatureOptionsModel.Format = core.StringPtr("TEXT")
 				createFeatureOptionsModel.Enabled = core.BoolPtr(true)
@@ -3093,7 +3094,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				// Construct an instance of the FeatureSegmentRule model
 				featureSegmentRuleModel := new(appconfigurationv1.FeatureSegmentRule)
 				featureSegmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
-				featureSegmentRuleModel.Value = core.StringPtr("true")
+				featureSegmentRuleModel.Value = "true"
 				featureSegmentRuleModel.Order = core.Int64Ptr(int64(1))
 				featureSegmentRuleModel.RolloutPercentage = core.Int64Ptr(int64(50))
 
@@ -3107,8 +3108,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				createFeatureOptionsModel.Name = core.StringPtr("Cycle Rentals")
 				createFeatureOptionsModel.FeatureID = core.StringPtr("cycle-rentals")
 				createFeatureOptionsModel.Type = core.StringPtr("BOOLEAN")
-				createFeatureOptionsModel.EnabledValue = core.StringPtr("true")
-				createFeatureOptionsModel.DisabledValue = core.StringPtr("false")
+				createFeatureOptionsModel.EnabledValue = "true"
+				createFeatureOptionsModel.DisabledValue = "false"
 				createFeatureOptionsModel.Description = core.StringPtr("Feature flag to enable Cycle Rentals")
 				createFeatureOptionsModel.Format = core.StringPtr("TEXT")
 				createFeatureOptionsModel.Enabled = core.BoolPtr(true)
@@ -3195,7 +3196,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				// Construct an instance of the FeatureSegmentRule model
 				featureSegmentRuleModel := new(appconfigurationv1.FeatureSegmentRule)
 				featureSegmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
-				featureSegmentRuleModel.Value = core.StringPtr("true")
+				featureSegmentRuleModel.Value = "true"
 				featureSegmentRuleModel.Order = core.Int64Ptr(int64(1))
 				featureSegmentRuleModel.RolloutPercentage = core.Int64Ptr(int64(50))
 
@@ -3209,8 +3210,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				createFeatureOptionsModel.Name = core.StringPtr("Cycle Rentals")
 				createFeatureOptionsModel.FeatureID = core.StringPtr("cycle-rentals")
 				createFeatureOptionsModel.Type = core.StringPtr("BOOLEAN")
-				createFeatureOptionsModel.EnabledValue = core.StringPtr("true")
-				createFeatureOptionsModel.DisabledValue = core.StringPtr("false")
+				createFeatureOptionsModel.EnabledValue = "true"
+				createFeatureOptionsModel.DisabledValue = "false"
 				createFeatureOptionsModel.Description = core.StringPtr("Feature flag to enable Cycle Rentals")
 				createFeatureOptionsModel.Format = core.StringPtr("TEXT")
 				createFeatureOptionsModel.Enabled = core.BoolPtr(true)
@@ -3242,7 +3243,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				// Construct an instance of the FeatureSegmentRule model
 				featureSegmentRuleModel := new(appconfigurationv1.FeatureSegmentRule)
 				featureSegmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
-				featureSegmentRuleModel.Value = core.StringPtr("true")
+				featureSegmentRuleModel.Value = "true"
 				featureSegmentRuleModel.Order = core.Int64Ptr(int64(1))
 				featureSegmentRuleModel.RolloutPercentage = core.Int64Ptr(int64(50))
 
@@ -3256,8 +3257,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				createFeatureOptionsModel.Name = core.StringPtr("Cycle Rentals")
 				createFeatureOptionsModel.FeatureID = core.StringPtr("cycle-rentals")
 				createFeatureOptionsModel.Type = core.StringPtr("BOOLEAN")
-				createFeatureOptionsModel.EnabledValue = core.StringPtr("true")
-				createFeatureOptionsModel.DisabledValue = core.StringPtr("false")
+				createFeatureOptionsModel.EnabledValue = "true"
+				createFeatureOptionsModel.DisabledValue = "false"
 				createFeatureOptionsModel.Description = core.StringPtr("Feature flag to enable Cycle Rentals")
 				createFeatureOptionsModel.Format = core.StringPtr("TEXT")
 				createFeatureOptionsModel.Enabled = core.BoolPtr(true)
@@ -3310,7 +3311,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				// Construct an instance of the FeatureSegmentRule model
 				featureSegmentRuleModel := new(appconfigurationv1.FeatureSegmentRule)
 				featureSegmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
-				featureSegmentRuleModel.Value = core.StringPtr("true")
+				featureSegmentRuleModel.Value = "true"
 				featureSegmentRuleModel.Order = core.Int64Ptr(int64(1))
 				featureSegmentRuleModel.RolloutPercentage = core.Int64Ptr(int64(50))
 
@@ -3324,8 +3325,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				createFeatureOptionsModel.Name = core.StringPtr("Cycle Rentals")
 				createFeatureOptionsModel.FeatureID = core.StringPtr("cycle-rentals")
 				createFeatureOptionsModel.Type = core.StringPtr("BOOLEAN")
-				createFeatureOptionsModel.EnabledValue = core.StringPtr("true")
-				createFeatureOptionsModel.DisabledValue = core.StringPtr("false")
+				createFeatureOptionsModel.EnabledValue = "true"
+				createFeatureOptionsModel.DisabledValue = "false"
 				createFeatureOptionsModel.Description = core.StringPtr("Feature flag to enable Cycle Rentals")
 				createFeatureOptionsModel.Format = core.StringPtr("TEXT")
 				createFeatureOptionsModel.Enabled = core.BoolPtr(true)
@@ -3378,7 +3379,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				// Construct an instance of the FeatureSegmentRule model
 				featureSegmentRuleModel := new(appconfigurationv1.FeatureSegmentRule)
 				featureSegmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
-				featureSegmentRuleModel.Value = core.StringPtr("true")
+				featureSegmentRuleModel.Value = "true"
 				featureSegmentRuleModel.Order = core.Int64Ptr(int64(1))
 				featureSegmentRuleModel.RolloutPercentage = core.Int64Ptr(int64(90))
 
@@ -3392,8 +3393,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				updateFeatureOptionsModel.FeatureID = core.StringPtr("feature_id")
 				updateFeatureOptionsModel.Name = core.StringPtr("Cycle Rentals")
 				updateFeatureOptionsModel.Description = core.StringPtr("Feature flags to enable Cycle Rentals")
-				updateFeatureOptionsModel.EnabledValue = core.StringPtr("true")
-				updateFeatureOptionsModel.DisabledValue = core.StringPtr("false")
+				updateFeatureOptionsModel.EnabledValue = "true"
+				updateFeatureOptionsModel.DisabledValue = "false"
 				updateFeatureOptionsModel.Enabled = core.BoolPtr(true)
 				updateFeatureOptionsModel.RolloutPercentage = core.Int64Ptr(int64(100))
 				updateFeatureOptionsModel.Tags = core.StringPtr("version: 1.1, yet-to-release")
@@ -3470,7 +3471,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				// Construct an instance of the FeatureSegmentRule model
 				featureSegmentRuleModel := new(appconfigurationv1.FeatureSegmentRule)
 				featureSegmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
-				featureSegmentRuleModel.Value = core.StringPtr("true")
+				featureSegmentRuleModel.Value = "true"
 				featureSegmentRuleModel.Order = core.Int64Ptr(int64(1))
 				featureSegmentRuleModel.RolloutPercentage = core.Int64Ptr(int64(90))
 
@@ -3484,8 +3485,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				updateFeatureOptionsModel.FeatureID = core.StringPtr("feature_id")
 				updateFeatureOptionsModel.Name = core.StringPtr("Cycle Rentals")
 				updateFeatureOptionsModel.Description = core.StringPtr("Feature flags to enable Cycle Rentals")
-				updateFeatureOptionsModel.EnabledValue = core.StringPtr("true")
-				updateFeatureOptionsModel.DisabledValue = core.StringPtr("false")
+				updateFeatureOptionsModel.EnabledValue = "true"
+				updateFeatureOptionsModel.DisabledValue = "false"
 				updateFeatureOptionsModel.Enabled = core.BoolPtr(true)
 				updateFeatureOptionsModel.RolloutPercentage = core.Int64Ptr(int64(100))
 				updateFeatureOptionsModel.Tags = core.StringPtr("version: 1.1, yet-to-release")
@@ -3570,7 +3571,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				// Construct an instance of the FeatureSegmentRule model
 				featureSegmentRuleModel := new(appconfigurationv1.FeatureSegmentRule)
 				featureSegmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
-				featureSegmentRuleModel.Value = core.StringPtr("true")
+				featureSegmentRuleModel.Value = "true"
 				featureSegmentRuleModel.Order = core.Int64Ptr(int64(1))
 				featureSegmentRuleModel.RolloutPercentage = core.Int64Ptr(int64(90))
 
@@ -3584,8 +3585,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				updateFeatureOptionsModel.FeatureID = core.StringPtr("feature_id")
 				updateFeatureOptionsModel.Name = core.StringPtr("Cycle Rentals")
 				updateFeatureOptionsModel.Description = core.StringPtr("Feature flags to enable Cycle Rentals")
-				updateFeatureOptionsModel.EnabledValue = core.StringPtr("true")
-				updateFeatureOptionsModel.DisabledValue = core.StringPtr("false")
+				updateFeatureOptionsModel.EnabledValue = "true"
+				updateFeatureOptionsModel.DisabledValue = "false"
 				updateFeatureOptionsModel.Enabled = core.BoolPtr(true)
 				updateFeatureOptionsModel.RolloutPercentage = core.Int64Ptr(int64(100))
 				updateFeatureOptionsModel.Tags = core.StringPtr("version: 1.1, yet-to-release")
@@ -3615,7 +3616,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				// Construct an instance of the FeatureSegmentRule model
 				featureSegmentRuleModel := new(appconfigurationv1.FeatureSegmentRule)
 				featureSegmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
-				featureSegmentRuleModel.Value = core.StringPtr("true")
+				featureSegmentRuleModel.Value = "true"
 				featureSegmentRuleModel.Order = core.Int64Ptr(int64(1))
 				featureSegmentRuleModel.RolloutPercentage = core.Int64Ptr(int64(90))
 
@@ -3629,8 +3630,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				updateFeatureOptionsModel.FeatureID = core.StringPtr("feature_id")
 				updateFeatureOptionsModel.Name = core.StringPtr("Cycle Rentals")
 				updateFeatureOptionsModel.Description = core.StringPtr("Feature flags to enable Cycle Rentals")
-				updateFeatureOptionsModel.EnabledValue = core.StringPtr("true")
-				updateFeatureOptionsModel.DisabledValue = core.StringPtr("false")
+				updateFeatureOptionsModel.EnabledValue = "true"
+				updateFeatureOptionsModel.DisabledValue = "false"
 				updateFeatureOptionsModel.Enabled = core.BoolPtr(true)
 				updateFeatureOptionsModel.RolloutPercentage = core.Int64Ptr(int64(100))
 				updateFeatureOptionsModel.Tags = core.StringPtr("version: 1.1, yet-to-release")
@@ -3681,7 +3682,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				// Construct an instance of the FeatureSegmentRule model
 				featureSegmentRuleModel := new(appconfigurationv1.FeatureSegmentRule)
 				featureSegmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
-				featureSegmentRuleModel.Value = core.StringPtr("true")
+				featureSegmentRuleModel.Value = "true"
 				featureSegmentRuleModel.Order = core.Int64Ptr(int64(1))
 				featureSegmentRuleModel.RolloutPercentage = core.Int64Ptr(int64(90))
 
@@ -3695,8 +3696,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				updateFeatureOptionsModel.FeatureID = core.StringPtr("feature_id")
 				updateFeatureOptionsModel.Name = core.StringPtr("Cycle Rentals")
 				updateFeatureOptionsModel.Description = core.StringPtr("Feature flags to enable Cycle Rentals")
-				updateFeatureOptionsModel.EnabledValue = core.StringPtr("true")
-				updateFeatureOptionsModel.DisabledValue = core.StringPtr("false")
+				updateFeatureOptionsModel.EnabledValue = "true"
+				updateFeatureOptionsModel.DisabledValue = "false"
 				updateFeatureOptionsModel.Enabled = core.BoolPtr(true)
 				updateFeatureOptionsModel.RolloutPercentage = core.Int64Ptr(int64(100))
 				updateFeatureOptionsModel.Tags = core.StringPtr("version: 1.1, yet-to-release")
@@ -3747,7 +3748,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				// Construct an instance of the FeatureSegmentRule model
 				featureSegmentRuleModel := new(appconfigurationv1.FeatureSegmentRule)
 				featureSegmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
-				featureSegmentRuleModel.Value = core.StringPtr("true")
+				featureSegmentRuleModel.Value = "true"
 				featureSegmentRuleModel.Order = core.Int64Ptr(int64(1))
 				featureSegmentRuleModel.RolloutPercentage = core.Int64Ptr(int64(100))
 
@@ -3758,8 +3759,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				updateFeatureValuesOptionsModel.Name = core.StringPtr("Cycle Rentals")
 				updateFeatureValuesOptionsModel.Description = core.StringPtr("Feature flags to enable Cycle Rentals")
 				updateFeatureValuesOptionsModel.Tags = core.StringPtr("version: 1.1, yet-to-release")
-				updateFeatureValuesOptionsModel.EnabledValue = core.StringPtr("true")
-				updateFeatureValuesOptionsModel.DisabledValue = core.StringPtr("false")
+				updateFeatureValuesOptionsModel.EnabledValue = "true"
+				updateFeatureValuesOptionsModel.DisabledValue = "false"
 				updateFeatureValuesOptionsModel.RolloutPercentage = core.Int64Ptr(int64(100))
 				updateFeatureValuesOptionsModel.SegmentRules = []appconfigurationv1.FeatureSegmentRule{*featureSegmentRuleModel}
 				updateFeatureValuesOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -3833,7 +3834,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				// Construct an instance of the FeatureSegmentRule model
 				featureSegmentRuleModel := new(appconfigurationv1.FeatureSegmentRule)
 				featureSegmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
-				featureSegmentRuleModel.Value = core.StringPtr("true")
+				featureSegmentRuleModel.Value = "true"
 				featureSegmentRuleModel.Order = core.Int64Ptr(int64(1))
 				featureSegmentRuleModel.RolloutPercentage = core.Int64Ptr(int64(100))
 
@@ -3844,8 +3845,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				updateFeatureValuesOptionsModel.Name = core.StringPtr("Cycle Rentals")
 				updateFeatureValuesOptionsModel.Description = core.StringPtr("Feature flags to enable Cycle Rentals")
 				updateFeatureValuesOptionsModel.Tags = core.StringPtr("version: 1.1, yet-to-release")
-				updateFeatureValuesOptionsModel.EnabledValue = core.StringPtr("true")
-				updateFeatureValuesOptionsModel.DisabledValue = core.StringPtr("false")
+				updateFeatureValuesOptionsModel.EnabledValue = "true"
+				updateFeatureValuesOptionsModel.DisabledValue = "false"
 				updateFeatureValuesOptionsModel.RolloutPercentage = core.Int64Ptr(int64(100))
 				updateFeatureValuesOptionsModel.SegmentRules = []appconfigurationv1.FeatureSegmentRule{*featureSegmentRuleModel}
 				updateFeatureValuesOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -3927,7 +3928,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				// Construct an instance of the FeatureSegmentRule model
 				featureSegmentRuleModel := new(appconfigurationv1.FeatureSegmentRule)
 				featureSegmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
-				featureSegmentRuleModel.Value = core.StringPtr("true")
+				featureSegmentRuleModel.Value = "true"
 				featureSegmentRuleModel.Order = core.Int64Ptr(int64(1))
 				featureSegmentRuleModel.RolloutPercentage = core.Int64Ptr(int64(100))
 
@@ -3938,8 +3939,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				updateFeatureValuesOptionsModel.Name = core.StringPtr("Cycle Rentals")
 				updateFeatureValuesOptionsModel.Description = core.StringPtr("Feature flags to enable Cycle Rentals")
 				updateFeatureValuesOptionsModel.Tags = core.StringPtr("version: 1.1, yet-to-release")
-				updateFeatureValuesOptionsModel.EnabledValue = core.StringPtr("true")
-				updateFeatureValuesOptionsModel.DisabledValue = core.StringPtr("false")
+				updateFeatureValuesOptionsModel.EnabledValue = "true"
+				updateFeatureValuesOptionsModel.DisabledValue = "false"
 				updateFeatureValuesOptionsModel.RolloutPercentage = core.Int64Ptr(int64(100))
 				updateFeatureValuesOptionsModel.SegmentRules = []appconfigurationv1.FeatureSegmentRule{*featureSegmentRuleModel}
 				updateFeatureValuesOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -3966,7 +3967,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				// Construct an instance of the FeatureSegmentRule model
 				featureSegmentRuleModel := new(appconfigurationv1.FeatureSegmentRule)
 				featureSegmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
-				featureSegmentRuleModel.Value = core.StringPtr("true")
+				featureSegmentRuleModel.Value = "true"
 				featureSegmentRuleModel.Order = core.Int64Ptr(int64(1))
 				featureSegmentRuleModel.RolloutPercentage = core.Int64Ptr(int64(100))
 
@@ -3977,8 +3978,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				updateFeatureValuesOptionsModel.Name = core.StringPtr("Cycle Rentals")
 				updateFeatureValuesOptionsModel.Description = core.StringPtr("Feature flags to enable Cycle Rentals")
 				updateFeatureValuesOptionsModel.Tags = core.StringPtr("version: 1.1, yet-to-release")
-				updateFeatureValuesOptionsModel.EnabledValue = core.StringPtr("true")
-				updateFeatureValuesOptionsModel.DisabledValue = core.StringPtr("false")
+				updateFeatureValuesOptionsModel.EnabledValue = "true"
+				updateFeatureValuesOptionsModel.DisabledValue = "false"
 				updateFeatureValuesOptionsModel.RolloutPercentage = core.Int64Ptr(int64(100))
 				updateFeatureValuesOptionsModel.SegmentRules = []appconfigurationv1.FeatureSegmentRule{*featureSegmentRuleModel}
 				updateFeatureValuesOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -4026,7 +4027,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				// Construct an instance of the FeatureSegmentRule model
 				featureSegmentRuleModel := new(appconfigurationv1.FeatureSegmentRule)
 				featureSegmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
-				featureSegmentRuleModel.Value = core.StringPtr("true")
+				featureSegmentRuleModel.Value = "true"
 				featureSegmentRuleModel.Order = core.Int64Ptr(int64(1))
 				featureSegmentRuleModel.RolloutPercentage = core.Int64Ptr(int64(100))
 
@@ -4037,8 +4038,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				updateFeatureValuesOptionsModel.Name = core.StringPtr("Cycle Rentals")
 				updateFeatureValuesOptionsModel.Description = core.StringPtr("Feature flags to enable Cycle Rentals")
 				updateFeatureValuesOptionsModel.Tags = core.StringPtr("version: 1.1, yet-to-release")
-				updateFeatureValuesOptionsModel.EnabledValue = core.StringPtr("true")
-				updateFeatureValuesOptionsModel.DisabledValue = core.StringPtr("false")
+				updateFeatureValuesOptionsModel.EnabledValue = "true"
+				updateFeatureValuesOptionsModel.DisabledValue = "false"
 				updateFeatureValuesOptionsModel.RolloutPercentage = core.Int64Ptr(int64(100))
 				updateFeatureValuesOptionsModel.SegmentRules = []appconfigurationv1.FeatureSegmentRule{*featureSegmentRuleModel}
 				updateFeatureValuesOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -5032,7 +5033,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				// Construct an instance of the SegmentRule model
 				segmentRuleModel := new(appconfigurationv1.SegmentRule)
 				segmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
-				segmentRuleModel.Value = core.StringPtr("true")
+				segmentRuleModel.Value = "true"
 				segmentRuleModel.Order = core.Int64Ptr(int64(1))
 
 				// Construct an instance of the CollectionRef model
@@ -5045,7 +5046,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				createPropertyOptionsModel.Name = core.StringPtr("Email property")
 				createPropertyOptionsModel.PropertyID = core.StringPtr("email-property")
 				createPropertyOptionsModel.Type = core.StringPtr("BOOLEAN")
-				createPropertyOptionsModel.Value = core.StringPtr("true")
+				createPropertyOptionsModel.Value = "true"
 				createPropertyOptionsModel.Description = core.StringPtr("Property for email")
 				createPropertyOptionsModel.Format = core.StringPtr("TEXT")
 				createPropertyOptionsModel.Tags = core.StringPtr("version: 1.1, pre-release")
@@ -5122,7 +5123,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				// Construct an instance of the SegmentRule model
 				segmentRuleModel := new(appconfigurationv1.SegmentRule)
 				segmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
-				segmentRuleModel.Value = core.StringPtr("true")
+				segmentRuleModel.Value = "true"
 				segmentRuleModel.Order = core.Int64Ptr(int64(1))
 
 				// Construct an instance of the CollectionRef model
@@ -5135,7 +5136,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				createPropertyOptionsModel.Name = core.StringPtr("Email property")
 				createPropertyOptionsModel.PropertyID = core.StringPtr("email-property")
 				createPropertyOptionsModel.Type = core.StringPtr("BOOLEAN")
-				createPropertyOptionsModel.Value = core.StringPtr("true")
+				createPropertyOptionsModel.Value = "true"
 				createPropertyOptionsModel.Description = core.StringPtr("Property for email")
 				createPropertyOptionsModel.Format = core.StringPtr("TEXT")
 				createPropertyOptionsModel.Tags = core.StringPtr("version: 1.1, pre-release")
@@ -5220,7 +5221,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				// Construct an instance of the SegmentRule model
 				segmentRuleModel := new(appconfigurationv1.SegmentRule)
 				segmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
-				segmentRuleModel.Value = core.StringPtr("true")
+				segmentRuleModel.Value = "true"
 				segmentRuleModel.Order = core.Int64Ptr(int64(1))
 
 				// Construct an instance of the CollectionRef model
@@ -5233,7 +5234,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				createPropertyOptionsModel.Name = core.StringPtr("Email property")
 				createPropertyOptionsModel.PropertyID = core.StringPtr("email-property")
 				createPropertyOptionsModel.Type = core.StringPtr("BOOLEAN")
-				createPropertyOptionsModel.Value = core.StringPtr("true")
+				createPropertyOptionsModel.Value = "true"
 				createPropertyOptionsModel.Description = core.StringPtr("Property for email")
 				createPropertyOptionsModel.Format = core.StringPtr("TEXT")
 				createPropertyOptionsModel.Tags = core.StringPtr("version: 1.1, pre-release")
@@ -5263,7 +5264,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				// Construct an instance of the SegmentRule model
 				segmentRuleModel := new(appconfigurationv1.SegmentRule)
 				segmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
-				segmentRuleModel.Value = core.StringPtr("true")
+				segmentRuleModel.Value = "true"
 				segmentRuleModel.Order = core.Int64Ptr(int64(1))
 
 				// Construct an instance of the CollectionRef model
@@ -5276,7 +5277,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				createPropertyOptionsModel.Name = core.StringPtr("Email property")
 				createPropertyOptionsModel.PropertyID = core.StringPtr("email-property")
 				createPropertyOptionsModel.Type = core.StringPtr("BOOLEAN")
-				createPropertyOptionsModel.Value = core.StringPtr("true")
+				createPropertyOptionsModel.Value = "true"
 				createPropertyOptionsModel.Description = core.StringPtr("Property for email")
 				createPropertyOptionsModel.Format = core.StringPtr("TEXT")
 				createPropertyOptionsModel.Tags = core.StringPtr("version: 1.1, pre-release")
@@ -5327,7 +5328,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				// Construct an instance of the SegmentRule model
 				segmentRuleModel := new(appconfigurationv1.SegmentRule)
 				segmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
-				segmentRuleModel.Value = core.StringPtr("true")
+				segmentRuleModel.Value = "true"
 				segmentRuleModel.Order = core.Int64Ptr(int64(1))
 
 				// Construct an instance of the CollectionRef model
@@ -5340,7 +5341,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				createPropertyOptionsModel.Name = core.StringPtr("Email property")
 				createPropertyOptionsModel.PropertyID = core.StringPtr("email-property")
 				createPropertyOptionsModel.Type = core.StringPtr("BOOLEAN")
-				createPropertyOptionsModel.Value = core.StringPtr("true")
+				createPropertyOptionsModel.Value = "true"
 				createPropertyOptionsModel.Description = core.StringPtr("Property for email")
 				createPropertyOptionsModel.Format = core.StringPtr("TEXT")
 				createPropertyOptionsModel.Tags = core.StringPtr("version: 1.1, pre-release")
@@ -5391,7 +5392,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				// Construct an instance of the SegmentRule model
 				segmentRuleModel := new(appconfigurationv1.SegmentRule)
 				segmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
-				segmentRuleModel.Value = core.StringPtr("true")
+				segmentRuleModel.Value = "true"
 				segmentRuleModel.Order = core.Int64Ptr(int64(1))
 
 				// Construct an instance of the CollectionRef model
@@ -5404,7 +5405,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				updatePropertyOptionsModel.PropertyID = core.StringPtr("property_id")
 				updatePropertyOptionsModel.Name = core.StringPtr("Email property")
 				updatePropertyOptionsModel.Description = core.StringPtr("Property for email")
-				updatePropertyOptionsModel.Value = core.StringPtr("true")
+				updatePropertyOptionsModel.Value = "true"
 				updatePropertyOptionsModel.Tags = core.StringPtr("version: 1.1, pre-release")
 				updatePropertyOptionsModel.SegmentRules = []appconfigurationv1.SegmentRule{*segmentRuleModel}
 				updatePropertyOptionsModel.Collections = []appconfigurationv1.CollectionRef{*collectionRefModel}
@@ -5479,7 +5480,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				// Construct an instance of the SegmentRule model
 				segmentRuleModel := new(appconfigurationv1.SegmentRule)
 				segmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
-				segmentRuleModel.Value = core.StringPtr("true")
+				segmentRuleModel.Value = "true"
 				segmentRuleModel.Order = core.Int64Ptr(int64(1))
 
 				// Construct an instance of the CollectionRef model
@@ -5492,7 +5493,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				updatePropertyOptionsModel.PropertyID = core.StringPtr("property_id")
 				updatePropertyOptionsModel.Name = core.StringPtr("Email property")
 				updatePropertyOptionsModel.Description = core.StringPtr("Property for email")
-				updatePropertyOptionsModel.Value = core.StringPtr("true")
+				updatePropertyOptionsModel.Value = "true"
 				updatePropertyOptionsModel.Tags = core.StringPtr("version: 1.1, pre-release")
 				updatePropertyOptionsModel.SegmentRules = []appconfigurationv1.SegmentRule{*segmentRuleModel}
 				updatePropertyOptionsModel.Collections = []appconfigurationv1.CollectionRef{*collectionRefModel}
@@ -5575,7 +5576,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				// Construct an instance of the SegmentRule model
 				segmentRuleModel := new(appconfigurationv1.SegmentRule)
 				segmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
-				segmentRuleModel.Value = core.StringPtr("true")
+				segmentRuleModel.Value = "true"
 				segmentRuleModel.Order = core.Int64Ptr(int64(1))
 
 				// Construct an instance of the CollectionRef model
@@ -5588,7 +5589,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				updatePropertyOptionsModel.PropertyID = core.StringPtr("property_id")
 				updatePropertyOptionsModel.Name = core.StringPtr("Email property")
 				updatePropertyOptionsModel.Description = core.StringPtr("Property for email")
-				updatePropertyOptionsModel.Value = core.StringPtr("true")
+				updatePropertyOptionsModel.Value = "true"
 				updatePropertyOptionsModel.Tags = core.StringPtr("version: 1.1, pre-release")
 				updatePropertyOptionsModel.SegmentRules = []appconfigurationv1.SegmentRule{*segmentRuleModel}
 				updatePropertyOptionsModel.Collections = []appconfigurationv1.CollectionRef{*collectionRefModel}
@@ -5616,7 +5617,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				// Construct an instance of the SegmentRule model
 				segmentRuleModel := new(appconfigurationv1.SegmentRule)
 				segmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
-				segmentRuleModel.Value = core.StringPtr("true")
+				segmentRuleModel.Value = "true"
 				segmentRuleModel.Order = core.Int64Ptr(int64(1))
 
 				// Construct an instance of the CollectionRef model
@@ -5629,7 +5630,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				updatePropertyOptionsModel.PropertyID = core.StringPtr("property_id")
 				updatePropertyOptionsModel.Name = core.StringPtr("Email property")
 				updatePropertyOptionsModel.Description = core.StringPtr("Property for email")
-				updatePropertyOptionsModel.Value = core.StringPtr("true")
+				updatePropertyOptionsModel.Value = "true"
 				updatePropertyOptionsModel.Tags = core.StringPtr("version: 1.1, pre-release")
 				updatePropertyOptionsModel.SegmentRules = []appconfigurationv1.SegmentRule{*segmentRuleModel}
 				updatePropertyOptionsModel.Collections = []appconfigurationv1.CollectionRef{*collectionRefModel}
@@ -5678,7 +5679,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				// Construct an instance of the SegmentRule model
 				segmentRuleModel := new(appconfigurationv1.SegmentRule)
 				segmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
-				segmentRuleModel.Value = core.StringPtr("true")
+				segmentRuleModel.Value = "true"
 				segmentRuleModel.Order = core.Int64Ptr(int64(1))
 
 				// Construct an instance of the CollectionRef model
@@ -5691,7 +5692,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				updatePropertyOptionsModel.PropertyID = core.StringPtr("property_id")
 				updatePropertyOptionsModel.Name = core.StringPtr("Email property")
 				updatePropertyOptionsModel.Description = core.StringPtr("Property for email")
-				updatePropertyOptionsModel.Value = core.StringPtr("true")
+				updatePropertyOptionsModel.Value = "true"
 				updatePropertyOptionsModel.Tags = core.StringPtr("version: 1.1, pre-release")
 				updatePropertyOptionsModel.SegmentRules = []appconfigurationv1.SegmentRule{*segmentRuleModel}
 				updatePropertyOptionsModel.Collections = []appconfigurationv1.CollectionRef{*collectionRefModel}
@@ -5740,7 +5741,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				// Construct an instance of the SegmentRule model
 				segmentRuleModel := new(appconfigurationv1.SegmentRule)
 				segmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
-				segmentRuleModel.Value = core.StringPtr("true")
+				segmentRuleModel.Value = "true"
 				segmentRuleModel.Order = core.Int64Ptr(int64(1))
 
 				// Construct an instance of the UpdatePropertyValuesOptions model
@@ -5750,7 +5751,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				updatePropertyValuesOptionsModel.Name = core.StringPtr("Email property")
 				updatePropertyValuesOptionsModel.Description = core.StringPtr("Property for email")
 				updatePropertyValuesOptionsModel.Tags = core.StringPtr("version: 1.1, pre-release")
-				updatePropertyValuesOptionsModel.Value = core.StringPtr("true")
+				updatePropertyValuesOptionsModel.Value = "true"
 				updatePropertyValuesOptionsModel.SegmentRules = []appconfigurationv1.SegmentRule{*segmentRuleModel}
 				updatePropertyValuesOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
@@ -5823,7 +5824,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				// Construct an instance of the SegmentRule model
 				segmentRuleModel := new(appconfigurationv1.SegmentRule)
 				segmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
-				segmentRuleModel.Value = core.StringPtr("true")
+				segmentRuleModel.Value = "true"
 				segmentRuleModel.Order = core.Int64Ptr(int64(1))
 
 				// Construct an instance of the UpdatePropertyValuesOptions model
@@ -5833,7 +5834,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				updatePropertyValuesOptionsModel.Name = core.StringPtr("Email property")
 				updatePropertyValuesOptionsModel.Description = core.StringPtr("Property for email")
 				updatePropertyValuesOptionsModel.Tags = core.StringPtr("version: 1.1, pre-release")
-				updatePropertyValuesOptionsModel.Value = core.StringPtr("true")
+				updatePropertyValuesOptionsModel.Value = "true"
 				updatePropertyValuesOptionsModel.SegmentRules = []appconfigurationv1.SegmentRule{*segmentRuleModel}
 				updatePropertyValuesOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
@@ -5914,7 +5915,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				// Construct an instance of the SegmentRule model
 				segmentRuleModel := new(appconfigurationv1.SegmentRule)
 				segmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
-				segmentRuleModel.Value = core.StringPtr("true")
+				segmentRuleModel.Value = "true"
 				segmentRuleModel.Order = core.Int64Ptr(int64(1))
 
 				// Construct an instance of the UpdatePropertyValuesOptions model
@@ -5924,7 +5925,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				updatePropertyValuesOptionsModel.Name = core.StringPtr("Email property")
 				updatePropertyValuesOptionsModel.Description = core.StringPtr("Property for email")
 				updatePropertyValuesOptionsModel.Tags = core.StringPtr("version: 1.1, pre-release")
-				updatePropertyValuesOptionsModel.Value = core.StringPtr("true")
+				updatePropertyValuesOptionsModel.Value = "true"
 				updatePropertyValuesOptionsModel.SegmentRules = []appconfigurationv1.SegmentRule{*segmentRuleModel}
 				updatePropertyValuesOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
@@ -5950,7 +5951,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				// Construct an instance of the SegmentRule model
 				segmentRuleModel := new(appconfigurationv1.SegmentRule)
 				segmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
-				segmentRuleModel.Value = core.StringPtr("true")
+				segmentRuleModel.Value = "true"
 				segmentRuleModel.Order = core.Int64Ptr(int64(1))
 
 				// Construct an instance of the UpdatePropertyValuesOptions model
@@ -5960,7 +5961,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				updatePropertyValuesOptionsModel.Name = core.StringPtr("Email property")
 				updatePropertyValuesOptionsModel.Description = core.StringPtr("Property for email")
 				updatePropertyValuesOptionsModel.Tags = core.StringPtr("version: 1.1, pre-release")
-				updatePropertyValuesOptionsModel.Value = core.StringPtr("true")
+				updatePropertyValuesOptionsModel.Value = "true"
 				updatePropertyValuesOptionsModel.SegmentRules = []appconfigurationv1.SegmentRule{*segmentRuleModel}
 				updatePropertyValuesOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
@@ -6007,7 +6008,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				// Construct an instance of the SegmentRule model
 				segmentRuleModel := new(appconfigurationv1.SegmentRule)
 				segmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
-				segmentRuleModel.Value = core.StringPtr("true")
+				segmentRuleModel.Value = "true"
 				segmentRuleModel.Order = core.Int64Ptr(int64(1))
 
 				// Construct an instance of the UpdatePropertyValuesOptions model
@@ -6017,7 +6018,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				updatePropertyValuesOptionsModel.Name = core.StringPtr("Email property")
 				updatePropertyValuesOptionsModel.Description = core.StringPtr("Property for email")
 				updatePropertyValuesOptionsModel.Tags = core.StringPtr("version: 1.1, pre-release")
-				updatePropertyValuesOptionsModel.Value = core.StringPtr("true")
+				updatePropertyValuesOptionsModel.Value = "true"
 				updatePropertyValuesOptionsModel.SegmentRules = []appconfigurationv1.SegmentRule{*segmentRuleModel}
 				updatePropertyValuesOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
@@ -9887,14 +9888,18 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				workflowCredentialsModel.ClientID = core.StringPtr("client id value")
 				workflowCredentialsModel.ClientSecret = core.StringPtr("clientsecret")
 
+				// Construct an instance of the CreateWorkflowconfigRequestWorkflowConfig model
+				createWorkflowconfigRequestModel := new(appconfigurationv1.CreateWorkflowconfigRequestWorkflowConfig)
+				createWorkflowconfigRequestModel.WorkflowURL = core.StringPtr("https://xxxxx.service-now.com")
+				createWorkflowconfigRequestModel.ApprovalGroupName = core.StringPtr("WorkflowCRApprovers")
+				createWorkflowconfigRequestModel.ApprovalExpiration = core.Int64Ptr(int64(10))
+				createWorkflowconfigRequestModel.WorkflowCredentials = workflowCredentialsModel
+				createWorkflowconfigRequestModel.Enabled = core.BoolPtr(true)
+
 				// Construct an instance of the CreateWorkflowconfigOptions model
 				createWorkflowconfigOptionsModel := new(appconfigurationv1.CreateWorkflowconfigOptions)
 				createWorkflowconfigOptionsModel.EnvironmentID = core.StringPtr("environment_id")
-				createWorkflowconfigOptionsModel.WorkflowURL = core.StringPtr("https://xxxxx.service-now.com")
-				createWorkflowconfigOptionsModel.ApprovalGroupName = core.StringPtr("WorkflowCRApprovers")
-				createWorkflowconfigOptionsModel.ApprovalExpiration = core.Int64Ptr(int64(10))
-				createWorkflowconfigOptionsModel.WorkflowCredentials = workflowCredentialsModel
-				createWorkflowconfigOptionsModel.Enabled = core.BoolPtr(true)
+				createWorkflowconfigOptionsModel.WorkflowConfig = createWorkflowconfigRequestModel
 				createWorkflowconfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
 				result, response, operationErr := appConfigurationService.CreateWorkflowconfig(createWorkflowconfigOptionsModel)
@@ -9966,14 +9971,18 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				workflowCredentialsModel.ClientID = core.StringPtr("client id value")
 				workflowCredentialsModel.ClientSecret = core.StringPtr("clientsecret")
 
+				// Construct an instance of the CreateWorkflowconfigRequestWorkflowConfig model
+				createWorkflowconfigRequestModel := new(appconfigurationv1.CreateWorkflowconfigRequestWorkflowConfig)
+				createWorkflowconfigRequestModel.WorkflowURL = core.StringPtr("https://xxxxx.service-now.com")
+				createWorkflowconfigRequestModel.ApprovalGroupName = core.StringPtr("WorkflowCRApprovers")
+				createWorkflowconfigRequestModel.ApprovalExpiration = core.Int64Ptr(int64(10))
+				createWorkflowconfigRequestModel.WorkflowCredentials = workflowCredentialsModel
+				createWorkflowconfigRequestModel.Enabled = core.BoolPtr(true)
+
 				// Construct an instance of the CreateWorkflowconfigOptions model
 				createWorkflowconfigOptionsModel := new(appconfigurationv1.CreateWorkflowconfigOptions)
 				createWorkflowconfigOptionsModel.EnvironmentID = core.StringPtr("environment_id")
-				createWorkflowconfigOptionsModel.WorkflowURL = core.StringPtr("https://xxxxx.service-now.com")
-				createWorkflowconfigOptionsModel.ApprovalGroupName = core.StringPtr("WorkflowCRApprovers")
-				createWorkflowconfigOptionsModel.ApprovalExpiration = core.Int64Ptr(int64(10))
-				createWorkflowconfigOptionsModel.WorkflowCredentials = workflowCredentialsModel
-				createWorkflowconfigOptionsModel.Enabled = core.BoolPtr(true)
+				createWorkflowconfigOptionsModel.WorkflowConfig = createWorkflowconfigRequestModel
 				createWorkflowconfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with a Context to test a timeout error
@@ -10053,14 +10062,18 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				workflowCredentialsModel.ClientID = core.StringPtr("client id value")
 				workflowCredentialsModel.ClientSecret = core.StringPtr("clientsecret")
 
+				// Construct an instance of the CreateWorkflowconfigRequestWorkflowConfig model
+				createWorkflowconfigRequestModel := new(appconfigurationv1.CreateWorkflowconfigRequestWorkflowConfig)
+				createWorkflowconfigRequestModel.WorkflowURL = core.StringPtr("https://xxxxx.service-now.com")
+				createWorkflowconfigRequestModel.ApprovalGroupName = core.StringPtr("WorkflowCRApprovers")
+				createWorkflowconfigRequestModel.ApprovalExpiration = core.Int64Ptr(int64(10))
+				createWorkflowconfigRequestModel.WorkflowCredentials = workflowCredentialsModel
+				createWorkflowconfigRequestModel.Enabled = core.BoolPtr(true)
+
 				// Construct an instance of the CreateWorkflowconfigOptions model
 				createWorkflowconfigOptionsModel := new(appconfigurationv1.CreateWorkflowconfigOptions)
 				createWorkflowconfigOptionsModel.EnvironmentID = core.StringPtr("environment_id")
-				createWorkflowconfigOptionsModel.WorkflowURL = core.StringPtr("https://xxxxx.service-now.com")
-				createWorkflowconfigOptionsModel.ApprovalGroupName = core.StringPtr("WorkflowCRApprovers")
-				createWorkflowconfigOptionsModel.ApprovalExpiration = core.Int64Ptr(int64(10))
-				createWorkflowconfigOptionsModel.WorkflowCredentials = workflowCredentialsModel
-				createWorkflowconfigOptionsModel.Enabled = core.BoolPtr(true)
+				createWorkflowconfigOptionsModel.WorkflowConfig = createWorkflowconfigRequestModel
 				createWorkflowconfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
@@ -10085,14 +10098,18 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				workflowCredentialsModel.ClientID = core.StringPtr("client id value")
 				workflowCredentialsModel.ClientSecret = core.StringPtr("clientsecret")
 
+				// Construct an instance of the CreateWorkflowconfigRequestWorkflowConfig model
+				createWorkflowconfigRequestModel := new(appconfigurationv1.CreateWorkflowconfigRequestWorkflowConfig)
+				createWorkflowconfigRequestModel.WorkflowURL = core.StringPtr("https://xxxxx.service-now.com")
+				createWorkflowconfigRequestModel.ApprovalGroupName = core.StringPtr("WorkflowCRApprovers")
+				createWorkflowconfigRequestModel.ApprovalExpiration = core.Int64Ptr(int64(10))
+				createWorkflowconfigRequestModel.WorkflowCredentials = workflowCredentialsModel
+				createWorkflowconfigRequestModel.Enabled = core.BoolPtr(true)
+
 				// Construct an instance of the CreateWorkflowconfigOptions model
 				createWorkflowconfigOptionsModel := new(appconfigurationv1.CreateWorkflowconfigOptions)
 				createWorkflowconfigOptionsModel.EnvironmentID = core.StringPtr("environment_id")
-				createWorkflowconfigOptionsModel.WorkflowURL = core.StringPtr("https://xxxxx.service-now.com")
-				createWorkflowconfigOptionsModel.ApprovalGroupName = core.StringPtr("WorkflowCRApprovers")
-				createWorkflowconfigOptionsModel.ApprovalExpiration = core.Int64Ptr(int64(10))
-				createWorkflowconfigOptionsModel.WorkflowCredentials = workflowCredentialsModel
-				createWorkflowconfigOptionsModel.Enabled = core.BoolPtr(true)
+				createWorkflowconfigOptionsModel.WorkflowConfig = createWorkflowconfigRequestModel
 				createWorkflowconfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := appConfigurationService.SetServiceURL("")
@@ -10138,14 +10155,18 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				workflowCredentialsModel.ClientID = core.StringPtr("client id value")
 				workflowCredentialsModel.ClientSecret = core.StringPtr("clientsecret")
 
+				// Construct an instance of the CreateWorkflowconfigRequestWorkflowConfig model
+				createWorkflowconfigRequestModel := new(appconfigurationv1.CreateWorkflowconfigRequestWorkflowConfig)
+				createWorkflowconfigRequestModel.WorkflowURL = core.StringPtr("https://xxxxx.service-now.com")
+				createWorkflowconfigRequestModel.ApprovalGroupName = core.StringPtr("WorkflowCRApprovers")
+				createWorkflowconfigRequestModel.ApprovalExpiration = core.Int64Ptr(int64(10))
+				createWorkflowconfigRequestModel.WorkflowCredentials = workflowCredentialsModel
+				createWorkflowconfigRequestModel.Enabled = core.BoolPtr(true)
+
 				// Construct an instance of the CreateWorkflowconfigOptions model
 				createWorkflowconfigOptionsModel := new(appconfigurationv1.CreateWorkflowconfigOptions)
 				createWorkflowconfigOptionsModel.EnvironmentID = core.StringPtr("environment_id")
-				createWorkflowconfigOptionsModel.WorkflowURL = core.StringPtr("https://xxxxx.service-now.com")
-				createWorkflowconfigOptionsModel.ApprovalGroupName = core.StringPtr("WorkflowCRApprovers")
-				createWorkflowconfigOptionsModel.ApprovalExpiration = core.Int64Ptr(int64(10))
-				createWorkflowconfigOptionsModel.WorkflowCredentials = workflowCredentialsModel
-				createWorkflowconfigOptionsModel.Enabled = core.BoolPtr(true)
+				createWorkflowconfigOptionsModel.WorkflowConfig = createWorkflowconfigRequestModel
 				createWorkflowconfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation
@@ -10186,19 +10207,23 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the WorkflowCredentials model
 				workflowCredentialsModel := new(appconfigurationv1.WorkflowCredentials)
-				workflowCredentialsModel.Username = core.StringPtr("admin")
-				workflowCredentialsModel.Password = core.StringPtr("testString")
-				workflowCredentialsModel.ClientID = core.StringPtr("f7b6379b55d08210f8ree233afc7256d")
-				workflowCredentialsModel.ClientSecret = core.StringPtr("testString")
+				workflowCredentialsModel.Username = core.StringPtr("user")
+				workflowCredentialsModel.Password = core.StringPtr("updated password")
+				workflowCredentialsModel.ClientID = core.StringPtr("client id value")
+				workflowCredentialsModel.ClientSecret = core.StringPtr("updated client secret")
+
+				// Construct an instance of the UpdateWorkflowconfigRequestUpdateWorkflowConfig model
+				updateWorkflowconfigRequestModel := new(appconfigurationv1.UpdateWorkflowconfigRequestUpdateWorkflowConfig)
+				updateWorkflowconfigRequestModel.WorkflowURL = core.StringPtr("https://xxxxx.service-now.com")
+				updateWorkflowconfigRequestModel.ApprovalGroupName = core.StringPtr("WorkflowCRApprovers")
+				updateWorkflowconfigRequestModel.ApprovalExpiration = core.Int64Ptr(int64(5))
+				updateWorkflowconfigRequestModel.WorkflowCredentials = workflowCredentialsModel
+				updateWorkflowconfigRequestModel.Enabled = core.BoolPtr(true)
 
 				// Construct an instance of the UpdateWorkflowconfigOptions model
 				updateWorkflowconfigOptionsModel := new(appconfigurationv1.UpdateWorkflowconfigOptions)
 				updateWorkflowconfigOptionsModel.EnvironmentID = core.StringPtr("environment_id")
-				updateWorkflowconfigOptionsModel.WorkflowURL = core.StringPtr("testString")
-				updateWorkflowconfigOptionsModel.ApprovalGroupName = core.StringPtr("testString")
-				updateWorkflowconfigOptionsModel.ApprovalExpiration = core.Int64Ptr(int64(1))
-				updateWorkflowconfigOptionsModel.WorkflowCredentials = workflowCredentialsModel
-				updateWorkflowconfigOptionsModel.Enabled = core.BoolPtr(false)
+				updateWorkflowconfigOptionsModel.UpdateWorkflowConfig = updateWorkflowconfigRequestModel
 				updateWorkflowconfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
 				result, response, operationErr := appConfigurationService.UpdateWorkflowconfig(updateWorkflowconfigOptionsModel)
@@ -10265,19 +10290,23 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the WorkflowCredentials model
 				workflowCredentialsModel := new(appconfigurationv1.WorkflowCredentials)
-				workflowCredentialsModel.Username = core.StringPtr("admin")
-				workflowCredentialsModel.Password = core.StringPtr("testString")
-				workflowCredentialsModel.ClientID = core.StringPtr("f7b6379b55d08210f8ree233afc7256d")
-				workflowCredentialsModel.ClientSecret = core.StringPtr("testString")
+				workflowCredentialsModel.Username = core.StringPtr("user")
+				workflowCredentialsModel.Password = core.StringPtr("updated password")
+				workflowCredentialsModel.ClientID = core.StringPtr("client id value")
+				workflowCredentialsModel.ClientSecret = core.StringPtr("updated client secret")
+
+				// Construct an instance of the UpdateWorkflowconfigRequestUpdateWorkflowConfig model
+				updateWorkflowconfigRequestModel := new(appconfigurationv1.UpdateWorkflowconfigRequestUpdateWorkflowConfig)
+				updateWorkflowconfigRequestModel.WorkflowURL = core.StringPtr("https://xxxxx.service-now.com")
+				updateWorkflowconfigRequestModel.ApprovalGroupName = core.StringPtr("WorkflowCRApprovers")
+				updateWorkflowconfigRequestModel.ApprovalExpiration = core.Int64Ptr(int64(5))
+				updateWorkflowconfigRequestModel.WorkflowCredentials = workflowCredentialsModel
+				updateWorkflowconfigRequestModel.Enabled = core.BoolPtr(true)
 
 				// Construct an instance of the UpdateWorkflowconfigOptions model
 				updateWorkflowconfigOptionsModel := new(appconfigurationv1.UpdateWorkflowconfigOptions)
 				updateWorkflowconfigOptionsModel.EnvironmentID = core.StringPtr("environment_id")
-				updateWorkflowconfigOptionsModel.WorkflowURL = core.StringPtr("testString")
-				updateWorkflowconfigOptionsModel.ApprovalGroupName = core.StringPtr("testString")
-				updateWorkflowconfigOptionsModel.ApprovalExpiration = core.Int64Ptr(int64(1))
-				updateWorkflowconfigOptionsModel.WorkflowCredentials = workflowCredentialsModel
-				updateWorkflowconfigOptionsModel.Enabled = core.BoolPtr(false)
+				updateWorkflowconfigOptionsModel.UpdateWorkflowConfig = updateWorkflowconfigRequestModel
 				updateWorkflowconfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with a Context to test a timeout error
@@ -10352,19 +10381,23 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the WorkflowCredentials model
 				workflowCredentialsModel := new(appconfigurationv1.WorkflowCredentials)
-				workflowCredentialsModel.Username = core.StringPtr("admin")
-				workflowCredentialsModel.Password = core.StringPtr("testString")
-				workflowCredentialsModel.ClientID = core.StringPtr("f7b6379b55d08210f8ree233afc7256d")
-				workflowCredentialsModel.ClientSecret = core.StringPtr("testString")
+				workflowCredentialsModel.Username = core.StringPtr("user")
+				workflowCredentialsModel.Password = core.StringPtr("updated password")
+				workflowCredentialsModel.ClientID = core.StringPtr("client id value")
+				workflowCredentialsModel.ClientSecret = core.StringPtr("updated client secret")
+
+				// Construct an instance of the UpdateWorkflowconfigRequestUpdateWorkflowConfig model
+				updateWorkflowconfigRequestModel := new(appconfigurationv1.UpdateWorkflowconfigRequestUpdateWorkflowConfig)
+				updateWorkflowconfigRequestModel.WorkflowURL = core.StringPtr("https://xxxxx.service-now.com")
+				updateWorkflowconfigRequestModel.ApprovalGroupName = core.StringPtr("WorkflowCRApprovers")
+				updateWorkflowconfigRequestModel.ApprovalExpiration = core.Int64Ptr(int64(5))
+				updateWorkflowconfigRequestModel.WorkflowCredentials = workflowCredentialsModel
+				updateWorkflowconfigRequestModel.Enabled = core.BoolPtr(true)
 
 				// Construct an instance of the UpdateWorkflowconfigOptions model
 				updateWorkflowconfigOptionsModel := new(appconfigurationv1.UpdateWorkflowconfigOptions)
 				updateWorkflowconfigOptionsModel.EnvironmentID = core.StringPtr("environment_id")
-				updateWorkflowconfigOptionsModel.WorkflowURL = core.StringPtr("testString")
-				updateWorkflowconfigOptionsModel.ApprovalGroupName = core.StringPtr("testString")
-				updateWorkflowconfigOptionsModel.ApprovalExpiration = core.Int64Ptr(int64(1))
-				updateWorkflowconfigOptionsModel.WorkflowCredentials = workflowCredentialsModel
-				updateWorkflowconfigOptionsModel.Enabled = core.BoolPtr(false)
+				updateWorkflowconfigOptionsModel.UpdateWorkflowConfig = updateWorkflowconfigRequestModel
 				updateWorkflowconfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
@@ -10384,19 +10417,23 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the WorkflowCredentials model
 				workflowCredentialsModel := new(appconfigurationv1.WorkflowCredentials)
-				workflowCredentialsModel.Username = core.StringPtr("admin")
-				workflowCredentialsModel.Password = core.StringPtr("testString")
-				workflowCredentialsModel.ClientID = core.StringPtr("f7b6379b55d08210f8ree233afc7256d")
-				workflowCredentialsModel.ClientSecret = core.StringPtr("testString")
+				workflowCredentialsModel.Username = core.StringPtr("user")
+				workflowCredentialsModel.Password = core.StringPtr("updated password")
+				workflowCredentialsModel.ClientID = core.StringPtr("client id value")
+				workflowCredentialsModel.ClientSecret = core.StringPtr("updated client secret")
+
+				// Construct an instance of the UpdateWorkflowconfigRequestUpdateWorkflowConfig model
+				updateWorkflowconfigRequestModel := new(appconfigurationv1.UpdateWorkflowconfigRequestUpdateWorkflowConfig)
+				updateWorkflowconfigRequestModel.WorkflowURL = core.StringPtr("https://xxxxx.service-now.com")
+				updateWorkflowconfigRequestModel.ApprovalGroupName = core.StringPtr("WorkflowCRApprovers")
+				updateWorkflowconfigRequestModel.ApprovalExpiration = core.Int64Ptr(int64(5))
+				updateWorkflowconfigRequestModel.WorkflowCredentials = workflowCredentialsModel
+				updateWorkflowconfigRequestModel.Enabled = core.BoolPtr(true)
 
 				// Construct an instance of the UpdateWorkflowconfigOptions model
 				updateWorkflowconfigOptionsModel := new(appconfigurationv1.UpdateWorkflowconfigOptions)
 				updateWorkflowconfigOptionsModel.EnvironmentID = core.StringPtr("environment_id")
-				updateWorkflowconfigOptionsModel.WorkflowURL = core.StringPtr("testString")
-				updateWorkflowconfigOptionsModel.ApprovalGroupName = core.StringPtr("testString")
-				updateWorkflowconfigOptionsModel.ApprovalExpiration = core.Int64Ptr(int64(1))
-				updateWorkflowconfigOptionsModel.WorkflowCredentials = workflowCredentialsModel
-				updateWorkflowconfigOptionsModel.Enabled = core.BoolPtr(false)
+				updateWorkflowconfigOptionsModel.UpdateWorkflowConfig = updateWorkflowconfigRequestModel
 				updateWorkflowconfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := appConfigurationService.SetServiceURL("")
@@ -10437,19 +10474,23 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Construct an instance of the WorkflowCredentials model
 				workflowCredentialsModel := new(appconfigurationv1.WorkflowCredentials)
-				workflowCredentialsModel.Username = core.StringPtr("admin")
-				workflowCredentialsModel.Password = core.StringPtr("testString")
-				workflowCredentialsModel.ClientID = core.StringPtr("f7b6379b55d08210f8ree233afc7256d")
-				workflowCredentialsModel.ClientSecret = core.StringPtr("testString")
+				workflowCredentialsModel.Username = core.StringPtr("user")
+				workflowCredentialsModel.Password = core.StringPtr("updated password")
+				workflowCredentialsModel.ClientID = core.StringPtr("client id value")
+				workflowCredentialsModel.ClientSecret = core.StringPtr("updated client secret")
+
+				// Construct an instance of the UpdateWorkflowconfigRequestUpdateWorkflowConfig model
+				updateWorkflowconfigRequestModel := new(appconfigurationv1.UpdateWorkflowconfigRequestUpdateWorkflowConfig)
+				updateWorkflowconfigRequestModel.WorkflowURL = core.StringPtr("https://xxxxx.service-now.com")
+				updateWorkflowconfigRequestModel.ApprovalGroupName = core.StringPtr("WorkflowCRApprovers")
+				updateWorkflowconfigRequestModel.ApprovalExpiration = core.Int64Ptr(int64(5))
+				updateWorkflowconfigRequestModel.WorkflowCredentials = workflowCredentialsModel
+				updateWorkflowconfigRequestModel.Enabled = core.BoolPtr(true)
 
 				// Construct an instance of the UpdateWorkflowconfigOptions model
 				updateWorkflowconfigOptionsModel := new(appconfigurationv1.UpdateWorkflowconfigOptions)
 				updateWorkflowconfigOptionsModel.EnvironmentID = core.StringPtr("environment_id")
-				updateWorkflowconfigOptionsModel.WorkflowURL = core.StringPtr("testString")
-				updateWorkflowconfigOptionsModel.ApprovalGroupName = core.StringPtr("testString")
-				updateWorkflowconfigOptionsModel.ApprovalExpiration = core.Int64Ptr(int64(1))
-				updateWorkflowconfigOptionsModel.WorkflowCredentials = workflowCredentialsModel
-				updateWorkflowconfigOptionsModel.Enabled = core.BoolPtr(false)
+				updateWorkflowconfigOptionsModel.UpdateWorkflowConfig = updateWorkflowconfigRequestModel
 				updateWorkflowconfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation
@@ -10564,7 +10605,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				// Construct an instance of the FeatureSegmentRule model
 				featureSegmentRuleModel := new(appconfigurationv1.FeatureSegmentRule)
 				featureSegmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
-				featureSegmentRuleModel.Value = core.StringPtr("testString")
+				featureSegmentRuleModel.Value = "testString"
 				featureSegmentRuleModel.Order = core.Int64Ptr(int64(38))
 				featureSegmentRuleModel.RolloutPercentage = core.Int64Ptr(int64(100))
 
@@ -10579,8 +10620,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				importFeatureRequestBodyModel.Description = core.StringPtr("testString")
 				importFeatureRequestBodyModel.Type = core.StringPtr("NUMERIC")
 				importFeatureRequestBodyModel.Format = core.StringPtr("TEXT")
-				importFeatureRequestBodyModel.EnabledValue = core.StringPtr("1")
-				importFeatureRequestBodyModel.DisabledValue = core.StringPtr("2")
+				importFeatureRequestBodyModel.EnabledValue = "1"
+				importFeatureRequestBodyModel.DisabledValue = "2"
 				importFeatureRequestBodyModel.Enabled = core.BoolPtr(true)
 				importFeatureRequestBodyModel.RolloutPercentage = core.Int64Ptr(int64(100))
 				importFeatureRequestBodyModel.Tags = core.StringPtr("testString")
@@ -10591,7 +10632,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				// Construct an instance of the SegmentRule model
 				segmentRuleModel := new(appconfigurationv1.SegmentRule)
 				segmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
-				segmentRuleModel.Value = core.StringPtr("200")
+				segmentRuleModel.Value = "200"
 				segmentRuleModel.Order = core.Int64Ptr(int64(1))
 
 				// Construct an instance of the ImportPropertyRequestBody model
@@ -10601,7 +10642,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				importPropertyRequestBodyModel.Description = core.StringPtr("testString")
 				importPropertyRequestBodyModel.Type = core.StringPtr("NUMERIC")
 				importPropertyRequestBodyModel.Format = core.StringPtr("TEXT")
-				importPropertyRequestBodyModel.Value = core.StringPtr("100")
+				importPropertyRequestBodyModel.Value = "100"
 				importPropertyRequestBodyModel.Tags = core.StringPtr("pre-release, v1.2")
 				importPropertyRequestBodyModel.SegmentRules = []appconfigurationv1.SegmentRule{*segmentRuleModel}
 				importPropertyRequestBodyModel.Collections = []appconfigurationv1.CollectionRef{*collectionRefModel}
@@ -10716,7 +10757,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				// Construct an instance of the FeatureSegmentRule model
 				featureSegmentRuleModel := new(appconfigurationv1.FeatureSegmentRule)
 				featureSegmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
-				featureSegmentRuleModel.Value = core.StringPtr("testString")
+				featureSegmentRuleModel.Value = "testString"
 				featureSegmentRuleModel.Order = core.Int64Ptr(int64(38))
 				featureSegmentRuleModel.RolloutPercentage = core.Int64Ptr(int64(100))
 
@@ -10731,8 +10772,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				importFeatureRequestBodyModel.Description = core.StringPtr("testString")
 				importFeatureRequestBodyModel.Type = core.StringPtr("NUMERIC")
 				importFeatureRequestBodyModel.Format = core.StringPtr("TEXT")
-				importFeatureRequestBodyModel.EnabledValue = core.StringPtr("1")
-				importFeatureRequestBodyModel.DisabledValue = core.StringPtr("2")
+				importFeatureRequestBodyModel.EnabledValue = "1"
+				importFeatureRequestBodyModel.DisabledValue = "2"
 				importFeatureRequestBodyModel.Enabled = core.BoolPtr(true)
 				importFeatureRequestBodyModel.RolloutPercentage = core.Int64Ptr(int64(100))
 				importFeatureRequestBodyModel.Tags = core.StringPtr("testString")
@@ -10743,7 +10784,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				// Construct an instance of the SegmentRule model
 				segmentRuleModel := new(appconfigurationv1.SegmentRule)
 				segmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
-				segmentRuleModel.Value = core.StringPtr("200")
+				segmentRuleModel.Value = "200"
 				segmentRuleModel.Order = core.Int64Ptr(int64(1))
 
 				// Construct an instance of the ImportPropertyRequestBody model
@@ -10753,7 +10794,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				importPropertyRequestBodyModel.Description = core.StringPtr("testString")
 				importPropertyRequestBodyModel.Type = core.StringPtr("NUMERIC")
 				importPropertyRequestBodyModel.Format = core.StringPtr("TEXT")
-				importPropertyRequestBodyModel.Value = core.StringPtr("100")
+				importPropertyRequestBodyModel.Value = "100"
 				importPropertyRequestBodyModel.Tags = core.StringPtr("pre-release, v1.2")
 				importPropertyRequestBodyModel.SegmentRules = []appconfigurationv1.SegmentRule{*segmentRuleModel}
 				importPropertyRequestBodyModel.Collections = []appconfigurationv1.CollectionRef{*collectionRefModel}
@@ -10876,7 +10917,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				// Construct an instance of the FeatureSegmentRule model
 				featureSegmentRuleModel := new(appconfigurationv1.FeatureSegmentRule)
 				featureSegmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
-				featureSegmentRuleModel.Value = core.StringPtr("testString")
+				featureSegmentRuleModel.Value = "testString"
 				featureSegmentRuleModel.Order = core.Int64Ptr(int64(38))
 				featureSegmentRuleModel.RolloutPercentage = core.Int64Ptr(int64(100))
 
@@ -10891,8 +10932,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				importFeatureRequestBodyModel.Description = core.StringPtr("testString")
 				importFeatureRequestBodyModel.Type = core.StringPtr("NUMERIC")
 				importFeatureRequestBodyModel.Format = core.StringPtr("TEXT")
-				importFeatureRequestBodyModel.EnabledValue = core.StringPtr("1")
-				importFeatureRequestBodyModel.DisabledValue = core.StringPtr("2")
+				importFeatureRequestBodyModel.EnabledValue = "1"
+				importFeatureRequestBodyModel.DisabledValue = "2"
 				importFeatureRequestBodyModel.Enabled = core.BoolPtr(true)
 				importFeatureRequestBodyModel.RolloutPercentage = core.Int64Ptr(int64(100))
 				importFeatureRequestBodyModel.Tags = core.StringPtr("testString")
@@ -10903,7 +10944,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				// Construct an instance of the SegmentRule model
 				segmentRuleModel := new(appconfigurationv1.SegmentRule)
 				segmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
-				segmentRuleModel.Value = core.StringPtr("200")
+				segmentRuleModel.Value = "200"
 				segmentRuleModel.Order = core.Int64Ptr(int64(1))
 
 				// Construct an instance of the ImportPropertyRequestBody model
@@ -10913,7 +10954,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				importPropertyRequestBodyModel.Description = core.StringPtr("testString")
 				importPropertyRequestBodyModel.Type = core.StringPtr("NUMERIC")
 				importPropertyRequestBodyModel.Format = core.StringPtr("TEXT")
-				importPropertyRequestBodyModel.Value = core.StringPtr("100")
+				importPropertyRequestBodyModel.Value = "100"
 				importPropertyRequestBodyModel.Tags = core.StringPtr("pre-release, v1.2")
 				importPropertyRequestBodyModel.SegmentRules = []appconfigurationv1.SegmentRule{*segmentRuleModel}
 				importPropertyRequestBodyModel.Collections = []appconfigurationv1.CollectionRef{*collectionRefModel}
@@ -10980,7 +11021,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				// Construct an instance of the FeatureSegmentRule model
 				featureSegmentRuleModel := new(appconfigurationv1.FeatureSegmentRule)
 				featureSegmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
-				featureSegmentRuleModel.Value = core.StringPtr("testString")
+				featureSegmentRuleModel.Value = "testString"
 				featureSegmentRuleModel.Order = core.Int64Ptr(int64(38))
 				featureSegmentRuleModel.RolloutPercentage = core.Int64Ptr(int64(100))
 
@@ -10995,8 +11036,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				importFeatureRequestBodyModel.Description = core.StringPtr("testString")
 				importFeatureRequestBodyModel.Type = core.StringPtr("NUMERIC")
 				importFeatureRequestBodyModel.Format = core.StringPtr("TEXT")
-				importFeatureRequestBodyModel.EnabledValue = core.StringPtr("1")
-				importFeatureRequestBodyModel.DisabledValue = core.StringPtr("2")
+				importFeatureRequestBodyModel.EnabledValue = "1"
+				importFeatureRequestBodyModel.DisabledValue = "2"
 				importFeatureRequestBodyModel.Enabled = core.BoolPtr(true)
 				importFeatureRequestBodyModel.RolloutPercentage = core.Int64Ptr(int64(100))
 				importFeatureRequestBodyModel.Tags = core.StringPtr("testString")
@@ -11007,7 +11048,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				// Construct an instance of the SegmentRule model
 				segmentRuleModel := new(appconfigurationv1.SegmentRule)
 				segmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
-				segmentRuleModel.Value = core.StringPtr("200")
+				segmentRuleModel.Value = "200"
 				segmentRuleModel.Order = core.Int64Ptr(int64(1))
 
 				// Construct an instance of the ImportPropertyRequestBody model
@@ -11017,7 +11058,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				importPropertyRequestBodyModel.Description = core.StringPtr("testString")
 				importPropertyRequestBodyModel.Type = core.StringPtr("NUMERIC")
 				importPropertyRequestBodyModel.Format = core.StringPtr("TEXT")
-				importPropertyRequestBodyModel.Value = core.StringPtr("100")
+				importPropertyRequestBodyModel.Value = "100"
 				importPropertyRequestBodyModel.Tags = core.StringPtr("pre-release, v1.2")
 				importPropertyRequestBodyModel.SegmentRules = []appconfigurationv1.SegmentRule{*segmentRuleModel}
 				importPropertyRequestBodyModel.Collections = []appconfigurationv1.CollectionRef{*collectionRefModel}
@@ -11098,7 +11139,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				// Construct an instance of the FeatureSegmentRule model
 				featureSegmentRuleModel := new(appconfigurationv1.FeatureSegmentRule)
 				featureSegmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
-				featureSegmentRuleModel.Value = core.StringPtr("testString")
+				featureSegmentRuleModel.Value = "testString"
 				featureSegmentRuleModel.Order = core.Int64Ptr(int64(38))
 				featureSegmentRuleModel.RolloutPercentage = core.Int64Ptr(int64(100))
 
@@ -11113,8 +11154,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				importFeatureRequestBodyModel.Description = core.StringPtr("testString")
 				importFeatureRequestBodyModel.Type = core.StringPtr("NUMERIC")
 				importFeatureRequestBodyModel.Format = core.StringPtr("TEXT")
-				importFeatureRequestBodyModel.EnabledValue = core.StringPtr("1")
-				importFeatureRequestBodyModel.DisabledValue = core.StringPtr("2")
+				importFeatureRequestBodyModel.EnabledValue = "1"
+				importFeatureRequestBodyModel.DisabledValue = "2"
 				importFeatureRequestBodyModel.Enabled = core.BoolPtr(true)
 				importFeatureRequestBodyModel.RolloutPercentage = core.Int64Ptr(int64(100))
 				importFeatureRequestBodyModel.Tags = core.StringPtr("testString")
@@ -11125,7 +11166,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				// Construct an instance of the SegmentRule model
 				segmentRuleModel := new(appconfigurationv1.SegmentRule)
 				segmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
-				segmentRuleModel.Value = core.StringPtr("200")
+				segmentRuleModel.Value = "200"
 				segmentRuleModel.Order = core.Int64Ptr(int64(1))
 
 				// Construct an instance of the ImportPropertyRequestBody model
@@ -11135,7 +11176,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				importPropertyRequestBodyModel.Description = core.StringPtr("testString")
 				importPropertyRequestBodyModel.Type = core.StringPtr("NUMERIC")
 				importPropertyRequestBodyModel.Format = core.StringPtr("TEXT")
-				importPropertyRequestBodyModel.Value = core.StringPtr("100")
+				importPropertyRequestBodyModel.Value = "100"
 				importPropertyRequestBodyModel.Tags = core.StringPtr("pre-release, v1.2")
 				importPropertyRequestBodyModel.SegmentRules = []appconfigurationv1.SegmentRule{*segmentRuleModel}
 				importPropertyRequestBodyModel.Collections = []appconfigurationv1.CollectionRef{*collectionRefModel}
@@ -11682,11 +11723,11 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				featureSegmentRuleModel := new(appconfigurationv1.FeatureSegmentRule)
 				Expect(featureSegmentRuleModel).ToNot(BeNil())
 				featureSegmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
-				featureSegmentRuleModel.Value = core.StringPtr("true")
+				featureSegmentRuleModel.Value = "true"
 				featureSegmentRuleModel.Order = core.Int64Ptr(int64(1))
 				featureSegmentRuleModel.RolloutPercentage = core.Int64Ptr(int64(50))
 				Expect(featureSegmentRuleModel.Rules).To(Equal([]appconfigurationv1.TargetSegments{*targetSegmentsModel}))
-				Expect(featureSegmentRuleModel.Value).To(Equal(core.StringPtr("true")))
+				Expect(featureSegmentRuleModel.Value).To(Equal("true"))
 				Expect(featureSegmentRuleModel.Order).To(Equal(core.Int64Ptr(int64(1))))
 				Expect(featureSegmentRuleModel.RolloutPercentage).To(Equal(core.Int64Ptr(int64(50))))
 
@@ -11701,15 +11742,15 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				createFeatureOptionsName := "Cycle Rentals"
 				createFeatureOptionsFeatureID := "cycle-rentals"
 				createFeatureOptionsType := "BOOLEAN"
-				createFeatureOptionsEnabledValue := core.StringPtr("true")
-				createFeatureOptionsDisabledValue := core.StringPtr("false")
+				createFeatureOptionsEnabledValue := "true"
+				createFeatureOptionsDisabledValue := "false"
 				createFeatureOptionsModel := appConfigurationService.NewCreateFeatureOptions(environmentID, createFeatureOptionsName, createFeatureOptionsFeatureID, createFeatureOptionsType, createFeatureOptionsEnabledValue, createFeatureOptionsDisabledValue)
 				createFeatureOptionsModel.SetEnvironmentID("environment_id")
 				createFeatureOptionsModel.SetName("Cycle Rentals")
 				createFeatureOptionsModel.SetFeatureID("cycle-rentals")
 				createFeatureOptionsModel.SetType("BOOLEAN")
-				createFeatureOptionsModel.SetEnabledValue(core.StringPtr("true"))
-				createFeatureOptionsModel.SetDisabledValue(core.StringPtr("false"))
+				createFeatureOptionsModel.SetEnabledValue("true")
+				createFeatureOptionsModel.SetDisabledValue("false")
 				createFeatureOptionsModel.SetDescription("Feature flag to enable Cycle Rentals")
 				createFeatureOptionsModel.SetFormat("TEXT")
 				createFeatureOptionsModel.SetEnabled(true)
@@ -11723,8 +11764,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(createFeatureOptionsModel.Name).To(Equal(core.StringPtr("Cycle Rentals")))
 				Expect(createFeatureOptionsModel.FeatureID).To(Equal(core.StringPtr("cycle-rentals")))
 				Expect(createFeatureOptionsModel.Type).To(Equal(core.StringPtr("BOOLEAN")))
-				Expect(createFeatureOptionsModel.EnabledValue).To(Equal(core.StringPtr("true")))
-				Expect(createFeatureOptionsModel.DisabledValue).To(Equal(core.StringPtr("false")))
+				Expect(createFeatureOptionsModel.EnabledValue).To(Equal("true"))
+				Expect(createFeatureOptionsModel.DisabledValue).To(Equal("false"))
 				Expect(createFeatureOptionsModel.Description).To(Equal(core.StringPtr("Feature flag to enable Cycle Rentals")))
 				Expect(createFeatureOptionsModel.Format).To(Equal(core.StringPtr("TEXT")))
 				Expect(createFeatureOptionsModel.Enabled).To(Equal(core.BoolPtr(true)))
@@ -11776,10 +11817,10 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				segmentRuleModel := new(appconfigurationv1.SegmentRule)
 				Expect(segmentRuleModel).ToNot(BeNil())
 				segmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
-				segmentRuleModel.Value = core.StringPtr("true")
+				segmentRuleModel.Value = "true"
 				segmentRuleModel.Order = core.Int64Ptr(int64(1))
 				Expect(segmentRuleModel.Rules).To(Equal([]appconfigurationv1.TargetSegments{*targetSegmentsModel}))
-				Expect(segmentRuleModel.Value).To(Equal(core.StringPtr("true")))
+				Expect(segmentRuleModel.Value).To(Equal("true"))
 				Expect(segmentRuleModel.Order).To(Equal(core.Int64Ptr(int64(1))))
 
 				// Construct an instance of the CollectionRef model
@@ -11793,13 +11834,13 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				createPropertyOptionsName := "Email property"
 				createPropertyOptionsPropertyID := "email-property"
 				createPropertyOptionsType := "BOOLEAN"
-				createPropertyOptionsValue := core.StringPtr("true")
+				createPropertyOptionsValue := "true"
 				createPropertyOptionsModel := appConfigurationService.NewCreatePropertyOptions(environmentID, createPropertyOptionsName, createPropertyOptionsPropertyID, createPropertyOptionsType, createPropertyOptionsValue)
 				createPropertyOptionsModel.SetEnvironmentID("environment_id")
 				createPropertyOptionsModel.SetName("Email property")
 				createPropertyOptionsModel.SetPropertyID("email-property")
 				createPropertyOptionsModel.SetType("BOOLEAN")
-				createPropertyOptionsModel.SetValue(core.StringPtr("true"))
+				createPropertyOptionsModel.SetValue("true")
 				createPropertyOptionsModel.SetDescription("Property for email")
 				createPropertyOptionsModel.SetFormat("TEXT")
 				createPropertyOptionsModel.SetTags("version: 1.1, pre-release")
@@ -11811,7 +11852,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(createPropertyOptionsModel.Name).To(Equal(core.StringPtr("Email property")))
 				Expect(createPropertyOptionsModel.PropertyID).To(Equal(core.StringPtr("email-property")))
 				Expect(createPropertyOptionsModel.Type).To(Equal(core.StringPtr("BOOLEAN")))
-				Expect(createPropertyOptionsModel.Value).To(Equal(core.StringPtr("true")))
+				Expect(createPropertyOptionsModel.Value).To(Equal("true"))
 				Expect(createPropertyOptionsModel.Description).To(Equal(core.StringPtr("Property for email")))
 				Expect(createPropertyOptionsModel.Format).To(Equal(core.StringPtr("TEXT")))
 				Expect(createPropertyOptionsModel.Tags).To(Equal(core.StringPtr("version: 1.1, pre-release")))
@@ -11853,37 +11894,39 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				// Construct an instance of the WorkflowCredentials model
 				workflowCredentialsModel := new(appconfigurationv1.WorkflowCredentials)
 				Expect(workflowCredentialsModel).ToNot(BeNil())
-				workflowCredentialsModel.Username = core.StringPtr("user")
-				workflowCredentialsModel.Password = core.StringPtr("pwd")
-				workflowCredentialsModel.ClientID = core.StringPtr("client id value")
-				workflowCredentialsModel.ClientSecret = core.StringPtr("clientsecret")
-				Expect(workflowCredentialsModel.Username).To(Equal(core.StringPtr("user")))
-				Expect(workflowCredentialsModel.Password).To(Equal(core.StringPtr("pwd")))
-				Expect(workflowCredentialsModel.ClientID).To(Equal(core.StringPtr("client id value")))
-				Expect(workflowCredentialsModel.ClientSecret).To(Equal(core.StringPtr("clientsecret")))
+				workflowCredentialsModel.Username = core.StringPtr("admin")
+				workflowCredentialsModel.Password = core.StringPtr("testString")
+				workflowCredentialsModel.ClientID = core.StringPtr("f7b6379b55d08210f8ree233afc7256d")
+				workflowCredentialsModel.ClientSecret = core.StringPtr("testString")
+				Expect(workflowCredentialsModel.Username).To(Equal(core.StringPtr("admin")))
+				Expect(workflowCredentialsModel.Password).To(Equal(core.StringPtr("testString")))
+				Expect(workflowCredentialsModel.ClientID).To(Equal(core.StringPtr("f7b6379b55d08210f8ree233afc7256d")))
+				Expect(workflowCredentialsModel.ClientSecret).To(Equal(core.StringPtr("testString")))
+
+				// Construct an instance of the CreateWorkflowconfigRequestWorkflowConfig model
+				createWorkflowconfigRequestModel := new(appconfigurationv1.CreateWorkflowconfigRequestWorkflowConfig)
+				Expect(createWorkflowconfigRequestModel).ToNot(BeNil())
+				createWorkflowconfigRequestModel.WorkflowURL = core.StringPtr("testString")
+				createWorkflowconfigRequestModel.ApprovalGroupName = core.StringPtr("testString")
+				createWorkflowconfigRequestModel.ApprovalExpiration = core.Int64Ptr(int64(1))
+				createWorkflowconfigRequestModel.WorkflowCredentials = workflowCredentialsModel
+				createWorkflowconfigRequestModel.Enabled = core.BoolPtr(false)
+				Expect(createWorkflowconfigRequestModel.WorkflowURL).To(Equal(core.StringPtr("testString")))
+				Expect(createWorkflowconfigRequestModel.ApprovalGroupName).To(Equal(core.StringPtr("testString")))
+				Expect(createWorkflowconfigRequestModel.ApprovalExpiration).To(Equal(core.Int64Ptr(int64(1))))
+				Expect(createWorkflowconfigRequestModel.WorkflowCredentials).To(Equal(workflowCredentialsModel))
+				Expect(createWorkflowconfigRequestModel.Enabled).To(Equal(core.BoolPtr(false)))
 
 				// Construct an instance of the CreateWorkflowconfigOptions model
 				environmentID := "environment_id"
-				createWorkflowconfigOptionsWorkflowURL := "https://xxxxx.service-now.com"
-				createWorkflowconfigOptionsApprovalGroupName := "WorkflowCRApprovers"
-				createWorkflowconfigOptionsApprovalExpiration := int64(10)
-				var createWorkflowconfigOptionsWorkflowCredentials *appconfigurationv1.WorkflowCredentials = nil
-				createWorkflowconfigOptionsEnabled := true
-				createWorkflowconfigOptionsModel := appConfigurationService.NewCreateWorkflowconfigOptions(environmentID, createWorkflowconfigOptionsWorkflowURL, createWorkflowconfigOptionsApprovalGroupName, createWorkflowconfigOptionsApprovalExpiration, createWorkflowconfigOptionsWorkflowCredentials, createWorkflowconfigOptionsEnabled)
+				var workflowConfig appconfigurationv1.CreateWorkflowconfigRequestIntf = nil
+				createWorkflowconfigOptionsModel := appConfigurationService.NewCreateWorkflowconfigOptions(environmentID, workflowConfig)
 				createWorkflowconfigOptionsModel.SetEnvironmentID("environment_id")
-				createWorkflowconfigOptionsModel.SetWorkflowURL("https://xxxxx.service-now.com")
-				createWorkflowconfigOptionsModel.SetApprovalGroupName("WorkflowCRApprovers")
-				createWorkflowconfigOptionsModel.SetApprovalExpiration(int64(10))
-				createWorkflowconfigOptionsModel.SetWorkflowCredentials(workflowCredentialsModel)
-				createWorkflowconfigOptionsModel.SetEnabled(true)
+				createWorkflowconfigOptionsModel.SetWorkflowConfig(createWorkflowconfigRequestModel)
 				createWorkflowconfigOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(createWorkflowconfigOptionsModel).ToNot(BeNil())
 				Expect(createWorkflowconfigOptionsModel.EnvironmentID).To(Equal(core.StringPtr("environment_id")))
-				Expect(createWorkflowconfigOptionsModel.WorkflowURL).To(Equal(core.StringPtr("https://xxxxx.service-now.com")))
-				Expect(createWorkflowconfigOptionsModel.ApprovalGroupName).To(Equal(core.StringPtr("WorkflowCRApprovers")))
-				Expect(createWorkflowconfigOptionsModel.ApprovalExpiration).To(Equal(core.Int64Ptr(int64(10))))
-				Expect(createWorkflowconfigOptionsModel.WorkflowCredentials).To(Equal(workflowCredentialsModel))
-				Expect(createWorkflowconfigOptionsModel.Enabled).To(Equal(core.BoolPtr(true)))
+				Expect(createWorkflowconfigOptionsModel.WorkflowConfig).To(Equal(createWorkflowconfigRequestModel))
 				Expect(createWorkflowconfigOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewDeleteCollectionOptions successfully`, func() {
@@ -11978,7 +12021,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 			})
 			It(`Invoke NewFeatureSegmentRule successfully`, func() {
 				rules := []appconfigurationv1.TargetSegments{}
-				value := core.StringPtr("testString")
+				value := "testString"
 				order := int64(38)
 				_model, err := appConfigurationService.NewFeatureSegmentRule(rules, value, order)
 				Expect(_model).ToNot(BeNil())
@@ -12082,11 +12125,11 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				featureSegmentRuleModel := new(appconfigurationv1.FeatureSegmentRule)
 				Expect(featureSegmentRuleModel).ToNot(BeNil())
 				featureSegmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
-				featureSegmentRuleModel.Value = core.StringPtr("testString")
+				featureSegmentRuleModel.Value = "testString"
 				featureSegmentRuleModel.Order = core.Int64Ptr(int64(38))
 				featureSegmentRuleModel.RolloutPercentage = core.Int64Ptr(int64(100))
 				Expect(featureSegmentRuleModel.Rules).To(Equal([]appconfigurationv1.TargetSegments{*targetSegmentsModel}))
-				Expect(featureSegmentRuleModel.Value).To(Equal(core.StringPtr("testString")))
+				Expect(featureSegmentRuleModel.Value).To(Equal("testString"))
 				Expect(featureSegmentRuleModel.Order).To(Equal(core.Int64Ptr(int64(38))))
 				Expect(featureSegmentRuleModel.RolloutPercentage).To(Equal(core.Int64Ptr(int64(100))))
 
@@ -12104,8 +12147,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				importFeatureRequestBodyModel.Description = core.StringPtr("testString")
 				importFeatureRequestBodyModel.Type = core.StringPtr("NUMERIC")
 				importFeatureRequestBodyModel.Format = core.StringPtr("TEXT")
-				importFeatureRequestBodyModel.EnabledValue = core.StringPtr("1")
-				importFeatureRequestBodyModel.DisabledValue = core.StringPtr("2")
+				importFeatureRequestBodyModel.EnabledValue = "1"
+				importFeatureRequestBodyModel.DisabledValue = "2"
 				importFeatureRequestBodyModel.Enabled = core.BoolPtr(true)
 				importFeatureRequestBodyModel.RolloutPercentage = core.Int64Ptr(int64(100))
 				importFeatureRequestBodyModel.Tags = core.StringPtr("testString")
@@ -12117,8 +12160,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(importFeatureRequestBodyModel.Description).To(Equal(core.StringPtr("testString")))
 				Expect(importFeatureRequestBodyModel.Type).To(Equal(core.StringPtr("NUMERIC")))
 				Expect(importFeatureRequestBodyModel.Format).To(Equal(core.StringPtr("TEXT")))
-				Expect(importFeatureRequestBodyModel.EnabledValue).To(Equal(core.StringPtr("1")))
-				Expect(importFeatureRequestBodyModel.DisabledValue).To(Equal(core.StringPtr("2")))
+				Expect(importFeatureRequestBodyModel.EnabledValue).To(Equal("1"))
+				Expect(importFeatureRequestBodyModel.DisabledValue).To(Equal("2"))
 				Expect(importFeatureRequestBodyModel.Enabled).To(Equal(core.BoolPtr(true)))
 				Expect(importFeatureRequestBodyModel.RolloutPercentage).To(Equal(core.Int64Ptr(int64(100))))
 				Expect(importFeatureRequestBodyModel.Tags).To(Equal(core.StringPtr("testString")))
@@ -12130,10 +12173,10 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				segmentRuleModel := new(appconfigurationv1.SegmentRule)
 				Expect(segmentRuleModel).ToNot(BeNil())
 				segmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
-				segmentRuleModel.Value = core.StringPtr("200")
+				segmentRuleModel.Value = "200"
 				segmentRuleModel.Order = core.Int64Ptr(int64(1))
 				Expect(segmentRuleModel.Rules).To(Equal([]appconfigurationv1.TargetSegments{*targetSegmentsModel}))
-				Expect(segmentRuleModel.Value).To(Equal(core.StringPtr("200")))
+				Expect(segmentRuleModel.Value).To(Equal("200"))
 				Expect(segmentRuleModel.Order).To(Equal(core.Int64Ptr(int64(1))))
 
 				// Construct an instance of the ImportPropertyRequestBody model
@@ -12144,7 +12187,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				importPropertyRequestBodyModel.Description = core.StringPtr("testString")
 				importPropertyRequestBodyModel.Type = core.StringPtr("NUMERIC")
 				importPropertyRequestBodyModel.Format = core.StringPtr("TEXT")
-				importPropertyRequestBodyModel.Value = core.StringPtr("100")
+				importPropertyRequestBodyModel.Value = "100"
 				importPropertyRequestBodyModel.Tags = core.StringPtr("pre-release, v1.2")
 				importPropertyRequestBodyModel.SegmentRules = []appconfigurationv1.SegmentRule{*segmentRuleModel}
 				importPropertyRequestBodyModel.Collections = []appconfigurationv1.CollectionRef{*collectionRefModel}
@@ -12154,7 +12197,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(importPropertyRequestBodyModel.Description).To(Equal(core.StringPtr("testString")))
 				Expect(importPropertyRequestBodyModel.Type).To(Equal(core.StringPtr("NUMERIC")))
 				Expect(importPropertyRequestBodyModel.Format).To(Equal(core.StringPtr("TEXT")))
-				Expect(importPropertyRequestBodyModel.Value).To(Equal(core.StringPtr("100")))
+				Expect(importPropertyRequestBodyModel.Value).To(Equal("100"))
 				Expect(importPropertyRequestBodyModel.Tags).To(Equal(core.StringPtr("pre-release, v1.2")))
 				Expect(importPropertyRequestBodyModel.SegmentRules).To(Equal([]appconfigurationv1.SegmentRule{*segmentRuleModel}))
 				Expect(importPropertyRequestBodyModel.Collections).To(Equal([]appconfigurationv1.CollectionRef{*collectionRefModel}))
@@ -12239,8 +12282,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				name := "testString"
 				featureID := "testString"
 				typeVar := "BOOLEAN"
-				enabledValue := core.StringPtr("testString")
-				disabledValue := core.StringPtr("testString")
+				enabledValue := "testString"
+				disabledValue := "testString"
 				isOverridden := true
 				_model, err := appConfigurationService.NewImportFeatureRequestBody(name, featureID, typeVar, enabledValue, disabledValue, isOverridden)
 				Expect(_model).ToNot(BeNil())
@@ -12250,7 +12293,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				name := "testString"
 				propertyID := "testString"
 				typeVar := "BOOLEAN"
-				value := core.StringPtr("testString")
+				value := "testString"
 				isOverridden := true
 				_model, err := appConfigurationService.NewImportPropertyRequestBody(name, propertyID, typeVar, value, isOverridden)
 				Expect(_model).ToNot(BeNil())
@@ -12457,7 +12500,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				name := "testString"
 				propertyID := "testString"
 				typeVar := "BOOLEAN"
-				value := core.StringPtr("testString")
+				value := "testString"
 				_model, err := appConfigurationService.NewProperty(name, propertyID, typeVar, value)
 				Expect(_model).ToNot(BeNil())
 				Expect(err).To(BeNil())
@@ -12497,7 +12540,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 			})
 			It(`Invoke NewSegmentRule successfully`, func() {
 				rules := []appconfigurationv1.TargetSegments{}
-				value := core.StringPtr("testString")
+				value := "testString"
 				order := int64(38)
 				_model, err := appConfigurationService.NewSegmentRule(rules, value, order)
 				Expect(_model).ToNot(BeNil())
@@ -12577,11 +12620,11 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				featureSegmentRuleModel := new(appconfigurationv1.FeatureSegmentRule)
 				Expect(featureSegmentRuleModel).ToNot(BeNil())
 				featureSegmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
-				featureSegmentRuleModel.Value = core.StringPtr("true")
+				featureSegmentRuleModel.Value = "true"
 				featureSegmentRuleModel.Order = core.Int64Ptr(int64(1))
 				featureSegmentRuleModel.RolloutPercentage = core.Int64Ptr(int64(90))
 				Expect(featureSegmentRuleModel.Rules).To(Equal([]appconfigurationv1.TargetSegments{*targetSegmentsModel}))
-				Expect(featureSegmentRuleModel.Value).To(Equal(core.StringPtr("true")))
+				Expect(featureSegmentRuleModel.Value).To(Equal("true"))
 				Expect(featureSegmentRuleModel.Order).To(Equal(core.Int64Ptr(int64(1))))
 				Expect(featureSegmentRuleModel.RolloutPercentage).To(Equal(core.Int64Ptr(int64(90))))
 
@@ -12599,8 +12642,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				updateFeatureOptionsModel.SetFeatureID("feature_id")
 				updateFeatureOptionsModel.SetName("Cycle Rentals")
 				updateFeatureOptionsModel.SetDescription("Feature flags to enable Cycle Rentals")
-				updateFeatureOptionsModel.SetEnabledValue(core.StringPtr("true"))
-				updateFeatureOptionsModel.SetDisabledValue(core.StringPtr("false"))
+				updateFeatureOptionsModel.SetEnabledValue("true")
+				updateFeatureOptionsModel.SetDisabledValue("false")
 				updateFeatureOptionsModel.SetEnabled(true)
 				updateFeatureOptionsModel.SetRolloutPercentage(int64(100))
 				updateFeatureOptionsModel.SetTags("version: 1.1, yet-to-release")
@@ -12612,8 +12655,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(updateFeatureOptionsModel.FeatureID).To(Equal(core.StringPtr("feature_id")))
 				Expect(updateFeatureOptionsModel.Name).To(Equal(core.StringPtr("Cycle Rentals")))
 				Expect(updateFeatureOptionsModel.Description).To(Equal(core.StringPtr("Feature flags to enable Cycle Rentals")))
-				Expect(updateFeatureOptionsModel.EnabledValue).To(Equal(core.StringPtr("true")))
-				Expect(updateFeatureOptionsModel.DisabledValue).To(Equal(core.StringPtr("false")))
+				Expect(updateFeatureOptionsModel.EnabledValue).To(Equal("true"))
+				Expect(updateFeatureOptionsModel.DisabledValue).To(Equal("false"))
 				Expect(updateFeatureOptionsModel.Enabled).To(Equal(core.BoolPtr(true)))
 				Expect(updateFeatureOptionsModel.RolloutPercentage).To(Equal(core.Int64Ptr(int64(100))))
 				Expect(updateFeatureOptionsModel.Tags).To(Equal(core.StringPtr("version: 1.1, yet-to-release")))
@@ -12632,11 +12675,11 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				featureSegmentRuleModel := new(appconfigurationv1.FeatureSegmentRule)
 				Expect(featureSegmentRuleModel).ToNot(BeNil())
 				featureSegmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
-				featureSegmentRuleModel.Value = core.StringPtr("true")
+				featureSegmentRuleModel.Value = "true"
 				featureSegmentRuleModel.Order = core.Int64Ptr(int64(1))
 				featureSegmentRuleModel.RolloutPercentage = core.Int64Ptr(int64(100))
 				Expect(featureSegmentRuleModel.Rules).To(Equal([]appconfigurationv1.TargetSegments{*targetSegmentsModel}))
-				Expect(featureSegmentRuleModel.Value).To(Equal(core.StringPtr("true")))
+				Expect(featureSegmentRuleModel.Value).To(Equal("true"))
 				Expect(featureSegmentRuleModel.Order).To(Equal(core.Int64Ptr(int64(1))))
 				Expect(featureSegmentRuleModel.RolloutPercentage).To(Equal(core.Int64Ptr(int64(100))))
 
@@ -12649,8 +12692,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				updateFeatureValuesOptionsModel.SetName("Cycle Rentals")
 				updateFeatureValuesOptionsModel.SetDescription("Feature flags to enable Cycle Rentals")
 				updateFeatureValuesOptionsModel.SetTags("version: 1.1, yet-to-release")
-				updateFeatureValuesOptionsModel.SetEnabledValue(core.StringPtr("true"))
-				updateFeatureValuesOptionsModel.SetDisabledValue(core.StringPtr("false"))
+				updateFeatureValuesOptionsModel.SetEnabledValue("true")
+				updateFeatureValuesOptionsModel.SetDisabledValue("false")
 				updateFeatureValuesOptionsModel.SetRolloutPercentage(int64(100))
 				updateFeatureValuesOptionsModel.SetSegmentRules([]appconfigurationv1.FeatureSegmentRule{*featureSegmentRuleModel})
 				updateFeatureValuesOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
@@ -12660,8 +12703,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(updateFeatureValuesOptionsModel.Name).To(Equal(core.StringPtr("Cycle Rentals")))
 				Expect(updateFeatureValuesOptionsModel.Description).To(Equal(core.StringPtr("Feature flags to enable Cycle Rentals")))
 				Expect(updateFeatureValuesOptionsModel.Tags).To(Equal(core.StringPtr("version: 1.1, yet-to-release")))
-				Expect(updateFeatureValuesOptionsModel.EnabledValue).To(Equal(core.StringPtr("true")))
-				Expect(updateFeatureValuesOptionsModel.DisabledValue).To(Equal(core.StringPtr("false")))
+				Expect(updateFeatureValuesOptionsModel.EnabledValue).To(Equal("true"))
+				Expect(updateFeatureValuesOptionsModel.DisabledValue).To(Equal("false"))
 				Expect(updateFeatureValuesOptionsModel.RolloutPercentage).To(Equal(core.Int64Ptr(int64(100))))
 				Expect(updateFeatureValuesOptionsModel.SegmentRules).To(Equal([]appconfigurationv1.FeatureSegmentRule{*featureSegmentRuleModel}))
 				Expect(updateFeatureValuesOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
@@ -12711,10 +12754,10 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				segmentRuleModel := new(appconfigurationv1.SegmentRule)
 				Expect(segmentRuleModel).ToNot(BeNil())
 				segmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
-				segmentRuleModel.Value = core.StringPtr("true")
+				segmentRuleModel.Value = "true"
 				segmentRuleModel.Order = core.Int64Ptr(int64(1))
 				Expect(segmentRuleModel.Rules).To(Equal([]appconfigurationv1.TargetSegments{*targetSegmentsModel}))
-				Expect(segmentRuleModel.Value).To(Equal(core.StringPtr("true")))
+				Expect(segmentRuleModel.Value).To(Equal("true"))
 				Expect(segmentRuleModel.Order).To(Equal(core.Int64Ptr(int64(1))))
 
 				// Construct an instance of the CollectionRef model
@@ -12731,7 +12774,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				updatePropertyOptionsModel.SetPropertyID("property_id")
 				updatePropertyOptionsModel.SetName("Email property")
 				updatePropertyOptionsModel.SetDescription("Property for email")
-				updatePropertyOptionsModel.SetValue(core.StringPtr("true"))
+				updatePropertyOptionsModel.SetValue("true")
 				updatePropertyOptionsModel.SetTags("version: 1.1, pre-release")
 				updatePropertyOptionsModel.SetSegmentRules([]appconfigurationv1.SegmentRule{*segmentRuleModel})
 				updatePropertyOptionsModel.SetCollections([]appconfigurationv1.CollectionRef{*collectionRefModel})
@@ -12741,7 +12784,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(updatePropertyOptionsModel.PropertyID).To(Equal(core.StringPtr("property_id")))
 				Expect(updatePropertyOptionsModel.Name).To(Equal(core.StringPtr("Email property")))
 				Expect(updatePropertyOptionsModel.Description).To(Equal(core.StringPtr("Property for email")))
-				Expect(updatePropertyOptionsModel.Value).To(Equal(core.StringPtr("true")))
+				Expect(updatePropertyOptionsModel.Value).To(Equal("true"))
 				Expect(updatePropertyOptionsModel.Tags).To(Equal(core.StringPtr("version: 1.1, pre-release")))
 				Expect(updatePropertyOptionsModel.SegmentRules).To(Equal([]appconfigurationv1.SegmentRule{*segmentRuleModel}))
 				Expect(updatePropertyOptionsModel.Collections).To(Equal([]appconfigurationv1.CollectionRef{*collectionRefModel}))
@@ -12758,10 +12801,10 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				segmentRuleModel := new(appconfigurationv1.SegmentRule)
 				Expect(segmentRuleModel).ToNot(BeNil())
 				segmentRuleModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
-				segmentRuleModel.Value = core.StringPtr("true")
+				segmentRuleModel.Value = "true"
 				segmentRuleModel.Order = core.Int64Ptr(int64(1))
 				Expect(segmentRuleModel.Rules).To(Equal([]appconfigurationv1.TargetSegments{*targetSegmentsModel}))
-				Expect(segmentRuleModel.Value).To(Equal(core.StringPtr("true")))
+				Expect(segmentRuleModel.Value).To(Equal("true"))
 				Expect(segmentRuleModel.Order).To(Equal(core.Int64Ptr(int64(1))))
 
 				// Construct an instance of the UpdatePropertyValuesOptions model
@@ -12773,7 +12816,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				updatePropertyValuesOptionsModel.SetName("Email property")
 				updatePropertyValuesOptionsModel.SetDescription("Property for email")
 				updatePropertyValuesOptionsModel.SetTags("version: 1.1, pre-release")
-				updatePropertyValuesOptionsModel.SetValue(core.StringPtr("true"))
+				updatePropertyValuesOptionsModel.SetValue("true")
 				updatePropertyValuesOptionsModel.SetSegmentRules([]appconfigurationv1.SegmentRule{*segmentRuleModel})
 				updatePropertyValuesOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(updatePropertyValuesOptionsModel).ToNot(BeNil())
@@ -12782,7 +12825,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(updatePropertyValuesOptionsModel.Name).To(Equal(core.StringPtr("Email property")))
 				Expect(updatePropertyValuesOptionsModel.Description).To(Equal(core.StringPtr("Property for email")))
 				Expect(updatePropertyValuesOptionsModel.Tags).To(Equal(core.StringPtr("version: 1.1, pre-release")))
-				Expect(updatePropertyValuesOptionsModel.Value).To(Equal(core.StringPtr("true")))
+				Expect(updatePropertyValuesOptionsModel.Value).To(Equal("true"))
 				Expect(updatePropertyValuesOptionsModel.SegmentRules).To(Equal([]appconfigurationv1.SegmentRule{*segmentRuleModel}))
 				Expect(updatePropertyValuesOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
@@ -12827,33 +12870,31 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(workflowCredentialsModel.ClientID).To(Equal(core.StringPtr("f7b6379b55d08210f8ree233afc7256d")))
 				Expect(workflowCredentialsModel.ClientSecret).To(Equal(core.StringPtr("testString")))
 
+				// Construct an instance of the UpdateWorkflowconfigRequestUpdateWorkflowConfig model
+				updateWorkflowconfigRequestModel := new(appconfigurationv1.UpdateWorkflowconfigRequestUpdateWorkflowConfig)
+				Expect(updateWorkflowconfigRequestModel).ToNot(BeNil())
+				updateWorkflowconfigRequestModel.WorkflowURL = core.StringPtr("testString")
+				updateWorkflowconfigRequestModel.ApprovalGroupName = core.StringPtr("testString")
+				updateWorkflowconfigRequestModel.ApprovalExpiration = core.Int64Ptr(int64(1))
+				updateWorkflowconfigRequestModel.WorkflowCredentials = workflowCredentialsModel
+				updateWorkflowconfigRequestModel.Enabled = core.BoolPtr(false)
+				Expect(updateWorkflowconfigRequestModel.WorkflowURL).To(Equal(core.StringPtr("testString")))
+				Expect(updateWorkflowconfigRequestModel.ApprovalGroupName).To(Equal(core.StringPtr("testString")))
+				Expect(updateWorkflowconfigRequestModel.ApprovalExpiration).To(Equal(core.Int64Ptr(int64(1))))
+				Expect(updateWorkflowconfigRequestModel.WorkflowCredentials).To(Equal(workflowCredentialsModel))
+				Expect(updateWorkflowconfigRequestModel.Enabled).To(Equal(core.BoolPtr(false)))
+
 				// Construct an instance of the UpdateWorkflowconfigOptions model
 				environmentID := "environment_id"
-				updateWorkflowconfigOptionsModel := appConfigurationService.NewUpdateWorkflowconfigOptions(environmentID)
+				var updateWorkflowConfig appconfigurationv1.UpdateWorkflowconfigRequestIntf = nil
+				updateWorkflowconfigOptionsModel := appConfigurationService.NewUpdateWorkflowconfigOptions(environmentID, updateWorkflowConfig)
 				updateWorkflowconfigOptionsModel.SetEnvironmentID("environment_id")
-				updateWorkflowconfigOptionsModel.SetWorkflowURL("testString")
-				updateWorkflowconfigOptionsModel.SetApprovalGroupName("testString")
-				updateWorkflowconfigOptionsModel.SetApprovalExpiration(int64(1))
-				updateWorkflowconfigOptionsModel.SetWorkflowCredentials(workflowCredentialsModel)
-				updateWorkflowconfigOptionsModel.SetEnabled(false)
+				updateWorkflowconfigOptionsModel.SetUpdateWorkflowConfig(updateWorkflowconfigRequestModel)
 				updateWorkflowconfigOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(updateWorkflowconfigOptionsModel).ToNot(BeNil())
 				Expect(updateWorkflowconfigOptionsModel.EnvironmentID).To(Equal(core.StringPtr("environment_id")))
-				Expect(updateWorkflowconfigOptionsModel.WorkflowURL).To(Equal(core.StringPtr("testString")))
-				Expect(updateWorkflowconfigOptionsModel.ApprovalGroupName).To(Equal(core.StringPtr("testString")))
-				Expect(updateWorkflowconfigOptionsModel.ApprovalExpiration).To(Equal(core.Int64Ptr(int64(1))))
-				Expect(updateWorkflowconfigOptionsModel.WorkflowCredentials).To(Equal(workflowCredentialsModel))
-				Expect(updateWorkflowconfigOptionsModel.Enabled).To(Equal(core.BoolPtr(false)))
+				Expect(updateWorkflowconfigOptionsModel.UpdateWorkflowConfig).To(Equal(updateWorkflowconfigRequestModel))
 				Expect(updateWorkflowconfigOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
-			})
-			It(`Invoke NewWorkflowConfig successfully`, func() {
-				workflowURL := "testString"
-				approvalGroupName := "testString"
-				approvalExpiration := int64(1)
-				var workflowCredentials *appconfigurationv1.WorkflowCredentials = nil
-				enabled := false
-				_, err := appConfigurationService.NewWorkflowConfig(workflowURL, approvalGroupName, approvalExpiration, workflowCredentials, enabled)
-				Expect(err).ToNot(BeNil())
 			})
 			It(`Invoke NewWorkflowCredentials successfully`, func() {
 				username := "admin"
@@ -12864,6 +12905,619 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(_model).ToNot(BeNil())
 				Expect(err).To(BeNil())
 			})
+			It(`Invoke NewCreateWorkflowconfigRequestIbmWorkflowConfig successfully`, func() {
+				serviceCrn := "testString"
+				workflowType := "testString"
+				approvalExpiration := int64(1)
+				smInstanceCrn := "testString"
+				secretID := "testString"
+				enabled := false
+				_model, err := appConfigurationService.NewCreateWorkflowconfigRequestIbmWorkflowConfig(serviceCrn, workflowType, approvalExpiration, smInstanceCrn, secretID, enabled)
+				Expect(_model).ToNot(BeNil())
+				Expect(err).To(BeNil())
+			})
+			It(`Invoke NewCreateWorkflowconfigRequestWorkflowConfig successfully`, func() {
+				workflowURL := "testString"
+				approvalGroupName := "testString"
+				approvalExpiration := int64(1)
+				var workflowCredentials *appconfigurationv1.WorkflowCredentials = nil
+				enabled := false
+				_, err := appConfigurationService.NewCreateWorkflowconfigRequestWorkflowConfig(workflowURL, approvalGroupName, approvalExpiration, workflowCredentials, enabled)
+				Expect(err).ToNot(BeNil())
+			})
+		})
+	})
+	Describe(`Model unmarshaling tests`, func() {
+		It(`Invoke UnmarshalCollection successfully`, func() {
+			// Construct an instance of the model.
+			model := new(appconfigurationv1.Collection)
+			model.Name = core.StringPtr("testString")
+			model.CollectionID = core.StringPtr("testString")
+			model.Description = core.StringPtr("testString")
+			model.Tags = core.StringPtr("testString")
+			model.CreatedTime = CreateMockDateTime("2021-05-12T23:20:50.520Z")
+			model.UpdatedTime = CreateMockDateTime("2021-05-12T23:20:50.520Z")
+			model.Href = core.StringPtr("testString")
+			model.Features = nil
+			model.Properties = nil
+			model.Snapshots = nil
+			model.FeaturesCount = core.Int64Ptr(int64(38))
+			model.PropertiesCount = core.Int64Ptr(int64(38))
+			model.SnapshotCount = core.Int64Ptr(int64(38))
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *appconfigurationv1.Collection
+			err = appconfigurationv1.UnmarshalCollection(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalCollectionRef successfully`, func() {
+			// Construct an instance of the model.
+			model := new(appconfigurationv1.CollectionRef)
+			model.CollectionID = core.StringPtr("testString")
+			model.Name = core.StringPtr("testString")
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *appconfigurationv1.CollectionRef
+			err = appconfigurationv1.UnmarshalCollectionRef(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalCreateWorkflowconfigRequest successfully`, func() {
+			// Construct an instance of the model.
+			model := new(appconfigurationv1.CreateWorkflowconfigRequest)
+			model.EnvironmentName = core.StringPtr("testString")
+			model.EnvironmentID = core.StringPtr("testString")
+			model.WorkflowURL = core.StringPtr("testString")
+			model.ApprovalGroupName = core.StringPtr("testString")
+			model.ApprovalExpiration = core.Int64Ptr(int64(1))
+			model.WorkflowCredentials = nil
+			model.Enabled = core.BoolPtr(false)
+			model.CreatedTime = CreateMockDateTime("2022-11-15T23:20:50.000Z")
+			model.UpdatedTime = CreateMockDateTime("2022-11-16T21:20:50.000Z")
+			model.Href = core.StringPtr("testString")
+			model.ServiceCrn = core.StringPtr("testString")
+			model.WorkflowType = core.StringPtr("testString")
+			model.SmInstanceCrn = core.StringPtr("testString")
+			model.SecretID = core.StringPtr("testString")
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *appconfigurationv1.CreateWorkflowconfigRequest
+			err = appconfigurationv1.UnmarshalCreateWorkflowconfigRequest(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalEnvironment successfully`, func() {
+			// Construct an instance of the model.
+			model := new(appconfigurationv1.Environment)
+			model.Name = core.StringPtr("testString")
+			model.EnvironmentID = core.StringPtr("testString")
+			model.Description = core.StringPtr("testString")
+			model.Tags = core.StringPtr("testString")
+			model.ColorCode = core.StringPtr("#FDD13A")
+			model.CreatedTime = CreateMockDateTime("2021-05-12T23:20:50.520Z")
+			model.UpdatedTime = CreateMockDateTime("2021-05-12T23:20:50.520Z")
+			model.Href = core.StringPtr("testString")
+			model.Features = nil
+			model.Properties = nil
+			model.Snapshots = nil
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *appconfigurationv1.Environment
+			err = appconfigurationv1.UnmarshalEnvironment(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalFeatureOutput successfully`, func() {
+			// Construct an instance of the model.
+			model := new(appconfigurationv1.FeatureOutput)
+			model.FeatureID = core.StringPtr("testString")
+			model.Name = core.StringPtr("testString")
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *appconfigurationv1.FeatureOutput
+			err = appconfigurationv1.UnmarshalFeatureOutput(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalFeatureSegmentRule successfully`, func() {
+			// Construct an instance of the model.
+			model := new(appconfigurationv1.FeatureSegmentRule)
+			model.Rules = nil
+			model.Value = "testString"
+			model.Order = core.Int64Ptr(int64(38))
+			model.RolloutPercentage = core.Int64Ptr(int64(100))
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *appconfigurationv1.FeatureSegmentRule
+			err = appconfigurationv1.UnmarshalFeatureSegmentRule(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalImportCollectionSchema successfully`, func() {
+			// Construct an instance of the model.
+			model := new(appconfigurationv1.ImportCollectionSchema)
+			model.CollectionID = core.StringPtr("testString")
+			model.Name = core.StringPtr("testString")
+			model.Description = core.StringPtr("testString")
+			model.Tags = core.StringPtr("testString")
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *appconfigurationv1.ImportCollectionSchema
+			err = appconfigurationv1.UnmarshalImportCollectionSchema(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalImportConfig successfully`, func() {
+			// Construct an instance of the model.
+			model := new(appconfigurationv1.ImportConfig)
+			model.Environments = nil
+			model.Collections = nil
+			model.Segments = nil
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *appconfigurationv1.ImportConfig
+			err = appconfigurationv1.UnmarshalImportConfig(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalImportEnvironmentSchema successfully`, func() {
+			// Construct an instance of the model.
+			model := new(appconfigurationv1.ImportEnvironmentSchema)
+			model.Name = core.StringPtr("testString")
+			model.EnvironmentID = core.StringPtr("testString")
+			model.Description = core.StringPtr("testString")
+			model.Tags = core.StringPtr("testString")
+			model.ColorCode = core.StringPtr("#FDD13A")
+			model.Features = nil
+			model.Properties = nil
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *appconfigurationv1.ImportEnvironmentSchema
+			err = appconfigurationv1.UnmarshalImportEnvironmentSchema(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalImportFeatureRequestBody successfully`, func() {
+			// Construct an instance of the model.
+			model := new(appconfigurationv1.ImportFeatureRequestBody)
+			model.Name = core.StringPtr("testString")
+			model.FeatureID = core.StringPtr("testString")
+			model.Description = core.StringPtr("testString")
+			model.Type = core.StringPtr("BOOLEAN")
+			model.Format = core.StringPtr("TEXT")
+			model.EnabledValue = "testString"
+			model.DisabledValue = "testString"
+			model.Enabled = core.BoolPtr(true)
+			model.RolloutPercentage = core.Int64Ptr(int64(100))
+			model.Tags = core.StringPtr("testString")
+			model.SegmentRules = nil
+			model.Collections = nil
+			model.IsOverridden = core.BoolPtr(true)
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *appconfigurationv1.ImportFeatureRequestBody
+			err = appconfigurationv1.UnmarshalImportFeatureRequestBody(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalImportPropertyRequestBody successfully`, func() {
+			// Construct an instance of the model.
+			model := new(appconfigurationv1.ImportPropertyRequestBody)
+			model.Name = core.StringPtr("testString")
+			model.PropertyID = core.StringPtr("testString")
+			model.Description = core.StringPtr("testString")
+			model.Type = core.StringPtr("BOOLEAN")
+			model.Format = core.StringPtr("TEXT")
+			model.Value = "testString"
+			model.Tags = core.StringPtr("testString")
+			model.SegmentRules = nil
+			model.Collections = nil
+			model.IsOverridden = core.BoolPtr(true)
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *appconfigurationv1.ImportPropertyRequestBody
+			err = appconfigurationv1.UnmarshalImportPropertyRequestBody(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalImportSegmentSchema successfully`, func() {
+			// Construct an instance of the model.
+			model := new(appconfigurationv1.ImportSegmentSchema)
+			model.Name = core.StringPtr("testString")
+			model.SegmentID = core.StringPtr("testString")
+			model.Description = core.StringPtr("testString")
+			model.Tags = core.StringPtr("testString")
+			model.Rules = nil
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *appconfigurationv1.ImportSegmentSchema
+			err = appconfigurationv1.UnmarshalImportSegmentSchema(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalProperty successfully`, func() {
+			// Construct an instance of the model.
+			model := new(appconfigurationv1.Property)
+			model.Name = core.StringPtr("testString")
+			model.PropertyID = core.StringPtr("testString")
+			model.Description = core.StringPtr("testString")
+			model.Type = core.StringPtr("BOOLEAN")
+			model.Format = core.StringPtr("TEXT")
+			model.Value = "testString"
+			model.Tags = core.StringPtr("testString")
+			model.SegmentRules = nil
+			model.SegmentExists = core.BoolPtr(true)
+			model.Collections = nil
+			model.CreatedTime = CreateMockDateTime("2021-05-12T23:20:50.520Z")
+			model.UpdatedTime = CreateMockDateTime("2021-05-12T23:20:50.520Z")
+			model.EvaluationTime = CreateMockDateTime("2021-05-12T23:20:50.520Z")
+			model.Href = core.StringPtr("testString")
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *appconfigurationv1.Property
+			err = appconfigurationv1.UnmarshalProperty(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalPropertyOutput successfully`, func() {
+			// Construct an instance of the model.
+			model := new(appconfigurationv1.PropertyOutput)
+			model.PropertyID = core.StringPtr("testString")
+			model.Name = core.StringPtr("testString")
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *appconfigurationv1.PropertyOutput
+			err = appconfigurationv1.UnmarshalPropertyOutput(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalRule successfully`, func() {
+			// Construct an instance of the model.
+			model := new(appconfigurationv1.Rule)
+			model.AttributeName = core.StringPtr("testString")
+			model.Operator = core.StringPtr("is")
+			model.Values = []string{"testString"}
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *appconfigurationv1.Rule
+			err = appconfigurationv1.UnmarshalRule(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalSegment successfully`, func() {
+			// Construct an instance of the model.
+			model := new(appconfigurationv1.Segment)
+			model.Name = core.StringPtr("testString")
+			model.SegmentID = core.StringPtr("testString")
+			model.Description = core.StringPtr("testString")
+			model.Tags = core.StringPtr("testString")
+			model.Rules = nil
+			model.CreatedTime = CreateMockDateTime("2021-05-12T23:20:50.520Z")
+			model.UpdatedTime = CreateMockDateTime("2021-05-12T23:20:50.520Z")
+			model.Href = core.StringPtr("testString")
+			model.Features = nil
+			model.Properties = nil
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *appconfigurationv1.Segment
+			err = appconfigurationv1.UnmarshalSegment(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalSegmentRule successfully`, func() {
+			// Construct an instance of the model.
+			model := new(appconfigurationv1.SegmentRule)
+			model.Rules = nil
+			model.Value = "testString"
+			model.Order = core.Int64Ptr(int64(38))
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *appconfigurationv1.SegmentRule
+			err = appconfigurationv1.UnmarshalSegmentRule(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalSnapshotOutput successfully`, func() {
+			// Construct an instance of the model.
+			model := new(appconfigurationv1.SnapshotOutput)
+			model.GitConfigID = core.StringPtr("testString")
+			model.Name = core.StringPtr("testString")
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *appconfigurationv1.SnapshotOutput
+			err = appconfigurationv1.UnmarshalSnapshotOutput(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalTargetSegments successfully`, func() {
+			// Construct an instance of the model.
+			model := new(appconfigurationv1.TargetSegments)
+			model.Segments = []string{"testString"}
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *appconfigurationv1.TargetSegments
+			err = appconfigurationv1.UnmarshalTargetSegments(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalUpdateWorkflowconfigRequest successfully`, func() {
+			// Construct an instance of the model.
+			model := new(appconfigurationv1.UpdateWorkflowconfigRequest)
+			model.WorkflowURL = core.StringPtr("testString")
+			model.ApprovalGroupName = core.StringPtr("testString")
+			model.ApprovalExpiration = core.Int64Ptr(int64(1))
+			model.WorkflowCredentials = nil
+			model.Enabled = core.BoolPtr(false)
+			model.ServiceCrn = core.StringPtr("testString")
+			model.SmInstanceCrn = core.StringPtr("testString")
+			model.SecretID = core.StringPtr("testString")
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *appconfigurationv1.UpdateWorkflowconfigRequest
+			err = appconfigurationv1.UnmarshalUpdateWorkflowconfigRequest(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalWorkflowCredentials successfully`, func() {
+			// Construct an instance of the model.
+			model := new(appconfigurationv1.WorkflowCredentials)
+			model.Username = core.StringPtr("admin")
+			model.Password = core.StringPtr("testString")
+			model.ClientID = core.StringPtr("f7b6379b55d08210f8ree233afc7256d")
+			model.ClientSecret = core.StringPtr("testString")
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *appconfigurationv1.WorkflowCredentials
+			err = appconfigurationv1.UnmarshalWorkflowCredentials(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalCreateWorkflowconfigRequestIbmWorkflowConfig successfully`, func() {
+			// Construct an instance of the model.
+			model := new(appconfigurationv1.CreateWorkflowconfigRequestIbmWorkflowConfig)
+			model.EnvironmentName = core.StringPtr("testString")
+			model.EnvironmentID = core.StringPtr("testString")
+			model.ServiceCrn = core.StringPtr("testString")
+			model.WorkflowType = core.StringPtr("testString")
+			model.ApprovalExpiration = core.Int64Ptr(int64(1))
+			model.SmInstanceCrn = core.StringPtr("testString")
+			model.SecretID = core.StringPtr("testString")
+			model.Enabled = core.BoolPtr(false)
+			model.CreatedTime = CreateMockDateTime("2022-11-15T23:20:50.000Z")
+			model.UpdatedTime = CreateMockDateTime("2022-11-16T21:20:50.000Z")
+			model.Href = core.StringPtr("testString")
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *appconfigurationv1.CreateWorkflowconfigRequestIbmWorkflowConfig
+			err = appconfigurationv1.UnmarshalCreateWorkflowconfigRequestIbmWorkflowConfig(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalCreateWorkflowconfigRequestWorkflowConfig successfully`, func() {
+			// Construct an instance of the model.
+			model := new(appconfigurationv1.CreateWorkflowconfigRequestWorkflowConfig)
+			model.EnvironmentName = core.StringPtr("testString")
+			model.EnvironmentID = core.StringPtr("testString")
+			model.WorkflowURL = core.StringPtr("testString")
+			model.ApprovalGroupName = core.StringPtr("testString")
+			model.ApprovalExpiration = core.Int64Ptr(int64(1))
+			model.WorkflowCredentials = nil
+			model.Enabled = core.BoolPtr(false)
+			model.CreatedTime = CreateMockDateTime("2022-11-15T23:20:50.000Z")
+			model.UpdatedTime = CreateMockDateTime("2022-11-16T21:20:50.000Z")
+			model.Href = core.StringPtr("testString")
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *appconfigurationv1.CreateWorkflowconfigRequestWorkflowConfig
+			err = appconfigurationv1.UnmarshalCreateWorkflowconfigRequestWorkflowConfig(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalUpdateWorkflowconfigRequestUpdateIbmWorkflowConfig successfully`, func() {
+			// Construct an instance of the model.
+			model := new(appconfigurationv1.UpdateWorkflowconfigRequestUpdateIbmWorkflowConfig)
+			model.ServiceCrn = core.StringPtr("testString")
+			model.ApprovalExpiration = core.Int64Ptr(int64(1))
+			model.SmInstanceCrn = core.StringPtr("testString")
+			model.SecretID = core.StringPtr("testString")
+			model.Enabled = core.BoolPtr(false)
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *appconfigurationv1.UpdateWorkflowconfigRequestUpdateIbmWorkflowConfig
+			err = appconfigurationv1.UnmarshalUpdateWorkflowconfigRequestUpdateIbmWorkflowConfig(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalUpdateWorkflowconfigRequestUpdateWorkflowConfig successfully`, func() {
+			// Construct an instance of the model.
+			model := new(appconfigurationv1.UpdateWorkflowconfigRequestUpdateWorkflowConfig)
+			model.WorkflowURL = core.StringPtr("testString")
+			model.ApprovalGroupName = core.StringPtr("testString")
+			model.ApprovalExpiration = core.Int64Ptr(int64(1))
+			model.WorkflowCredentials = nil
+			model.Enabled = core.BoolPtr(false)
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *appconfigurationv1.UpdateWorkflowconfigRequestUpdateWorkflowConfig
+			err = appconfigurationv1.UnmarshalUpdateWorkflowconfigRequestUpdateWorkflowConfig(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
 		})
 	})
 	Describe(`Utility function tests`, func() {
@@ -12895,8 +13549,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 //
 
 func CreateMockByteArray(mockData string) *[]byte {
-	ba := make([]byte, 0)
-	ba = append(ba, mockData...)
+	ba := []byte(mockData)
 	return &ba
 }
 
