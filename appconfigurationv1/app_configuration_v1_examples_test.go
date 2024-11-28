@@ -995,24 +995,24 @@ var _ = Describe(`AppConfigurationV1 Examples Tests`, func() {
 			fmt.Println("\nCreateWorkflowconfig() result:")
 			// begin-create_Workflowconfig
 
-			workflowCredentialsModel := &appconfigurationv1.WorkflowCredentials{
+			externalServiceNowCredentialsModel := &appconfigurationv1.ExternalServiceNowCredentials{
 				Username: core.StringPtr("user"),
 				Password: core.StringPtr("pwd"),
 				ClientID: core.StringPtr("client id value"),
 				ClientSecret: core.StringPtr("clientsecret"),
 			}
 
-			createWorkflowconfigRequestModel := &appconfigurationv1.CreateWorkflowconfigRequestWorkflowConfig{
+			createWorkflowConfigModel := &appconfigurationv1.CreateWorkflowConfigExternalServiceNow{
 				WorkflowURL: core.StringPtr("https://xxxxx.service-now.com"),
 				ApprovalGroupName: core.StringPtr("WorkflowCRApprovers"),
 				ApprovalExpiration: core.Int64Ptr(int64(10)),
-				WorkflowCredentials: workflowCredentialsModel,
+				WorkflowCredentials: externalServiceNowCredentialsModel,
 				Enabled: core.BoolPtr(true),
 			}
 
 			createWorkflowconfigOptions := appConfigurationService.NewCreateWorkflowconfigOptions(
 				"environment_id",
-				createWorkflowconfigRequestModel,
+				createWorkflowConfigModel,
 			)
 
 			createWorkflowconfigResponse, response, err := appConfigurationService.CreateWorkflowconfig(createWorkflowconfigOptions)
@@ -1032,24 +1032,24 @@ var _ = Describe(`AppConfigurationV1 Examples Tests`, func() {
 			fmt.Println("\nUpdateWorkflowconfig() result:")
 			// begin-update_Workflowconfig
 
-			workflowCredentialsModel := &appconfigurationv1.WorkflowCredentials{
+			externalServiceNowCredentialsModel := &appconfigurationv1.ExternalServiceNowCredentials{
 				Username: core.StringPtr("user"),
 				Password: core.StringPtr("updated password"),
 				ClientID: core.StringPtr("client id value"),
 				ClientSecret: core.StringPtr("updated client secret"),
 			}
 
-			updateWorkflowconfigRequestModel := &appconfigurationv1.UpdateWorkflowconfigRequestUpdateWorkflowConfig{
+			updateWorkflowConfigModel := &appconfigurationv1.UpdateWorkflowConfigUpdateExternalServiceNow{
 				WorkflowURL: core.StringPtr("https://xxxxx.service-now.com"),
 				ApprovalGroupName: core.StringPtr("WorkflowCRApprovers"),
 				ApprovalExpiration: core.Int64Ptr(int64(5)),
-				WorkflowCredentials: workflowCredentialsModel,
+				WorkflowCredentials: externalServiceNowCredentialsModel,
 				Enabled: core.BoolPtr(true),
 			}
 
 			updateWorkflowconfigOptions := appConfigurationService.NewUpdateWorkflowconfigOptions(
 				"environment_id",
-				updateWorkflowconfigRequestModel,
+				updateWorkflowConfigModel,
 			)
 
 			updateWorkflowconfigResponse, response, err := appConfigurationService.UpdateWorkflowconfig(updateWorkflowconfigOptions)

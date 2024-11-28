@@ -19,6 +19,7 @@ package appconfigurationv1_test
 import (
 	"bytes"
 	"context"
+	"encoding/base64"
 	"encoding/json"
 	"fmt"
 	"io"
@@ -9881,25 +9882,25 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(appConfigurationService).ToNot(BeNil())
 
-				// Construct an instance of the WorkflowCredentials model
-				workflowCredentialsModel := new(appconfigurationv1.WorkflowCredentials)
-				workflowCredentialsModel.Username = core.StringPtr("user")
-				workflowCredentialsModel.Password = core.StringPtr("pwd")
-				workflowCredentialsModel.ClientID = core.StringPtr("client id value")
-				workflowCredentialsModel.ClientSecret = core.StringPtr("clientsecret")
+				// Construct an instance of the ExternalServiceNowCredentials model
+				externalServiceNowCredentialsModel := new(appconfigurationv1.ExternalServiceNowCredentials)
+				externalServiceNowCredentialsModel.Username = core.StringPtr("user")
+				externalServiceNowCredentialsModel.Password = core.StringPtr("pwd")
+				externalServiceNowCredentialsModel.ClientID = core.StringPtr("client id value")
+				externalServiceNowCredentialsModel.ClientSecret = core.StringPtr("clientsecret")
 
-				// Construct an instance of the CreateWorkflowconfigRequestWorkflowConfig model
-				createWorkflowconfigRequestModel := new(appconfigurationv1.CreateWorkflowconfigRequestWorkflowConfig)
-				createWorkflowconfigRequestModel.WorkflowURL = core.StringPtr("https://xxxxx.service-now.com")
-				createWorkflowconfigRequestModel.ApprovalGroupName = core.StringPtr("WorkflowCRApprovers")
-				createWorkflowconfigRequestModel.ApprovalExpiration = core.Int64Ptr(int64(10))
-				createWorkflowconfigRequestModel.WorkflowCredentials = workflowCredentialsModel
-				createWorkflowconfigRequestModel.Enabled = core.BoolPtr(true)
+				// Construct an instance of the CreateWorkflowConfigExternalServiceNow model
+				createWorkflowConfigModel := new(appconfigurationv1.CreateWorkflowConfigExternalServiceNow)
+				createWorkflowConfigModel.WorkflowURL = core.StringPtr("https://xxxxx.service-now.com")
+				createWorkflowConfigModel.ApprovalGroupName = core.StringPtr("WorkflowCRApprovers")
+				createWorkflowConfigModel.ApprovalExpiration = core.Int64Ptr(int64(10))
+				createWorkflowConfigModel.WorkflowCredentials = externalServiceNowCredentialsModel
+				createWorkflowConfigModel.Enabled = core.BoolPtr(true)
 
 				// Construct an instance of the CreateWorkflowconfigOptions model
 				createWorkflowconfigOptionsModel := new(appconfigurationv1.CreateWorkflowconfigOptions)
 				createWorkflowconfigOptionsModel.EnvironmentID = core.StringPtr("environment_id")
-				createWorkflowconfigOptionsModel.WorkflowConfig = createWorkflowconfigRequestModel
+				createWorkflowconfigOptionsModel.WorkflowConfig = createWorkflowConfigModel
 				createWorkflowconfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
 				result, response, operationErr := appConfigurationService.CreateWorkflowconfig(createWorkflowconfigOptionsModel)
@@ -9964,25 +9965,25 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(appConfigurationService).ToNot(BeNil())
 				appConfigurationService.EnableRetries(0, 0)
 
-				// Construct an instance of the WorkflowCredentials model
-				workflowCredentialsModel := new(appconfigurationv1.WorkflowCredentials)
-				workflowCredentialsModel.Username = core.StringPtr("user")
-				workflowCredentialsModel.Password = core.StringPtr("pwd")
-				workflowCredentialsModel.ClientID = core.StringPtr("client id value")
-				workflowCredentialsModel.ClientSecret = core.StringPtr("clientsecret")
+				// Construct an instance of the ExternalServiceNowCredentials model
+				externalServiceNowCredentialsModel := new(appconfigurationv1.ExternalServiceNowCredentials)
+				externalServiceNowCredentialsModel.Username = core.StringPtr("user")
+				externalServiceNowCredentialsModel.Password = core.StringPtr("pwd")
+				externalServiceNowCredentialsModel.ClientID = core.StringPtr("client id value")
+				externalServiceNowCredentialsModel.ClientSecret = core.StringPtr("clientsecret")
 
-				// Construct an instance of the CreateWorkflowconfigRequestWorkflowConfig model
-				createWorkflowconfigRequestModel := new(appconfigurationv1.CreateWorkflowconfigRequestWorkflowConfig)
-				createWorkflowconfigRequestModel.WorkflowURL = core.StringPtr("https://xxxxx.service-now.com")
-				createWorkflowconfigRequestModel.ApprovalGroupName = core.StringPtr("WorkflowCRApprovers")
-				createWorkflowconfigRequestModel.ApprovalExpiration = core.Int64Ptr(int64(10))
-				createWorkflowconfigRequestModel.WorkflowCredentials = workflowCredentialsModel
-				createWorkflowconfigRequestModel.Enabled = core.BoolPtr(true)
+				// Construct an instance of the CreateWorkflowConfigExternalServiceNow model
+				createWorkflowConfigModel := new(appconfigurationv1.CreateWorkflowConfigExternalServiceNow)
+				createWorkflowConfigModel.WorkflowURL = core.StringPtr("https://xxxxx.service-now.com")
+				createWorkflowConfigModel.ApprovalGroupName = core.StringPtr("WorkflowCRApprovers")
+				createWorkflowConfigModel.ApprovalExpiration = core.Int64Ptr(int64(10))
+				createWorkflowConfigModel.WorkflowCredentials = externalServiceNowCredentialsModel
+				createWorkflowConfigModel.Enabled = core.BoolPtr(true)
 
 				// Construct an instance of the CreateWorkflowconfigOptions model
 				createWorkflowconfigOptionsModel := new(appconfigurationv1.CreateWorkflowconfigOptions)
 				createWorkflowconfigOptionsModel.EnvironmentID = core.StringPtr("environment_id")
-				createWorkflowconfigOptionsModel.WorkflowConfig = createWorkflowconfigRequestModel
+				createWorkflowconfigOptionsModel.WorkflowConfig = createWorkflowConfigModel
 				createWorkflowconfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with a Context to test a timeout error
@@ -10055,25 +10056,25 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(response).To(BeNil())
 				Expect(result).To(BeNil())
 
-				// Construct an instance of the WorkflowCredentials model
-				workflowCredentialsModel := new(appconfigurationv1.WorkflowCredentials)
-				workflowCredentialsModel.Username = core.StringPtr("user")
-				workflowCredentialsModel.Password = core.StringPtr("pwd")
-				workflowCredentialsModel.ClientID = core.StringPtr("client id value")
-				workflowCredentialsModel.ClientSecret = core.StringPtr("clientsecret")
+				// Construct an instance of the ExternalServiceNowCredentials model
+				externalServiceNowCredentialsModel := new(appconfigurationv1.ExternalServiceNowCredentials)
+				externalServiceNowCredentialsModel.Username = core.StringPtr("user")
+				externalServiceNowCredentialsModel.Password = core.StringPtr("pwd")
+				externalServiceNowCredentialsModel.ClientID = core.StringPtr("client id value")
+				externalServiceNowCredentialsModel.ClientSecret = core.StringPtr("clientsecret")
 
-				// Construct an instance of the CreateWorkflowconfigRequestWorkflowConfig model
-				createWorkflowconfigRequestModel := new(appconfigurationv1.CreateWorkflowconfigRequestWorkflowConfig)
-				createWorkflowconfigRequestModel.WorkflowURL = core.StringPtr("https://xxxxx.service-now.com")
-				createWorkflowconfigRequestModel.ApprovalGroupName = core.StringPtr("WorkflowCRApprovers")
-				createWorkflowconfigRequestModel.ApprovalExpiration = core.Int64Ptr(int64(10))
-				createWorkflowconfigRequestModel.WorkflowCredentials = workflowCredentialsModel
-				createWorkflowconfigRequestModel.Enabled = core.BoolPtr(true)
+				// Construct an instance of the CreateWorkflowConfigExternalServiceNow model
+				createWorkflowConfigModel := new(appconfigurationv1.CreateWorkflowConfigExternalServiceNow)
+				createWorkflowConfigModel.WorkflowURL = core.StringPtr("https://xxxxx.service-now.com")
+				createWorkflowConfigModel.ApprovalGroupName = core.StringPtr("WorkflowCRApprovers")
+				createWorkflowConfigModel.ApprovalExpiration = core.Int64Ptr(int64(10))
+				createWorkflowConfigModel.WorkflowCredentials = externalServiceNowCredentialsModel
+				createWorkflowConfigModel.Enabled = core.BoolPtr(true)
 
 				// Construct an instance of the CreateWorkflowconfigOptions model
 				createWorkflowconfigOptionsModel := new(appconfigurationv1.CreateWorkflowconfigOptions)
 				createWorkflowconfigOptionsModel.EnvironmentID = core.StringPtr("environment_id")
-				createWorkflowconfigOptionsModel.WorkflowConfig = createWorkflowconfigRequestModel
+				createWorkflowconfigOptionsModel.WorkflowConfig = createWorkflowConfigModel
 				createWorkflowconfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
@@ -10091,25 +10092,25 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(appConfigurationService).ToNot(BeNil())
 
-				// Construct an instance of the WorkflowCredentials model
-				workflowCredentialsModel := new(appconfigurationv1.WorkflowCredentials)
-				workflowCredentialsModel.Username = core.StringPtr("user")
-				workflowCredentialsModel.Password = core.StringPtr("pwd")
-				workflowCredentialsModel.ClientID = core.StringPtr("client id value")
-				workflowCredentialsModel.ClientSecret = core.StringPtr("clientsecret")
+				// Construct an instance of the ExternalServiceNowCredentials model
+				externalServiceNowCredentialsModel := new(appconfigurationv1.ExternalServiceNowCredentials)
+				externalServiceNowCredentialsModel.Username = core.StringPtr("user")
+				externalServiceNowCredentialsModel.Password = core.StringPtr("pwd")
+				externalServiceNowCredentialsModel.ClientID = core.StringPtr("client id value")
+				externalServiceNowCredentialsModel.ClientSecret = core.StringPtr("clientsecret")
 
-				// Construct an instance of the CreateWorkflowconfigRequestWorkflowConfig model
-				createWorkflowconfigRequestModel := new(appconfigurationv1.CreateWorkflowconfigRequestWorkflowConfig)
-				createWorkflowconfigRequestModel.WorkflowURL = core.StringPtr("https://xxxxx.service-now.com")
-				createWorkflowconfigRequestModel.ApprovalGroupName = core.StringPtr("WorkflowCRApprovers")
-				createWorkflowconfigRequestModel.ApprovalExpiration = core.Int64Ptr(int64(10))
-				createWorkflowconfigRequestModel.WorkflowCredentials = workflowCredentialsModel
-				createWorkflowconfigRequestModel.Enabled = core.BoolPtr(true)
+				// Construct an instance of the CreateWorkflowConfigExternalServiceNow model
+				createWorkflowConfigModel := new(appconfigurationv1.CreateWorkflowConfigExternalServiceNow)
+				createWorkflowConfigModel.WorkflowURL = core.StringPtr("https://xxxxx.service-now.com")
+				createWorkflowConfigModel.ApprovalGroupName = core.StringPtr("WorkflowCRApprovers")
+				createWorkflowConfigModel.ApprovalExpiration = core.Int64Ptr(int64(10))
+				createWorkflowConfigModel.WorkflowCredentials = externalServiceNowCredentialsModel
+				createWorkflowConfigModel.Enabled = core.BoolPtr(true)
 
 				// Construct an instance of the CreateWorkflowconfigOptions model
 				createWorkflowconfigOptionsModel := new(appconfigurationv1.CreateWorkflowconfigOptions)
 				createWorkflowconfigOptionsModel.EnvironmentID = core.StringPtr("environment_id")
-				createWorkflowconfigOptionsModel.WorkflowConfig = createWorkflowconfigRequestModel
+				createWorkflowconfigOptionsModel.WorkflowConfig = createWorkflowConfigModel
 				createWorkflowconfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := appConfigurationService.SetServiceURL("")
@@ -10148,25 +10149,25 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(appConfigurationService).ToNot(BeNil())
 
-				// Construct an instance of the WorkflowCredentials model
-				workflowCredentialsModel := new(appconfigurationv1.WorkflowCredentials)
-				workflowCredentialsModel.Username = core.StringPtr("user")
-				workflowCredentialsModel.Password = core.StringPtr("pwd")
-				workflowCredentialsModel.ClientID = core.StringPtr("client id value")
-				workflowCredentialsModel.ClientSecret = core.StringPtr("clientsecret")
+				// Construct an instance of the ExternalServiceNowCredentials model
+				externalServiceNowCredentialsModel := new(appconfigurationv1.ExternalServiceNowCredentials)
+				externalServiceNowCredentialsModel.Username = core.StringPtr("user")
+				externalServiceNowCredentialsModel.Password = core.StringPtr("pwd")
+				externalServiceNowCredentialsModel.ClientID = core.StringPtr("client id value")
+				externalServiceNowCredentialsModel.ClientSecret = core.StringPtr("clientsecret")
 
-				// Construct an instance of the CreateWorkflowconfigRequestWorkflowConfig model
-				createWorkflowconfigRequestModel := new(appconfigurationv1.CreateWorkflowconfigRequestWorkflowConfig)
-				createWorkflowconfigRequestModel.WorkflowURL = core.StringPtr("https://xxxxx.service-now.com")
-				createWorkflowconfigRequestModel.ApprovalGroupName = core.StringPtr("WorkflowCRApprovers")
-				createWorkflowconfigRequestModel.ApprovalExpiration = core.Int64Ptr(int64(10))
-				createWorkflowconfigRequestModel.WorkflowCredentials = workflowCredentialsModel
-				createWorkflowconfigRequestModel.Enabled = core.BoolPtr(true)
+				// Construct an instance of the CreateWorkflowConfigExternalServiceNow model
+				createWorkflowConfigModel := new(appconfigurationv1.CreateWorkflowConfigExternalServiceNow)
+				createWorkflowConfigModel.WorkflowURL = core.StringPtr("https://xxxxx.service-now.com")
+				createWorkflowConfigModel.ApprovalGroupName = core.StringPtr("WorkflowCRApprovers")
+				createWorkflowConfigModel.ApprovalExpiration = core.Int64Ptr(int64(10))
+				createWorkflowConfigModel.WorkflowCredentials = externalServiceNowCredentialsModel
+				createWorkflowConfigModel.Enabled = core.BoolPtr(true)
 
 				// Construct an instance of the CreateWorkflowconfigOptions model
 				createWorkflowconfigOptionsModel := new(appconfigurationv1.CreateWorkflowconfigOptions)
 				createWorkflowconfigOptionsModel.EnvironmentID = core.StringPtr("environment_id")
-				createWorkflowconfigOptionsModel.WorkflowConfig = createWorkflowconfigRequestModel
+				createWorkflowconfigOptionsModel.WorkflowConfig = createWorkflowConfigModel
 				createWorkflowconfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation
@@ -10205,25 +10206,25 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(appConfigurationService).ToNot(BeNil())
 
-				// Construct an instance of the WorkflowCredentials model
-				workflowCredentialsModel := new(appconfigurationv1.WorkflowCredentials)
-				workflowCredentialsModel.Username = core.StringPtr("user")
-				workflowCredentialsModel.Password = core.StringPtr("updated password")
-				workflowCredentialsModel.ClientID = core.StringPtr("client id value")
-				workflowCredentialsModel.ClientSecret = core.StringPtr("updated client secret")
+				// Construct an instance of the ExternalServiceNowCredentials model
+				externalServiceNowCredentialsModel := new(appconfigurationv1.ExternalServiceNowCredentials)
+				externalServiceNowCredentialsModel.Username = core.StringPtr("user")
+				externalServiceNowCredentialsModel.Password = core.StringPtr("updated password")
+				externalServiceNowCredentialsModel.ClientID = core.StringPtr("client id value")
+				externalServiceNowCredentialsModel.ClientSecret = core.StringPtr("updated client secret")
 
-				// Construct an instance of the UpdateWorkflowconfigRequestUpdateWorkflowConfig model
-				updateWorkflowconfigRequestModel := new(appconfigurationv1.UpdateWorkflowconfigRequestUpdateWorkflowConfig)
-				updateWorkflowconfigRequestModel.WorkflowURL = core.StringPtr("https://xxxxx.service-now.com")
-				updateWorkflowconfigRequestModel.ApprovalGroupName = core.StringPtr("WorkflowCRApprovers")
-				updateWorkflowconfigRequestModel.ApprovalExpiration = core.Int64Ptr(int64(5))
-				updateWorkflowconfigRequestModel.WorkflowCredentials = workflowCredentialsModel
-				updateWorkflowconfigRequestModel.Enabled = core.BoolPtr(true)
+				// Construct an instance of the UpdateWorkflowConfigUpdateExternalServiceNow model
+				updateWorkflowConfigModel := new(appconfigurationv1.UpdateWorkflowConfigUpdateExternalServiceNow)
+				updateWorkflowConfigModel.WorkflowURL = core.StringPtr("https://xxxxx.service-now.com")
+				updateWorkflowConfigModel.ApprovalGroupName = core.StringPtr("WorkflowCRApprovers")
+				updateWorkflowConfigModel.ApprovalExpiration = core.Int64Ptr(int64(5))
+				updateWorkflowConfigModel.WorkflowCredentials = externalServiceNowCredentialsModel
+				updateWorkflowConfigModel.Enabled = core.BoolPtr(true)
 
 				// Construct an instance of the UpdateWorkflowconfigOptions model
 				updateWorkflowconfigOptionsModel := new(appconfigurationv1.UpdateWorkflowconfigOptions)
 				updateWorkflowconfigOptionsModel.EnvironmentID = core.StringPtr("environment_id")
-				updateWorkflowconfigOptionsModel.UpdateWorkflowConfig = updateWorkflowconfigRequestModel
+				updateWorkflowconfigOptionsModel.UpdateWorkflowConfig = updateWorkflowConfigModel
 				updateWorkflowconfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
 				result, response, operationErr := appConfigurationService.UpdateWorkflowconfig(updateWorkflowconfigOptionsModel)
@@ -10288,25 +10289,25 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(appConfigurationService).ToNot(BeNil())
 				appConfigurationService.EnableRetries(0, 0)
 
-				// Construct an instance of the WorkflowCredentials model
-				workflowCredentialsModel := new(appconfigurationv1.WorkflowCredentials)
-				workflowCredentialsModel.Username = core.StringPtr("user")
-				workflowCredentialsModel.Password = core.StringPtr("updated password")
-				workflowCredentialsModel.ClientID = core.StringPtr("client id value")
-				workflowCredentialsModel.ClientSecret = core.StringPtr("updated client secret")
+				// Construct an instance of the ExternalServiceNowCredentials model
+				externalServiceNowCredentialsModel := new(appconfigurationv1.ExternalServiceNowCredentials)
+				externalServiceNowCredentialsModel.Username = core.StringPtr("user")
+				externalServiceNowCredentialsModel.Password = core.StringPtr("updated password")
+				externalServiceNowCredentialsModel.ClientID = core.StringPtr("client id value")
+				externalServiceNowCredentialsModel.ClientSecret = core.StringPtr("updated client secret")
 
-				// Construct an instance of the UpdateWorkflowconfigRequestUpdateWorkflowConfig model
-				updateWorkflowconfigRequestModel := new(appconfigurationv1.UpdateWorkflowconfigRequestUpdateWorkflowConfig)
-				updateWorkflowconfigRequestModel.WorkflowURL = core.StringPtr("https://xxxxx.service-now.com")
-				updateWorkflowconfigRequestModel.ApprovalGroupName = core.StringPtr("WorkflowCRApprovers")
-				updateWorkflowconfigRequestModel.ApprovalExpiration = core.Int64Ptr(int64(5))
-				updateWorkflowconfigRequestModel.WorkflowCredentials = workflowCredentialsModel
-				updateWorkflowconfigRequestModel.Enabled = core.BoolPtr(true)
+				// Construct an instance of the UpdateWorkflowConfigUpdateExternalServiceNow model
+				updateWorkflowConfigModel := new(appconfigurationv1.UpdateWorkflowConfigUpdateExternalServiceNow)
+				updateWorkflowConfigModel.WorkflowURL = core.StringPtr("https://xxxxx.service-now.com")
+				updateWorkflowConfigModel.ApprovalGroupName = core.StringPtr("WorkflowCRApprovers")
+				updateWorkflowConfigModel.ApprovalExpiration = core.Int64Ptr(int64(5))
+				updateWorkflowConfigModel.WorkflowCredentials = externalServiceNowCredentialsModel
+				updateWorkflowConfigModel.Enabled = core.BoolPtr(true)
 
 				// Construct an instance of the UpdateWorkflowconfigOptions model
 				updateWorkflowconfigOptionsModel := new(appconfigurationv1.UpdateWorkflowconfigOptions)
 				updateWorkflowconfigOptionsModel.EnvironmentID = core.StringPtr("environment_id")
-				updateWorkflowconfigOptionsModel.UpdateWorkflowConfig = updateWorkflowconfigRequestModel
+				updateWorkflowconfigOptionsModel.UpdateWorkflowConfig = updateWorkflowConfigModel
 				updateWorkflowconfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with a Context to test a timeout error
@@ -10379,25 +10380,25 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(response).To(BeNil())
 				Expect(result).To(BeNil())
 
-				// Construct an instance of the WorkflowCredentials model
-				workflowCredentialsModel := new(appconfigurationv1.WorkflowCredentials)
-				workflowCredentialsModel.Username = core.StringPtr("user")
-				workflowCredentialsModel.Password = core.StringPtr("updated password")
-				workflowCredentialsModel.ClientID = core.StringPtr("client id value")
-				workflowCredentialsModel.ClientSecret = core.StringPtr("updated client secret")
+				// Construct an instance of the ExternalServiceNowCredentials model
+				externalServiceNowCredentialsModel := new(appconfigurationv1.ExternalServiceNowCredentials)
+				externalServiceNowCredentialsModel.Username = core.StringPtr("user")
+				externalServiceNowCredentialsModel.Password = core.StringPtr("updated password")
+				externalServiceNowCredentialsModel.ClientID = core.StringPtr("client id value")
+				externalServiceNowCredentialsModel.ClientSecret = core.StringPtr("updated client secret")
 
-				// Construct an instance of the UpdateWorkflowconfigRequestUpdateWorkflowConfig model
-				updateWorkflowconfigRequestModel := new(appconfigurationv1.UpdateWorkflowconfigRequestUpdateWorkflowConfig)
-				updateWorkflowconfigRequestModel.WorkflowURL = core.StringPtr("https://xxxxx.service-now.com")
-				updateWorkflowconfigRequestModel.ApprovalGroupName = core.StringPtr("WorkflowCRApprovers")
-				updateWorkflowconfigRequestModel.ApprovalExpiration = core.Int64Ptr(int64(5))
-				updateWorkflowconfigRequestModel.WorkflowCredentials = workflowCredentialsModel
-				updateWorkflowconfigRequestModel.Enabled = core.BoolPtr(true)
+				// Construct an instance of the UpdateWorkflowConfigUpdateExternalServiceNow model
+				updateWorkflowConfigModel := new(appconfigurationv1.UpdateWorkflowConfigUpdateExternalServiceNow)
+				updateWorkflowConfigModel.WorkflowURL = core.StringPtr("https://xxxxx.service-now.com")
+				updateWorkflowConfigModel.ApprovalGroupName = core.StringPtr("WorkflowCRApprovers")
+				updateWorkflowConfigModel.ApprovalExpiration = core.Int64Ptr(int64(5))
+				updateWorkflowConfigModel.WorkflowCredentials = externalServiceNowCredentialsModel
+				updateWorkflowConfigModel.Enabled = core.BoolPtr(true)
 
 				// Construct an instance of the UpdateWorkflowconfigOptions model
 				updateWorkflowconfigOptionsModel := new(appconfigurationv1.UpdateWorkflowconfigOptions)
 				updateWorkflowconfigOptionsModel.EnvironmentID = core.StringPtr("environment_id")
-				updateWorkflowconfigOptionsModel.UpdateWorkflowConfig = updateWorkflowconfigRequestModel
+				updateWorkflowconfigOptionsModel.UpdateWorkflowConfig = updateWorkflowConfigModel
 				updateWorkflowconfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
@@ -10415,25 +10416,25 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(appConfigurationService).ToNot(BeNil())
 
-				// Construct an instance of the WorkflowCredentials model
-				workflowCredentialsModel := new(appconfigurationv1.WorkflowCredentials)
-				workflowCredentialsModel.Username = core.StringPtr("user")
-				workflowCredentialsModel.Password = core.StringPtr("updated password")
-				workflowCredentialsModel.ClientID = core.StringPtr("client id value")
-				workflowCredentialsModel.ClientSecret = core.StringPtr("updated client secret")
+				// Construct an instance of the ExternalServiceNowCredentials model
+				externalServiceNowCredentialsModel := new(appconfigurationv1.ExternalServiceNowCredentials)
+				externalServiceNowCredentialsModel.Username = core.StringPtr("user")
+				externalServiceNowCredentialsModel.Password = core.StringPtr("updated password")
+				externalServiceNowCredentialsModel.ClientID = core.StringPtr("client id value")
+				externalServiceNowCredentialsModel.ClientSecret = core.StringPtr("updated client secret")
 
-				// Construct an instance of the UpdateWorkflowconfigRequestUpdateWorkflowConfig model
-				updateWorkflowconfigRequestModel := new(appconfigurationv1.UpdateWorkflowconfigRequestUpdateWorkflowConfig)
-				updateWorkflowconfigRequestModel.WorkflowURL = core.StringPtr("https://xxxxx.service-now.com")
-				updateWorkflowconfigRequestModel.ApprovalGroupName = core.StringPtr("WorkflowCRApprovers")
-				updateWorkflowconfigRequestModel.ApprovalExpiration = core.Int64Ptr(int64(5))
-				updateWorkflowconfigRequestModel.WorkflowCredentials = workflowCredentialsModel
-				updateWorkflowconfigRequestModel.Enabled = core.BoolPtr(true)
+				// Construct an instance of the UpdateWorkflowConfigUpdateExternalServiceNow model
+				updateWorkflowConfigModel := new(appconfigurationv1.UpdateWorkflowConfigUpdateExternalServiceNow)
+				updateWorkflowConfigModel.WorkflowURL = core.StringPtr("https://xxxxx.service-now.com")
+				updateWorkflowConfigModel.ApprovalGroupName = core.StringPtr("WorkflowCRApprovers")
+				updateWorkflowConfigModel.ApprovalExpiration = core.Int64Ptr(int64(5))
+				updateWorkflowConfigModel.WorkflowCredentials = externalServiceNowCredentialsModel
+				updateWorkflowConfigModel.Enabled = core.BoolPtr(true)
 
 				// Construct an instance of the UpdateWorkflowconfigOptions model
 				updateWorkflowconfigOptionsModel := new(appconfigurationv1.UpdateWorkflowconfigOptions)
 				updateWorkflowconfigOptionsModel.EnvironmentID = core.StringPtr("environment_id")
-				updateWorkflowconfigOptionsModel.UpdateWorkflowConfig = updateWorkflowconfigRequestModel
+				updateWorkflowconfigOptionsModel.UpdateWorkflowConfig = updateWorkflowConfigModel
 				updateWorkflowconfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := appConfigurationService.SetServiceURL("")
@@ -10472,25 +10473,25 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(appConfigurationService).ToNot(BeNil())
 
-				// Construct an instance of the WorkflowCredentials model
-				workflowCredentialsModel := new(appconfigurationv1.WorkflowCredentials)
-				workflowCredentialsModel.Username = core.StringPtr("user")
-				workflowCredentialsModel.Password = core.StringPtr("updated password")
-				workflowCredentialsModel.ClientID = core.StringPtr("client id value")
-				workflowCredentialsModel.ClientSecret = core.StringPtr("updated client secret")
+				// Construct an instance of the ExternalServiceNowCredentials model
+				externalServiceNowCredentialsModel := new(appconfigurationv1.ExternalServiceNowCredentials)
+				externalServiceNowCredentialsModel.Username = core.StringPtr("user")
+				externalServiceNowCredentialsModel.Password = core.StringPtr("updated password")
+				externalServiceNowCredentialsModel.ClientID = core.StringPtr("client id value")
+				externalServiceNowCredentialsModel.ClientSecret = core.StringPtr("updated client secret")
 
-				// Construct an instance of the UpdateWorkflowconfigRequestUpdateWorkflowConfig model
-				updateWorkflowconfigRequestModel := new(appconfigurationv1.UpdateWorkflowconfigRequestUpdateWorkflowConfig)
-				updateWorkflowconfigRequestModel.WorkflowURL = core.StringPtr("https://xxxxx.service-now.com")
-				updateWorkflowconfigRequestModel.ApprovalGroupName = core.StringPtr("WorkflowCRApprovers")
-				updateWorkflowconfigRequestModel.ApprovalExpiration = core.Int64Ptr(int64(5))
-				updateWorkflowconfigRequestModel.WorkflowCredentials = workflowCredentialsModel
-				updateWorkflowconfigRequestModel.Enabled = core.BoolPtr(true)
+				// Construct an instance of the UpdateWorkflowConfigUpdateExternalServiceNow model
+				updateWorkflowConfigModel := new(appconfigurationv1.UpdateWorkflowConfigUpdateExternalServiceNow)
+				updateWorkflowConfigModel.WorkflowURL = core.StringPtr("https://xxxxx.service-now.com")
+				updateWorkflowConfigModel.ApprovalGroupName = core.StringPtr("WorkflowCRApprovers")
+				updateWorkflowConfigModel.ApprovalExpiration = core.Int64Ptr(int64(5))
+				updateWorkflowConfigModel.WorkflowCredentials = externalServiceNowCredentialsModel
+				updateWorkflowConfigModel.Enabled = core.BoolPtr(true)
 
 				// Construct an instance of the UpdateWorkflowconfigOptions model
 				updateWorkflowconfigOptionsModel := new(appconfigurationv1.UpdateWorkflowconfigOptions)
 				updateWorkflowconfigOptionsModel.EnvironmentID = core.StringPtr("environment_id")
-				updateWorkflowconfigOptionsModel.UpdateWorkflowConfig = updateWorkflowconfigRequestModel
+				updateWorkflowconfigOptionsModel.UpdateWorkflowConfig = updateWorkflowConfigModel
 				updateWorkflowconfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation
@@ -11891,42 +11892,42 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(createSegmentOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewCreateWorkflowconfigOptions successfully`, func() {
-				// Construct an instance of the WorkflowCredentials model
-				workflowCredentialsModel := new(appconfigurationv1.WorkflowCredentials)
-				Expect(workflowCredentialsModel).ToNot(BeNil())
-				workflowCredentialsModel.Username = core.StringPtr("admin")
-				workflowCredentialsModel.Password = core.StringPtr("testString")
-				workflowCredentialsModel.ClientID = core.StringPtr("f7b6379b55d08210f8ree233afc7256d")
-				workflowCredentialsModel.ClientSecret = core.StringPtr("testString")
-				Expect(workflowCredentialsModel.Username).To(Equal(core.StringPtr("admin")))
-				Expect(workflowCredentialsModel.Password).To(Equal(core.StringPtr("testString")))
-				Expect(workflowCredentialsModel.ClientID).To(Equal(core.StringPtr("f7b6379b55d08210f8ree233afc7256d")))
-				Expect(workflowCredentialsModel.ClientSecret).To(Equal(core.StringPtr("testString")))
+				// Construct an instance of the ExternalServiceNowCredentials model
+				externalServiceNowCredentialsModel := new(appconfigurationv1.ExternalServiceNowCredentials)
+				Expect(externalServiceNowCredentialsModel).ToNot(BeNil())
+				externalServiceNowCredentialsModel.Username = core.StringPtr("admin")
+				externalServiceNowCredentialsModel.Password = core.StringPtr("testString")
+				externalServiceNowCredentialsModel.ClientID = core.StringPtr("f7b6379b55d08210f8ree233afc7256d")
+				externalServiceNowCredentialsModel.ClientSecret = core.StringPtr("testString")
+				Expect(externalServiceNowCredentialsModel.Username).To(Equal(core.StringPtr("admin")))
+				Expect(externalServiceNowCredentialsModel.Password).To(Equal(core.StringPtr("testString")))
+				Expect(externalServiceNowCredentialsModel.ClientID).To(Equal(core.StringPtr("f7b6379b55d08210f8ree233afc7256d")))
+				Expect(externalServiceNowCredentialsModel.ClientSecret).To(Equal(core.StringPtr("testString")))
 
-				// Construct an instance of the CreateWorkflowconfigRequestWorkflowConfig model
-				createWorkflowconfigRequestModel := new(appconfigurationv1.CreateWorkflowconfigRequestWorkflowConfig)
-				Expect(createWorkflowconfigRequestModel).ToNot(BeNil())
-				createWorkflowconfigRequestModel.WorkflowURL = core.StringPtr("testString")
-				createWorkflowconfigRequestModel.ApprovalGroupName = core.StringPtr("testString")
-				createWorkflowconfigRequestModel.ApprovalExpiration = core.Int64Ptr(int64(1))
-				createWorkflowconfigRequestModel.WorkflowCredentials = workflowCredentialsModel
-				createWorkflowconfigRequestModel.Enabled = core.BoolPtr(false)
-				Expect(createWorkflowconfigRequestModel.WorkflowURL).To(Equal(core.StringPtr("testString")))
-				Expect(createWorkflowconfigRequestModel.ApprovalGroupName).To(Equal(core.StringPtr("testString")))
-				Expect(createWorkflowconfigRequestModel.ApprovalExpiration).To(Equal(core.Int64Ptr(int64(1))))
-				Expect(createWorkflowconfigRequestModel.WorkflowCredentials).To(Equal(workflowCredentialsModel))
-				Expect(createWorkflowconfigRequestModel.Enabled).To(Equal(core.BoolPtr(false)))
+				// Construct an instance of the CreateWorkflowConfigExternalServiceNow model
+				createWorkflowConfigModel := new(appconfigurationv1.CreateWorkflowConfigExternalServiceNow)
+				Expect(createWorkflowConfigModel).ToNot(BeNil())
+				createWorkflowConfigModel.WorkflowURL = core.StringPtr("testString")
+				createWorkflowConfigModel.ApprovalGroupName = core.StringPtr("testString")
+				createWorkflowConfigModel.ApprovalExpiration = core.Int64Ptr(int64(1))
+				createWorkflowConfigModel.WorkflowCredentials = externalServiceNowCredentialsModel
+				createWorkflowConfigModel.Enabled = core.BoolPtr(false)
+				Expect(createWorkflowConfigModel.WorkflowURL).To(Equal(core.StringPtr("testString")))
+				Expect(createWorkflowConfigModel.ApprovalGroupName).To(Equal(core.StringPtr("testString")))
+				Expect(createWorkflowConfigModel.ApprovalExpiration).To(Equal(core.Int64Ptr(int64(1))))
+				Expect(createWorkflowConfigModel.WorkflowCredentials).To(Equal(externalServiceNowCredentialsModel))
+				Expect(createWorkflowConfigModel.Enabled).To(Equal(core.BoolPtr(false)))
 
 				// Construct an instance of the CreateWorkflowconfigOptions model
 				environmentID := "environment_id"
-				var workflowConfig appconfigurationv1.CreateWorkflowconfigRequestIntf = nil
+				var workflowConfig appconfigurationv1.CreateWorkflowConfigIntf = nil
 				createWorkflowconfigOptionsModel := appConfigurationService.NewCreateWorkflowconfigOptions(environmentID, workflowConfig)
 				createWorkflowconfigOptionsModel.SetEnvironmentID("environment_id")
-				createWorkflowconfigOptionsModel.SetWorkflowConfig(createWorkflowconfigRequestModel)
+				createWorkflowconfigOptionsModel.SetWorkflowConfig(createWorkflowConfigModel)
 				createWorkflowconfigOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(createWorkflowconfigOptionsModel).ToNot(BeNil())
 				Expect(createWorkflowconfigOptionsModel.EnvironmentID).To(Equal(core.StringPtr("environment_id")))
-				Expect(createWorkflowconfigOptionsModel.WorkflowConfig).To(Equal(createWorkflowconfigRequestModel))
+				Expect(createWorkflowconfigOptionsModel.WorkflowConfig).To(Equal(createWorkflowConfigModel))
 				Expect(createWorkflowconfigOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewDeleteCollectionOptions successfully`, func() {
@@ -12009,6 +12010,15 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				name := "testString"
 				environmentID := "testString"
 				_model, err := appConfigurationService.NewEnvironment(name, environmentID)
+				Expect(_model).ToNot(BeNil())
+				Expect(err).To(BeNil())
+			})
+			It(`Invoke NewExternalServiceNowCredentials successfully`, func() {
+				username := "admin"
+				password := "testString"
+				clientID := "f7b6379b55d08210f8ree233afc7256d"
+				clientSecret := "testString"
+				_model, err := appConfigurationService.NewExternalServiceNowCredentials(username, password, clientID, clientSecret)
 				Expect(_model).ToNot(BeNil())
 				Expect(err).To(BeNil())
 			})
@@ -12858,72 +12868,63 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(updateSegmentOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewUpdateWorkflowconfigOptions successfully`, func() {
-				// Construct an instance of the WorkflowCredentials model
-				workflowCredentialsModel := new(appconfigurationv1.WorkflowCredentials)
-				Expect(workflowCredentialsModel).ToNot(BeNil())
-				workflowCredentialsModel.Username = core.StringPtr("admin")
-				workflowCredentialsModel.Password = core.StringPtr("testString")
-				workflowCredentialsModel.ClientID = core.StringPtr("f7b6379b55d08210f8ree233afc7256d")
-				workflowCredentialsModel.ClientSecret = core.StringPtr("testString")
-				Expect(workflowCredentialsModel.Username).To(Equal(core.StringPtr("admin")))
-				Expect(workflowCredentialsModel.Password).To(Equal(core.StringPtr("testString")))
-				Expect(workflowCredentialsModel.ClientID).To(Equal(core.StringPtr("f7b6379b55d08210f8ree233afc7256d")))
-				Expect(workflowCredentialsModel.ClientSecret).To(Equal(core.StringPtr("testString")))
+				// Construct an instance of the ExternalServiceNowCredentials model
+				externalServiceNowCredentialsModel := new(appconfigurationv1.ExternalServiceNowCredentials)
+				Expect(externalServiceNowCredentialsModel).ToNot(BeNil())
+				externalServiceNowCredentialsModel.Username = core.StringPtr("admin")
+				externalServiceNowCredentialsModel.Password = core.StringPtr("testString")
+				externalServiceNowCredentialsModel.ClientID = core.StringPtr("f7b6379b55d08210f8ree233afc7256d")
+				externalServiceNowCredentialsModel.ClientSecret = core.StringPtr("testString")
+				Expect(externalServiceNowCredentialsModel.Username).To(Equal(core.StringPtr("admin")))
+				Expect(externalServiceNowCredentialsModel.Password).To(Equal(core.StringPtr("testString")))
+				Expect(externalServiceNowCredentialsModel.ClientID).To(Equal(core.StringPtr("f7b6379b55d08210f8ree233afc7256d")))
+				Expect(externalServiceNowCredentialsModel.ClientSecret).To(Equal(core.StringPtr("testString")))
 
-				// Construct an instance of the UpdateWorkflowconfigRequestUpdateWorkflowConfig model
-				updateWorkflowconfigRequestModel := new(appconfigurationv1.UpdateWorkflowconfigRequestUpdateWorkflowConfig)
-				Expect(updateWorkflowconfigRequestModel).ToNot(BeNil())
-				updateWorkflowconfigRequestModel.WorkflowURL = core.StringPtr("testString")
-				updateWorkflowconfigRequestModel.ApprovalGroupName = core.StringPtr("testString")
-				updateWorkflowconfigRequestModel.ApprovalExpiration = core.Int64Ptr(int64(1))
-				updateWorkflowconfigRequestModel.WorkflowCredentials = workflowCredentialsModel
-				updateWorkflowconfigRequestModel.Enabled = core.BoolPtr(false)
-				Expect(updateWorkflowconfigRequestModel.WorkflowURL).To(Equal(core.StringPtr("testString")))
-				Expect(updateWorkflowconfigRequestModel.ApprovalGroupName).To(Equal(core.StringPtr("testString")))
-				Expect(updateWorkflowconfigRequestModel.ApprovalExpiration).To(Equal(core.Int64Ptr(int64(1))))
-				Expect(updateWorkflowconfigRequestModel.WorkflowCredentials).To(Equal(workflowCredentialsModel))
-				Expect(updateWorkflowconfigRequestModel.Enabled).To(Equal(core.BoolPtr(false)))
+				// Construct an instance of the UpdateWorkflowConfigUpdateExternalServiceNow model
+				updateWorkflowConfigModel := new(appconfigurationv1.UpdateWorkflowConfigUpdateExternalServiceNow)
+				Expect(updateWorkflowConfigModel).ToNot(BeNil())
+				updateWorkflowConfigModel.WorkflowURL = core.StringPtr("testString")
+				updateWorkflowConfigModel.ApprovalGroupName = core.StringPtr("testString")
+				updateWorkflowConfigModel.ApprovalExpiration = core.Int64Ptr(int64(1))
+				updateWorkflowConfigModel.WorkflowCredentials = externalServiceNowCredentialsModel
+				updateWorkflowConfigModel.Enabled = core.BoolPtr(false)
+				Expect(updateWorkflowConfigModel.WorkflowURL).To(Equal(core.StringPtr("testString")))
+				Expect(updateWorkflowConfigModel.ApprovalGroupName).To(Equal(core.StringPtr("testString")))
+				Expect(updateWorkflowConfigModel.ApprovalExpiration).To(Equal(core.Int64Ptr(int64(1))))
+				Expect(updateWorkflowConfigModel.WorkflowCredentials).To(Equal(externalServiceNowCredentialsModel))
+				Expect(updateWorkflowConfigModel.Enabled).To(Equal(core.BoolPtr(false)))
 
 				// Construct an instance of the UpdateWorkflowconfigOptions model
 				environmentID := "environment_id"
-				var updateWorkflowConfig appconfigurationv1.UpdateWorkflowconfigRequestIntf = nil
+				var updateWorkflowConfig appconfigurationv1.UpdateWorkflowConfigIntf = nil
 				updateWorkflowconfigOptionsModel := appConfigurationService.NewUpdateWorkflowconfigOptions(environmentID, updateWorkflowConfig)
 				updateWorkflowconfigOptionsModel.SetEnvironmentID("environment_id")
-				updateWorkflowconfigOptionsModel.SetUpdateWorkflowConfig(updateWorkflowconfigRequestModel)
+				updateWorkflowconfigOptionsModel.SetUpdateWorkflowConfig(updateWorkflowConfigModel)
 				updateWorkflowconfigOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(updateWorkflowconfigOptionsModel).ToNot(BeNil())
 				Expect(updateWorkflowconfigOptionsModel.EnvironmentID).To(Equal(core.StringPtr("environment_id")))
-				Expect(updateWorkflowconfigOptionsModel.UpdateWorkflowConfig).To(Equal(updateWorkflowconfigRequestModel))
+				Expect(updateWorkflowconfigOptionsModel.UpdateWorkflowConfig).To(Equal(updateWorkflowConfigModel))
 				Expect(updateWorkflowconfigOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
-			It(`Invoke NewWorkflowCredentials successfully`, func() {
-				username := "admin"
-				password := "testString"
-				clientID := "f7b6379b55d08210f8ree233afc7256d"
-				clientSecret := "testString"
-				_model, err := appConfigurationService.NewWorkflowCredentials(username, password, clientID, clientSecret)
-				Expect(_model).ToNot(BeNil())
-				Expect(err).To(BeNil())
+			It(`Invoke NewCreateWorkflowConfigExternalServiceNow successfully`, func() {
+				workflowURL := "testString"
+				approvalGroupName := "testString"
+				approvalExpiration := int64(1)
+				var workflowCredentials *appconfigurationv1.ExternalServiceNowCredentials = nil
+				enabled := false
+				_, err := appConfigurationService.NewCreateWorkflowConfigExternalServiceNow(workflowURL, approvalGroupName, approvalExpiration, workflowCredentials, enabled)
+				Expect(err).ToNot(BeNil())
 			})
-			It(`Invoke NewCreateWorkflowconfigRequestIbmWorkflowConfig successfully`, func() {
+			It(`Invoke NewCreateWorkflowConfigIBMServiceNow successfully`, func() {
 				serviceCrn := "testString"
 				workflowType := "testString"
 				approvalExpiration := int64(1)
 				smInstanceCrn := "testString"
 				secretID := "testString"
 				enabled := false
-				_model, err := appConfigurationService.NewCreateWorkflowconfigRequestIbmWorkflowConfig(serviceCrn, workflowType, approvalExpiration, smInstanceCrn, secretID, enabled)
+				_model, err := appConfigurationService.NewCreateWorkflowConfigIBMServiceNow(serviceCrn, workflowType, approvalExpiration, smInstanceCrn, secretID, enabled)
 				Expect(_model).ToNot(BeNil())
 				Expect(err).To(BeNil())
-			})
-			It(`Invoke NewCreateWorkflowconfigRequestWorkflowConfig successfully`, func() {
-				workflowURL := "testString"
-				approvalGroupName := "testString"
-				approvalExpiration := int64(1)
-				var workflowCredentials *appconfigurationv1.WorkflowCredentials = nil
-				enabled := false
-				_, err := appConfigurationService.NewCreateWorkflowconfigRequestWorkflowConfig(workflowURL, approvalGroupName, approvalExpiration, workflowCredentials, enabled)
-				Expect(err).ToNot(BeNil())
 			})
 		})
 	})
@@ -12977,9 +12978,9 @@ var _ = Describe(`AppConfigurationV1`, func() {
 			Expect(result).ToNot(BeNil())
 			Expect(result).To(Equal(model))
 		})
-		It(`Invoke UnmarshalCreateWorkflowconfigRequest successfully`, func() {
+		It(`Invoke UnmarshalCreateWorkflowConfig successfully`, func() {
 			// Construct an instance of the model.
-			model := new(appconfigurationv1.CreateWorkflowconfigRequest)
+			model := new(appconfigurationv1.CreateWorkflowConfig)
 			model.EnvironmentName = core.StringPtr("testString")
 			model.EnvironmentID = core.StringPtr("testString")
 			model.WorkflowURL = core.StringPtr("testString")
@@ -13002,8 +13003,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 			err = json.Unmarshal(b, &raw)
 			Expect(err).To(BeNil())
 
-			var result *appconfigurationv1.CreateWorkflowconfigRequest
-			err = appconfigurationv1.UnmarshalCreateWorkflowconfigRequest(raw, &result)
+			var result *appconfigurationv1.CreateWorkflowConfig
+			err = appconfigurationv1.UnmarshalCreateWorkflowConfig(raw, &result)
 			Expect(err).To(BeNil())
 			Expect(result).ToNot(BeNil())
 			Expect(result).To(Equal(model))
@@ -13032,6 +13033,27 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 			var result *appconfigurationv1.Environment
 			err = appconfigurationv1.UnmarshalEnvironment(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalExternalServiceNowCredentials successfully`, func() {
+			// Construct an instance of the model.
+			model := new(appconfigurationv1.ExternalServiceNowCredentials)
+			model.Username = core.StringPtr("admin")
+			model.Password = core.StringPtr("testString")
+			model.ClientID = core.StringPtr("f7b6379b55d08210f8ree233afc7256d")
+			model.ClientSecret = core.StringPtr("testString")
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *appconfigurationv1.ExternalServiceNowCredentials
+			err = appconfigurationv1.UnmarshalExternalServiceNowCredentials(raw, &result)
 			Expect(err).To(BeNil())
 			Expect(result).ToNot(BeNil())
 			Expect(result).To(Equal(model))
@@ -13374,9 +13396,9 @@ var _ = Describe(`AppConfigurationV1`, func() {
 			Expect(result).ToNot(BeNil())
 			Expect(result).To(Equal(model))
 		})
-		It(`Invoke UnmarshalUpdateWorkflowconfigRequest successfully`, func() {
+		It(`Invoke UnmarshalUpdateWorkflowConfig successfully`, func() {
 			// Construct an instance of the model.
-			model := new(appconfigurationv1.UpdateWorkflowconfigRequest)
+			model := new(appconfigurationv1.UpdateWorkflowConfig)
 			model.WorkflowURL = core.StringPtr("testString")
 			model.ApprovalGroupName = core.StringPtr("testString")
 			model.ApprovalExpiration = core.Int64Ptr(int64(1))
@@ -13393,19 +13415,25 @@ var _ = Describe(`AppConfigurationV1`, func() {
 			err = json.Unmarshal(b, &raw)
 			Expect(err).To(BeNil())
 
-			var result *appconfigurationv1.UpdateWorkflowconfigRequest
-			err = appconfigurationv1.UnmarshalUpdateWorkflowconfigRequest(raw, &result)
+			var result *appconfigurationv1.UpdateWorkflowConfig
+			err = appconfigurationv1.UnmarshalUpdateWorkflowConfig(raw, &result)
 			Expect(err).To(BeNil())
 			Expect(result).ToNot(BeNil())
 			Expect(result).To(Equal(model))
 		})
-		It(`Invoke UnmarshalWorkflowCredentials successfully`, func() {
+		It(`Invoke UnmarshalCreateWorkflowConfigExternalServiceNow successfully`, func() {
 			// Construct an instance of the model.
-			model := new(appconfigurationv1.WorkflowCredentials)
-			model.Username = core.StringPtr("admin")
-			model.Password = core.StringPtr("testString")
-			model.ClientID = core.StringPtr("f7b6379b55d08210f8ree233afc7256d")
-			model.ClientSecret = core.StringPtr("testString")
+			model := new(appconfigurationv1.CreateWorkflowConfigExternalServiceNow)
+			model.EnvironmentName = core.StringPtr("testString")
+			model.EnvironmentID = core.StringPtr("testString")
+			model.WorkflowURL = core.StringPtr("testString")
+			model.ApprovalGroupName = core.StringPtr("testString")
+			model.ApprovalExpiration = core.Int64Ptr(int64(1))
+			model.WorkflowCredentials = nil
+			model.Enabled = core.BoolPtr(false)
+			model.CreatedTime = CreateMockDateTime("2022-11-15T23:20:50.000Z")
+			model.UpdatedTime = CreateMockDateTime("2022-11-16T21:20:50.000Z")
+			model.Href = core.StringPtr("testString")
 
 			b, err := json.Marshal(model)
 			Expect(err).To(BeNil())
@@ -13414,15 +13442,15 @@ var _ = Describe(`AppConfigurationV1`, func() {
 			err = json.Unmarshal(b, &raw)
 			Expect(err).To(BeNil())
 
-			var result *appconfigurationv1.WorkflowCredentials
-			err = appconfigurationv1.UnmarshalWorkflowCredentials(raw, &result)
+			var result *appconfigurationv1.CreateWorkflowConfigExternalServiceNow
+			err = appconfigurationv1.UnmarshalCreateWorkflowConfigExternalServiceNow(raw, &result)
 			Expect(err).To(BeNil())
 			Expect(result).ToNot(BeNil())
 			Expect(result).To(Equal(model))
 		})
-		It(`Invoke UnmarshalCreateWorkflowconfigRequestIbmWorkflowConfig successfully`, func() {
+		It(`Invoke UnmarshalCreateWorkflowConfigIBMServiceNow successfully`, func() {
 			// Construct an instance of the model.
-			model := new(appconfigurationv1.CreateWorkflowconfigRequestIbmWorkflowConfig)
+			model := new(appconfigurationv1.CreateWorkflowConfigIBMServiceNow)
 			model.EnvironmentName = core.StringPtr("testString")
 			model.EnvironmentID = core.StringPtr("testString")
 			model.ServiceCrn = core.StringPtr("testString")
@@ -13442,25 +13470,20 @@ var _ = Describe(`AppConfigurationV1`, func() {
 			err = json.Unmarshal(b, &raw)
 			Expect(err).To(BeNil())
 
-			var result *appconfigurationv1.CreateWorkflowconfigRequestIbmWorkflowConfig
-			err = appconfigurationv1.UnmarshalCreateWorkflowconfigRequestIbmWorkflowConfig(raw, &result)
+			var result *appconfigurationv1.CreateWorkflowConfigIBMServiceNow
+			err = appconfigurationv1.UnmarshalCreateWorkflowConfigIBMServiceNow(raw, &result)
 			Expect(err).To(BeNil())
 			Expect(result).ToNot(BeNil())
 			Expect(result).To(Equal(model))
 		})
-		It(`Invoke UnmarshalCreateWorkflowconfigRequestWorkflowConfig successfully`, func() {
+		It(`Invoke UnmarshalUpdateWorkflowConfigUpdateExternalServiceNow successfully`, func() {
 			// Construct an instance of the model.
-			model := new(appconfigurationv1.CreateWorkflowconfigRequestWorkflowConfig)
-			model.EnvironmentName = core.StringPtr("testString")
-			model.EnvironmentID = core.StringPtr("testString")
+			model := new(appconfigurationv1.UpdateWorkflowConfigUpdateExternalServiceNow)
 			model.WorkflowURL = core.StringPtr("testString")
 			model.ApprovalGroupName = core.StringPtr("testString")
 			model.ApprovalExpiration = core.Int64Ptr(int64(1))
 			model.WorkflowCredentials = nil
 			model.Enabled = core.BoolPtr(false)
-			model.CreatedTime = CreateMockDateTime("2022-11-15T23:20:50.000Z")
-			model.UpdatedTime = CreateMockDateTime("2022-11-16T21:20:50.000Z")
-			model.Href = core.StringPtr("testString")
 
 			b, err := json.Marshal(model)
 			Expect(err).To(BeNil())
@@ -13469,15 +13492,15 @@ var _ = Describe(`AppConfigurationV1`, func() {
 			err = json.Unmarshal(b, &raw)
 			Expect(err).To(BeNil())
 
-			var result *appconfigurationv1.CreateWorkflowconfigRequestWorkflowConfig
-			err = appconfigurationv1.UnmarshalCreateWorkflowconfigRequestWorkflowConfig(raw, &result)
+			var result *appconfigurationv1.UpdateWorkflowConfigUpdateExternalServiceNow
+			err = appconfigurationv1.UnmarshalUpdateWorkflowConfigUpdateExternalServiceNow(raw, &result)
 			Expect(err).To(BeNil())
 			Expect(result).ToNot(BeNil())
 			Expect(result).To(Equal(model))
 		})
-		It(`Invoke UnmarshalUpdateWorkflowconfigRequestUpdateIbmWorkflowConfig successfully`, func() {
+		It(`Invoke UnmarshalUpdateWorkflowConfigUpdateIBMServiceNow successfully`, func() {
 			// Construct an instance of the model.
-			model := new(appconfigurationv1.UpdateWorkflowconfigRequestUpdateIbmWorkflowConfig)
+			model := new(appconfigurationv1.UpdateWorkflowConfigUpdateIBMServiceNow)
 			model.ServiceCrn = core.StringPtr("testString")
 			model.ApprovalExpiration = core.Int64Ptr(int64(1))
 			model.SmInstanceCrn = core.StringPtr("testString")
@@ -13491,30 +13514,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 			err = json.Unmarshal(b, &raw)
 			Expect(err).To(BeNil())
 
-			var result *appconfigurationv1.UpdateWorkflowconfigRequestUpdateIbmWorkflowConfig
-			err = appconfigurationv1.UnmarshalUpdateWorkflowconfigRequestUpdateIbmWorkflowConfig(raw, &result)
-			Expect(err).To(BeNil())
-			Expect(result).ToNot(BeNil())
-			Expect(result).To(Equal(model))
-		})
-		It(`Invoke UnmarshalUpdateWorkflowconfigRequestUpdateWorkflowConfig successfully`, func() {
-			// Construct an instance of the model.
-			model := new(appconfigurationv1.UpdateWorkflowconfigRequestUpdateWorkflowConfig)
-			model.WorkflowURL = core.StringPtr("testString")
-			model.ApprovalGroupName = core.StringPtr("testString")
-			model.ApprovalExpiration = core.Int64Ptr(int64(1))
-			model.WorkflowCredentials = nil
-			model.Enabled = core.BoolPtr(false)
-
-			b, err := json.Marshal(model)
-			Expect(err).To(BeNil())
-
-			var raw map[string]json.RawMessage
-			err = json.Unmarshal(b, &raw)
-			Expect(err).To(BeNil())
-
-			var result *appconfigurationv1.UpdateWorkflowconfigRequestUpdateWorkflowConfig
-			err = appconfigurationv1.UnmarshalUpdateWorkflowconfigRequestUpdateWorkflowConfig(raw, &result)
+			var result *appconfigurationv1.UpdateWorkflowConfigUpdateIBMServiceNow
+			err = appconfigurationv1.UnmarshalUpdateWorkflowConfigUpdateIBMServiceNow(raw, &result)
 			Expect(err).To(BeNil())
 			Expect(result).ToNot(BeNil())
 			Expect(result).To(Equal(model))
@@ -13522,7 +13523,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 	})
 	Describe(`Utility function tests`, func() {
 		It(`Invoke CreateMockByteArray() successfully`, func() {
-			mockByteArray := CreateMockByteArray("This is a test")
+			mockByteArray := CreateMockByteArray("VGhpcyBpcyBhIHRlc3Qgb2YgdGhlIGVtZXJnZW5jeSBicm9hZGNhc3Qgc3lzdGVt") // pragma: allowlist secret
 			Expect(mockByteArray).ToNot(BeNil())
 		})
 		It(`Invoke CreateMockUUID() successfully`, func() {
@@ -13548,8 +13549,11 @@ var _ = Describe(`AppConfigurationV1`, func() {
 // Utility functions used by the generated test code
 //
 
-func CreateMockByteArray(mockData string) *[]byte {
-	ba := []byte(mockData)
+func CreateMockByteArray(encodedString string) *[]byte {
+	ba, err := base64.StdEncoding.DecodeString(encodedString)
+	if err != nil {
+		panic(err)
+	}
 	return &ba
 }
 
