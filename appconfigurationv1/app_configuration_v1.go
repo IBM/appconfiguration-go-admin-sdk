@@ -15,7 +15,7 @@
  */
 
 /*
- * IBM OpenAPI SDK Code Generator Version: 3.89.1-ed9d96f4-20240417-193115
+ * IBM OpenAPI SDK Code Generator Version: 3.97.1-d6730d2a-20241125-163317
  */
 
 // Package appconfigurationv1 : Operations and models for the AppConfigurationV1 service
@@ -3207,7 +3207,7 @@ func (appConfiguration *AppConfigurationV1) UpdateOriginconfigsWithContext(ctx c
 }
 
 // ListWorkflowconfig : Get Workflow Config
-// Get the environment specific workflow Configs.
+// Get the environment specific workflow configs.
 func (appConfiguration *AppConfigurationV1) ListWorkflowconfig(listWorkflowconfigOptions *ListWorkflowconfigOptions) (result ListWorkflowconfigResponseIntf, response *core.DetailedResponse, err error) {
 	result, response, err = appConfiguration.ListWorkflowconfigWithContext(context.Background(), listWorkflowconfigOptions)
 	err = core.RepurposeSDKProblem(err, "")
@@ -3712,10 +3712,10 @@ type Collection struct {
 	// Collection Id. Allowed special characters are dot ( . ), hyphen( - ), underscore ( _ ) only.
 	CollectionID *string `json:"collection_id" validate:"required"`
 
-	// Collection description.
+	// Collection description, allowed special characters are [.,-_ :()$&%#!].
 	Description *string `json:"description,omitempty"`
 
-	// Tags associated with the collection.
+	// Tags associated with the collection, allowed special characters are [_. ,-:].
 	Tags *string `json:"tags,omitempty"`
 
 	// Creation time of the collection.
@@ -3934,10 +3934,10 @@ type CollectionLite struct {
 	// Collection Id. Allowed special characters are dot ( . ), hyphen( - ), underscore ( _ ) only.
 	CollectionID *string `json:"collection_id" validate:"required"`
 
-	// Collection description.
+	// Collection description, allowed special characters are [.,-_ :()$&%#!].
 	Description *string `json:"description,omitempty"`
 
-	// Tags associated with the collection.
+	// Tags associated with the collection, allowed special characters are [_. ,-:].
 	Tags *string `json:"tags,omitempty"`
 
 	// Creation time of the collection.
@@ -4099,13 +4099,13 @@ type CreateCollectionOptions struct {
 	// Collection Id. Allowed special characters are dot ( . ), hyphen( - ), underscore ( _ ) only.
 	CollectionID *string `json:"collection_id" validate:"required"`
 
-	// Collection description.
+	// Collection description, allowed special characters are [.,-_ :()$&%#!].
 	Description *string `json:"description,omitempty"`
 
-	// Tags associated with the collection.
+	// Tags associated with the collection, allowed special characters are [_. ,-:].
 	Tags *string `json:"tags,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -4155,16 +4155,16 @@ type CreateEnvironmentOptions struct {
 	// Environment id. Allowed special characters are dot ( . ), hyphen( - ), underscore ( _ ) only.
 	EnvironmentID *string `json:"environment_id" validate:"required"`
 
-	// Environment description.
+	// Environment description, allowed special characters are [.,-_ :()$&%#!].
 	Description *string `json:"description,omitempty"`
 
-	// Tags associated with the environment.
+	// Tags associated with the environment, allowed special characters are [_. ,-:].
 	Tags *string `json:"tags,omitempty"`
 
 	// Color code to distinguish the environment. The Hex code for the color. For example `#FF0000` for `red`.
 	ColorCode *string `json:"color_code,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -4234,7 +4234,7 @@ type CreateFeatureOptions struct {
 	// YAML value as per the `type` and `format` attributes.
 	DisabledValue interface{} `json:"disabled_value" validate:"required"`
 
-	// Feature description.
+	// Feature description, allowed special characters are [.,-_ :()$&%#!].
 	Description *string `json:"description,omitempty"`
 
 	// Format of the feature (TEXT, JSON, YAML) and it is a required attribute when `type` is `STRING`. It is not required
@@ -4248,7 +4248,7 @@ type CreateFeatureOptions struct {
 	// Rollout percentage associated with feature flag. Supported only for Lite and Enterprise plans.
 	RolloutPercentage *int64 `json:"rollout_percentage,omitempty"`
 
-	// Tags associated with the feature.
+	// Tags associated with the feature, allowed special characters are [_. ,-:].
 	Tags *string `json:"tags,omitempty"`
 
 	// Specify the targeting rules that is used to set different feature flag values for different segments.
@@ -4257,7 +4257,7 @@ type CreateFeatureOptions struct {
 	// List of collection id representing the collections that are associated with the specified feature flag.
 	Collections []CollectionRef `json:"collections,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -4497,7 +4497,7 @@ type CreateGitconfigOptions struct {
 	// Git token, this needs to be provided with enough permission to write and update the file.
 	GitToken *string `json:"git_token" validate:"required"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -4588,7 +4588,7 @@ type CreatePropertyOptions struct {
 	// per the `type` and `format` attributes.
 	Value interface{} `json:"value" validate:"required"`
 
-	// Property description.
+	// Property description, allowed special characters are [.,-_ :()$&%#!].
 	Description *string `json:"description,omitempty"`
 
 	// Format of the property (TEXT, JSON, YAML) and it is a required attribute when `type` is `STRING`. It is not required
@@ -4596,7 +4596,7 @@ type CreatePropertyOptions struct {
 	// GET` calls if the type `STRING` is used and not populated for `BOOLEAN`, `NUMERIC` and `SECRETREF` types.
 	Format *string `json:"format,omitempty"`
 
-	// Tags associated with the property.
+	// Tags associated with the property, allowed special characters are [_. ,-:].
 	Tags *string `json:"tags,omitempty"`
 
 	// Specify the targeting rules that is used to set different property values for different segments.
@@ -4605,7 +4605,7 @@ type CreatePropertyOptions struct {
 	// List of collection id representing the collections that are associated with the specified property.
 	Collections []CollectionRef `json:"collections,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -4719,13 +4719,13 @@ type CreateSegmentOptions struct {
 	// evaluation is performed in the context of an entity when it is targeted to segments.
 	Rules []Rule `json:"rules" validate:"required"`
 
-	// Segment description.
+	// Segment description, allowed special characters are [.,-_ :()$&%#!].
 	Description *string `json:"description,omitempty"`
 
-	// Tags associated with the segments.
+	// Tags associated with the segments, allowed special characters are [_. ,-:].
 	Tags *string `json:"tags,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -4774,49 +4774,11 @@ func (options *CreateSegmentOptions) SetHeaders(param map[string]string) *Create
 	return options
 }
 
-// CreateWorkflowconfigOptions : The CreateWorkflowconfig options.
-type CreateWorkflowconfigOptions struct {
-	// Environment Id.
-	EnvironmentID *string `json:"environment_id" validate:"required,ne="`
-
-	// The request body to create a new external workflow config.
-	WorkflowConfig CreateWorkflowconfigRequestIntf `json:"WorkflowConfig" validate:"required"`
-
-	// Allows users to set headers on API requests
-	Headers map[string]string
-}
-
-// NewCreateWorkflowconfigOptions : Instantiate CreateWorkflowconfigOptions
-func (*AppConfigurationV1) NewCreateWorkflowconfigOptions(environmentID string, workflowConfig CreateWorkflowconfigRequestIntf) *CreateWorkflowconfigOptions {
-	return &CreateWorkflowconfigOptions{
-		EnvironmentID: core.StringPtr(environmentID),
-		WorkflowConfig: workflowConfig,
-	}
-}
-
-// SetEnvironmentID : Allow user to set EnvironmentID
-func (_options *CreateWorkflowconfigOptions) SetEnvironmentID(environmentID string) *CreateWorkflowconfigOptions {
-	_options.EnvironmentID = core.StringPtr(environmentID)
-	return _options
-}
-
-// SetWorkflowConfig : Allow user to set WorkflowConfig
-func (_options *CreateWorkflowconfigOptions) SetWorkflowConfig(workflowConfig CreateWorkflowconfigRequestIntf) *CreateWorkflowconfigOptions {
-	_options.WorkflowConfig = workflowConfig
-	return _options
-}
-
-// SetHeaders : Allow user to set Headers
-func (options *CreateWorkflowconfigOptions) SetHeaders(param map[string]string) *CreateWorkflowconfigOptions {
-	options.Headers = param
-	return options
-}
-
-// CreateWorkflowconfigRequest : CreateWorkflowconfigRequest struct
+// CreateWorkflowConfig : CreateWorkflowConfig struct
 // Models which "extend" this model:
-// - CreateWorkflowconfigRequestWorkflowConfig
-// - CreateWorkflowconfigRequestIbmWorkflowConfig
-type CreateWorkflowconfigRequest struct {
+// - CreateWorkflowConfigExternalServiceNow
+// - CreateWorkflowConfigIBMServiceNow
+type CreateWorkflowConfig struct {
 	// Environment name of workflow config in which it is created.
 	EnvironmentName *string `json:"environment_name,omitempty"`
 
@@ -4826,15 +4788,15 @@ type CreateWorkflowconfigRequest struct {
 	// Only service now url https://xxxxx.service-now.com allowed, xxxxx is the service now instance id.
 	WorkflowURL *string `json:"workflow_url,omitempty"`
 
-	// Group name of personals who can approve the Change Request on your Service Now. It must be first registered in your
-	// Service Now then it must be added here.
+	// Group name of personals who can approve the Change Request on your ServiceNow. It must be first registered in your
+	// ServiceNow then it must be added here.
 	ApprovalGroupName *string `json:"approval_group_name,omitempty"`
 
 	// Integer number identifies as hours which helps in adding approval start and end time to the created Change Request.
 	ApprovalExpiration *int64 `json:"approval_expiration,omitempty"`
 
-	// The credentials of the Service Now instance.
-	WorkflowCredentials *WorkflowCredentials `json:"workflow_credentials,omitempty"`
+	// The credentials of the External ServiceNow instance.
+	WorkflowCredentials *ExternalServiceNowCredentials `json:"workflow_credentials,omitempty"`
 
 	// This option enables the workflow configuration per environment. User must set it to true if they wish to create
 	// Change Request for flag state changes.
@@ -4863,17 +4825,17 @@ type CreateWorkflowconfigRequest struct {
 	// action on ServiceNow like Create CR or Close CR.
 	SecretID *string `json:"secret_id,omitempty"`
 }
-func (*CreateWorkflowconfigRequest) isaCreateWorkflowconfigRequest() bool {
+func (*CreateWorkflowConfig) isaCreateWorkflowConfig() bool {
 	return true
 }
 
-type CreateWorkflowconfigRequestIntf interface {
-	isaCreateWorkflowconfigRequest() bool
+type CreateWorkflowConfigIntf interface {
+	isaCreateWorkflowConfig() bool
 }
 
-// UnmarshalCreateWorkflowconfigRequest unmarshals an instance of CreateWorkflowconfigRequest from the specified map of raw messages.
-func UnmarshalCreateWorkflowconfigRequest(m map[string]json.RawMessage, result interface{}) (err error) {
-	obj := new(CreateWorkflowconfigRequest)
+// UnmarshalCreateWorkflowConfig unmarshals an instance of CreateWorkflowConfig from the specified map of raw messages.
+func UnmarshalCreateWorkflowConfig(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(CreateWorkflowConfig)
 	err = core.UnmarshalPrimitive(m, "environment_name", &obj.EnvironmentName)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "environment_name-error", common.GetComponentInfo())
@@ -4899,7 +4861,7 @@ func UnmarshalCreateWorkflowconfigRequest(m map[string]json.RawMessage, result i
 		err = core.SDKErrorf(err, "", "approval_expiration-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalModel(m, "workflow_credentials", &obj.WorkflowCredentials, UnmarshalWorkflowCredentials)
+	err = core.UnmarshalModel(m, "workflow_credentials", &obj.WorkflowCredentials, UnmarshalExternalServiceNowCredentials)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "workflow_credentials-error", common.GetComponentInfo())
 		return
@@ -4948,10 +4910,48 @@ func UnmarshalCreateWorkflowconfigRequest(m map[string]json.RawMessage, result i
 	return
 }
 
+// CreateWorkflowconfigOptions : The CreateWorkflowconfig options.
+type CreateWorkflowconfigOptions struct {
+	// Environment Id.
+	EnvironmentID *string `json:"environment_id" validate:"required,ne="`
+
+	// The request body to create a new workflow config.
+	WorkflowConfig CreateWorkflowConfigIntf `json:"WorkflowConfig" validate:"required"`
+
+	// Allows users to set headers on API requests.
+	Headers map[string]string
+}
+
+// NewCreateWorkflowconfigOptions : Instantiate CreateWorkflowconfigOptions
+func (*AppConfigurationV1) NewCreateWorkflowconfigOptions(environmentID string, workflowConfig CreateWorkflowConfigIntf) *CreateWorkflowconfigOptions {
+	return &CreateWorkflowconfigOptions{
+		EnvironmentID: core.StringPtr(environmentID),
+		WorkflowConfig: workflowConfig,
+	}
+}
+
+// SetEnvironmentID : Allow user to set EnvironmentID
+func (_options *CreateWorkflowconfigOptions) SetEnvironmentID(environmentID string) *CreateWorkflowconfigOptions {
+	_options.EnvironmentID = core.StringPtr(environmentID)
+	return _options
+}
+
+// SetWorkflowConfig : Allow user to set WorkflowConfig
+func (_options *CreateWorkflowconfigOptions) SetWorkflowConfig(workflowConfig CreateWorkflowConfigIntf) *CreateWorkflowconfigOptions {
+	_options.WorkflowConfig = workflowConfig
+	return _options
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *CreateWorkflowconfigOptions) SetHeaders(param map[string]string) *CreateWorkflowconfigOptions {
+	options.Headers = param
+	return options
+}
+
 // CreateWorkflowconfigResponse : CreateWorkflowconfigResponse struct
 // Models which "extend" this model:
-// - CreateWorkflowconfigResponseWorkflowConfig
-// - CreateWorkflowconfigResponseIbmWorkflowConfig
+// - CreateWorkflowconfigResponseExternalServiceNow
+// - CreateWorkflowconfigResponseIBMServiceNow
 type CreateWorkflowconfigResponse struct {
 	// Environment name of workflow config in which it is created.
 	EnvironmentName *string `json:"environment_name,omitempty"`
@@ -4962,15 +4962,15 @@ type CreateWorkflowconfigResponse struct {
 	// Only service now url https://xxxxx.service-now.com allowed, xxxxx is the service now instance id.
 	WorkflowURL *string `json:"workflow_url,omitempty"`
 
-	// Group name of personals who can approve the Change Request on your Service Now. It must be first registered in your
-	// Service Now then it must be added here.
+	// Group name of personals who can approve the Change Request on your ServiceNow. It must be first registered in your
+	// ServiceNow then it must be added here.
 	ApprovalGroupName *string `json:"approval_group_name,omitempty"`
 
 	// Integer number identifies as hours which helps in adding approval start and end time to the created Change Request.
 	ApprovalExpiration *int64 `json:"approval_expiration,omitempty"`
 
-	// The credentials of the Service Now instance.
-	WorkflowCredentials *WorkflowCredentials `json:"workflow_credentials,omitempty"`
+	// The credentials of the External ServiceNow instance.
+	WorkflowCredentials *ExternalServiceNowCredentials `json:"workflow_credentials,omitempty"`
 
 	// This option enables the workflow configuration per environment. User must set it to true if they wish to create
 	// Change Request for flag state changes.
@@ -5035,7 +5035,7 @@ func UnmarshalCreateWorkflowconfigResponse(m map[string]json.RawMessage, result 
 		err = core.SDKErrorf(err, "", "approval_expiration-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalModel(m, "workflow_credentials", &obj.WorkflowCredentials, UnmarshalWorkflowCredentials)
+	err = core.UnmarshalModel(m, "workflow_credentials", &obj.WorkflowCredentials, UnmarshalExternalServiceNowCredentials)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "workflow_credentials-error", common.GetComponentInfo())
 		return
@@ -5089,7 +5089,7 @@ type DeleteCollectionOptions struct {
 	// Collection Id of the collection.
 	CollectionID *string `json:"collection_id" validate:"required,ne="`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -5117,7 +5117,7 @@ type DeleteEnvironmentOptions struct {
 	// Environment Id.
 	EnvironmentID *string `json:"environment_id" validate:"required,ne="`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -5148,7 +5148,7 @@ type DeleteFeatureOptions struct {
 	// Feature Id.
 	FeatureID *string `json:"feature_id" validate:"required,ne="`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -5183,7 +5183,7 @@ type DeleteGitconfigOptions struct {
 	// Git Config Id.
 	GitConfigID *string `json:"git_config_id" validate:"required,ne="`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -5214,7 +5214,7 @@ type DeletePropertyOptions struct {
 	// Property Id.
 	PropertyID *string `json:"property_id" validate:"required,ne="`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -5249,7 +5249,7 @@ type DeleteSegmentOptions struct {
 	// Segment Id.
 	SegmentID *string `json:"segment_id" validate:"required,ne="`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -5277,7 +5277,7 @@ type DeleteWorkflowconfigOptions struct {
 	// Environment Id.
 	EnvironmentID *string `json:"environment_id" validate:"required,ne="`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -5308,10 +5308,10 @@ type Environment struct {
 	// Environment id. Allowed special characters are dot ( . ), hyphen( - ), underscore ( _ ) only.
 	EnvironmentID *string `json:"environment_id" validate:"required"`
 
-	// Environment description.
+	// Environment description, allowed special characters are [.,-_ :()$&%#!].
 	Description *string `json:"description,omitempty"`
 
-	// Tags associated with the environment.
+	// Tags associated with the environment, allowed special characters are [_. ,-:].
 	Tags *string `json:"tags,omitempty"`
 
 	// Color code to distinguish the environment. The Hex code for the color. For example `#FF0000` for `red`.
@@ -5506,6 +5506,64 @@ func (resp *EnvironmentList) GetNextOffset() (*int64, error) {
 	return core.Int64Ptr(offsetValue), nil
 }
 
+// ExternalServiceNowCredentials : The credentials of the External ServiceNow instance.
+type ExternalServiceNowCredentials struct {
+	// ServiceNow instance login username.
+	Username *string `json:"username" validate:"required"`
+
+	// ServiceNow instance login password.
+	Password *string `json:"password" validate:"required"`
+
+	// The auto-generated unique ID of the application in your ServiceNow instance.
+	ClientID *string `json:"client_id" validate:"required"`
+
+	// The secret string that both the ServiceNow instance and the client application use to authorize communications with
+	// one another.
+	ClientSecret *string `json:"client_secret" validate:"required"`
+}
+
+// NewExternalServiceNowCredentials : Instantiate ExternalServiceNowCredentials (Generic Model Constructor)
+func (*AppConfigurationV1) NewExternalServiceNowCredentials(username string, password string, clientID string, clientSecret string) (_model *ExternalServiceNowCredentials, err error) {
+	_model = &ExternalServiceNowCredentials{
+		Username: core.StringPtr(username),
+		Password: core.StringPtr(password),
+		ClientID: core.StringPtr(clientID),
+		ClientSecret: core.StringPtr(clientSecret),
+	}
+	err = core.ValidateStruct(_model, "required parameters")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "model-missing-required", common.GetComponentInfo())
+	}
+	return
+}
+
+// UnmarshalExternalServiceNowCredentials unmarshals an instance of ExternalServiceNowCredentials from the specified map of raw messages.
+func UnmarshalExternalServiceNowCredentials(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(ExternalServiceNowCredentials)
+	err = core.UnmarshalPrimitive(m, "username", &obj.Username)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "username-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "password", &obj.Password)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "password-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "client_id", &obj.ClientID)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "client_id-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "client_secret", &obj.ClientSecret)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "client_secret-error", common.GetComponentInfo())
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
 // Feature : Details of the feature.
 type Feature struct {
 	// Feature name. Allowed special characters are dot ( . ), hyphen( - ), underscore ( _ ) only.
@@ -5514,7 +5572,7 @@ type Feature struct {
 	// Feature id. Allowed special characters are dot ( . ), hyphen( - ), underscore ( _ ) only.
 	FeatureID *string `json:"feature_id" validate:"required"`
 
-	// Feature description.
+	// Feature description, allowed special characters are [.,-_ :()$&%#!].
 	Description *string `json:"description,omitempty"`
 
 	// Type of the feature (BOOLEAN, STRING, NUMERIC). If `type` is `STRING`, then `format` attribute is required.
@@ -5539,7 +5597,7 @@ type Feature struct {
 	// Rollout percentage associated with feature flag. Supported only for Lite and Enterprise plans.
 	RolloutPercentage *int64 `json:"rollout_percentage,omitempty"`
 
-	// Tags associated with the feature.
+	// Tags associated with the feature, allowed special characters are [_. ,-:].
 	Tags *string `json:"tags,omitempty"`
 
 	// Specify the targeting rules that is used to set different feature flag values for different segments.
@@ -5893,7 +5951,7 @@ type GetCollectionOptions struct {
 	// Include feature, property, snapshots details in the response.
 	Include []string `json:"include,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -5946,7 +6004,7 @@ type GetEnvironmentOptions struct {
 	// Include feature, property, snapshots details in the response.
 	Include []string `json:"include,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -5999,7 +6057,7 @@ type GetFeatureOptions struct {
 	// Include the associated collections or targeting rules or change request details in the response.
 	Include []string `json:"include,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -6047,7 +6105,7 @@ type GetGitconfigOptions struct {
 	// Git Config Id.
 	GitConfigID *string `json:"git_config_id" validate:"required,ne="`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -6081,7 +6139,7 @@ type GetPropertyOptions struct {
 	// Include the associated collections or targeting rules details in the response.
 	Include []string `json:"include,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -6131,7 +6189,7 @@ type GetSegmentOptions struct {
 	// Include feature and property details in the response.
 	Include []string `json:"include,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -6488,10 +6546,10 @@ type ImportCollectionSchema struct {
 	// Collection name. Allowed special characters are dot ( . ), hyphen( - ), underscore ( _ ) only.
 	Name *string `json:"name" validate:"required"`
 
-	// Description of the collection.
+	// Description of the collection, allowed special characters are [.,-_ :()$&%#!].
 	Description *string `json:"description,omitempty"`
 
-	// Tags associated with the collection.
+	// Tags associated with the collection, allowed special characters are [_. ,-:].
 	Tags *string `json:"tags,omitempty"`
 }
 
@@ -6583,7 +6641,7 @@ type ImportConfigOptions struct {
 	// Full instance import requires query parameter `clean=true` to perform wiping of the existing data.
 	Clean *string `json:"clean,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -6630,10 +6688,10 @@ type ImportEnvironmentSchema struct {
 	// Environment Id. Allowed special characters are dot ( . ), hyphen( - ), underscore ( _ ) only.
 	EnvironmentID *string `json:"environment_id" validate:"required"`
 
-	// Environment description.
+	// Environment description, allowed special characters are [.,-_ :()$&%#!].
 	Description *string `json:"description,omitempty"`
 
-	// Tags associated with the environment.
+	// Tags associated with the environment, allowed special characters are [_. ,-:].
 	Tags *string `json:"tags,omitempty"`
 
 	// Color code to distinguish the environment. The Hex code for the color. For example `#FF0000` for `red`.
@@ -6709,7 +6767,7 @@ type ImportFeatureRequestBody struct {
 	// Feature id. Allowed special characters are dot ( . ), hyphen( - ), underscore ( _ ) only.
 	FeatureID *string `json:"feature_id" validate:"required"`
 
-	// Feature description.
+	// Feature description, allowed special characters are [.,-_ :()$&%#!].
 	Description *string `json:"description,omitempty"`
 
 	// Type of the feature (BOOLEAN, STRING, NUMERIC). If `type` is `STRING`, then `format` attribute is required.
@@ -6734,7 +6792,7 @@ type ImportFeatureRequestBody struct {
 	// Rollout percentage associated with feature flag. Supported only for Lite and Enterprise plans.
 	RolloutPercentage *int64 `json:"rollout_percentage,omitempty"`
 
-	// Tags associated with the feature.
+	// Tags associated with the feature, allowed special characters are [_. ,-:].
 	Tags *string `json:"tags,omitempty"`
 
 	// Specify the targeting rules that is used to set different feature flag values for different segments.
@@ -6862,7 +6920,7 @@ type ImportPropertyRequestBody struct {
 	// Property id. Allowed special characters are dot ( . ), hyphen( - ), underscore ( _ ) only.
 	PropertyID *string `json:"property_id" validate:"required"`
 
-	// Property description.
+	// Property description, allowed special characters are [.,-_ :()$&%#!].
 	Description *string `json:"description,omitempty"`
 
 	// Type of the property (BOOLEAN, STRING, NUMERIC, SECRETREF). If `type` is `STRING`, then `format` attribute is
@@ -6878,7 +6936,7 @@ type ImportPropertyRequestBody struct {
 	// per the `type` and `format` attributes.
 	Value interface{} `json:"value" validate:"required"`
 
-	// Tags associated with the property.
+	// Tags associated with the property, allowed special characters are [_. ,-:].
 	Tags *string `json:"tags,omitempty"`
 
 	// Specify the targeting rules that is used to set different property values for different segments.
@@ -6992,10 +7050,10 @@ type ImportSegmentSchema struct {
 	// Segment id. Allowed special characters are dot ( . ), hyphen( - ), underscore ( _ ) only.
 	SegmentID *string `json:"segment_id" validate:"required"`
 
-	// Segment description.
+	// Segment description, allowed special characters are [.,-_ :()$&%#!].
 	Description *string `json:"description,omitempty"`
 
-	// Tags associated with the segments.
+	// Tags associated with the segments, allowed special characters are [_. ,-:].
 	Tags *string `json:"tags,omitempty"`
 
 	// List of rules that determine if the entity belongs to the segment during feature / property evaluation. An entity is
@@ -7083,7 +7141,7 @@ type ListCollectionsOptions struct {
 	// '[Name OR Tag]' of the entity.
 	Search *string `json:"search,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -7195,7 +7253,7 @@ type ListEnvironmentsOptions struct {
 	// '[Name OR Tag]' of the entity.
 	Search *string `json:"search,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -7304,7 +7362,7 @@ type ListFeaturesOptions struct {
 	// '[Name OR Tag]' of the entity.
 	Search *string `json:"search,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -7400,7 +7458,7 @@ func (options *ListFeaturesOptions) SetHeaders(param map[string]string) *ListFea
 // ListInstanceConfigOptions : The ListInstanceConfig options.
 type ListInstanceConfigOptions struct {
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -7418,7 +7476,7 @@ func (options *ListInstanceConfigOptions) SetHeaders(param map[string]string) *L
 // ListOriginconfigsOptions : The ListOriginconfigs options.
 type ListOriginconfigsOptions struct {
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -7469,7 +7527,7 @@ type ListPropertiesOptions struct {
 	// '[Name OR Tag]' of the entity.
 	Search *string `json:"search,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -7588,7 +7646,7 @@ type ListSegmentsOptions struct {
 	// '[Name OR Tag]' of the entity.
 	Search *string `json:"search,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -7683,7 +7741,7 @@ type ListSnapshotsOptions struct {
 	// '[Name]' of the entity.
 	Search *string `json:"search,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -7748,7 +7806,7 @@ type ListWorkflowconfigOptions struct {
 	// Environment Id.
 	EnvironmentID *string `json:"environment_id" validate:"required,ne="`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -7773,8 +7831,8 @@ func (options *ListWorkflowconfigOptions) SetHeaders(param map[string]string) *L
 
 // ListWorkflowconfigResponse : ListWorkflowconfigResponse struct
 // Models which "extend" this model:
-// - ListWorkflowconfigResponseWorkflowConfig
-// - ListWorkflowconfigResponseIbmWorkflowConfig
+// - ListWorkflowconfigResponseExternalServiceNow
+// - ListWorkflowconfigResponseIBMServiceNow
 type ListWorkflowconfigResponse struct {
 	// Environment name of workflow config in which it is created.
 	EnvironmentName *string `json:"environment_name,omitempty"`
@@ -7785,15 +7843,15 @@ type ListWorkflowconfigResponse struct {
 	// Only service now url https://xxxxx.service-now.com allowed, xxxxx is the service now instance id.
 	WorkflowURL *string `json:"workflow_url,omitempty"`
 
-	// Group name of personals who can approve the Change Request on your Service Now. It must be first registered in your
-	// Service Now then it must be added here.
+	// Group name of personals who can approve the Change Request on your ServiceNow. It must be first registered in your
+	// ServiceNow then it must be added here.
 	ApprovalGroupName *string `json:"approval_group_name,omitempty"`
 
 	// Integer number identifies as hours which helps in adding approval start and end time to the created Change Request.
 	ApprovalExpiration *int64 `json:"approval_expiration,omitempty"`
 
-	// The credentials of the Service Now instance.
-	WorkflowCredentials *WorkflowCredentials `json:"workflow_credentials,omitempty"`
+	// The credentials of the External ServiceNow instance.
+	WorkflowCredentials *ExternalServiceNowCredentials `json:"workflow_credentials,omitempty"`
 
 	// This option enables the workflow configuration per environment. User must set it to true if they wish to create
 	// Change Request for flag state changes.
@@ -7858,7 +7916,7 @@ func UnmarshalListWorkflowconfigResponse(m map[string]json.RawMessage, result in
 		err = core.SDKErrorf(err, "", "approval_expiration-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalModel(m, "workflow_credentials", &obj.WorkflowCredentials, UnmarshalWorkflowCredentials)
+	err = core.UnmarshalModel(m, "workflow_credentials", &obj.WorkflowCredentials, UnmarshalExternalServiceNowCredentials)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "workflow_credentials-error", common.GetComponentInfo())
 		return
@@ -8026,7 +8084,7 @@ type PromoteGitconfigOptions struct {
 	// Git Config Id.
 	GitConfigID *string `json:"git_config_id" validate:"required,ne="`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -8057,7 +8115,7 @@ type PromoteRestoreConfigOptions struct {
 	// Promote configuration to Git or Restore configuration from Git.
 	Action *string `json:"action" validate:"required"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -8197,7 +8255,7 @@ type Property struct {
 	// Property id. Allowed special characters are dot ( . ), hyphen( - ), underscore ( _ ) only.
 	PropertyID *string `json:"property_id" validate:"required"`
 
-	// Property description.
+	// Property description, allowed special characters are [.,-_ :()$&%#!].
 	Description *string `json:"description,omitempty"`
 
 	// Type of the property (BOOLEAN, STRING, NUMERIC, SECRETREF). If `type` is `STRING`, then `format` attribute is
@@ -8213,7 +8271,7 @@ type Property struct {
 	// per the `type` and `format` attributes.
 	Value interface{} `json:"value" validate:"required"`
 
-	// Tags associated with the property.
+	// Tags associated with the property, allowed special characters are [_. ,-:].
 	Tags *string `json:"tags,omitempty"`
 
 	// Specify the targeting rules that is used to set different property values for different segments.
@@ -8394,7 +8452,7 @@ type RestoreGitconfigOptions struct {
 	// Git Config Id.
 	GitConfigID *string `json:"git_config_id" validate:"required,ne="`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -8486,10 +8544,10 @@ type Segment struct {
 	// Segment id. Allowed special characters are dot ( . ), hyphen( - ), underscore ( _ ) only.
 	SegmentID *string `json:"segment_id" validate:"required"`
 
-	// Segment description.
+	// Segment description, allowed special characters are [.,-_ :()$&%#!].
 	Description *string `json:"description,omitempty"`
 
-	// Tags associated with the segments.
+	// Tags associated with the segments, allowed special characters are [_. ,-:].
 	Tags *string `json:"tags,omitempty"`
 
 	// List of rules that determine if the entity belongs to the segment during feature / property evaluation. An entity is
@@ -8809,7 +8867,7 @@ type ToggleFeatureOptions struct {
 	// The state of the feature flag.
 	Enabled *bool `json:"enabled" validate:"required"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -8854,13 +8912,13 @@ type UpdateCollectionOptions struct {
 	// Collection name. Allowed special characters are dot ( . ), hyphen( - ), underscore ( _ ) only.
 	Name *string `json:"name,omitempty"`
 
-	// Description of the collection.
+	// Description of the collection, allowed special characters are [.,-_ :()$&%#!].
 	Description *string `json:"description,omitempty"`
 
-	// Tags associated with the collection.
+	// Tags associated with the collection, allowed special characters are [_. ,-:].
 	Tags *string `json:"tags,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -8909,16 +8967,16 @@ type UpdateEnvironmentOptions struct {
 	// Environment name. Allowed special characters are dot ( . ), hyphen( - ), underscore ( _ ) only.
 	Name *string `json:"name,omitempty"`
 
-	// Environment description.
+	// Environment description, allowed special characters are [.,-_ :()$&%#!].
 	Description *string `json:"description,omitempty"`
 
-	// Tags associated with the environment.
+	// Tags associated with the environment, allowed special characters are [_. ,-:].
 	Tags *string `json:"tags,omitempty"`
 
 	// Color code to distinguish the environment. The Hex code for the color. For example `#FF0000` for `red`.
 	ColorCode *string `json:"color_code,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -8976,7 +9034,7 @@ type UpdateFeatureOptions struct {
 	// Feature name. Allowed special characters are dot ( . ), hyphen( - ), underscore ( _ ) only.
 	Name *string `json:"name,omitempty"`
 
-	// Feature description.
+	// Feature description, allowed special characters are [.,-_ :()$&%#!].
 	Description *string `json:"description,omitempty"`
 
 	// Value of the feature when it is enabled. The value can be Boolean, Numeric, String - TEXT, String - JSON, String -
@@ -8993,7 +9051,7 @@ type UpdateFeatureOptions struct {
 	// Rollout percentage associated with feature flag. Supported only for Lite and Enterprise plans.
 	RolloutPercentage *int64 `json:"rollout_percentage,omitempty"`
 
-	// Tags associated with the feature.
+	// Tags associated with the feature, allowed special characters are [_. ,-:].
 	Tags *string `json:"tags,omitempty"`
 
 	// Specify the targeting rules that is used to set different property values for different segments.
@@ -9002,7 +9060,7 @@ type UpdateFeatureOptions struct {
 	// List of collection id representing the collections that are associated with the specified property.
 	Collections []CollectionRef `json:"collections,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -9097,10 +9155,10 @@ type UpdateFeatureValuesOptions struct {
 	// Feature name. Allowed special characters are dot ( . ), hyphen( - ), underscore ( _ ) only.
 	Name *string `json:"name,omitempty"`
 
-	// Feature description.
+	// Feature description, allowed special characters are [.,-_ :()$&%#!].
 	Description *string `json:"description,omitempty"`
 
-	// Tags associated with the feature.
+	// Tags associated with the feature, allowed special characters are [_. ,-:].
 	Tags *string `json:"tags,omitempty"`
 
 	// Value of the feature when it is enabled. The value can be Boolean, Numeric, String - TEXT, String - JSON, String -
@@ -9117,7 +9175,7 @@ type UpdateFeatureValuesOptions struct {
 	// Specify the targeting rules that is used to set different property values for different segments.
 	SegmentRules []FeatureSegmentRule `json:"segment_rules,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -9221,7 +9279,7 @@ type UpdateGitconfigOptions struct {
 	// Git token, this needs to be provided with enough permission to write and update the file.
 	GitToken *string `json:"git_token,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -9291,7 +9349,7 @@ type UpdateOriginconfigsOptions struct {
 	// List of allowed origins. Specify the parameter as a list of comma separated origins.
 	AllowedOrigins []string `json:"allowed_origins" validate:"required"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -9325,14 +9383,14 @@ type UpdatePropertyOptions struct {
 	// Property name. Allowed special characters are dot ( . ), hyphen( - ), underscore ( _ ) only.
 	Name *string `json:"name,omitempty"`
 
-	// Property description.
+	// Property description, allowed special characters are [.,-_ :()$&%#!].
 	Description *string `json:"description,omitempty"`
 
 	// Value of the Property. The value can be Boolean, Numeric, SecretRef, String - TEXT, String - JSON, String - YAML as
 	// per the `type` and `format` attributes.
 	Value interface{} `json:"value,omitempty"`
 
-	// Tags associated with the property.
+	// Tags associated with the property, allowed special characters are [_. ,-:].
 	Tags *string `json:"tags,omitempty"`
 
 	// Specify the targeting rules that is used to set different property values for different segments.
@@ -9341,7 +9399,7 @@ type UpdatePropertyOptions struct {
 	// List of collection id representing the collections that are associated with the specified property.
 	Collections []CollectionRef `json:"collections,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -9418,10 +9476,10 @@ type UpdatePropertyValuesOptions struct {
 	// Property name. Allowed special characters are dot ( . ), hyphen( - ), underscore ( _ ) only.
 	Name *string `json:"name,omitempty"`
 
-	// Property description.
+	// Property description, allowed special characters are [.,-_ :()$&%#!].
 	Description *string `json:"description,omitempty"`
 
-	// Tags associated with the property.
+	// Tags associated with the property, allowed special characters are [_. ,-:].
 	Tags *string `json:"tags,omitempty"`
 
 	// Value of the Property. The value can be Boolean, Numeric, SecretRef, String - TEXT, String - JSON, String - YAML as
@@ -9431,7 +9489,7 @@ type UpdatePropertyValuesOptions struct {
 	// Specify the targeting rules that is used to set different property values for different segments.
 	SegmentRules []SegmentRule `json:"segment_rules,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -9499,10 +9557,10 @@ type UpdateSegmentOptions struct {
 	// Segment name. Allowed special characters are dot ( . ), hyphen( - ), underscore ( _ ) only.
 	Name *string `json:"name,omitempty"`
 
-	// Segment description.
+	// Segment description, allowed special characters are [.,-_ :()$&%#!].
 	Description *string `json:"description,omitempty"`
 
-	// Tags associated with segments.
+	// Tags associated with the segments, allowed special characters are [_. ,-:].
 	Tags *string `json:"tags,omitempty"`
 
 	// List of rules that determine if the entity belongs to the segment during feature / property evaluation. An entity is
@@ -9510,7 +9568,7 @@ type UpdateSegmentOptions struct {
 	// evaluation is performed in the context of an entity when it is targeted to segments.
 	Rules []Rule `json:"rules,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -9557,61 +9615,23 @@ func (options *UpdateSegmentOptions) SetHeaders(param map[string]string) *Update
 	return options
 }
 
-// UpdateWorkflowconfigOptions : The UpdateWorkflowconfig options.
-type UpdateWorkflowconfigOptions struct {
-	// Environment Id.
-	EnvironmentID *string `json:"environment_id" validate:"required,ne="`
-
-	// The request body to update a workflow config.
-	UpdateWorkflowConfig UpdateWorkflowconfigRequestIntf `json:"UpdateWorkflowConfig" validate:"required"`
-
-	// Allows users to set headers on API requests
-	Headers map[string]string
-}
-
-// NewUpdateWorkflowconfigOptions : Instantiate UpdateWorkflowconfigOptions
-func (*AppConfigurationV1) NewUpdateWorkflowconfigOptions(environmentID string, updateWorkflowConfig UpdateWorkflowconfigRequestIntf) *UpdateWorkflowconfigOptions {
-	return &UpdateWorkflowconfigOptions{
-		EnvironmentID: core.StringPtr(environmentID),
-		UpdateWorkflowConfig: updateWorkflowConfig,
-	}
-}
-
-// SetEnvironmentID : Allow user to set EnvironmentID
-func (_options *UpdateWorkflowconfigOptions) SetEnvironmentID(environmentID string) *UpdateWorkflowconfigOptions {
-	_options.EnvironmentID = core.StringPtr(environmentID)
-	return _options
-}
-
-// SetUpdateWorkflowConfig : Allow user to set UpdateWorkflowConfig
-func (_options *UpdateWorkflowconfigOptions) SetUpdateWorkflowConfig(updateWorkflowConfig UpdateWorkflowconfigRequestIntf) *UpdateWorkflowconfigOptions {
-	_options.UpdateWorkflowConfig = updateWorkflowConfig
-	return _options
-}
-
-// SetHeaders : Allow user to set Headers
-func (options *UpdateWorkflowconfigOptions) SetHeaders(param map[string]string) *UpdateWorkflowconfigOptions {
-	options.Headers = param
-	return options
-}
-
-// UpdateWorkflowconfigRequest : UpdateWorkflowconfigRequest struct
+// UpdateWorkflowConfig : UpdateWorkflowConfig struct
 // Models which "extend" this model:
-// - UpdateWorkflowconfigRequestUpdateWorkflowConfig
-// - UpdateWorkflowconfigRequestUpdateIbmWorkflowConfig
-type UpdateWorkflowconfigRequest struct {
-	// Service Now instance URL. Only url https://xxxxx.service-now.com allowed, xxxxx is the service now instance id.
+// - UpdateWorkflowConfigUpdateExternalServiceNow
+// - UpdateWorkflowConfigUpdateIBMServiceNow
+type UpdateWorkflowConfig struct {
+	// ServiceNow instance URL. Only url https://xxxxx.service-now.com allowed, xxxxx is the service now instance id.
 	WorkflowURL *string `json:"workflow_url,omitempty"`
 
-	// Group name of personals who can approve the Change Request on your Service Now. It must be first registered in your
-	// Service Now then it must be added here.
+	// Group name of personals who can approve the Change Request on your ServiceNow. It must be first registered in your
+	// ServiceNow then it must be added here.
 	ApprovalGroupName *string `json:"approval_group_name,omitempty"`
 
 	// Integer number identifies as hours which helps in adding approval start and end time to the created Change Request.
 	ApprovalExpiration *int64 `json:"approval_expiration,omitempty"`
 
-	// The credentials of the Service Now instance.
-	WorkflowCredentials *WorkflowCredentials `json:"workflow_credentials,omitempty"`
+	// The credentials of the External ServiceNow instance.
+	WorkflowCredentials *ExternalServiceNowCredentials `json:"workflow_credentials,omitempty"`
 
 	// This option enables the workflow configuration per environment. User must set it to true if they wish to create
 	// Change Request for flag state changes.
@@ -9628,17 +9648,17 @@ type UpdateWorkflowconfigRequest struct {
 	// action on ServiceNow like Create CR or Close CR.
 	SecretID *string `json:"secret_id,omitempty"`
 }
-func (*UpdateWorkflowconfigRequest) isaUpdateWorkflowconfigRequest() bool {
+func (*UpdateWorkflowConfig) isaUpdateWorkflowConfig() bool {
 	return true
 }
 
-type UpdateWorkflowconfigRequestIntf interface {
-	isaUpdateWorkflowconfigRequest() bool
+type UpdateWorkflowConfigIntf interface {
+	isaUpdateWorkflowConfig() bool
 }
 
-// UnmarshalUpdateWorkflowconfigRequest unmarshals an instance of UpdateWorkflowconfigRequest from the specified map of raw messages.
-func UnmarshalUpdateWorkflowconfigRequest(m map[string]json.RawMessage, result interface{}) (err error) {
-	obj := new(UpdateWorkflowconfigRequest)
+// UnmarshalUpdateWorkflowConfig unmarshals an instance of UpdateWorkflowConfig from the specified map of raw messages.
+func UnmarshalUpdateWorkflowConfig(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(UpdateWorkflowConfig)
 	err = core.UnmarshalPrimitive(m, "workflow_url", &obj.WorkflowURL)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "workflow_url-error", common.GetComponentInfo())
@@ -9654,7 +9674,7 @@ func UnmarshalUpdateWorkflowconfigRequest(m map[string]json.RawMessage, result i
 		err = core.SDKErrorf(err, "", "approval_expiration-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalModel(m, "workflow_credentials", &obj.WorkflowCredentials, UnmarshalWorkflowCredentials)
+	err = core.UnmarshalModel(m, "workflow_credentials", &obj.WorkflowCredentials, UnmarshalExternalServiceNowCredentials)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "workflow_credentials-error", common.GetComponentInfo())
 		return
@@ -9683,10 +9703,48 @@ func UnmarshalUpdateWorkflowconfigRequest(m map[string]json.RawMessage, result i
 	return
 }
 
+// UpdateWorkflowconfigOptions : The UpdateWorkflowconfig options.
+type UpdateWorkflowconfigOptions struct {
+	// Environment Id.
+	EnvironmentID *string `json:"environment_id" validate:"required,ne="`
+
+	// The request body to update an existing workflow config.
+	UpdateWorkflowConfig UpdateWorkflowConfigIntf `json:"UpdateWorkflowConfig" validate:"required"`
+
+	// Allows users to set headers on API requests.
+	Headers map[string]string
+}
+
+// NewUpdateWorkflowconfigOptions : Instantiate UpdateWorkflowconfigOptions
+func (*AppConfigurationV1) NewUpdateWorkflowconfigOptions(environmentID string, updateWorkflowConfig UpdateWorkflowConfigIntf) *UpdateWorkflowconfigOptions {
+	return &UpdateWorkflowconfigOptions{
+		EnvironmentID: core.StringPtr(environmentID),
+		UpdateWorkflowConfig: updateWorkflowConfig,
+	}
+}
+
+// SetEnvironmentID : Allow user to set EnvironmentID
+func (_options *UpdateWorkflowconfigOptions) SetEnvironmentID(environmentID string) *UpdateWorkflowconfigOptions {
+	_options.EnvironmentID = core.StringPtr(environmentID)
+	return _options
+}
+
+// SetUpdateWorkflowConfig : Allow user to set UpdateWorkflowConfig
+func (_options *UpdateWorkflowconfigOptions) SetUpdateWorkflowConfig(updateWorkflowConfig UpdateWorkflowConfigIntf) *UpdateWorkflowconfigOptions {
+	_options.UpdateWorkflowConfig = updateWorkflowConfig
+	return _options
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *UpdateWorkflowconfigOptions) SetHeaders(param map[string]string) *UpdateWorkflowconfigOptions {
+	options.Headers = param
+	return options
+}
+
 // UpdateWorkflowconfigResponse : UpdateWorkflowconfigResponse struct
 // Models which "extend" this model:
-// - UpdateWorkflowconfigResponseWorkflowConfig
-// - UpdateWorkflowconfigResponseIbmWorkflowConfig
+// - UpdateWorkflowconfigResponseExternalServiceNow
+// - UpdateWorkflowconfigResponseIBMServiceNow
 type UpdateWorkflowconfigResponse struct {
 	// Environment name of workflow config in which it is created.
 	EnvironmentName *string `json:"environment_name,omitempty"`
@@ -9697,15 +9755,15 @@ type UpdateWorkflowconfigResponse struct {
 	// Only service now url https://xxxxx.service-now.com allowed, xxxxx is the service now instance id.
 	WorkflowURL *string `json:"workflow_url,omitempty"`
 
-	// Group name of personals who can approve the Change Request on your Service Now. It must be first registered in your
-	// Service Now then it must be added here.
+	// Group name of personals who can approve the Change Request on your ServiceNow. It must be first registered in your
+	// ServiceNow then it must be added here.
 	ApprovalGroupName *string `json:"approval_group_name,omitempty"`
 
 	// Integer number identifies as hours which helps in adding approval start and end time to the created Change Request.
 	ApprovalExpiration *int64 `json:"approval_expiration,omitempty"`
 
-	// The credentials of the Service Now instance.
-	WorkflowCredentials *WorkflowCredentials `json:"workflow_credentials,omitempty"`
+	// The credentials of the External ServiceNow instance.
+	WorkflowCredentials *ExternalServiceNowCredentials `json:"workflow_credentials,omitempty"`
 
 	// This option enables the workflow configuration per environment. User must set it to true if they wish to create
 	// Change Request for flag state changes.
@@ -9770,7 +9828,7 @@ func UnmarshalUpdateWorkflowconfigResponse(m map[string]json.RawMessage, result 
 		err = core.SDKErrorf(err, "", "approval_expiration-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalModel(m, "workflow_credentials", &obj.WorkflowCredentials, UnmarshalWorkflowCredentials)
+	err = core.UnmarshalModel(m, "workflow_credentials", &obj.WorkflowCredentials, UnmarshalExternalServiceNowCredentials)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "workflow_credentials-error", common.GetComponentInfo())
 		return
@@ -9813,64 +9871,6 @@ func UnmarshalUpdateWorkflowconfigResponse(m map[string]json.RawMessage, result 
 	err = core.UnmarshalPrimitive(m, "secret_id", &obj.SecretID)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "secret_id-error", common.GetComponentInfo())
-		return
-	}
-	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
-	return
-}
-
-// WorkflowCredentials : The credentials of the Service Now instance.
-type WorkflowCredentials struct {
-	// Service Now instance login username.
-	Username *string `json:"username" validate:"required"`
-
-	// Service Now instance login password.
-	Password *string `json:"password" validate:"required"`
-
-	// The auto-generated unique ID of the application in your Service Now instance.
-	ClientID *string `json:"client_id" validate:"required"`
-
-	// The secret string that both the Service Now instance and the client application use to authorize communications with
-	// one another.
-	ClientSecret *string `json:"client_secret" validate:"required"`
-}
-
-// NewWorkflowCredentials : Instantiate WorkflowCredentials (Generic Model Constructor)
-func (*AppConfigurationV1) NewWorkflowCredentials(username string, password string, clientID string, clientSecret string) (_model *WorkflowCredentials, err error) {
-	_model = &WorkflowCredentials{
-		Username: core.StringPtr(username),
-		Password: core.StringPtr(password),
-		ClientID: core.StringPtr(clientID),
-		ClientSecret: core.StringPtr(clientSecret),
-	}
-	err = core.ValidateStruct(_model, "required parameters")
-	if err != nil {
-		err = core.SDKErrorf(err, "", "model-missing-required", common.GetComponentInfo())
-	}
-	return
-}
-
-// UnmarshalWorkflowCredentials unmarshals an instance of WorkflowCredentials from the specified map of raw messages.
-func UnmarshalWorkflowCredentials(m map[string]json.RawMessage, result interface{}) (err error) {
-	obj := new(WorkflowCredentials)
-	err = core.UnmarshalPrimitive(m, "username", &obj.Username)
-	if err != nil {
-		err = core.SDKErrorf(err, "", "username-error", common.GetComponentInfo())
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "password", &obj.Password)
-	if err != nil {
-		err = core.SDKErrorf(err, "", "password-error", common.GetComponentInfo())
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "client_id", &obj.ClientID)
-	if err != nil {
-		err = core.SDKErrorf(err, "", "client_id-error", common.GetComponentInfo())
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "client_secret", &obj.ClientSecret)
-	if err != nil {
-		err = core.SDKErrorf(err, "", "client_secret-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -9948,9 +9948,122 @@ func UnmarshalConfigActionGitConfigRestore(m map[string]json.RawMessage, result 
 	return
 }
 
-// CreateWorkflowconfigRequestIbmWorkflowConfig : Details of the IBM Workflow configuration.
-// This model "extends" CreateWorkflowconfigRequest
-type CreateWorkflowconfigRequestIbmWorkflowConfig struct {
+// CreateWorkflowConfigExternalServiceNow : Details of the External ServiceNow workflow configuration.
+// This model "extends" CreateWorkflowConfig
+type CreateWorkflowConfigExternalServiceNow struct {
+	// Environment name of workflow config in which it is created.
+	EnvironmentName *string `json:"environment_name,omitempty"`
+
+	// Environment ID of workflow config in which it is created.
+	EnvironmentID *string `json:"environment_id,omitempty"`
+
+	// Only service now url https://xxxxx.service-now.com allowed, xxxxx is the service now instance id.
+	WorkflowURL *string `json:"workflow_url" validate:"required"`
+
+	// Group name of personals who can approve the Change Request on your ServiceNow. It must be first registered in your
+	// ServiceNow then it must be added here.
+	ApprovalGroupName *string `json:"approval_group_name" validate:"required"`
+
+	// Integer number identifies as hours which helps in adding approval start and end time to the created Change Request.
+	ApprovalExpiration *int64 `json:"approval_expiration" validate:"required"`
+
+	// The credentials of the External ServiceNow instance.
+	WorkflowCredentials *ExternalServiceNowCredentials `json:"workflow_credentials" validate:"required"`
+
+	// This option enables the workflow configuration per environment. User must set it to true if they wish to create
+	// Change Request for flag state changes.
+	Enabled *bool `json:"enabled" validate:"required"`
+
+	// Creation time of the workflow configs.
+	CreatedTime *strfmt.DateTime `json:"created_time,omitempty"`
+
+	// Last modified time of the workflow configs.
+	UpdatedTime *strfmt.DateTime `json:"updated_time,omitempty"`
+
+	// Workflow Config URL.
+	Href *string `json:"href,omitempty"`
+}
+
+// NewCreateWorkflowConfigExternalServiceNow : Instantiate CreateWorkflowConfigExternalServiceNow (Generic Model Constructor)
+func (*AppConfigurationV1) NewCreateWorkflowConfigExternalServiceNow(workflowURL string, approvalGroupName string, approvalExpiration int64, workflowCredentials *ExternalServiceNowCredentials, enabled bool) (_model *CreateWorkflowConfigExternalServiceNow, err error) {
+	_model = &CreateWorkflowConfigExternalServiceNow{
+		WorkflowURL: core.StringPtr(workflowURL),
+		ApprovalGroupName: core.StringPtr(approvalGroupName),
+		ApprovalExpiration: core.Int64Ptr(approvalExpiration),
+		WorkflowCredentials: workflowCredentials,
+		Enabled: core.BoolPtr(enabled),
+	}
+	err = core.ValidateStruct(_model, "required parameters")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "model-missing-required", common.GetComponentInfo())
+	}
+	return
+}
+
+func (*CreateWorkflowConfigExternalServiceNow) isaCreateWorkflowConfig() bool {
+	return true
+}
+
+// UnmarshalCreateWorkflowConfigExternalServiceNow unmarshals an instance of CreateWorkflowConfigExternalServiceNow from the specified map of raw messages.
+func UnmarshalCreateWorkflowConfigExternalServiceNow(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(CreateWorkflowConfigExternalServiceNow)
+	err = core.UnmarshalPrimitive(m, "environment_name", &obj.EnvironmentName)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "environment_name-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "environment_id", &obj.EnvironmentID)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "environment_id-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "workflow_url", &obj.WorkflowURL)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "workflow_url-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "approval_group_name", &obj.ApprovalGroupName)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "approval_group_name-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "approval_expiration", &obj.ApprovalExpiration)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "approval_expiration-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalModel(m, "workflow_credentials", &obj.WorkflowCredentials, UnmarshalExternalServiceNowCredentials)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "workflow_credentials-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "enabled", &obj.Enabled)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "enabled-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "created_time", &obj.CreatedTime)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "created_time-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "updated_time", &obj.UpdatedTime)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "updated_time-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "href", &obj.Href)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "href-error", common.GetComponentInfo())
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// CreateWorkflowConfigIBMServiceNow : Details of the IBM ServiceNow workflow configuration.
+// This model "extends" CreateWorkflowConfig
+type CreateWorkflowConfigIBMServiceNow struct {
 	// Environment name of workflow config in which it is created.
 	EnvironmentName *string `json:"environment_name,omitempty"`
 
@@ -9988,9 +10101,9 @@ type CreateWorkflowconfigRequestIbmWorkflowConfig struct {
 	Href *string `json:"href,omitempty"`
 }
 
-// NewCreateWorkflowconfigRequestIbmWorkflowConfig : Instantiate CreateWorkflowconfigRequestIbmWorkflowConfig (Generic Model Constructor)
-func (*AppConfigurationV1) NewCreateWorkflowconfigRequestIbmWorkflowConfig(serviceCrn string, workflowType string, approvalExpiration int64, smInstanceCrn string, secretID string, enabled bool) (_model *CreateWorkflowconfigRequestIbmWorkflowConfig, err error) {
-	_model = &CreateWorkflowconfigRequestIbmWorkflowConfig{
+// NewCreateWorkflowConfigIBMServiceNow : Instantiate CreateWorkflowConfigIBMServiceNow (Generic Model Constructor)
+func (*AppConfigurationV1) NewCreateWorkflowConfigIBMServiceNow(serviceCrn string, workflowType string, approvalExpiration int64, smInstanceCrn string, secretID string, enabled bool) (_model *CreateWorkflowConfigIBMServiceNow, err error) {
+	_model = &CreateWorkflowConfigIBMServiceNow{
 		ServiceCrn: core.StringPtr(serviceCrn),
 		WorkflowType: core.StringPtr(workflowType),
 		ApprovalExpiration: core.Int64Ptr(approvalExpiration),
@@ -10005,13 +10118,13 @@ func (*AppConfigurationV1) NewCreateWorkflowconfigRequestIbmWorkflowConfig(servi
 	return
 }
 
-func (*CreateWorkflowconfigRequestIbmWorkflowConfig) isaCreateWorkflowconfigRequest() bool {
+func (*CreateWorkflowConfigIBMServiceNow) isaCreateWorkflowConfig() bool {
 	return true
 }
 
-// UnmarshalCreateWorkflowconfigRequestIbmWorkflowConfig unmarshals an instance of CreateWorkflowconfigRequestIbmWorkflowConfig from the specified map of raw messages.
-func UnmarshalCreateWorkflowconfigRequestIbmWorkflowConfig(m map[string]json.RawMessage, result interface{}) (err error) {
-	obj := new(CreateWorkflowconfigRequestIbmWorkflowConfig)
+// UnmarshalCreateWorkflowConfigIBMServiceNow unmarshals an instance of CreateWorkflowConfigIBMServiceNow from the specified map of raw messages.
+func UnmarshalCreateWorkflowConfigIBMServiceNow(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(CreateWorkflowConfigIBMServiceNow)
 	err = core.UnmarshalPrimitive(m, "environment_name", &obj.EnvironmentName)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "environment_name-error", common.GetComponentInfo())
@@ -10071,9 +10184,9 @@ func UnmarshalCreateWorkflowconfigRequestIbmWorkflowConfig(m map[string]json.Raw
 	return
 }
 
-// CreateWorkflowconfigRequestWorkflowConfig : Details of the External Workflow configuration.
-// This model "extends" CreateWorkflowconfigRequest
-type CreateWorkflowconfigRequestWorkflowConfig struct {
+// CreateWorkflowconfigResponseExternalServiceNow : Details of the External ServiceNow workflow configuration.
+// This model "extends" CreateWorkflowconfigResponse
+type CreateWorkflowconfigResponseExternalServiceNow struct {
 	// Environment name of workflow config in which it is created.
 	EnvironmentName *string `json:"environment_name,omitempty"`
 
@@ -10083,15 +10196,15 @@ type CreateWorkflowconfigRequestWorkflowConfig struct {
 	// Only service now url https://xxxxx.service-now.com allowed, xxxxx is the service now instance id.
 	WorkflowURL *string `json:"workflow_url" validate:"required"`
 
-	// Group name of personals who can approve the Change Request on your Service Now. It must be first registered in your
-	// Service Now then it must be added here.
+	// Group name of personals who can approve the Change Request on your ServiceNow. It must be first registered in your
+	// ServiceNow then it must be added here.
 	ApprovalGroupName *string `json:"approval_group_name" validate:"required"`
 
 	// Integer number identifies as hours which helps in adding approval start and end time to the created Change Request.
 	ApprovalExpiration *int64 `json:"approval_expiration" validate:"required"`
 
-	// The credentials of the Service Now instance.
-	WorkflowCredentials *WorkflowCredentials `json:"workflow_credentials" validate:"required"`
+	// The credentials of the External ServiceNow instance.
+	WorkflowCredentials *ExternalServiceNowCredentials `json:"workflow_credentials" validate:"required"`
 
 	// This option enables the workflow configuration per environment. User must set it to true if they wish to create
 	// Change Request for flag state changes.
@@ -10107,29 +10220,13 @@ type CreateWorkflowconfigRequestWorkflowConfig struct {
 	Href *string `json:"href,omitempty"`
 }
 
-// NewCreateWorkflowconfigRequestWorkflowConfig : Instantiate CreateWorkflowconfigRequestWorkflowConfig (Generic Model Constructor)
-func (*AppConfigurationV1) NewCreateWorkflowconfigRequestWorkflowConfig(workflowURL string, approvalGroupName string, approvalExpiration int64, workflowCredentials *WorkflowCredentials, enabled bool) (_model *CreateWorkflowconfigRequestWorkflowConfig, err error) {
-	_model = &CreateWorkflowconfigRequestWorkflowConfig{
-		WorkflowURL: core.StringPtr(workflowURL),
-		ApprovalGroupName: core.StringPtr(approvalGroupName),
-		ApprovalExpiration: core.Int64Ptr(approvalExpiration),
-		WorkflowCredentials: workflowCredentials,
-		Enabled: core.BoolPtr(enabled),
-	}
-	err = core.ValidateStruct(_model, "required parameters")
-	if err != nil {
-		err = core.SDKErrorf(err, "", "model-missing-required", common.GetComponentInfo())
-	}
-	return
-}
-
-func (*CreateWorkflowconfigRequestWorkflowConfig) isaCreateWorkflowconfigRequest() bool {
+func (*CreateWorkflowconfigResponseExternalServiceNow) isaCreateWorkflowconfigResponse() bool {
 	return true
 }
 
-// UnmarshalCreateWorkflowconfigRequestWorkflowConfig unmarshals an instance of CreateWorkflowconfigRequestWorkflowConfig from the specified map of raw messages.
-func UnmarshalCreateWorkflowconfigRequestWorkflowConfig(m map[string]json.RawMessage, result interface{}) (err error) {
-	obj := new(CreateWorkflowconfigRequestWorkflowConfig)
+// UnmarshalCreateWorkflowconfigResponseExternalServiceNow unmarshals an instance of CreateWorkflowconfigResponseExternalServiceNow from the specified map of raw messages.
+func UnmarshalCreateWorkflowconfigResponseExternalServiceNow(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(CreateWorkflowconfigResponseExternalServiceNow)
 	err = core.UnmarshalPrimitive(m, "environment_name", &obj.EnvironmentName)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "environment_name-error", common.GetComponentInfo())
@@ -10155,7 +10252,7 @@ func UnmarshalCreateWorkflowconfigRequestWorkflowConfig(m map[string]json.RawMes
 		err = core.SDKErrorf(err, "", "approval_expiration-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalModel(m, "workflow_credentials", &obj.WorkflowCredentials, UnmarshalWorkflowCredentials)
+	err = core.UnmarshalModel(m, "workflow_credentials", &obj.WorkflowCredentials, UnmarshalExternalServiceNowCredentials)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "workflow_credentials-error", common.GetComponentInfo())
 		return
@@ -10184,9 +10281,9 @@ func UnmarshalCreateWorkflowconfigRequestWorkflowConfig(m map[string]json.RawMes
 	return
 }
 
-// CreateWorkflowconfigResponseIbmWorkflowConfig : Details of the IBM Workflow configuration.
+// CreateWorkflowconfigResponseIBMServiceNow : Details of the IBM ServiceNow workflow configuration.
 // This model "extends" CreateWorkflowconfigResponse
-type CreateWorkflowconfigResponseIbmWorkflowConfig struct {
+type CreateWorkflowconfigResponseIBMServiceNow struct {
 	// Environment name of workflow config in which it is created.
 	EnvironmentName *string `json:"environment_name,omitempty"`
 
@@ -10224,13 +10321,13 @@ type CreateWorkflowconfigResponseIbmWorkflowConfig struct {
 	Href *string `json:"href,omitempty"`
 }
 
-func (*CreateWorkflowconfigResponseIbmWorkflowConfig) isaCreateWorkflowconfigResponse() bool {
+func (*CreateWorkflowconfigResponseIBMServiceNow) isaCreateWorkflowconfigResponse() bool {
 	return true
 }
 
-// UnmarshalCreateWorkflowconfigResponseIbmWorkflowConfig unmarshals an instance of CreateWorkflowconfigResponseIbmWorkflowConfig from the specified map of raw messages.
-func UnmarshalCreateWorkflowconfigResponseIbmWorkflowConfig(m map[string]json.RawMessage, result interface{}) (err error) {
-	obj := new(CreateWorkflowconfigResponseIbmWorkflowConfig)
+// UnmarshalCreateWorkflowconfigResponseIBMServiceNow unmarshals an instance of CreateWorkflowconfigResponseIBMServiceNow from the specified map of raw messages.
+func UnmarshalCreateWorkflowconfigResponseIBMServiceNow(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(CreateWorkflowconfigResponseIBMServiceNow)
 	err = core.UnmarshalPrimitive(m, "environment_name", &obj.EnvironmentName)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "environment_name-error", common.GetComponentInfo())
@@ -10290,9 +10387,9 @@ func UnmarshalCreateWorkflowconfigResponseIbmWorkflowConfig(m map[string]json.Ra
 	return
 }
 
-// CreateWorkflowconfigResponseWorkflowConfig : Details of the External Workflow configuration.
-// This model "extends" CreateWorkflowconfigResponse
-type CreateWorkflowconfigResponseWorkflowConfig struct {
+// ListWorkflowconfigResponseExternalServiceNow : Details of the External ServiceNow workflow configuration.
+// This model "extends" ListWorkflowconfigResponse
+type ListWorkflowconfigResponseExternalServiceNow struct {
 	// Environment name of workflow config in which it is created.
 	EnvironmentName *string `json:"environment_name,omitempty"`
 
@@ -10302,15 +10399,15 @@ type CreateWorkflowconfigResponseWorkflowConfig struct {
 	// Only service now url https://xxxxx.service-now.com allowed, xxxxx is the service now instance id.
 	WorkflowURL *string `json:"workflow_url" validate:"required"`
 
-	// Group name of personals who can approve the Change Request on your Service Now. It must be first registered in your
-	// Service Now then it must be added here.
+	// Group name of personals who can approve the Change Request on your ServiceNow. It must be first registered in your
+	// ServiceNow then it must be added here.
 	ApprovalGroupName *string `json:"approval_group_name" validate:"required"`
 
 	// Integer number identifies as hours which helps in adding approval start and end time to the created Change Request.
 	ApprovalExpiration *int64 `json:"approval_expiration" validate:"required"`
 
-	// The credentials of the Service Now instance.
-	WorkflowCredentials *WorkflowCredentials `json:"workflow_credentials" validate:"required"`
+	// The credentials of the External ServiceNow instance.
+	WorkflowCredentials *ExternalServiceNowCredentials `json:"workflow_credentials" validate:"required"`
 
 	// This option enables the workflow configuration per environment. User must set it to true if they wish to create
 	// Change Request for flag state changes.
@@ -10326,13 +10423,13 @@ type CreateWorkflowconfigResponseWorkflowConfig struct {
 	Href *string `json:"href,omitempty"`
 }
 
-func (*CreateWorkflowconfigResponseWorkflowConfig) isaCreateWorkflowconfigResponse() bool {
+func (*ListWorkflowconfigResponseExternalServiceNow) isaListWorkflowconfigResponse() bool {
 	return true
 }
 
-// UnmarshalCreateWorkflowconfigResponseWorkflowConfig unmarshals an instance of CreateWorkflowconfigResponseWorkflowConfig from the specified map of raw messages.
-func UnmarshalCreateWorkflowconfigResponseWorkflowConfig(m map[string]json.RawMessage, result interface{}) (err error) {
-	obj := new(CreateWorkflowconfigResponseWorkflowConfig)
+// UnmarshalListWorkflowconfigResponseExternalServiceNow unmarshals an instance of ListWorkflowconfigResponseExternalServiceNow from the specified map of raw messages.
+func UnmarshalListWorkflowconfigResponseExternalServiceNow(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(ListWorkflowconfigResponseExternalServiceNow)
 	err = core.UnmarshalPrimitive(m, "environment_name", &obj.EnvironmentName)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "environment_name-error", common.GetComponentInfo())
@@ -10358,7 +10455,7 @@ func UnmarshalCreateWorkflowconfigResponseWorkflowConfig(m map[string]json.RawMe
 		err = core.SDKErrorf(err, "", "approval_expiration-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalModel(m, "workflow_credentials", &obj.WorkflowCredentials, UnmarshalWorkflowCredentials)
+	err = core.UnmarshalModel(m, "workflow_credentials", &obj.WorkflowCredentials, UnmarshalExternalServiceNowCredentials)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "workflow_credentials-error", common.GetComponentInfo())
 		return
@@ -10387,9 +10484,9 @@ func UnmarshalCreateWorkflowconfigResponseWorkflowConfig(m map[string]json.RawMe
 	return
 }
 
-// ListWorkflowconfigResponseIbmWorkflowConfig : Details of the IBM Workflow configuration.
+// ListWorkflowconfigResponseIBMServiceNow : Details of the IBM ServiceNow workflow configuration.
 // This model "extends" ListWorkflowconfigResponse
-type ListWorkflowconfigResponseIbmWorkflowConfig struct {
+type ListWorkflowconfigResponseIBMServiceNow struct {
 	// Environment name of workflow config in which it is created.
 	EnvironmentName *string `json:"environment_name,omitempty"`
 
@@ -10427,13 +10524,13 @@ type ListWorkflowconfigResponseIbmWorkflowConfig struct {
 	Href *string `json:"href,omitempty"`
 }
 
-func (*ListWorkflowconfigResponseIbmWorkflowConfig) isaListWorkflowconfigResponse() bool {
+func (*ListWorkflowconfigResponseIBMServiceNow) isaListWorkflowconfigResponse() bool {
 	return true
 }
 
-// UnmarshalListWorkflowconfigResponseIbmWorkflowConfig unmarshals an instance of ListWorkflowconfigResponseIbmWorkflowConfig from the specified map of raw messages.
-func UnmarshalListWorkflowconfigResponseIbmWorkflowConfig(m map[string]json.RawMessage, result interface{}) (err error) {
-	obj := new(ListWorkflowconfigResponseIbmWorkflowConfig)
+// UnmarshalListWorkflowconfigResponseIBMServiceNow unmarshals an instance of ListWorkflowconfigResponseIBMServiceNow from the specified map of raw messages.
+func UnmarshalListWorkflowconfigResponseIBMServiceNow(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(ListWorkflowconfigResponseIBMServiceNow)
 	err = core.UnmarshalPrimitive(m, "environment_name", &obj.EnvironmentName)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "environment_name-error", common.GetComponentInfo())
@@ -10493,59 +10590,34 @@ func UnmarshalListWorkflowconfigResponseIbmWorkflowConfig(m map[string]json.RawM
 	return
 }
 
-// ListWorkflowconfigResponseWorkflowConfig : Details of the External Workflow configuration.
-// This model "extends" ListWorkflowconfigResponse
-type ListWorkflowconfigResponseWorkflowConfig struct {
-	// Environment name of workflow config in which it is created.
-	EnvironmentName *string `json:"environment_name,omitempty"`
+// UpdateWorkflowConfigUpdateExternalServiceNow : External ServiceNow workflow configuration attributes to be updated.
+// This model "extends" UpdateWorkflowConfig
+type UpdateWorkflowConfigUpdateExternalServiceNow struct {
+	// ServiceNow instance URL. Only url https://xxxxx.service-now.com allowed, xxxxx is the service now instance id.
+	WorkflowURL *string `json:"workflow_url,omitempty"`
 
-	// Environment ID of workflow config in which it is created.
-	EnvironmentID *string `json:"environment_id,omitempty"`
-
-	// Only service now url https://xxxxx.service-now.com allowed, xxxxx is the service now instance id.
-	WorkflowURL *string `json:"workflow_url" validate:"required"`
-
-	// Group name of personals who can approve the Change Request on your Service Now. It must be first registered in your
-	// Service Now then it must be added here.
-	ApprovalGroupName *string `json:"approval_group_name" validate:"required"`
+	// Group name of personals who can approve the Change Request on your ServiceNow. It must be first registered in your
+	// ServiceNow then it must be added here.
+	ApprovalGroupName *string `json:"approval_group_name,omitempty"`
 
 	// Integer number identifies as hours which helps in adding approval start and end time to the created Change Request.
-	ApprovalExpiration *int64 `json:"approval_expiration" validate:"required"`
+	ApprovalExpiration *int64 `json:"approval_expiration,omitempty"`
 
-	// The credentials of the Service Now instance.
-	WorkflowCredentials *WorkflowCredentials `json:"workflow_credentials" validate:"required"`
+	// The credentials of the External ServiceNow instance.
+	WorkflowCredentials *ExternalServiceNowCredentials `json:"workflow_credentials,omitempty"`
 
 	// This option enables the workflow configuration per environment. User must set it to true if they wish to create
 	// Change Request for flag state changes.
-	Enabled *bool `json:"enabled" validate:"required"`
-
-	// Creation time of the workflow configs.
-	CreatedTime *strfmt.DateTime `json:"created_time,omitempty"`
-
-	// Last modified time of the workflow configs.
-	UpdatedTime *strfmt.DateTime `json:"updated_time,omitempty"`
-
-	// Workflow Config URL.
-	Href *string `json:"href,omitempty"`
+	Enabled *bool `json:"enabled,omitempty"`
 }
 
-func (*ListWorkflowconfigResponseWorkflowConfig) isaListWorkflowconfigResponse() bool {
+func (*UpdateWorkflowConfigUpdateExternalServiceNow) isaUpdateWorkflowConfig() bool {
 	return true
 }
 
-// UnmarshalListWorkflowconfigResponseWorkflowConfig unmarshals an instance of ListWorkflowconfigResponseWorkflowConfig from the specified map of raw messages.
-func UnmarshalListWorkflowconfigResponseWorkflowConfig(m map[string]json.RawMessage, result interface{}) (err error) {
-	obj := new(ListWorkflowconfigResponseWorkflowConfig)
-	err = core.UnmarshalPrimitive(m, "environment_name", &obj.EnvironmentName)
-	if err != nil {
-		err = core.SDKErrorf(err, "", "environment_name-error", common.GetComponentInfo())
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "environment_id", &obj.EnvironmentID)
-	if err != nil {
-		err = core.SDKErrorf(err, "", "environment_id-error", common.GetComponentInfo())
-		return
-	}
+// UnmarshalUpdateWorkflowConfigUpdateExternalServiceNow unmarshals an instance of UpdateWorkflowConfigUpdateExternalServiceNow from the specified map of raw messages.
+func UnmarshalUpdateWorkflowConfigUpdateExternalServiceNow(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(UpdateWorkflowConfigUpdateExternalServiceNow)
 	err = core.UnmarshalPrimitive(m, "workflow_url", &obj.WorkflowURL)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "workflow_url-error", common.GetComponentInfo())
@@ -10561,7 +10633,7 @@ func UnmarshalListWorkflowconfigResponseWorkflowConfig(m map[string]json.RawMess
 		err = core.SDKErrorf(err, "", "approval_expiration-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalModel(m, "workflow_credentials", &obj.WorkflowCredentials, UnmarshalWorkflowCredentials)
+	err = core.UnmarshalModel(m, "workflow_credentials", &obj.WorkflowCredentials, UnmarshalExternalServiceNowCredentials)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "workflow_credentials-error", common.GetComponentInfo())
 		return
@@ -10571,28 +10643,13 @@ func UnmarshalListWorkflowconfigResponseWorkflowConfig(m map[string]json.RawMess
 		err = core.SDKErrorf(err, "", "enabled-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "created_time", &obj.CreatedTime)
-	if err != nil {
-		err = core.SDKErrorf(err, "", "created_time-error", common.GetComponentInfo())
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "updated_time", &obj.UpdatedTime)
-	if err != nil {
-		err = core.SDKErrorf(err, "", "updated_time-error", common.GetComponentInfo())
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "href", &obj.Href)
-	if err != nil {
-		err = core.SDKErrorf(err, "", "href-error", common.GetComponentInfo())
-		return
-	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
 	return
 }
 
-// UpdateWorkflowconfigRequestUpdateIbmWorkflowConfig : IBM Workflow config attributes to be updated.
-// This model "extends" UpdateWorkflowconfigRequest
-type UpdateWorkflowconfigRequestUpdateIbmWorkflowConfig struct {
+// UpdateWorkflowConfigUpdateIBMServiceNow : IBM ServiceNow workflow configuration attributes to be updated.
+// This model "extends" UpdateWorkflowConfig
+type UpdateWorkflowConfigUpdateIBMServiceNow struct {
 	// Only service crn will be allowed. Example: `crn:v1:staging:staging:appservice:us-south::::`.
 	ServiceCrn *string `json:"service_crn,omitempty"`
 
@@ -10612,13 +10669,13 @@ type UpdateWorkflowconfigRequestUpdateIbmWorkflowConfig struct {
 	Enabled *bool `json:"enabled,omitempty"`
 }
 
-func (*UpdateWorkflowconfigRequestUpdateIbmWorkflowConfig) isaUpdateWorkflowconfigRequest() bool {
+func (*UpdateWorkflowConfigUpdateIBMServiceNow) isaUpdateWorkflowConfig() bool {
 	return true
 }
 
-// UnmarshalUpdateWorkflowconfigRequestUpdateIbmWorkflowConfig unmarshals an instance of UpdateWorkflowconfigRequestUpdateIbmWorkflowConfig from the specified map of raw messages.
-func UnmarshalUpdateWorkflowconfigRequestUpdateIbmWorkflowConfig(m map[string]json.RawMessage, result interface{}) (err error) {
-	obj := new(UpdateWorkflowconfigRequestUpdateIbmWorkflowConfig)
+// UnmarshalUpdateWorkflowConfigUpdateIBMServiceNow unmarshals an instance of UpdateWorkflowConfigUpdateIBMServiceNow from the specified map of raw messages.
+func UnmarshalUpdateWorkflowConfigUpdateIBMServiceNow(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(UpdateWorkflowConfigUpdateIBMServiceNow)
 	err = core.UnmarshalPrimitive(m, "service_crn", &obj.ServiceCrn)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "service_crn-error", common.GetComponentInfo())
@@ -10648,34 +10705,59 @@ func UnmarshalUpdateWorkflowconfigRequestUpdateIbmWorkflowConfig(m map[string]js
 	return
 }
 
-// UpdateWorkflowconfigRequestUpdateWorkflowConfig : Workflow config attributes to be updated.
-// This model "extends" UpdateWorkflowconfigRequest
-type UpdateWorkflowconfigRequestUpdateWorkflowConfig struct {
-	// Service Now instance URL. Only url https://xxxxx.service-now.com allowed, xxxxx is the service now instance id.
-	WorkflowURL *string `json:"workflow_url,omitempty"`
+// UpdateWorkflowconfigResponseExternalServiceNow : Details of the External ServiceNow workflow configuration.
+// This model "extends" UpdateWorkflowconfigResponse
+type UpdateWorkflowconfigResponseExternalServiceNow struct {
+	// Environment name of workflow config in which it is created.
+	EnvironmentName *string `json:"environment_name,omitempty"`
 
-	// Group name of personals who can approve the Change Request on your Service Now. It must be first registered in your
-	// Service Now then it must be added here.
-	ApprovalGroupName *string `json:"approval_group_name,omitempty"`
+	// Environment ID of workflow config in which it is created.
+	EnvironmentID *string `json:"environment_id,omitempty"`
+
+	// Only service now url https://xxxxx.service-now.com allowed, xxxxx is the service now instance id.
+	WorkflowURL *string `json:"workflow_url" validate:"required"`
+
+	// Group name of personals who can approve the Change Request on your ServiceNow. It must be first registered in your
+	// ServiceNow then it must be added here.
+	ApprovalGroupName *string `json:"approval_group_name" validate:"required"`
 
 	// Integer number identifies as hours which helps in adding approval start and end time to the created Change Request.
-	ApprovalExpiration *int64 `json:"approval_expiration,omitempty"`
+	ApprovalExpiration *int64 `json:"approval_expiration" validate:"required"`
 
-	// The credentials of the Service Now instance.
-	WorkflowCredentials *WorkflowCredentials `json:"workflow_credentials,omitempty"`
+	// The credentials of the External ServiceNow instance.
+	WorkflowCredentials *ExternalServiceNowCredentials `json:"workflow_credentials" validate:"required"`
 
 	// This option enables the workflow configuration per environment. User must set it to true if they wish to create
 	// Change Request for flag state changes.
-	Enabled *bool `json:"enabled,omitempty"`
+	Enabled *bool `json:"enabled" validate:"required"`
+
+	// Creation time of the workflow configs.
+	CreatedTime *strfmt.DateTime `json:"created_time,omitempty"`
+
+	// Last modified time of the workflow configs.
+	UpdatedTime *strfmt.DateTime `json:"updated_time,omitempty"`
+
+	// Workflow Config URL.
+	Href *string `json:"href,omitempty"`
 }
 
-func (*UpdateWorkflowconfigRequestUpdateWorkflowConfig) isaUpdateWorkflowconfigRequest() bool {
+func (*UpdateWorkflowconfigResponseExternalServiceNow) isaUpdateWorkflowconfigResponse() bool {
 	return true
 }
 
-// UnmarshalUpdateWorkflowconfigRequestUpdateWorkflowConfig unmarshals an instance of UpdateWorkflowconfigRequestUpdateWorkflowConfig from the specified map of raw messages.
-func UnmarshalUpdateWorkflowconfigRequestUpdateWorkflowConfig(m map[string]json.RawMessage, result interface{}) (err error) {
-	obj := new(UpdateWorkflowconfigRequestUpdateWorkflowConfig)
+// UnmarshalUpdateWorkflowconfigResponseExternalServiceNow unmarshals an instance of UpdateWorkflowconfigResponseExternalServiceNow from the specified map of raw messages.
+func UnmarshalUpdateWorkflowconfigResponseExternalServiceNow(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(UpdateWorkflowconfigResponseExternalServiceNow)
+	err = core.UnmarshalPrimitive(m, "environment_name", &obj.EnvironmentName)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "environment_name-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "environment_id", &obj.EnvironmentID)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "environment_id-error", common.GetComponentInfo())
+		return
+	}
 	err = core.UnmarshalPrimitive(m, "workflow_url", &obj.WorkflowURL)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "workflow_url-error", common.GetComponentInfo())
@@ -10691,7 +10773,7 @@ func UnmarshalUpdateWorkflowconfigRequestUpdateWorkflowConfig(m map[string]json.
 		err = core.SDKErrorf(err, "", "approval_expiration-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalModel(m, "workflow_credentials", &obj.WorkflowCredentials, UnmarshalWorkflowCredentials)
+	err = core.UnmarshalModel(m, "workflow_credentials", &obj.WorkflowCredentials, UnmarshalExternalServiceNowCredentials)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "workflow_credentials-error", common.GetComponentInfo())
 		return
@@ -10701,13 +10783,28 @@ func UnmarshalUpdateWorkflowconfigRequestUpdateWorkflowConfig(m map[string]json.
 		err = core.SDKErrorf(err, "", "enabled-error", common.GetComponentInfo())
 		return
 	}
+	err = core.UnmarshalPrimitive(m, "created_time", &obj.CreatedTime)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "created_time-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "updated_time", &obj.UpdatedTime)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "updated_time-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "href", &obj.Href)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "href-error", common.GetComponentInfo())
+		return
+	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
 	return
 }
 
-// UpdateWorkflowconfigResponseIbmWorkflowConfig : Details of the IBM Workflow configuration.
+// UpdateWorkflowconfigResponseIBMServiceNow : Details of the IBM ServiceNow workflow configuration.
 // This model "extends" UpdateWorkflowconfigResponse
-type UpdateWorkflowconfigResponseIbmWorkflowConfig struct {
+type UpdateWorkflowconfigResponseIBMServiceNow struct {
 	// Environment name of workflow config in which it is created.
 	EnvironmentName *string `json:"environment_name,omitempty"`
 
@@ -10745,13 +10842,13 @@ type UpdateWorkflowconfigResponseIbmWorkflowConfig struct {
 	Href *string `json:"href,omitempty"`
 }
 
-func (*UpdateWorkflowconfigResponseIbmWorkflowConfig) isaUpdateWorkflowconfigResponse() bool {
+func (*UpdateWorkflowconfigResponseIBMServiceNow) isaUpdateWorkflowconfigResponse() bool {
 	return true
 }
 
-// UnmarshalUpdateWorkflowconfigResponseIbmWorkflowConfig unmarshals an instance of UpdateWorkflowconfigResponseIbmWorkflowConfig from the specified map of raw messages.
-func UnmarshalUpdateWorkflowconfigResponseIbmWorkflowConfig(m map[string]json.RawMessage, result interface{}) (err error) {
-	obj := new(UpdateWorkflowconfigResponseIbmWorkflowConfig)
+// UnmarshalUpdateWorkflowconfigResponseIBMServiceNow unmarshals an instance of UpdateWorkflowconfigResponseIBMServiceNow from the specified map of raw messages.
+func UnmarshalUpdateWorkflowconfigResponseIBMServiceNow(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(UpdateWorkflowconfigResponseIBMServiceNow)
 	err = core.UnmarshalPrimitive(m, "environment_name", &obj.EnvironmentName)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "environment_name-error", common.GetComponentInfo())
@@ -10785,103 +10882,6 @@ func UnmarshalUpdateWorkflowconfigResponseIbmWorkflowConfig(m map[string]json.Ra
 	err = core.UnmarshalPrimitive(m, "secret_id", &obj.SecretID)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "secret_id-error", common.GetComponentInfo())
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "enabled", &obj.Enabled)
-	if err != nil {
-		err = core.SDKErrorf(err, "", "enabled-error", common.GetComponentInfo())
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "created_time", &obj.CreatedTime)
-	if err != nil {
-		err = core.SDKErrorf(err, "", "created_time-error", common.GetComponentInfo())
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "updated_time", &obj.UpdatedTime)
-	if err != nil {
-		err = core.SDKErrorf(err, "", "updated_time-error", common.GetComponentInfo())
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "href", &obj.Href)
-	if err != nil {
-		err = core.SDKErrorf(err, "", "href-error", common.GetComponentInfo())
-		return
-	}
-	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
-	return
-}
-
-// UpdateWorkflowconfigResponseWorkflowConfig : Details of the External Workflow configuration.
-// This model "extends" UpdateWorkflowconfigResponse
-type UpdateWorkflowconfigResponseWorkflowConfig struct {
-	// Environment name of workflow config in which it is created.
-	EnvironmentName *string `json:"environment_name,omitempty"`
-
-	// Environment ID of workflow config in which it is created.
-	EnvironmentID *string `json:"environment_id,omitempty"`
-
-	// Only service now url https://xxxxx.service-now.com allowed, xxxxx is the service now instance id.
-	WorkflowURL *string `json:"workflow_url" validate:"required"`
-
-	// Group name of personals who can approve the Change Request on your Service Now. It must be first registered in your
-	// Service Now then it must be added here.
-	ApprovalGroupName *string `json:"approval_group_name" validate:"required"`
-
-	// Integer number identifies as hours which helps in adding approval start and end time to the created Change Request.
-	ApprovalExpiration *int64 `json:"approval_expiration" validate:"required"`
-
-	// The credentials of the Service Now instance.
-	WorkflowCredentials *WorkflowCredentials `json:"workflow_credentials" validate:"required"`
-
-	// This option enables the workflow configuration per environment. User must set it to true if they wish to create
-	// Change Request for flag state changes.
-	Enabled *bool `json:"enabled" validate:"required"`
-
-	// Creation time of the workflow configs.
-	CreatedTime *strfmt.DateTime `json:"created_time,omitempty"`
-
-	// Last modified time of the workflow configs.
-	UpdatedTime *strfmt.DateTime `json:"updated_time,omitempty"`
-
-	// Workflow Config URL.
-	Href *string `json:"href,omitempty"`
-}
-
-func (*UpdateWorkflowconfigResponseWorkflowConfig) isaUpdateWorkflowconfigResponse() bool {
-	return true
-}
-
-// UnmarshalUpdateWorkflowconfigResponseWorkflowConfig unmarshals an instance of UpdateWorkflowconfigResponseWorkflowConfig from the specified map of raw messages.
-func UnmarshalUpdateWorkflowconfigResponseWorkflowConfig(m map[string]json.RawMessage, result interface{}) (err error) {
-	obj := new(UpdateWorkflowconfigResponseWorkflowConfig)
-	err = core.UnmarshalPrimitive(m, "environment_name", &obj.EnvironmentName)
-	if err != nil {
-		err = core.SDKErrorf(err, "", "environment_name-error", common.GetComponentInfo())
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "environment_id", &obj.EnvironmentID)
-	if err != nil {
-		err = core.SDKErrorf(err, "", "environment_id-error", common.GetComponentInfo())
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "workflow_url", &obj.WorkflowURL)
-	if err != nil {
-		err = core.SDKErrorf(err, "", "workflow_url-error", common.GetComponentInfo())
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "approval_group_name", &obj.ApprovalGroupName)
-	if err != nil {
-		err = core.SDKErrorf(err, "", "approval_group_name-error", common.GetComponentInfo())
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "approval_expiration", &obj.ApprovalExpiration)
-	if err != nil {
-		err = core.SDKErrorf(err, "", "approval_expiration-error", common.GetComponentInfo())
-		return
-	}
-	err = core.UnmarshalModel(m, "workflow_credentials", &obj.WorkflowCredentials, UnmarshalWorkflowCredentials)
-	if err != nil {
-		err = core.SDKErrorf(err, "", "workflow_credentials-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "enabled", &obj.Enabled)
