@@ -45,7 +45,7 @@ CLI [here.](https://cloud.ibm.com/docs/app-configuration?topic=app-configuration
 * An [IBM Cloud][ibm-cloud-onboarding] account.
 * An [App Configuration service instance](https://cloud.ibm.com/catalog/services/app-configuration).
 * An IAM API key to allow the SDK to access your account. Create one [here](https://cloud.ibm.com/iam/apikeys).
-* Go version 1.20 or above.
+* Go version 1.21 or above.
 
 ## Installation
 

@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2024.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,7 @@
  */
 
 /*
- * IBM OpenAPI SDK Code Generator Version: 3.97.1-d6730d2a-20241125-163317
+ * IBM OpenAPI SDK Code Generator Version: 3.98.0-8be2046a-20241205-162752
  */
 
 // Package appconfigurationv1 : Operations and models for the AppConfigurationV1 service
@@ -3712,7 +3712,7 @@ type Collection struct {
 	// Collection Id. Allowed special characters are dot ( . ), hyphen( - ), underscore ( _ ) only.
 	CollectionID *string `json:"collection_id" validate:"required"`
 
-	// Collection description, allowed special characters are [.,-_ :()$&%#!].
+	// Collection description.
 	Description *string `json:"description,omitempty"`
 
 	// Tags associated with the collection, allowed special characters are [_. ,-:].
@@ -3934,7 +3934,7 @@ type CollectionLite struct {
 	// Collection Id. Allowed special characters are dot ( . ), hyphen( - ), underscore ( _ ) only.
 	CollectionID *string `json:"collection_id" validate:"required"`
 
-	// Collection description, allowed special characters are [.,-_ :()$&%#!].
+	// Collection description.
 	Description *string `json:"description,omitempty"`
 
 	// Tags associated with the collection, allowed special characters are [_. ,-:].
@@ -4099,7 +4099,7 @@ type CreateCollectionOptions struct {
 	// Collection Id. Allowed special characters are dot ( . ), hyphen( - ), underscore ( _ ) only.
 	CollectionID *string `json:"collection_id" validate:"required"`
 
-	// Collection description, allowed special characters are [.,-_ :()$&%#!].
+	// Collection description.
 	Description *string `json:"description,omitempty"`
 
 	// Tags associated with the collection, allowed special characters are [_. ,-:].
@@ -4155,7 +4155,7 @@ type CreateEnvironmentOptions struct {
 	// Environment id. Allowed special characters are dot ( . ), hyphen( - ), underscore ( _ ) only.
 	EnvironmentID *string `json:"environment_id" validate:"required"`
 
-	// Environment description, allowed special characters are [.,-_ :()$&%#!].
+	// Environment description.
 	Description *string `json:"description,omitempty"`
 
 	// Tags associated with the environment, allowed special characters are [_. ,-:].
@@ -4234,7 +4234,7 @@ type CreateFeatureOptions struct {
 	// YAML value as per the `type` and `format` attributes.
 	DisabledValue interface{} `json:"disabled_value" validate:"required"`
 
-	// Feature description, allowed special characters are [.,-_ :()$&%#!].
+	// Feature description.
 	Description *string `json:"description,omitempty"`
 
 	// Format of the feature (TEXT, JSON, YAML) and it is a required attribute when `type` is `STRING`. It is not required
@@ -4588,7 +4588,7 @@ type CreatePropertyOptions struct {
 	// per the `type` and `format` attributes.
 	Value interface{} `json:"value" validate:"required"`
 
-	// Property description, allowed special characters are [.,-_ :()$&%#!].
+	// Property description.
 	Description *string `json:"description,omitempty"`
 
 	// Format of the property (TEXT, JSON, YAML) and it is a required attribute when `type` is `STRING`. It is not required
@@ -4719,7 +4719,7 @@ type CreateSegmentOptions struct {
 	// evaluation is performed in the context of an entity when it is targeted to segments.
 	Rules []Rule `json:"rules" validate:"required"`
 
-	// Segment description, allowed special characters are [.,-_ :()$&%#!].
+	// Segment description.
 	Description *string `json:"description,omitempty"`
 
 	// Tags associated with the segments, allowed special characters are [_. ,-:].
@@ -5308,7 +5308,7 @@ type Environment struct {
 	// Environment id. Allowed special characters are dot ( . ), hyphen( - ), underscore ( _ ) only.
 	EnvironmentID *string `json:"environment_id" validate:"required"`
 
-	// Environment description, allowed special characters are [.,-_ :()$&%#!].
+	// Environment description.
 	Description *string `json:"description,omitempty"`
 
 	// Tags associated with the environment, allowed special characters are [_. ,-:].
@@ -5572,7 +5572,7 @@ type Feature struct {
 	// Feature id. Allowed special characters are dot ( . ), hyphen( - ), underscore ( _ ) only.
 	FeatureID *string `json:"feature_id" validate:"required"`
 
-	// Feature description, allowed special characters are [.,-_ :()$&%#!].
+	// Feature description.
 	Description *string `json:"description,omitempty"`
 
 	// Type of the feature (BOOLEAN, STRING, NUMERIC). If `type` is `STRING`, then `format` attribute is required.
@@ -6546,7 +6546,7 @@ type ImportCollectionSchema struct {
 	// Collection name. Allowed special characters are dot ( . ), hyphen( - ), underscore ( _ ) only.
 	Name *string `json:"name" validate:"required"`
 
-	// Description of the collection, allowed special characters are [.,-_ :()$&%#!].
+	// Description of the collection.
 	Description *string `json:"description,omitempty"`
 
 	// Tags associated with the collection, allowed special characters are [_. ,-:].
@@ -6688,7 +6688,7 @@ type ImportEnvironmentSchema struct {
 	// Environment Id. Allowed special characters are dot ( . ), hyphen( - ), underscore ( _ ) only.
 	EnvironmentID *string `json:"environment_id" validate:"required"`
 
-	// Environment description, allowed special characters are [.,-_ :()$&%#!].
+	// Environment description.
 	Description *string `json:"description,omitempty"`
 
 	// Tags associated with the environment, allowed special characters are [_. ,-:].
@@ -6767,7 +6767,7 @@ type ImportFeatureRequestBody struct {
 	// Feature id. Allowed special characters are dot ( . ), hyphen( - ), underscore ( _ ) only.
 	FeatureID *string `json:"feature_id" validate:"required"`
 
-	// Feature description, allowed special characters are [.,-_ :()$&%#!].
+	// Feature description.
 	Description *string `json:"description,omitempty"`
 
 	// Type of the feature (BOOLEAN, STRING, NUMERIC). If `type` is `STRING`, then `format` attribute is required.
@@ -6920,7 +6920,7 @@ type ImportPropertyRequestBody struct {
 	// Property id. Allowed special characters are dot ( . ), hyphen( - ), underscore ( _ ) only.
 	PropertyID *string `json:"property_id" validate:"required"`
 
-	// Property description, allowed special characters are [.,-_ :()$&%#!].
+	// Property description.
 	Description *string `json:"description,omitempty"`
 
 	// Type of the property (BOOLEAN, STRING, NUMERIC, SECRETREF). If `type` is `STRING`, then `format` attribute is
@@ -7050,7 +7050,7 @@ type ImportSegmentSchema struct {
 	// Segment id. Allowed special characters are dot ( . ), hyphen( - ), underscore ( _ ) only.
 	SegmentID *string `json:"segment_id" validate:"required"`
 
-	// Segment description, allowed special characters are [.,-_ :()$&%#!].
+	// Segment description.
 	Description *string `json:"description,omitempty"`
 
 	// Tags associated with the segments, allowed special characters are [_. ,-:].
@@ -8255,7 +8255,7 @@ type Property struct {
 	// Property id. Allowed special characters are dot ( . ), hyphen( - ), underscore ( _ ) only.
 	PropertyID *string `json:"property_id" validate:"required"`
 
-	// Property description, allowed special characters are [.,-_ :()$&%#!].
+	// Property description.
 	Description *string `json:"description,omitempty"`
 
 	// Type of the property (BOOLEAN, STRING, NUMERIC, SECRETREF). If `type` is `STRING`, then `format` attribute is
@@ -8544,7 +8544,7 @@ type Segment struct {
 	// Segment id. Allowed special characters are dot ( . ), hyphen( - ), underscore ( _ ) only.
 	SegmentID *string `json:"segment_id" validate:"required"`
 
-	// Segment description, allowed special characters are [.,-_ :()$&%#!].
+	// Segment description.
 	Description *string `json:"description,omitempty"`
 
 	// Tags associated with the segments, allowed special characters are [_. ,-:].
@@ -8912,7 +8912,7 @@ type UpdateCollectionOptions struct {
 	// Collection name. Allowed special characters are dot ( . ), hyphen( - ), underscore ( _ ) only.
 	Name *string `json:"name,omitempty"`
 
-	// Description of the collection, allowed special characters are [.,-_ :()$&%#!].
+	// Description of the collection.
 	Description *string `json:"description,omitempty"`
 
 	// Tags associated with the collection, allowed special characters are [_. ,-:].
@@ -8967,7 +8967,7 @@ type UpdateEnvironmentOptions struct {
 	// Environment name. Allowed special characters are dot ( . ), hyphen( - ), underscore ( _ ) only.
 	Name *string `json:"name,omitempty"`
 
-	// Environment description, allowed special characters are [.,-_ :()$&%#!].
+	// Environment description.
 	Description *string `json:"description,omitempty"`
 
 	// Tags associated with the environment, allowed special characters are [_. ,-:].
@@ -9034,7 +9034,7 @@ type UpdateFeatureOptions struct {
 	// Feature name. Allowed special characters are dot ( . ), hyphen( - ), underscore ( _ ) only.
 	Name *string `json:"name,omitempty"`
 
-	// Feature description, allowed special characters are [.,-_ :()$&%#!].
+	// Feature description.
 	Description *string `json:"description,omitempty"`
 
 	// Value of the feature when it is enabled. The value can be Boolean, Numeric, String - TEXT, String - JSON, String -
@@ -9155,7 +9155,7 @@ type UpdateFeatureValuesOptions struct {
 	// Feature name. Allowed special characters are dot ( . ), hyphen( - ), underscore ( _ ) only.
 	Name *string `json:"name,omitempty"`
 
-	// Feature description, allowed special characters are [.,-_ :()$&%#!].
+	// Feature description.
 	Description *string `json:"description,omitempty"`
 
 	// Tags associated with the feature, allowed special characters are [_. ,-:].
@@ -9383,7 +9383,7 @@ type UpdatePropertyOptions struct {
 	// Property name. Allowed special characters are dot ( . ), hyphen( - ), underscore ( _ ) only.
 	Name *string `json:"name,omitempty"`
 
-	// Property description, allowed special characters are [.,-_ :()$&%#!].
+	// Property description.
 	Description *string `json:"description,omitempty"`
 
 	// Value of the Property. The value can be Boolean, Numeric, SecretRef, String - TEXT, String - JSON, String - YAML as
@@ -9476,7 +9476,7 @@ type UpdatePropertyValuesOptions struct {
 	// Property name. Allowed special characters are dot ( . ), hyphen( - ), underscore ( _ ) only.
 	Name *string `json:"name,omitempty"`
 
-	// Property description, allowed special characters are [.,-_ :()$&%#!].
+	// Property description.
 	Description *string `json:"description,omitempty"`
 
 	// Tags associated with the property, allowed special characters are [_. ,-:].
@@ -9557,7 +9557,7 @@ type UpdateSegmentOptions struct {
 	// Segment name. Allowed special characters are dot ( . ), hyphen( - ), underscore ( _ ) only.
 	Name *string `json:"name,omitempty"`
 
-	// Segment description, allowed special characters are [.,-_ :()$&%#!].
+	// Segment description.
 	Description *string `json:"description,omitempty"`
 
 	// Tags associated with the segments, allowed special characters are [_. ,-:].
