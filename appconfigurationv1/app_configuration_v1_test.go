@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2024.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13523,7 +13523,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 	})
 	Describe(`Utility function tests`, func() {
 		It(`Invoke CreateMockByteArray() successfully`, func() {
-			mockByteArray := CreateMockByteArray("VGhpcyBpcyBhIHRlc3Qgb2YgdGhlIGVtZXJnZW5jeSBicm9hZGNhc3Qgc3lzdGVt") // pragma: allowlist secret
+			mockByteArray := CreateMockByteArray("VGhpcyBpcyBhIHRlc3Qgb2YgdGhlIGVtZXJnZW5jeSBicm9hZGNhc3Qgc3lzdGVt")
 			Expect(mockByteArray).ToNot(BeNil())
 		})
 		It(`Invoke CreateMockUUID() successfully`, func() {
