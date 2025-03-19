@@ -393,7 +393,7 @@ var _ = Describe(`AppConfigurationV1 Examples Tests`, func() {
 				RolloutPercentage: core.Int64Ptr(int64(90)),
 			}
 
-			collectionRefModel := &appconfigurationv1.CollectionRef{
+			collectionUpdateRefModel := &appconfigurationv1.CollectionUpdateRef{
 				CollectionID: core.StringPtr("ghzinc"),
 			}
 
@@ -409,7 +409,7 @@ var _ = Describe(`AppConfigurationV1 Examples Tests`, func() {
 			updateFeatureOptions.SetRolloutPercentage(int64(100))
 			updateFeatureOptions.SetTags("version: 1.1, yet-to-release")
 			updateFeatureOptions.SetSegmentRules([]appconfigurationv1.FeatureSegmentRule{*featureSegmentRuleModel})
-			updateFeatureOptions.SetCollections([]appconfigurationv1.CollectionRef{*collectionRefModel})
+			updateFeatureOptions.SetCollections([]appconfigurationv1.CollectionUpdateRef{*collectionUpdateRefModel})
 
 			feature, response, err := appConfigurationService.UpdateFeature(updateFeatureOptions)
 			if err != nil {
@@ -599,7 +599,7 @@ var _ = Describe(`AppConfigurationV1 Examples Tests`, func() {
 				Order: core.Int64Ptr(int64(1)),
 			}
 
-			collectionRefModel := &appconfigurationv1.CollectionRef{
+			collectionUpdateRefModel := &appconfigurationv1.CollectionUpdateRef{
 				CollectionID: core.StringPtr("ghzinc"),
 			}
 
@@ -612,7 +612,7 @@ var _ = Describe(`AppConfigurationV1 Examples Tests`, func() {
 			updatePropertyOptions.SetValue("true")
 			updatePropertyOptions.SetTags("version: 1.1, pre-release")
 			updatePropertyOptions.SetSegmentRules([]appconfigurationv1.SegmentRule{*segmentRuleModel})
-			updatePropertyOptions.SetCollections([]appconfigurationv1.CollectionRef{*collectionRefModel})
+			updatePropertyOptions.SetCollections([]appconfigurationv1.CollectionUpdateRef{*collectionUpdateRefModel})
 
 			property, response, err := appConfigurationService.UpdateProperty(updatePropertyOptions)
 			if err != nil {
