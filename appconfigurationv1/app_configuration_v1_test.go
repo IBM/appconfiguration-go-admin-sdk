@@ -3384,9 +3384,10 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				featureSegmentRuleModel.Order = core.Int64Ptr(int64(1))
 				featureSegmentRuleModel.RolloutPercentage = core.Int64Ptr(int64(90))
 
-				// Construct an instance of the CollectionRef model
-				collectionRefModel := new(appconfigurationv1.CollectionRef)
-				collectionRefModel.CollectionID = core.StringPtr("ghzinc")
+				// Construct an instance of the CollectionUpdateRef model
+				collectionUpdateRefModel := new(appconfigurationv1.CollectionUpdateRef)
+				collectionUpdateRefModel.CollectionID = core.StringPtr("ghzinc")
+				collectionUpdateRefModel.Deleted = core.BoolPtr(true)
 
 				// Construct an instance of the UpdateFeatureOptions model
 				updateFeatureOptionsModel := new(appconfigurationv1.UpdateFeatureOptions)
@@ -3400,7 +3401,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				updateFeatureOptionsModel.RolloutPercentage = core.Int64Ptr(int64(100))
 				updateFeatureOptionsModel.Tags = core.StringPtr("version: 1.1, yet-to-release")
 				updateFeatureOptionsModel.SegmentRules = []appconfigurationv1.FeatureSegmentRule{*featureSegmentRuleModel}
-				updateFeatureOptionsModel.Collections = []appconfigurationv1.CollectionRef{*collectionRefModel}
+				updateFeatureOptionsModel.Collections = []appconfigurationv1.CollectionUpdateRef{*collectionUpdateRefModel}
 				updateFeatureOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
 				result, response, operationErr := appConfigurationService.UpdateFeature(updateFeatureOptionsModel)
@@ -3476,9 +3477,10 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				featureSegmentRuleModel.Order = core.Int64Ptr(int64(1))
 				featureSegmentRuleModel.RolloutPercentage = core.Int64Ptr(int64(90))
 
-				// Construct an instance of the CollectionRef model
-				collectionRefModel := new(appconfigurationv1.CollectionRef)
-				collectionRefModel.CollectionID = core.StringPtr("ghzinc")
+				// Construct an instance of the CollectionUpdateRef model
+				collectionUpdateRefModel := new(appconfigurationv1.CollectionUpdateRef)
+				collectionUpdateRefModel.CollectionID = core.StringPtr("ghzinc")
+				collectionUpdateRefModel.Deleted = core.BoolPtr(true)
 
 				// Construct an instance of the UpdateFeatureOptions model
 				updateFeatureOptionsModel := new(appconfigurationv1.UpdateFeatureOptions)
@@ -3492,7 +3494,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				updateFeatureOptionsModel.RolloutPercentage = core.Int64Ptr(int64(100))
 				updateFeatureOptionsModel.Tags = core.StringPtr("version: 1.1, yet-to-release")
 				updateFeatureOptionsModel.SegmentRules = []appconfigurationv1.FeatureSegmentRule{*featureSegmentRuleModel}
-				updateFeatureOptionsModel.Collections = []appconfigurationv1.CollectionRef{*collectionRefModel}
+				updateFeatureOptionsModel.Collections = []appconfigurationv1.CollectionUpdateRef{*collectionUpdateRefModel}
 				updateFeatureOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with a Context to test a timeout error
@@ -3576,9 +3578,10 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				featureSegmentRuleModel.Order = core.Int64Ptr(int64(1))
 				featureSegmentRuleModel.RolloutPercentage = core.Int64Ptr(int64(90))
 
-				// Construct an instance of the CollectionRef model
-				collectionRefModel := new(appconfigurationv1.CollectionRef)
-				collectionRefModel.CollectionID = core.StringPtr("ghzinc")
+				// Construct an instance of the CollectionUpdateRef model
+				collectionUpdateRefModel := new(appconfigurationv1.CollectionUpdateRef)
+				collectionUpdateRefModel.CollectionID = core.StringPtr("ghzinc")
+				collectionUpdateRefModel.Deleted = core.BoolPtr(true)
 
 				// Construct an instance of the UpdateFeatureOptions model
 				updateFeatureOptionsModel := new(appconfigurationv1.UpdateFeatureOptions)
@@ -3592,7 +3595,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				updateFeatureOptionsModel.RolloutPercentage = core.Int64Ptr(int64(100))
 				updateFeatureOptionsModel.Tags = core.StringPtr("version: 1.1, yet-to-release")
 				updateFeatureOptionsModel.SegmentRules = []appconfigurationv1.FeatureSegmentRule{*featureSegmentRuleModel}
-				updateFeatureOptionsModel.Collections = []appconfigurationv1.CollectionRef{*collectionRefModel}
+				updateFeatureOptionsModel.Collections = []appconfigurationv1.CollectionUpdateRef{*collectionUpdateRefModel}
 				updateFeatureOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
@@ -3621,9 +3624,10 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				featureSegmentRuleModel.Order = core.Int64Ptr(int64(1))
 				featureSegmentRuleModel.RolloutPercentage = core.Int64Ptr(int64(90))
 
-				// Construct an instance of the CollectionRef model
-				collectionRefModel := new(appconfigurationv1.CollectionRef)
-				collectionRefModel.CollectionID = core.StringPtr("ghzinc")
+				// Construct an instance of the CollectionUpdateRef model
+				collectionUpdateRefModel := new(appconfigurationv1.CollectionUpdateRef)
+				collectionUpdateRefModel.CollectionID = core.StringPtr("ghzinc")
+				collectionUpdateRefModel.Deleted = core.BoolPtr(true)
 
 				// Construct an instance of the UpdateFeatureOptions model
 				updateFeatureOptionsModel := new(appconfigurationv1.UpdateFeatureOptions)
@@ -3637,7 +3641,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				updateFeatureOptionsModel.RolloutPercentage = core.Int64Ptr(int64(100))
 				updateFeatureOptionsModel.Tags = core.StringPtr("version: 1.1, yet-to-release")
 				updateFeatureOptionsModel.SegmentRules = []appconfigurationv1.FeatureSegmentRule{*featureSegmentRuleModel}
-				updateFeatureOptionsModel.Collections = []appconfigurationv1.CollectionRef{*collectionRefModel}
+				updateFeatureOptionsModel.Collections = []appconfigurationv1.CollectionUpdateRef{*collectionUpdateRefModel}
 				updateFeatureOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := appConfigurationService.SetServiceURL("")
@@ -3687,9 +3691,10 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				featureSegmentRuleModel.Order = core.Int64Ptr(int64(1))
 				featureSegmentRuleModel.RolloutPercentage = core.Int64Ptr(int64(90))
 
-				// Construct an instance of the CollectionRef model
-				collectionRefModel := new(appconfigurationv1.CollectionRef)
-				collectionRefModel.CollectionID = core.StringPtr("ghzinc")
+				// Construct an instance of the CollectionUpdateRef model
+				collectionUpdateRefModel := new(appconfigurationv1.CollectionUpdateRef)
+				collectionUpdateRefModel.CollectionID = core.StringPtr("ghzinc")
+				collectionUpdateRefModel.Deleted = core.BoolPtr(true)
 
 				// Construct an instance of the UpdateFeatureOptions model
 				updateFeatureOptionsModel := new(appconfigurationv1.UpdateFeatureOptions)
@@ -3703,7 +3708,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				updateFeatureOptionsModel.RolloutPercentage = core.Int64Ptr(int64(100))
 				updateFeatureOptionsModel.Tags = core.StringPtr("version: 1.1, yet-to-release")
 				updateFeatureOptionsModel.SegmentRules = []appconfigurationv1.FeatureSegmentRule{*featureSegmentRuleModel}
-				updateFeatureOptionsModel.Collections = []appconfigurationv1.CollectionRef{*collectionRefModel}
+				updateFeatureOptionsModel.Collections = []appconfigurationv1.CollectionUpdateRef{*collectionUpdateRefModel}
 				updateFeatureOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation
@@ -5396,9 +5401,10 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				segmentRuleModel.Value = "true"
 				segmentRuleModel.Order = core.Int64Ptr(int64(1))
 
-				// Construct an instance of the CollectionRef model
-				collectionRefModel := new(appconfigurationv1.CollectionRef)
-				collectionRefModel.CollectionID = core.StringPtr("ghzinc")
+				// Construct an instance of the CollectionUpdateRef model
+				collectionUpdateRefModel := new(appconfigurationv1.CollectionUpdateRef)
+				collectionUpdateRefModel.CollectionID = core.StringPtr("ghzinc")
+				collectionUpdateRefModel.Deleted = core.BoolPtr(true)
 
 				// Construct an instance of the UpdatePropertyOptions model
 				updatePropertyOptionsModel := new(appconfigurationv1.UpdatePropertyOptions)
@@ -5409,7 +5415,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				updatePropertyOptionsModel.Value = "true"
 				updatePropertyOptionsModel.Tags = core.StringPtr("version: 1.1, pre-release")
 				updatePropertyOptionsModel.SegmentRules = []appconfigurationv1.SegmentRule{*segmentRuleModel}
-				updatePropertyOptionsModel.Collections = []appconfigurationv1.CollectionRef{*collectionRefModel}
+				updatePropertyOptionsModel.Collections = []appconfigurationv1.CollectionUpdateRef{*collectionUpdateRefModel}
 				updatePropertyOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
 				result, response, operationErr := appConfigurationService.UpdateProperty(updatePropertyOptionsModel)
@@ -5484,9 +5490,10 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				segmentRuleModel.Value = "true"
 				segmentRuleModel.Order = core.Int64Ptr(int64(1))
 
-				// Construct an instance of the CollectionRef model
-				collectionRefModel := new(appconfigurationv1.CollectionRef)
-				collectionRefModel.CollectionID = core.StringPtr("ghzinc")
+				// Construct an instance of the CollectionUpdateRef model
+				collectionUpdateRefModel := new(appconfigurationv1.CollectionUpdateRef)
+				collectionUpdateRefModel.CollectionID = core.StringPtr("ghzinc")
+				collectionUpdateRefModel.Deleted = core.BoolPtr(true)
 
 				// Construct an instance of the UpdatePropertyOptions model
 				updatePropertyOptionsModel := new(appconfigurationv1.UpdatePropertyOptions)
@@ -5497,7 +5504,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				updatePropertyOptionsModel.Value = "true"
 				updatePropertyOptionsModel.Tags = core.StringPtr("version: 1.1, pre-release")
 				updatePropertyOptionsModel.SegmentRules = []appconfigurationv1.SegmentRule{*segmentRuleModel}
-				updatePropertyOptionsModel.Collections = []appconfigurationv1.CollectionRef{*collectionRefModel}
+				updatePropertyOptionsModel.Collections = []appconfigurationv1.CollectionUpdateRef{*collectionUpdateRefModel}
 				updatePropertyOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with a Context to test a timeout error
@@ -5580,9 +5587,10 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				segmentRuleModel.Value = "true"
 				segmentRuleModel.Order = core.Int64Ptr(int64(1))
 
-				// Construct an instance of the CollectionRef model
-				collectionRefModel := new(appconfigurationv1.CollectionRef)
-				collectionRefModel.CollectionID = core.StringPtr("ghzinc")
+				// Construct an instance of the CollectionUpdateRef model
+				collectionUpdateRefModel := new(appconfigurationv1.CollectionUpdateRef)
+				collectionUpdateRefModel.CollectionID = core.StringPtr("ghzinc")
+				collectionUpdateRefModel.Deleted = core.BoolPtr(true)
 
 				// Construct an instance of the UpdatePropertyOptions model
 				updatePropertyOptionsModel := new(appconfigurationv1.UpdatePropertyOptions)
@@ -5593,7 +5601,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				updatePropertyOptionsModel.Value = "true"
 				updatePropertyOptionsModel.Tags = core.StringPtr("version: 1.1, pre-release")
 				updatePropertyOptionsModel.SegmentRules = []appconfigurationv1.SegmentRule{*segmentRuleModel}
-				updatePropertyOptionsModel.Collections = []appconfigurationv1.CollectionRef{*collectionRefModel}
+				updatePropertyOptionsModel.Collections = []appconfigurationv1.CollectionUpdateRef{*collectionUpdateRefModel}
 				updatePropertyOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
@@ -5621,9 +5629,10 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				segmentRuleModel.Value = "true"
 				segmentRuleModel.Order = core.Int64Ptr(int64(1))
 
-				// Construct an instance of the CollectionRef model
-				collectionRefModel := new(appconfigurationv1.CollectionRef)
-				collectionRefModel.CollectionID = core.StringPtr("ghzinc")
+				// Construct an instance of the CollectionUpdateRef model
+				collectionUpdateRefModel := new(appconfigurationv1.CollectionUpdateRef)
+				collectionUpdateRefModel.CollectionID = core.StringPtr("ghzinc")
+				collectionUpdateRefModel.Deleted = core.BoolPtr(true)
 
 				// Construct an instance of the UpdatePropertyOptions model
 				updatePropertyOptionsModel := new(appconfigurationv1.UpdatePropertyOptions)
@@ -5634,7 +5643,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				updatePropertyOptionsModel.Value = "true"
 				updatePropertyOptionsModel.Tags = core.StringPtr("version: 1.1, pre-release")
 				updatePropertyOptionsModel.SegmentRules = []appconfigurationv1.SegmentRule{*segmentRuleModel}
-				updatePropertyOptionsModel.Collections = []appconfigurationv1.CollectionRef{*collectionRefModel}
+				updatePropertyOptionsModel.Collections = []appconfigurationv1.CollectionUpdateRef{*collectionUpdateRefModel}
 				updatePropertyOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := appConfigurationService.SetServiceURL("")
@@ -5683,9 +5692,10 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				segmentRuleModel.Value = "true"
 				segmentRuleModel.Order = core.Int64Ptr(int64(1))
 
-				// Construct an instance of the CollectionRef model
-				collectionRefModel := new(appconfigurationv1.CollectionRef)
-				collectionRefModel.CollectionID = core.StringPtr("ghzinc")
+				// Construct an instance of the CollectionUpdateRef model
+				collectionUpdateRefModel := new(appconfigurationv1.CollectionUpdateRef)
+				collectionUpdateRefModel.CollectionID = core.StringPtr("ghzinc")
+				collectionUpdateRefModel.Deleted = core.BoolPtr(true)
 
 				// Construct an instance of the UpdatePropertyOptions model
 				updatePropertyOptionsModel := new(appconfigurationv1.UpdatePropertyOptions)
@@ -5696,7 +5706,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				updatePropertyOptionsModel.Value = "true"
 				updatePropertyOptionsModel.Tags = core.StringPtr("version: 1.1, pre-release")
 				updatePropertyOptionsModel.SegmentRules = []appconfigurationv1.SegmentRule{*segmentRuleModel}
-				updatePropertyOptionsModel.Collections = []appconfigurationv1.CollectionRef{*collectionRefModel}
+				updatePropertyOptionsModel.Collections = []appconfigurationv1.CollectionUpdateRef{*collectionUpdateRefModel}
 				updatePropertyOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation
@@ -11677,6 +11687,12 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(_model).ToNot(BeNil())
 				Expect(err).To(BeNil())
 			})
+			It(`Invoke NewCollectionUpdateRef successfully`, func() {
+				collectionID := "testString"
+				_model, err := appConfigurationService.NewCollectionUpdateRef(collectionID)
+				Expect(_model).ToNot(BeNil())
+				Expect(err).To(BeNil())
+			})
 			It(`Invoke NewCreateCollectionOptions successfully`, func() {
 				// Construct an instance of the CreateCollectionOptions model
 				createCollectionOptionsName := "Web App Collection"
@@ -12638,11 +12654,13 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(featureSegmentRuleModel.Order).To(Equal(core.Int64Ptr(int64(1))))
 				Expect(featureSegmentRuleModel.RolloutPercentage).To(Equal(core.Int64Ptr(int64(90))))
 
-				// Construct an instance of the CollectionRef model
-				collectionRefModel := new(appconfigurationv1.CollectionRef)
-				Expect(collectionRefModel).ToNot(BeNil())
-				collectionRefModel.CollectionID = core.StringPtr("ghzinc")
-				Expect(collectionRefModel.CollectionID).To(Equal(core.StringPtr("ghzinc")))
+				// Construct an instance of the CollectionUpdateRef model
+				collectionUpdateRefModel := new(appconfigurationv1.CollectionUpdateRef)
+				Expect(collectionUpdateRefModel).ToNot(BeNil())
+				collectionUpdateRefModel.CollectionID = core.StringPtr("ghzinc")
+				collectionUpdateRefModel.Deleted = core.BoolPtr(true)
+				Expect(collectionUpdateRefModel.CollectionID).To(Equal(core.StringPtr("ghzinc")))
+				Expect(collectionUpdateRefModel.Deleted).To(Equal(core.BoolPtr(true)))
 
 				// Construct an instance of the UpdateFeatureOptions model
 				environmentID := "environment_id"
@@ -12658,7 +12676,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				updateFeatureOptionsModel.SetRolloutPercentage(int64(100))
 				updateFeatureOptionsModel.SetTags("version: 1.1, yet-to-release")
 				updateFeatureOptionsModel.SetSegmentRules([]appconfigurationv1.FeatureSegmentRule{*featureSegmentRuleModel})
-				updateFeatureOptionsModel.SetCollections([]appconfigurationv1.CollectionRef{*collectionRefModel})
+				updateFeatureOptionsModel.SetCollections([]appconfigurationv1.CollectionUpdateRef{*collectionUpdateRefModel})
 				updateFeatureOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(updateFeatureOptionsModel).ToNot(BeNil())
 				Expect(updateFeatureOptionsModel.EnvironmentID).To(Equal(core.StringPtr("environment_id")))
@@ -12671,7 +12689,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(updateFeatureOptionsModel.RolloutPercentage).To(Equal(core.Int64Ptr(int64(100))))
 				Expect(updateFeatureOptionsModel.Tags).To(Equal(core.StringPtr("version: 1.1, yet-to-release")))
 				Expect(updateFeatureOptionsModel.SegmentRules).To(Equal([]appconfigurationv1.FeatureSegmentRule{*featureSegmentRuleModel}))
-				Expect(updateFeatureOptionsModel.Collections).To(Equal([]appconfigurationv1.CollectionRef{*collectionRefModel}))
+				Expect(updateFeatureOptionsModel.Collections).To(Equal([]appconfigurationv1.CollectionUpdateRef{*collectionUpdateRefModel}))
 				Expect(updateFeatureOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewUpdateFeatureValuesOptions successfully`, func() {
@@ -12770,11 +12788,13 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(segmentRuleModel.Value).To(Equal("true"))
 				Expect(segmentRuleModel.Order).To(Equal(core.Int64Ptr(int64(1))))
 
-				// Construct an instance of the CollectionRef model
-				collectionRefModel := new(appconfigurationv1.CollectionRef)
-				Expect(collectionRefModel).ToNot(BeNil())
-				collectionRefModel.CollectionID = core.StringPtr("ghzinc")
-				Expect(collectionRefModel.CollectionID).To(Equal(core.StringPtr("ghzinc")))
+				// Construct an instance of the CollectionUpdateRef model
+				collectionUpdateRefModel := new(appconfigurationv1.CollectionUpdateRef)
+				Expect(collectionUpdateRefModel).ToNot(BeNil())
+				collectionUpdateRefModel.CollectionID = core.StringPtr("ghzinc")
+				collectionUpdateRefModel.Deleted = core.BoolPtr(true)
+				Expect(collectionUpdateRefModel.CollectionID).To(Equal(core.StringPtr("ghzinc")))
+				Expect(collectionUpdateRefModel.Deleted).To(Equal(core.BoolPtr(true)))
 
 				// Construct an instance of the UpdatePropertyOptions model
 				environmentID := "environment_id"
@@ -12787,7 +12807,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				updatePropertyOptionsModel.SetValue("true")
 				updatePropertyOptionsModel.SetTags("version: 1.1, pre-release")
 				updatePropertyOptionsModel.SetSegmentRules([]appconfigurationv1.SegmentRule{*segmentRuleModel})
-				updatePropertyOptionsModel.SetCollections([]appconfigurationv1.CollectionRef{*collectionRefModel})
+				updatePropertyOptionsModel.SetCollections([]appconfigurationv1.CollectionUpdateRef{*collectionUpdateRefModel})
 				updatePropertyOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(updatePropertyOptionsModel).ToNot(BeNil())
 				Expect(updatePropertyOptionsModel.EnvironmentID).To(Equal(core.StringPtr("environment_id")))
@@ -12797,7 +12817,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(updatePropertyOptionsModel.Value).To(Equal("true"))
 				Expect(updatePropertyOptionsModel.Tags).To(Equal(core.StringPtr("version: 1.1, pre-release")))
 				Expect(updatePropertyOptionsModel.SegmentRules).To(Equal([]appconfigurationv1.SegmentRule{*segmentRuleModel}))
-				Expect(updatePropertyOptionsModel.Collections).To(Equal([]appconfigurationv1.CollectionRef{*collectionRefModel}))
+				Expect(updatePropertyOptionsModel.Collections).To(Equal([]appconfigurationv1.CollectionUpdateRef{*collectionUpdateRefModel}))
 				Expect(updatePropertyOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewUpdatePropertyValuesOptions successfully`, func() {
@@ -12974,6 +12994,25 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 			var result *appconfigurationv1.CollectionRef
 			err = appconfigurationv1.UnmarshalCollectionRef(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalCollectionUpdateRef successfully`, func() {
+			// Construct an instance of the model.
+			model := new(appconfigurationv1.CollectionUpdateRef)
+			model.CollectionID = core.StringPtr("testString")
+			model.Deleted = core.BoolPtr(true)
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *appconfigurationv1.CollectionUpdateRef
+			err = appconfigurationv1.UnmarshalCollectionUpdateRef(raw, &result)
 			Expect(err).To(BeNil())
 			Expect(result).ToNot(BeNil())
 			Expect(result).To(Equal(model))

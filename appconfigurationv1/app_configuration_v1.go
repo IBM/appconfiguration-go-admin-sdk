@@ -4030,6 +4030,44 @@ func UnmarshalCollectionRef(m map[string]json.RawMessage, result interface{}) (e
 	return
 }
 
+// CollectionUpdateRef : CollectionUpdateRef struct
+type CollectionUpdateRef struct {
+	// Collection id.
+	CollectionID *string `json:"collection_id" validate:"required"`
+
+	// Remove the association with the given collection_id if deleted is `true`.
+	Deleted *bool `json:"deleted,omitempty"`
+}
+
+// NewCollectionUpdateRef : Instantiate CollectionUpdateRef (Generic Model Constructor)
+func (*AppConfigurationV1) NewCollectionUpdateRef(collectionID string) (_model *CollectionUpdateRef, err error) {
+	_model = &CollectionUpdateRef{
+		CollectionID: core.StringPtr(collectionID),
+	}
+	err = core.ValidateStruct(_model, "required parameters")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "model-missing-required", common.GetComponentInfo())
+	}
+	return
+}
+
+// UnmarshalCollectionUpdateRef unmarshals an instance of CollectionUpdateRef from the specified map of raw messages.
+func UnmarshalCollectionUpdateRef(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(CollectionUpdateRef)
+	err = core.UnmarshalPrimitive(m, "collection_id", &obj.CollectionID)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "collection_id-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "deleted", &obj.Deleted)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "deleted-error", common.GetComponentInfo())
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
 // ConfigAction : ConfigAction struct
 // Models which "extend" this model:
 // - ConfigActionGitConfigPromote
@@ -8495,8 +8533,12 @@ const (
 	Rule_Operator_Greaterthan = "greaterThan"
 	Rule_Operator_Greaterthanequals = "greaterThanEquals"
 	Rule_Operator_Is = "is"
+	Rule_Operator_Isnot = "isNot"
 	Rule_Operator_Lesserthan = "lesserThan"
 	Rule_Operator_Lesserthanequals = "lesserThanEquals"
+	Rule_Operator_Notcontains = "notContains"
+	Rule_Operator_Notendswith = "notEndsWith"
+	Rule_Operator_Notstartswith = "notStartsWith"
 	Rule_Operator_Startswith = "startsWith"
 )
 
@@ -9058,7 +9100,7 @@ type UpdateFeatureOptions struct {
 	SegmentRules []FeatureSegmentRule `json:"segment_rules,omitempty"`
 
 	// List of collection id representing the collections that are associated with the specified property.
-	Collections []CollectionRef `json:"collections,omitempty"`
+	Collections []CollectionUpdateRef `json:"collections,omitempty"`
 
 	// Allows users to set headers on API requests.
 	Headers map[string]string
@@ -9133,7 +9175,7 @@ func (_options *UpdateFeatureOptions) SetSegmentRules(segmentRules []FeatureSegm
 }
 
 // SetCollections : Allow user to set Collections
-func (_options *UpdateFeatureOptions) SetCollections(collections []CollectionRef) *UpdateFeatureOptions {
+func (_options *UpdateFeatureOptions) SetCollections(collections []CollectionUpdateRef) *UpdateFeatureOptions {
 	_options.Collections = collections
 	return _options
 }
@@ -9397,7 +9439,7 @@ type UpdatePropertyOptions struct {
 	SegmentRules []SegmentRule `json:"segment_rules,omitempty"`
 
 	// List of collection id representing the collections that are associated with the specified property.
-	Collections []CollectionRef `json:"collections,omitempty"`
+	Collections []CollectionUpdateRef `json:"collections,omitempty"`
 
 	// Allows users to set headers on API requests.
 	Headers map[string]string
@@ -9454,7 +9496,7 @@ func (_options *UpdatePropertyOptions) SetSegmentRules(segmentRules []SegmentRul
 }
 
 // SetCollections : Allow user to set Collections
-func (_options *UpdatePropertyOptions) SetCollections(collections []CollectionRef) *UpdatePropertyOptions {
+func (_options *UpdatePropertyOptions) SetCollections(collections []CollectionUpdateRef) *UpdatePropertyOptions {
 	_options.Collections = collections
 	return _options
 }

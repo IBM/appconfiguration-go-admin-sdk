@@ -490,8 +490,9 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 				RolloutPercentage: core.Int64Ptr(int64(90)),
 			}
 
-			collectionRefModel := &appconfigurationv1.CollectionRef{
+			collectionUpdateRefModel := &appconfigurationv1.CollectionUpdateRef{
 				CollectionID: core.StringPtr("ghzinc"),
+				Deleted: core.BoolPtr(true),
 			}
 
 			updateFeatureOptions := &appconfigurationv1.UpdateFeatureOptions{
@@ -505,7 +506,7 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 				RolloutPercentage: core.Int64Ptr(int64(100)),
 				Tags: core.StringPtr("version: 1.1, yet-to-release"),
 				SegmentRules: []appconfigurationv1.FeatureSegmentRule{*featureSegmentRuleModel},
-				Collections: []appconfigurationv1.CollectionRef{*collectionRefModel},
+				Collections: []appconfigurationv1.CollectionUpdateRef{*collectionUpdateRefModel},
 			}
 
 			feature, response, err := appConfigurationService.UpdateFeature(updateFeatureOptions)
@@ -718,8 +719,9 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 				Order: core.Int64Ptr(int64(1)),
 			}
 
-			collectionRefModel := &appconfigurationv1.CollectionRef{
+			collectionUpdateRefModel := &appconfigurationv1.CollectionUpdateRef{
 				CollectionID: core.StringPtr("ghzinc"),
+				Deleted: core.BoolPtr(true),
 			}
 
 			updatePropertyOptions := &appconfigurationv1.UpdatePropertyOptions{
@@ -730,7 +732,7 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 				Value: core.StringPtr("true"),
 				Tags: core.StringPtr("version: 1.1, pre-release"),
 				SegmentRules: []appconfigurationv1.SegmentRule{*segmentRuleModel},
-				Collections: []appconfigurationv1.CollectionRef{*collectionRefModel},
+				Collections: []appconfigurationv1.CollectionUpdateRef{*collectionUpdateRefModel},
 			}
 
 			property, response, err := appConfigurationService.UpdateProperty(updatePropertyOptions)

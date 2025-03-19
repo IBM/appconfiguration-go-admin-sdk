@@ -45,11 +45,11 @@ CLI [here.](https://cloud.ibm.com/docs/app-configuration?topic=app-configuration
 * An [IBM Cloud][ibm-cloud-onboarding] account.
 * An [App Configuration service instance](https://cloud.ibm.com/catalog/services/app-configuration).
 * An IAM API key to allow the SDK to access your account. Create one [here](https://cloud.ibm.com/iam/apikeys).
-* Go version 1.21 or above.
+* Go version 1.23 or above.
 
 ## Installation
 
-The current version of this SDK: 0.4.2
+The current version of this SDK: 0.5.0
 
 **Note: The v1.x.x versions of the App Configuration Go Admin SDK have been retracted. Use the latest available version
 of the SDK.**
