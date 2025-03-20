@@ -4609,6 +4609,1109 @@ var _ = Describe(`AppConfigurationV1`, func() {
 			})
 		})
 	})
+	Describe(`CreateFeatureRule(createFeatureRuleOptions *CreateFeatureRuleOptions) - Operation response error`, func() {
+		createFeatureRulePath := "/environments/environment_id/features/feature_id/rules"
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(createFeatureRulePath))
+					Expect(req.Method).To(Equal("POST"))
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(201)
+					fmt.Fprint(res, `} this is not valid json {`)
+				}))
+			})
+			It(`Invoke CreateFeatureRule with error: Operation response processing error`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the TargetSegments model
+				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
+				targetSegmentsModel.Segments = []string{"betausers", "premiumusers"}
+
+				// Construct an instance of the CreateFeatureRuleOptions model
+				createFeatureRuleOptionsModel := new(appconfigurationv1.CreateFeatureRuleOptions)
+				createFeatureRuleOptionsModel.EnvironmentID = core.StringPtr("environment_id")
+				createFeatureRuleOptionsModel.FeatureID = core.StringPtr("feature_id")
+				createFeatureRuleOptionsModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
+				createFeatureRuleOptionsModel.Value = "true"
+				createFeatureRuleOptionsModel.RuleID = core.StringPtr("RuleA")
+				createFeatureRuleOptionsModel.RolloutPercentage = core.Int64Ptr(int64(50))
+				createFeatureRuleOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Expect response parsing to fail since we are receiving a text/plain response
+				result, response, operationErr := appConfigurationService.CreateFeatureRule(createFeatureRuleOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				appConfigurationService.EnableRetries(0, 0)
+				result, response, operationErr = appConfigurationService.CreateFeatureRule(createFeatureRuleOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`CreateFeatureRule(createFeatureRuleOptions *CreateFeatureRuleOptions)`, func() {
+		createFeatureRulePath := "/environments/environment_id/features/feature_id/rules"
+		Context(`Using mock server endpoint with timeout`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(createFeatureRulePath))
+					Expect(req.Method).To(Equal("POST"))
+
+					// For gzip-disabled operation, verify Content-Encoding is not set.
+					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+
+					// If there is a body, then make sure we can read it
+					bodyBuf := new(bytes.Buffer)
+					if req.Header.Get("Content-Encoding") == "gzip" {
+						body, err := core.NewGzipDecompressionReader(req.Body)
+						Expect(err).To(BeNil())
+						_, err = bodyBuf.ReadFrom(body)
+						Expect(err).To(BeNil())
+					} else {
+						_, err := bodyBuf.ReadFrom(req.Body)
+						Expect(err).To(BeNil())
+					}
+					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
+
+					// Sleep a short time to support a timeout test
+					time.Sleep(100 * time.Millisecond)
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(201)
+					fmt.Fprintf(res, "%s", `{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "rule_id": "RuleID", "rollout_percentage": 100, "order": 5, "href": "Href"}`)
+				}))
+			})
+			It(`Invoke CreateFeatureRule successfully with retries`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+				appConfigurationService.EnableRetries(0, 0)
+
+				// Construct an instance of the TargetSegments model
+				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
+				targetSegmentsModel.Segments = []string{"betausers", "premiumusers"}
+
+				// Construct an instance of the CreateFeatureRuleOptions model
+				createFeatureRuleOptionsModel := new(appconfigurationv1.CreateFeatureRuleOptions)
+				createFeatureRuleOptionsModel.EnvironmentID = core.StringPtr("environment_id")
+				createFeatureRuleOptionsModel.FeatureID = core.StringPtr("feature_id")
+				createFeatureRuleOptionsModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
+				createFeatureRuleOptionsModel.Value = "true"
+				createFeatureRuleOptionsModel.RuleID = core.StringPtr("RuleA")
+				createFeatureRuleOptionsModel.RolloutPercentage = core.Int64Ptr(int64(50))
+				createFeatureRuleOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with a Context to test a timeout error
+				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc()
+				_, _, operationErr := appConfigurationService.CreateFeatureRuleWithContext(ctx, createFeatureRuleOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+
+				// Disable retries and test again
+				appConfigurationService.DisableRetries()
+				result, response, operationErr := appConfigurationService.CreateFeatureRule(createFeatureRuleOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				_, _, operationErr = appConfigurationService.CreateFeatureRuleWithContext(ctx, createFeatureRuleOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(createFeatureRulePath))
+					Expect(req.Method).To(Equal("POST"))
+
+					// For gzip-disabled operation, verify Content-Encoding is not set.
+					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+
+					// If there is a body, then make sure we can read it
+					bodyBuf := new(bytes.Buffer)
+					if req.Header.Get("Content-Encoding") == "gzip" {
+						body, err := core.NewGzipDecompressionReader(req.Body)
+						Expect(err).To(BeNil())
+						_, err = bodyBuf.ReadFrom(body)
+						Expect(err).To(BeNil())
+					} else {
+						_, err := bodyBuf.ReadFrom(req.Body)
+						Expect(err).To(BeNil())
+					}
+					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(201)
+					fmt.Fprintf(res, "%s", `{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "rule_id": "RuleID", "rollout_percentage": 100, "order": 5, "href": "Href"}`)
+				}))
+			})
+			It(`Invoke CreateFeatureRule successfully`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Invoke operation with nil options model (negative test)
+				result, response, operationErr := appConfigurationService.CreateFeatureRule(nil)
+				Expect(operationErr).NotTo(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+
+				// Construct an instance of the TargetSegments model
+				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
+				targetSegmentsModel.Segments = []string{"betausers", "premiumusers"}
+
+				// Construct an instance of the CreateFeatureRuleOptions model
+				createFeatureRuleOptionsModel := new(appconfigurationv1.CreateFeatureRuleOptions)
+				createFeatureRuleOptionsModel.EnvironmentID = core.StringPtr("environment_id")
+				createFeatureRuleOptionsModel.FeatureID = core.StringPtr("feature_id")
+				createFeatureRuleOptionsModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
+				createFeatureRuleOptionsModel.Value = "true"
+				createFeatureRuleOptionsModel.RuleID = core.StringPtr("RuleA")
+				createFeatureRuleOptionsModel.RolloutPercentage = core.Int64Ptr(int64(50))
+				createFeatureRuleOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with valid options model (positive test)
+				result, response, operationErr = appConfigurationService.CreateFeatureRule(createFeatureRuleOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+			})
+			It(`Invoke CreateFeatureRule with error: Operation validation and request error`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the TargetSegments model
+				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
+				targetSegmentsModel.Segments = []string{"betausers", "premiumusers"}
+
+				// Construct an instance of the CreateFeatureRuleOptions model
+				createFeatureRuleOptionsModel := new(appconfigurationv1.CreateFeatureRuleOptions)
+				createFeatureRuleOptionsModel.EnvironmentID = core.StringPtr("environment_id")
+				createFeatureRuleOptionsModel.FeatureID = core.StringPtr("feature_id")
+				createFeatureRuleOptionsModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
+				createFeatureRuleOptionsModel.Value = "true"
+				createFeatureRuleOptionsModel.RuleID = core.StringPtr("RuleA")
+				createFeatureRuleOptionsModel.RolloutPercentage = core.Int64Ptr(int64(50))
+				createFeatureRuleOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Invoke operation with empty URL (negative test)
+				err := appConfigurationService.SetServiceURL("")
+				Expect(err).To(BeNil())
+				result, response, operationErr := appConfigurationService.CreateFeatureRule(createFeatureRuleOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+				// Construct a second instance of the CreateFeatureRuleOptions model with no property values
+				createFeatureRuleOptionsModelNew := new(appconfigurationv1.CreateFeatureRuleOptions)
+				// Invoke operation with invalid model (negative test)
+				result, response, operationErr = appConfigurationService.CreateFeatureRule(createFeatureRuleOptionsModelNew)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(201)
+				}))
+			})
+			It(`Invoke CreateFeatureRule successfully`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the TargetSegments model
+				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
+				targetSegmentsModel.Segments = []string{"betausers", "premiumusers"}
+
+				// Construct an instance of the CreateFeatureRuleOptions model
+				createFeatureRuleOptionsModel := new(appconfigurationv1.CreateFeatureRuleOptions)
+				createFeatureRuleOptionsModel.EnvironmentID = core.StringPtr("environment_id")
+				createFeatureRuleOptionsModel.FeatureID = core.StringPtr("feature_id")
+				createFeatureRuleOptionsModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
+				createFeatureRuleOptionsModel.Value = "true"
+				createFeatureRuleOptionsModel.RuleID = core.StringPtr("RuleA")
+				createFeatureRuleOptionsModel.RolloutPercentage = core.Int64Ptr(int64(50))
+				createFeatureRuleOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := appConfigurationService.CreateFeatureRule(createFeatureRuleOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`GetFeatureRule(getFeatureRuleOptions *GetFeatureRuleOptions) - Operation response error`, func() {
+		getFeatureRulePath := "/environments/environment_id/features/feature_id/rules/rule_id"
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(getFeatureRulePath))
+					Expect(req.Method).To(Equal("GET"))
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprint(res, `} this is not valid json {`)
+				}))
+			})
+			It(`Invoke GetFeatureRule with error: Operation response processing error`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the GetFeatureRuleOptions model
+				getFeatureRuleOptionsModel := new(appconfigurationv1.GetFeatureRuleOptions)
+				getFeatureRuleOptionsModel.EnvironmentID = core.StringPtr("environment_id")
+				getFeatureRuleOptionsModel.FeatureID = core.StringPtr("feature_id")
+				getFeatureRuleOptionsModel.RuleID = core.StringPtr("rule_id")
+				getFeatureRuleOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Expect response parsing to fail since we are receiving a text/plain response
+				result, response, operationErr := appConfigurationService.GetFeatureRule(getFeatureRuleOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				appConfigurationService.EnableRetries(0, 0)
+				result, response, operationErr = appConfigurationService.GetFeatureRule(getFeatureRuleOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`GetFeatureRule(getFeatureRuleOptions *GetFeatureRuleOptions)`, func() {
+		getFeatureRulePath := "/environments/environment_id/features/feature_id/rules/rule_id"
+		Context(`Using mock server endpoint with timeout`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(getFeatureRulePath))
+					Expect(req.Method).To(Equal("GET"))
+
+					// Sleep a short time to support a timeout test
+					time.Sleep(100 * time.Millisecond)
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "rule_id": "RuleID", "rollout_percentage": 100, "order": 5, "href": "Href"}`)
+				}))
+			})
+			It(`Invoke GetFeatureRule successfully with retries`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+				appConfigurationService.EnableRetries(0, 0)
+
+				// Construct an instance of the GetFeatureRuleOptions model
+				getFeatureRuleOptionsModel := new(appconfigurationv1.GetFeatureRuleOptions)
+				getFeatureRuleOptionsModel.EnvironmentID = core.StringPtr("environment_id")
+				getFeatureRuleOptionsModel.FeatureID = core.StringPtr("feature_id")
+				getFeatureRuleOptionsModel.RuleID = core.StringPtr("rule_id")
+				getFeatureRuleOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with a Context to test a timeout error
+				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc()
+				_, _, operationErr := appConfigurationService.GetFeatureRuleWithContext(ctx, getFeatureRuleOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+
+				// Disable retries and test again
+				appConfigurationService.DisableRetries()
+				result, response, operationErr := appConfigurationService.GetFeatureRule(getFeatureRuleOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				_, _, operationErr = appConfigurationService.GetFeatureRuleWithContext(ctx, getFeatureRuleOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(getFeatureRulePath))
+					Expect(req.Method).To(Equal("GET"))
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "rule_id": "RuleID", "rollout_percentage": 100, "order": 5, "href": "Href"}`)
+				}))
+			})
+			It(`Invoke GetFeatureRule successfully`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Invoke operation with nil options model (negative test)
+				result, response, operationErr := appConfigurationService.GetFeatureRule(nil)
+				Expect(operationErr).NotTo(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+
+				// Construct an instance of the GetFeatureRuleOptions model
+				getFeatureRuleOptionsModel := new(appconfigurationv1.GetFeatureRuleOptions)
+				getFeatureRuleOptionsModel.EnvironmentID = core.StringPtr("environment_id")
+				getFeatureRuleOptionsModel.FeatureID = core.StringPtr("feature_id")
+				getFeatureRuleOptionsModel.RuleID = core.StringPtr("rule_id")
+				getFeatureRuleOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with valid options model (positive test)
+				result, response, operationErr = appConfigurationService.GetFeatureRule(getFeatureRuleOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+			})
+			It(`Invoke GetFeatureRule with error: Operation validation and request error`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the GetFeatureRuleOptions model
+				getFeatureRuleOptionsModel := new(appconfigurationv1.GetFeatureRuleOptions)
+				getFeatureRuleOptionsModel.EnvironmentID = core.StringPtr("environment_id")
+				getFeatureRuleOptionsModel.FeatureID = core.StringPtr("feature_id")
+				getFeatureRuleOptionsModel.RuleID = core.StringPtr("rule_id")
+				getFeatureRuleOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Invoke operation with empty URL (negative test)
+				err := appConfigurationService.SetServiceURL("")
+				Expect(err).To(BeNil())
+				result, response, operationErr := appConfigurationService.GetFeatureRule(getFeatureRuleOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+				// Construct a second instance of the GetFeatureRuleOptions model with no property values
+				getFeatureRuleOptionsModelNew := new(appconfigurationv1.GetFeatureRuleOptions)
+				// Invoke operation with invalid model (negative test)
+				result, response, operationErr = appConfigurationService.GetFeatureRule(getFeatureRuleOptionsModelNew)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke GetFeatureRule successfully`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the GetFeatureRuleOptions model
+				getFeatureRuleOptionsModel := new(appconfigurationv1.GetFeatureRuleOptions)
+				getFeatureRuleOptionsModel.EnvironmentID = core.StringPtr("environment_id")
+				getFeatureRuleOptionsModel.FeatureID = core.StringPtr("feature_id")
+				getFeatureRuleOptionsModel.RuleID = core.StringPtr("rule_id")
+				getFeatureRuleOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := appConfigurationService.GetFeatureRule(getFeatureRuleOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`UpdateFeatureRule(updateFeatureRuleOptions *UpdateFeatureRuleOptions) - Operation response error`, func() {
+		updateFeatureRulePath := "/environments/environment_id/features/feature_id/rules/rule_id"
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(updateFeatureRulePath))
+					Expect(req.Method).To(Equal("PATCH"))
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprint(res, `} this is not valid json {`)
+				}))
+			})
+			It(`Invoke UpdateFeatureRule with error: Operation response processing error`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the TargetSegments model
+				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
+				targetSegmentsModel.Segments = []string{"betausers", "premiumusers"}
+
+				// Construct an instance of the UpdateFeatureRuleOptions model
+				updateFeatureRuleOptionsModel := new(appconfigurationv1.UpdateFeatureRuleOptions)
+				updateFeatureRuleOptionsModel.EnvironmentID = core.StringPtr("environment_id")
+				updateFeatureRuleOptionsModel.FeatureID = core.StringPtr("feature_id")
+				updateFeatureRuleOptionsModel.RuleID = core.StringPtr("rule_id")
+				updateFeatureRuleOptionsModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
+				updateFeatureRuleOptionsModel.Value = "true"
+				updateFeatureRuleOptionsModel.RolloutPercentage = core.Int64Ptr(int64(50))
+				updateFeatureRuleOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Expect response parsing to fail since we are receiving a text/plain response
+				result, response, operationErr := appConfigurationService.UpdateFeatureRule(updateFeatureRuleOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				appConfigurationService.EnableRetries(0, 0)
+				result, response, operationErr = appConfigurationService.UpdateFeatureRule(updateFeatureRuleOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`UpdateFeatureRule(updateFeatureRuleOptions *UpdateFeatureRuleOptions)`, func() {
+		updateFeatureRulePath := "/environments/environment_id/features/feature_id/rules/rule_id"
+		Context(`Using mock server endpoint with timeout`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(updateFeatureRulePath))
+					Expect(req.Method).To(Equal("PATCH"))
+
+					// For gzip-disabled operation, verify Content-Encoding is not set.
+					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+
+					// If there is a body, then make sure we can read it
+					bodyBuf := new(bytes.Buffer)
+					if req.Header.Get("Content-Encoding") == "gzip" {
+						body, err := core.NewGzipDecompressionReader(req.Body)
+						Expect(err).To(BeNil())
+						_, err = bodyBuf.ReadFrom(body)
+						Expect(err).To(BeNil())
+					} else {
+						_, err := bodyBuf.ReadFrom(req.Body)
+						Expect(err).To(BeNil())
+					}
+					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
+
+					// Sleep a short time to support a timeout test
+					time.Sleep(100 * time.Millisecond)
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "rule_id": "RuleID", "rollout_percentage": 100, "order": 5, "href": "Href"}`)
+				}))
+			})
+			It(`Invoke UpdateFeatureRule successfully with retries`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+				appConfigurationService.EnableRetries(0, 0)
+
+				// Construct an instance of the TargetSegments model
+				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
+				targetSegmentsModel.Segments = []string{"betausers", "premiumusers"}
+
+				// Construct an instance of the UpdateFeatureRuleOptions model
+				updateFeatureRuleOptionsModel := new(appconfigurationv1.UpdateFeatureRuleOptions)
+				updateFeatureRuleOptionsModel.EnvironmentID = core.StringPtr("environment_id")
+				updateFeatureRuleOptionsModel.FeatureID = core.StringPtr("feature_id")
+				updateFeatureRuleOptionsModel.RuleID = core.StringPtr("rule_id")
+				updateFeatureRuleOptionsModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
+				updateFeatureRuleOptionsModel.Value = "true"
+				updateFeatureRuleOptionsModel.RolloutPercentage = core.Int64Ptr(int64(50))
+				updateFeatureRuleOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with a Context to test a timeout error
+				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc()
+				_, _, operationErr := appConfigurationService.UpdateFeatureRuleWithContext(ctx, updateFeatureRuleOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+
+				// Disable retries and test again
+				appConfigurationService.DisableRetries()
+				result, response, operationErr := appConfigurationService.UpdateFeatureRule(updateFeatureRuleOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				_, _, operationErr = appConfigurationService.UpdateFeatureRuleWithContext(ctx, updateFeatureRuleOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(updateFeatureRulePath))
+					Expect(req.Method).To(Equal("PATCH"))
+
+					// For gzip-disabled operation, verify Content-Encoding is not set.
+					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+
+					// If there is a body, then make sure we can read it
+					bodyBuf := new(bytes.Buffer)
+					if req.Header.Get("Content-Encoding") == "gzip" {
+						body, err := core.NewGzipDecompressionReader(req.Body)
+						Expect(err).To(BeNil())
+						_, err = bodyBuf.ReadFrom(body)
+						Expect(err).To(BeNil())
+					} else {
+						_, err := bodyBuf.ReadFrom(req.Body)
+						Expect(err).To(BeNil())
+					}
+					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "rule_id": "RuleID", "rollout_percentage": 100, "order": 5, "href": "Href"}`)
+				}))
+			})
+			It(`Invoke UpdateFeatureRule successfully`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Invoke operation with nil options model (negative test)
+				result, response, operationErr := appConfigurationService.UpdateFeatureRule(nil)
+				Expect(operationErr).NotTo(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+
+				// Construct an instance of the TargetSegments model
+				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
+				targetSegmentsModel.Segments = []string{"betausers", "premiumusers"}
+
+				// Construct an instance of the UpdateFeatureRuleOptions model
+				updateFeatureRuleOptionsModel := new(appconfigurationv1.UpdateFeatureRuleOptions)
+				updateFeatureRuleOptionsModel.EnvironmentID = core.StringPtr("environment_id")
+				updateFeatureRuleOptionsModel.FeatureID = core.StringPtr("feature_id")
+				updateFeatureRuleOptionsModel.RuleID = core.StringPtr("rule_id")
+				updateFeatureRuleOptionsModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
+				updateFeatureRuleOptionsModel.Value = "true"
+				updateFeatureRuleOptionsModel.RolloutPercentage = core.Int64Ptr(int64(50))
+				updateFeatureRuleOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with valid options model (positive test)
+				result, response, operationErr = appConfigurationService.UpdateFeatureRule(updateFeatureRuleOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+			})
+			It(`Invoke UpdateFeatureRule with error: Operation validation and request error`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the TargetSegments model
+				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
+				targetSegmentsModel.Segments = []string{"betausers", "premiumusers"}
+
+				// Construct an instance of the UpdateFeatureRuleOptions model
+				updateFeatureRuleOptionsModel := new(appconfigurationv1.UpdateFeatureRuleOptions)
+				updateFeatureRuleOptionsModel.EnvironmentID = core.StringPtr("environment_id")
+				updateFeatureRuleOptionsModel.FeatureID = core.StringPtr("feature_id")
+				updateFeatureRuleOptionsModel.RuleID = core.StringPtr("rule_id")
+				updateFeatureRuleOptionsModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
+				updateFeatureRuleOptionsModel.Value = "true"
+				updateFeatureRuleOptionsModel.RolloutPercentage = core.Int64Ptr(int64(50))
+				updateFeatureRuleOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Invoke operation with empty URL (negative test)
+				err := appConfigurationService.SetServiceURL("")
+				Expect(err).To(BeNil())
+				result, response, operationErr := appConfigurationService.UpdateFeatureRule(updateFeatureRuleOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+				// Construct a second instance of the UpdateFeatureRuleOptions model with no property values
+				updateFeatureRuleOptionsModelNew := new(appconfigurationv1.UpdateFeatureRuleOptions)
+				// Invoke operation with invalid model (negative test)
+				result, response, operationErr = appConfigurationService.UpdateFeatureRule(updateFeatureRuleOptionsModelNew)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke UpdateFeatureRule successfully`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the TargetSegments model
+				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
+				targetSegmentsModel.Segments = []string{"betausers", "premiumusers"}
+
+				// Construct an instance of the UpdateFeatureRuleOptions model
+				updateFeatureRuleOptionsModel := new(appconfigurationv1.UpdateFeatureRuleOptions)
+				updateFeatureRuleOptionsModel.EnvironmentID = core.StringPtr("environment_id")
+				updateFeatureRuleOptionsModel.FeatureID = core.StringPtr("feature_id")
+				updateFeatureRuleOptionsModel.RuleID = core.StringPtr("rule_id")
+				updateFeatureRuleOptionsModel.Rules = []appconfigurationv1.TargetSegments{*targetSegmentsModel}
+				updateFeatureRuleOptionsModel.Value = "true"
+				updateFeatureRuleOptionsModel.RolloutPercentage = core.Int64Ptr(int64(50))
+				updateFeatureRuleOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := appConfigurationService.UpdateFeatureRule(updateFeatureRuleOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`DeleteFeatureRule(deleteFeatureRuleOptions *DeleteFeatureRuleOptions)`, func() {
+		deleteFeatureRulePath := "/environments/environment_id/features/feature_id/rules/rule_id"
+		Context(`Using mock server endpoint`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(deleteFeatureRulePath))
+					Expect(req.Method).To(Equal("DELETE"))
+
+					res.WriteHeader(204)
+				}))
+			})
+			It(`Invoke DeleteFeatureRule successfully`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Invoke operation with nil options model (negative test)
+				response, operationErr := appConfigurationService.DeleteFeatureRule(nil)
+				Expect(operationErr).NotTo(BeNil())
+				Expect(response).To(BeNil())
+
+				// Construct an instance of the DeleteFeatureRuleOptions model
+				deleteFeatureRuleOptionsModel := new(appconfigurationv1.DeleteFeatureRuleOptions)
+				deleteFeatureRuleOptionsModel.EnvironmentID = core.StringPtr("environment_id")
+				deleteFeatureRuleOptionsModel.FeatureID = core.StringPtr("feature_id")
+				deleteFeatureRuleOptionsModel.RuleID = core.StringPtr("rule_id")
+				deleteFeatureRuleOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with valid options model (positive test)
+				response, operationErr = appConfigurationService.DeleteFeatureRule(deleteFeatureRuleOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+			})
+			It(`Invoke DeleteFeatureRule with error: Operation validation and request error`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the DeleteFeatureRuleOptions model
+				deleteFeatureRuleOptionsModel := new(appconfigurationv1.DeleteFeatureRuleOptions)
+				deleteFeatureRuleOptionsModel.EnvironmentID = core.StringPtr("environment_id")
+				deleteFeatureRuleOptionsModel.FeatureID = core.StringPtr("feature_id")
+				deleteFeatureRuleOptionsModel.RuleID = core.StringPtr("rule_id")
+				deleteFeatureRuleOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Invoke operation with empty URL (negative test)
+				err := appConfigurationService.SetServiceURL("")
+				Expect(err).To(BeNil())
+				response, operationErr := appConfigurationService.DeleteFeatureRule(deleteFeatureRuleOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
+				Expect(response).To(BeNil())
+				// Construct a second instance of the DeleteFeatureRuleOptions model with no property values
+				deleteFeatureRuleOptionsModelNew := new(appconfigurationv1.DeleteFeatureRuleOptions)
+				// Invoke operation with invalid model (negative test)
+				response, operationErr = appConfigurationService.DeleteFeatureRule(deleteFeatureRuleOptionsModelNew)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`UpdateFeatureRuleOrder(updateFeatureRuleOrderOptions *UpdateFeatureRuleOrderOptions)`, func() {
+		updateFeatureRuleOrderPath := "/environments/environment_id/features/feature_id/rules_order"
+		Context(`Using mock server endpoint with timeout`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(updateFeatureRuleOrderPath))
+					Expect(req.Method).To(Equal("PATCH"))
+
+					// For gzip-disabled operation, verify Content-Encoding is not set.
+					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+
+					// If there is a body, then make sure we can read it
+					bodyBuf := new(bytes.Buffer)
+					if req.Header.Get("Content-Encoding") == "gzip" {
+						body, err := core.NewGzipDecompressionReader(req.Body)
+						Expect(err).To(BeNil())
+						_, err = bodyBuf.ReadFrom(body)
+						Expect(err).To(BeNil())
+					} else {
+						_, err := bodyBuf.ReadFrom(req.Body)
+						Expect(err).To(BeNil())
+					}
+					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
+
+					// Sleep a short time to support a timeout test
+					time.Sleep(100 * time.Millisecond)
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `"{\"rules\":[{\"segments\":[\"betausers\",\"premiumusers\"]}],\"value\":true,\"order\":1,\"rollout_percentage\":50,\"rule_id\":\"RuleA\",\"href\":\"https://us-south.apprapp.cloud.ibm.com/apprapp/feature/v1/instances/9xxxxx-xxxxx-xxxxx-b3cd-xxxxx/environments/dev/features/cycle-rentals/rules/RuleA\"}"`)
+				}))
+			})
+			It(`Invoke UpdateFeatureRuleOrder successfully with retries`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+				appConfigurationService.EnableRetries(0, 0)
+
+				// Construct an instance of the ReorderFeatureRulesReoderFeatureRulesByMove model
+				reorderFeatureRulesModel := new(appconfigurationv1.ReorderFeatureRulesReoderFeatureRulesByMove)
+				reorderFeatureRulesModel.Action = core.StringPtr("move")
+				reorderFeatureRulesModel.RuleID = core.StringPtr("RuleA")
+				reorderFeatureRulesModel.Order = core.Int64Ptr(int64(1))
+
+				// Construct an instance of the UpdateFeatureRuleOrderOptions model
+				updateFeatureRuleOrderOptionsModel := new(appconfigurationv1.UpdateFeatureRuleOrderOptions)
+				updateFeatureRuleOrderOptionsModel.EnvironmentID = core.StringPtr("environment_id")
+				updateFeatureRuleOrderOptionsModel.FeatureID = core.StringPtr("feature_id")
+				updateFeatureRuleOrderOptionsModel.UpdateFeatureRuleOrder = reorderFeatureRulesModel
+				updateFeatureRuleOrderOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with a Context to test a timeout error
+				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc()
+				_, _, operationErr := appConfigurationService.UpdateFeatureRuleOrderWithContext(ctx, updateFeatureRuleOrderOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+
+				// Disable retries and test again
+				appConfigurationService.DisableRetries()
+				result, response, operationErr := appConfigurationService.UpdateFeatureRuleOrder(updateFeatureRuleOrderOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				_, _, operationErr = appConfigurationService.UpdateFeatureRuleOrderWithContext(ctx, updateFeatureRuleOrderOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(updateFeatureRuleOrderPath))
+					Expect(req.Method).To(Equal("PATCH"))
+
+					// For gzip-disabled operation, verify Content-Encoding is not set.
+					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+
+					// If there is a body, then make sure we can read it
+					bodyBuf := new(bytes.Buffer)
+					if req.Header.Get("Content-Encoding") == "gzip" {
+						body, err := core.NewGzipDecompressionReader(req.Body)
+						Expect(err).To(BeNil())
+						_, err = bodyBuf.ReadFrom(body)
+						Expect(err).To(BeNil())
+					} else {
+						_, err := bodyBuf.ReadFrom(req.Body)
+						Expect(err).To(BeNil())
+					}
+					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `"{\"rules\":[{\"segments\":[\"betausers\",\"premiumusers\"]}],\"value\":true,\"order\":1,\"rollout_percentage\":50,\"rule_id\":\"RuleA\",\"href\":\"https://us-south.apprapp.cloud.ibm.com/apprapp/feature/v1/instances/9xxxxx-xxxxx-xxxxx-b3cd-xxxxx/environments/dev/features/cycle-rentals/rules/RuleA\"}"`)
+				}))
+			})
+			It(`Invoke UpdateFeatureRuleOrder successfully`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Invoke operation with nil options model (negative test)
+				result, response, operationErr := appConfigurationService.UpdateFeatureRuleOrder(nil)
+				Expect(operationErr).NotTo(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+
+				// Construct an instance of the ReorderFeatureRulesReoderFeatureRulesByMove model
+				reorderFeatureRulesModel := new(appconfigurationv1.ReorderFeatureRulesReoderFeatureRulesByMove)
+				reorderFeatureRulesModel.Action = core.StringPtr("move")
+				reorderFeatureRulesModel.RuleID = core.StringPtr("RuleA")
+				reorderFeatureRulesModel.Order = core.Int64Ptr(int64(1))
+
+				// Construct an instance of the UpdateFeatureRuleOrderOptions model
+				updateFeatureRuleOrderOptionsModel := new(appconfigurationv1.UpdateFeatureRuleOrderOptions)
+				updateFeatureRuleOrderOptionsModel.EnvironmentID = core.StringPtr("environment_id")
+				updateFeatureRuleOrderOptionsModel.FeatureID = core.StringPtr("feature_id")
+				updateFeatureRuleOrderOptionsModel.UpdateFeatureRuleOrder = reorderFeatureRulesModel
+				updateFeatureRuleOrderOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with valid options model (positive test)
+				result, response, operationErr = appConfigurationService.UpdateFeatureRuleOrder(updateFeatureRuleOrderOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+			})
+			It(`Invoke UpdateFeatureRuleOrder with error: Operation validation and request error`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the ReorderFeatureRulesReoderFeatureRulesByMove model
+				reorderFeatureRulesModel := new(appconfigurationv1.ReorderFeatureRulesReoderFeatureRulesByMove)
+				reorderFeatureRulesModel.Action = core.StringPtr("move")
+				reorderFeatureRulesModel.RuleID = core.StringPtr("RuleA")
+				reorderFeatureRulesModel.Order = core.Int64Ptr(int64(1))
+
+				// Construct an instance of the UpdateFeatureRuleOrderOptions model
+				updateFeatureRuleOrderOptionsModel := new(appconfigurationv1.UpdateFeatureRuleOrderOptions)
+				updateFeatureRuleOrderOptionsModel.EnvironmentID = core.StringPtr("environment_id")
+				updateFeatureRuleOrderOptionsModel.FeatureID = core.StringPtr("feature_id")
+				updateFeatureRuleOrderOptionsModel.UpdateFeatureRuleOrder = reorderFeatureRulesModel
+				updateFeatureRuleOrderOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Invoke operation with empty URL (negative test)
+				err := appConfigurationService.SetServiceURL("")
+				Expect(err).To(BeNil())
+				result, response, operationErr := appConfigurationService.UpdateFeatureRuleOrder(updateFeatureRuleOrderOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+				// Construct a second instance of the UpdateFeatureRuleOrderOptions model with no property values
+				updateFeatureRuleOrderOptionsModelNew := new(appconfigurationv1.UpdateFeatureRuleOrderOptions)
+				// Invoke operation with invalid model (negative test)
+				result, response, operationErr = appConfigurationService.UpdateFeatureRuleOrder(updateFeatureRuleOrderOptionsModelNew)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke UpdateFeatureRuleOrder successfully`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the ReorderFeatureRulesReoderFeatureRulesByMove model
+				reorderFeatureRulesModel := new(appconfigurationv1.ReorderFeatureRulesReoderFeatureRulesByMove)
+				reorderFeatureRulesModel.Action = core.StringPtr("move")
+				reorderFeatureRulesModel.RuleID = core.StringPtr("RuleA")
+				reorderFeatureRulesModel.Order = core.Int64Ptr(int64(1))
+
+				// Construct an instance of the UpdateFeatureRuleOrderOptions model
+				updateFeatureRuleOrderOptionsModel := new(appconfigurationv1.UpdateFeatureRuleOrderOptions)
+				updateFeatureRuleOrderOptionsModel.EnvironmentID = core.StringPtr("environment_id")
+				updateFeatureRuleOrderOptionsModel.FeatureID = core.StringPtr("feature_id")
+				updateFeatureRuleOrderOptionsModel.UpdateFeatureRuleOrder = reorderFeatureRulesModel
+				updateFeatureRuleOrderOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := appConfigurationService.UpdateFeatureRuleOrder(updateFeatureRuleOrderOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
 	Describe(`ListProperties(listPropertiesOptions *ListPropertiesOptions) - Operation response error`, func() {
 		listPropertiesPath := "/environments/environment_id/properties"
 		Context(`Using mock server endpoint with invalid JSON response`, func() {
@@ -11792,6 +12895,36 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(createFeatureOptionsModel.Collections).To(Equal([]appconfigurationv1.CollectionRef{*collectionRefModel}))
 				Expect(createFeatureOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
+			It(`Invoke NewCreateFeatureRuleOptions successfully`, func() {
+				// Construct an instance of the TargetSegments model
+				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
+				Expect(targetSegmentsModel).ToNot(BeNil())
+				targetSegmentsModel.Segments = []string{"betausers", "premiumusers"}
+				Expect(targetSegmentsModel.Segments).To(Equal([]string{"betausers", "premiumusers"}))
+
+				// Construct an instance of the CreateFeatureRuleOptions model
+				environmentID := "environment_id"
+				featureID := "feature_id"
+				createFeatureRuleOptionsRules := []appconfigurationv1.TargetSegments{}
+				createFeatureRuleOptionsValue := "true"
+				createFeatureRuleOptionsRuleID := "RuleA"
+				createFeatureRuleOptionsModel := appConfigurationService.NewCreateFeatureRuleOptions(environmentID, featureID, createFeatureRuleOptionsRules, createFeatureRuleOptionsValue, createFeatureRuleOptionsRuleID)
+				createFeatureRuleOptionsModel.SetEnvironmentID("environment_id")
+				createFeatureRuleOptionsModel.SetFeatureID("feature_id")
+				createFeatureRuleOptionsModel.SetRules([]appconfigurationv1.TargetSegments{*targetSegmentsModel})
+				createFeatureRuleOptionsModel.SetValue("true")
+				createFeatureRuleOptionsModel.SetRuleID("RuleA")
+				createFeatureRuleOptionsModel.SetRolloutPercentage(int64(50))
+				createFeatureRuleOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
+				Expect(createFeatureRuleOptionsModel).ToNot(BeNil())
+				Expect(createFeatureRuleOptionsModel.EnvironmentID).To(Equal(core.StringPtr("environment_id")))
+				Expect(createFeatureRuleOptionsModel.FeatureID).To(Equal(core.StringPtr("feature_id")))
+				Expect(createFeatureRuleOptionsModel.Rules).To(Equal([]appconfigurationv1.TargetSegments{*targetSegmentsModel}))
+				Expect(createFeatureRuleOptionsModel.Value).To(Equal("true"))
+				Expect(createFeatureRuleOptionsModel.RuleID).To(Equal(core.StringPtr("RuleA")))
+				Expect(createFeatureRuleOptionsModel.RolloutPercentage).To(Equal(core.Int64Ptr(int64(50))))
+				Expect(createFeatureRuleOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
+			})
 			It(`Invoke NewCreateGitconfigOptions successfully`, func() {
 				// Construct an instance of the CreateGitconfigOptions model
 				createGitconfigOptionsGitConfigName := "boot-strap-configuration"
@@ -11979,6 +13112,22 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(deleteFeatureOptionsModel.FeatureID).To(Equal(core.StringPtr("feature_id")))
 				Expect(deleteFeatureOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
+			It(`Invoke NewDeleteFeatureRuleOptions successfully`, func() {
+				// Construct an instance of the DeleteFeatureRuleOptions model
+				environmentID := "environment_id"
+				featureID := "feature_id"
+				ruleID := "rule_id"
+				deleteFeatureRuleOptionsModel := appConfigurationService.NewDeleteFeatureRuleOptions(environmentID, featureID, ruleID)
+				deleteFeatureRuleOptionsModel.SetEnvironmentID("environment_id")
+				deleteFeatureRuleOptionsModel.SetFeatureID("feature_id")
+				deleteFeatureRuleOptionsModel.SetRuleID("rule_id")
+				deleteFeatureRuleOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
+				Expect(deleteFeatureRuleOptionsModel).ToNot(BeNil())
+				Expect(deleteFeatureRuleOptionsModel.EnvironmentID).To(Equal(core.StringPtr("environment_id")))
+				Expect(deleteFeatureRuleOptionsModel.FeatureID).To(Equal(core.StringPtr("feature_id")))
+				Expect(deleteFeatureRuleOptionsModel.RuleID).To(Equal(core.StringPtr("rule_id")))
+				Expect(deleteFeatureRuleOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
+			})
 			It(`Invoke NewDeleteGitconfigOptions successfully`, func() {
 				// Construct an instance of the DeleteGitconfigOptions model
 				gitConfigID := "git_config_id"
@@ -12095,6 +13244,22 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(getFeatureOptionsModel.FeatureID).To(Equal(core.StringPtr("feature_id")))
 				Expect(getFeatureOptionsModel.Include).To(Equal([]string{"collections", "rules", "change_request"}))
 				Expect(getFeatureOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
+			})
+			It(`Invoke NewGetFeatureRuleOptions successfully`, func() {
+				// Construct an instance of the GetFeatureRuleOptions model
+				environmentID := "environment_id"
+				featureID := "feature_id"
+				ruleID := "rule_id"
+				getFeatureRuleOptionsModel := appConfigurationService.NewGetFeatureRuleOptions(environmentID, featureID, ruleID)
+				getFeatureRuleOptionsModel.SetEnvironmentID("environment_id")
+				getFeatureRuleOptionsModel.SetFeatureID("feature_id")
+				getFeatureRuleOptionsModel.SetRuleID("rule_id")
+				getFeatureRuleOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
+				Expect(getFeatureRuleOptionsModel).ToNot(BeNil())
+				Expect(getFeatureRuleOptionsModel.EnvironmentID).To(Equal(core.StringPtr("environment_id")))
+				Expect(getFeatureRuleOptionsModel.FeatureID).To(Equal(core.StringPtr("feature_id")))
+				Expect(getFeatureRuleOptionsModel.RuleID).To(Equal(core.StringPtr("rule_id")))
+				Expect(getFeatureRuleOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewGetGitconfigOptions successfully`, func() {
 				// Construct an instance of the GetGitconfigOptions model
@@ -12692,6 +13857,60 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(updateFeatureOptionsModel.Collections).To(Equal([]appconfigurationv1.CollectionUpdateRef{*collectionUpdateRefModel}))
 				Expect(updateFeatureOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
+			It(`Invoke NewUpdateFeatureRuleOptions successfully`, func() {
+				// Construct an instance of the TargetSegments model
+				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
+				Expect(targetSegmentsModel).ToNot(BeNil())
+				targetSegmentsModel.Segments = []string{"betausers", "premiumusers"}
+				Expect(targetSegmentsModel.Segments).To(Equal([]string{"betausers", "premiumusers"}))
+
+				// Construct an instance of the UpdateFeatureRuleOptions model
+				environmentID := "environment_id"
+				featureID := "feature_id"
+				ruleID := "rule_id"
+				updateFeatureRuleOptionsModel := appConfigurationService.NewUpdateFeatureRuleOptions(environmentID, featureID, ruleID)
+				updateFeatureRuleOptionsModel.SetEnvironmentID("environment_id")
+				updateFeatureRuleOptionsModel.SetFeatureID("feature_id")
+				updateFeatureRuleOptionsModel.SetRuleID("rule_id")
+				updateFeatureRuleOptionsModel.SetRules([]appconfigurationv1.TargetSegments{*targetSegmentsModel})
+				updateFeatureRuleOptionsModel.SetValue("true")
+				updateFeatureRuleOptionsModel.SetRolloutPercentage(int64(50))
+				updateFeatureRuleOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
+				Expect(updateFeatureRuleOptionsModel).ToNot(BeNil())
+				Expect(updateFeatureRuleOptionsModel.EnvironmentID).To(Equal(core.StringPtr("environment_id")))
+				Expect(updateFeatureRuleOptionsModel.FeatureID).To(Equal(core.StringPtr("feature_id")))
+				Expect(updateFeatureRuleOptionsModel.RuleID).To(Equal(core.StringPtr("rule_id")))
+				Expect(updateFeatureRuleOptionsModel.Rules).To(Equal([]appconfigurationv1.TargetSegments{*targetSegmentsModel}))
+				Expect(updateFeatureRuleOptionsModel.Value).To(Equal("true"))
+				Expect(updateFeatureRuleOptionsModel.RolloutPercentage).To(Equal(core.Int64Ptr(int64(50))))
+				Expect(updateFeatureRuleOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
+			})
+			It(`Invoke NewUpdateFeatureRuleOrderOptions successfully`, func() {
+				// Construct an instance of the ReorderFeatureRulesReoderFeatureRulesByMove model
+				reorderFeatureRulesModel := new(appconfigurationv1.ReorderFeatureRulesReoderFeatureRulesByMove)
+				Expect(reorderFeatureRulesModel).ToNot(BeNil())
+				reorderFeatureRulesModel.Action = core.StringPtr("testString")
+				reorderFeatureRulesModel.RuleID = core.StringPtr("testString")
+				reorderFeatureRulesModel.Order = core.Int64Ptr(int64(38))
+				Expect(reorderFeatureRulesModel.Action).To(Equal(core.StringPtr("testString")))
+				Expect(reorderFeatureRulesModel.RuleID).To(Equal(core.StringPtr("testString")))
+				Expect(reorderFeatureRulesModel.Order).To(Equal(core.Int64Ptr(int64(38))))
+
+				// Construct an instance of the UpdateFeatureRuleOrderOptions model
+				environmentID := "environment_id"
+				featureID := "feature_id"
+				var updateFeatureRuleOrder appconfigurationv1.ReorderFeatureRulesIntf = nil
+				updateFeatureRuleOrderOptionsModel := appConfigurationService.NewUpdateFeatureRuleOrderOptions(environmentID, featureID, updateFeatureRuleOrder)
+				updateFeatureRuleOrderOptionsModel.SetEnvironmentID("environment_id")
+				updateFeatureRuleOrderOptionsModel.SetFeatureID("feature_id")
+				updateFeatureRuleOrderOptionsModel.SetUpdateFeatureRuleOrder(reorderFeatureRulesModel)
+				updateFeatureRuleOrderOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
+				Expect(updateFeatureRuleOrderOptionsModel).ToNot(BeNil())
+				Expect(updateFeatureRuleOrderOptionsModel.EnvironmentID).To(Equal(core.StringPtr("environment_id")))
+				Expect(updateFeatureRuleOrderOptionsModel.FeatureID).To(Equal(core.StringPtr("feature_id")))
+				Expect(updateFeatureRuleOrderOptionsModel.UpdateFeatureRuleOrder).To(Equal(reorderFeatureRulesModel))
+				Expect(updateFeatureRuleOrderOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
+			})
 			It(`Invoke NewUpdateFeatureValuesOptions successfully`, func() {
 				// Construct an instance of the TargetSegments model
 				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
@@ -12943,6 +14162,22 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				secretID := "testString"
 				enabled := false
 				_model, err := appConfigurationService.NewCreateWorkflowConfigIBMServiceNow(serviceCrn, workflowType, approvalExpiration, smInstanceCrn, secretID, enabled)
+				Expect(_model).ToNot(BeNil())
+				Expect(err).To(BeNil())
+			})
+			It(`Invoke NewReorderFeatureRulesBySwap successfully`, func() {
+				action := "testString"
+				sourceRuleID := "testString"
+				targetRuleID := "testString"
+				_model, err := appConfigurationService.NewReorderFeatureRulesBySwap(action, sourceRuleID, targetRuleID)
+				Expect(_model).ToNot(BeNil())
+				Expect(err).To(BeNil())
+			})
+			It(`Invoke NewReorderFeatureRulesReoderFeatureRulesByMove successfully`, func() {
+				action := "testString"
+				ruleID := "testString"
+				order := int64(38)
+				_model, err := appConfigurationService.NewReorderFeatureRulesReoderFeatureRulesByMove(action, ruleID, order)
 				Expect(_model).ToNot(BeNil())
 				Expect(err).To(BeNil())
 			})
@@ -13331,6 +14566,28 @@ var _ = Describe(`AppConfigurationV1`, func() {
 			Expect(result).ToNot(BeNil())
 			Expect(result).To(Equal(model))
 		})
+		It(`Invoke UnmarshalReorderFeatureRules successfully`, func() {
+			// Construct an instance of the model.
+			model := new(appconfigurationv1.ReorderFeatureRules)
+			model.Action = core.StringPtr("testString")
+			model.RuleID = core.StringPtr("testString")
+			model.Order = core.Int64Ptr(int64(38))
+			model.SourceRuleID = core.StringPtr("testString")
+			model.TargetRuleID = core.StringPtr("testString")
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *appconfigurationv1.ReorderFeatureRules
+			err = appconfigurationv1.UnmarshalReorderFeatureRules(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
 		It(`Invoke UnmarshalRule successfully`, func() {
 			// Construct an instance of the model.
 			model := new(appconfigurationv1.Rule)
@@ -13511,6 +14768,46 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 			var result *appconfigurationv1.CreateWorkflowConfigIBMServiceNow
 			err = appconfigurationv1.UnmarshalCreateWorkflowConfigIBMServiceNow(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalReorderFeatureRulesBySwap successfully`, func() {
+			// Construct an instance of the model.
+			model := new(appconfigurationv1.ReorderFeatureRulesBySwap)
+			model.Action = core.StringPtr("testString")
+			model.SourceRuleID = core.StringPtr("testString")
+			model.TargetRuleID = core.StringPtr("testString")
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *appconfigurationv1.ReorderFeatureRulesBySwap
+			err = appconfigurationv1.UnmarshalReorderFeatureRulesBySwap(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalReorderFeatureRulesReoderFeatureRulesByMove successfully`, func() {
+			// Construct an instance of the model.
+			model := new(appconfigurationv1.ReorderFeatureRulesReoderFeatureRulesByMove)
+			model.Action = core.StringPtr("testString")
+			model.RuleID = core.StringPtr("testString")
+			model.Order = core.Int64Ptr(int64(38))
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *appconfigurationv1.ReorderFeatureRulesReoderFeatureRulesByMove
+			err = appconfigurationv1.UnmarshalReorderFeatureRulesReoderFeatureRulesByMove(raw, &result)
 			Expect(err).To(BeNil())
 			Expect(result).ToNot(BeNil())
 			Expect(result).To(Equal(model))

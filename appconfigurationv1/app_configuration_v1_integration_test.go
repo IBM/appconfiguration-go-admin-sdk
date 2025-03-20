@@ -587,6 +587,98 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 		})
 	})
 
+	Describe(`CreateFeatureRule - Create Feature Rule`, func() {
+		BeforeEach(func() {
+			shouldSkipTest()
+		})
+		It(`CreateFeatureRule(createFeatureRuleOptions *CreateFeatureRuleOptions)`, func() {
+			targetSegmentsModel := &appconfigurationv1.TargetSegments{
+				Segments: []string{"betausers", "premiumusers"},
+			}
+
+			createFeatureRuleOptions := &appconfigurationv1.CreateFeatureRuleOptions{
+				EnvironmentID: core.StringPtr("environment_id"),
+				FeatureID: core.StringPtr("feature_id"),
+				Rules: []appconfigurationv1.TargetSegments{*targetSegmentsModel},
+				Value: core.StringPtr("true"),
+				RuleID: core.StringPtr("RuleA"),
+				RolloutPercentage: core.Int64Ptr(int64(50)),
+			}
+
+			featureSegmentRuleWithRuleID, response, err := appConfigurationService.CreateFeatureRule(createFeatureRuleOptions)
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(201))
+			Expect(featureSegmentRuleWithRuleID).ToNot(BeNil())
+		})
+	})
+
+	Describe(`GetFeatureRule - Get rule for feature by rule id`, func() {
+		BeforeEach(func() {
+			shouldSkipTest()
+		})
+		It(`GetFeatureRule(getFeatureRuleOptions *GetFeatureRuleOptions)`, func() {
+			getFeatureRuleOptions := &appconfigurationv1.GetFeatureRuleOptions{
+				EnvironmentID: core.StringPtr("environment_id"),
+				FeatureID: core.StringPtr("feature_id"),
+				RuleID: core.StringPtr("rule_id"),
+			}
+
+			featureSegmentRuleWithRuleID, response, err := appConfigurationService.GetFeatureRule(getFeatureRuleOptions)
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(200))
+			Expect(featureSegmentRuleWithRuleID).ToNot(BeNil())
+		})
+	})
+
+	Describe(`UpdateFeatureRule - Update Feature rule`, func() {
+		BeforeEach(func() {
+			shouldSkipTest()
+		})
+		It(`UpdateFeatureRule(updateFeatureRuleOptions *UpdateFeatureRuleOptions)`, func() {
+			targetSegmentsModel := &appconfigurationv1.TargetSegments{
+				Segments: []string{"betausers", "premiumusers"},
+			}
+
+			updateFeatureRuleOptions := &appconfigurationv1.UpdateFeatureRuleOptions{
+				EnvironmentID: core.StringPtr("environment_id"),
+				FeatureID: core.StringPtr("feature_id"),
+				RuleID: core.StringPtr("rule_id"),
+				Rules: []appconfigurationv1.TargetSegments{*targetSegmentsModel},
+				Value: core.StringPtr("true"),
+				RolloutPercentage: core.Int64Ptr(int64(50)),
+			}
+
+			featureSegmentRuleWithRuleID, response, err := appConfigurationService.UpdateFeatureRule(updateFeatureRuleOptions)
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(200))
+			Expect(featureSegmentRuleWithRuleID).ToNot(BeNil())
+		})
+	})
+
+	Describe(`UpdateFeatureRuleOrder - Update Feature rule order`, func() {
+		BeforeEach(func() {
+			shouldSkipTest()
+		})
+		It(`UpdateFeatureRuleOrder(updateFeatureRuleOrderOptions *UpdateFeatureRuleOrderOptions)`, func() {
+			reorderFeatureRulesModel := &appconfigurationv1.ReorderFeatureRulesReoderFeatureRulesByMove{
+				Action: core.StringPtr("move"),
+				RuleID: core.StringPtr("RuleA"),
+				Order: core.Int64Ptr(int64(1)),
+			}
+
+			updateFeatureRuleOrderOptions := &appconfigurationv1.UpdateFeatureRuleOrderOptions{
+				EnvironmentID: core.StringPtr("environment_id"),
+				FeatureID: core.StringPtr("feature_id"),
+				UpdateFeatureRuleOrder: reorderFeatureRulesModel,
+			}
+
+			result, response, err := appConfigurationService.UpdateFeatureRuleOrder(updateFeatureRuleOrderOptions)
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(200))
+			Expect(result).ToNot(BeNil())
+		})
+	})
+
 	Describe(`ListProperties - Get list of Properties`, func() {
 		BeforeEach(func() {
 			shouldSkipTest()
@@ -1381,6 +1473,23 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 			}
 
 			response, err := appConfigurationService.DeleteFeature(deleteFeatureOptions)
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(204))
+		})
+	})
+
+	Describe(`DeleteFeatureRule - Delete Feature rule`, func() {
+		BeforeEach(func() {
+			shouldSkipTest()
+		})
+		It(`DeleteFeatureRule(deleteFeatureRuleOptions *DeleteFeatureRuleOptions)`, func() {
+			deleteFeatureRuleOptions := &appconfigurationv1.DeleteFeatureRuleOptions{
+				EnvironmentID: core.StringPtr("environment_id"),
+				FeatureID: core.StringPtr("feature_id"),
+				RuleID: core.StringPtr("rule_id"),
+			}
+
+			response, err := appConfigurationService.DeleteFeatureRule(deleteFeatureRuleOptions)
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(204))
 		})
