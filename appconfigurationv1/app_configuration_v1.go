@@ -6344,6 +6344,9 @@ type FeatureSegmentRule struct {
 
 	// Rollout percentage associated with feature flag. Supported only for Lite and Enterprise plans.
 	RolloutPercentage *int64 `json:"rollout_percentage,omitempty"`
+
+	// Rule id is an identifier used for identifying the rule.
+	RuleID *string `json:"rule_id,omitempty"`
 }
 
 // NewFeatureSegmentRule : Instantiate FeatureSegmentRule (Generic Model Constructor)
@@ -6381,6 +6384,11 @@ func UnmarshalFeatureSegmentRule(m map[string]json.RawMessage, result interface{
 	err = core.UnmarshalPrimitive(m, "rollout_percentage", &obj.RolloutPercentage)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "rollout_percentage-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "rule_id", &obj.RuleID)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "rule_id-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))

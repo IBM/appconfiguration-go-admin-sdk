@@ -445,6 +445,7 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 				Value: core.StringPtr("true"),
 				Order: core.Int64Ptr(int64(1)),
 				RolloutPercentage: core.Int64Ptr(int64(50)),
+				RuleID: core.StringPtr("testString"),
 			}
 
 			collectionRefModel := &appconfigurationv1.CollectionRef{
@@ -488,6 +489,7 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 				Value: core.StringPtr("true"),
 				Order: core.Int64Ptr(int64(1)),
 				RolloutPercentage: core.Int64Ptr(int64(90)),
+				RuleID: core.StringPtr("testString"),
 			}
 
 			collectionUpdateRefModel := &appconfigurationv1.CollectionUpdateRef{
@@ -530,6 +532,7 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 				Value: core.StringPtr("true"),
 				Order: core.Int64Ptr(int64(1)),
 				RolloutPercentage: core.Int64Ptr(int64(100)),
+				RuleID: core.StringPtr("testString"),
 			}
 
 			updateFeatureValuesOptions := &appconfigurationv1.UpdateFeatureValuesOptions{
@@ -1314,6 +1317,7 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 				Value: "testString",
 				Order: core.Int64Ptr(int64(38)),
 				RolloutPercentage: core.Int64Ptr(int64(100)),
+				RuleID: core.StringPtr("testString"),
 			}
 
 			collectionRefModel := &appconfigurationv1.CollectionRef{

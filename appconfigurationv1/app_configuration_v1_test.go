@@ -2654,7 +2654,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"features": [{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100}], "segment_exists": false, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "change_request_number": "ChangeRequestNumber", "change_request_status": "ChangeRequestStatus", "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href"}], "limit": 10, "offset": 0, "total_count": 0, "first": {"href": "Href"}, "previous": {"href": "Href"}, "next": {"href": "Href"}, "last": {"href": "Href"}}`)
+					fmt.Fprintf(res, "%s", `{"features": [{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100, "rule_id": "RuleID"}], "segment_exists": false, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "change_request_number": "ChangeRequestNumber", "change_request_status": "ChangeRequestStatus", "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href"}], "limit": 10, "offset": 0, "total_count": 0, "first": {"href": "Href"}, "previous": {"href": "Href"}, "next": {"href": "Href"}, "last": {"href": "Href"}}`)
 				}))
 			})
 			It(`Invoke ListFeatures successfully with retries`, func() {
@@ -2723,7 +2723,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"features": [{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100}], "segment_exists": false, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "change_request_number": "ChangeRequestNumber", "change_request_status": "ChangeRequestStatus", "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href"}], "limit": 10, "offset": 0, "total_count": 0, "first": {"href": "Href"}, "previous": {"href": "Href"}, "next": {"href": "Href"}, "last": {"href": "Href"}}`)
+					fmt.Fprintf(res, "%s", `{"features": [{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100, "rule_id": "RuleID"}], "segment_exists": false, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "change_request_number": "ChangeRequestNumber", "change_request_status": "ChangeRequestStatus", "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href"}], "limit": 10, "offset": 0, "total_count": 0, "first": {"href": "Href"}, "previous": {"href": "Href"}, "next": {"href": "Href"}, "last": {"href": "Href"}}`)
 				}))
 			})
 			It(`Invoke ListFeatures successfully`, func() {
@@ -2899,9 +2899,9 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					res.WriteHeader(200)
 					requestNumber++
 					if requestNumber == 1 {
-						fmt.Fprintf(res, "%s", `{"next":{"href":"https://myhost.com/somePath?offset=1"},"features":[{"name":"Name","feature_id":"FeatureID","description":"Description","type":"BOOLEAN","format":"TEXT","enabled_value":"anyValue","disabled_value":"anyValue","enabled":false,"rollout_percentage":100,"tags":"Tags","segment_rules":[{"rules":[{"segments":["Segments"]}],"value":"anyValue","order":5,"rollout_percentage":100}],"segment_exists":false,"collections":[{"collection_id":"CollectionID","name":"Name"}],"change_request_number":"ChangeRequestNumber","change_request_status":"ChangeRequestStatus","created_time":"2021-05-12T23:20:50.520Z","updated_time":"2021-05-12T23:20:50.520Z","evaluation_time":"2021-05-12T23:20:50.520Z","href":"Href"}],"total_count":2,"limit":1}`)
+						fmt.Fprintf(res, "%s", `{"next":{"href":"https://myhost.com/somePath?offset=1"},"features":[{"name":"Name","feature_id":"FeatureID","description":"Description","type":"BOOLEAN","format":"TEXT","enabled_value":"anyValue","disabled_value":"anyValue","enabled":false,"rollout_percentage":100,"tags":"Tags","segment_rules":[{"rules":[{"segments":["Segments"]}],"value":"anyValue","order":5,"rollout_percentage":100,"rule_id":"RuleID"}],"segment_exists":false,"collections":[{"collection_id":"CollectionID","name":"Name"}],"change_request_number":"ChangeRequestNumber","change_request_status":"ChangeRequestStatus","created_time":"2021-05-12T23:20:50.520Z","updated_time":"2021-05-12T23:20:50.520Z","evaluation_time":"2021-05-12T23:20:50.520Z","href":"Href"}],"total_count":2,"limit":1}`)
 					} else if requestNumber == 2 {
-						fmt.Fprintf(res, "%s", `{"features":[{"name":"Name","feature_id":"FeatureID","description":"Description","type":"BOOLEAN","format":"TEXT","enabled_value":"anyValue","disabled_value":"anyValue","enabled":false,"rollout_percentage":100,"tags":"Tags","segment_rules":[{"rules":[{"segments":["Segments"]}],"value":"anyValue","order":5,"rollout_percentage":100}],"segment_exists":false,"collections":[{"collection_id":"CollectionID","name":"Name"}],"change_request_number":"ChangeRequestNumber","change_request_status":"ChangeRequestStatus","created_time":"2021-05-12T23:20:50.520Z","updated_time":"2021-05-12T23:20:50.520Z","evaluation_time":"2021-05-12T23:20:50.520Z","href":"Href"}],"total_count":2,"limit":1}`)
+						fmt.Fprintf(res, "%s", `{"features":[{"name":"Name","feature_id":"FeatureID","description":"Description","type":"BOOLEAN","format":"TEXT","enabled_value":"anyValue","disabled_value":"anyValue","enabled":false,"rollout_percentage":100,"tags":"Tags","segment_rules":[{"rules":[{"segments":["Segments"]}],"value":"anyValue","order":5,"rollout_percentage":100,"rule_id":"RuleID"}],"segment_exists":false,"collections":[{"collection_id":"CollectionID","name":"Name"}],"change_request_number":"ChangeRequestNumber","change_request_status":"ChangeRequestStatus","created_time":"2021-05-12T23:20:50.520Z","updated_time":"2021-05-12T23:20:50.520Z","evaluation_time":"2021-05-12T23:20:50.520Z","href":"Href"}],"total_count":2,"limit":1}`)
 					} else {
 						res.WriteHeader(400)
 					}
@@ -3004,6 +3004,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				featureSegmentRuleModel.Value = "true"
 				featureSegmentRuleModel.Order = core.Int64Ptr(int64(1))
 				featureSegmentRuleModel.RolloutPercentage = core.Int64Ptr(int64(50))
+				featureSegmentRuleModel.RuleID = core.StringPtr("testString")
 
 				// Construct an instance of the CollectionRef model
 				collectionRefModel := new(appconfigurationv1.CollectionRef)
@@ -3076,7 +3077,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
-					fmt.Fprintf(res, "%s", `{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100}], "segment_exists": false, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "change_request_number": "ChangeRequestNumber", "change_request_status": "ChangeRequestStatus", "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href"}`)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100, "rule_id": "RuleID"}], "segment_exists": false, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "change_request_number": "ChangeRequestNumber", "change_request_status": "ChangeRequestStatus", "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href"}`)
 				}))
 			})
 			It(`Invoke CreateFeature successfully with retries`, func() {
@@ -3098,6 +3099,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				featureSegmentRuleModel.Value = "true"
 				featureSegmentRuleModel.Order = core.Int64Ptr(int64(1))
 				featureSegmentRuleModel.RolloutPercentage = core.Int64Ptr(int64(50))
+				featureSegmentRuleModel.RuleID = core.StringPtr("testString")
 
 				// Construct an instance of the CollectionRef model
 				collectionRefModel := new(appconfigurationv1.CollectionRef)
@@ -3173,7 +3175,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
-					fmt.Fprintf(res, "%s", `{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100}], "segment_exists": false, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "change_request_number": "ChangeRequestNumber", "change_request_status": "ChangeRequestStatus", "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href"}`)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100, "rule_id": "RuleID"}], "segment_exists": false, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "change_request_number": "ChangeRequestNumber", "change_request_status": "ChangeRequestStatus", "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href"}`)
 				}))
 			})
 			It(`Invoke CreateFeature successfully`, func() {
@@ -3200,6 +3202,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				featureSegmentRuleModel.Value = "true"
 				featureSegmentRuleModel.Order = core.Int64Ptr(int64(1))
 				featureSegmentRuleModel.RolloutPercentage = core.Int64Ptr(int64(50))
+				featureSegmentRuleModel.RuleID = core.StringPtr("testString")
 
 				// Construct an instance of the CollectionRef model
 				collectionRefModel := new(appconfigurationv1.CollectionRef)
@@ -3247,6 +3250,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				featureSegmentRuleModel.Value = "true"
 				featureSegmentRuleModel.Order = core.Int64Ptr(int64(1))
 				featureSegmentRuleModel.RolloutPercentage = core.Int64Ptr(int64(50))
+				featureSegmentRuleModel.RuleID = core.StringPtr("testString")
 
 				// Construct an instance of the CollectionRef model
 				collectionRefModel := new(appconfigurationv1.CollectionRef)
@@ -3315,6 +3319,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				featureSegmentRuleModel.Value = "true"
 				featureSegmentRuleModel.Order = core.Int64Ptr(int64(1))
 				featureSegmentRuleModel.RolloutPercentage = core.Int64Ptr(int64(50))
+				featureSegmentRuleModel.RuleID = core.StringPtr("testString")
 
 				// Construct an instance of the CollectionRef model
 				collectionRefModel := new(appconfigurationv1.CollectionRef)
@@ -3383,6 +3388,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				featureSegmentRuleModel.Value = "true"
 				featureSegmentRuleModel.Order = core.Int64Ptr(int64(1))
 				featureSegmentRuleModel.RolloutPercentage = core.Int64Ptr(int64(90))
+				featureSegmentRuleModel.RuleID = core.StringPtr("testString")
 
 				// Construct an instance of the CollectionUpdateRef model
 				collectionUpdateRefModel := new(appconfigurationv1.CollectionUpdateRef)
@@ -3454,7 +3460,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100}], "segment_exists": false, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "change_request_number": "ChangeRequestNumber", "change_request_status": "ChangeRequestStatus", "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href"}`)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100, "rule_id": "RuleID"}], "segment_exists": false, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "change_request_number": "ChangeRequestNumber", "change_request_status": "ChangeRequestStatus", "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href"}`)
 				}))
 			})
 			It(`Invoke UpdateFeature successfully with retries`, func() {
@@ -3476,6 +3482,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				featureSegmentRuleModel.Value = "true"
 				featureSegmentRuleModel.Order = core.Int64Ptr(int64(1))
 				featureSegmentRuleModel.RolloutPercentage = core.Int64Ptr(int64(90))
+				featureSegmentRuleModel.RuleID = core.StringPtr("testString")
 
 				// Construct an instance of the CollectionUpdateRef model
 				collectionUpdateRefModel := new(appconfigurationv1.CollectionUpdateRef)
@@ -3550,7 +3557,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100}], "segment_exists": false, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "change_request_number": "ChangeRequestNumber", "change_request_status": "ChangeRequestStatus", "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href"}`)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100, "rule_id": "RuleID"}], "segment_exists": false, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "change_request_number": "ChangeRequestNumber", "change_request_status": "ChangeRequestStatus", "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href"}`)
 				}))
 			})
 			It(`Invoke UpdateFeature successfully`, func() {
@@ -3577,6 +3584,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				featureSegmentRuleModel.Value = "true"
 				featureSegmentRuleModel.Order = core.Int64Ptr(int64(1))
 				featureSegmentRuleModel.RolloutPercentage = core.Int64Ptr(int64(90))
+				featureSegmentRuleModel.RuleID = core.StringPtr("testString")
 
 				// Construct an instance of the CollectionUpdateRef model
 				collectionUpdateRefModel := new(appconfigurationv1.CollectionUpdateRef)
@@ -3623,6 +3631,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				featureSegmentRuleModel.Value = "true"
 				featureSegmentRuleModel.Order = core.Int64Ptr(int64(1))
 				featureSegmentRuleModel.RolloutPercentage = core.Int64Ptr(int64(90))
+				featureSegmentRuleModel.RuleID = core.StringPtr("testString")
 
 				// Construct an instance of the CollectionUpdateRef model
 				collectionUpdateRefModel := new(appconfigurationv1.CollectionUpdateRef)
@@ -3690,6 +3699,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				featureSegmentRuleModel.Value = "true"
 				featureSegmentRuleModel.Order = core.Int64Ptr(int64(1))
 				featureSegmentRuleModel.RolloutPercentage = core.Int64Ptr(int64(90))
+				featureSegmentRuleModel.RuleID = core.StringPtr("testString")
 
 				// Construct an instance of the CollectionUpdateRef model
 				collectionUpdateRefModel := new(appconfigurationv1.CollectionUpdateRef)
@@ -3757,6 +3767,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				featureSegmentRuleModel.Value = "true"
 				featureSegmentRuleModel.Order = core.Int64Ptr(int64(1))
 				featureSegmentRuleModel.RolloutPercentage = core.Int64Ptr(int64(100))
+				featureSegmentRuleModel.RuleID = core.StringPtr("testString")
 
 				// Construct an instance of the UpdateFeatureValuesOptions model
 				updateFeatureValuesOptionsModel := new(appconfigurationv1.UpdateFeatureValuesOptions)
@@ -3821,7 +3832,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100}], "segment_exists": false, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "change_request_number": "ChangeRequestNumber", "change_request_status": "ChangeRequestStatus", "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href"}`)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100, "rule_id": "RuleID"}], "segment_exists": false, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "change_request_number": "ChangeRequestNumber", "change_request_status": "ChangeRequestStatus", "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href"}`)
 				}))
 			})
 			It(`Invoke UpdateFeatureValues successfully with retries`, func() {
@@ -3843,6 +3854,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				featureSegmentRuleModel.Value = "true"
 				featureSegmentRuleModel.Order = core.Int64Ptr(int64(1))
 				featureSegmentRuleModel.RolloutPercentage = core.Int64Ptr(int64(100))
+				featureSegmentRuleModel.RuleID = core.StringPtr("testString")
 
 				// Construct an instance of the UpdateFeatureValuesOptions model
 				updateFeatureValuesOptionsModel := new(appconfigurationv1.UpdateFeatureValuesOptions)
@@ -3910,7 +3922,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100}], "segment_exists": false, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "change_request_number": "ChangeRequestNumber", "change_request_status": "ChangeRequestStatus", "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href"}`)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100, "rule_id": "RuleID"}], "segment_exists": false, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "change_request_number": "ChangeRequestNumber", "change_request_status": "ChangeRequestStatus", "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href"}`)
 				}))
 			})
 			It(`Invoke UpdateFeatureValues successfully`, func() {
@@ -3937,6 +3949,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				featureSegmentRuleModel.Value = "true"
 				featureSegmentRuleModel.Order = core.Int64Ptr(int64(1))
 				featureSegmentRuleModel.RolloutPercentage = core.Int64Ptr(int64(100))
+				featureSegmentRuleModel.RuleID = core.StringPtr("testString")
 
 				// Construct an instance of the UpdateFeatureValuesOptions model
 				updateFeatureValuesOptionsModel := new(appconfigurationv1.UpdateFeatureValuesOptions)
@@ -3976,6 +3989,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				featureSegmentRuleModel.Value = "true"
 				featureSegmentRuleModel.Order = core.Int64Ptr(int64(1))
 				featureSegmentRuleModel.RolloutPercentage = core.Int64Ptr(int64(100))
+				featureSegmentRuleModel.RuleID = core.StringPtr("testString")
 
 				// Construct an instance of the UpdateFeatureValuesOptions model
 				updateFeatureValuesOptionsModel := new(appconfigurationv1.UpdateFeatureValuesOptions)
@@ -4036,6 +4050,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				featureSegmentRuleModel.Value = "true"
 				featureSegmentRuleModel.Order = core.Int64Ptr(int64(1))
 				featureSegmentRuleModel.RolloutPercentage = core.Int64Ptr(int64(100))
+				featureSegmentRuleModel.RuleID = core.StringPtr("testString")
 
 				// Construct an instance of the UpdateFeatureValuesOptions model
 				updateFeatureValuesOptionsModel := new(appconfigurationv1.UpdateFeatureValuesOptions)
@@ -4127,7 +4142,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100}], "segment_exists": false, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "change_request_number": "ChangeRequestNumber", "change_request_status": "ChangeRequestStatus", "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href"}`)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100, "rule_id": "RuleID"}], "segment_exists": false, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "change_request_number": "ChangeRequestNumber", "change_request_status": "ChangeRequestStatus", "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href"}`)
 				}))
 			})
 			It(`Invoke GetFeature successfully with retries`, func() {
@@ -4183,7 +4198,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100}], "segment_exists": false, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "change_request_number": "ChangeRequestNumber", "change_request_status": "ChangeRequestStatus", "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href"}`)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100, "rule_id": "RuleID"}], "segment_exists": false, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "change_request_number": "ChangeRequestNumber", "change_request_status": "ChangeRequestStatus", "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href"}`)
 				}))
 			})
 			It(`Invoke GetFeature successfully`, func() {
@@ -4435,7 +4450,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100}], "segment_exists": false, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "change_request_number": "ChangeRequestNumber", "change_request_status": "ChangeRequestStatus", "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href"}`)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100, "rule_id": "RuleID"}], "segment_exists": false, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "change_request_number": "ChangeRequestNumber", "change_request_status": "ChangeRequestStatus", "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href"}`)
 				}))
 			})
 			It(`Invoke ToggleFeature successfully with retries`, func() {
@@ -4507,7 +4522,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100}], "segment_exists": false, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "change_request_number": "ChangeRequestNumber", "change_request_status": "ChangeRequestStatus", "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href"}`)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100, "rule_id": "RuleID"}], "segment_exists": false, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "change_request_number": "ChangeRequestNumber", "change_request_status": "ChangeRequestStatus", "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href"}`)
 				}))
 			})
 			It(`Invoke ToggleFeature successfully`, func() {
@@ -10166,7 +10181,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"environments": [{"name": "Name", "environment_id": "EnvironmentID", "description": "Description", "tags": "Tags", "color_code": "#FDD13A", "features": [{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100}], "collections": [{"collection_id": "CollectionID", "name": "Name"}], "isOverridden": true}], "properties": [{"name": "Name", "property_id": "PropertyID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "value": "anyValue", "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5}], "collections": [{"collection_id": "CollectionID", "name": "Name"}], "isOverridden": true}]}], "segments": [{"name": "Name", "segment_id": "SegmentID", "description": "Description", "tags": "Tags", "rules": [{"attribute_name": "AttributeName", "operator": "is", "values": ["Values"]}]}]}`)
+					fmt.Fprintf(res, "%s", `{"environments": [{"name": "Name", "environment_id": "EnvironmentID", "description": "Description", "tags": "Tags", "color_code": "#FDD13A", "features": [{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100, "rule_id": "RuleID"}], "collections": [{"collection_id": "CollectionID", "name": "Name"}], "isOverridden": true}], "properties": [{"name": "Name", "property_id": "PropertyID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "value": "anyValue", "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5}], "collections": [{"collection_id": "CollectionID", "name": "Name"}], "isOverridden": true}]}], "segments": [{"name": "Name", "segment_id": "SegmentID", "description": "Description", "tags": "Tags", "rules": [{"attribute_name": "AttributeName", "operator": "is", "values": ["Values"]}]}]}`)
 				}))
 			})
 			It(`Invoke RestoreGitconfig successfully with retries`, func() {
@@ -10220,7 +10235,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"environments": [{"name": "Name", "environment_id": "EnvironmentID", "description": "Description", "tags": "Tags", "color_code": "#FDD13A", "features": [{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100}], "collections": [{"collection_id": "CollectionID", "name": "Name"}], "isOverridden": true}], "properties": [{"name": "Name", "property_id": "PropertyID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "value": "anyValue", "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5}], "collections": [{"collection_id": "CollectionID", "name": "Name"}], "isOverridden": true}]}], "segments": [{"name": "Name", "segment_id": "SegmentID", "description": "Description", "tags": "Tags", "rules": [{"attribute_name": "AttributeName", "operator": "is", "values": ["Values"]}]}]}`)
+					fmt.Fprintf(res, "%s", `{"environments": [{"name": "Name", "environment_id": "EnvironmentID", "description": "Description", "tags": "Tags", "color_code": "#FDD13A", "features": [{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100, "rule_id": "RuleID"}], "collections": [{"collection_id": "CollectionID", "name": "Name"}], "isOverridden": true}], "properties": [{"name": "Name", "property_id": "PropertyID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "value": "anyValue", "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5}], "collections": [{"collection_id": "CollectionID", "name": "Name"}], "isOverridden": true}]}], "segments": [{"name": "Name", "segment_id": "SegmentID", "description": "Description", "tags": "Tags", "rules": [{"attribute_name": "AttributeName", "operator": "is", "values": ["Values"]}]}]}`)
 				}))
 			})
 			It(`Invoke RestoreGitconfig successfully`, func() {
@@ -11722,6 +11737,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				featureSegmentRuleModel.Value = "testString"
 				featureSegmentRuleModel.Order = core.Int64Ptr(int64(38))
 				featureSegmentRuleModel.RolloutPercentage = core.Int64Ptr(int64(100))
+				featureSegmentRuleModel.RuleID = core.StringPtr("testString")
 
 				// Construct an instance of the CollectionRef model
 				collectionRefModel := new(appconfigurationv1.CollectionRef)
@@ -11852,7 +11868,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
-					fmt.Fprintf(res, "%s", `{"environments": [{"name": "Name", "environment_id": "EnvironmentID", "description": "Description", "tags": "Tags", "color_code": "#FDD13A", "features": [{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100}], "collections": [{"collection_id": "CollectionID", "name": "Name"}], "isOverridden": true}], "properties": [{"name": "Name", "property_id": "PropertyID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "value": "anyValue", "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5}], "collections": [{"collection_id": "CollectionID", "name": "Name"}], "isOverridden": true}]}], "collections": [{"collection_id": "CollectionID", "name": "Name", "description": "Description", "tags": "Tags"}], "segments": [{"name": "Name", "segment_id": "SegmentID", "description": "Description", "tags": "Tags", "rules": [{"attribute_name": "AttributeName", "operator": "is", "values": ["Values"]}]}]}`)
+					fmt.Fprintf(res, "%s", `{"environments": [{"name": "Name", "environment_id": "EnvironmentID", "description": "Description", "tags": "Tags", "color_code": "#FDD13A", "features": [{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100, "rule_id": "RuleID"}], "collections": [{"collection_id": "CollectionID", "name": "Name"}], "isOverridden": true}], "properties": [{"name": "Name", "property_id": "PropertyID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "value": "anyValue", "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5}], "collections": [{"collection_id": "CollectionID", "name": "Name"}], "isOverridden": true}]}], "collections": [{"collection_id": "CollectionID", "name": "Name", "description": "Description", "tags": "Tags"}], "segments": [{"name": "Name", "segment_id": "SegmentID", "description": "Description", "tags": "Tags", "rules": [{"attribute_name": "AttributeName", "operator": "is", "values": ["Values"]}]}]}`)
 				}))
 			})
 			It(`Invoke ImportConfig successfully with retries`, func() {
@@ -11874,6 +11890,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				featureSegmentRuleModel.Value = "testString"
 				featureSegmentRuleModel.Order = core.Int64Ptr(int64(38))
 				featureSegmentRuleModel.RolloutPercentage = core.Int64Ptr(int64(100))
+				featureSegmentRuleModel.RuleID = core.StringPtr("testString")
 
 				// Construct an instance of the CollectionRef model
 				collectionRefModel := new(appconfigurationv1.CollectionRef)
@@ -12007,7 +12024,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
-					fmt.Fprintf(res, "%s", `{"environments": [{"name": "Name", "environment_id": "EnvironmentID", "description": "Description", "tags": "Tags", "color_code": "#FDD13A", "features": [{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100}], "collections": [{"collection_id": "CollectionID", "name": "Name"}], "isOverridden": true}], "properties": [{"name": "Name", "property_id": "PropertyID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "value": "anyValue", "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5}], "collections": [{"collection_id": "CollectionID", "name": "Name"}], "isOverridden": true}]}], "collections": [{"collection_id": "CollectionID", "name": "Name", "description": "Description", "tags": "Tags"}], "segments": [{"name": "Name", "segment_id": "SegmentID", "description": "Description", "tags": "Tags", "rules": [{"attribute_name": "AttributeName", "operator": "is", "values": ["Values"]}]}]}`)
+					fmt.Fprintf(res, "%s", `{"environments": [{"name": "Name", "environment_id": "EnvironmentID", "description": "Description", "tags": "Tags", "color_code": "#FDD13A", "features": [{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100, "rule_id": "RuleID"}], "collections": [{"collection_id": "CollectionID", "name": "Name"}], "isOverridden": true}], "properties": [{"name": "Name", "property_id": "PropertyID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "value": "anyValue", "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5}], "collections": [{"collection_id": "CollectionID", "name": "Name"}], "isOverridden": true}]}], "collections": [{"collection_id": "CollectionID", "name": "Name", "description": "Description", "tags": "Tags"}], "segments": [{"name": "Name", "segment_id": "SegmentID", "description": "Description", "tags": "Tags", "rules": [{"attribute_name": "AttributeName", "operator": "is", "values": ["Values"]}]}]}`)
 				}))
 			})
 			It(`Invoke ImportConfig successfully`, func() {
@@ -12034,6 +12051,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				featureSegmentRuleModel.Value = "testString"
 				featureSegmentRuleModel.Order = core.Int64Ptr(int64(38))
 				featureSegmentRuleModel.RolloutPercentage = core.Int64Ptr(int64(100))
+				featureSegmentRuleModel.RuleID = core.StringPtr("testString")
 
 				// Construct an instance of the CollectionRef model
 				collectionRefModel := new(appconfigurationv1.CollectionRef)
@@ -12138,6 +12156,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				featureSegmentRuleModel.Value = "testString"
 				featureSegmentRuleModel.Order = core.Int64Ptr(int64(38))
 				featureSegmentRuleModel.RolloutPercentage = core.Int64Ptr(int64(100))
+				featureSegmentRuleModel.RuleID = core.StringPtr("testString")
 
 				// Construct an instance of the CollectionRef model
 				collectionRefModel := new(appconfigurationv1.CollectionRef)
@@ -12256,6 +12275,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				featureSegmentRuleModel.Value = "testString"
 				featureSegmentRuleModel.Order = core.Int64Ptr(int64(38))
 				featureSegmentRuleModel.RolloutPercentage = core.Int64Ptr(int64(100))
+				featureSegmentRuleModel.RuleID = core.StringPtr("testString")
 
 				// Construct an instance of the CollectionRef model
 				collectionRefModel := new(appconfigurationv1.CollectionRef)
@@ -12409,7 +12429,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"environments": [{"name": "Name", "environment_id": "EnvironmentID", "description": "Description", "tags": "Tags", "color_code": "#FDD13A", "features": [{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100}], "collections": [{"collection_id": "CollectionID", "name": "Name"}], "isOverridden": true}], "properties": [{"name": "Name", "property_id": "PropertyID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "value": "anyValue", "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5}], "collections": [{"collection_id": "CollectionID", "name": "Name"}], "isOverridden": true}]}], "collections": [{"collection_id": "CollectionID", "name": "Name", "description": "Description", "tags": "Tags"}], "segments": [{"name": "Name", "segment_id": "SegmentID", "description": "Description", "tags": "Tags", "rules": [{"attribute_name": "AttributeName", "operator": "is", "values": ["Values"]}]}]}`)
+					fmt.Fprintf(res, "%s", `{"environments": [{"name": "Name", "environment_id": "EnvironmentID", "description": "Description", "tags": "Tags", "color_code": "#FDD13A", "features": [{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100, "rule_id": "RuleID"}], "collections": [{"collection_id": "CollectionID", "name": "Name"}], "isOverridden": true}], "properties": [{"name": "Name", "property_id": "PropertyID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "value": "anyValue", "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5}], "collections": [{"collection_id": "CollectionID", "name": "Name"}], "isOverridden": true}]}], "collections": [{"collection_id": "CollectionID", "name": "Name", "description": "Description", "tags": "Tags"}], "segments": [{"name": "Name", "segment_id": "SegmentID", "description": "Description", "tags": "Tags", "rules": [{"attribute_name": "AttributeName", "operator": "is", "values": ["Values"]}]}]}`)
 				}))
 			})
 			It(`Invoke ListInstanceConfig successfully with retries`, func() {
@@ -12462,7 +12482,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"environments": [{"name": "Name", "environment_id": "EnvironmentID", "description": "Description", "tags": "Tags", "color_code": "#FDD13A", "features": [{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100}], "collections": [{"collection_id": "CollectionID", "name": "Name"}], "isOverridden": true}], "properties": [{"name": "Name", "property_id": "PropertyID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "value": "anyValue", "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5}], "collections": [{"collection_id": "CollectionID", "name": "Name"}], "isOverridden": true}]}], "collections": [{"collection_id": "CollectionID", "name": "Name", "description": "Description", "tags": "Tags"}], "segments": [{"name": "Name", "segment_id": "SegmentID", "description": "Description", "tags": "Tags", "rules": [{"attribute_name": "AttributeName", "operator": "is", "values": ["Values"]}]}]}`)
+					fmt.Fprintf(res, "%s", `{"environments": [{"name": "Name", "environment_id": "EnvironmentID", "description": "Description", "tags": "Tags", "color_code": "#FDD13A", "features": [{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100, "rule_id": "RuleID"}], "collections": [{"collection_id": "CollectionID", "name": "Name"}], "isOverridden": true}], "properties": [{"name": "Name", "property_id": "PropertyID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "value": "anyValue", "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5}], "collections": [{"collection_id": "CollectionID", "name": "Name"}], "isOverridden": true}]}], "collections": [{"collection_id": "CollectionID", "name": "Name", "description": "Description", "tags": "Tags"}], "segments": [{"name": "Name", "segment_id": "SegmentID", "description": "Description", "tags": "Tags", "rules": [{"attribute_name": "AttributeName", "operator": "is", "values": ["Values"]}]}]}`)
 				}))
 			})
 			It(`Invoke ListInstanceConfig successfully`, func() {
@@ -12846,10 +12866,12 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				featureSegmentRuleModel.Value = "true"
 				featureSegmentRuleModel.Order = core.Int64Ptr(int64(1))
 				featureSegmentRuleModel.RolloutPercentage = core.Int64Ptr(int64(50))
+				featureSegmentRuleModel.RuleID = core.StringPtr("testString")
 				Expect(featureSegmentRuleModel.Rules).To(Equal([]appconfigurationv1.TargetSegments{*targetSegmentsModel}))
 				Expect(featureSegmentRuleModel.Value).To(Equal("true"))
 				Expect(featureSegmentRuleModel.Order).To(Equal(core.Int64Ptr(int64(1))))
 				Expect(featureSegmentRuleModel.RolloutPercentage).To(Equal(core.Int64Ptr(int64(50))))
+				Expect(featureSegmentRuleModel.RuleID).To(Equal(core.StringPtr("testString")))
 
 				// Construct an instance of the CollectionRef model
 				collectionRefModel := new(appconfigurationv1.CollectionRef)
@@ -13319,10 +13341,12 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				featureSegmentRuleModel.Value = "testString"
 				featureSegmentRuleModel.Order = core.Int64Ptr(int64(38))
 				featureSegmentRuleModel.RolloutPercentage = core.Int64Ptr(int64(100))
+				featureSegmentRuleModel.RuleID = core.StringPtr("testString")
 				Expect(featureSegmentRuleModel.Rules).To(Equal([]appconfigurationv1.TargetSegments{*targetSegmentsModel}))
 				Expect(featureSegmentRuleModel.Value).To(Equal("testString"))
 				Expect(featureSegmentRuleModel.Order).To(Equal(core.Int64Ptr(int64(38))))
 				Expect(featureSegmentRuleModel.RolloutPercentage).To(Equal(core.Int64Ptr(int64(100))))
+				Expect(featureSegmentRuleModel.RuleID).To(Equal(core.StringPtr("testString")))
 
 				// Construct an instance of the CollectionRef model
 				collectionRefModel := new(appconfigurationv1.CollectionRef)
@@ -13814,10 +13838,12 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				featureSegmentRuleModel.Value = "true"
 				featureSegmentRuleModel.Order = core.Int64Ptr(int64(1))
 				featureSegmentRuleModel.RolloutPercentage = core.Int64Ptr(int64(90))
+				featureSegmentRuleModel.RuleID = core.StringPtr("testString")
 				Expect(featureSegmentRuleModel.Rules).To(Equal([]appconfigurationv1.TargetSegments{*targetSegmentsModel}))
 				Expect(featureSegmentRuleModel.Value).To(Equal("true"))
 				Expect(featureSegmentRuleModel.Order).To(Equal(core.Int64Ptr(int64(1))))
 				Expect(featureSegmentRuleModel.RolloutPercentage).To(Equal(core.Int64Ptr(int64(90))))
+				Expect(featureSegmentRuleModel.RuleID).To(Equal(core.StringPtr("testString")))
 
 				// Construct an instance of the CollectionUpdateRef model
 				collectionUpdateRefModel := new(appconfigurationv1.CollectionUpdateRef)
@@ -13925,10 +13951,12 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				featureSegmentRuleModel.Value = "true"
 				featureSegmentRuleModel.Order = core.Int64Ptr(int64(1))
 				featureSegmentRuleModel.RolloutPercentage = core.Int64Ptr(int64(100))
+				featureSegmentRuleModel.RuleID = core.StringPtr("testString")
 				Expect(featureSegmentRuleModel.Rules).To(Equal([]appconfigurationv1.TargetSegments{*targetSegmentsModel}))
 				Expect(featureSegmentRuleModel.Value).To(Equal("true"))
 				Expect(featureSegmentRuleModel.Order).To(Equal(core.Int64Ptr(int64(1))))
 				Expect(featureSegmentRuleModel.RolloutPercentage).To(Equal(core.Int64Ptr(int64(100))))
+				Expect(featureSegmentRuleModel.RuleID).To(Equal(core.StringPtr("testString")))
 
 				// Construct an instance of the UpdateFeatureValuesOptions model
 				environmentID := "environment_id"
@@ -14358,6 +14386,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 			model.Value = "testString"
 			model.Order = core.Int64Ptr(int64(38))
 			model.RolloutPercentage = core.Int64Ptr(int64(100))
+			model.RuleID = core.StringPtr("testString")
 
 			b, err := json.Marshal(model)
 			Expect(err).To(BeNil())
