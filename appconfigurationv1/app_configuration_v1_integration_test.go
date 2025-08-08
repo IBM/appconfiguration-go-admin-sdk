@@ -1097,6 +1097,111 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 		})
 	})
 
+	Describe(`ListIntegrations - Get list of integrations`, func() {
+		BeforeEach(func() {
+			shouldSkipTest()
+		})
+		It(`ListIntegrations(listIntegrationsOptions *ListIntegrationsOptions) with pagination`, func(){
+			listIntegrationsOptions := &appconfigurationv1.ListIntegrationsOptions{
+				Expand: core.BoolPtr(true),
+				Limit: core.Int64Ptr(int64(10)),
+				Offset: core.Int64Ptr(int64(0)),
+			}
+
+			listIntegrationsOptions.Offset = nil
+			listIntegrationsOptions.Limit = core.Int64Ptr(1)
+
+			var allResults []appconfigurationv1.Integration
+			for {
+				integrationList, response, err := appConfigurationService.ListIntegrations(listIntegrationsOptions)
+				Expect(err).To(BeNil())
+				Expect(response.StatusCode).To(Equal(200))
+				Expect(integrationList).ToNot(BeNil())
+				allResults = append(allResults, integrationList.Integrations...)
+
+				listIntegrationsOptions.Offset, err = integrationList.GetNextOffset()
+				Expect(err).To(BeNil())
+
+				if listIntegrationsOptions.Offset == nil {
+					break
+				}
+			}
+			fmt.Fprintf(GinkgoWriter, "Retrieved a total of %d item(s) with pagination.\n", len(allResults))
+		})
+		It(`ListIntegrations(listIntegrationsOptions *ListIntegrationsOptions) using IntegrationsPager`, func(){
+			listIntegrationsOptions := &appconfigurationv1.ListIntegrationsOptions{
+				Expand: core.BoolPtr(true),
+				Limit: core.Int64Ptr(int64(10)),
+			}
+
+			// Test GetNext().
+			pager, err := appConfigurationService.NewIntegrationsPager(listIntegrationsOptions)
+			Expect(err).To(BeNil())
+			Expect(pager).ToNot(BeNil())
+
+			var allResults []appconfigurationv1.Integration
+			for pager.HasNext() {
+				nextPage, err := pager.GetNext()
+				Expect(err).To(BeNil())
+				Expect(nextPage).ToNot(BeNil())
+				allResults = append(allResults, nextPage...)
+			}
+
+			// Test GetAll().
+			pager, err = appConfigurationService.NewIntegrationsPager(listIntegrationsOptions)
+			Expect(err).To(BeNil())
+			Expect(pager).ToNot(BeNil())
+
+			allItems, err := pager.GetAll()
+			Expect(err).To(BeNil())
+			Expect(allItems).ToNot(BeNil())
+
+			Expect(len(allItems)).To(Equal(len(allResults)))
+			fmt.Fprintf(GinkgoWriter, "ListIntegrations() returned a total of %d item(s) using IntegrationsPager.\n", len(allResults))
+		})
+	})
+
+	Describe(`CreateIntegration - Create integration`, func() {
+		BeforeEach(func() {
+			shouldSkipTest()
+		})
+		It(`CreateIntegration(createIntegrationOptions *CreateIntegrationOptions)`, func() {
+			createIntegrationMetadataModel := &appconfigurationv1.CreateIntegrationMetadataCreateEnIntegrationMetadata{
+				EventNotificationsInstanceCrn: core.StringPtr("crn:v1:bluemix:public:event-notifications:eu-gb:a/4f631ea3b3204b2b878a295604994acf:0eb42def-21aa-4f0a-a975-0812ead6ceee::"),
+				EventNotificationsEndpoint: core.StringPtr("https://eu-gb.event-notifications.cloud.ibm.com"),
+				EventNotificationsSourceName: core.StringPtr("My App Config"),
+				EventNotificationsSourceDescription: core.StringPtr("All the events from App Configuration instance"),
+			}
+
+			createIntegrationOptions := &appconfigurationv1.CreateIntegrationOptions{
+				IntegrationID: core.StringPtr("lckkhp34t"),
+				IntegrationType: core.StringPtr("EVENT_NOTIFICATIONS"),
+				Metadata: createIntegrationMetadataModel,
+			}
+
+			integration, response, err := appConfigurationService.CreateIntegration(createIntegrationOptions)
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(201))
+			Expect(integration).ToNot(BeNil())
+		})
+	})
+
+	Describe(`GetIntegration - Get integration`, func() {
+		BeforeEach(func() {
+			shouldSkipTest()
+		})
+		It(`GetIntegration(getIntegrationOptions *GetIntegrationOptions)`, func() {
+			getIntegrationOptions := &appconfigurationv1.GetIntegrationOptions{
+				IntegrationID: core.StringPtr("integration_id"),
+			}
+
+			integration, response, err := appConfigurationService.GetIntegration(getIntegrationOptions)
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(200))
+			Expect(integration).ToNot(BeNil())
+		})
+	})
+
 	Describe(`ListOriginconfigs - Get list of Origin Configs`, func() {
 		BeforeEach(func() {
 			shouldSkipTest()
@@ -1427,6 +1532,21 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 			}
 
 			response, err := appConfigurationService.DeleteGitconfig(deleteGitconfigOptions)
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(204))
+		})
+	})
+
+	Describe(`DeleteIntegration - Delete integration`, func() {
+		BeforeEach(func() {
+			shouldSkipTest()
+		})
+		It(`DeleteIntegration(deleteIntegrationOptions *DeleteIntegrationOptions)`, func() {
+			deleteIntegrationOptions := &appconfigurationv1.DeleteIntegrationOptions{
+				IntegrationID: core.StringPtr("integration_id"),
+			}
+
+			response, err := appConfigurationService.DeleteIntegration(deleteIntegrationOptions)
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(204))
 		})
