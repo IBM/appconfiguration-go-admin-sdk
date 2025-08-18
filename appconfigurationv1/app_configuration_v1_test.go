@@ -9063,7 +9063,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"environments": [{"name": "Name", "environment_id": "EnvironmentID", "description": "Description", "tags": "Tags", "color_code": "#FDD13A", "features": [{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100}], "collections": [{"collection_id": "CollectionID", "name": "Name"}], "isOverridden": true}], "properties": [{"name": "Name", "property_id": "PropertyID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "value": "anyValue", "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5}], "collections": [{"collection_id": "CollectionID", "name": "Name"}], "isOverridden": true}]}], "segments": [{"name": "Name", "segment_id": "SegmentID", "description": "Description", "tags": "Tags", "rules": [{"attribute_name": "AttributeName", "operator": "is", "values": ["Values"]}]}]}`)
+					fmt.Fprintf(res, "%s", `{"environments": [{"name": "Name", "environment_id": "EnvironmentID", "description": "Description", "tags": "Tags", "color_code": "#FDD13A", "features": [{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100}], "collections": [{"collection_id": "CollectionID", "name": "Name"}]}], "properties": [{"name": "Name", "property_id": "PropertyID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "value": "anyValue", "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5}], "collections": [{"collection_id": "CollectionID", "name": "Name"}]}]}], "segments": [{"name": "Name", "segment_id": "SegmentID", "description": "Description", "tags": "Tags", "rules": [{"attribute_name": "AttributeName", "operator": "is", "values": ["Values"]}]}]}`)
 				}))
 			})
 			It(`Invoke RestoreGitconfig successfully with retries`, func() {
@@ -9117,7 +9117,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"environments": [{"name": "Name", "environment_id": "EnvironmentID", "description": "Description", "tags": "Tags", "color_code": "#FDD13A", "features": [{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100}], "collections": [{"collection_id": "CollectionID", "name": "Name"}], "isOverridden": true}], "properties": [{"name": "Name", "property_id": "PropertyID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "value": "anyValue", "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5}], "collections": [{"collection_id": "CollectionID", "name": "Name"}], "isOverridden": true}]}], "segments": [{"name": "Name", "segment_id": "SegmentID", "description": "Description", "tags": "Tags", "rules": [{"attribute_name": "AttributeName", "operator": "is", "values": ["Values"]}]}]}`)
+					fmt.Fprintf(res, "%s", `{"environments": [{"name": "Name", "environment_id": "EnvironmentID", "description": "Description", "tags": "Tags", "color_code": "#FDD13A", "features": [{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100}], "collections": [{"collection_id": "CollectionID", "name": "Name"}]}], "properties": [{"name": "Name", "property_id": "PropertyID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "value": "anyValue", "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5}], "collections": [{"collection_id": "CollectionID", "name": "Name"}]}]}], "segments": [{"name": "Name", "segment_id": "SegmentID", "description": "Description", "tags": "Tags", "rules": [{"attribute_name": "AttributeName", "operator": "is", "values": ["Values"]}]}]}`)
 				}))
 			})
 			It(`Invoke RestoreGitconfig successfully`, func() {
@@ -11501,7 +11501,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					Expect(req.Method).To(Equal("POST"))
 					Expect(req.URL.Query()["clean"]).To(Equal([]string{"true"}))
 					res.Header().Set("Content-type", "application/json")
-					res.WriteHeader(201)
+					res.WriteHeader(202)
 					fmt.Fprint(res, `} this is not valid json {`)
 				}))
 			})
@@ -11542,7 +11542,6 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				importFeatureRequestBodyModel.Tags = core.StringPtr("testString")
 				importFeatureRequestBodyModel.SegmentRules = []appconfigurationv1.FeatureSegmentRule{*featureSegmentRuleModel}
 				importFeatureRequestBodyModel.Collections = []appconfigurationv1.CollectionRef{*collectionRefModel}
-				importFeatureRequestBodyModel.IsOverridden = core.BoolPtr(true)
 
 				// Construct an instance of the SegmentRule model
 				segmentRuleModel := new(appconfigurationv1.SegmentRule)
@@ -11561,7 +11560,6 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				importPropertyRequestBodyModel.Tags = core.StringPtr("pre-release, v1.2")
 				importPropertyRequestBodyModel.SegmentRules = []appconfigurationv1.SegmentRule{*segmentRuleModel}
 				importPropertyRequestBodyModel.Collections = []appconfigurationv1.CollectionRef{*collectionRefModel}
-				importPropertyRequestBodyModel.IsOverridden = core.BoolPtr(true)
 
 				// Construct an instance of the ImportEnvironmentSchema model
 				importEnvironmentSchemaModel := new(appconfigurationv1.ImportEnvironmentSchema)
@@ -11652,8 +11650,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
-					res.WriteHeader(201)
-					fmt.Fprintf(res, "%s", `{"environments": [{"name": "Name", "environment_id": "EnvironmentID", "description": "Description", "tags": "Tags", "color_code": "#FDD13A", "features": [{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100}], "collections": [{"collection_id": "CollectionID", "name": "Name"}], "isOverridden": true}], "properties": [{"name": "Name", "property_id": "PropertyID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "value": "anyValue", "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5}], "collections": [{"collection_id": "CollectionID", "name": "Name"}], "isOverridden": true}]}], "collections": [{"collection_id": "CollectionID", "name": "Name", "description": "Description", "tags": "Tags"}], "segments": [{"name": "Name", "segment_id": "SegmentID", "description": "Description", "tags": "Tags", "rules": [{"attribute_name": "AttributeName", "operator": "is", "values": ["Values"]}]}]}`)
+					res.WriteHeader(202)
+					fmt.Fprintf(res, "%s", `{"message": "Message", "referenceId": "ReferenceID"}`)
 				}))
 			})
 			It(`Invoke ImportConfig successfully with retries`, func() {
@@ -11694,7 +11692,6 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				importFeatureRequestBodyModel.Tags = core.StringPtr("testString")
 				importFeatureRequestBodyModel.SegmentRules = []appconfigurationv1.FeatureSegmentRule{*featureSegmentRuleModel}
 				importFeatureRequestBodyModel.Collections = []appconfigurationv1.CollectionRef{*collectionRefModel}
-				importFeatureRequestBodyModel.IsOverridden = core.BoolPtr(true)
 
 				// Construct an instance of the SegmentRule model
 				segmentRuleModel := new(appconfigurationv1.SegmentRule)
@@ -11713,7 +11710,6 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				importPropertyRequestBodyModel.Tags = core.StringPtr("pre-release, v1.2")
 				importPropertyRequestBodyModel.SegmentRules = []appconfigurationv1.SegmentRule{*segmentRuleModel}
 				importPropertyRequestBodyModel.Collections = []appconfigurationv1.CollectionRef{*collectionRefModel}
-				importPropertyRequestBodyModel.IsOverridden = core.BoolPtr(true)
 
 				// Construct an instance of the ImportEnvironmentSchema model
 				importEnvironmentSchemaModel := new(appconfigurationv1.ImportEnvironmentSchema)
@@ -11807,8 +11803,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					Expect(req.URL.Query()["clean"]).To(Equal([]string{"true"}))
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
-					res.WriteHeader(201)
-					fmt.Fprintf(res, "%s", `{"environments": [{"name": "Name", "environment_id": "EnvironmentID", "description": "Description", "tags": "Tags", "color_code": "#FDD13A", "features": [{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100}], "collections": [{"collection_id": "CollectionID", "name": "Name"}], "isOverridden": true}], "properties": [{"name": "Name", "property_id": "PropertyID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "value": "anyValue", "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5}], "collections": [{"collection_id": "CollectionID", "name": "Name"}], "isOverridden": true}]}], "collections": [{"collection_id": "CollectionID", "name": "Name", "description": "Description", "tags": "Tags"}], "segments": [{"name": "Name", "segment_id": "SegmentID", "description": "Description", "tags": "Tags", "rules": [{"attribute_name": "AttributeName", "operator": "is", "values": ["Values"]}]}]}`)
+					res.WriteHeader(202)
+					fmt.Fprintf(res, "%s", `{"message": "Message", "referenceId": "ReferenceID"}`)
 				}))
 			})
 			It(`Invoke ImportConfig successfully`, func() {
@@ -11854,7 +11850,6 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				importFeatureRequestBodyModel.Tags = core.StringPtr("testString")
 				importFeatureRequestBodyModel.SegmentRules = []appconfigurationv1.FeatureSegmentRule{*featureSegmentRuleModel}
 				importFeatureRequestBodyModel.Collections = []appconfigurationv1.CollectionRef{*collectionRefModel}
-				importFeatureRequestBodyModel.IsOverridden = core.BoolPtr(true)
 
 				// Construct an instance of the SegmentRule model
 				segmentRuleModel := new(appconfigurationv1.SegmentRule)
@@ -11873,7 +11868,6 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				importPropertyRequestBodyModel.Tags = core.StringPtr("pre-release, v1.2")
 				importPropertyRequestBodyModel.SegmentRules = []appconfigurationv1.SegmentRule{*segmentRuleModel}
 				importPropertyRequestBodyModel.Collections = []appconfigurationv1.CollectionRef{*collectionRefModel}
-				importPropertyRequestBodyModel.IsOverridden = core.BoolPtr(true)
 
 				// Construct an instance of the ImportEnvironmentSchema model
 				importEnvironmentSchemaModel := new(appconfigurationv1.ImportEnvironmentSchema)
@@ -11958,7 +11952,6 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				importFeatureRequestBodyModel.Tags = core.StringPtr("testString")
 				importFeatureRequestBodyModel.SegmentRules = []appconfigurationv1.FeatureSegmentRule{*featureSegmentRuleModel}
 				importFeatureRequestBodyModel.Collections = []appconfigurationv1.CollectionRef{*collectionRefModel}
-				importFeatureRequestBodyModel.IsOverridden = core.BoolPtr(true)
 
 				// Construct an instance of the SegmentRule model
 				segmentRuleModel := new(appconfigurationv1.SegmentRule)
@@ -11977,7 +11970,6 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				importPropertyRequestBodyModel.Tags = core.StringPtr("pre-release, v1.2")
 				importPropertyRequestBodyModel.SegmentRules = []appconfigurationv1.SegmentRule{*segmentRuleModel}
 				importPropertyRequestBodyModel.Collections = []appconfigurationv1.CollectionRef{*collectionRefModel}
-				importPropertyRequestBodyModel.IsOverridden = core.BoolPtr(true)
 
 				// Construct an instance of the ImportEnvironmentSchema model
 				importEnvironmentSchemaModel := new(appconfigurationv1.ImportEnvironmentSchema)
@@ -12036,7 +12028,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					defer GinkgoRecover()
 
 					// Set success status code with no respoonse body
-					res.WriteHeader(201)
+					res.WriteHeader(202)
 				}))
 			})
 			It(`Invoke ImportConfig successfully`, func() {
@@ -12076,7 +12068,6 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				importFeatureRequestBodyModel.Tags = core.StringPtr("testString")
 				importFeatureRequestBodyModel.SegmentRules = []appconfigurationv1.FeatureSegmentRule{*featureSegmentRuleModel}
 				importFeatureRequestBodyModel.Collections = []appconfigurationv1.CollectionRef{*collectionRefModel}
-				importFeatureRequestBodyModel.IsOverridden = core.BoolPtr(true)
 
 				// Construct an instance of the SegmentRule model
 				segmentRuleModel := new(appconfigurationv1.SegmentRule)
@@ -12095,7 +12086,6 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				importPropertyRequestBodyModel.Tags = core.StringPtr("pre-release, v1.2")
 				importPropertyRequestBodyModel.SegmentRules = []appconfigurationv1.SegmentRule{*segmentRuleModel}
 				importPropertyRequestBodyModel.Collections = []appconfigurationv1.CollectionRef{*collectionRefModel}
-				importPropertyRequestBodyModel.IsOverridden = core.BoolPtr(true)
 
 				// Construct an instance of the ImportEnvironmentSchema model
 				importEnvironmentSchemaModel := new(appconfigurationv1.ImportEnvironmentSchema)
@@ -12210,7 +12200,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"environments": [{"name": "Name", "environment_id": "EnvironmentID", "description": "Description", "tags": "Tags", "color_code": "#FDD13A", "features": [{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100}], "collections": [{"collection_id": "CollectionID", "name": "Name"}], "isOverridden": true}], "properties": [{"name": "Name", "property_id": "PropertyID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "value": "anyValue", "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5}], "collections": [{"collection_id": "CollectionID", "name": "Name"}], "isOverridden": true}]}], "collections": [{"collection_id": "CollectionID", "name": "Name", "description": "Description", "tags": "Tags"}], "segments": [{"name": "Name", "segment_id": "SegmentID", "description": "Description", "tags": "Tags", "rules": [{"attribute_name": "AttributeName", "operator": "is", "values": ["Values"]}]}]}`)
+					fmt.Fprintf(res, "%s", `{"environments": [{"name": "Name", "environment_id": "EnvironmentID", "description": "Description", "tags": "Tags", "color_code": "#FDD13A", "features": [{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100}], "collections": [{"collection_id": "CollectionID", "name": "Name"}]}], "properties": [{"name": "Name", "property_id": "PropertyID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "value": "anyValue", "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5}], "collections": [{"collection_id": "CollectionID", "name": "Name"}]}]}], "collections": [{"collection_id": "CollectionID", "name": "Name", "description": "Description", "tags": "Tags"}], "segments": [{"name": "Name", "segment_id": "SegmentID", "description": "Description", "tags": "Tags", "rules": [{"attribute_name": "AttributeName", "operator": "is", "values": ["Values"]}]}]}`)
 				}))
 			})
 			It(`Invoke ListInstanceConfig successfully with retries`, func() {
@@ -12263,7 +12253,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"environments": [{"name": "Name", "environment_id": "EnvironmentID", "description": "Description", "tags": "Tags", "color_code": "#FDD13A", "features": [{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100}], "collections": [{"collection_id": "CollectionID", "name": "Name"}], "isOverridden": true}], "properties": [{"name": "Name", "property_id": "PropertyID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "value": "anyValue", "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5}], "collections": [{"collection_id": "CollectionID", "name": "Name"}], "isOverridden": true}]}], "collections": [{"collection_id": "CollectionID", "name": "Name", "description": "Description", "tags": "Tags"}], "segments": [{"name": "Name", "segment_id": "SegmentID", "description": "Description", "tags": "Tags", "rules": [{"attribute_name": "AttributeName", "operator": "is", "values": ["Values"]}]}]}`)
+					fmt.Fprintf(res, "%s", `{"environments": [{"name": "Name", "environment_id": "EnvironmentID", "description": "Description", "tags": "Tags", "color_code": "#FDD13A", "features": [{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100}], "collections": [{"collection_id": "CollectionID", "name": "Name"}]}], "properties": [{"name": "Name", "property_id": "PropertyID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "value": "anyValue", "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5}], "collections": [{"collection_id": "CollectionID", "name": "Name"}]}]}], "collections": [{"collection_id": "CollectionID", "name": "Name", "description": "Description", "tags": "Tags"}], "segments": [{"name": "Name", "segment_id": "SegmentID", "description": "Description", "tags": "Tags", "rules": [{"attribute_name": "AttributeName", "operator": "is", "values": ["Values"]}]}]}`)
 				}))
 			})
 			It(`Invoke ListInstanceConfig successfully`, func() {
@@ -12561,6 +12551,226 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Invoke operation
 				result, response, operationErr := appConfigurationService.PromoteRestoreConfig(promoteRestoreConfigOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`InstanceConfigStatus(instanceConfigStatusOptions *InstanceConfigStatusOptions) - Operation response error`, func() {
+		instanceConfigStatusPath := "/config/status/testString"
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(instanceConfigStatusPath))
+					Expect(req.Method).To(Equal("GET"))
+					Expect(req.URL.Query()["action"]).To(Equal([]string{"import"}))
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprint(res, `} this is not valid json {`)
+				}))
+			})
+			It(`Invoke InstanceConfigStatus with error: Operation response processing error`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the InstanceConfigStatusOptions model
+				instanceConfigStatusOptionsModel := new(appconfigurationv1.InstanceConfigStatusOptions)
+				instanceConfigStatusOptionsModel.ReferenceID = core.StringPtr("testString")
+				instanceConfigStatusOptionsModel.Action = core.StringPtr("import")
+				instanceConfigStatusOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Expect response parsing to fail since we are receiving a text/plain response
+				result, response, operationErr := appConfigurationService.InstanceConfigStatus(instanceConfigStatusOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				appConfigurationService.EnableRetries(0, 0)
+				result, response, operationErr = appConfigurationService.InstanceConfigStatus(instanceConfigStatusOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`InstanceConfigStatus(instanceConfigStatusOptions *InstanceConfigStatusOptions)`, func() {
+		instanceConfigStatusPath := "/config/status/testString"
+		Context(`Using mock server endpoint with timeout`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(instanceConfigStatusPath))
+					Expect(req.Method).To(Equal("GET"))
+
+					Expect(req.URL.Query()["action"]).To(Equal([]string{"import"}))
+					// Sleep a short time to support a timeout test
+					time.Sleep(100 * time.Millisecond)
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"action": "import", "errors": {"anyKey": "anyValue"}, "message": "Message", "status": "inprogress", "last_updated": "2019-01-01T12:00:00.000Z", "triggered_time": "2019-01-01T12:00:00.000Z"}`)
+				}))
+			})
+			It(`Invoke InstanceConfigStatus successfully with retries`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+				appConfigurationService.EnableRetries(0, 0)
+
+				// Construct an instance of the InstanceConfigStatusOptions model
+				instanceConfigStatusOptionsModel := new(appconfigurationv1.InstanceConfigStatusOptions)
+				instanceConfigStatusOptionsModel.ReferenceID = core.StringPtr("testString")
+				instanceConfigStatusOptionsModel.Action = core.StringPtr("import")
+				instanceConfigStatusOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with a Context to test a timeout error
+				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc()
+				_, _, operationErr := appConfigurationService.InstanceConfigStatusWithContext(ctx, instanceConfigStatusOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+
+				// Disable retries and test again
+				appConfigurationService.DisableRetries()
+				result, response, operationErr := appConfigurationService.InstanceConfigStatus(instanceConfigStatusOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				_, _, operationErr = appConfigurationService.InstanceConfigStatusWithContext(ctx, instanceConfigStatusOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(instanceConfigStatusPath))
+					Expect(req.Method).To(Equal("GET"))
+
+					Expect(req.URL.Query()["action"]).To(Equal([]string{"import"}))
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"action": "import", "errors": {"anyKey": "anyValue"}, "message": "Message", "status": "inprogress", "last_updated": "2019-01-01T12:00:00.000Z", "triggered_time": "2019-01-01T12:00:00.000Z"}`)
+				}))
+			})
+			It(`Invoke InstanceConfigStatus successfully`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Invoke operation with nil options model (negative test)
+				result, response, operationErr := appConfigurationService.InstanceConfigStatus(nil)
+				Expect(operationErr).NotTo(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+
+				// Construct an instance of the InstanceConfigStatusOptions model
+				instanceConfigStatusOptionsModel := new(appconfigurationv1.InstanceConfigStatusOptions)
+				instanceConfigStatusOptionsModel.ReferenceID = core.StringPtr("testString")
+				instanceConfigStatusOptionsModel.Action = core.StringPtr("import")
+				instanceConfigStatusOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with valid options model (positive test)
+				result, response, operationErr = appConfigurationService.InstanceConfigStatus(instanceConfigStatusOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+			})
+			It(`Invoke InstanceConfigStatus with error: Operation validation and request error`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the InstanceConfigStatusOptions model
+				instanceConfigStatusOptionsModel := new(appconfigurationv1.InstanceConfigStatusOptions)
+				instanceConfigStatusOptionsModel.ReferenceID = core.StringPtr("testString")
+				instanceConfigStatusOptionsModel.Action = core.StringPtr("import")
+				instanceConfigStatusOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Invoke operation with empty URL (negative test)
+				err := appConfigurationService.SetServiceURL("")
+				Expect(err).To(BeNil())
+				result, response, operationErr := appConfigurationService.InstanceConfigStatus(instanceConfigStatusOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+				// Construct a second instance of the InstanceConfigStatusOptions model with no property values
+				instanceConfigStatusOptionsModelNew := new(appconfigurationv1.InstanceConfigStatusOptions)
+				// Invoke operation with invalid model (negative test)
+				result, response, operationErr = appConfigurationService.InstanceConfigStatus(instanceConfigStatusOptionsModelNew)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke InstanceConfigStatus successfully`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the InstanceConfigStatusOptions model
+				instanceConfigStatusOptionsModel := new(appconfigurationv1.InstanceConfigStatusOptions)
+				instanceConfigStatusOptionsModel.ReferenceID = core.StringPtr("testString")
+				instanceConfigStatusOptionsModel.Action = core.StringPtr("import")
+				instanceConfigStatusOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := appConfigurationService.InstanceConfigStatus(instanceConfigStatusOptionsModel)
 				Expect(operationErr).To(BeNil())
 				Expect(response).ToNot(BeNil())
 
@@ -13132,7 +13342,6 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				importFeatureRequestBodyModel.Tags = core.StringPtr("testString")
 				importFeatureRequestBodyModel.SegmentRules = []appconfigurationv1.FeatureSegmentRule{*featureSegmentRuleModel}
 				importFeatureRequestBodyModel.Collections = []appconfigurationv1.CollectionRef{*collectionRefModel}
-				importFeatureRequestBodyModel.IsOverridden = core.BoolPtr(true)
 				Expect(importFeatureRequestBodyModel.Name).To(Equal(core.StringPtr("Cycle Rentals")))
 				Expect(importFeatureRequestBodyModel.FeatureID).To(Equal(core.StringPtr("cycle-rentals")))
 				Expect(importFeatureRequestBodyModel.Description).To(Equal(core.StringPtr("testString")))
@@ -13145,7 +13354,6 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(importFeatureRequestBodyModel.Tags).To(Equal(core.StringPtr("testString")))
 				Expect(importFeatureRequestBodyModel.SegmentRules).To(Equal([]appconfigurationv1.FeatureSegmentRule{*featureSegmentRuleModel}))
 				Expect(importFeatureRequestBodyModel.Collections).To(Equal([]appconfigurationv1.CollectionRef{*collectionRefModel}))
-				Expect(importFeatureRequestBodyModel.IsOverridden).To(Equal(core.BoolPtr(true)))
 
 				// Construct an instance of the SegmentRule model
 				segmentRuleModel := new(appconfigurationv1.SegmentRule)
@@ -13169,7 +13377,6 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				importPropertyRequestBodyModel.Tags = core.StringPtr("pre-release, v1.2")
 				importPropertyRequestBodyModel.SegmentRules = []appconfigurationv1.SegmentRule{*segmentRuleModel}
 				importPropertyRequestBodyModel.Collections = []appconfigurationv1.CollectionRef{*collectionRefModel}
-				importPropertyRequestBodyModel.IsOverridden = core.BoolPtr(true)
 				Expect(importPropertyRequestBodyModel.Name).To(Equal(core.StringPtr("Daily Discount")))
 				Expect(importPropertyRequestBodyModel.PropertyID).To(Equal(core.StringPtr("daily_discount")))
 				Expect(importPropertyRequestBodyModel.Description).To(Equal(core.StringPtr("testString")))
@@ -13179,7 +13386,6 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(importPropertyRequestBodyModel.Tags).To(Equal(core.StringPtr("pre-release, v1.2")))
 				Expect(importPropertyRequestBodyModel.SegmentRules).To(Equal([]appconfigurationv1.SegmentRule{*segmentRuleModel}))
 				Expect(importPropertyRequestBodyModel.Collections).To(Equal([]appconfigurationv1.CollectionRef{*collectionRefModel}))
-				Expect(importPropertyRequestBodyModel.IsOverridden).To(Equal(core.BoolPtr(true)))
 
 				// Construct an instance of the ImportEnvironmentSchema model
 				importEnvironmentSchemaModel := new(appconfigurationv1.ImportEnvironmentSchema)
@@ -13262,8 +13468,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				typeVar := "BOOLEAN"
 				enabledValue := "testString"
 				disabledValue := "testString"
-				isOverridden := true
-				_model, err := appConfigurationService.NewImportFeatureRequestBody(name, featureID, typeVar, enabledValue, disabledValue, isOverridden)
+				_model, err := appConfigurationService.NewImportFeatureRequestBody(name, featureID, typeVar, enabledValue, disabledValue)
 				Expect(_model).ToNot(BeNil())
 				Expect(err).To(BeNil())
 			})
@@ -13272,8 +13477,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				propertyID := "testString"
 				typeVar := "BOOLEAN"
 				value := "testString"
-				isOverridden := true
-				_model, err := appConfigurationService.NewImportPropertyRequestBody(name, propertyID, typeVar, value, isOverridden)
+				_model, err := appConfigurationService.NewImportPropertyRequestBody(name, propertyID, typeVar, value)
 				Expect(_model).ToNot(BeNil())
 				Expect(err).To(BeNil())
 			})
@@ -13284,6 +13488,19 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				_model, err := appConfigurationService.NewImportSegmentSchema(name, segmentID, rules)
 				Expect(_model).ToNot(BeNil())
 				Expect(err).To(BeNil())
+			})
+			It(`Invoke NewInstanceConfigStatusOptions successfully`, func() {
+				// Construct an instance of the InstanceConfigStatusOptions model
+				referenceID := "testString"
+				action := "import"
+				instanceConfigStatusOptionsModel := appConfigurationService.NewInstanceConfigStatusOptions(referenceID, action)
+				instanceConfigStatusOptionsModel.SetReferenceID("testString")
+				instanceConfigStatusOptionsModel.SetAction("import")
+				instanceConfigStatusOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
+				Expect(instanceConfigStatusOptionsModel).ToNot(BeNil())
+				Expect(instanceConfigStatusOptionsModel.ReferenceID).To(Equal(core.StringPtr("testString")))
+				Expect(instanceConfigStatusOptionsModel.Action).To(Equal(core.StringPtr("import")))
+				Expect(instanceConfigStatusOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewListCollectionsOptions successfully`, func() {
 				// Construct an instance of the ListCollectionsOptions model
@@ -14222,7 +14439,6 @@ var _ = Describe(`AppConfigurationV1`, func() {
 			model.Tags = core.StringPtr("testString")
 			model.SegmentRules = nil
 			model.Collections = nil
-			model.IsOverridden = core.BoolPtr(true)
 
 			b, err := json.Marshal(model)
 			Expect(err).To(BeNil())
@@ -14249,7 +14465,6 @@ var _ = Describe(`AppConfigurationV1`, func() {
 			model.Tags = core.StringPtr("testString")
 			model.SegmentRules = nil
 			model.Collections = nil
-			model.IsOverridden = core.BoolPtr(true)
 
 			b, err := json.Marshal(model)
 			Expect(err).To(BeNil())

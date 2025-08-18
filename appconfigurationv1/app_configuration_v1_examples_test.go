@@ -1169,7 +1169,6 @@ var _ = Describe(`AppConfigurationV1 Examples Tests`, func() {
 				RolloutPercentage: core.Int64Ptr(int64(100)),
 				SegmentRules: []appconfigurationv1.FeatureSegmentRule{*featureSegmentRuleModel},
 				Collections: []appconfigurationv1.CollectionRef{*collectionRefModel},
-				IsOverridden: core.BoolPtr(true),
 			}
 
 			segmentRuleModel := &appconfigurationv1.SegmentRule{
@@ -1186,7 +1185,6 @@ var _ = Describe(`AppConfigurationV1 Examples Tests`, func() {
 				Tags: core.StringPtr("pre-release, v1.2"),
 				SegmentRules: []appconfigurationv1.SegmentRule{*segmentRuleModel},
 				Collections: []appconfigurationv1.CollectionRef{*collectionRefModel},
-				IsOverridden: core.BoolPtr(true),
 			}
 
 			importEnvironmentSchemaModel := &appconfigurationv1.ImportEnvironmentSchema{
@@ -1225,18 +1223,18 @@ var _ = Describe(`AppConfigurationV1 Examples Tests`, func() {
 			importConfigOptions.SetSegments([]appconfigurationv1.ImportSegmentSchema{*importSegmentSchemaModel})
 			importConfigOptions.SetClean("true")
 
-			importConfig, response, err := appConfigurationService.ImportConfig(importConfigOptions)
+			instanceConfigAcceptedResponse, response, err := appConfigurationService.ImportConfig(importConfigOptions)
 			if err != nil {
 				panic(err)
 			}
-			b, _ := json.MarshalIndent(importConfig, "", "  ")
+			b, _ := json.MarshalIndent(instanceConfigAcceptedResponse, "", "  ")
 			fmt.Println(string(b))
 
 			// end-import_config
 
 			Expect(err).To(BeNil())
-			Expect(response.StatusCode).To(Equal(201))
-			Expect(importConfig).ToNot(BeNil())
+			Expect(response.StatusCode).To(Equal(202))
+			Expect(instanceConfigAcceptedResponse).ToNot(BeNil())
 		})
 		It(`ListInstanceConfig request example`, func() {
 			fmt.Println("\nListInstanceConfig() result:")
@@ -1278,6 +1276,28 @@ var _ = Describe(`AppConfigurationV1 Examples Tests`, func() {
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(200))
 			Expect(configAction).ToNot(BeNil())
+		})
+		It(`InstanceConfigStatus request example`, func() {
+			fmt.Println("\nInstanceConfigStatus() result:")
+			// begin-instance_config_status
+
+			instanceConfigStatusOptions := appConfigurationService.NewInstanceConfigStatusOptions(
+				"testString",
+				"import",
+			)
+
+			instanceConfigStatusResponse, response, err := appConfigurationService.InstanceConfigStatus(instanceConfigStatusOptions)
+			if err != nil {
+				panic(err)
+			}
+			b, _ := json.MarshalIndent(instanceConfigStatusResponse, "", "  ")
+			fmt.Println(string(b))
+
+			// end-instance_config_status
+
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(200))
+			Expect(instanceConfigStatusResponse).ToNot(BeNil())
 		})
 		It(`DeleteEnvironment request example`, func() {
 			// begin-delete_environment

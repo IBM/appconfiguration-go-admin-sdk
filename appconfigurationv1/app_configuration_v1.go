@@ -3768,14 +3768,14 @@ func (appConfiguration *AppConfigurationV1) DeleteWorkflowconfigWithContext(ctx 
 
 // ImportConfig : Import instance configuration
 // Import configuration to the instance.
-func (appConfiguration *AppConfigurationV1) ImportConfig(importConfigOptions *ImportConfigOptions) (result *ImportConfig, response *core.DetailedResponse, err error) {
+func (appConfiguration *AppConfigurationV1) ImportConfig(importConfigOptions *ImportConfigOptions) (result *InstanceConfigAcceptedResponse, response *core.DetailedResponse, err error) {
 	result, response, err = appConfiguration.ImportConfigWithContext(context.Background(), importConfigOptions)
 	err = core.RepurposeSDKProblem(err, "")
 	return
 }
 
 // ImportConfigWithContext is an alternate form of the ImportConfig method which supports a Context parameter
-func (appConfiguration *AppConfigurationV1) ImportConfigWithContext(ctx context.Context, importConfigOptions *ImportConfigOptions) (result *ImportConfig, response *core.DetailedResponse, err error) {
+func (appConfiguration *AppConfigurationV1) ImportConfigWithContext(ctx context.Context, importConfigOptions *ImportConfigOptions) (result *InstanceConfigAcceptedResponse, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(importConfigOptions, "importConfigOptions cannot be nil")
 	if err != nil {
 		err = core.SDKErrorf(err, "", "unexpected-nil-param", common.GetComponentInfo())
@@ -3841,7 +3841,7 @@ func (appConfiguration *AppConfigurationV1) ImportConfigWithContext(ctx context.
 		return
 	}
 	if rawResponse != nil {
-		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalImportConfig)
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalInstanceConfigAcceptedResponse)
 		if err != nil {
 			err = core.SDKErrorf(err, "", "unmarshal-resp-error", common.GetComponentInfo())
 			return
@@ -3971,6 +3971,77 @@ func (appConfiguration *AppConfigurationV1) PromoteRestoreConfigWithContext(ctx 
 	}
 	if rawResponse != nil {
 		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalConfigAction)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-resp-error", common.GetComponentInfo())
+			return
+		}
+		response.Result = result
+	}
+
+	return
+}
+
+// InstanceConfigStatus : Get status of instance configuration import / export
+// Get the status of instance configuration operation.
+func (appConfiguration *AppConfigurationV1) InstanceConfigStatus(instanceConfigStatusOptions *InstanceConfigStatusOptions) (result *InstanceConfigStatusResponse, response *core.DetailedResponse, err error) {
+	result, response, err = appConfiguration.InstanceConfigStatusWithContext(context.Background(), instanceConfigStatusOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
+}
+
+// InstanceConfigStatusWithContext is an alternate form of the InstanceConfigStatus method which supports a Context parameter
+func (appConfiguration *AppConfigurationV1) InstanceConfigStatusWithContext(ctx context.Context, instanceConfigStatusOptions *InstanceConfigStatusOptions) (result *InstanceConfigStatusResponse, response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(instanceConfigStatusOptions, "instanceConfigStatusOptions cannot be nil")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "unexpected-nil-param", common.GetComponentInfo())
+		return
+	}
+	err = core.ValidateStruct(instanceConfigStatusOptions, "instanceConfigStatusOptions")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
+		return
+	}
+
+	pathParamsMap := map[string]string{
+		"reference_id": *instanceConfigStatusOptions.ReferenceID,
+	}
+
+	builder := core.NewRequestBuilder(core.GET)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = appConfiguration.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(appConfiguration.Service.Options.URL, `/config/status/{reference_id}`, pathParamsMap)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
+		return
+	}
+
+	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "InstanceConfigStatus")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	for headerName, headerValue := range instanceConfigStatusOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+	builder.AddHeader("Accept", "application/json")
+
+	builder.AddQuery("action", fmt.Sprint(*instanceConfigStatusOptions.Action))
+
+	request, err := builder.Build()
+	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
+		return
+	}
+
+	var rawResponse map[string]json.RawMessage
+	response, err = appConfiguration.Service.Request(request, &rawResponse)
+	if err != nil {
+		core.EnrichHTTPProblem(err, "instance_config_status", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
+		return
+	}
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalInstanceConfigStatusResponse)
 		if err != nil {
 			err = core.SDKErrorf(err, "", "unmarshal-resp-error", common.GetComponentInfo())
 			return
@@ -7305,9 +7376,6 @@ type ImportFeatureRequestBody struct {
 
 	// List of collection id representing the collections that are associated with the specified feature flag.
 	Collections []CollectionRef `json:"collections,omitempty"`
-
-	// This attribute explains whether the feature has to be imported or not.
-	IsOverridden *bool `json:"isOverridden" validate:"required"`
 }
 
 // Constants associated with the ImportFeatureRequestBody.Type property.
@@ -7329,14 +7397,13 @@ const (
 )
 
 // NewImportFeatureRequestBody : Instantiate ImportFeatureRequestBody (Generic Model Constructor)
-func (*AppConfigurationV1) NewImportFeatureRequestBody(name string, featureID string, typeVar string, enabledValue interface{}, disabledValue interface{}, isOverridden bool) (_model *ImportFeatureRequestBody, err error) {
+func (*AppConfigurationV1) NewImportFeatureRequestBody(name string, featureID string, typeVar string, enabledValue interface{}, disabledValue interface{}) (_model *ImportFeatureRequestBody, err error) {
 	_model = &ImportFeatureRequestBody{
 		Name: core.StringPtr(name),
 		FeatureID: core.StringPtr(featureID),
 		Type: core.StringPtr(typeVar),
 		EnabledValue: enabledValue,
 		DisabledValue: disabledValue,
-		IsOverridden: core.BoolPtr(isOverridden),
 	}
 	err = core.ValidateStruct(_model, "required parameters")
 	if err != nil {
@@ -7408,11 +7475,6 @@ func UnmarshalImportFeatureRequestBody(m map[string]json.RawMessage, result inte
 		err = core.SDKErrorf(err, "", "collections-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "isOverridden", &obj.IsOverridden)
-	if err != nil {
-		err = core.SDKErrorf(err, "", "isOverridden-error", common.GetComponentInfo())
-		return
-	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
 	return
 }
@@ -7449,9 +7511,6 @@ type ImportPropertyRequestBody struct {
 
 	// List of collection id representing the collections that are associated with the specified property.
 	Collections []CollectionRef `json:"collections,omitempty"`
-
-	// This attribute explains whether the property has to be imported or not.
-	IsOverridden *bool `json:"isOverridden" validate:"required"`
 }
 
 // Constants associated with the ImportPropertyRequestBody.Type property.
@@ -7475,13 +7534,12 @@ const (
 )
 
 // NewImportPropertyRequestBody : Instantiate ImportPropertyRequestBody (Generic Model Constructor)
-func (*AppConfigurationV1) NewImportPropertyRequestBody(name string, propertyID string, typeVar string, value interface{}, isOverridden bool) (_model *ImportPropertyRequestBody, err error) {
+func (*AppConfigurationV1) NewImportPropertyRequestBody(name string, propertyID string, typeVar string, value interface{}) (_model *ImportPropertyRequestBody, err error) {
 	_model = &ImportPropertyRequestBody{
 		Name: core.StringPtr(name),
 		PropertyID: core.StringPtr(propertyID),
 		Type: core.StringPtr(typeVar),
 		Value: value,
-		IsOverridden: core.BoolPtr(isOverridden),
 	}
 	err = core.ValidateStruct(_model, "required parameters")
 	if err != nil {
@@ -7536,11 +7594,6 @@ func UnmarshalImportPropertyRequestBody(m map[string]json.RawMessage, result int
 	err = core.UnmarshalModel(m, "collections", &obj.Collections, UnmarshalCollectionRef)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "collections-error", common.GetComponentInfo())
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "isOverridden", &obj.IsOverridden)
-	if err != nil {
-		err = core.SDKErrorf(err, "", "isOverridden-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -7607,6 +7660,150 @@ func UnmarshalImportSegmentSchema(m map[string]json.RawMessage, result interface
 	err = core.UnmarshalModel(m, "rules", &obj.Rules, UnmarshalRule)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "rules-error", common.GetComponentInfo())
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// InstanceConfigAcceptedResponse : Config import & export operation status accepted response.
+type InstanceConfigAcceptedResponse struct {
+	// The message describing the request status.
+	Message *string `json:"message" validate:"required"`
+
+	// Reference id to check status of import/export operation.
+	ReferenceID *string `json:"referenceId" validate:"required"`
+}
+
+// UnmarshalInstanceConfigAcceptedResponse unmarshals an instance of InstanceConfigAcceptedResponse from the specified map of raw messages.
+func UnmarshalInstanceConfigAcceptedResponse(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(InstanceConfigAcceptedResponse)
+	err = core.UnmarshalPrimitive(m, "message", &obj.Message)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "message-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "referenceId", &obj.ReferenceID)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "referenceId-error", common.GetComponentInfo())
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// InstanceConfigStatusOptions : The InstanceConfigStatus options.
+type InstanceConfigStatusOptions struct {
+	// AppConfiguration config status reference id.
+	ReferenceID *string `json:"reference_id" validate:"required,ne="`
+
+	// The type of config status that is to be fetched.
+	Action *string `json:"action" validate:"required"`
+
+	// Allows users to set headers on API requests.
+	Headers map[string]string
+}
+
+// Constants associated with the InstanceConfigStatusOptions.Action property.
+// The type of config status that is to be fetched.
+const (
+	InstanceConfigStatusOptions_Action_Export = "export"
+	InstanceConfigStatusOptions_Action_Import = "import"
+)
+
+// NewInstanceConfigStatusOptions : Instantiate InstanceConfigStatusOptions
+func (*AppConfigurationV1) NewInstanceConfigStatusOptions(referenceID string, action string) *InstanceConfigStatusOptions {
+	return &InstanceConfigStatusOptions{
+		ReferenceID: core.StringPtr(referenceID),
+		Action: core.StringPtr(action),
+	}
+}
+
+// SetReferenceID : Allow user to set ReferenceID
+func (_options *InstanceConfigStatusOptions) SetReferenceID(referenceID string) *InstanceConfigStatusOptions {
+	_options.ReferenceID = core.StringPtr(referenceID)
+	return _options
+}
+
+// SetAction : Allow user to set Action
+func (_options *InstanceConfigStatusOptions) SetAction(action string) *InstanceConfigStatusOptions {
+	_options.Action = core.StringPtr(action)
+	return _options
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *InstanceConfigStatusOptions) SetHeaders(param map[string]string) *InstanceConfigStatusOptions {
+	options.Headers = param
+	return options
+}
+
+// InstanceConfigStatusResponse : Config import & export operation status.
+type InstanceConfigStatusResponse struct {
+	// Type of instance config operation(import/export).
+	Action *string `json:"action" validate:"required"`
+
+	// Accumulated errors during the operation.
+	Errors map[string]interface{} `json:"errors" validate:"required"`
+
+	// Message describing operation status.
+	Message *string `json:"message" validate:"required"`
+
+	// Status of the operation.
+	Status *string `json:"status" validate:"required"`
+
+	// Latest time at which import/export status updated.
+	LastUpdated *strfmt.DateTime `json:"last_updated" validate:"required"`
+
+	// Time when import/export operation triggered.
+	TriggeredTime *strfmt.DateTime `json:"triggered_time" validate:"required"`
+}
+
+// Constants associated with the InstanceConfigStatusResponse.Action property.
+// Type of instance config operation(import/export).
+const (
+	InstanceConfigStatusResponse_Action_Export = "export"
+	InstanceConfigStatusResponse_Action_Import = "import"
+)
+
+// Constants associated with the InstanceConfigStatusResponse.Status property.
+// Status of the operation.
+const (
+	InstanceConfigStatusResponse_Status_Completed = "completed"
+	InstanceConfigStatusResponse_Status_Failed = "failed"
+	InstanceConfigStatusResponse_Status_Inprogress = "inprogress"
+)
+
+// UnmarshalInstanceConfigStatusResponse unmarshals an instance of InstanceConfigStatusResponse from the specified map of raw messages.
+func UnmarshalInstanceConfigStatusResponse(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(InstanceConfigStatusResponse)
+	err = core.UnmarshalPrimitive(m, "action", &obj.Action)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "action-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "errors", &obj.Errors)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "errors-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "message", &obj.Message)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "message-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "status", &obj.Status)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "status-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "last_updated", &obj.LastUpdated)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "last_updated-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "triggered_time", &obj.TriggeredTime)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "triggered_time-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
