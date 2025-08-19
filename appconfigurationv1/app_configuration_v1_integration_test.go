@@ -1346,7 +1346,6 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 				Tags: core.StringPtr("testString"),
 				SegmentRules: []appconfigurationv1.FeatureSegmentRule{*featureSegmentRuleModel},
 				Collections: []appconfigurationv1.CollectionRef{*collectionRefModel},
-				IsOverridden: core.BoolPtr(true),
 			}
 
 			segmentRuleModel := &appconfigurationv1.SegmentRule{
@@ -1365,7 +1364,6 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 				Tags: core.StringPtr("pre-release, v1.2"),
 				SegmentRules: []appconfigurationv1.SegmentRule{*segmentRuleModel},
 				Collections: []appconfigurationv1.CollectionRef{*collectionRefModel},
-				IsOverridden: core.BoolPtr(true),
 			}
 
 			importEnvironmentSchemaModel := &appconfigurationv1.ImportEnvironmentSchema{
@@ -1406,10 +1404,10 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 				Clean: core.StringPtr("true"),
 			}
 
-			importConfig, response, err := appConfigurationService.ImportConfig(importConfigOptions)
+			instanceConfigAcceptedResponse, response, err := appConfigurationService.ImportConfig(importConfigOptions)
 			Expect(err).To(BeNil())
-			Expect(response.StatusCode).To(Equal(201))
-			Expect(importConfig).ToNot(BeNil())
+			Expect(response.StatusCode).To(Equal(202))
+			Expect(instanceConfigAcceptedResponse).ToNot(BeNil())
 		})
 	})
 
@@ -1442,6 +1440,23 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(200))
 			Expect(configAction).ToNot(BeNil())
+		})
+	})
+
+	Describe(`InstanceConfigStatus - Get status of instance configuration import / export`, func() {
+		BeforeEach(func() {
+			shouldSkipTest()
+		})
+		It(`InstanceConfigStatus(instanceConfigStatusOptions *InstanceConfigStatusOptions)`, func() {
+			instanceConfigStatusOptions := &appconfigurationv1.InstanceConfigStatusOptions{
+				ReferenceID: core.StringPtr("testString"),
+				Action: core.StringPtr("import"),
+			}
+
+			instanceConfigStatusResponse, response, err := appConfigurationService.InstanceConfigStatus(instanceConfigStatusOptions)
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(200))
+			Expect(instanceConfigStatusResponse).ToNot(BeNil())
 		})
 	})
 
