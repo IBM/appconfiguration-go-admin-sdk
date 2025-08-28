@@ -10181,7 +10181,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"environments": [{"name": "Name", "environment_id": "EnvironmentID", "description": "Description", "tags": "Tags", "color_code": "#FDD13A", "features": [{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100, "rule_id": "RuleID"}], "collections": [{"collection_id": "CollectionID", "name": "Name"}], "isOverridden": true}], "properties": [{"name": "Name", "property_id": "PropertyID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "value": "anyValue", "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5}], "collections": [{"collection_id": "CollectionID", "name": "Name"}], "isOverridden": true}]}], "segments": [{"name": "Name", "segment_id": "SegmentID", "description": "Description", "tags": "Tags", "rules": [{"attribute_name": "AttributeName", "operator": "is", "values": ["Values"]}]}]}`)
+					fmt.Fprintf(res, "%s", `{"environments": [{"name": "Name", "environment_id": "EnvironmentID", "description": "Description", "tags": "Tags", "color_code": "#FDD13A", "features": [{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100, "rule_id": "RuleID"}], "collections": [{"collection_id": "CollectionID", "name": "Name"}]}], "properties": [{"name": "Name", "property_id": "PropertyID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "value": "anyValue", "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5}], "collections": [{"collection_id": "CollectionID", "name": "Name"}]}]}], "segments": [{"name": "Name", "segment_id": "SegmentID", "description": "Description", "tags": "Tags", "rules": [{"attribute_name": "AttributeName", "operator": "is", "values": ["Values"]}]}]}`)
 				}))
 			})
 			It(`Invoke RestoreGitconfig successfully with retries`, func() {
@@ -10235,7 +10235,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"environments": [{"name": "Name", "environment_id": "EnvironmentID", "description": "Description", "tags": "Tags", "color_code": "#FDD13A", "features": [{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100, "rule_id": "RuleID"}], "collections": [{"collection_id": "CollectionID", "name": "Name"}], "isOverridden": true}], "properties": [{"name": "Name", "property_id": "PropertyID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "value": "anyValue", "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5}], "collections": [{"collection_id": "CollectionID", "name": "Name"}], "isOverridden": true}]}], "segments": [{"name": "Name", "segment_id": "SegmentID", "description": "Description", "tags": "Tags", "rules": [{"attribute_name": "AttributeName", "operator": "is", "values": ["Values"]}]}]}`)
+					fmt.Fprintf(res, "%s", `{"environments": [{"name": "Name", "environment_id": "EnvironmentID", "description": "Description", "tags": "Tags", "color_code": "#FDD13A", "features": [{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100, "rule_id": "RuleID"}], "collections": [{"collection_id": "CollectionID", "name": "Name"}]}], "properties": [{"name": "Name", "property_id": "PropertyID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "value": "anyValue", "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5}], "collections": [{"collection_id": "CollectionID", "name": "Name"}]}]}], "segments": [{"name": "Name", "segment_id": "SegmentID", "description": "Description", "tags": "Tags", "rules": [{"attribute_name": "AttributeName", "operator": "is", "values": ["Values"]}]}]}`)
 				}))
 			})
 			It(`Invoke RestoreGitconfig successfully`, func() {
@@ -10325,6 +10325,910 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Verify a nil result
 				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`ListIntegrations(listIntegrationsOptions *ListIntegrationsOptions) - Operation response error`, func() {
+		listIntegrationsPath := "/integrations"
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(listIntegrationsPath))
+					Expect(req.Method).To(Equal("GET"))
+					// TODO: Add check for expand query parameter
+					Expect(req.URL.Query()["limit"]).To(Equal([]string{fmt.Sprint(int64(10))}))
+					Expect(req.URL.Query()["offset"]).To(Equal([]string{fmt.Sprint(int64(0))}))
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprint(res, `} this is not valid json {`)
+				}))
+			})
+			It(`Invoke ListIntegrations with error: Operation response processing error`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the ListIntegrationsOptions model
+				listIntegrationsOptionsModel := new(appconfigurationv1.ListIntegrationsOptions)
+				listIntegrationsOptionsModel.Expand = core.BoolPtr(true)
+				listIntegrationsOptionsModel.Limit = core.Int64Ptr(int64(10))
+				listIntegrationsOptionsModel.Offset = core.Int64Ptr(int64(0))
+				listIntegrationsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Expect response parsing to fail since we are receiving a text/plain response
+				result, response, operationErr := appConfigurationService.ListIntegrations(listIntegrationsOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				appConfigurationService.EnableRetries(0, 0)
+				result, response, operationErr = appConfigurationService.ListIntegrations(listIntegrationsOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`ListIntegrations(listIntegrationsOptions *ListIntegrationsOptions)`, func() {
+		listIntegrationsPath := "/integrations"
+		Context(`Using mock server endpoint with timeout`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(listIntegrationsPath))
+					Expect(req.Method).To(Equal("GET"))
+
+					// TODO: Add check for expand query parameter
+					Expect(req.URL.Query()["limit"]).To(Equal([]string{fmt.Sprint(int64(10))}))
+					Expect(req.URL.Query()["offset"]).To(Equal([]string{fmt.Sprint(int64(0))}))
+					// Sleep a short time to support a timeout test
+					time.Sleep(100 * time.Millisecond)
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"integrations": [{"integration_id": "IntegrationID", "integration_type": "IntegrationType", "metadata": {"event_notifications_source_id": "EventNotificationsSourceID", "event_notifications_endpoint": "EventNotificationsEndpoint", "event_notifications_instance_crn": "EventNotificationsInstanceCrn"}, "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "href": "Href"}], "limit": 10, "offset": 0, "total_count": 0, "first": {"href": "Href"}, "previous": {"href": "Href"}, "next": {"href": "Href"}, "last": {"href": "Href"}}`)
+				}))
+			})
+			It(`Invoke ListIntegrations successfully with retries`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+				appConfigurationService.EnableRetries(0, 0)
+
+				// Construct an instance of the ListIntegrationsOptions model
+				listIntegrationsOptionsModel := new(appconfigurationv1.ListIntegrationsOptions)
+				listIntegrationsOptionsModel.Expand = core.BoolPtr(true)
+				listIntegrationsOptionsModel.Limit = core.Int64Ptr(int64(10))
+				listIntegrationsOptionsModel.Offset = core.Int64Ptr(int64(0))
+				listIntegrationsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with a Context to test a timeout error
+				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc()
+				_, _, operationErr := appConfigurationService.ListIntegrationsWithContext(ctx, listIntegrationsOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+
+				// Disable retries and test again
+				appConfigurationService.DisableRetries()
+				result, response, operationErr := appConfigurationService.ListIntegrations(listIntegrationsOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				_, _, operationErr = appConfigurationService.ListIntegrationsWithContext(ctx, listIntegrationsOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(listIntegrationsPath))
+					Expect(req.Method).To(Equal("GET"))
+
+					// TODO: Add check for expand query parameter
+					Expect(req.URL.Query()["limit"]).To(Equal([]string{fmt.Sprint(int64(10))}))
+					Expect(req.URL.Query()["offset"]).To(Equal([]string{fmt.Sprint(int64(0))}))
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"integrations": [{"integration_id": "IntegrationID", "integration_type": "IntegrationType", "metadata": {"event_notifications_source_id": "EventNotificationsSourceID", "event_notifications_endpoint": "EventNotificationsEndpoint", "event_notifications_instance_crn": "EventNotificationsInstanceCrn"}, "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "href": "Href"}], "limit": 10, "offset": 0, "total_count": 0, "first": {"href": "Href"}, "previous": {"href": "Href"}, "next": {"href": "Href"}, "last": {"href": "Href"}}`)
+				}))
+			})
+			It(`Invoke ListIntegrations successfully`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Invoke operation with nil options model (negative test)
+				result, response, operationErr := appConfigurationService.ListIntegrations(nil)
+				Expect(operationErr).NotTo(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+
+				// Construct an instance of the ListIntegrationsOptions model
+				listIntegrationsOptionsModel := new(appconfigurationv1.ListIntegrationsOptions)
+				listIntegrationsOptionsModel.Expand = core.BoolPtr(true)
+				listIntegrationsOptionsModel.Limit = core.Int64Ptr(int64(10))
+				listIntegrationsOptionsModel.Offset = core.Int64Ptr(int64(0))
+				listIntegrationsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with valid options model (positive test)
+				result, response, operationErr = appConfigurationService.ListIntegrations(listIntegrationsOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+			})
+			It(`Invoke ListIntegrations with error: Operation request error`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the ListIntegrationsOptions model
+				listIntegrationsOptionsModel := new(appconfigurationv1.ListIntegrationsOptions)
+				listIntegrationsOptionsModel.Expand = core.BoolPtr(true)
+				listIntegrationsOptionsModel.Limit = core.Int64Ptr(int64(10))
+				listIntegrationsOptionsModel.Offset = core.Int64Ptr(int64(0))
+				listIntegrationsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Invoke operation with empty URL (negative test)
+				err := appConfigurationService.SetServiceURL("")
+				Expect(err).To(BeNil())
+				result, response, operationErr := appConfigurationService.ListIntegrations(listIntegrationsOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke ListIntegrations successfully`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the ListIntegrationsOptions model
+				listIntegrationsOptionsModel := new(appconfigurationv1.ListIntegrationsOptions)
+				listIntegrationsOptionsModel.Expand = core.BoolPtr(true)
+				listIntegrationsOptionsModel.Limit = core.Int64Ptr(int64(10))
+				listIntegrationsOptionsModel.Offset = core.Int64Ptr(int64(0))
+				listIntegrationsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := appConfigurationService.ListIntegrations(listIntegrationsOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Test pagination helper method on response`, func() {
+			It(`Invoke GetNextOffset successfully`, func() {
+				responseObject := new(appconfigurationv1.IntegrationList)
+				nextObject := new(appconfigurationv1.PaginatedListNext)
+				nextObject.Href = core.StringPtr("ibm.com?offset=135")
+				responseObject.Next = nextObject
+
+				value, err := responseObject.GetNextOffset()
+				Expect(err).To(BeNil())
+				Expect(value).To(Equal(core.Int64Ptr(int64(135))))
+			})
+			It(`Invoke GetNextOffset without a "Next" property in the response`, func() {
+				responseObject := new(appconfigurationv1.IntegrationList)
+
+				value, err := responseObject.GetNextOffset()
+				Expect(err).To(BeNil())
+				Expect(value).To(BeNil())
+			})
+			It(`Invoke GetNextOffset without any query params in the "Next" URL`, func() {
+				responseObject := new(appconfigurationv1.IntegrationList)
+				nextObject := new(appconfigurationv1.PaginatedListNext)
+				nextObject.Href = core.StringPtr("ibm.com")
+				responseObject.Next = nextObject
+
+				value, err := responseObject.GetNextOffset()
+				Expect(err).To(BeNil())
+				Expect(value).To(BeNil())
+			})
+			It(`Invoke GetNextOffset with a non-integer query param in the "Next" URL`, func() {
+				responseObject := new(appconfigurationv1.IntegrationList)
+				nextObject := new(appconfigurationv1.PaginatedListNext)
+				nextObject.Href = core.StringPtr("ibm.com?offset=tiger")
+				responseObject.Next = nextObject
+
+				value, err := responseObject.GetNextOffset()
+				Expect(err).NotTo(BeNil())
+				Expect(value).To(BeNil())
+			})
+		})
+		Context(`Using mock server endpoint - paginated response`, func() {
+			BeforeEach(func() {
+				var requestNumber int = 0
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(listIntegrationsPath))
+					Expect(req.Method).To(Equal("GET"))
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					requestNumber++
+					if requestNumber == 1 {
+						fmt.Fprintf(res, "%s", `{"next":{"href":"https://myhost.com/somePath?offset=1"},"total_count":2,"limit":1,"integrations":[{"integration_id":"IntegrationID","integration_type":"IntegrationType","metadata":{"event_notifications_source_id":"EventNotificationsSourceID","event_notifications_endpoint":"EventNotificationsEndpoint","event_notifications_instance_crn":"EventNotificationsInstanceCrn"},"created_time":"2021-05-12T23:20:50.520Z","updated_time":"2021-05-12T23:20:50.520Z","href":"Href"}]}`)
+					} else if requestNumber == 2 {
+						fmt.Fprintf(res, "%s", `{"total_count":2,"limit":1,"integrations":[{"integration_id":"IntegrationID","integration_type":"IntegrationType","metadata":{"event_notifications_source_id":"EventNotificationsSourceID","event_notifications_endpoint":"EventNotificationsEndpoint","event_notifications_instance_crn":"EventNotificationsInstanceCrn"},"created_time":"2021-05-12T23:20:50.520Z","updated_time":"2021-05-12T23:20:50.520Z","href":"Href"}]}`)
+					} else {
+						res.WriteHeader(400)
+					}
+				}))
+			})
+			It(`Use IntegrationsPager.GetNext successfully`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				listIntegrationsOptionsModel := &appconfigurationv1.ListIntegrationsOptions{
+					Expand: core.BoolPtr(true),
+					Limit: core.Int64Ptr(int64(10)),
+				}
+
+				pager, err := appConfigurationService.NewIntegrationsPager(listIntegrationsOptionsModel)
+				Expect(err).To(BeNil())
+				Expect(pager).ToNot(BeNil())
+
+				var allResults []appconfigurationv1.Integration
+				for pager.HasNext() {
+					nextPage, err := pager.GetNext()
+					Expect(err).To(BeNil())
+					Expect(nextPage).ToNot(BeNil())
+					allResults = append(allResults, nextPage...)
+				}
+				Expect(len(allResults)).To(Equal(2))
+			})
+			It(`Use IntegrationsPager.GetAll successfully`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				listIntegrationsOptionsModel := &appconfigurationv1.ListIntegrationsOptions{
+					Expand: core.BoolPtr(true),
+					Limit: core.Int64Ptr(int64(10)),
+				}
+
+				pager, err := appConfigurationService.NewIntegrationsPager(listIntegrationsOptionsModel)
+				Expect(err).To(BeNil())
+				Expect(pager).ToNot(BeNil())
+
+				allResults, err := pager.GetAll()
+				Expect(err).To(BeNil())
+				Expect(allResults).ToNot(BeNil())
+				Expect(len(allResults)).To(Equal(2))
+			})
+		})
+	})
+	Describe(`CreateIntegration(createIntegrationOptions *CreateIntegrationOptions) - Operation response error`, func() {
+		createIntegrationPath := "/integrations"
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(createIntegrationPath))
+					Expect(req.Method).To(Equal("POST"))
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(201)
+					fmt.Fprint(res, `} this is not valid json {`)
+				}))
+			})
+			It(`Invoke CreateIntegration with error: Operation response processing error`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the CreateIntegrationMetadataCreateEnIntegrationMetadata model
+				createIntegrationMetadataModel := new(appconfigurationv1.CreateIntegrationMetadataCreateEnIntegrationMetadata)
+				createIntegrationMetadataModel.EventNotificationsInstanceCrn = core.StringPtr("crn:v1:bluemix:public:event-notifications:eu-gb:a/4f631ea3b3204b2b878a295604994acf:0eb42def-21aa-4f0a-a975-0812ead6ceee::")
+				createIntegrationMetadataModel.EventNotificationsEndpoint = core.StringPtr("https://eu-gb.event-notifications.cloud.ibm.com")
+				createIntegrationMetadataModel.EventNotificationsSourceName = core.StringPtr("My App Config")
+				createIntegrationMetadataModel.EventNotificationsSourceDescription = core.StringPtr("All the events from App Configuration instance")
+
+				// Construct an instance of the CreateIntegrationOptions model
+				createIntegrationOptionsModel := new(appconfigurationv1.CreateIntegrationOptions)
+				createIntegrationOptionsModel.IntegrationID = core.StringPtr("lckkhp34t")
+				createIntegrationOptionsModel.IntegrationType = core.StringPtr("EVENT_NOTIFICATIONS")
+				createIntegrationOptionsModel.Metadata = createIntegrationMetadataModel
+				createIntegrationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Expect response parsing to fail since we are receiving a text/plain response
+				result, response, operationErr := appConfigurationService.CreateIntegration(createIntegrationOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				appConfigurationService.EnableRetries(0, 0)
+				result, response, operationErr = appConfigurationService.CreateIntegration(createIntegrationOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`CreateIntegration(createIntegrationOptions *CreateIntegrationOptions)`, func() {
+		createIntegrationPath := "/integrations"
+		Context(`Using mock server endpoint with timeout`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(createIntegrationPath))
+					Expect(req.Method).To(Equal("POST"))
+
+					// For gzip-disabled operation, verify Content-Encoding is not set.
+					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+
+					// If there is a body, then make sure we can read it
+					bodyBuf := new(bytes.Buffer)
+					if req.Header.Get("Content-Encoding") == "gzip" {
+						body, err := core.NewGzipDecompressionReader(req.Body)
+						Expect(err).To(BeNil())
+						_, err = bodyBuf.ReadFrom(body)
+						Expect(err).To(BeNil())
+					} else {
+						_, err := bodyBuf.ReadFrom(req.Body)
+						Expect(err).To(BeNil())
+					}
+					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
+
+					// Sleep a short time to support a timeout test
+					time.Sleep(100 * time.Millisecond)
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(201)
+					fmt.Fprintf(res, "%s", `{"integration_id": "IntegrationID", "integration_type": "IntegrationType", "metadata": {"event_notifications_source_id": "EventNotificationsSourceID", "event_notifications_endpoint": "EventNotificationsEndpoint", "event_notifications_instance_crn": "EventNotificationsInstanceCrn"}, "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "href": "Href"}`)
+				}))
+			})
+			It(`Invoke CreateIntegration successfully with retries`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+				appConfigurationService.EnableRetries(0, 0)
+
+				// Construct an instance of the CreateIntegrationMetadataCreateEnIntegrationMetadata model
+				createIntegrationMetadataModel := new(appconfigurationv1.CreateIntegrationMetadataCreateEnIntegrationMetadata)
+				createIntegrationMetadataModel.EventNotificationsInstanceCrn = core.StringPtr("crn:v1:bluemix:public:event-notifications:eu-gb:a/4f631ea3b3204b2b878a295604994acf:0eb42def-21aa-4f0a-a975-0812ead6ceee::")
+				createIntegrationMetadataModel.EventNotificationsEndpoint = core.StringPtr("https://eu-gb.event-notifications.cloud.ibm.com")
+				createIntegrationMetadataModel.EventNotificationsSourceName = core.StringPtr("My App Config")
+				createIntegrationMetadataModel.EventNotificationsSourceDescription = core.StringPtr("All the events from App Configuration instance")
+
+				// Construct an instance of the CreateIntegrationOptions model
+				createIntegrationOptionsModel := new(appconfigurationv1.CreateIntegrationOptions)
+				createIntegrationOptionsModel.IntegrationID = core.StringPtr("lckkhp34t")
+				createIntegrationOptionsModel.IntegrationType = core.StringPtr("EVENT_NOTIFICATIONS")
+				createIntegrationOptionsModel.Metadata = createIntegrationMetadataModel
+				createIntegrationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with a Context to test a timeout error
+				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc()
+				_, _, operationErr := appConfigurationService.CreateIntegrationWithContext(ctx, createIntegrationOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+
+				// Disable retries and test again
+				appConfigurationService.DisableRetries()
+				result, response, operationErr := appConfigurationService.CreateIntegration(createIntegrationOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				_, _, operationErr = appConfigurationService.CreateIntegrationWithContext(ctx, createIntegrationOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(createIntegrationPath))
+					Expect(req.Method).To(Equal("POST"))
+
+					// For gzip-disabled operation, verify Content-Encoding is not set.
+					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+
+					// If there is a body, then make sure we can read it
+					bodyBuf := new(bytes.Buffer)
+					if req.Header.Get("Content-Encoding") == "gzip" {
+						body, err := core.NewGzipDecompressionReader(req.Body)
+						Expect(err).To(BeNil())
+						_, err = bodyBuf.ReadFrom(body)
+						Expect(err).To(BeNil())
+					} else {
+						_, err := bodyBuf.ReadFrom(req.Body)
+						Expect(err).To(BeNil())
+					}
+					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(201)
+					fmt.Fprintf(res, "%s", `{"integration_id": "IntegrationID", "integration_type": "IntegrationType", "metadata": {"event_notifications_source_id": "EventNotificationsSourceID", "event_notifications_endpoint": "EventNotificationsEndpoint", "event_notifications_instance_crn": "EventNotificationsInstanceCrn"}, "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "href": "Href"}`)
+				}))
+			})
+			It(`Invoke CreateIntegration successfully`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Invoke operation with nil options model (negative test)
+				result, response, operationErr := appConfigurationService.CreateIntegration(nil)
+				Expect(operationErr).NotTo(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+
+				// Construct an instance of the CreateIntegrationMetadataCreateEnIntegrationMetadata model
+				createIntegrationMetadataModel := new(appconfigurationv1.CreateIntegrationMetadataCreateEnIntegrationMetadata)
+				createIntegrationMetadataModel.EventNotificationsInstanceCrn = core.StringPtr("crn:v1:bluemix:public:event-notifications:eu-gb:a/4f631ea3b3204b2b878a295604994acf:0eb42def-21aa-4f0a-a975-0812ead6ceee::")
+				createIntegrationMetadataModel.EventNotificationsEndpoint = core.StringPtr("https://eu-gb.event-notifications.cloud.ibm.com")
+				createIntegrationMetadataModel.EventNotificationsSourceName = core.StringPtr("My App Config")
+				createIntegrationMetadataModel.EventNotificationsSourceDescription = core.StringPtr("All the events from App Configuration instance")
+
+				// Construct an instance of the CreateIntegrationOptions model
+				createIntegrationOptionsModel := new(appconfigurationv1.CreateIntegrationOptions)
+				createIntegrationOptionsModel.IntegrationID = core.StringPtr("lckkhp34t")
+				createIntegrationOptionsModel.IntegrationType = core.StringPtr("EVENT_NOTIFICATIONS")
+				createIntegrationOptionsModel.Metadata = createIntegrationMetadataModel
+				createIntegrationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with valid options model (positive test)
+				result, response, operationErr = appConfigurationService.CreateIntegration(createIntegrationOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+			})
+			It(`Invoke CreateIntegration with error: Operation validation and request error`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the CreateIntegrationMetadataCreateEnIntegrationMetadata model
+				createIntegrationMetadataModel := new(appconfigurationv1.CreateIntegrationMetadataCreateEnIntegrationMetadata)
+				createIntegrationMetadataModel.EventNotificationsInstanceCrn = core.StringPtr("crn:v1:bluemix:public:event-notifications:eu-gb:a/4f631ea3b3204b2b878a295604994acf:0eb42def-21aa-4f0a-a975-0812ead6ceee::")
+				createIntegrationMetadataModel.EventNotificationsEndpoint = core.StringPtr("https://eu-gb.event-notifications.cloud.ibm.com")
+				createIntegrationMetadataModel.EventNotificationsSourceName = core.StringPtr("My App Config")
+				createIntegrationMetadataModel.EventNotificationsSourceDescription = core.StringPtr("All the events from App Configuration instance")
+
+				// Construct an instance of the CreateIntegrationOptions model
+				createIntegrationOptionsModel := new(appconfigurationv1.CreateIntegrationOptions)
+				createIntegrationOptionsModel.IntegrationID = core.StringPtr("lckkhp34t")
+				createIntegrationOptionsModel.IntegrationType = core.StringPtr("EVENT_NOTIFICATIONS")
+				createIntegrationOptionsModel.Metadata = createIntegrationMetadataModel
+				createIntegrationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Invoke operation with empty URL (negative test)
+				err := appConfigurationService.SetServiceURL("")
+				Expect(err).To(BeNil())
+				result, response, operationErr := appConfigurationService.CreateIntegration(createIntegrationOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+				// Construct a second instance of the CreateIntegrationOptions model with no property values
+				createIntegrationOptionsModelNew := new(appconfigurationv1.CreateIntegrationOptions)
+				// Invoke operation with invalid model (negative test)
+				result, response, operationErr = appConfigurationService.CreateIntegration(createIntegrationOptionsModelNew)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(201)
+				}))
+			})
+			It(`Invoke CreateIntegration successfully`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the CreateIntegrationMetadataCreateEnIntegrationMetadata model
+				createIntegrationMetadataModel := new(appconfigurationv1.CreateIntegrationMetadataCreateEnIntegrationMetadata)
+				createIntegrationMetadataModel.EventNotificationsInstanceCrn = core.StringPtr("crn:v1:bluemix:public:event-notifications:eu-gb:a/4f631ea3b3204b2b878a295604994acf:0eb42def-21aa-4f0a-a975-0812ead6ceee::")
+				createIntegrationMetadataModel.EventNotificationsEndpoint = core.StringPtr("https://eu-gb.event-notifications.cloud.ibm.com")
+				createIntegrationMetadataModel.EventNotificationsSourceName = core.StringPtr("My App Config")
+				createIntegrationMetadataModel.EventNotificationsSourceDescription = core.StringPtr("All the events from App Configuration instance")
+
+				// Construct an instance of the CreateIntegrationOptions model
+				createIntegrationOptionsModel := new(appconfigurationv1.CreateIntegrationOptions)
+				createIntegrationOptionsModel.IntegrationID = core.StringPtr("lckkhp34t")
+				createIntegrationOptionsModel.IntegrationType = core.StringPtr("EVENT_NOTIFICATIONS")
+				createIntegrationOptionsModel.Metadata = createIntegrationMetadataModel
+				createIntegrationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := appConfigurationService.CreateIntegration(createIntegrationOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`GetIntegration(getIntegrationOptions *GetIntegrationOptions) - Operation response error`, func() {
+		getIntegrationPath := "/integrations/integration_id"
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(getIntegrationPath))
+					Expect(req.Method).To(Equal("GET"))
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprint(res, `} this is not valid json {`)
+				}))
+			})
+			It(`Invoke GetIntegration with error: Operation response processing error`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the GetIntegrationOptions model
+				getIntegrationOptionsModel := new(appconfigurationv1.GetIntegrationOptions)
+				getIntegrationOptionsModel.IntegrationID = core.StringPtr("integration_id")
+				getIntegrationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Expect response parsing to fail since we are receiving a text/plain response
+				result, response, operationErr := appConfigurationService.GetIntegration(getIntegrationOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				appConfigurationService.EnableRetries(0, 0)
+				result, response, operationErr = appConfigurationService.GetIntegration(getIntegrationOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`GetIntegration(getIntegrationOptions *GetIntegrationOptions)`, func() {
+		getIntegrationPath := "/integrations/integration_id"
+		Context(`Using mock server endpoint with timeout`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(getIntegrationPath))
+					Expect(req.Method).To(Equal("GET"))
+
+					// Sleep a short time to support a timeout test
+					time.Sleep(100 * time.Millisecond)
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"integration_id": "IntegrationID", "integration_type": "IntegrationType", "metadata": {"event_notifications_source_id": "EventNotificationsSourceID", "event_notifications_endpoint": "EventNotificationsEndpoint", "event_notifications_instance_crn": "EventNotificationsInstanceCrn"}, "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "href": "Href"}`)
+				}))
+			})
+			It(`Invoke GetIntegration successfully with retries`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+				appConfigurationService.EnableRetries(0, 0)
+
+				// Construct an instance of the GetIntegrationOptions model
+				getIntegrationOptionsModel := new(appconfigurationv1.GetIntegrationOptions)
+				getIntegrationOptionsModel.IntegrationID = core.StringPtr("integration_id")
+				getIntegrationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with a Context to test a timeout error
+				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc()
+				_, _, operationErr := appConfigurationService.GetIntegrationWithContext(ctx, getIntegrationOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+
+				// Disable retries and test again
+				appConfigurationService.DisableRetries()
+				result, response, operationErr := appConfigurationService.GetIntegration(getIntegrationOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				_, _, operationErr = appConfigurationService.GetIntegrationWithContext(ctx, getIntegrationOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(getIntegrationPath))
+					Expect(req.Method).To(Equal("GET"))
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"integration_id": "IntegrationID", "integration_type": "IntegrationType", "metadata": {"event_notifications_source_id": "EventNotificationsSourceID", "event_notifications_endpoint": "EventNotificationsEndpoint", "event_notifications_instance_crn": "EventNotificationsInstanceCrn"}, "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "href": "Href"}`)
+				}))
+			})
+			It(`Invoke GetIntegration successfully`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Invoke operation with nil options model (negative test)
+				result, response, operationErr := appConfigurationService.GetIntegration(nil)
+				Expect(operationErr).NotTo(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+
+				// Construct an instance of the GetIntegrationOptions model
+				getIntegrationOptionsModel := new(appconfigurationv1.GetIntegrationOptions)
+				getIntegrationOptionsModel.IntegrationID = core.StringPtr("integration_id")
+				getIntegrationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with valid options model (positive test)
+				result, response, operationErr = appConfigurationService.GetIntegration(getIntegrationOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+			})
+			It(`Invoke GetIntegration with error: Operation validation and request error`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the GetIntegrationOptions model
+				getIntegrationOptionsModel := new(appconfigurationv1.GetIntegrationOptions)
+				getIntegrationOptionsModel.IntegrationID = core.StringPtr("integration_id")
+				getIntegrationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Invoke operation with empty URL (negative test)
+				err := appConfigurationService.SetServiceURL("")
+				Expect(err).To(BeNil())
+				result, response, operationErr := appConfigurationService.GetIntegration(getIntegrationOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+				// Construct a second instance of the GetIntegrationOptions model with no property values
+				getIntegrationOptionsModelNew := new(appconfigurationv1.GetIntegrationOptions)
+				// Invoke operation with invalid model (negative test)
+				result, response, operationErr = appConfigurationService.GetIntegration(getIntegrationOptionsModelNew)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke GetIntegration successfully`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the GetIntegrationOptions model
+				getIntegrationOptionsModel := new(appconfigurationv1.GetIntegrationOptions)
+				getIntegrationOptionsModel.IntegrationID = core.StringPtr("integration_id")
+				getIntegrationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := appConfigurationService.GetIntegration(getIntegrationOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`DeleteIntegration(deleteIntegrationOptions *DeleteIntegrationOptions)`, func() {
+		deleteIntegrationPath := "/integrations/integration_id"
+		Context(`Using mock server endpoint`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(deleteIntegrationPath))
+					Expect(req.Method).To(Equal("DELETE"))
+
+					res.WriteHeader(204)
+				}))
+			})
+			It(`Invoke DeleteIntegration successfully`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Invoke operation with nil options model (negative test)
+				response, operationErr := appConfigurationService.DeleteIntegration(nil)
+				Expect(operationErr).NotTo(BeNil())
+				Expect(response).To(BeNil())
+
+				// Construct an instance of the DeleteIntegrationOptions model
+				deleteIntegrationOptionsModel := new(appconfigurationv1.DeleteIntegrationOptions)
+				deleteIntegrationOptionsModel.IntegrationID = core.StringPtr("integration_id")
+				deleteIntegrationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with valid options model (positive test)
+				response, operationErr = appConfigurationService.DeleteIntegration(deleteIntegrationOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+			})
+			It(`Invoke DeleteIntegration with error: Operation validation and request error`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the DeleteIntegrationOptions model
+				deleteIntegrationOptionsModel := new(appconfigurationv1.DeleteIntegrationOptions)
+				deleteIntegrationOptionsModel.IntegrationID = core.StringPtr("integration_id")
+				deleteIntegrationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Invoke operation with empty URL (negative test)
+				err := appConfigurationService.SetServiceURL("")
+				Expect(err).To(BeNil())
+				response, operationErr := appConfigurationService.DeleteIntegration(deleteIntegrationOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
+				Expect(response).To(BeNil())
+				// Construct a second instance of the DeleteIntegrationOptions model with no property values
+				deleteIntegrationOptionsModelNew := new(appconfigurationv1.DeleteIntegrationOptions)
+				// Invoke operation with invalid model (negative test)
+				response, operationErr = appConfigurationService.DeleteIntegration(deleteIntegrationOptionsModelNew)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).To(BeNil())
 			})
 			AfterEach(func() {
 				testServer.Close()
@@ -11715,7 +12619,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					Expect(req.Method).To(Equal("POST"))
 					Expect(req.URL.Query()["clean"]).To(Equal([]string{"true"}))
 					res.Header().Set("Content-type", "application/json")
-					res.WriteHeader(201)
+					res.WriteHeader(202)
 					fmt.Fprint(res, `} this is not valid json {`)
 				}))
 			})
@@ -11757,7 +12661,6 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				importFeatureRequestBodyModel.Tags = core.StringPtr("testString")
 				importFeatureRequestBodyModel.SegmentRules = []appconfigurationv1.FeatureSegmentRule{*featureSegmentRuleModel}
 				importFeatureRequestBodyModel.Collections = []appconfigurationv1.CollectionRef{*collectionRefModel}
-				importFeatureRequestBodyModel.IsOverridden = core.BoolPtr(true)
 
 				// Construct an instance of the SegmentRule model
 				segmentRuleModel := new(appconfigurationv1.SegmentRule)
@@ -11776,7 +12679,6 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				importPropertyRequestBodyModel.Tags = core.StringPtr("pre-release, v1.2")
 				importPropertyRequestBodyModel.SegmentRules = []appconfigurationv1.SegmentRule{*segmentRuleModel}
 				importPropertyRequestBodyModel.Collections = []appconfigurationv1.CollectionRef{*collectionRefModel}
-				importPropertyRequestBodyModel.IsOverridden = core.BoolPtr(true)
 
 				// Construct an instance of the ImportEnvironmentSchema model
 				importEnvironmentSchemaModel := new(appconfigurationv1.ImportEnvironmentSchema)
@@ -11867,8 +12769,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
-					res.WriteHeader(201)
-					fmt.Fprintf(res, "%s", `{"environments": [{"name": "Name", "environment_id": "EnvironmentID", "description": "Description", "tags": "Tags", "color_code": "#FDD13A", "features": [{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100, "rule_id": "RuleID"}], "collections": [{"collection_id": "CollectionID", "name": "Name"}], "isOverridden": true}], "properties": [{"name": "Name", "property_id": "PropertyID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "value": "anyValue", "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5}], "collections": [{"collection_id": "CollectionID", "name": "Name"}], "isOverridden": true}]}], "collections": [{"collection_id": "CollectionID", "name": "Name", "description": "Description", "tags": "Tags"}], "segments": [{"name": "Name", "segment_id": "SegmentID", "description": "Description", "tags": "Tags", "rules": [{"attribute_name": "AttributeName", "operator": "is", "values": ["Values"]}]}]}`)
+					res.WriteHeader(202)
+					fmt.Fprintf(res, "%s", `{"message": "Message", "referenceId": "ReferenceID"}`)
 				}))
 			})
 			It(`Invoke ImportConfig successfully with retries`, func() {
@@ -11910,7 +12812,6 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				importFeatureRequestBodyModel.Tags = core.StringPtr("testString")
 				importFeatureRequestBodyModel.SegmentRules = []appconfigurationv1.FeatureSegmentRule{*featureSegmentRuleModel}
 				importFeatureRequestBodyModel.Collections = []appconfigurationv1.CollectionRef{*collectionRefModel}
-				importFeatureRequestBodyModel.IsOverridden = core.BoolPtr(true)
 
 				// Construct an instance of the SegmentRule model
 				segmentRuleModel := new(appconfigurationv1.SegmentRule)
@@ -11929,7 +12830,6 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				importPropertyRequestBodyModel.Tags = core.StringPtr("pre-release, v1.2")
 				importPropertyRequestBodyModel.SegmentRules = []appconfigurationv1.SegmentRule{*segmentRuleModel}
 				importPropertyRequestBodyModel.Collections = []appconfigurationv1.CollectionRef{*collectionRefModel}
-				importPropertyRequestBodyModel.IsOverridden = core.BoolPtr(true)
 
 				// Construct an instance of the ImportEnvironmentSchema model
 				importEnvironmentSchemaModel := new(appconfigurationv1.ImportEnvironmentSchema)
@@ -12023,8 +12923,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					Expect(req.URL.Query()["clean"]).To(Equal([]string{"true"}))
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
-					res.WriteHeader(201)
-					fmt.Fprintf(res, "%s", `{"environments": [{"name": "Name", "environment_id": "EnvironmentID", "description": "Description", "tags": "Tags", "color_code": "#FDD13A", "features": [{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100, "rule_id": "RuleID"}], "collections": [{"collection_id": "CollectionID", "name": "Name"}], "isOverridden": true}], "properties": [{"name": "Name", "property_id": "PropertyID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "value": "anyValue", "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5}], "collections": [{"collection_id": "CollectionID", "name": "Name"}], "isOverridden": true}]}], "collections": [{"collection_id": "CollectionID", "name": "Name", "description": "Description", "tags": "Tags"}], "segments": [{"name": "Name", "segment_id": "SegmentID", "description": "Description", "tags": "Tags", "rules": [{"attribute_name": "AttributeName", "operator": "is", "values": ["Values"]}]}]}`)
+					res.WriteHeader(202)
+					fmt.Fprintf(res, "%s", `{"message": "Message", "referenceId": "ReferenceID"}`)
 				}))
 			})
 			It(`Invoke ImportConfig successfully`, func() {
@@ -12071,7 +12971,6 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				importFeatureRequestBodyModel.Tags = core.StringPtr("testString")
 				importFeatureRequestBodyModel.SegmentRules = []appconfigurationv1.FeatureSegmentRule{*featureSegmentRuleModel}
 				importFeatureRequestBodyModel.Collections = []appconfigurationv1.CollectionRef{*collectionRefModel}
-				importFeatureRequestBodyModel.IsOverridden = core.BoolPtr(true)
 
 				// Construct an instance of the SegmentRule model
 				segmentRuleModel := new(appconfigurationv1.SegmentRule)
@@ -12090,7 +12989,6 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				importPropertyRequestBodyModel.Tags = core.StringPtr("pre-release, v1.2")
 				importPropertyRequestBodyModel.SegmentRules = []appconfigurationv1.SegmentRule{*segmentRuleModel}
 				importPropertyRequestBodyModel.Collections = []appconfigurationv1.CollectionRef{*collectionRefModel}
-				importPropertyRequestBodyModel.IsOverridden = core.BoolPtr(true)
 
 				// Construct an instance of the ImportEnvironmentSchema model
 				importEnvironmentSchemaModel := new(appconfigurationv1.ImportEnvironmentSchema)
@@ -12176,7 +13074,6 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				importFeatureRequestBodyModel.Tags = core.StringPtr("testString")
 				importFeatureRequestBodyModel.SegmentRules = []appconfigurationv1.FeatureSegmentRule{*featureSegmentRuleModel}
 				importFeatureRequestBodyModel.Collections = []appconfigurationv1.CollectionRef{*collectionRefModel}
-				importFeatureRequestBodyModel.IsOverridden = core.BoolPtr(true)
 
 				// Construct an instance of the SegmentRule model
 				segmentRuleModel := new(appconfigurationv1.SegmentRule)
@@ -12195,7 +13092,6 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				importPropertyRequestBodyModel.Tags = core.StringPtr("pre-release, v1.2")
 				importPropertyRequestBodyModel.SegmentRules = []appconfigurationv1.SegmentRule{*segmentRuleModel}
 				importPropertyRequestBodyModel.Collections = []appconfigurationv1.CollectionRef{*collectionRefModel}
-				importPropertyRequestBodyModel.IsOverridden = core.BoolPtr(true)
 
 				// Construct an instance of the ImportEnvironmentSchema model
 				importEnvironmentSchemaModel := new(appconfigurationv1.ImportEnvironmentSchema)
@@ -12254,7 +13150,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					defer GinkgoRecover()
 
 					// Set success status code with no respoonse body
-					res.WriteHeader(201)
+					res.WriteHeader(202)
 				}))
 			})
 			It(`Invoke ImportConfig successfully`, func() {
@@ -12295,7 +13191,6 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				importFeatureRequestBodyModel.Tags = core.StringPtr("testString")
 				importFeatureRequestBodyModel.SegmentRules = []appconfigurationv1.FeatureSegmentRule{*featureSegmentRuleModel}
 				importFeatureRequestBodyModel.Collections = []appconfigurationv1.CollectionRef{*collectionRefModel}
-				importFeatureRequestBodyModel.IsOverridden = core.BoolPtr(true)
 
 				// Construct an instance of the SegmentRule model
 				segmentRuleModel := new(appconfigurationv1.SegmentRule)
@@ -12314,7 +13209,6 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				importPropertyRequestBodyModel.Tags = core.StringPtr("pre-release, v1.2")
 				importPropertyRequestBodyModel.SegmentRules = []appconfigurationv1.SegmentRule{*segmentRuleModel}
 				importPropertyRequestBodyModel.Collections = []appconfigurationv1.CollectionRef{*collectionRefModel}
-				importPropertyRequestBodyModel.IsOverridden = core.BoolPtr(true)
 
 				// Construct an instance of the ImportEnvironmentSchema model
 				importEnvironmentSchemaModel := new(appconfigurationv1.ImportEnvironmentSchema)
@@ -12429,7 +13323,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"environments": [{"name": "Name", "environment_id": "EnvironmentID", "description": "Description", "tags": "Tags", "color_code": "#FDD13A", "features": [{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100, "rule_id": "RuleID"}], "collections": [{"collection_id": "CollectionID", "name": "Name"}], "isOverridden": true}], "properties": [{"name": "Name", "property_id": "PropertyID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "value": "anyValue", "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5}], "collections": [{"collection_id": "CollectionID", "name": "Name"}], "isOverridden": true}]}], "collections": [{"collection_id": "CollectionID", "name": "Name", "description": "Description", "tags": "Tags"}], "segments": [{"name": "Name", "segment_id": "SegmentID", "description": "Description", "tags": "Tags", "rules": [{"attribute_name": "AttributeName", "operator": "is", "values": ["Values"]}]}]}`)
+					fmt.Fprintf(res, "%s", `{"environments": [{"name": "Name", "environment_id": "EnvironmentID", "description": "Description", "tags": "Tags", "color_code": "#FDD13A", "features": [{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100, "rule_id": "RuleID"}], "collections": [{"collection_id": "CollectionID", "name": "Name"}]}], "properties": [{"name": "Name", "property_id": "PropertyID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "value": "anyValue", "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5}], "collections": [{"collection_id": "CollectionID", "name": "Name"}]}]}], "collections": [{"collection_id": "CollectionID", "name": "Name", "description": "Description", "tags": "Tags"}], "segments": [{"name": "Name", "segment_id": "SegmentID", "description": "Description", "tags": "Tags", "rules": [{"attribute_name": "AttributeName", "operator": "is", "values": ["Values"]}]}]}`)
 				}))
 			})
 			It(`Invoke ListInstanceConfig successfully with retries`, func() {
@@ -12482,7 +13376,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"environments": [{"name": "Name", "environment_id": "EnvironmentID", "description": "Description", "tags": "Tags", "color_code": "#FDD13A", "features": [{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100, "rule_id": "RuleID"}], "collections": [{"collection_id": "CollectionID", "name": "Name"}], "isOverridden": true}], "properties": [{"name": "Name", "property_id": "PropertyID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "value": "anyValue", "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5}], "collections": [{"collection_id": "CollectionID", "name": "Name"}], "isOverridden": true}]}], "collections": [{"collection_id": "CollectionID", "name": "Name", "description": "Description", "tags": "Tags"}], "segments": [{"name": "Name", "segment_id": "SegmentID", "description": "Description", "tags": "Tags", "rules": [{"attribute_name": "AttributeName", "operator": "is", "values": ["Values"]}]}]}`)
+					fmt.Fprintf(res, "%s", `{"environments": [{"name": "Name", "environment_id": "EnvironmentID", "description": "Description", "tags": "Tags", "color_code": "#FDD13A", "features": [{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100, "rule_id": "RuleID"}], "collections": [{"collection_id": "CollectionID", "name": "Name"}]}], "properties": [{"name": "Name", "property_id": "PropertyID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "value": "anyValue", "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5}], "collections": [{"collection_id": "CollectionID", "name": "Name"}]}]}], "collections": [{"collection_id": "CollectionID", "name": "Name", "description": "Description", "tags": "Tags"}], "segments": [{"name": "Name", "segment_id": "SegmentID", "description": "Description", "tags": "Tags", "rules": [{"attribute_name": "AttributeName", "operator": "is", "values": ["Values"]}]}]}`)
 				}))
 			})
 			It(`Invoke ListInstanceConfig successfully`, func() {
@@ -12791,6 +13685,226 @@ var _ = Describe(`AppConfigurationV1`, func() {
 			})
 		})
 	})
+	Describe(`InstanceConfigStatus(instanceConfigStatusOptions *InstanceConfigStatusOptions) - Operation response error`, func() {
+		instanceConfigStatusPath := "/config/status/testString"
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(instanceConfigStatusPath))
+					Expect(req.Method).To(Equal("GET"))
+					Expect(req.URL.Query()["action"]).To(Equal([]string{"import"}))
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprint(res, `} this is not valid json {`)
+				}))
+			})
+			It(`Invoke InstanceConfigStatus with error: Operation response processing error`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the InstanceConfigStatusOptions model
+				instanceConfigStatusOptionsModel := new(appconfigurationv1.InstanceConfigStatusOptions)
+				instanceConfigStatusOptionsModel.ReferenceID = core.StringPtr("testString")
+				instanceConfigStatusOptionsModel.Action = core.StringPtr("import")
+				instanceConfigStatusOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Expect response parsing to fail since we are receiving a text/plain response
+				result, response, operationErr := appConfigurationService.InstanceConfigStatus(instanceConfigStatusOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				appConfigurationService.EnableRetries(0, 0)
+				result, response, operationErr = appConfigurationService.InstanceConfigStatus(instanceConfigStatusOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`InstanceConfigStatus(instanceConfigStatusOptions *InstanceConfigStatusOptions)`, func() {
+		instanceConfigStatusPath := "/config/status/testString"
+		Context(`Using mock server endpoint with timeout`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(instanceConfigStatusPath))
+					Expect(req.Method).To(Equal("GET"))
+
+					Expect(req.URL.Query()["action"]).To(Equal([]string{"import"}))
+					// Sleep a short time to support a timeout test
+					time.Sleep(100 * time.Millisecond)
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"action": "import", "errors": {"anyKey": "anyValue"}, "message": "Message", "status": "inprogress", "last_updated": "2019-01-01T12:00:00.000Z", "triggered_time": "2019-01-01T12:00:00.000Z"}`)
+				}))
+			})
+			It(`Invoke InstanceConfigStatus successfully with retries`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+				appConfigurationService.EnableRetries(0, 0)
+
+				// Construct an instance of the InstanceConfigStatusOptions model
+				instanceConfigStatusOptionsModel := new(appconfigurationv1.InstanceConfigStatusOptions)
+				instanceConfigStatusOptionsModel.ReferenceID = core.StringPtr("testString")
+				instanceConfigStatusOptionsModel.Action = core.StringPtr("import")
+				instanceConfigStatusOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with a Context to test a timeout error
+				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc()
+				_, _, operationErr := appConfigurationService.InstanceConfigStatusWithContext(ctx, instanceConfigStatusOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+
+				// Disable retries and test again
+				appConfigurationService.DisableRetries()
+				result, response, operationErr := appConfigurationService.InstanceConfigStatus(instanceConfigStatusOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				_, _, operationErr = appConfigurationService.InstanceConfigStatusWithContext(ctx, instanceConfigStatusOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(instanceConfigStatusPath))
+					Expect(req.Method).To(Equal("GET"))
+
+					Expect(req.URL.Query()["action"]).To(Equal([]string{"import"}))
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"action": "import", "errors": {"anyKey": "anyValue"}, "message": "Message", "status": "inprogress", "last_updated": "2019-01-01T12:00:00.000Z", "triggered_time": "2019-01-01T12:00:00.000Z"}`)
+				}))
+			})
+			It(`Invoke InstanceConfigStatus successfully`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Invoke operation with nil options model (negative test)
+				result, response, operationErr := appConfigurationService.InstanceConfigStatus(nil)
+				Expect(operationErr).NotTo(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+
+				// Construct an instance of the InstanceConfigStatusOptions model
+				instanceConfigStatusOptionsModel := new(appconfigurationv1.InstanceConfigStatusOptions)
+				instanceConfigStatusOptionsModel.ReferenceID = core.StringPtr("testString")
+				instanceConfigStatusOptionsModel.Action = core.StringPtr("import")
+				instanceConfigStatusOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with valid options model (positive test)
+				result, response, operationErr = appConfigurationService.InstanceConfigStatus(instanceConfigStatusOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+			})
+			It(`Invoke InstanceConfigStatus with error: Operation validation and request error`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the InstanceConfigStatusOptions model
+				instanceConfigStatusOptionsModel := new(appconfigurationv1.InstanceConfigStatusOptions)
+				instanceConfigStatusOptionsModel.ReferenceID = core.StringPtr("testString")
+				instanceConfigStatusOptionsModel.Action = core.StringPtr("import")
+				instanceConfigStatusOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Invoke operation with empty URL (negative test)
+				err := appConfigurationService.SetServiceURL("")
+				Expect(err).To(BeNil())
+				result, response, operationErr := appConfigurationService.InstanceConfigStatus(instanceConfigStatusOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+				// Construct a second instance of the InstanceConfigStatusOptions model with no property values
+				instanceConfigStatusOptionsModelNew := new(appconfigurationv1.InstanceConfigStatusOptions)
+				// Invoke operation with invalid model (negative test)
+				result, response, operationErr = appConfigurationService.InstanceConfigStatus(instanceConfigStatusOptionsModelNew)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke InstanceConfigStatus successfully`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the InstanceConfigStatusOptions model
+				instanceConfigStatusOptionsModel := new(appconfigurationv1.InstanceConfigStatusOptions)
+				instanceConfigStatusOptionsModel.ReferenceID = core.StringPtr("testString")
+				instanceConfigStatusOptionsModel.Action = core.StringPtr("import")
+				instanceConfigStatusOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := appConfigurationService.InstanceConfigStatus(instanceConfigStatusOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
 	Describe(`Model constructor tests`, func() {
 		Context(`Using a service client instance`, func() {
 			appConfigurationService, _ := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
@@ -12978,6 +14092,34 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(createGitconfigOptionsModel.GitToken).To(Equal(core.StringPtr("61a792eahhGHji223jijb55a6cfdd4d5cde4c8a67esjjhjhHVH")))
 				Expect(createGitconfigOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
+			It(`Invoke NewCreateIntegrationOptions successfully`, func() {
+				// Construct an instance of the CreateIntegrationMetadataCreateEnIntegrationMetadata model
+				createIntegrationMetadataModel := new(appconfigurationv1.CreateIntegrationMetadataCreateEnIntegrationMetadata)
+				Expect(createIntegrationMetadataModel).ToNot(BeNil())
+				createIntegrationMetadataModel.EventNotificationsInstanceCrn = core.StringPtr("crn:v1:bluemix:public:event-notifications:eu-gb:a/4f631ea3b3204b2b878a295604994acf:0eb42def-21aa-4f0a-a975-0812ead6ceee::")
+				createIntegrationMetadataModel.EventNotificationsEndpoint = core.StringPtr("https://eu-gb.event-notifications.cloud.ibm.com")
+				createIntegrationMetadataModel.EventNotificationsSourceName = core.StringPtr("My App Config")
+				createIntegrationMetadataModel.EventNotificationsSourceDescription = core.StringPtr("All the events from App Configuration instance")
+				Expect(createIntegrationMetadataModel.EventNotificationsInstanceCrn).To(Equal(core.StringPtr("crn:v1:bluemix:public:event-notifications:eu-gb:a/4f631ea3b3204b2b878a295604994acf:0eb42def-21aa-4f0a-a975-0812ead6ceee::")))
+				Expect(createIntegrationMetadataModel.EventNotificationsEndpoint).To(Equal(core.StringPtr("https://eu-gb.event-notifications.cloud.ibm.com")))
+				Expect(createIntegrationMetadataModel.EventNotificationsSourceName).To(Equal(core.StringPtr("My App Config")))
+				Expect(createIntegrationMetadataModel.EventNotificationsSourceDescription).To(Equal(core.StringPtr("All the events from App Configuration instance")))
+
+				// Construct an instance of the CreateIntegrationOptions model
+				createIntegrationOptionsIntegrationID := "lckkhp34t"
+				createIntegrationOptionsIntegrationType := "EVENT_NOTIFICATIONS"
+				var createIntegrationOptionsMetadata appconfigurationv1.CreateIntegrationMetadataIntf = nil
+				createIntegrationOptionsModel := appConfigurationService.NewCreateIntegrationOptions(createIntegrationOptionsIntegrationID, createIntegrationOptionsIntegrationType, createIntegrationOptionsMetadata)
+				createIntegrationOptionsModel.SetIntegrationID("lckkhp34t")
+				createIntegrationOptionsModel.SetIntegrationType("EVENT_NOTIFICATIONS")
+				createIntegrationOptionsModel.SetMetadata(createIntegrationMetadataModel)
+				createIntegrationOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
+				Expect(createIntegrationOptionsModel).ToNot(BeNil())
+				Expect(createIntegrationOptionsModel.IntegrationID).To(Equal(core.StringPtr("lckkhp34t")))
+				Expect(createIntegrationOptionsModel.IntegrationType).To(Equal(core.StringPtr("EVENT_NOTIFICATIONS")))
+				Expect(createIntegrationOptionsModel.Metadata).To(Equal(createIntegrationMetadataModel))
+				Expect(createIntegrationOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
+			})
 			It(`Invoke NewCreatePropertyOptions successfully`, func() {
 				// Construct an instance of the TargetSegments model
 				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
@@ -13160,6 +14302,16 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(deleteGitconfigOptionsModel.GitConfigID).To(Equal(core.StringPtr("git_config_id")))
 				Expect(deleteGitconfigOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
+			It(`Invoke NewDeleteIntegrationOptions successfully`, func() {
+				// Construct an instance of the DeleteIntegrationOptions model
+				integrationID := "integration_id"
+				deleteIntegrationOptionsModel := appConfigurationService.NewDeleteIntegrationOptions(integrationID)
+				deleteIntegrationOptionsModel.SetIntegrationID("integration_id")
+				deleteIntegrationOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
+				Expect(deleteIntegrationOptionsModel).ToNot(BeNil())
+				Expect(deleteIntegrationOptionsModel.IntegrationID).To(Equal(core.StringPtr("integration_id")))
+				Expect(deleteIntegrationOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
+			})
 			It(`Invoke NewDeletePropertyOptions successfully`, func() {
 				// Construct an instance of the DeletePropertyOptions model
 				environmentID := "environment_id"
@@ -13293,6 +14445,16 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(getGitconfigOptionsModel.GitConfigID).To(Equal(core.StringPtr("git_config_id")))
 				Expect(getGitconfigOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
+			It(`Invoke NewGetIntegrationOptions successfully`, func() {
+				// Construct an instance of the GetIntegrationOptions model
+				integrationID := "integration_id"
+				getIntegrationOptionsModel := appConfigurationService.NewGetIntegrationOptions(integrationID)
+				getIntegrationOptionsModel.SetIntegrationID("integration_id")
+				getIntegrationOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
+				Expect(getIntegrationOptionsModel).ToNot(BeNil())
+				Expect(getIntegrationOptionsModel.IntegrationID).To(Equal(core.StringPtr("integration_id")))
+				Expect(getIntegrationOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
+			})
 			It(`Invoke NewGetPropertyOptions successfully`, func() {
 				// Construct an instance of the GetPropertyOptions model
 				environmentID := "environment_id"
@@ -13369,7 +14531,6 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				importFeatureRequestBodyModel.Tags = core.StringPtr("testString")
 				importFeatureRequestBodyModel.SegmentRules = []appconfigurationv1.FeatureSegmentRule{*featureSegmentRuleModel}
 				importFeatureRequestBodyModel.Collections = []appconfigurationv1.CollectionRef{*collectionRefModel}
-				importFeatureRequestBodyModel.IsOverridden = core.BoolPtr(true)
 				Expect(importFeatureRequestBodyModel.Name).To(Equal(core.StringPtr("Cycle Rentals")))
 				Expect(importFeatureRequestBodyModel.FeatureID).To(Equal(core.StringPtr("cycle-rentals")))
 				Expect(importFeatureRequestBodyModel.Description).To(Equal(core.StringPtr("testString")))
@@ -13382,7 +14543,6 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(importFeatureRequestBodyModel.Tags).To(Equal(core.StringPtr("testString")))
 				Expect(importFeatureRequestBodyModel.SegmentRules).To(Equal([]appconfigurationv1.FeatureSegmentRule{*featureSegmentRuleModel}))
 				Expect(importFeatureRequestBodyModel.Collections).To(Equal([]appconfigurationv1.CollectionRef{*collectionRefModel}))
-				Expect(importFeatureRequestBodyModel.IsOverridden).To(Equal(core.BoolPtr(true)))
 
 				// Construct an instance of the SegmentRule model
 				segmentRuleModel := new(appconfigurationv1.SegmentRule)
@@ -13406,7 +14566,6 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				importPropertyRequestBodyModel.Tags = core.StringPtr("pre-release, v1.2")
 				importPropertyRequestBodyModel.SegmentRules = []appconfigurationv1.SegmentRule{*segmentRuleModel}
 				importPropertyRequestBodyModel.Collections = []appconfigurationv1.CollectionRef{*collectionRefModel}
-				importPropertyRequestBodyModel.IsOverridden = core.BoolPtr(true)
 				Expect(importPropertyRequestBodyModel.Name).To(Equal(core.StringPtr("Daily Discount")))
 				Expect(importPropertyRequestBodyModel.PropertyID).To(Equal(core.StringPtr("daily_discount")))
 				Expect(importPropertyRequestBodyModel.Description).To(Equal(core.StringPtr("testString")))
@@ -13416,7 +14575,6 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(importPropertyRequestBodyModel.Tags).To(Equal(core.StringPtr("pre-release, v1.2")))
 				Expect(importPropertyRequestBodyModel.SegmentRules).To(Equal([]appconfigurationv1.SegmentRule{*segmentRuleModel}))
 				Expect(importPropertyRequestBodyModel.Collections).To(Equal([]appconfigurationv1.CollectionRef{*collectionRefModel}))
-				Expect(importPropertyRequestBodyModel.IsOverridden).To(Equal(core.BoolPtr(true)))
 
 				// Construct an instance of the ImportEnvironmentSchema model
 				importEnvironmentSchemaModel := new(appconfigurationv1.ImportEnvironmentSchema)
@@ -13499,8 +14657,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				typeVar := "BOOLEAN"
 				enabledValue := "testString"
 				disabledValue := "testString"
-				isOverridden := true
-				_model, err := appConfigurationService.NewImportFeatureRequestBody(name, featureID, typeVar, enabledValue, disabledValue, isOverridden)
+				_model, err := appConfigurationService.NewImportFeatureRequestBody(name, featureID, typeVar, enabledValue, disabledValue)
 				Expect(_model).ToNot(BeNil())
 				Expect(err).To(BeNil())
 			})
@@ -13509,8 +14666,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				propertyID := "testString"
 				typeVar := "BOOLEAN"
 				value := "testString"
-				isOverridden := true
-				_model, err := appConfigurationService.NewImportPropertyRequestBody(name, propertyID, typeVar, value, isOverridden)
+				_model, err := appConfigurationService.NewImportPropertyRequestBody(name, propertyID, typeVar, value)
 				Expect(_model).ToNot(BeNil())
 				Expect(err).To(BeNil())
 			})
@@ -13521,6 +14677,19 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				_model, err := appConfigurationService.NewImportSegmentSchema(name, segmentID, rules)
 				Expect(_model).ToNot(BeNil())
 				Expect(err).To(BeNil())
+			})
+			It(`Invoke NewInstanceConfigStatusOptions successfully`, func() {
+				// Construct an instance of the InstanceConfigStatusOptions model
+				referenceID := "testString"
+				action := "import"
+				instanceConfigStatusOptionsModel := appConfigurationService.NewInstanceConfigStatusOptions(referenceID, action)
+				instanceConfigStatusOptionsModel.SetReferenceID("testString")
+				instanceConfigStatusOptionsModel.SetAction("import")
+				instanceConfigStatusOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
+				Expect(instanceConfigStatusOptionsModel).ToNot(BeNil())
+				Expect(instanceConfigStatusOptionsModel.ReferenceID).To(Equal(core.StringPtr("testString")))
+				Expect(instanceConfigStatusOptionsModel.Action).To(Equal(core.StringPtr("import")))
+				Expect(instanceConfigStatusOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewListCollectionsOptions successfully`, func() {
 				// Construct an instance of the ListCollectionsOptions model
@@ -13602,6 +14771,19 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				listInstanceConfigOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(listInstanceConfigOptionsModel).ToNot(BeNil())
 				Expect(listInstanceConfigOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
+			})
+			It(`Invoke NewListIntegrationsOptions successfully`, func() {
+				// Construct an instance of the ListIntegrationsOptions model
+				listIntegrationsOptionsModel := appConfigurationService.NewListIntegrationsOptions()
+				listIntegrationsOptionsModel.SetExpand(true)
+				listIntegrationsOptionsModel.SetLimit(int64(10))
+				listIntegrationsOptionsModel.SetOffset(int64(0))
+				listIntegrationsOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
+				Expect(listIntegrationsOptionsModel).ToNot(BeNil())
+				Expect(listIntegrationsOptionsModel.Expand).To(Equal(core.BoolPtr(true)))
+				Expect(listIntegrationsOptionsModel.Limit).To(Equal(core.Int64Ptr(int64(10))))
+				Expect(listIntegrationsOptionsModel.Offset).To(Equal(core.Int64Ptr(int64(0))))
+				Expect(listIntegrationsOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewListOriginconfigsOptions successfully`, func() {
 				// Construct an instance of the ListOriginconfigsOptions model
@@ -14173,6 +15355,22 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(updateWorkflowconfigOptionsModel.UpdateWorkflowConfig).To(Equal(updateWorkflowConfigModel))
 				Expect(updateWorkflowconfigOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
+			It(`Invoke NewCreateIntegrationMetadataCreateEnIntegrationMetadata successfully`, func() {
+				eventNotificationsInstanceCrn := "crn:v1:bluemix:public:event-notifications:eu-gb:a/4f631ea3b3204b2b878a295604994acf:0eb42def-21aa-4f0a-a975-0812ead6ceee::"
+				eventNotificationsEndpoint := "https://eu-gb.event-notifications.cloud.ibm.com"
+				eventNotificationsSourceName := "testString"
+				_model, err := appConfigurationService.NewCreateIntegrationMetadataCreateEnIntegrationMetadata(eventNotificationsInstanceCrn, eventNotificationsEndpoint, eventNotificationsSourceName)
+				Expect(_model).ToNot(BeNil())
+				Expect(err).To(BeNil())
+			})
+			It(`Invoke NewCreateIntegrationMetadataCreateKmsIntegrationMetadata successfully`, func() {
+				kmsInstanceCrn := "crn:v1:bluemix:public:kms:au-syd:a/4f631ea3b3204b2b878a295604994acf:a3d454ea-38f4-4ae1-92e1-6a4aaac24e14::"
+				kmsEndpoint := "https://au-syd.kms.cloud.ibm.com"
+				rootKeyID := "testString"
+				_model, err := appConfigurationService.NewCreateIntegrationMetadataCreateKmsIntegrationMetadata(kmsInstanceCrn, kmsEndpoint, rootKeyID)
+				Expect(_model).ToNot(BeNil())
+				Expect(err).To(BeNil())
+			})
 			It(`Invoke NewCreateWorkflowConfigExternalServiceNow successfully`, func() {
 				workflowURL := "testString"
 				approvalGroupName := "testString"
@@ -14276,6 +15474,30 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 			var result *appconfigurationv1.CollectionUpdateRef
 			err = appconfigurationv1.UnmarshalCollectionUpdateRef(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalCreateIntegrationMetadata successfully`, func() {
+			// Construct an instance of the model.
+			model := new(appconfigurationv1.CreateIntegrationMetadata)
+			model.EventNotificationsInstanceCrn = core.StringPtr("crn:v1:bluemix:public:event-notifications:eu-gb:a/4f631ea3b3204b2b878a295604994acf:0eb42def-21aa-4f0a-a975-0812ead6ceee::")
+			model.EventNotificationsEndpoint = core.StringPtr("https://eu-gb.event-notifications.cloud.ibm.com")
+			model.EventNotificationsSourceName = core.StringPtr("testString")
+			model.EventNotificationsSourceDescription = core.StringPtr("testString")
+			model.KmsInstanceCrn = core.StringPtr("crn:v1:bluemix:public:kms:au-syd:a/4f631ea3b3204b2b878a295604994acf:a3d454ea-38f4-4ae1-92e1-6a4aaac24e14::")
+			model.KmsEndpoint = core.StringPtr("https://au-syd.kms.cloud.ibm.com")
+			model.RootKeyID = core.StringPtr("testString")
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *appconfigurationv1.CreateIntegrationMetadata
+			err = appconfigurationv1.UnmarshalCreateIntegrationMetadata(raw, &result)
 			Expect(err).To(BeNil())
 			Expect(result).ToNot(BeNil())
 			Expect(result).To(Equal(model))
@@ -14481,7 +15703,6 @@ var _ = Describe(`AppConfigurationV1`, func() {
 			model.Tags = core.StringPtr("testString")
 			model.SegmentRules = nil
 			model.Collections = nil
-			model.IsOverridden = core.BoolPtr(true)
 
 			b, err := json.Marshal(model)
 			Expect(err).To(BeNil())
@@ -14508,7 +15729,6 @@ var _ = Describe(`AppConfigurationV1`, func() {
 			model.Tags = core.StringPtr("testString")
 			model.SegmentRules = nil
 			model.Collections = nil
-			model.IsOverridden = core.BoolPtr(true)
 
 			b, err := json.Marshal(model)
 			Expect(err).To(BeNil())
@@ -14742,6 +15962,47 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 			var result *appconfigurationv1.UpdateWorkflowConfig
 			err = appconfigurationv1.UnmarshalUpdateWorkflowConfig(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalCreateIntegrationMetadataCreateEnIntegrationMetadata successfully`, func() {
+			// Construct an instance of the model.
+			model := new(appconfigurationv1.CreateIntegrationMetadataCreateEnIntegrationMetadata)
+			model.EventNotificationsInstanceCrn = core.StringPtr("crn:v1:bluemix:public:event-notifications:eu-gb:a/4f631ea3b3204b2b878a295604994acf:0eb42def-21aa-4f0a-a975-0812ead6ceee::")
+			model.EventNotificationsEndpoint = core.StringPtr("https://eu-gb.event-notifications.cloud.ibm.com")
+			model.EventNotificationsSourceName = core.StringPtr("testString")
+			model.EventNotificationsSourceDescription = core.StringPtr("testString")
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *appconfigurationv1.CreateIntegrationMetadataCreateEnIntegrationMetadata
+			err = appconfigurationv1.UnmarshalCreateIntegrationMetadataCreateEnIntegrationMetadata(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalCreateIntegrationMetadataCreateKmsIntegrationMetadata successfully`, func() {
+			// Construct an instance of the model.
+			model := new(appconfigurationv1.CreateIntegrationMetadataCreateKmsIntegrationMetadata)
+			model.KmsInstanceCrn = core.StringPtr("crn:v1:bluemix:public:kms:au-syd:a/4f631ea3b3204b2b878a295604994acf:a3d454ea-38f4-4ae1-92e1-6a4aaac24e14::")
+			model.KmsEndpoint = core.StringPtr("https://au-syd.kms.cloud.ibm.com")
+			model.RootKeyID = core.StringPtr("testString")
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *appconfigurationv1.CreateIntegrationMetadataCreateKmsIntegrationMetadata
+			err = appconfigurationv1.UnmarshalCreateIntegrationMetadataCreateKmsIntegrationMetadata(raw, &result)
 			Expect(err).To(BeNil())
 			Expect(result).ToNot(BeNil())
 			Expect(result).To(Equal(model))

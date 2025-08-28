@@ -15,7 +15,7 @@
  */
 
 /*
- * IBM OpenAPI SDK Code Generator Version: 3.102.0-615ec964-20250307-203034
+ * IBM OpenAPI SDK Code Generator Version: 3.106.0-09823488-20250707-071701
  */
 
 // Package appconfigurationv1 : Operations and models for the AppConfigurationV1 service
@@ -211,12 +211,12 @@ func (appConfiguration *AppConfigurationV1) ListEnvironmentsWithContext(ctx cont
 		return
 	}
 
-	for headerName, headerValue := range listEnvironmentsOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "ListEnvironments")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "ListEnvironments")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range listEnvironmentsOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -298,12 +298,12 @@ func (appConfiguration *AppConfigurationV1) CreateEnvironmentWithContext(ctx con
 		return
 	}
 
-	for headerName, headerValue := range createEnvironmentOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "CreateEnvironment")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "CreateEnvironment")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range createEnvironmentOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -390,12 +390,12 @@ func (appConfiguration *AppConfigurationV1) UpdateEnvironmentWithContext(ctx con
 		return
 	}
 
-	for headerName, headerValue := range updateEnvironmentOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "UpdateEnvironment")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "UpdateEnvironment")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range updateEnvironmentOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -479,12 +479,12 @@ func (appConfiguration *AppConfigurationV1) GetEnvironmentWithContext(ctx contex
 		return
 	}
 
-	for headerName, headerValue := range getEnvironmentOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "GetEnvironment")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "GetEnvironment")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range getEnvironmentOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -555,12 +555,12 @@ func (appConfiguration *AppConfigurationV1) DeleteEnvironmentWithContext(ctx con
 		return
 	}
 
-	for headerName, headerValue := range deleteEnvironmentOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "DeleteEnvironment")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "DeleteEnvironment")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range deleteEnvironmentOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 
@@ -605,12 +605,12 @@ func (appConfiguration *AppConfigurationV1) ListCollectionsWithContext(ctx conte
 		return
 	}
 
-	for headerName, headerValue := range listCollectionsOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "ListCollections")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "ListCollections")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range listCollectionsOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -698,12 +698,12 @@ func (appConfiguration *AppConfigurationV1) CreateCollectionWithContext(ctx cont
 		return
 	}
 
-	for headerName, headerValue := range createCollectionOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "CreateCollection")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "CreateCollection")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range createCollectionOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -787,12 +787,12 @@ func (appConfiguration *AppConfigurationV1) UpdateCollectionWithContext(ctx cont
 		return
 	}
 
-	for headerName, headerValue := range updateCollectionOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "UpdateCollection")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "UpdateCollection")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range updateCollectionOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -873,12 +873,12 @@ func (appConfiguration *AppConfigurationV1) GetCollectionWithContext(ctx context
 		return
 	}
 
-	for headerName, headerValue := range getCollectionOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "GetCollection")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "GetCollection")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range getCollectionOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -949,12 +949,12 @@ func (appConfiguration *AppConfigurationV1) DeleteCollectionWithContext(ctx cont
 		return
 	}
 
-	for headerName, headerValue := range deleteCollectionOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "DeleteCollection")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "DeleteCollection")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range deleteCollectionOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 
@@ -1008,12 +1008,12 @@ func (appConfiguration *AppConfigurationV1) ListFeaturesWithContext(ctx context.
 		return
 	}
 
-	for headerName, headerValue := range listFeaturesOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "ListFeatures")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "ListFeatures")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range listFeaturesOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -1105,12 +1105,12 @@ func (appConfiguration *AppConfigurationV1) CreateFeatureWithContext(ctx context
 		return
 	}
 
-	for headerName, headerValue := range createFeatureOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "CreateFeature")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "CreateFeature")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range createFeatureOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -1219,12 +1219,12 @@ func (appConfiguration *AppConfigurationV1) UpdateFeatureWithContext(ctx context
 		return
 	}
 
-	for headerName, headerValue := range updateFeatureOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "UpdateFeature")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "UpdateFeature")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range updateFeatureOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -1326,12 +1326,12 @@ func (appConfiguration *AppConfigurationV1) UpdateFeatureValuesWithContext(ctx c
 		return
 	}
 
-	for headerName, headerValue := range updateFeatureValuesOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "UpdateFeatureValues")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "UpdateFeatureValues")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range updateFeatureValuesOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -1425,12 +1425,12 @@ func (appConfiguration *AppConfigurationV1) GetFeatureWithContext(ctx context.Co
 		return
 	}
 
-	for headerName, headerValue := range getFeatureOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "GetFeature")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "GetFeature")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range getFeatureOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -1499,12 +1499,12 @@ func (appConfiguration *AppConfigurationV1) DeleteFeatureWithContext(ctx context
 		return
 	}
 
-	for headerName, headerValue := range deleteFeatureOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "DeleteFeature")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "DeleteFeature")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range deleteFeatureOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 
@@ -1559,12 +1559,12 @@ func (appConfiguration *AppConfigurationV1) ToggleFeatureWithContext(ctx context
 		return
 	}
 
-	for headerName, headerValue := range toggleFeatureOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "ToggleFeature")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "ToggleFeature")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range toggleFeatureOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -1640,12 +1640,12 @@ func (appConfiguration *AppConfigurationV1) CreateFeatureRuleWithContext(ctx con
 		return
 	}
 
-	for headerName, headerValue := range createFeatureRuleOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "CreateFeatureRule")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "CreateFeatureRule")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range createFeatureRuleOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -1731,12 +1731,12 @@ func (appConfiguration *AppConfigurationV1) GetFeatureRuleWithContext(ctx contex
 		return
 	}
 
-	for headerName, headerValue := range getFeatureRuleOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "GetFeatureRule")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "GetFeatureRule")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range getFeatureRuleOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -1802,12 +1802,12 @@ func (appConfiguration *AppConfigurationV1) UpdateFeatureRuleWithContext(ctx con
 		return
 	}
 
-	for headerName, headerValue := range updateFeatureRuleOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "UpdateFeatureRule")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "UpdateFeatureRule")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range updateFeatureRuleOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -1890,12 +1890,12 @@ func (appConfiguration *AppConfigurationV1) DeleteFeatureRuleWithContext(ctx con
 		return
 	}
 
-	for headerName, headerValue := range deleteFeatureRuleOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "DeleteFeatureRule")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "DeleteFeatureRule")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range deleteFeatureRuleOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 
@@ -1950,12 +1950,12 @@ func (appConfiguration *AppConfigurationV1) UpdateFeatureRuleOrderWithContext(ct
 		return
 	}
 
-	for headerName, headerValue := range updateFeatureRuleOrderOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "UpdateFeatureRuleOrder")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "UpdateFeatureRuleOrder")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range updateFeatureRuleOrderOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -2017,12 +2017,12 @@ func (appConfiguration *AppConfigurationV1) ListPropertiesWithContext(ctx contex
 		return
 	}
 
-	for headerName, headerValue := range listPropertiesOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "ListProperties")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "ListProperties")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range listPropertiesOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -2114,12 +2114,12 @@ func (appConfiguration *AppConfigurationV1) CreatePropertyWithContext(ctx contex
 		return
 	}
 
-	for headerName, headerValue := range createPropertyOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "CreateProperty")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "CreateProperty")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range createPropertyOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -2219,12 +2219,12 @@ func (appConfiguration *AppConfigurationV1) UpdatePropertyWithContext(ctx contex
 		return
 	}
 
-	for headerName, headerValue := range updatePropertyOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "UpdateProperty")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "UpdateProperty")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range updatePropertyOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -2316,12 +2316,12 @@ func (appConfiguration *AppConfigurationV1) UpdatePropertyValuesWithContext(ctx 
 		return
 	}
 
-	for headerName, headerValue := range updatePropertyValuesOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "UpdatePropertyValues")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "UpdatePropertyValues")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range updatePropertyValuesOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -2409,12 +2409,12 @@ func (appConfiguration *AppConfigurationV1) GetPropertyWithContext(ctx context.C
 		return
 	}
 
-	for headerName, headerValue := range getPropertyOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "GetProperty")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "GetProperty")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range getPropertyOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -2483,12 +2483,12 @@ func (appConfiguration *AppConfigurationV1) DeletePropertyWithContext(ctx contex
 		return
 	}
 
-	for headerName, headerValue := range deletePropertyOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "DeleteProperty")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "DeleteProperty")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range deletePropertyOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 
@@ -2533,12 +2533,12 @@ func (appConfiguration *AppConfigurationV1) ListSegmentsWithContext(ctx context.
 		return
 	}
 
-	for headerName, headerValue := range listSegmentsOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "ListSegments")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "ListSegments")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range listSegmentsOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -2620,12 +2620,12 @@ func (appConfiguration *AppConfigurationV1) CreateSegmentWithContext(ctx context
 		return
 	}
 
-	for headerName, headerValue := range createSegmentOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "CreateSegment")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "CreateSegment")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range createSegmentOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -2712,12 +2712,12 @@ func (appConfiguration *AppConfigurationV1) UpdateSegmentWithContext(ctx context
 		return
 	}
 
-	for headerName, headerValue := range updateSegmentOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "UpdateSegment")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "UpdateSegment")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range updateSegmentOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -2801,12 +2801,12 @@ func (appConfiguration *AppConfigurationV1) GetSegmentWithContext(ctx context.Co
 		return
 	}
 
-	for headerName, headerValue := range getSegmentOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "GetSegment")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "GetSegment")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range getSegmentOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -2874,12 +2874,12 @@ func (appConfiguration *AppConfigurationV1) DeleteSegmentWithContext(ctx context
 		return
 	}
 
-	for headerName, headerValue := range deleteSegmentOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "DeleteSegment")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "DeleteSegment")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range deleteSegmentOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 
@@ -2924,12 +2924,12 @@ func (appConfiguration *AppConfigurationV1) ListSnapshotsWithContext(ctx context
 		return
 	}
 
-	for headerName, headerValue := range listSnapshotsOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "ListSnapshots")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "ListSnapshots")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range listSnapshotsOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -3008,12 +3008,12 @@ func (appConfiguration *AppConfigurationV1) CreateGitconfigWithContext(ctx conte
 		return
 	}
 
-	for headerName, headerValue := range createGitconfigOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "CreateGitconfig")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "CreateGitconfig")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range createGitconfigOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -3109,12 +3109,12 @@ func (appConfiguration *AppConfigurationV1) UpdateGitconfigWithContext(ctx conte
 		return
 	}
 
-	for headerName, headerValue := range updateGitconfigOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "UpdateGitconfig")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "UpdateGitconfig")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range updateGitconfigOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -3207,12 +3207,12 @@ func (appConfiguration *AppConfigurationV1) GetGitconfigWithContext(ctx context.
 		return
 	}
 
-	for headerName, headerValue := range getGitconfigOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "GetGitconfig")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "GetGitconfig")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range getGitconfigOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -3276,12 +3276,12 @@ func (appConfiguration *AppConfigurationV1) DeleteGitconfigWithContext(ctx conte
 		return
 	}
 
-	for headerName, headerValue := range deleteGitconfigOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "DeleteGitconfig")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "DeleteGitconfig")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range deleteGitconfigOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 
@@ -3339,12 +3339,12 @@ func (appConfiguration *AppConfigurationV1) PromoteGitconfigWithContext(ctx cont
 		return
 	}
 
-	for headerName, headerValue := range promoteGitconfigOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "PromoteGitconfig")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "PromoteGitconfig")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range promoteGitconfigOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -3413,12 +3413,12 @@ func (appConfiguration *AppConfigurationV1) RestoreGitconfigWithContext(ctx cont
 		return
 	}
 
-	for headerName, headerValue := range restoreGitconfigOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "RestoreGitconfig")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "RestoreGitconfig")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range restoreGitconfigOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -3443,6 +3443,286 @@ func (appConfiguration *AppConfigurationV1) RestoreGitconfigWithContext(ctx cont
 			return
 		}
 		response.Result = result
+	}
+
+	return
+}
+
+// ListIntegrations : Get list of integrations
+// List all the integrations.
+func (appConfiguration *AppConfigurationV1) ListIntegrations(listIntegrationsOptions *ListIntegrationsOptions) (result *IntegrationList, response *core.DetailedResponse, err error) {
+	result, response, err = appConfiguration.ListIntegrationsWithContext(context.Background(), listIntegrationsOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
+}
+
+// ListIntegrationsWithContext is an alternate form of the ListIntegrations method which supports a Context parameter
+func (appConfiguration *AppConfigurationV1) ListIntegrationsWithContext(ctx context.Context, listIntegrationsOptions *ListIntegrationsOptions) (result *IntegrationList, response *core.DetailedResponse, err error) {
+	err = core.ValidateStruct(listIntegrationsOptions, "listIntegrationsOptions")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
+		return
+	}
+
+	builder := core.NewRequestBuilder(core.GET)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = appConfiguration.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(appConfiguration.Service.Options.URL, `/integrations`, nil)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
+		return
+	}
+
+	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "ListIntegrations")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	for headerName, headerValue := range listIntegrationsOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+	builder.AddHeader("Accept", "application/json")
+
+	if listIntegrationsOptions.Expand != nil {
+		builder.AddQuery("expand", fmt.Sprint(*listIntegrationsOptions.Expand))
+	}
+	if listIntegrationsOptions.Limit != nil {
+		builder.AddQuery("limit", fmt.Sprint(*listIntegrationsOptions.Limit))
+	}
+	if listIntegrationsOptions.Offset != nil {
+		builder.AddQuery("offset", fmt.Sprint(*listIntegrationsOptions.Offset))
+	}
+
+	request, err := builder.Build()
+	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
+		return
+	}
+
+	var rawResponse map[string]json.RawMessage
+	response, err = appConfiguration.Service.Request(request, &rawResponse)
+	if err != nil {
+		core.EnrichHTTPProblem(err, "list_integrations", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
+		return
+	}
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalIntegrationList)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-resp-error", common.GetComponentInfo())
+			return
+		}
+		response.Result = result
+	}
+
+	return
+}
+
+// CreateIntegration : Create integration
+// Create an integration with App Configuration service instance.
+func (appConfiguration *AppConfigurationV1) CreateIntegration(createIntegrationOptions *CreateIntegrationOptions) (result *Integration, response *core.DetailedResponse, err error) {
+	result, response, err = appConfiguration.CreateIntegrationWithContext(context.Background(), createIntegrationOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
+}
+
+// CreateIntegrationWithContext is an alternate form of the CreateIntegration method which supports a Context parameter
+func (appConfiguration *AppConfigurationV1) CreateIntegrationWithContext(ctx context.Context, createIntegrationOptions *CreateIntegrationOptions) (result *Integration, response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(createIntegrationOptions, "createIntegrationOptions cannot be nil")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "unexpected-nil-param", common.GetComponentInfo())
+		return
+	}
+	err = core.ValidateStruct(createIntegrationOptions, "createIntegrationOptions")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
+		return
+	}
+
+	builder := core.NewRequestBuilder(core.POST)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = appConfiguration.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(appConfiguration.Service.Options.URL, `/integrations`, nil)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
+		return
+	}
+
+	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "CreateIntegration")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	for headerName, headerValue := range createIntegrationOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+	builder.AddHeader("Accept", "application/json")
+	builder.AddHeader("Content-Type", "application/json")
+
+	body := make(map[string]interface{})
+	if createIntegrationOptions.IntegrationID != nil {
+		body["integration_id"] = createIntegrationOptions.IntegrationID
+	}
+	if createIntegrationOptions.IntegrationType != nil {
+		body["integration_type"] = createIntegrationOptions.IntegrationType
+	}
+	if createIntegrationOptions.Metadata != nil {
+		body["metadata"] = createIntegrationOptions.Metadata
+	}
+	_, err = builder.SetBodyContentJSON(body)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "set-json-body-error", common.GetComponentInfo())
+		return
+	}
+
+	request, err := builder.Build()
+	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
+		return
+	}
+
+	var rawResponse map[string]json.RawMessage
+	response, err = appConfiguration.Service.Request(request, &rawResponse)
+	if err != nil {
+		core.EnrichHTTPProblem(err, "create_integration", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
+		return
+	}
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalIntegration)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-resp-error", common.GetComponentInfo())
+			return
+		}
+		response.Result = result
+	}
+
+	return
+}
+
+// GetIntegration : Get integration
+// Retrieve the details of the integration.
+func (appConfiguration *AppConfigurationV1) GetIntegration(getIntegrationOptions *GetIntegrationOptions) (result *Integration, response *core.DetailedResponse, err error) {
+	result, response, err = appConfiguration.GetIntegrationWithContext(context.Background(), getIntegrationOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
+}
+
+// GetIntegrationWithContext is an alternate form of the GetIntegration method which supports a Context parameter
+func (appConfiguration *AppConfigurationV1) GetIntegrationWithContext(ctx context.Context, getIntegrationOptions *GetIntegrationOptions) (result *Integration, response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(getIntegrationOptions, "getIntegrationOptions cannot be nil")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "unexpected-nil-param", common.GetComponentInfo())
+		return
+	}
+	err = core.ValidateStruct(getIntegrationOptions, "getIntegrationOptions")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
+		return
+	}
+
+	pathParamsMap := map[string]string{
+		"integration_id": *getIntegrationOptions.IntegrationID,
+	}
+
+	builder := core.NewRequestBuilder(core.GET)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = appConfiguration.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(appConfiguration.Service.Options.URL, `/integrations/{integration_id}`, pathParamsMap)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
+		return
+	}
+
+	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "GetIntegration")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	for headerName, headerValue := range getIntegrationOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+	builder.AddHeader("Accept", "application/json")
+
+	request, err := builder.Build()
+	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
+		return
+	}
+
+	var rawResponse map[string]json.RawMessage
+	response, err = appConfiguration.Service.Request(request, &rawResponse)
+	if err != nil {
+		core.EnrichHTTPProblem(err, "get_integration", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
+		return
+	}
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalIntegration)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-resp-error", common.GetComponentInfo())
+			return
+		}
+		response.Result = result
+	}
+
+	return
+}
+
+// DeleteIntegration : Delete integration
+// Delete an integration.
+func (appConfiguration *AppConfigurationV1) DeleteIntegration(deleteIntegrationOptions *DeleteIntegrationOptions) (response *core.DetailedResponse, err error) {
+	response, err = appConfiguration.DeleteIntegrationWithContext(context.Background(), deleteIntegrationOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
+}
+
+// DeleteIntegrationWithContext is an alternate form of the DeleteIntegration method which supports a Context parameter
+func (appConfiguration *AppConfigurationV1) DeleteIntegrationWithContext(ctx context.Context, deleteIntegrationOptions *DeleteIntegrationOptions) (response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(deleteIntegrationOptions, "deleteIntegrationOptions cannot be nil")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "unexpected-nil-param", common.GetComponentInfo())
+		return
+	}
+	err = core.ValidateStruct(deleteIntegrationOptions, "deleteIntegrationOptions")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
+		return
+	}
+
+	pathParamsMap := map[string]string{
+		"integration_id": *deleteIntegrationOptions.IntegrationID,
+	}
+
+	builder := core.NewRequestBuilder(core.DELETE)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = appConfiguration.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(appConfiguration.Service.Options.URL, `/integrations/{integration_id}`, pathParamsMap)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
+		return
+	}
+
+	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "DeleteIntegration")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	for headerName, headerValue := range deleteIntegrationOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	request, err := builder.Build()
+	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
+		return
+	}
+
+	response, err = appConfiguration.Service.Request(request, nil)
+	if err != nil {
+		core.EnrichHTTPProblem(err, "delete_integration", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
+		return
 	}
 
 	return
@@ -3473,12 +3753,12 @@ func (appConfiguration *AppConfigurationV1) ListOriginconfigsWithContext(ctx con
 		return
 	}
 
-	for headerName, headerValue := range listOriginconfigsOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "ListOriginconfigs")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "ListOriginconfigs")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range listOriginconfigsOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -3538,12 +3818,12 @@ func (appConfiguration *AppConfigurationV1) UpdateOriginconfigsWithContext(ctx c
 		return
 	}
 
-	for headerName, headerValue := range updateOriginconfigsOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "UpdateOriginconfigs")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "UpdateOriginconfigs")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range updateOriginconfigsOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -3618,12 +3898,12 @@ func (appConfiguration *AppConfigurationV1) ListWorkflowconfigWithContext(ctx co
 		return
 	}
 
-	for headerName, headerValue := range listWorkflowconfigOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "ListWorkflowconfig")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "ListWorkflowconfig")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range listWorkflowconfigOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -3687,12 +3967,12 @@ func (appConfiguration *AppConfigurationV1) CreateWorkflowconfigWithContext(ctx 
 		return
 	}
 
-	for headerName, headerValue := range createWorkflowconfigOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "CreateWorkflowconfig")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "CreateWorkflowconfig")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range createWorkflowconfigOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -3763,12 +4043,12 @@ func (appConfiguration *AppConfigurationV1) UpdateWorkflowconfigWithContext(ctx 
 		return
 	}
 
-	for headerName, headerValue := range updateWorkflowconfigOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "UpdateWorkflowconfig")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "UpdateWorkflowconfig")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range updateWorkflowconfigOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -3839,12 +4119,12 @@ func (appConfiguration *AppConfigurationV1) DeleteWorkflowconfigWithContext(ctx 
 		return
 	}
 
-	for headerName, headerValue := range deleteWorkflowconfigOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "DeleteWorkflowconfig")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "DeleteWorkflowconfig")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range deleteWorkflowconfigOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 
@@ -3866,14 +4146,14 @@ func (appConfiguration *AppConfigurationV1) DeleteWorkflowconfigWithContext(ctx 
 
 // ImportConfig : Import instance configuration
 // Import configuration to the instance.
-func (appConfiguration *AppConfigurationV1) ImportConfig(importConfigOptions *ImportConfigOptions) (result *ImportConfig, response *core.DetailedResponse, err error) {
+func (appConfiguration *AppConfigurationV1) ImportConfig(importConfigOptions *ImportConfigOptions) (result *InstanceConfigAcceptedResponse, response *core.DetailedResponse, err error) {
 	result, response, err = appConfiguration.ImportConfigWithContext(context.Background(), importConfigOptions)
 	err = core.RepurposeSDKProblem(err, "")
 	return
 }
 
 // ImportConfigWithContext is an alternate form of the ImportConfig method which supports a Context parameter
-func (appConfiguration *AppConfigurationV1) ImportConfigWithContext(ctx context.Context, importConfigOptions *ImportConfigOptions) (result *ImportConfig, response *core.DetailedResponse, err error) {
+func (appConfiguration *AppConfigurationV1) ImportConfigWithContext(ctx context.Context, importConfigOptions *ImportConfigOptions) (result *InstanceConfigAcceptedResponse, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(importConfigOptions, "importConfigOptions cannot be nil")
 	if err != nil {
 		err = core.SDKErrorf(err, "", "unexpected-nil-param", common.GetComponentInfo())
@@ -3894,12 +4174,12 @@ func (appConfiguration *AppConfigurationV1) ImportConfigWithContext(ctx context.
 		return
 	}
 
-	for headerName, headerValue := range importConfigOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "ImportConfig")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "ImportConfig")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range importConfigOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -3939,7 +4219,7 @@ func (appConfiguration *AppConfigurationV1) ImportConfigWithContext(ctx context.
 		return
 	}
 	if rawResponse != nil {
-		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalImportConfig)
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalInstanceConfigAcceptedResponse)
 		if err != nil {
 			err = core.SDKErrorf(err, "", "unmarshal-resp-error", common.GetComponentInfo())
 			return
@@ -3975,12 +4255,12 @@ func (appConfiguration *AppConfigurationV1) ListInstanceConfigWithContext(ctx co
 		return
 	}
 
-	for headerName, headerValue := range listInstanceConfigOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "ListInstanceConfig")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "ListInstanceConfig")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range listInstanceConfigOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -4041,12 +4321,12 @@ func (appConfiguration *AppConfigurationV1) PromoteRestoreConfigWithContext(ctx 
 		return
 	}
 
-	for headerName, headerValue := range promoteRestoreConfigOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "PromoteRestoreConfig")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "PromoteRestoreConfig")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range promoteRestoreConfigOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -4069,6 +4349,77 @@ func (appConfiguration *AppConfigurationV1) PromoteRestoreConfigWithContext(ctx 
 	}
 	if rawResponse != nil {
 		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalConfigAction)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-resp-error", common.GetComponentInfo())
+			return
+		}
+		response.Result = result
+	}
+
+	return
+}
+
+// InstanceConfigStatus : Get status of instance configuration import / export
+// Get the status of instance configuration operation.
+func (appConfiguration *AppConfigurationV1) InstanceConfigStatus(instanceConfigStatusOptions *InstanceConfigStatusOptions) (result *InstanceConfigStatusResponse, response *core.DetailedResponse, err error) {
+	result, response, err = appConfiguration.InstanceConfigStatusWithContext(context.Background(), instanceConfigStatusOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
+}
+
+// InstanceConfigStatusWithContext is an alternate form of the InstanceConfigStatus method which supports a Context parameter
+func (appConfiguration *AppConfigurationV1) InstanceConfigStatusWithContext(ctx context.Context, instanceConfigStatusOptions *InstanceConfigStatusOptions) (result *InstanceConfigStatusResponse, response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(instanceConfigStatusOptions, "instanceConfigStatusOptions cannot be nil")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "unexpected-nil-param", common.GetComponentInfo())
+		return
+	}
+	err = core.ValidateStruct(instanceConfigStatusOptions, "instanceConfigStatusOptions")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
+		return
+	}
+
+	pathParamsMap := map[string]string{
+		"reference_id": *instanceConfigStatusOptions.ReferenceID,
+	}
+
+	builder := core.NewRequestBuilder(core.GET)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = appConfiguration.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(appConfiguration.Service.Options.URL, `/config/status/{reference_id}`, pathParamsMap)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
+		return
+	}
+
+	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "InstanceConfigStatus")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	for headerName, headerValue := range instanceConfigStatusOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+	builder.AddHeader("Accept", "application/json")
+
+	builder.AddQuery("action", fmt.Sprint(*instanceConfigStatusOptions.Action))
+
+	request, err := builder.Build()
+	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
+		return
+	}
+
+	var rawResponse map[string]json.RawMessage
+	response, err = appConfiguration.Service.Request(request, &rawResponse)
+	if err != nil {
+		core.EnrichHTTPProblem(err, "instance_config_status", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
+		return
+	}
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalInstanceConfigStatusResponse)
 		if err != nil {
 			err = core.SDKErrorf(err, "", "unmarshal-resp-error", common.GetComponentInfo())
 			return
@@ -5063,6 +5414,137 @@ func (options *CreateGitconfigOptions) SetHeaders(param map[string]string) *Crea
 	return options
 }
 
+// CreateIntegrationMetadata : CreateIntegrationMetadata struct
+// Models which "extend" this model:
+// - CreateIntegrationMetadataCreateEnIntegrationMetadata
+// - CreateIntegrationMetadataCreateKmsIntegrationMetadata
+type CreateIntegrationMetadata struct {
+	// The CRN of the Event Notifications service instance.
+	EventNotificationsInstanceCrn *string `json:"event_notifications_instance_crn,omitempty"`
+
+	// The URL endpoint of the Event Notifications service instance.
+	EventNotificationsEndpoint *string `json:"event_notifications_endpoint,omitempty"`
+
+	// Source name. This name will be shown in your Event Notification instance sources page.
+	EventNotificationsSourceName *string `json:"event_notifications_source_name,omitempty"`
+
+	// Source description. This description will be shown in your Event Notification instance sources page under above
+	// source name.
+	EventNotificationsSourceDescription *string `json:"event_notifications_source_description,omitempty"`
+
+	// The CRN of the Key Protect or HPCS service instance.
+	KmsInstanceCrn *string `json:"kms_instance_crn,omitempty"`
+
+	// The URL endpoint of Key Protect or HPCS instance.
+	KmsEndpoint *string `json:"kms_endpoint,omitempty"`
+
+	// The rootkey id of Key Protect or HPCS instance.
+	RootKeyID *string `json:"root_key_id,omitempty"`
+}
+func (*CreateIntegrationMetadata) isaCreateIntegrationMetadata() bool {
+	return true
+}
+
+type CreateIntegrationMetadataIntf interface {
+	isaCreateIntegrationMetadata() bool
+}
+
+// UnmarshalCreateIntegrationMetadata unmarshals an instance of CreateIntegrationMetadata from the specified map of raw messages.
+func UnmarshalCreateIntegrationMetadata(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(CreateIntegrationMetadata)
+	err = core.UnmarshalPrimitive(m, "event_notifications_instance_crn", &obj.EventNotificationsInstanceCrn)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "event_notifications_instance_crn-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "event_notifications_endpoint", &obj.EventNotificationsEndpoint)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "event_notifications_endpoint-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "event_notifications_source_name", &obj.EventNotificationsSourceName)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "event_notifications_source_name-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "event_notifications_source_description", &obj.EventNotificationsSourceDescription)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "event_notifications_source_description-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "kms_instance_crn", &obj.KmsInstanceCrn)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "kms_instance_crn-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "kms_endpoint", &obj.KmsEndpoint)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "kms_endpoint-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "root_key_id", &obj.RootKeyID)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "root_key_id-error", common.GetComponentInfo())
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// CreateIntegrationOptions : The CreateIntegration options.
+type CreateIntegrationOptions struct {
+	// Integration id. Allowed special characters are dot ( . ), hyphen( - ), underscore ( _ ) only.
+	IntegrationID *string `json:"integration_id" validate:"required"`
+
+	// Integration type.
+	IntegrationType *string `json:"integration_type" validate:"required"`
+
+	Metadata CreateIntegrationMetadataIntf `json:"metadata" validate:"required"`
+
+	// Allows users to set headers on API requests.
+	Headers map[string]string
+}
+
+// Constants associated with the CreateIntegrationOptions.IntegrationType property.
+// Integration type.
+const (
+	CreateIntegrationOptions_IntegrationType_EventNotifications = "EVENT_NOTIFICATIONS"
+	CreateIntegrationOptions_IntegrationType_Kms = "KMS"
+)
+
+// NewCreateIntegrationOptions : Instantiate CreateIntegrationOptions
+func (*AppConfigurationV1) NewCreateIntegrationOptions(integrationID string, integrationType string, metadata CreateIntegrationMetadataIntf) *CreateIntegrationOptions {
+	return &CreateIntegrationOptions{
+		IntegrationID: core.StringPtr(integrationID),
+		IntegrationType: core.StringPtr(integrationType),
+		Metadata: metadata,
+	}
+}
+
+// SetIntegrationID : Allow user to set IntegrationID
+func (_options *CreateIntegrationOptions) SetIntegrationID(integrationID string) *CreateIntegrationOptions {
+	_options.IntegrationID = core.StringPtr(integrationID)
+	return _options
+}
+
+// SetIntegrationType : Allow user to set IntegrationType
+func (_options *CreateIntegrationOptions) SetIntegrationType(integrationType string) *CreateIntegrationOptions {
+	_options.IntegrationType = core.StringPtr(integrationType)
+	return _options
+}
+
+// SetMetadata : Allow user to set Metadata
+func (_options *CreateIntegrationOptions) SetMetadata(metadata CreateIntegrationMetadataIntf) *CreateIntegrationOptions {
+	_options.Metadata = metadata
+	return _options
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *CreateIntegrationOptions) SetHeaders(param map[string]string) *CreateIntegrationOptions {
+	options.Headers = param
+	return options
+}
+
 // CreatePropertyOptions : The CreateProperty options.
 type CreatePropertyOptions struct {
 	// Environment Id.
@@ -5744,6 +6226,34 @@ func (_options *DeleteGitconfigOptions) SetGitConfigID(gitConfigID string) *Dele
 
 // SetHeaders : Allow user to set Headers
 func (options *DeleteGitconfigOptions) SetHeaders(param map[string]string) *DeleteGitconfigOptions {
+	options.Headers = param
+	return options
+}
+
+// DeleteIntegrationOptions : The DeleteIntegration options.
+type DeleteIntegrationOptions struct {
+	// Integration Id of the integration.
+	IntegrationID *string `json:"integration_id" validate:"required,ne="`
+
+	// Allows users to set headers on API requests.
+	Headers map[string]string
+}
+
+// NewDeleteIntegrationOptions : Instantiate DeleteIntegrationOptions
+func (*AppConfigurationV1) NewDeleteIntegrationOptions(integrationID string) *DeleteIntegrationOptions {
+	return &DeleteIntegrationOptions{
+		IntegrationID: core.StringPtr(integrationID),
+	}
+}
+
+// SetIntegrationID : Allow user to set IntegrationID
+func (_options *DeleteIntegrationOptions) SetIntegrationID(integrationID string) *DeleteIntegrationOptions {
+	_options.IntegrationID = core.StringPtr(integrationID)
+	return _options
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *DeleteIntegrationOptions) SetHeaders(param map[string]string) *DeleteIntegrationOptions {
 	options.Headers = param
 	return options
 }
@@ -6786,6 +7296,34 @@ func (options *GetGitconfigOptions) SetHeaders(param map[string]string) *GetGitc
 	return options
 }
 
+// GetIntegrationOptions : The GetIntegration options.
+type GetIntegrationOptions struct {
+	// Integration Id of the integration.
+	IntegrationID *string `json:"integration_id" validate:"required,ne="`
+
+	// Allows users to set headers on API requests.
+	Headers map[string]string
+}
+
+// NewGetIntegrationOptions : Instantiate GetIntegrationOptions
+func (*AppConfigurationV1) NewGetIntegrationOptions(integrationID string) *GetIntegrationOptions {
+	return &GetIntegrationOptions{
+		IntegrationID: core.StringPtr(integrationID),
+	}
+}
+
+// SetIntegrationID : Allow user to set IntegrationID
+func (_options *GetIntegrationOptions) SetIntegrationID(integrationID string) *GetIntegrationOptions {
+	_options.IntegrationID = core.StringPtr(integrationID)
+	return _options
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *GetIntegrationOptions) SetHeaders(param map[string]string) *GetIntegrationOptions {
+	options.Headers = param
+	return options
+}
+
 // GetPropertyOptions : The GetProperty options.
 type GetPropertyOptions struct {
 	// Environment Id.
@@ -7458,9 +7996,6 @@ type ImportFeatureRequestBody struct {
 
 	// List of collection id representing the collections that are associated with the specified feature flag.
 	Collections []CollectionRef `json:"collections,omitempty"`
-
-	// This attribute explains whether the feature has to be imported or not.
-	IsOverridden *bool `json:"isOverridden" validate:"required"`
 }
 
 // Constants associated with the ImportFeatureRequestBody.Type property.
@@ -7482,14 +8017,13 @@ const (
 )
 
 // NewImportFeatureRequestBody : Instantiate ImportFeatureRequestBody (Generic Model Constructor)
-func (*AppConfigurationV1) NewImportFeatureRequestBody(name string, featureID string, typeVar string, enabledValue interface{}, disabledValue interface{}, isOverridden bool) (_model *ImportFeatureRequestBody, err error) {
+func (*AppConfigurationV1) NewImportFeatureRequestBody(name string, featureID string, typeVar string, enabledValue interface{}, disabledValue interface{}) (_model *ImportFeatureRequestBody, err error) {
 	_model = &ImportFeatureRequestBody{
 		Name: core.StringPtr(name),
 		FeatureID: core.StringPtr(featureID),
 		Type: core.StringPtr(typeVar),
 		EnabledValue: enabledValue,
 		DisabledValue: disabledValue,
-		IsOverridden: core.BoolPtr(isOverridden),
 	}
 	err = core.ValidateStruct(_model, "required parameters")
 	if err != nil {
@@ -7561,11 +8095,6 @@ func UnmarshalImportFeatureRequestBody(m map[string]json.RawMessage, result inte
 		err = core.SDKErrorf(err, "", "collections-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "isOverridden", &obj.IsOverridden)
-	if err != nil {
-		err = core.SDKErrorf(err, "", "isOverridden-error", common.GetComponentInfo())
-		return
-	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
 	return
 }
@@ -7602,9 +8131,6 @@ type ImportPropertyRequestBody struct {
 
 	// List of collection id representing the collections that are associated with the specified property.
 	Collections []CollectionRef `json:"collections,omitempty"`
-
-	// This attribute explains whether the property has to be imported or not.
-	IsOverridden *bool `json:"isOverridden" validate:"required"`
 }
 
 // Constants associated with the ImportPropertyRequestBody.Type property.
@@ -7628,13 +8154,12 @@ const (
 )
 
 // NewImportPropertyRequestBody : Instantiate ImportPropertyRequestBody (Generic Model Constructor)
-func (*AppConfigurationV1) NewImportPropertyRequestBody(name string, propertyID string, typeVar string, value interface{}, isOverridden bool) (_model *ImportPropertyRequestBody, err error) {
+func (*AppConfigurationV1) NewImportPropertyRequestBody(name string, propertyID string, typeVar string, value interface{}) (_model *ImportPropertyRequestBody, err error) {
 	_model = &ImportPropertyRequestBody{
 		Name: core.StringPtr(name),
 		PropertyID: core.StringPtr(propertyID),
 		Type: core.StringPtr(typeVar),
 		Value: value,
-		IsOverridden: core.BoolPtr(isOverridden),
 	}
 	err = core.ValidateStruct(_model, "required parameters")
 	if err != nil {
@@ -7689,11 +8214,6 @@ func UnmarshalImportPropertyRequestBody(m map[string]json.RawMessage, result int
 	err = core.UnmarshalModel(m, "collections", &obj.Collections, UnmarshalCollectionRef)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "collections-error", common.GetComponentInfo())
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "isOverridden", &obj.IsOverridden)
-	if err != nil {
-		err = core.SDKErrorf(err, "", "isOverridden-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -7760,6 +8280,394 @@ func UnmarshalImportSegmentSchema(m map[string]json.RawMessage, result interface
 	err = core.UnmarshalModel(m, "rules", &obj.Rules, UnmarshalRule)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "rules-error", common.GetComponentInfo())
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// InstanceConfigAcceptedResponse : Config import & export operation status accepted response.
+type InstanceConfigAcceptedResponse struct {
+	// The message describing the request status.
+	Message *string `json:"message" validate:"required"`
+
+	// Reference id to check status of import/export operation.
+	ReferenceID *string `json:"referenceId" validate:"required"`
+}
+
+// UnmarshalInstanceConfigAcceptedResponse unmarshals an instance of InstanceConfigAcceptedResponse from the specified map of raw messages.
+func UnmarshalInstanceConfigAcceptedResponse(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(InstanceConfigAcceptedResponse)
+	err = core.UnmarshalPrimitive(m, "message", &obj.Message)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "message-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "referenceId", &obj.ReferenceID)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "referenceId-error", common.GetComponentInfo())
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// InstanceConfigStatusOptions : The InstanceConfigStatus options.
+type InstanceConfigStatusOptions struct {
+	// AppConfiguration config status reference id.
+	ReferenceID *string `json:"reference_id" validate:"required,ne="`
+
+	// The type of config status that is to be fetched.
+	Action *string `json:"action" validate:"required"`
+
+	// Allows users to set headers on API requests.
+	Headers map[string]string
+}
+
+// Constants associated with the InstanceConfigStatusOptions.Action property.
+// The type of config status that is to be fetched.
+const (
+	InstanceConfigStatusOptions_Action_Export = "export"
+	InstanceConfigStatusOptions_Action_Import = "import"
+)
+
+// NewInstanceConfigStatusOptions : Instantiate InstanceConfigStatusOptions
+func (*AppConfigurationV1) NewInstanceConfigStatusOptions(referenceID string, action string) *InstanceConfigStatusOptions {
+	return &InstanceConfigStatusOptions{
+		ReferenceID: core.StringPtr(referenceID),
+		Action: core.StringPtr(action),
+	}
+}
+
+// SetReferenceID : Allow user to set ReferenceID
+func (_options *InstanceConfigStatusOptions) SetReferenceID(referenceID string) *InstanceConfigStatusOptions {
+	_options.ReferenceID = core.StringPtr(referenceID)
+	return _options
+}
+
+// SetAction : Allow user to set Action
+func (_options *InstanceConfigStatusOptions) SetAction(action string) *InstanceConfigStatusOptions {
+	_options.Action = core.StringPtr(action)
+	return _options
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *InstanceConfigStatusOptions) SetHeaders(param map[string]string) *InstanceConfigStatusOptions {
+	options.Headers = param
+	return options
+}
+
+// InstanceConfigStatusResponse : Config import & export operation status.
+type InstanceConfigStatusResponse struct {
+	// Type of instance config operation(import/export).
+	Action *string `json:"action" validate:"required"`
+
+	// Accumulated errors during the operation.
+	Errors map[string]interface{} `json:"errors" validate:"required"`
+
+	// Message describing operation status.
+	Message *string `json:"message" validate:"required"`
+
+	// Status of the operation.
+	Status *string `json:"status" validate:"required"`
+
+	// Latest time at which import/export status updated.
+	LastUpdated *strfmt.DateTime `json:"last_updated" validate:"required"`
+
+	// Time when import/export operation triggered.
+	TriggeredTime *strfmt.DateTime `json:"triggered_time" validate:"required"`
+}
+
+// Constants associated with the InstanceConfigStatusResponse.Action property.
+// Type of instance config operation(import/export).
+const (
+	InstanceConfigStatusResponse_Action_Export = "export"
+	InstanceConfigStatusResponse_Action_Import = "import"
+)
+
+// Constants associated with the InstanceConfigStatusResponse.Status property.
+// Status of the operation.
+const (
+	InstanceConfigStatusResponse_Status_Completed = "completed"
+	InstanceConfigStatusResponse_Status_Failed = "failed"
+	InstanceConfigStatusResponse_Status_Inprogress = "inprogress"
+)
+
+// UnmarshalInstanceConfigStatusResponse unmarshals an instance of InstanceConfigStatusResponse from the specified map of raw messages.
+func UnmarshalInstanceConfigStatusResponse(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(InstanceConfigStatusResponse)
+	err = core.UnmarshalPrimitive(m, "action", &obj.Action)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "action-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "errors", &obj.Errors)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "errors-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "message", &obj.Message)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "message-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "status", &obj.Status)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "status-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "last_updated", &obj.LastUpdated)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "last_updated-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "triggered_time", &obj.TriggeredTime)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "triggered_time-error", common.GetComponentInfo())
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// Integration : Details of the integration.
+type Integration struct {
+	// Integration id.
+	IntegrationID *string `json:"integration_id" validate:"required"`
+
+	// Integration type.
+	IntegrationType *string `json:"integration_type" validate:"required"`
+
+	Metadata IntegrationMetadataIntf `json:"metadata" validate:"required"`
+
+	// Creation time of the integration.
+	CreatedTime *strfmt.DateTime `json:"created_time,omitempty"`
+
+	// Last updated time of the integration.
+	UpdatedTime *strfmt.DateTime `json:"updated_time,omitempty"`
+
+	// Integration URL.
+	Href *string `json:"href,omitempty"`
+}
+
+// UnmarshalIntegration unmarshals an instance of Integration from the specified map of raw messages.
+func UnmarshalIntegration(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(Integration)
+	err = core.UnmarshalPrimitive(m, "integration_id", &obj.IntegrationID)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "integration_id-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "integration_type", &obj.IntegrationType)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "integration_type-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalModel(m, "metadata", &obj.Metadata, UnmarshalIntegrationMetadata)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "metadata-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "created_time", &obj.CreatedTime)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "created_time-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "updated_time", &obj.UpdatedTime)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "updated_time-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "href", &obj.Href)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "href-error", common.GetComponentInfo())
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// IntegrationList : List of all integrations.
+type IntegrationList struct {
+	// Array of integrations.
+	Integrations []Integration `json:"integrations" validate:"required"`
+
+	// The number of records that are retrieved in a list.
+	Limit *int64 `json:"limit" validate:"required"`
+
+	// The number of records that are skipped in a list.
+	Offset *int64 `json:"offset" validate:"required"`
+
+	// The total number of records.
+	TotalCount *int64 `json:"total_count" validate:"required"`
+
+	// URL to navigate to the first page of records.
+	First *PaginatedListFirst `json:"first" validate:"required"`
+
+	// URL to navigate to the previous list of records.
+	Previous *PaginatedListPrevious `json:"previous,omitempty"`
+
+	// URL to navigate to the next list of records.
+	Next *PaginatedListNext `json:"next,omitempty"`
+
+	// URL to navigate to the last page of records.
+	Last *PaginatedListLast `json:"last" validate:"required"`
+}
+
+// UnmarshalIntegrationList unmarshals an instance of IntegrationList from the specified map of raw messages.
+func UnmarshalIntegrationList(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(IntegrationList)
+	err = core.UnmarshalModel(m, "integrations", &obj.Integrations, UnmarshalIntegration)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "integrations-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "limit", &obj.Limit)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "limit-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "offset", &obj.Offset)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "offset-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "total_count", &obj.TotalCount)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "total_count-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalModel(m, "first", &obj.First, UnmarshalPaginatedListFirst)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "first-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalModel(m, "previous", &obj.Previous, UnmarshalPaginatedListPrevious)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "previous-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalModel(m, "next", &obj.Next, UnmarshalPaginatedListNext)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "next-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalModel(m, "last", &obj.Last, UnmarshalPaginatedListLast)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "last-error", common.GetComponentInfo())
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// Retrieve the value to be passed to a request to access the next page of results
+func (resp *IntegrationList) GetNextOffset() (*int64, error) {
+	if core.IsNil(resp.Next) {
+		return nil, nil
+	}
+	offset, err := core.GetQueryParam(resp.Next.Href, "offset")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "read-query-param-error", common.GetComponentInfo())
+		return nil, err
+	} else if offset == nil {
+		return nil, nil
+	}
+	var offsetValue int64
+	offsetValue, err = strconv.ParseInt(*offset, 10, 64)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "parse-int-query-error", common.GetComponentInfo())
+		return nil, err
+	}
+	return core.Int64Ptr(offsetValue), nil
+}
+
+// IntegrationMetadata : IntegrationMetadata struct
+// Models which "extend" this model:
+// - IntegrationMetadataMetadataEnIntegration
+// - IntegrationMetadataMetadataKmsIntegration
+type IntegrationMetadata struct {
+	// Event Notifications source id.
+	EventNotificationsSourceID *string `json:"event_notifications_source_id,omitempty"`
+
+	// Event Notifications URL endpoint.
+	EventNotificationsEndpoint *string `json:"event_notifications_endpoint,omitempty"`
+
+	// Event Notifications instance CRN.
+	EventNotificationsInstanceCrn *string `json:"event_notifications_instance_crn,omitempty"`
+
+	// Key Protect or HPCS instance root key id.
+	RootKeyID *string `json:"root_key_id,omitempty"`
+
+	// Key Protect or HPCS URL endpoint.
+	KmsEndpoint *string `json:"kms_endpoint,omitempty"`
+
+	// Key Protect or HPCS instance CRN.
+	KmsInstanceCrn *string `json:"kms_instance_crn,omitempty"`
+
+	// Key Protect or HPCS instance root key status.
+	KeyStatus *string `json:"key_status,omitempty"`
+
+	// For service name "kms" the schema type is "BYOK". For service name "hs-crypto" the schema type is "KYOK".
+	KmsSchemeType *string `json:"kms_scheme_type,omitempty"`
+}
+
+// Constants associated with the IntegrationMetadata.KeyStatus property.
+// Key Protect or HPCS instance root key status.
+const (
+	IntegrationMetadata_KeyStatus_NonUsableDelete = "NON_USABLE_DELETE"
+	IntegrationMetadata_KeyStatus_NonUsableDisable = "NON_USABLE_DISABLE"
+	IntegrationMetadata_KeyStatus_Usable = "USABLE"
+)
+func (*IntegrationMetadata) isaIntegrationMetadata() bool {
+	return true
+}
+
+type IntegrationMetadataIntf interface {
+	isaIntegrationMetadata() bool
+}
+
+// UnmarshalIntegrationMetadata unmarshals an instance of IntegrationMetadata from the specified map of raw messages.
+func UnmarshalIntegrationMetadata(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(IntegrationMetadata)
+	err = core.UnmarshalPrimitive(m, "event_notifications_source_id", &obj.EventNotificationsSourceID)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "event_notifications_source_id-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "event_notifications_endpoint", &obj.EventNotificationsEndpoint)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "event_notifications_endpoint-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "event_notifications_instance_crn", &obj.EventNotificationsInstanceCrn)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "event_notifications_instance_crn-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "root_key_id", &obj.RootKeyID)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "root_key_id-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "kms_endpoint", &obj.KmsEndpoint)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "kms_endpoint-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "kms_instance_crn", &obj.KmsInstanceCrn)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "kms_instance_crn-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "key_status", &obj.KeyStatus)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "key_status-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "kms_scheme_type", &obj.KmsSchemeType)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "kms_scheme_type-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -8127,6 +9035,52 @@ func (*AppConfigurationV1) NewListInstanceConfigOptions() *ListInstanceConfigOpt
 
 // SetHeaders : Allow user to set Headers
 func (options *ListInstanceConfigOptions) SetHeaders(param map[string]string) *ListInstanceConfigOptions {
+	options.Headers = param
+	return options
+}
+
+// ListIntegrationsOptions : The ListIntegrations options.
+type ListIntegrationsOptions struct {
+	// If set to `true`, returns expanded view of the resource details.
+	Expand *bool `json:"expand,omitempty"`
+
+	// The number of records to retrieve. By default, the list operation return the first 10 records. To retrieve different
+	// set of records, use `limit` with `offset` to page through the available records.
+	Limit *int64 `json:"limit,omitempty"`
+
+	// The number of records to skip. By specifying `offset`, you retrieve a subset of items that starts with the `offset`
+	// value. Use `offset` with `limit` to page through the available records.
+	Offset *int64 `json:"offset,omitempty"`
+
+	// Allows users to set headers on API requests.
+	Headers map[string]string
+}
+
+// NewListIntegrationsOptions : Instantiate ListIntegrationsOptions
+func (*AppConfigurationV1) NewListIntegrationsOptions() *ListIntegrationsOptions {
+	return &ListIntegrationsOptions{}
+}
+
+// SetExpand : Allow user to set Expand
+func (_options *ListIntegrationsOptions) SetExpand(expand bool) *ListIntegrationsOptions {
+	_options.Expand = core.BoolPtr(expand)
+	return _options
+}
+
+// SetLimit : Allow user to set Limit
+func (_options *ListIntegrationsOptions) SetLimit(limit int64) *ListIntegrationsOptions {
+	_options.Limit = core.Int64Ptr(limit)
+	return _options
+}
+
+// SetOffset : Allow user to set Offset
+func (_options *ListIntegrationsOptions) SetOffset(offset int64) *ListIntegrationsOptions {
+	_options.Offset = core.Int64Ptr(offset)
+	return _options
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *ListIntegrationsOptions) SetHeaders(param map[string]string) *ListIntegrationsOptions {
 	options.Headers = param
 	return options
 }
@@ -10794,6 +11748,121 @@ func UnmarshalConfigActionGitConfigRestore(m map[string]json.RawMessage, result 
 	return
 }
 
+// CreateIntegrationMetadataCreateEnIntegrationMetadata : Metadata required to create Event Notifications integration.
+// This model "extends" CreateIntegrationMetadata
+type CreateIntegrationMetadataCreateEnIntegrationMetadata struct {
+	// The CRN of the Event Notifications service instance.
+	EventNotificationsInstanceCrn *string `json:"event_notifications_instance_crn" validate:"required"`
+
+	// The URL endpoint of the Event Notifications service instance.
+	EventNotificationsEndpoint *string `json:"event_notifications_endpoint" validate:"required"`
+
+	// Source name. This name will be shown in your Event Notification instance sources page.
+	EventNotificationsSourceName *string `json:"event_notifications_source_name" validate:"required"`
+
+	// Source description. This description will be shown in your Event Notification instance sources page under above
+	// source name.
+	EventNotificationsSourceDescription *string `json:"event_notifications_source_description,omitempty"`
+}
+
+// NewCreateIntegrationMetadataCreateEnIntegrationMetadata : Instantiate CreateIntegrationMetadataCreateEnIntegrationMetadata (Generic Model Constructor)
+func (*AppConfigurationV1) NewCreateIntegrationMetadataCreateEnIntegrationMetadata(eventNotificationsInstanceCrn string, eventNotificationsEndpoint string, eventNotificationsSourceName string) (_model *CreateIntegrationMetadataCreateEnIntegrationMetadata, err error) {
+	_model = &CreateIntegrationMetadataCreateEnIntegrationMetadata{
+		EventNotificationsInstanceCrn: core.StringPtr(eventNotificationsInstanceCrn),
+		EventNotificationsEndpoint: core.StringPtr(eventNotificationsEndpoint),
+		EventNotificationsSourceName: core.StringPtr(eventNotificationsSourceName),
+	}
+	err = core.ValidateStruct(_model, "required parameters")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "model-missing-required", common.GetComponentInfo())
+	}
+	return
+}
+
+func (*CreateIntegrationMetadataCreateEnIntegrationMetadata) isaCreateIntegrationMetadata() bool {
+	return true
+}
+
+// UnmarshalCreateIntegrationMetadataCreateEnIntegrationMetadata unmarshals an instance of CreateIntegrationMetadataCreateEnIntegrationMetadata from the specified map of raw messages.
+func UnmarshalCreateIntegrationMetadataCreateEnIntegrationMetadata(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(CreateIntegrationMetadataCreateEnIntegrationMetadata)
+	err = core.UnmarshalPrimitive(m, "event_notifications_instance_crn", &obj.EventNotificationsInstanceCrn)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "event_notifications_instance_crn-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "event_notifications_endpoint", &obj.EventNotificationsEndpoint)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "event_notifications_endpoint-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "event_notifications_source_name", &obj.EventNotificationsSourceName)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "event_notifications_source_name-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "event_notifications_source_description", &obj.EventNotificationsSourceDescription)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "event_notifications_source_description-error", common.GetComponentInfo())
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// CreateIntegrationMetadataCreateKmsIntegrationMetadata : Metadata required to create KMS integration.
+// This model "extends" CreateIntegrationMetadata
+type CreateIntegrationMetadataCreateKmsIntegrationMetadata struct {
+	// The CRN of the Key Protect or HPCS service instance.
+	KmsInstanceCrn *string `json:"kms_instance_crn" validate:"required"`
+
+	// The URL endpoint of Key Protect or HPCS instance.
+	KmsEndpoint *string `json:"kms_endpoint" validate:"required"`
+
+	// The rootkey id of Key Protect or HPCS instance.
+	RootKeyID *string `json:"root_key_id" validate:"required"`
+}
+
+// NewCreateIntegrationMetadataCreateKmsIntegrationMetadata : Instantiate CreateIntegrationMetadataCreateKmsIntegrationMetadata (Generic Model Constructor)
+func (*AppConfigurationV1) NewCreateIntegrationMetadataCreateKmsIntegrationMetadata(kmsInstanceCrn string, kmsEndpoint string, rootKeyID string) (_model *CreateIntegrationMetadataCreateKmsIntegrationMetadata, err error) {
+	_model = &CreateIntegrationMetadataCreateKmsIntegrationMetadata{
+		KmsInstanceCrn: core.StringPtr(kmsInstanceCrn),
+		KmsEndpoint: core.StringPtr(kmsEndpoint),
+		RootKeyID: core.StringPtr(rootKeyID),
+	}
+	err = core.ValidateStruct(_model, "required parameters")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "model-missing-required", common.GetComponentInfo())
+	}
+	return
+}
+
+func (*CreateIntegrationMetadataCreateKmsIntegrationMetadata) isaCreateIntegrationMetadata() bool {
+	return true
+}
+
+// UnmarshalCreateIntegrationMetadataCreateKmsIntegrationMetadata unmarshals an instance of CreateIntegrationMetadataCreateKmsIntegrationMetadata from the specified map of raw messages.
+func UnmarshalCreateIntegrationMetadataCreateKmsIntegrationMetadata(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(CreateIntegrationMetadataCreateKmsIntegrationMetadata)
+	err = core.UnmarshalPrimitive(m, "kms_instance_crn", &obj.KmsInstanceCrn)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "kms_instance_crn-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "kms_endpoint", &obj.KmsEndpoint)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "kms_endpoint-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "root_key_id", &obj.RootKeyID)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "root_key_id-error", common.GetComponentInfo())
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
 // CreateWorkflowConfigExternalServiceNow : Details of the External ServiceNow workflow configuration.
 // This model "extends" CreateWorkflowConfig
 type CreateWorkflowConfigExternalServiceNow struct {
@@ -11227,6 +12296,108 @@ func UnmarshalCreateWorkflowconfigResponseIBMServiceNow(m map[string]json.RawMes
 	err = core.UnmarshalPrimitive(m, "href", &obj.Href)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "href-error", common.GetComponentInfo())
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// IntegrationMetadataMetadataEnIntegration : Metadata details of the retrieved EN integration.
+// This model "extends" IntegrationMetadata
+type IntegrationMetadataMetadataEnIntegration struct {
+	// Event Notifications source id.
+	EventNotificationsSourceID *string `json:"event_notifications_source_id" validate:"required"`
+
+	// Event Notifications URL endpoint.
+	EventNotificationsEndpoint *string `json:"event_notifications_endpoint" validate:"required"`
+
+	// Event Notifications instance CRN.
+	EventNotificationsInstanceCrn *string `json:"event_notifications_instance_crn" validate:"required"`
+}
+
+func (*IntegrationMetadataMetadataEnIntegration) isaIntegrationMetadata() bool {
+	return true
+}
+
+// UnmarshalIntegrationMetadataMetadataEnIntegration unmarshals an instance of IntegrationMetadataMetadataEnIntegration from the specified map of raw messages.
+func UnmarshalIntegrationMetadataMetadataEnIntegration(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(IntegrationMetadataMetadataEnIntegration)
+	err = core.UnmarshalPrimitive(m, "event_notifications_source_id", &obj.EventNotificationsSourceID)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "event_notifications_source_id-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "event_notifications_endpoint", &obj.EventNotificationsEndpoint)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "event_notifications_endpoint-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "event_notifications_instance_crn", &obj.EventNotificationsInstanceCrn)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "event_notifications_instance_crn-error", common.GetComponentInfo())
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// IntegrationMetadataMetadataKmsIntegration : Metadata details of the retrieved Key Protect or HPCS integration.
+// This model "extends" IntegrationMetadata
+type IntegrationMetadataMetadataKmsIntegration struct {
+	// Key Protect or HPCS instance root key id.
+	RootKeyID *string `json:"root_key_id" validate:"required"`
+
+	// Key Protect or HPCS URL endpoint.
+	KmsEndpoint *string `json:"kms_endpoint" validate:"required"`
+
+	// Key Protect or HPCS instance CRN.
+	KmsInstanceCrn *string `json:"kms_instance_crn" validate:"required"`
+
+	// Key Protect or HPCS instance root key status.
+	KeyStatus *string `json:"key_status,omitempty"`
+
+	// For service name "kms" the schema type is "BYOK". For service name "hs-crypto" the schema type is "KYOK".
+	KmsSchemeType *string `json:"kms_scheme_type,omitempty"`
+}
+
+// Constants associated with the IntegrationMetadataMetadataKmsIntegration.KeyStatus property.
+// Key Protect or HPCS instance root key status.
+const (
+	IntegrationMetadataMetadataKmsIntegration_KeyStatus_NonUsableDelete = "NON_USABLE_DELETE"
+	IntegrationMetadataMetadataKmsIntegration_KeyStatus_NonUsableDisable = "NON_USABLE_DISABLE"
+	IntegrationMetadataMetadataKmsIntegration_KeyStatus_Usable = "USABLE"
+)
+
+func (*IntegrationMetadataMetadataKmsIntegration) isaIntegrationMetadata() bool {
+	return true
+}
+
+// UnmarshalIntegrationMetadataMetadataKmsIntegration unmarshals an instance of IntegrationMetadataMetadataKmsIntegration from the specified map of raw messages.
+func UnmarshalIntegrationMetadataMetadataKmsIntegration(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(IntegrationMetadataMetadataKmsIntegration)
+	err = core.UnmarshalPrimitive(m, "root_key_id", &obj.RootKeyID)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "root_key_id-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "kms_endpoint", &obj.KmsEndpoint)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "kms_endpoint-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "kms_instance_crn", &obj.KmsInstanceCrn)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "kms_instance_crn-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "key_status", &obj.KeyStatus)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "key_status-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "kms_scheme_type", &obj.KmsSchemeType)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "kms_scheme_type-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -12419,6 +13590,100 @@ func (pager *SnapshotsPager) GetNext() (page []GitConfig, err error) {
 
 // GetAll invokes GetAllWithContext() using context.Background() as the Context parameter.
 func (pager *SnapshotsPager) GetAll() (allItems []GitConfig, err error) {
+	allItems, err = pager.GetAllWithContext(context.Background())
+	err = core.RepurposeSDKProblem(err, "")
+	return
+}
+
+//
+// IntegrationsPager can be used to simplify the use of the "ListIntegrations" method.
+//
+type IntegrationsPager struct {
+	hasNext bool
+	options *ListIntegrationsOptions
+	client  *AppConfigurationV1
+	pageContext struct {
+		next *int64
+	}
+}
+
+// NewIntegrationsPager returns a new IntegrationsPager instance.
+func (appConfiguration *AppConfigurationV1) NewIntegrationsPager(options *ListIntegrationsOptions) (pager *IntegrationsPager, err error) {
+	if options.Offset != nil && *options.Offset != 0 {
+		err = core.SDKErrorf(nil, "the 'options.Offset' field should not be set", "no-query-setting", common.GetComponentInfo())
+		return
+	}
+
+	var optionsCopy ListIntegrationsOptions = *options
+	pager = &IntegrationsPager{
+		hasNext: true,
+		options: &optionsCopy,
+		client:  appConfiguration,
+	}
+	return
+}
+
+// HasNext returns true if there are potentially more results to be retrieved.
+func (pager *IntegrationsPager) HasNext() bool {
+	return pager.hasNext
+}
+
+// GetNextWithContext returns the next page of results using the specified Context.
+func (pager *IntegrationsPager) GetNextWithContext(ctx context.Context) (page []Integration, err error) {
+	if !pager.HasNext() {
+		return nil, fmt.Errorf("no more results available")
+	}
+
+	pager.options.Offset = pager.pageContext.next
+
+	result, _, err := pager.client.ListIntegrationsWithContext(ctx, pager.options)
+	if err != nil {
+		err = core.RepurposeSDKProblem(err, "error-getting-next-page")
+		return
+	}
+
+	var next *int64
+	if result.Next != nil {
+		var offset *int64
+		offset, err = core.GetQueryParamAsInt(result.Next.Href, "offset")
+		if err != nil {
+			errMsg := fmt.Sprintf("error retrieving 'offset' query parameter from URL '%s': %s", *result.Next.Href, err.Error())
+			err = core.SDKErrorf(err, errMsg, "get-query-error", common.GetComponentInfo())
+			return
+		}
+		next = offset
+	}
+	pager.pageContext.next = next
+	pager.hasNext = (pager.pageContext.next != nil)
+	page = result.Integrations
+
+	return
+}
+
+// GetAllWithContext returns all results by invoking GetNextWithContext() repeatedly
+// until all pages of results have been retrieved.
+func (pager *IntegrationsPager) GetAllWithContext(ctx context.Context) (allItems []Integration, err error) {
+	for pager.HasNext() {
+		var nextPage []Integration
+		nextPage, err = pager.GetNextWithContext(ctx)
+		if err != nil {
+			err = core.RepurposeSDKProblem(err, "error-getting-next-page")
+			return
+		}
+		allItems = append(allItems, nextPage...)
+	}
+	return
+}
+
+// GetNext invokes GetNextWithContext() using context.Background() as the Context parameter.
+func (pager *IntegrationsPager) GetNext() (page []Integration, err error) {
+	page, err = pager.GetNextWithContext(context.Background())
+	err = core.RepurposeSDKProblem(err, "")
+	return
+}
+
+// GetAll invokes GetAllWithContext() using context.Background() as the Context parameter.
+func (pager *IntegrationsPager) GetAll() (allItems []Integration, err error) {
 	allItems, err = pager.GetAllWithContext(context.Background())
 	err = core.RepurposeSDKProblem(err, "")
 	return

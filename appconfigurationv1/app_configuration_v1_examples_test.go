@@ -1042,6 +1042,82 @@ var _ = Describe(`AppConfigurationV1 Examples Tests`, func() {
 			Expect(response.StatusCode).To(Equal(200))
 			Expect(gitConfigRestore).ToNot(BeNil())
 		})
+		It(`ListIntegrations request example`, func() {
+			fmt.Println("\nListIntegrations() result:")
+			// begin-list_integrations
+			listIntegrationsOptions := &appconfigurationv1.ListIntegrationsOptions{
+				Expand: core.BoolPtr(true),
+				Limit: core.Int64Ptr(int64(10)),
+			}
+
+			pager, err := appConfigurationService.NewIntegrationsPager(listIntegrationsOptions)
+			if err != nil {
+				panic(err)
+			}
+
+			var allResults []appconfigurationv1.Integration
+			for pager.HasNext() {
+				nextPage, err := pager.GetNext()
+				if err != nil {
+					panic(err)
+				}
+				allResults = append(allResults, nextPage...)
+			}
+			b, _ := json.MarshalIndent(allResults, "", "  ")
+			fmt.Println(string(b))
+			// end-list_integrations
+		})
+		It(`CreateIntegration request example`, func() {
+			fmt.Println("\nCreateIntegration() result:")
+			// begin-create_integration
+
+			createIntegrationMetadataModel := &appconfigurationv1.CreateIntegrationMetadataCreateEnIntegrationMetadata{
+				EventNotificationsInstanceCrn: core.StringPtr("crn:v1:bluemix:public:event-notifications:eu-gb:a/4f631ea3b3204b2b878a295604994acf:0eb42def-21aa-4f0a-a975-0812ead6ceee::"),
+				EventNotificationsEndpoint: core.StringPtr("https://eu-gb.event-notifications.cloud.ibm.com"),
+				EventNotificationsSourceName: core.StringPtr("My App Config"),
+				EventNotificationsSourceDescription: core.StringPtr("All the events from App Configuration instance"),
+			}
+
+			createIntegrationOptions := appConfigurationService.NewCreateIntegrationOptions(
+				"lckkhp34t",
+				"EVENT_NOTIFICATIONS",
+				createIntegrationMetadataModel,
+			)
+
+			integration, response, err := appConfigurationService.CreateIntegration(createIntegrationOptions)
+			if err != nil {
+				panic(err)
+			}
+			b, _ := json.MarshalIndent(integration, "", "  ")
+			fmt.Println(string(b))
+
+			// end-create_integration
+
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(201))
+			Expect(integration).ToNot(BeNil())
+		})
+		It(`GetIntegration request example`, func() {
+			fmt.Println("\nGetIntegration() result:")
+			// begin-get_integration
+
+			getIntegrationOptions := appConfigurationService.NewGetIntegrationOptions(
+				"integration_id",
+			)
+
+			integration, response, err := appConfigurationService.GetIntegration(getIntegrationOptions)
+			if err != nil {
+				panic(err)
+			}
+			b, _ := json.MarshalIndent(integration, "", "  ")
+			fmt.Println(string(b))
+
+			// end-get_integration
+
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(200))
+			Expect(integration).ToNot(BeNil())
+		})
 		It(`ListOriginconfigs request example`, func() {
 			fmt.Println("\nListOriginconfigs() result:")
 			// begin-list_originconfigs
@@ -1205,7 +1281,6 @@ var _ = Describe(`AppConfigurationV1 Examples Tests`, func() {
 				RolloutPercentage: core.Int64Ptr(int64(100)),
 				SegmentRules: []appconfigurationv1.FeatureSegmentRule{*featureSegmentRuleModel},
 				Collections: []appconfigurationv1.CollectionRef{*collectionRefModel},
-				IsOverridden: core.BoolPtr(true),
 			}
 
 			segmentRuleModel := &appconfigurationv1.SegmentRule{
@@ -1222,7 +1297,6 @@ var _ = Describe(`AppConfigurationV1 Examples Tests`, func() {
 				Tags: core.StringPtr("pre-release, v1.2"),
 				SegmentRules: []appconfigurationv1.SegmentRule{*segmentRuleModel},
 				Collections: []appconfigurationv1.CollectionRef{*collectionRefModel},
-				IsOverridden: core.BoolPtr(true),
 			}
 
 			importEnvironmentSchemaModel := &appconfigurationv1.ImportEnvironmentSchema{
@@ -1261,18 +1335,18 @@ var _ = Describe(`AppConfigurationV1 Examples Tests`, func() {
 			importConfigOptions.SetSegments([]appconfigurationv1.ImportSegmentSchema{*importSegmentSchemaModel})
 			importConfigOptions.SetClean("true")
 
-			importConfig, response, err := appConfigurationService.ImportConfig(importConfigOptions)
+			instanceConfigAcceptedResponse, response, err := appConfigurationService.ImportConfig(importConfigOptions)
 			if err != nil {
 				panic(err)
 			}
-			b, _ := json.MarshalIndent(importConfig, "", "  ")
+			b, _ := json.MarshalIndent(instanceConfigAcceptedResponse, "", "  ")
 			fmt.Println(string(b))
 
 			// end-import_config
 
 			Expect(err).To(BeNil())
-			Expect(response.StatusCode).To(Equal(201))
-			Expect(importConfig).ToNot(BeNil())
+			Expect(response.StatusCode).To(Equal(202))
+			Expect(instanceConfigAcceptedResponse).ToNot(BeNil())
 		})
 		It(`ListInstanceConfig request example`, func() {
 			fmt.Println("\nListInstanceConfig() result:")
@@ -1314,6 +1388,28 @@ var _ = Describe(`AppConfigurationV1 Examples Tests`, func() {
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(200))
 			Expect(configAction).ToNot(BeNil())
+		})
+		It(`InstanceConfigStatus request example`, func() {
+			fmt.Println("\nInstanceConfigStatus() result:")
+			// begin-instance_config_status
+
+			instanceConfigStatusOptions := appConfigurationService.NewInstanceConfigStatusOptions(
+				"testString",
+				"import",
+			)
+
+			instanceConfigStatusResponse, response, err := appConfigurationService.InstanceConfigStatus(instanceConfigStatusOptions)
+			if err != nil {
+				panic(err)
+			}
+			b, _ := json.MarshalIndent(instanceConfigStatusResponse, "", "  ")
+			fmt.Println(string(b))
+
+			// end-instance_config_status
+
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(200))
+			Expect(instanceConfigStatusResponse).ToNot(BeNil())
 		})
 		It(`DeleteEnvironment request example`, func() {
 			// begin-delete_environment
@@ -1455,6 +1551,26 @@ var _ = Describe(`AppConfigurationV1 Examples Tests`, func() {
 			}
 
 			// end-delete_gitconfig
+
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(204))
+		})
+		It(`DeleteIntegration request example`, func() {
+			// begin-delete_integration
+
+			deleteIntegrationOptions := appConfigurationService.NewDeleteIntegrationOptions(
+				"integration_id",
+			)
+
+			response, err := appConfigurationService.DeleteIntegration(deleteIntegrationOptions)
+			if err != nil {
+				panic(err)
+			}
+			if response.StatusCode != 204 {
+				fmt.Printf("\nUnexpected response status code received from DeleteIntegration(): %d\n", response.StatusCode)
+			}
+
+			// end-delete_integration
 
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(204))
