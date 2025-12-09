@@ -49,7 +49,7 @@ CLI [here.](https://cloud.ibm.com/docs/app-configuration?topic=app-configuration
 
 ## Installation
 
-The current version of this SDK: 0.5.0
+The current version of this SDK: 0.5.3
 
 **Note: The v1.x.x versions of the App Configuration Go Admin SDK have been retracted. Use the latest available version
 of the SDK.**
