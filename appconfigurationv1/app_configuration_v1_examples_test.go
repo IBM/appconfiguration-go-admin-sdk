@@ -1,7 +1,7 @@
 //go:build examples
 
 /**
- * (C) Copyright IBM Corp. 2025.
+ * (C) Copyright IBM Corp. 2026.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -344,6 +344,8 @@ var _ = Describe(`AppConfigurationV1 Examples Tests`, func() {
 				Value: core.StringPtr("true"),
 				Order: core.Int64Ptr(int64(1)),
 				RolloutPercentage: core.Int64Ptr(int64(50)),
+				RuleID: core.StringPtr("rule-id-1"),
+				RuleName: core.StringPtr("rule-name-1"),
 			}
 
 			collectionRefModel := &appconfigurationv1.CollectionRef{
@@ -391,6 +393,8 @@ var _ = Describe(`AppConfigurationV1 Examples Tests`, func() {
 				Value: core.StringPtr("true"),
 				Order: core.Int64Ptr(int64(1)),
 				RolloutPercentage: core.Int64Ptr(int64(90)),
+				RuleID: core.StringPtr("rule-id-1"),
+				RuleName: core.StringPtr("rule-name-1"),
 			}
 
 			collectionUpdateRefModel := &appconfigurationv1.CollectionUpdateRef{
@@ -437,6 +441,8 @@ var _ = Describe(`AppConfigurationV1 Examples Tests`, func() {
 				Value: core.StringPtr("true"),
 				Order: core.Int64Ptr(int64(1)),
 				RolloutPercentage: core.Int64Ptr(int64(100)),
+				RuleID: core.StringPtr("rule-id-1"),
+				RuleName: core.StringPtr("rule-name-1"),
 			}
 
 			updateFeatureValuesOptions := appConfigurationService.NewUpdateFeatureValuesOptions(
@@ -509,6 +515,142 @@ var _ = Describe(`AppConfigurationV1 Examples Tests`, func() {
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(200))
 			Expect(feature).ToNot(BeNil())
+		})
+		It(`CreateFeatureRule request example`, func() {
+			fmt.Println("\nCreateFeatureRule() result:")
+			// begin-create_feature_rule
+
+			targetSegmentsModel := &appconfigurationv1.TargetSegments{
+				Segments: []string{"betausers", "premiumusers"},
+			}
+
+			createFeatureRuleOptions := appConfigurationService.NewCreateFeatureRuleOptions(
+				"environment_id",
+				"feature_id",
+				[]appconfigurationv1.TargetSegments{*targetSegmentsModel},
+				"true",
+				"RuleA",
+			)
+			createFeatureRuleOptions.SetRuleName("Rule Name")
+			createFeatureRuleOptions.SetRolloutPercentage(int64(50))
+
+			featureSegmentRuleWithRuleID, response, err := appConfigurationService.CreateFeatureRule(createFeatureRuleOptions)
+			if err != nil {
+				panic(err)
+			}
+			b, _ := json.MarshalIndent(featureSegmentRuleWithRuleID, "", "  ")
+			fmt.Println(string(b))
+
+			// end-create_feature_rule
+
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(201))
+			Expect(featureSegmentRuleWithRuleID).ToNot(BeNil())
+		})
+		It(`ListFeatureRules request example`, func() {
+			fmt.Println("\nListFeatureRules() result:")
+			// begin-list_feature_rules
+
+			listFeatureRulesOptions := appConfigurationService.NewListFeatureRulesOptions(
+				"environment_id",
+				"feature_id",
+			)
+
+			featureSegmentRuleListWithRuleID, response, err := appConfigurationService.ListFeatureRules(listFeatureRulesOptions)
+			if err != nil {
+				panic(err)
+			}
+			b, _ := json.MarshalIndent(featureSegmentRuleListWithRuleID, "", "  ")
+			fmt.Println(string(b))
+
+			// end-list_feature_rules
+
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(200))
+			Expect(featureSegmentRuleListWithRuleID).ToNot(BeNil())
+		})
+		It(`GetFeatureRule request example`, func() {
+			fmt.Println("\nGetFeatureRule() result:")
+			// begin-get_feature_rule
+
+			getFeatureRuleOptions := appConfigurationService.NewGetFeatureRuleOptions(
+				"environment_id",
+				"feature_id",
+				"rule_id",
+			)
+
+			featureSegmentRuleWithRuleID, response, err := appConfigurationService.GetFeatureRule(getFeatureRuleOptions)
+			if err != nil {
+				panic(err)
+			}
+			b, _ := json.MarshalIndent(featureSegmentRuleWithRuleID, "", "  ")
+			fmt.Println(string(b))
+
+			// end-get_feature_rule
+
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(200))
+			Expect(featureSegmentRuleWithRuleID).ToNot(BeNil())
+		})
+		It(`UpdateFeatureRule request example`, func() {
+			fmt.Println("\nUpdateFeatureRule() result:")
+			// begin-update_feature_rule
+
+			targetSegmentsModel := &appconfigurationv1.TargetSegments{
+				Segments: []string{"betausers", "premiumusers"},
+			}
+
+			updateFeatureRuleOptions := appConfigurationService.NewUpdateFeatureRuleOptions(
+				"environment_id",
+				"feature_id",
+				"rule_id",
+			)
+			updateFeatureRuleOptions.SetRules([]appconfigurationv1.TargetSegments{*targetSegmentsModel})
+			updateFeatureRuleOptions.SetValue("true")
+			updateFeatureRuleOptions.SetRuleName("rule-name-1")
+			updateFeatureRuleOptions.SetRolloutPercentage(int64(50))
+
+			featureSegmentRuleWithRuleID, response, err := appConfigurationService.UpdateFeatureRule(updateFeatureRuleOptions)
+			if err != nil {
+				panic(err)
+			}
+			b, _ := json.MarshalIndent(featureSegmentRuleWithRuleID, "", "  ")
+			fmt.Println(string(b))
+
+			// end-update_feature_rule
+
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(200))
+			Expect(featureSegmentRuleWithRuleID).ToNot(BeNil())
+		})
+		It(`UpdateFeatureRuleOrder request example`, func() {
+			fmt.Println("\nUpdateFeatureRuleOrder() result:")
+			// begin-update_feature_rule_order
+
+			reorderFeatureRulesModel := &appconfigurationv1.ReorderFeatureRulesReoderFeatureRulesByMove{
+				Action: core.StringPtr("move"),
+				RuleID: core.StringPtr("RuleA"),
+				Order: core.Int64Ptr(int64(1)),
+			}
+
+			updateFeatureRuleOrderOptions := appConfigurationService.NewUpdateFeatureRuleOrderOptions(
+				"environment_id",
+				"feature_id",
+				reorderFeatureRulesModel,
+			)
+
+			updateFeatureRuleOrderResponse, response, err := appConfigurationService.UpdateFeatureRuleOrder(updateFeatureRuleOrderOptions)
+			if err != nil {
+				panic(err)
+			}
+			b, _ := json.MarshalIndent(updateFeatureRuleOrderResponse, "", "  ")
+			fmt.Println(string(b))
+
+			// end-update_feature_rule_order
+
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(200))
+			Expect(updateFeatureRuleOrderResponse).ToNot(BeNil())
 		})
 		It(`ListProperties request example`, func() {
 			fmt.Println("\nListProperties() result:")
@@ -790,10 +932,10 @@ var _ = Describe(`AppConfigurationV1 Examples Tests`, func() {
 			Expect(response.StatusCode).To(Equal(200))
 			Expect(segment).ToNot(BeNil())
 		})
-		It(`ListSnapshots request example`, func() {
-			fmt.Println("\nListSnapshots() result:")
-			// begin-list_snapshots
-			listSnapshotsOptions := &appconfigurationv1.ListSnapshotsOptions{
+		It(`ListGitconfigs request example`, func() {
+			fmt.Println("\nListGitconfigs() result:")
+			// begin-list_gitconfigs
+			listGitconfigsOptions := &appconfigurationv1.ListGitconfigsOptions{
 				Sort: core.StringPtr("created_time"),
 				CollectionID: core.StringPtr("collection_id"),
 				EnvironmentID: core.StringPtr("environment_id"),
@@ -801,7 +943,7 @@ var _ = Describe(`AppConfigurationV1 Examples Tests`, func() {
 				Search: core.StringPtr("search_string"),
 			}
 
-			pager, err := appConfigurationService.NewSnapshotsPager(listSnapshotsOptions)
+			pager, err := appConfigurationService.NewGitconfigsPager(listGitconfigsOptions)
 			if err != nil {
 				panic(err)
 			}
@@ -816,7 +958,7 @@ var _ = Describe(`AppConfigurationV1 Examples Tests`, func() {
 			}
 			b, _ := json.MarshalIndent(allResults, "", "  ")
 			fmt.Println(string(b))
-			// end-list_snapshots
+			// end-list_gitconfigs
 		})
 		It(`CreateGitconfig request example`, func() {
 			fmt.Println("\nCreateGitconfig() result:")
@@ -1356,6 +1498,28 @@ var _ = Describe(`AppConfigurationV1 Examples Tests`, func() {
 			}
 
 			// end-delete_feature
+
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(204))
+		})
+		It(`DeleteFeatureRule request example`, func() {
+			// begin-delete_feature_rule
+
+			deleteFeatureRuleOptions := appConfigurationService.NewDeleteFeatureRuleOptions(
+				"environment_id",
+				"feature_id",
+				"rule_id",
+			)
+
+			response, err := appConfigurationService.DeleteFeatureRule(deleteFeatureRuleOptions)
+			if err != nil {
+				panic(err)
+			}
+			if response.StatusCode != 204 {
+				fmt.Printf("\nUnexpected response status code received from DeleteFeatureRule(): %d\n", response.StatusCode)
+			}
+
+			// end-delete_feature_rule
 
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(204))

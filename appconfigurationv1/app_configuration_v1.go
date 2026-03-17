@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2025.
+ * (C) Copyright IBM Corp. 2026.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,7 @@
  */
 
 /*
- * IBM OpenAPI SDK Code Generator Version: 3.106.0-09823488-20250707-071701
+ * IBM OpenAPI SDK Code Generator Version: 3.112.0-f88e9264-20260220-115155
  */
 
 // Package appconfigurationv1 : Operations and models for the AppConfigurationV1 service
@@ -1605,6 +1605,460 @@ func (appConfiguration *AppConfigurationV1) ToggleFeatureWithContext(ctx context
 	return
 }
 
+// CreateFeatureRule : Create Feature Rule
+// Create a rule for feature flag.
+func (appConfiguration *AppConfigurationV1) CreateFeatureRule(createFeatureRuleOptions *CreateFeatureRuleOptions) (result *FeatureSegmentRuleWithRuleID, response *core.DetailedResponse, err error) {
+	result, response, err = appConfiguration.CreateFeatureRuleWithContext(context.Background(), createFeatureRuleOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
+}
+
+// CreateFeatureRuleWithContext is an alternate form of the CreateFeatureRule method which supports a Context parameter
+func (appConfiguration *AppConfigurationV1) CreateFeatureRuleWithContext(ctx context.Context, createFeatureRuleOptions *CreateFeatureRuleOptions) (result *FeatureSegmentRuleWithRuleID, response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(createFeatureRuleOptions, "createFeatureRuleOptions cannot be nil")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "unexpected-nil-param", common.GetComponentInfo())
+		return
+	}
+	err = core.ValidateStruct(createFeatureRuleOptions, "createFeatureRuleOptions")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
+		return
+	}
+
+	pathParamsMap := map[string]string{
+		"environment_id": *createFeatureRuleOptions.EnvironmentID,
+		"feature_id": *createFeatureRuleOptions.FeatureID,
+	}
+
+	builder := core.NewRequestBuilder(core.POST)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = appConfiguration.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(appConfiguration.Service.Options.URL, `/environments/{environment_id}/features/{feature_id}/rules`, pathParamsMap)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
+		return
+	}
+
+	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "CreateFeatureRule")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	for headerName, headerValue := range createFeatureRuleOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+	builder.AddHeader("Accept", "application/json")
+	builder.AddHeader("Content-Type", "application/json")
+
+	body := make(map[string]interface{})
+	if createFeatureRuleOptions.Rules != nil {
+		body["rules"] = createFeatureRuleOptions.Rules
+	}
+	if createFeatureRuleOptions.Value != nil {
+		body["value"] = createFeatureRuleOptions.Value
+	}
+	if createFeatureRuleOptions.RuleID != nil {
+		body["rule_id"] = createFeatureRuleOptions.RuleID
+	}
+	if createFeatureRuleOptions.RuleName != nil {
+		body["rule_name"] = createFeatureRuleOptions.RuleName
+	}
+	if createFeatureRuleOptions.RolloutPercentage != nil {
+		body["rollout_percentage"] = createFeatureRuleOptions.RolloutPercentage
+	}
+	_, err = builder.SetBodyContentJSON(body)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "set-json-body-error", common.GetComponentInfo())
+		return
+	}
+
+	request, err := builder.Build()
+	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
+		return
+	}
+
+	var rawResponse map[string]json.RawMessage
+	response, err = appConfiguration.Service.Request(request, &rawResponse)
+	if err != nil {
+		core.EnrichHTTPProblem(err, "create_feature_rule", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
+		return
+	}
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalFeatureSegmentRuleWithRuleID)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-resp-error", common.GetComponentInfo())
+			return
+		}
+		response.Result = result
+	}
+
+	return
+}
+
+// ListFeatureRules : Get All rules for feature
+// Get all the rules for a feature flag in the specified environment.
+func (appConfiguration *AppConfigurationV1) ListFeatureRules(listFeatureRulesOptions *ListFeatureRulesOptions) (result *FeatureSegmentRuleListWithRuleID, response *core.DetailedResponse, err error) {
+	result, response, err = appConfiguration.ListFeatureRulesWithContext(context.Background(), listFeatureRulesOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
+}
+
+// ListFeatureRulesWithContext is an alternate form of the ListFeatureRules method which supports a Context parameter
+func (appConfiguration *AppConfigurationV1) ListFeatureRulesWithContext(ctx context.Context, listFeatureRulesOptions *ListFeatureRulesOptions) (result *FeatureSegmentRuleListWithRuleID, response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(listFeatureRulesOptions, "listFeatureRulesOptions cannot be nil")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "unexpected-nil-param", common.GetComponentInfo())
+		return
+	}
+	err = core.ValidateStruct(listFeatureRulesOptions, "listFeatureRulesOptions")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
+		return
+	}
+
+	pathParamsMap := map[string]string{
+		"environment_id": *listFeatureRulesOptions.EnvironmentID,
+		"feature_id": *listFeatureRulesOptions.FeatureID,
+	}
+
+	builder := core.NewRequestBuilder(core.GET)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = appConfiguration.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(appConfiguration.Service.Options.URL, `/environments/{environment_id}/features/{feature_id}/rules`, pathParamsMap)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
+		return
+	}
+
+	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "ListFeatureRules")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	for headerName, headerValue := range listFeatureRulesOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+	builder.AddHeader("Accept", "application/json")
+
+	request, err := builder.Build()
+	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
+		return
+	}
+
+	var rawResponse map[string]json.RawMessage
+	response, err = appConfiguration.Service.Request(request, &rawResponse)
+	if err != nil {
+		core.EnrichHTTPProblem(err, "list_feature_rules", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
+		return
+	}
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalFeatureSegmentRuleListWithRuleID)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-resp-error", common.GetComponentInfo())
+			return
+		}
+		response.Result = result
+	}
+
+	return
+}
+
+// GetFeatureRule : Get rule for feature by rule id
+// Get the rule by rule id for the feature flag in the specified environment.
+func (appConfiguration *AppConfigurationV1) GetFeatureRule(getFeatureRuleOptions *GetFeatureRuleOptions) (result *FeatureSegmentRuleWithRuleID, response *core.DetailedResponse, err error) {
+	result, response, err = appConfiguration.GetFeatureRuleWithContext(context.Background(), getFeatureRuleOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
+}
+
+// GetFeatureRuleWithContext is an alternate form of the GetFeatureRule method which supports a Context parameter
+func (appConfiguration *AppConfigurationV1) GetFeatureRuleWithContext(ctx context.Context, getFeatureRuleOptions *GetFeatureRuleOptions) (result *FeatureSegmentRuleWithRuleID, response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(getFeatureRuleOptions, "getFeatureRuleOptions cannot be nil")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "unexpected-nil-param", common.GetComponentInfo())
+		return
+	}
+	err = core.ValidateStruct(getFeatureRuleOptions, "getFeatureRuleOptions")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
+		return
+	}
+
+	pathParamsMap := map[string]string{
+		"environment_id": *getFeatureRuleOptions.EnvironmentID,
+		"feature_id": *getFeatureRuleOptions.FeatureID,
+		"rule_id": *getFeatureRuleOptions.RuleID,
+	}
+
+	builder := core.NewRequestBuilder(core.GET)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = appConfiguration.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(appConfiguration.Service.Options.URL, `/environments/{environment_id}/features/{feature_id}/rules/{rule_id}`, pathParamsMap)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
+		return
+	}
+
+	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "GetFeatureRule")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	for headerName, headerValue := range getFeatureRuleOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+	builder.AddHeader("Accept", "application/json")
+
+	request, err := builder.Build()
+	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
+		return
+	}
+
+	var rawResponse map[string]json.RawMessage
+	response, err = appConfiguration.Service.Request(request, &rawResponse)
+	if err != nil {
+		core.EnrichHTTPProblem(err, "get_feature_rule", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
+		return
+	}
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalFeatureSegmentRuleWithRuleID)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-resp-error", common.GetComponentInfo())
+			return
+		}
+		response.Result = result
+	}
+
+	return
+}
+
+// UpdateFeatureRule : Update Feature rule
+// Update Feature rule.
+func (appConfiguration *AppConfigurationV1) UpdateFeatureRule(updateFeatureRuleOptions *UpdateFeatureRuleOptions) (result *FeatureSegmentRuleWithRuleID, response *core.DetailedResponse, err error) {
+	result, response, err = appConfiguration.UpdateFeatureRuleWithContext(context.Background(), updateFeatureRuleOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
+}
+
+// UpdateFeatureRuleWithContext is an alternate form of the UpdateFeatureRule method which supports a Context parameter
+func (appConfiguration *AppConfigurationV1) UpdateFeatureRuleWithContext(ctx context.Context, updateFeatureRuleOptions *UpdateFeatureRuleOptions) (result *FeatureSegmentRuleWithRuleID, response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(updateFeatureRuleOptions, "updateFeatureRuleOptions cannot be nil")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "unexpected-nil-param", common.GetComponentInfo())
+		return
+	}
+	err = core.ValidateStruct(updateFeatureRuleOptions, "updateFeatureRuleOptions")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
+		return
+	}
+
+	pathParamsMap := map[string]string{
+		"environment_id": *updateFeatureRuleOptions.EnvironmentID,
+		"feature_id": *updateFeatureRuleOptions.FeatureID,
+		"rule_id": *updateFeatureRuleOptions.RuleID,
+	}
+
+	builder := core.NewRequestBuilder(core.PATCH)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = appConfiguration.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(appConfiguration.Service.Options.URL, `/environments/{environment_id}/features/{feature_id}/rules/{rule_id}`, pathParamsMap)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
+		return
+	}
+
+	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "UpdateFeatureRule")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	for headerName, headerValue := range updateFeatureRuleOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+	builder.AddHeader("Accept", "application/json")
+	builder.AddHeader("Content-Type", "application/json")
+
+	body := make(map[string]interface{})
+	if updateFeatureRuleOptions.Rules != nil {
+		body["rules"] = updateFeatureRuleOptions.Rules
+	}
+	if updateFeatureRuleOptions.Value != nil {
+		body["value"] = updateFeatureRuleOptions.Value
+	}
+	if updateFeatureRuleOptions.RuleName != nil {
+		body["rule_name"] = updateFeatureRuleOptions.RuleName
+	}
+	if updateFeatureRuleOptions.RolloutPercentage != nil {
+		body["rollout_percentage"] = updateFeatureRuleOptions.RolloutPercentage
+	}
+	_, err = builder.SetBodyContentJSON(body)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "set-json-body-error", common.GetComponentInfo())
+		return
+	}
+
+	request, err := builder.Build()
+	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
+		return
+	}
+
+	var rawResponse map[string]json.RawMessage
+	response, err = appConfiguration.Service.Request(request, &rawResponse)
+	if err != nil {
+		core.EnrichHTTPProblem(err, "update_feature_rule", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
+		return
+	}
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalFeatureSegmentRuleWithRuleID)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-resp-error", common.GetComponentInfo())
+			return
+		}
+		response.Result = result
+	}
+
+	return
+}
+
+// DeleteFeatureRule : Delete Feature rule
+// Delete a feature rule.
+func (appConfiguration *AppConfigurationV1) DeleteFeatureRule(deleteFeatureRuleOptions *DeleteFeatureRuleOptions) (response *core.DetailedResponse, err error) {
+	response, err = appConfiguration.DeleteFeatureRuleWithContext(context.Background(), deleteFeatureRuleOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
+}
+
+// DeleteFeatureRuleWithContext is an alternate form of the DeleteFeatureRule method which supports a Context parameter
+func (appConfiguration *AppConfigurationV1) DeleteFeatureRuleWithContext(ctx context.Context, deleteFeatureRuleOptions *DeleteFeatureRuleOptions) (response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(deleteFeatureRuleOptions, "deleteFeatureRuleOptions cannot be nil")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "unexpected-nil-param", common.GetComponentInfo())
+		return
+	}
+	err = core.ValidateStruct(deleteFeatureRuleOptions, "deleteFeatureRuleOptions")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
+		return
+	}
+
+	pathParamsMap := map[string]string{
+		"environment_id": *deleteFeatureRuleOptions.EnvironmentID,
+		"feature_id": *deleteFeatureRuleOptions.FeatureID,
+		"rule_id": *deleteFeatureRuleOptions.RuleID,
+	}
+
+	builder := core.NewRequestBuilder(core.DELETE)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = appConfiguration.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(appConfiguration.Service.Options.URL, `/environments/{environment_id}/features/{feature_id}/rules/{rule_id}`, pathParamsMap)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
+		return
+	}
+
+	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "DeleteFeatureRule")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	for headerName, headerValue := range deleteFeatureRuleOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	request, err := builder.Build()
+	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
+		return
+	}
+
+	response, err = appConfiguration.Service.Request(request, nil)
+	if err != nil {
+		core.EnrichHTTPProblem(err, "delete_feature_rule", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
+		return
+	}
+
+	return
+}
+
+// UpdateFeatureRuleOrder : Update Feature rule order
+// Update Feature rule order.
+func (appConfiguration *AppConfigurationV1) UpdateFeatureRuleOrder(updateFeatureRuleOrderOptions *UpdateFeatureRuleOrderOptions) (result *string, response *core.DetailedResponse, err error) {
+	result, response, err = appConfiguration.UpdateFeatureRuleOrderWithContext(context.Background(), updateFeatureRuleOrderOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
+}
+
+// UpdateFeatureRuleOrderWithContext is an alternate form of the UpdateFeatureRuleOrder method which supports a Context parameter
+func (appConfiguration *AppConfigurationV1) UpdateFeatureRuleOrderWithContext(ctx context.Context, updateFeatureRuleOrderOptions *UpdateFeatureRuleOrderOptions) (result *string, response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(updateFeatureRuleOrderOptions, "updateFeatureRuleOrderOptions cannot be nil")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "unexpected-nil-param", common.GetComponentInfo())
+		return
+	}
+	err = core.ValidateStruct(updateFeatureRuleOrderOptions, "updateFeatureRuleOrderOptions")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
+		return
+	}
+
+	pathParamsMap := map[string]string{
+		"environment_id": *updateFeatureRuleOrderOptions.EnvironmentID,
+		"feature_id": *updateFeatureRuleOrderOptions.FeatureID,
+	}
+
+	builder := core.NewRequestBuilder(core.PATCH)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = appConfiguration.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(appConfiguration.Service.Options.URL, `/environments/{environment_id}/features/{feature_id}/rules_order`, pathParamsMap)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
+		return
+	}
+
+	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "UpdateFeatureRuleOrder")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	for headerName, headerValue := range updateFeatureRuleOrderOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+	builder.AddHeader("Accept", "application/json")
+	builder.AddHeader("Content-Type", "application/json")
+
+	_, err = builder.SetBodyContentJSON(updateFeatureRuleOrderOptions.UpdateFeatureRuleOrder)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "set-json-body-error", common.GetComponentInfo())
+		return
+	}
+
+	request, err := builder.Build()
+	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
+		return
+	}
+
+	response, err = appConfiguration.Service.Request(request, &result)
+	if err != nil {
+		core.EnrichHTTPProblem(err, "update_feature_rule_order", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
+		return
+	}
+
+	return
+}
+
 // ListProperties : Get list of Properties
 // List all the properties in the specified environment.
 func (appConfiguration *AppConfigurationV1) ListProperties(listPropertiesOptions *ListPropertiesOptions) (result *PropertiesList, response *core.DetailedResponse, err error) {
@@ -2521,17 +2975,17 @@ func (appConfiguration *AppConfigurationV1) DeleteSegmentWithContext(ctx context
 	return
 }
 
-// ListSnapshots : Get list of Git configs
+// ListGitconfigs : Get list of Git configs
 // List all the Git configs.
-func (appConfiguration *AppConfigurationV1) ListSnapshots(listSnapshotsOptions *ListSnapshotsOptions) (result *GitConfigList, response *core.DetailedResponse, err error) {
-	result, response, err = appConfiguration.ListSnapshotsWithContext(context.Background(), listSnapshotsOptions)
+func (appConfiguration *AppConfigurationV1) ListGitconfigs(listGitconfigsOptions *ListGitconfigsOptions) (result *GitConfigList, response *core.DetailedResponse, err error) {
+	result, response, err = appConfiguration.ListGitconfigsWithContext(context.Background(), listGitconfigsOptions)
 	err = core.RepurposeSDKProblem(err, "")
 	return
 }
 
-// ListSnapshotsWithContext is an alternate form of the ListSnapshots method which supports a Context parameter
-func (appConfiguration *AppConfigurationV1) ListSnapshotsWithContext(ctx context.Context, listSnapshotsOptions *ListSnapshotsOptions) (result *GitConfigList, response *core.DetailedResponse, err error) {
-	err = core.ValidateStruct(listSnapshotsOptions, "listSnapshotsOptions")
+// ListGitconfigsWithContext is an alternate form of the ListGitconfigs method which supports a Context parameter
+func (appConfiguration *AppConfigurationV1) ListGitconfigsWithContext(ctx context.Context, listGitconfigsOptions *ListGitconfigsOptions) (result *GitConfigList, response *core.DetailedResponse, err error) {
+	err = core.ValidateStruct(listGitconfigsOptions, "listGitconfigsOptions")
 	if err != nil {
 		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
 		return
@@ -2546,33 +3000,33 @@ func (appConfiguration *AppConfigurationV1) ListSnapshotsWithContext(ctx context
 		return
 	}
 
-	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "ListSnapshots")
+	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "ListGitconfigs")
 	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	for headerName, headerValue := range listSnapshotsOptions.Headers {
+	for headerName, headerValue := range listGitconfigsOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
 
-	if listSnapshotsOptions.Sort != nil {
-		builder.AddQuery("sort", fmt.Sprint(*listSnapshotsOptions.Sort))
+	if listGitconfigsOptions.Sort != nil {
+		builder.AddQuery("sort", fmt.Sprint(*listGitconfigsOptions.Sort))
 	}
-	if listSnapshotsOptions.CollectionID != nil {
-		builder.AddQuery("collection_id", fmt.Sprint(*listSnapshotsOptions.CollectionID))
+	if listGitconfigsOptions.CollectionID != nil {
+		builder.AddQuery("collection_id", fmt.Sprint(*listGitconfigsOptions.CollectionID))
 	}
-	if listSnapshotsOptions.EnvironmentID != nil {
-		builder.AddQuery("environment_id", fmt.Sprint(*listSnapshotsOptions.EnvironmentID))
+	if listGitconfigsOptions.EnvironmentID != nil {
+		builder.AddQuery("environment_id", fmt.Sprint(*listGitconfigsOptions.EnvironmentID))
 	}
-	if listSnapshotsOptions.Limit != nil {
-		builder.AddQuery("limit", fmt.Sprint(*listSnapshotsOptions.Limit))
+	if listGitconfigsOptions.Limit != nil {
+		builder.AddQuery("limit", fmt.Sprint(*listGitconfigsOptions.Limit))
 	}
-	if listSnapshotsOptions.Offset != nil {
-		builder.AddQuery("offset", fmt.Sprint(*listSnapshotsOptions.Offset))
+	if listGitconfigsOptions.Offset != nil {
+		builder.AddQuery("offset", fmt.Sprint(*listGitconfigsOptions.Offset))
 	}
-	if listSnapshotsOptions.Search != nil {
-		builder.AddQuery("search", fmt.Sprint(*listSnapshotsOptions.Search))
+	if listGitconfigsOptions.Search != nil {
+		builder.AddQuery("search", fmt.Sprint(*listGitconfigsOptions.Search))
 	}
 
 	request, err := builder.Build()
@@ -2584,7 +3038,7 @@ func (appConfiguration *AppConfigurationV1) ListSnapshotsWithContext(ctx context
 	var rawResponse map[string]json.RawMessage
 	response, err = appConfiguration.Service.Request(request, &rawResponse)
 	if err != nil {
-		core.EnrichHTTPProblem(err, "list_snapshots", getServiceComponentInfo())
+		core.EnrichHTTPProblem(err, "list_gitconfigs", getServiceComponentInfo())
 		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
 		return
 	}
@@ -3707,8 +4161,8 @@ func (appConfiguration *AppConfigurationV1) UpdateWorkflowconfigWithContext(ctx 
 	return
 }
 
-// DeleteWorkflowconfig : Delete  Workflow config
-// Delete a  Workflow config.
+// DeleteWorkflowconfig : Delete Workflow config
+// Delete a Workflow config.
 func (appConfiguration *AppConfigurationV1) DeleteWorkflowconfig(deleteWorkflowconfigOptions *DeleteWorkflowconfigOptions) (response *core.DetailedResponse, err error) {
 	response, err = appConfiguration.DeleteWorkflowconfigWithContext(context.Background(), deleteWorkflowconfigOptions)
 	err = core.RepurposeSDKProblem(err, "")
@@ -3981,7 +4435,7 @@ func (appConfiguration *AppConfigurationV1) PromoteRestoreConfigWithContext(ctx 
 	return
 }
 
-// InstanceConfigStatus : Get status of instance configuration import / export
+// InstanceConfigStatus : Get status of instance configuration import/export
 // Get the status of instance configuration operation.
 func (appConfiguration *AppConfigurationV1) InstanceConfigStatus(instanceConfigStatusOptions *InstanceConfigStatusOptions) (result *InstanceConfigStatusResponse, response *core.DetailedResponse, err error) {
 	result, response, err = appConfiguration.InstanceConfigStatusWithContext(context.Background(), instanceConfigStatusOptions)
@@ -4760,6 +5214,93 @@ func (_options *CreateFeatureOptions) SetCollections(collections []CollectionRef
 
 // SetHeaders : Allow user to set Headers
 func (options *CreateFeatureOptions) SetHeaders(param map[string]string) *CreateFeatureOptions {
+	options.Headers = param
+	return options
+}
+
+// CreateFeatureRuleOptions : The CreateFeatureRule options.
+type CreateFeatureRuleOptions struct {
+	// Environment Id.
+	EnvironmentID *string `json:"environment_id" validate:"required,ne="`
+
+	// Feature Id.
+	FeatureID *string `json:"feature_id" validate:"required,ne="`
+
+	// The list of targeted segments.
+	Rules []TargetSegments `json:"rules" validate:"required"`
+
+	// Value to be used for evaluation for this rule. The value can be Boolean, SecretRef, String - TEXT , String - JSON ,
+	// String - YAML or a Numeric value as per the `type` and `format` attributes.
+	Value interface{} `json:"value" validate:"required"`
+
+	// Rule id is an identifier used for identifying the rule.
+	RuleID *string `json:"rule_id" validate:"required"`
+
+	// Name assigned to a particular rule.
+	RuleName *string `json:"rule_name,omitempty"`
+
+	// Rollout percentage associated with feature flag. Supported only for Lite and Enterprise plans.
+	RolloutPercentage *int64 `json:"rollout_percentage,omitempty"`
+
+	// Allows users to set headers on API requests.
+	Headers map[string]string
+}
+
+// NewCreateFeatureRuleOptions : Instantiate CreateFeatureRuleOptions
+func (*AppConfigurationV1) NewCreateFeatureRuleOptions(environmentID string, featureID string, rules []TargetSegments, value interface{}, ruleID string) *CreateFeatureRuleOptions {
+	return &CreateFeatureRuleOptions{
+		EnvironmentID: core.StringPtr(environmentID),
+		FeatureID: core.StringPtr(featureID),
+		Rules: rules,
+		Value: value,
+		RuleID: core.StringPtr(ruleID),
+	}
+}
+
+// SetEnvironmentID : Allow user to set EnvironmentID
+func (_options *CreateFeatureRuleOptions) SetEnvironmentID(environmentID string) *CreateFeatureRuleOptions {
+	_options.EnvironmentID = core.StringPtr(environmentID)
+	return _options
+}
+
+// SetFeatureID : Allow user to set FeatureID
+func (_options *CreateFeatureRuleOptions) SetFeatureID(featureID string) *CreateFeatureRuleOptions {
+	_options.FeatureID = core.StringPtr(featureID)
+	return _options
+}
+
+// SetRules : Allow user to set Rules
+func (_options *CreateFeatureRuleOptions) SetRules(rules []TargetSegments) *CreateFeatureRuleOptions {
+	_options.Rules = rules
+	return _options
+}
+
+// SetValue : Allow user to set Value
+func (_options *CreateFeatureRuleOptions) SetValue(value interface{}) *CreateFeatureRuleOptions {
+	_options.Value = value
+	return _options
+}
+
+// SetRuleID : Allow user to set RuleID
+func (_options *CreateFeatureRuleOptions) SetRuleID(ruleID string) *CreateFeatureRuleOptions {
+	_options.RuleID = core.StringPtr(ruleID)
+	return _options
+}
+
+// SetRuleName : Allow user to set RuleName
+func (_options *CreateFeatureRuleOptions) SetRuleName(ruleName string) *CreateFeatureRuleOptions {
+	_options.RuleName = core.StringPtr(ruleName)
+	return _options
+}
+
+// SetRolloutPercentage : Allow user to set RolloutPercentage
+func (_options *CreateFeatureRuleOptions) SetRolloutPercentage(rolloutPercentage int64) *CreateFeatureRuleOptions {
+	_options.RolloutPercentage = core.Int64Ptr(rolloutPercentage)
+	return _options
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *CreateFeatureRuleOptions) SetHeaders(param map[string]string) *CreateFeatureRuleOptions {
 	options.Headers = param
 	return options
 }
@@ -5698,6 +6239,54 @@ func (options *DeleteFeatureOptions) SetHeaders(param map[string]string) *Delete
 	return options
 }
 
+// DeleteFeatureRuleOptions : The DeleteFeatureRule options.
+type DeleteFeatureRuleOptions struct {
+	// Environment Id.
+	EnvironmentID *string `json:"environment_id" validate:"required,ne="`
+
+	// Feature Id.
+	FeatureID *string `json:"feature_id" validate:"required,ne="`
+
+	// rule id.
+	RuleID *string `json:"rule_id" validate:"required,ne="`
+
+	// Allows users to set headers on API requests.
+	Headers map[string]string
+}
+
+// NewDeleteFeatureRuleOptions : Instantiate DeleteFeatureRuleOptions
+func (*AppConfigurationV1) NewDeleteFeatureRuleOptions(environmentID string, featureID string, ruleID string) *DeleteFeatureRuleOptions {
+	return &DeleteFeatureRuleOptions{
+		EnvironmentID: core.StringPtr(environmentID),
+		FeatureID: core.StringPtr(featureID),
+		RuleID: core.StringPtr(ruleID),
+	}
+}
+
+// SetEnvironmentID : Allow user to set EnvironmentID
+func (_options *DeleteFeatureRuleOptions) SetEnvironmentID(environmentID string) *DeleteFeatureRuleOptions {
+	_options.EnvironmentID = core.StringPtr(environmentID)
+	return _options
+}
+
+// SetFeatureID : Allow user to set FeatureID
+func (_options *DeleteFeatureRuleOptions) SetFeatureID(featureID string) *DeleteFeatureRuleOptions {
+	_options.FeatureID = core.StringPtr(featureID)
+	return _options
+}
+
+// SetRuleID : Allow user to set RuleID
+func (_options *DeleteFeatureRuleOptions) SetRuleID(ruleID string) *DeleteFeatureRuleOptions {
+	_options.RuleID = core.StringPtr(ruleID)
+	return _options
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *DeleteFeatureRuleOptions) SetHeaders(param map[string]string) *DeleteFeatureRuleOptions {
+	options.Headers = param
+	return options
+}
+
 // DeleteGitconfigOptions : The DeleteGitconfig options.
 type DeleteGitconfigOptions struct {
 	// Git Config Id.
@@ -6350,6 +6939,12 @@ type FeatureSegmentRule struct {
 
 	// Rollout percentage associated with feature flag. Supported only for Lite and Enterprise plans.
 	RolloutPercentage *int64 `json:"rollout_percentage,omitempty"`
+
+	// Rule id is an identifier used for identifying the rule.
+	RuleID *string `json:"rule_id,omitempty"`
+
+	// Name assigned to a particular rule.
+	RuleName *string `json:"rule_name,omitempty"`
 }
 
 // NewFeatureSegmentRule : Instantiate FeatureSegmentRule (Generic Model Constructor)
@@ -6387,6 +6982,158 @@ func UnmarshalFeatureSegmentRule(m map[string]json.RawMessage, result interface{
 	err = core.UnmarshalPrimitive(m, "rollout_percentage", &obj.RolloutPercentage)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "rollout_percentage-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "rule_id", &obj.RuleID)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "rule_id-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "rule_name", &obj.RuleName)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "rule_name-error", common.GetComponentInfo())
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// FeatureSegmentRuleListWithRuleID : FeatureSegmentRuleListWithRuleID struct
+type FeatureSegmentRuleListWithRuleID struct {
+	// Array of Segment Rules.
+	SegmentRules []FeatureSegmentRuleWithRuleID `json:"segment_rules" validate:"required"`
+
+	// The number of records that are retrieved in a list.
+	Limit *int64 `json:"limit" validate:"required"`
+
+	// The number of records that are skipped in a list.
+	Offset *int64 `json:"offset" validate:"required"`
+
+	// The total number of records.
+	TotalCount *int64 `json:"total_count" validate:"required"`
+
+	// URL to navigate to the first page of records.
+	First *PaginatedListFirst `json:"first" validate:"required"`
+
+	// URL to navigate to the previous list of records.
+	Previous *PaginatedListPrevious `json:"previous,omitempty"`
+
+	// URL to navigate to the next list of records.
+	Next *PaginatedListNext `json:"next,omitempty"`
+
+	// URL to navigate to the last page of records.
+	Last *PaginatedListLast `json:"last" validate:"required"`
+}
+
+// UnmarshalFeatureSegmentRuleListWithRuleID unmarshals an instance of FeatureSegmentRuleListWithRuleID from the specified map of raw messages.
+func UnmarshalFeatureSegmentRuleListWithRuleID(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(FeatureSegmentRuleListWithRuleID)
+	err = core.UnmarshalModel(m, "segment_rules", &obj.SegmentRules, UnmarshalFeatureSegmentRuleWithRuleID)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "segment_rules-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "limit", &obj.Limit)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "limit-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "offset", &obj.Offset)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "offset-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "total_count", &obj.TotalCount)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "total_count-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalModel(m, "first", &obj.First, UnmarshalPaginatedListFirst)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "first-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalModel(m, "previous", &obj.Previous, UnmarshalPaginatedListPrevious)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "previous-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalModel(m, "next", &obj.Next, UnmarshalPaginatedListNext)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "next-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalModel(m, "last", &obj.Last, UnmarshalPaginatedListLast)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "last-error", common.GetComponentInfo())
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// FeatureSegmentRuleWithRuleID : FeatureSegmentRuleWithRuleID struct
+type FeatureSegmentRuleWithRuleID struct {
+	// The list of targeted segments.
+	Rules []TargetSegments `json:"rules" validate:"required"`
+
+	// Value to be used for evaluation for this rule. The value can be Boolean, SecretRef, String - TEXT , String - JSON ,
+	// String - YAML or a Numeric value as per the `type` and `format` attributes.
+	Value interface{} `json:"value" validate:"required"`
+
+	// Rule id is an identifier used for identifying the rule.
+	RuleID *string `json:"rule_id" validate:"required"`
+
+	// Name assigned to a particular rule.
+	RuleName *string `json:"rule_name,omitempty"`
+
+	// Rollout percentage associated with feature flag. Supported only for Lite and Enterprise plans.
+	RolloutPercentage *int64 `json:"rollout_percentage,omitempty"`
+
+	// Order of the rule, used during evaluation. The evaluation is performed in the order defined and the value associated
+	// with the first matching rule is used for evaluation.
+	Order *int64 `json:"order,omitempty"`
+
+	// Feature flag rule URL.
+	Href *string `json:"href,omitempty"`
+}
+
+// UnmarshalFeatureSegmentRuleWithRuleID unmarshals an instance of FeatureSegmentRuleWithRuleID from the specified map of raw messages.
+func UnmarshalFeatureSegmentRuleWithRuleID(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(FeatureSegmentRuleWithRuleID)
+	err = core.UnmarshalModel(m, "rules", &obj.Rules, UnmarshalTargetSegments)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "rules-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "value", &obj.Value)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "value-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "rule_id", &obj.RuleID)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "rule_id-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "rule_name", &obj.RuleName)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "rule_name-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "rollout_percentage", &obj.RolloutPercentage)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "rollout_percentage-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "order", &obj.Order)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "order-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "href", &obj.Href)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "href-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -6644,6 +7391,54 @@ func (_options *GetFeatureOptions) SetInclude(include []string) *GetFeatureOptio
 
 // SetHeaders : Allow user to set Headers
 func (options *GetFeatureOptions) SetHeaders(param map[string]string) *GetFeatureOptions {
+	options.Headers = param
+	return options
+}
+
+// GetFeatureRuleOptions : The GetFeatureRule options.
+type GetFeatureRuleOptions struct {
+	// Environment Id.
+	EnvironmentID *string `json:"environment_id" validate:"required,ne="`
+
+	// Feature Id.
+	FeatureID *string `json:"feature_id" validate:"required,ne="`
+
+	// rule id.
+	RuleID *string `json:"rule_id" validate:"required,ne="`
+
+	// Allows users to set headers on API requests.
+	Headers map[string]string
+}
+
+// NewGetFeatureRuleOptions : Instantiate GetFeatureRuleOptions
+func (*AppConfigurationV1) NewGetFeatureRuleOptions(environmentID string, featureID string, ruleID string) *GetFeatureRuleOptions {
+	return &GetFeatureRuleOptions{
+		EnvironmentID: core.StringPtr(environmentID),
+		FeatureID: core.StringPtr(featureID),
+		RuleID: core.StringPtr(ruleID),
+	}
+}
+
+// SetEnvironmentID : Allow user to set EnvironmentID
+func (_options *GetFeatureRuleOptions) SetEnvironmentID(environmentID string) *GetFeatureRuleOptions {
+	_options.EnvironmentID = core.StringPtr(environmentID)
+	return _options
+}
+
+// SetFeatureID : Allow user to set FeatureID
+func (_options *GetFeatureRuleOptions) SetFeatureID(featureID string) *GetFeatureRuleOptions {
+	_options.FeatureID = core.StringPtr(featureID)
+	return _options
+}
+
+// SetRuleID : Allow user to set RuleID
+func (_options *GetFeatureRuleOptions) SetRuleID(ruleID string) *GetFeatureRuleOptions {
+	_options.RuleID = core.StringPtr(ruleID)
+	return _options
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *GetFeatureRuleOptions) SetHeaders(param map[string]string) *GetFeatureRuleOptions {
 	options.Headers = param
 	return options
 }
@@ -8272,6 +9067,44 @@ func (options *ListEnvironmentsOptions) SetHeaders(param map[string]string) *Lis
 	return options
 }
 
+// ListFeatureRulesOptions : The ListFeatureRules options.
+type ListFeatureRulesOptions struct {
+	// Environment Id.
+	EnvironmentID *string `json:"environment_id" validate:"required,ne="`
+
+	// Feature Id.
+	FeatureID *string `json:"feature_id" validate:"required,ne="`
+
+	// Allows users to set headers on API requests.
+	Headers map[string]string
+}
+
+// NewListFeatureRulesOptions : Instantiate ListFeatureRulesOptions
+func (*AppConfigurationV1) NewListFeatureRulesOptions(environmentID string, featureID string) *ListFeatureRulesOptions {
+	return &ListFeatureRulesOptions{
+		EnvironmentID: core.StringPtr(environmentID),
+		FeatureID: core.StringPtr(featureID),
+	}
+}
+
+// SetEnvironmentID : Allow user to set EnvironmentID
+func (_options *ListFeatureRulesOptions) SetEnvironmentID(environmentID string) *ListFeatureRulesOptions {
+	_options.EnvironmentID = core.StringPtr(environmentID)
+	return _options
+}
+
+// SetFeatureID : Allow user to set FeatureID
+func (_options *ListFeatureRulesOptions) SetFeatureID(featureID string) *ListFeatureRulesOptions {
+	_options.FeatureID = core.StringPtr(featureID)
+	return _options
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *ListFeatureRulesOptions) SetHeaders(param map[string]string) *ListFeatureRulesOptions {
+	options.Headers = param
+	return options
+}
+
 // ListFeaturesOptions : The ListFeatures options.
 type ListFeaturesOptions struct {
 	// Environment Id.
@@ -8397,6 +9230,89 @@ func (_options *ListFeaturesOptions) SetSearch(search string) *ListFeaturesOptio
 
 // SetHeaders : Allow user to set Headers
 func (options *ListFeaturesOptions) SetHeaders(param map[string]string) *ListFeaturesOptions {
+	options.Headers = param
+	return options
+}
+
+// ListGitconfigsOptions : The ListGitconfigs options.
+type ListGitconfigsOptions struct {
+	// Sort the git configurations details based on the specified attribute. By default, items are sorted by name.
+	Sort *string `json:"sort,omitempty"`
+
+	// Filters the response based on the specified collection_id.
+	CollectionID *string `json:"collection_id,omitempty"`
+
+	// Filters the response based on the specified environment_id.
+	EnvironmentID *string `json:"environment_id,omitempty"`
+
+	// The number of records to retrieve. By default, the list operation return the first 10 records. To retrieve different
+	// set of records, use `limit` with `offset` to page through the available records.
+	Limit *int64 `json:"limit,omitempty"`
+
+	// The number of records to skip. By specifying `offset`, you retrieve a subset of items that starts with the `offset`
+	// value. Use `offset` with `limit` to page through the available records.
+	Offset *int64 `json:"offset,omitempty"`
+
+	// Searches for the provided keyword and returns the appropriate row with that value. Here the search happens on the
+	// '[Name]' of the entity.
+	Search *string `json:"search,omitempty"`
+
+	// Allows users to set headers on API requests.
+	Headers map[string]string
+}
+
+// Constants associated with the ListGitconfigsOptions.Sort property.
+// Sort the git configurations details based on the specified attribute. By default, items are sorted by name.
+const (
+	ListGitconfigsOptions_Sort_CreatedTime = "created_time"
+	ListGitconfigsOptions_Sort_ID = "id"
+	ListGitconfigsOptions_Sort_Name = "name"
+	ListGitconfigsOptions_Sort_UpdatedTime = "updated_time"
+)
+
+// NewListGitconfigsOptions : Instantiate ListGitconfigsOptions
+func (*AppConfigurationV1) NewListGitconfigsOptions() *ListGitconfigsOptions {
+	return &ListGitconfigsOptions{}
+}
+
+// SetSort : Allow user to set Sort
+func (_options *ListGitconfigsOptions) SetSort(sort string) *ListGitconfigsOptions {
+	_options.Sort = core.StringPtr(sort)
+	return _options
+}
+
+// SetCollectionID : Allow user to set CollectionID
+func (_options *ListGitconfigsOptions) SetCollectionID(collectionID string) *ListGitconfigsOptions {
+	_options.CollectionID = core.StringPtr(collectionID)
+	return _options
+}
+
+// SetEnvironmentID : Allow user to set EnvironmentID
+func (_options *ListGitconfigsOptions) SetEnvironmentID(environmentID string) *ListGitconfigsOptions {
+	_options.EnvironmentID = core.StringPtr(environmentID)
+	return _options
+}
+
+// SetLimit : Allow user to set Limit
+func (_options *ListGitconfigsOptions) SetLimit(limit int64) *ListGitconfigsOptions {
+	_options.Limit = core.Int64Ptr(limit)
+	return _options
+}
+
+// SetOffset : Allow user to set Offset
+func (_options *ListGitconfigsOptions) SetOffset(offset int64) *ListGitconfigsOptions {
+	_options.Offset = core.Int64Ptr(offset)
+	return _options
+}
+
+// SetSearch : Allow user to set Search
+func (_options *ListGitconfigsOptions) SetSearch(search string) *ListGitconfigsOptions {
+	_options.Search = core.StringPtr(search)
+	return _options
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *ListGitconfigsOptions) SetHeaders(param map[string]string) *ListGitconfigsOptions {
 	options.Headers = param
 	return options
 }
@@ -8706,89 +9622,6 @@ func (_options *ListSegmentsOptions) SetSearch(search string) *ListSegmentsOptio
 
 // SetHeaders : Allow user to set Headers
 func (options *ListSegmentsOptions) SetHeaders(param map[string]string) *ListSegmentsOptions {
-	options.Headers = param
-	return options
-}
-
-// ListSnapshotsOptions : The ListSnapshots options.
-type ListSnapshotsOptions struct {
-	// Sort the git configurations details based on the specified attribute. By default, items are sorted by name.
-	Sort *string `json:"sort,omitempty"`
-
-	// Filters the response based on the specified collection_id.
-	CollectionID *string `json:"collection_id,omitempty"`
-
-	// Filters the response based on the specified environment_id.
-	EnvironmentID *string `json:"environment_id,omitempty"`
-
-	// The number of records to retrieve. By default, the list operation return the first 10 records. To retrieve different
-	// set of records, use `limit` with `offset` to page through the available records.
-	Limit *int64 `json:"limit,omitempty"`
-
-	// The number of records to skip. By specifying `offset`, you retrieve a subset of items that starts with the `offset`
-	// value. Use `offset` with `limit` to page through the available records.
-	Offset *int64 `json:"offset,omitempty"`
-
-	// Searches for the provided keyword and returns the appropriate row with that value. Here the search happens on the
-	// '[Name]' of the entity.
-	Search *string `json:"search,omitempty"`
-
-	// Allows users to set headers on API requests.
-	Headers map[string]string
-}
-
-// Constants associated with the ListSnapshotsOptions.Sort property.
-// Sort the git configurations details based on the specified attribute. By default, items are sorted by name.
-const (
-	ListSnapshotsOptions_Sort_CreatedTime = "created_time"
-	ListSnapshotsOptions_Sort_ID = "id"
-	ListSnapshotsOptions_Sort_Name = "name"
-	ListSnapshotsOptions_Sort_UpdatedTime = "updated_time"
-)
-
-// NewListSnapshotsOptions : Instantiate ListSnapshotsOptions
-func (*AppConfigurationV1) NewListSnapshotsOptions() *ListSnapshotsOptions {
-	return &ListSnapshotsOptions{}
-}
-
-// SetSort : Allow user to set Sort
-func (_options *ListSnapshotsOptions) SetSort(sort string) *ListSnapshotsOptions {
-	_options.Sort = core.StringPtr(sort)
-	return _options
-}
-
-// SetCollectionID : Allow user to set CollectionID
-func (_options *ListSnapshotsOptions) SetCollectionID(collectionID string) *ListSnapshotsOptions {
-	_options.CollectionID = core.StringPtr(collectionID)
-	return _options
-}
-
-// SetEnvironmentID : Allow user to set EnvironmentID
-func (_options *ListSnapshotsOptions) SetEnvironmentID(environmentID string) *ListSnapshotsOptions {
-	_options.EnvironmentID = core.StringPtr(environmentID)
-	return _options
-}
-
-// SetLimit : Allow user to set Limit
-func (_options *ListSnapshotsOptions) SetLimit(limit int64) *ListSnapshotsOptions {
-	_options.Limit = core.Int64Ptr(limit)
-	return _options
-}
-
-// SetOffset : Allow user to set Offset
-func (_options *ListSnapshotsOptions) SetOffset(offset int64) *ListSnapshotsOptions {
-	_options.Offset = core.Int64Ptr(offset)
-	return _options
-}
-
-// SetSearch : Allow user to set Search
-func (_options *ListSnapshotsOptions) SetSearch(search string) *ListSnapshotsOptions {
-	_options.Search = core.StringPtr(search)
-	return _options
-}
-
-// SetHeaders : Allow user to set Headers
-func (options *ListSnapshotsOptions) SetHeaders(param map[string]string) *ListSnapshotsOptions {
 	options.Headers = param
 	return options
 }
@@ -9433,6 +10266,66 @@ func UnmarshalPropertyOutput(m map[string]json.RawMessage, result interface{}) (
 	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "name-error", common.GetComponentInfo())
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// ReorderFeatureRules : ReorderFeatureRules struct
+// Models which "extend" this model:
+// - ReorderFeatureRulesReoderFeatureRulesByMove
+// - ReorderFeatureRulesBySwap
+type ReorderFeatureRules struct {
+	// Rules can be re-ordered either by `swap` or `move`.
+	Action *string `json:"action,omitempty"`
+
+	// Rule id which the user want to move.
+	RuleID *string `json:"rule_id,omitempty"`
+
+	// specify the target order that the rule must be moved.
+	Order *int64 `json:"order,omitempty"`
+
+	// Rule id which the user want to swap.
+	SourceRuleID *string `json:"source_rule_id,omitempty"`
+
+	// Rule id which the user want to swap.
+	TargetRuleID *string `json:"target_rule_id,omitempty"`
+}
+func (*ReorderFeatureRules) isaReorderFeatureRules() bool {
+	return true
+}
+
+type ReorderFeatureRulesIntf interface {
+	isaReorderFeatureRules() bool
+}
+
+// UnmarshalReorderFeatureRules unmarshals an instance of ReorderFeatureRules from the specified map of raw messages.
+func UnmarshalReorderFeatureRules(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(ReorderFeatureRules)
+	err = core.UnmarshalPrimitive(m, "action", &obj.Action)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "action-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "rule_id", &obj.RuleID)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "rule_id-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "order", &obj.Order)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "order-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "source_rule_id", &obj.SourceRuleID)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "source_rule_id-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "target_rule_id", &obj.TargetRuleID)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "target_rule_id-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -10140,6 +11033,139 @@ func (options *UpdateFeatureOptions) SetHeaders(param map[string]string) *Update
 	return options
 }
 
+// UpdateFeatureRuleOptions : The UpdateFeatureRule options.
+type UpdateFeatureRuleOptions struct {
+	// Environment Id.
+	EnvironmentID *string `json:"environment_id" validate:"required,ne="`
+
+	// Feature Id.
+	FeatureID *string `json:"feature_id" validate:"required,ne="`
+
+	// rule id.
+	RuleID *string `json:"rule_id" validate:"required,ne="`
+
+	// The list of targeted segments.
+	Rules []TargetSegments `json:"rules,omitempty"`
+
+	// Value to be used for evaluation for this rule. The value can be Boolean, SecretRef, String - TEXT , String - JSON ,
+	// String - YAML or a Numeric value as per the `type` and `format` attributes.
+	Value interface{} `json:"value,omitempty"`
+
+	// Name assigned to a particular rule.
+	RuleName *string `json:"rule_name,omitempty"`
+
+	// Rollout percentage associated with feature flag. Supported only for Lite and Enterprise plans.
+	RolloutPercentage *int64 `json:"rollout_percentage,omitempty"`
+
+	// Allows users to set headers on API requests.
+	Headers map[string]string
+}
+
+// NewUpdateFeatureRuleOptions : Instantiate UpdateFeatureRuleOptions
+func (*AppConfigurationV1) NewUpdateFeatureRuleOptions(environmentID string, featureID string, ruleID string) *UpdateFeatureRuleOptions {
+	return &UpdateFeatureRuleOptions{
+		EnvironmentID: core.StringPtr(environmentID),
+		FeatureID: core.StringPtr(featureID),
+		RuleID: core.StringPtr(ruleID),
+	}
+}
+
+// SetEnvironmentID : Allow user to set EnvironmentID
+func (_options *UpdateFeatureRuleOptions) SetEnvironmentID(environmentID string) *UpdateFeatureRuleOptions {
+	_options.EnvironmentID = core.StringPtr(environmentID)
+	return _options
+}
+
+// SetFeatureID : Allow user to set FeatureID
+func (_options *UpdateFeatureRuleOptions) SetFeatureID(featureID string) *UpdateFeatureRuleOptions {
+	_options.FeatureID = core.StringPtr(featureID)
+	return _options
+}
+
+// SetRuleID : Allow user to set RuleID
+func (_options *UpdateFeatureRuleOptions) SetRuleID(ruleID string) *UpdateFeatureRuleOptions {
+	_options.RuleID = core.StringPtr(ruleID)
+	return _options
+}
+
+// SetRules : Allow user to set Rules
+func (_options *UpdateFeatureRuleOptions) SetRules(rules []TargetSegments) *UpdateFeatureRuleOptions {
+	_options.Rules = rules
+	return _options
+}
+
+// SetValue : Allow user to set Value
+func (_options *UpdateFeatureRuleOptions) SetValue(value interface{}) *UpdateFeatureRuleOptions {
+	_options.Value = value
+	return _options
+}
+
+// SetRuleName : Allow user to set RuleName
+func (_options *UpdateFeatureRuleOptions) SetRuleName(ruleName string) *UpdateFeatureRuleOptions {
+	_options.RuleName = core.StringPtr(ruleName)
+	return _options
+}
+
+// SetRolloutPercentage : Allow user to set RolloutPercentage
+func (_options *UpdateFeatureRuleOptions) SetRolloutPercentage(rolloutPercentage int64) *UpdateFeatureRuleOptions {
+	_options.RolloutPercentage = core.Int64Ptr(rolloutPercentage)
+	return _options
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *UpdateFeatureRuleOptions) SetHeaders(param map[string]string) *UpdateFeatureRuleOptions {
+	options.Headers = param
+	return options
+}
+
+// UpdateFeatureRuleOrderOptions : The UpdateFeatureRuleOrder options.
+type UpdateFeatureRuleOrderOptions struct {
+	// Environment Id.
+	EnvironmentID *string `json:"environment_id" validate:"required,ne="`
+
+	// Feature Id.
+	FeatureID *string `json:"feature_id" validate:"required,ne="`
+
+	// The request body to re-order feature rule.
+	UpdateFeatureRuleOrder ReorderFeatureRulesIntf `json:"UpdateFeatureRuleOrder" validate:"required"`
+
+	// Allows users to set headers on API requests.
+	Headers map[string]string
+}
+
+// NewUpdateFeatureRuleOrderOptions : Instantiate UpdateFeatureRuleOrderOptions
+func (*AppConfigurationV1) NewUpdateFeatureRuleOrderOptions(environmentID string, featureID string, updateFeatureRuleOrder ReorderFeatureRulesIntf) *UpdateFeatureRuleOrderOptions {
+	return &UpdateFeatureRuleOrderOptions{
+		EnvironmentID: core.StringPtr(environmentID),
+		FeatureID: core.StringPtr(featureID),
+		UpdateFeatureRuleOrder: updateFeatureRuleOrder,
+	}
+}
+
+// SetEnvironmentID : Allow user to set EnvironmentID
+func (_options *UpdateFeatureRuleOrderOptions) SetEnvironmentID(environmentID string) *UpdateFeatureRuleOrderOptions {
+	_options.EnvironmentID = core.StringPtr(environmentID)
+	return _options
+}
+
+// SetFeatureID : Allow user to set FeatureID
+func (_options *UpdateFeatureRuleOrderOptions) SetFeatureID(featureID string) *UpdateFeatureRuleOrderOptions {
+	_options.FeatureID = core.StringPtr(featureID)
+	return _options
+}
+
+// SetUpdateFeatureRuleOrder : Allow user to set UpdateFeatureRuleOrder
+func (_options *UpdateFeatureRuleOrderOptions) SetUpdateFeatureRuleOrder(updateFeatureRuleOrder ReorderFeatureRulesIntf) *UpdateFeatureRuleOrderOptions {
+	_options.UpdateFeatureRuleOrder = updateFeatureRuleOrder
+	return _options
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *UpdateFeatureRuleOrderOptions) SetHeaders(param map[string]string) *UpdateFeatureRuleOrderOptions {
+	options.Headers = param
+	return options
+}
+
 // UpdateFeatureValuesOptions : The UpdateFeatureValues options.
 type UpdateFeatureValuesOptions struct {
 	// Environment Id.
@@ -10556,7 +11582,7 @@ type UpdateSegmentOptions struct {
 	// Segment description.
 	Description *string `json:"description,omitempty"`
 
-	// Tags associated with the segments, allowed special characters are [_. ,-:].
+	// Tags associated with segments, allowed special characters are [_. ,-:].
 	Tags *string `json:"tags,omitempty"`
 
 	// List of rules that determine if the entity belongs to the segment during feature / property evaluation. An entity is
@@ -11803,6 +12829,112 @@ func UnmarshalListWorkflowconfigResponseIBMServiceNow(m map[string]json.RawMessa
 	return
 }
 
+// ReorderFeatureRulesBySwap : ReorderFeatureRulesBySwap struct
+// This model "extends" ReorderFeatureRules
+type ReorderFeatureRulesBySwap struct {
+	// Rules can be re-ordered either by `swap` or `move`.
+	Action *string `json:"action" validate:"required"`
+
+	// Rule id which the user want to swap.
+	SourceRuleID *string `json:"source_rule_id" validate:"required"`
+
+	// Rule id which the user want to swap.
+	TargetRuleID *string `json:"target_rule_id" validate:"required"`
+}
+
+// NewReorderFeatureRulesBySwap : Instantiate ReorderFeatureRulesBySwap (Generic Model Constructor)
+func (*AppConfigurationV1) NewReorderFeatureRulesBySwap(action string, sourceRuleID string, targetRuleID string) (_model *ReorderFeatureRulesBySwap, err error) {
+	_model = &ReorderFeatureRulesBySwap{
+		Action: core.StringPtr(action),
+		SourceRuleID: core.StringPtr(sourceRuleID),
+		TargetRuleID: core.StringPtr(targetRuleID),
+	}
+	err = core.ValidateStruct(_model, "required parameters")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "model-missing-required", common.GetComponentInfo())
+	}
+	return
+}
+
+func (*ReorderFeatureRulesBySwap) isaReorderFeatureRules() bool {
+	return true
+}
+
+// UnmarshalReorderFeatureRulesBySwap unmarshals an instance of ReorderFeatureRulesBySwap from the specified map of raw messages.
+func UnmarshalReorderFeatureRulesBySwap(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(ReorderFeatureRulesBySwap)
+	err = core.UnmarshalPrimitive(m, "action", &obj.Action)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "action-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "source_rule_id", &obj.SourceRuleID)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "source_rule_id-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "target_rule_id", &obj.TargetRuleID)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "target_rule_id-error", common.GetComponentInfo())
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// ReorderFeatureRulesReoderFeatureRulesByMove : ReorderFeatureRulesReoderFeatureRulesByMove struct
+// This model "extends" ReorderFeatureRules
+type ReorderFeatureRulesReoderFeatureRulesByMove struct {
+	// Rules can be re-ordered either by `swap` or `move`.
+	Action *string `json:"action" validate:"required"`
+
+	// Rule id which the user want to move.
+	RuleID *string `json:"rule_id" validate:"required"`
+
+	// specify the target order that the rule must be moved.
+	Order *int64 `json:"order" validate:"required"`
+}
+
+// NewReorderFeatureRulesReoderFeatureRulesByMove : Instantiate ReorderFeatureRulesReoderFeatureRulesByMove (Generic Model Constructor)
+func (*AppConfigurationV1) NewReorderFeatureRulesReoderFeatureRulesByMove(action string, ruleID string, order int64) (_model *ReorderFeatureRulesReoderFeatureRulesByMove, err error) {
+	_model = &ReorderFeatureRulesReoderFeatureRulesByMove{
+		Action: core.StringPtr(action),
+		RuleID: core.StringPtr(ruleID),
+		Order: core.Int64Ptr(order),
+	}
+	err = core.ValidateStruct(_model, "required parameters")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "model-missing-required", common.GetComponentInfo())
+	}
+	return
+}
+
+func (*ReorderFeatureRulesReoderFeatureRulesByMove) isaReorderFeatureRules() bool {
+	return true
+}
+
+// UnmarshalReorderFeatureRulesReoderFeatureRulesByMove unmarshals an instance of ReorderFeatureRulesReoderFeatureRulesByMove from the specified map of raw messages.
+func UnmarshalReorderFeatureRulesReoderFeatureRulesByMove(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(ReorderFeatureRulesReoderFeatureRulesByMove)
+	err = core.UnmarshalPrimitive(m, "action", &obj.Action)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "action-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "rule_id", &obj.RuleID)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "rule_id-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "order", &obj.Order)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "order-error", common.GetComponentInfo())
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
 // UpdateWorkflowConfigUpdateExternalServiceNow : External ServiceNow workflow configuration attributes to be updated.
 // This model "extends" UpdateWorkflowConfig
 type UpdateWorkflowConfigUpdateExternalServiceNow struct {
@@ -12592,26 +13724,26 @@ func (pager *SegmentsPager) GetAll() (allItems []Segment, err error) {
 }
 
 //
-// SnapshotsPager can be used to simplify the use of the "ListSnapshots" method.
+// GitconfigsPager can be used to simplify the use of the "ListGitconfigs" method.
 //
-type SnapshotsPager struct {
+type GitconfigsPager struct {
 	hasNext bool
-	options *ListSnapshotsOptions
+	options *ListGitconfigsOptions
 	client  *AppConfigurationV1
 	pageContext struct {
 		next *int64
 	}
 }
 
-// NewSnapshotsPager returns a new SnapshotsPager instance.
-func (appConfiguration *AppConfigurationV1) NewSnapshotsPager(options *ListSnapshotsOptions) (pager *SnapshotsPager, err error) {
+// NewGitconfigsPager returns a new GitconfigsPager instance.
+func (appConfiguration *AppConfigurationV1) NewGitconfigsPager(options *ListGitconfigsOptions) (pager *GitconfigsPager, err error) {
 	if options.Offset != nil && *options.Offset != 0 {
 		err = core.SDKErrorf(nil, "the 'options.Offset' field should not be set", "no-query-setting", common.GetComponentInfo())
 		return
 	}
 
-	var optionsCopy ListSnapshotsOptions = *options
-	pager = &SnapshotsPager{
+	var optionsCopy ListGitconfigsOptions = *options
+	pager = &GitconfigsPager{
 		hasNext: true,
 		options: &optionsCopy,
 		client:  appConfiguration,
@@ -12620,19 +13752,19 @@ func (appConfiguration *AppConfigurationV1) NewSnapshotsPager(options *ListSnaps
 }
 
 // HasNext returns true if there are potentially more results to be retrieved.
-func (pager *SnapshotsPager) HasNext() bool {
+func (pager *GitconfigsPager) HasNext() bool {
 	return pager.hasNext
 }
 
 // GetNextWithContext returns the next page of results using the specified Context.
-func (pager *SnapshotsPager) GetNextWithContext(ctx context.Context) (page []GitConfig, err error) {
+func (pager *GitconfigsPager) GetNextWithContext(ctx context.Context) (page []GitConfig, err error) {
 	if !pager.HasNext() {
 		return nil, fmt.Errorf("no more results available")
 	}
 
 	pager.options.Offset = pager.pageContext.next
 
-	result, _, err := pager.client.ListSnapshotsWithContext(ctx, pager.options)
+	result, _, err := pager.client.ListGitconfigsWithContext(ctx, pager.options)
 	if err != nil {
 		err = core.RepurposeSDKProblem(err, "error-getting-next-page")
 		return
@@ -12658,7 +13790,7 @@ func (pager *SnapshotsPager) GetNextWithContext(ctx context.Context) (page []Git
 
 // GetAllWithContext returns all results by invoking GetNextWithContext() repeatedly
 // until all pages of results have been retrieved.
-func (pager *SnapshotsPager) GetAllWithContext(ctx context.Context) (allItems []GitConfig, err error) {
+func (pager *GitconfigsPager) GetAllWithContext(ctx context.Context) (allItems []GitConfig, err error) {
 	for pager.HasNext() {
 		var nextPage []GitConfig
 		nextPage, err = pager.GetNextWithContext(ctx)
@@ -12672,14 +13804,14 @@ func (pager *SnapshotsPager) GetAllWithContext(ctx context.Context) (allItems []
 }
 
 // GetNext invokes GetNextWithContext() using context.Background() as the Context parameter.
-func (pager *SnapshotsPager) GetNext() (page []GitConfig, err error) {
+func (pager *GitconfigsPager) GetNext() (page []GitConfig, err error) {
 	page, err = pager.GetNextWithContext(context.Background())
 	err = core.RepurposeSDKProblem(err, "")
 	return
 }
 
 // GetAll invokes GetAllWithContext() using context.Background() as the Context parameter.
-func (pager *SnapshotsPager) GetAll() (allItems []GitConfig, err error) {
+func (pager *GitconfigsPager) GetAll() (allItems []GitConfig, err error) {
 	allItems, err = pager.GetAllWithContext(context.Background())
 	err = core.RepurposeSDKProblem(err, "")
 	return

@@ -1,7 +1,7 @@
 //go:build integration
 
 /**
- * (C) Copyright IBM Corp. 2025.
+ * (C) Copyright IBM Corp. 2026.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -445,6 +445,8 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 				Value: core.StringPtr("true"),
 				Order: core.Int64Ptr(int64(1)),
 				RolloutPercentage: core.Int64Ptr(int64(50)),
+				RuleID: core.StringPtr("rule-id-1"),
+				RuleName: core.StringPtr("rule-name-1"),
 			}
 
 			collectionRefModel := &appconfigurationv1.CollectionRef{
@@ -488,6 +490,8 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 				Value: core.StringPtr("true"),
 				Order: core.Int64Ptr(int64(1)),
 				RolloutPercentage: core.Int64Ptr(int64(90)),
+				RuleID: core.StringPtr("rule-id-1"),
+				RuleName: core.StringPtr("rule-name-1"),
 			}
 
 			collectionUpdateRefModel := &appconfigurationv1.CollectionUpdateRef{
@@ -530,6 +534,8 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 				Value: core.StringPtr("true"),
 				Order: core.Int64Ptr(int64(1)),
 				RolloutPercentage: core.Int64Ptr(int64(100)),
+				RuleID: core.StringPtr("rule-id-1"),
+				RuleName: core.StringPtr("rule-name-1"),
 			}
 
 			updateFeatureValuesOptions := &appconfigurationv1.UpdateFeatureValuesOptions{
@@ -584,6 +590,117 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(200))
 			Expect(feature).ToNot(BeNil())
+		})
+	})
+
+	Describe(`CreateFeatureRule - Create Feature Rule`, func() {
+		BeforeEach(func() {
+			shouldSkipTest()
+		})
+		It(`CreateFeatureRule(createFeatureRuleOptions *CreateFeatureRuleOptions)`, func() {
+			targetSegmentsModel := &appconfigurationv1.TargetSegments{
+				Segments: []string{"betausers", "premiumusers"},
+			}
+
+			createFeatureRuleOptions := &appconfigurationv1.CreateFeatureRuleOptions{
+				EnvironmentID: core.StringPtr("environment_id"),
+				FeatureID: core.StringPtr("feature_id"),
+				Rules: []appconfigurationv1.TargetSegments{*targetSegmentsModel},
+				Value: core.StringPtr("true"),
+				RuleID: core.StringPtr("RuleA"),
+				RuleName: core.StringPtr("Rule Name"),
+				RolloutPercentage: core.Int64Ptr(int64(50)),
+			}
+
+			featureSegmentRuleWithRuleID, response, err := appConfigurationService.CreateFeatureRule(createFeatureRuleOptions)
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(201))
+			Expect(featureSegmentRuleWithRuleID).ToNot(BeNil())
+		})
+	})
+
+	Describe(`ListFeatureRules - Get All rules for feature`, func() {
+		BeforeEach(func() {
+			shouldSkipTest()
+		})
+		It(`ListFeatureRules(listFeatureRulesOptions *ListFeatureRulesOptions)`, func() {
+			listFeatureRulesOptions := &appconfigurationv1.ListFeatureRulesOptions{
+				EnvironmentID: core.StringPtr("environment_id"),
+				FeatureID: core.StringPtr("feature_id"),
+			}
+
+			featureSegmentRuleListWithRuleID, response, err := appConfigurationService.ListFeatureRules(listFeatureRulesOptions)
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(200))
+			Expect(featureSegmentRuleListWithRuleID).ToNot(BeNil())
+		})
+	})
+
+	Describe(`GetFeatureRule - Get rule for feature by rule id`, func() {
+		BeforeEach(func() {
+			shouldSkipTest()
+		})
+		It(`GetFeatureRule(getFeatureRuleOptions *GetFeatureRuleOptions)`, func() {
+			getFeatureRuleOptions := &appconfigurationv1.GetFeatureRuleOptions{
+				EnvironmentID: core.StringPtr("environment_id"),
+				FeatureID: core.StringPtr("feature_id"),
+				RuleID: core.StringPtr("rule_id"),
+			}
+
+			featureSegmentRuleWithRuleID, response, err := appConfigurationService.GetFeatureRule(getFeatureRuleOptions)
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(200))
+			Expect(featureSegmentRuleWithRuleID).ToNot(BeNil())
+		})
+	})
+
+	Describe(`UpdateFeatureRule - Update Feature rule`, func() {
+		BeforeEach(func() {
+			shouldSkipTest()
+		})
+		It(`UpdateFeatureRule(updateFeatureRuleOptions *UpdateFeatureRuleOptions)`, func() {
+			targetSegmentsModel := &appconfigurationv1.TargetSegments{
+				Segments: []string{"betausers", "premiumusers"},
+			}
+
+			updateFeatureRuleOptions := &appconfigurationv1.UpdateFeatureRuleOptions{
+				EnvironmentID: core.StringPtr("environment_id"),
+				FeatureID: core.StringPtr("feature_id"),
+				RuleID: core.StringPtr("rule_id"),
+				Rules: []appconfigurationv1.TargetSegments{*targetSegmentsModel},
+				Value: core.StringPtr("true"),
+				RuleName: core.StringPtr("rule-name-1"),
+				RolloutPercentage: core.Int64Ptr(int64(50)),
+			}
+
+			featureSegmentRuleWithRuleID, response, err := appConfigurationService.UpdateFeatureRule(updateFeatureRuleOptions)
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(200))
+			Expect(featureSegmentRuleWithRuleID).ToNot(BeNil())
+		})
+	})
+
+	Describe(`UpdateFeatureRuleOrder - Update Feature rule order`, func() {
+		BeforeEach(func() {
+			shouldSkipTest()
+		})
+		It(`UpdateFeatureRuleOrder(updateFeatureRuleOrderOptions *UpdateFeatureRuleOrderOptions)`, func() {
+			reorderFeatureRulesModel := &appconfigurationv1.ReorderFeatureRulesReoderFeatureRulesByMove{
+				Action: core.StringPtr("move"),
+				RuleID: core.StringPtr("RuleA"),
+				Order: core.Int64Ptr(int64(1)),
+			}
+
+			updateFeatureRuleOrderOptions := &appconfigurationv1.UpdateFeatureRuleOrderOptions{
+				EnvironmentID: core.StringPtr("environment_id"),
+				FeatureID: core.StringPtr("feature_id"),
+				UpdateFeatureRuleOrder: reorderFeatureRulesModel,
+			}
+
+			result, response, err := appConfigurationService.UpdateFeatureRuleOrder(updateFeatureRuleOrderOptions)
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(200))
+			Expect(result).ToNot(BeNil())
 		})
 	})
 
@@ -933,12 +1050,12 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 		})
 	})
 
-	Describe(`ListSnapshots - Get list of Git configs`, func() {
+	Describe(`ListGitconfigs - Get list of Git configs`, func() {
 		BeforeEach(func() {
 			shouldSkipTest()
 		})
-		It(`ListSnapshots(listSnapshotsOptions *ListSnapshotsOptions) with pagination`, func(){
-			listSnapshotsOptions := &appconfigurationv1.ListSnapshotsOptions{
+		It(`ListGitconfigs(listGitconfigsOptions *ListGitconfigsOptions) with pagination`, func(){
+			listGitconfigsOptions := &appconfigurationv1.ListGitconfigsOptions{
 				Sort: core.StringPtr("created_time"),
 				CollectionID: core.StringPtr("collection_id"),
 				EnvironmentID: core.StringPtr("environment_id"),
@@ -947,28 +1064,28 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 				Search: core.StringPtr("search_string"),
 			}
 
-			listSnapshotsOptions.Offset = nil
-			listSnapshotsOptions.Limit = core.Int64Ptr(1)
+			listGitconfigsOptions.Offset = nil
+			listGitconfigsOptions.Limit = core.Int64Ptr(1)
 
 			var allResults []appconfigurationv1.GitConfig
 			for {
-				gitConfigList, response, err := appConfigurationService.ListSnapshots(listSnapshotsOptions)
+				gitConfigList, response, err := appConfigurationService.ListGitconfigs(listGitconfigsOptions)
 				Expect(err).To(BeNil())
 				Expect(response.StatusCode).To(Equal(200))
 				Expect(gitConfigList).ToNot(BeNil())
 				allResults = append(allResults, gitConfigList.GitConfig...)
 
-				listSnapshotsOptions.Offset, err = gitConfigList.GetNextOffset()
+				listGitconfigsOptions.Offset, err = gitConfigList.GetNextOffset()
 				Expect(err).To(BeNil())
 
-				if listSnapshotsOptions.Offset == nil {
+				if listGitconfigsOptions.Offset == nil {
 					break
 				}
 			}
 			fmt.Fprintf(GinkgoWriter, "Retrieved a total of %d item(s) with pagination.\n", len(allResults))
 		})
-		It(`ListSnapshots(listSnapshotsOptions *ListSnapshotsOptions) using SnapshotsPager`, func(){
-			listSnapshotsOptions := &appconfigurationv1.ListSnapshotsOptions{
+		It(`ListGitconfigs(listGitconfigsOptions *ListGitconfigsOptions) using GitconfigsPager`, func(){
+			listGitconfigsOptions := &appconfigurationv1.ListGitconfigsOptions{
 				Sort: core.StringPtr("created_time"),
 				CollectionID: core.StringPtr("collection_id"),
 				EnvironmentID: core.StringPtr("environment_id"),
@@ -977,7 +1094,7 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 			}
 
 			// Test GetNext().
-			pager, err := appConfigurationService.NewSnapshotsPager(listSnapshotsOptions)
+			pager, err := appConfigurationService.NewGitconfigsPager(listGitconfigsOptions)
 			Expect(err).To(BeNil())
 			Expect(pager).ToNot(BeNil())
 
@@ -990,7 +1107,7 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 			}
 
 			// Test GetAll().
-			pager, err = appConfigurationService.NewSnapshotsPager(listSnapshotsOptions)
+			pager, err = appConfigurationService.NewGitconfigsPager(listGitconfigsOptions)
 			Expect(err).To(BeNil())
 			Expect(pager).ToNot(BeNil())
 
@@ -999,7 +1116,7 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 			Expect(allItems).ToNot(BeNil())
 
 			Expect(len(allItems)).To(Equal(len(allResults)))
-			fmt.Fprintf(GinkgoWriter, "ListSnapshots() returned a total of %d item(s) using SnapshotsPager.\n", len(allResults))
+			fmt.Fprintf(GinkgoWriter, "ListGitconfigs() returned a total of %d item(s) using GitconfigsPager.\n", len(allResults))
 		})
 	})
 
@@ -1327,6 +1444,8 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 				Value: "testString",
 				Order: core.Int64Ptr(int64(38)),
 				RolloutPercentage: core.Int64Ptr(int64(100)),
+				RuleID: core.StringPtr("testString"),
+				RuleName: core.StringPtr("testString"),
 			}
 
 			collectionRefModel := &appconfigurationv1.CollectionRef{
@@ -1443,7 +1562,7 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 		})
 	})
 
-	Describe(`InstanceConfigStatus - Get status of instance configuration import / export`, func() {
+	Describe(`InstanceConfigStatus - Get status of instance configuration import/export`, func() {
 		BeforeEach(func() {
 			shouldSkipTest()
 		})
@@ -1501,6 +1620,23 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 			}
 
 			response, err := appConfigurationService.DeleteFeature(deleteFeatureOptions)
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(204))
+		})
+	})
+
+	Describe(`DeleteFeatureRule - Delete Feature rule`, func() {
+		BeforeEach(func() {
+			shouldSkipTest()
+		})
+		It(`DeleteFeatureRule(deleteFeatureRuleOptions *DeleteFeatureRuleOptions)`, func() {
+			deleteFeatureRuleOptions := &appconfigurationv1.DeleteFeatureRuleOptions{
+				EnvironmentID: core.StringPtr("environment_id"),
+				FeatureID: core.StringPtr("feature_id"),
+				RuleID: core.StringPtr("rule_id"),
+			}
+
+			response, err := appConfigurationService.DeleteFeatureRule(deleteFeatureRuleOptions)
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(204))
 		})
@@ -1567,7 +1703,7 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 		})
 	})
 
-	Describe(`DeleteWorkflowconfig - Delete  Workflow config`, func() {
+	Describe(`DeleteWorkflowconfig - Delete Workflow config`, func() {
 		BeforeEach(func() {
 			shouldSkipTest()
 		})

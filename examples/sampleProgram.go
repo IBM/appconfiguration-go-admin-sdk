@@ -686,8 +686,8 @@ func getConfiguration(gitConfigId string) {
 }
 func listConfiguration() {
 	fmt.Println("listConfiguration")
-	listSnapshotsOptionsModel := appConfigurationServiceInstance.NewListSnapshotsOptions()
-	result, response, error := appConfigurationServiceInstance.ListSnapshots(listSnapshotsOptionsModel)
+	listSnapshotsOptionsModel := appConfigurationServiceInstance.NewListGitconfigsOptions()
+	result, response, error := appConfigurationServiceInstance.ListGitconfigs(listSnapshotsOptionsModel)
 	if error != nil {
 		fmt.Println("Error: " + error.Error())
 		return
