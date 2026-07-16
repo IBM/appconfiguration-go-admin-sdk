@@ -109,7 +109,7 @@ var _ = Describe(`AppConfigurationV1 Examples Tests`, func() {
 				Expand: core.BoolPtr(true),
 				Sort: core.StringPtr("created_time"),
 				Tags: core.StringPtr("version 1.1,pre-release"),
-				Include: []string{"features", "properties", "snapshots"},
+				Include: []string{"features", "properties", "snapshots", "workflow_approval"},
 				Limit: core.Int64Ptr(int64(10)),
 				Search: core.StringPtr("test tag"),
 			}
@@ -185,7 +185,7 @@ var _ = Describe(`AppConfigurationV1 Examples Tests`, func() {
 				"environment_id",
 			)
 			getEnvironmentOptions.SetExpand(true)
-			getEnvironmentOptions.SetInclude([]string{"features", "properties", "snapshots"})
+			getEnvironmentOptions.SetInclude([]string{"features", "properties", "snapshots", "workflow_approval"})
 
 			environment, response, err := appConfigurationService.GetEnvironment(getEnvironmentOptions)
 			if err != nil {
@@ -209,7 +209,7 @@ var _ = Describe(`AppConfigurationV1 Examples Tests`, func() {
 				Tags: core.StringPtr("version 1.1,pre-release"),
 				Features: []string{"my-feature-id", "cycle-rentals"},
 				Properties: []string{"my-property-id", "email-property"},
-				Include: []string{"features", "properties", "snapshots"},
+				Include: []string{"features", "properties", "snapshots", "workflow_approval"},
 				Limit: core.Int64Ptr(int64(10)),
 				Search: core.StringPtr("test tag"),
 			}
@@ -284,7 +284,7 @@ var _ = Describe(`AppConfigurationV1 Examples Tests`, func() {
 				"collection_id",
 			)
 			getCollectionOptions.SetExpand(true)
-			getCollectionOptions.SetInclude([]string{"features", "properties", "snapshots"})
+			getCollectionOptions.SetInclude([]string{"features", "properties", "snapshots", "workflow_approval"})
 
 			collection, response, err := appConfigurationService.GetCollection(getCollectionOptions)
 			if err != nil {
@@ -309,7 +309,7 @@ var _ = Describe(`AppConfigurationV1 Examples Tests`, func() {
 				Tags: core.StringPtr("version 1.1,pre-release"),
 				Collections: []string{"my-collection-id", "ghzindiapvtltd"},
 				Segments: []string{"my-segment-id", "beta-users"},
-				Include: []string{"collections", "rules", "change_request"},
+				Include: []string{"collections", "rules", "workflow_approval"},
 				Limit: core.Int64Ptr(int64(10)),
 				Search: core.StringPtr("test tag"),
 			}
@@ -344,6 +344,7 @@ var _ = Describe(`AppConfigurationV1 Examples Tests`, func() {
 				Value: core.StringPtr("true"),
 				Order: core.Int64Ptr(int64(1)),
 				RolloutPercentage: core.Int64Ptr(int64(50)),
+				RolloutType: core.StringPtr("MANUAL"),
 				RuleID: core.StringPtr("rule-id-1"),
 				RuleName: core.StringPtr("rule-name-1"),
 			}
@@ -363,6 +364,7 @@ var _ = Describe(`AppConfigurationV1 Examples Tests`, func() {
 			createFeatureOptions.SetDescription("Feature flag to enable Cycle Rentals")
 			createFeatureOptions.SetEnabled(true)
 			createFeatureOptions.SetRolloutPercentage(int64(100))
+			createFeatureOptions.SetRolloutType("MANUAL")
 			createFeatureOptions.SetTags("version: 1.1, pre-release")
 			createFeatureOptions.SetSegmentRules([]appconfigurationv1.FeatureSegmentRule{*featureSegmentRuleModel})
 			createFeatureOptions.SetCollections([]appconfigurationv1.CollectionRef{*collectionRefModel})
@@ -393,6 +395,7 @@ var _ = Describe(`AppConfigurationV1 Examples Tests`, func() {
 				Value: core.StringPtr("true"),
 				Order: core.Int64Ptr(int64(1)),
 				RolloutPercentage: core.Int64Ptr(int64(90)),
+				RolloutType: core.StringPtr("MANUAL"),
 				RuleID: core.StringPtr("rule-id-1"),
 				RuleName: core.StringPtr("rule-name-1"),
 			}
@@ -411,6 +414,7 @@ var _ = Describe(`AppConfigurationV1 Examples Tests`, func() {
 			updateFeatureOptions.SetDisabledValue("false")
 			updateFeatureOptions.SetEnabled(true)
 			updateFeatureOptions.SetRolloutPercentage(int64(100))
+			updateFeatureOptions.SetRolloutType("MANUAL")
 			updateFeatureOptions.SetTags("version: 1.1, yet-to-release")
 			updateFeatureOptions.SetSegmentRules([]appconfigurationv1.FeatureSegmentRule{*featureSegmentRuleModel})
 			updateFeatureOptions.SetCollections([]appconfigurationv1.CollectionUpdateRef{*collectionUpdateRefModel})
@@ -441,6 +445,7 @@ var _ = Describe(`AppConfigurationV1 Examples Tests`, func() {
 				Value: core.StringPtr("true"),
 				Order: core.Int64Ptr(int64(1)),
 				RolloutPercentage: core.Int64Ptr(int64(100)),
+				RolloutType: core.StringPtr("MANUAL"),
 				RuleID: core.StringPtr("rule-id-1"),
 				RuleName: core.StringPtr("rule-name-1"),
 			}
@@ -455,6 +460,7 @@ var _ = Describe(`AppConfigurationV1 Examples Tests`, func() {
 			updateFeatureValuesOptions.SetEnabledValue("true")
 			updateFeatureValuesOptions.SetDisabledValue("false")
 			updateFeatureValuesOptions.SetRolloutPercentage(int64(100))
+			updateFeatureValuesOptions.SetRolloutType("MANUAL")
 			updateFeatureValuesOptions.SetSegmentRules([]appconfigurationv1.FeatureSegmentRule{*featureSegmentRuleModel})
 
 			feature, response, err := appConfigurationService.UpdateFeatureValues(updateFeatureValuesOptions)
@@ -478,7 +484,7 @@ var _ = Describe(`AppConfigurationV1 Examples Tests`, func() {
 				"environment_id",
 				"feature_id",
 			)
-			getFeatureOptions.SetInclude([]string{"collections", "rules", "change_request"})
+			getFeatureOptions.SetInclude([]string{"collections", "rules", "workflow_approval"})
 
 			feature, response, err := appConfigurationService.GetFeature(getFeatureOptions)
 			if err != nil {
@@ -516,6 +522,30 @@ var _ = Describe(`AppConfigurationV1 Examples Tests`, func() {
 			Expect(response.StatusCode).To(Equal(200))
 			Expect(feature).ToNot(BeNil())
 		})
+		It(`StopFeatureRollout request example`, func() {
+			fmt.Println("\nStopFeatureRollout() result:")
+			// begin-stop_feature_rollout
+
+			stopFeatureRolloutOptions := appConfigurationService.NewStopFeatureRolloutOptions(
+				"environment_id",
+				"feature_id",
+				"stop",
+				int64(0),
+			)
+
+			feature, response, err := appConfigurationService.StopFeatureRollout(stopFeatureRolloutOptions)
+			if err != nil {
+				panic(err)
+			}
+			b, _ := json.MarshalIndent(feature, "", "  ")
+			fmt.Println(string(b))
+
+			// end-stop_feature_rollout
+
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(200))
+			Expect(feature).ToNot(BeNil())
+		})
 		It(`CreateFeatureRule request example`, func() {
 			fmt.Println("\nCreateFeatureRule() result:")
 			// begin-create_feature_rule
@@ -533,6 +563,7 @@ var _ = Describe(`AppConfigurationV1 Examples Tests`, func() {
 			)
 			createFeatureRuleOptions.SetRuleName("Rule Name")
 			createFeatureRuleOptions.SetRolloutPercentage(int64(50))
+			createFeatureRuleOptions.SetRolloutType("MANUAL")
 
 			featureSegmentRuleWithRuleID, response, err := appConfigurationService.CreateFeatureRule(createFeatureRuleOptions)
 			if err != nil {
@@ -609,6 +640,7 @@ var _ = Describe(`AppConfigurationV1 Examples Tests`, func() {
 			updateFeatureRuleOptions.SetValue("true")
 			updateFeatureRuleOptions.SetRuleName("rule-name-1")
 			updateFeatureRuleOptions.SetRolloutPercentage(int64(50))
+			updateFeatureRuleOptions.SetRolloutType("MANUAL")
 
 			featureSegmentRuleWithRuleID, response, err := appConfigurationService.UpdateFeatureRule(updateFeatureRuleOptions)
 			if err != nil {
@@ -618,6 +650,31 @@ var _ = Describe(`AppConfigurationV1 Examples Tests`, func() {
 			fmt.Println(string(b))
 
 			// end-update_feature_rule
+
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(200))
+			Expect(featureSegmentRuleWithRuleID).ToNot(BeNil())
+		})
+		It(`StopFeatureRuleRollout request example`, func() {
+			fmt.Println("\nStopFeatureRuleRollout() result:")
+			// begin-stop_feature_rule_rollout
+
+			stopFeatureRuleRolloutOptions := appConfigurationService.NewStopFeatureRuleRolloutOptions(
+				"environment_id",
+				"feature_id",
+				"rule_id",
+				"stop",
+				int64(0),
+			)
+
+			featureSegmentRuleWithRuleID, response, err := appConfigurationService.StopFeatureRuleRollout(stopFeatureRuleRolloutOptions)
+			if err != nil {
+				panic(err)
+			}
+			b, _ := json.MarshalIndent(featureSegmentRuleWithRuleID, "", "  ")
+			fmt.Println(string(b))
+
+			// end-stop_feature_rule_rollout
 
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(200))
@@ -662,7 +719,7 @@ var _ = Describe(`AppConfigurationV1 Examples Tests`, func() {
 				Tags: core.StringPtr("version 1.1,pre-release"),
 				Collections: []string{"my-collection-id", "ghzindiapvtltd"},
 				Segments: []string{"my-segment-id", "beta-users"},
-				Include: []string{"collections", "rules"},
+				Include: []string{"collections", "rules", "workflow_approval"},
 				Limit: core.Int64Ptr(int64(10)),
 				Search: core.StringPtr("test tag"),
 			}
@@ -814,7 +871,7 @@ var _ = Describe(`AppConfigurationV1 Examples Tests`, func() {
 				"environment_id",
 				"property_id",
 			)
-			getPropertyOptions.SetInclude([]string{"collections", "rules"})
+			getPropertyOptions.SetInclude([]string{"collections", "rules", "workflow_approval"})
 
 			property, response, err := appConfigurationService.GetProperty(getPropertyOptions)
 			if err != nil {
@@ -836,7 +893,7 @@ var _ = Describe(`AppConfigurationV1 Examples Tests`, func() {
 				Expand: core.BoolPtr(true),
 				Sort: core.StringPtr("created_time"),
 				Tags: core.StringPtr("version 1.1,pre-release"),
-				Include: core.StringPtr("rules"),
+				Include: []string{"rules", "workflow_approval"},
 				Limit: core.Int64Ptr(int64(10)),
 				Search: core.StringPtr("test tag"),
 			}
@@ -917,7 +974,7 @@ var _ = Describe(`AppConfigurationV1 Examples Tests`, func() {
 			getSegmentOptions := appConfigurationService.NewGetSegmentOptions(
 				"segment_id",
 			)
-			getSegmentOptions.SetInclude([]string{"features", "properties"})
+			getSegmentOptions.SetInclude([]string{"features", "properties", "workflow_approval"})
 
 			segment, response, err := appConfigurationService.GetSegment(getSegmentOptions)
 			if err != nil {
@@ -1283,6 +1340,223 @@ var _ = Describe(`AppConfigurationV1 Examples Tests`, func() {
 			Expect(response.StatusCode).To(Equal(201))
 			Expect(updateWorkflowconfigResponse).ToNot(BeNil())
 		})
+		It(`ListWorkflowConfigs request example`, func() {
+			fmt.Println("\nListWorkflowConfigs() result:")
+			// begin-list_workflow_configs
+			listWorkflowConfigsOptions := &appconfigurationv1.ListWorkflowConfigsOptions{
+				Sort: core.StringPtr("created_time"),
+				Search: core.StringPtr("search_string"),
+				Limit: core.Int64Ptr(int64(10)),
+			}
+
+			pager, err := appConfigurationService.NewWorkflowConfigsPager(listWorkflowConfigsOptions)
+			if err != nil {
+				panic(err)
+			}
+
+			var allResults []appconfigurationv1.WorkflowConfigResponse
+			for pager.HasNext() {
+				nextPage, err := pager.GetNext()
+				if err != nil {
+					panic(err)
+				}
+				allResults = append(allResults, nextPage...)
+			}
+			b, _ := json.MarshalIndent(allResults, "", "  ")
+			fmt.Println(string(b))
+			// end-list_workflow_configs
+		})
+		It(`CreateWorkflowConfigs request example`, func() {
+			fmt.Println("\nCreateWorkflowConfigs() result:")
+			// begin-create_workflow_configs
+
+			workflowMetadataModel := &appconfigurationv1.WorkflowMetadataExternalServiceNowMetadata{
+				ApprovalExpiration: core.Int64Ptr(int64(7)),
+				ApprovalGroupName: core.StringPtr("AppConfiguration Approvers"),
+				SmSecretID: core.StringPtr("63476562-d5b4-02ae-e966-528f8df457bb"),
+				WorkflowURL: core.StringPtr("https://dev339579.service-now.com"),
+			}
+
+			workflowProviderModel := &appconfigurationv1.WorkflowProvider{
+				Type: core.StringPtr("SERVICENOW_EXTERNAL"),
+				Metadata: workflowMetadataModel,
+			}
+
+			workflowScopeModeModel := &appconfigurationv1.WorkflowScopeMode{
+				Mode: core.StringPtr("ALL"),
+				Ids: []string{},
+			}
+
+			workflowEnvironmentResourcesEnvironmentModel := &appconfigurationv1.WorkflowEnvironmentResourcesEnvironment{
+				Enable: core.BoolPtr(true),
+			}
+
+			workflowEnvironmentResourcesModel := &appconfigurationv1.WorkflowEnvironmentResources{
+				Environment: workflowEnvironmentResourcesEnvironmentModel,
+				Features: workflowScopeModeModel,
+				Properties: workflowScopeModeModel,
+			}
+
+			workflowEnvironmentModel := &appconfigurationv1.WorkflowEnvironment{
+				EnvironmentID: core.StringPtr("stage"),
+				Resources: workflowEnvironmentResourcesModel,
+			}
+
+			workflowScopeModel := &appconfigurationv1.WorkflowScope{
+				Collections: workflowScopeModeModel,
+				Segments: workflowScopeModeModel,
+				Environments: []appconfigurationv1.WorkflowEnvironment{*workflowEnvironmentModel},
+			}
+
+			createWorkflowConfigsOptions := appConfigurationService.NewCreateWorkflowConfigsOptions(
+				"ext-service-now",
+				"workflow-id-1",
+				true,
+				workflowProviderModel,
+				workflowScopeModel,
+			)
+
+			workflowConfigResponse, response, err := appConfigurationService.CreateWorkflowConfigs(createWorkflowConfigsOptions)
+			if err != nil {
+				panic(err)
+			}
+			b, _ := json.MarshalIndent(workflowConfigResponse, "", "  ")
+			fmt.Println(string(b))
+
+			// end-create_workflow_configs
+
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(201))
+			Expect(workflowConfigResponse).ToNot(BeNil())
+		})
+		It(`GetWorkflowConfig request example`, func() {
+			fmt.Println("\nGetWorkflowConfig() result:")
+			// begin-get_workflow_config
+
+			getWorkflowConfigOptions := appConfigurationService.NewGetWorkflowConfigOptions(
+				"workflow_config_id",
+			)
+
+			workflowConfigResponse, response, err := appConfigurationService.GetWorkflowConfig(getWorkflowConfigOptions)
+			if err != nil {
+				panic(err)
+			}
+			b, _ := json.MarshalIndent(workflowConfigResponse, "", "  ")
+			fmt.Println(string(b))
+
+			// end-get_workflow_config
+
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(200))
+			Expect(workflowConfigResponse).ToNot(BeNil())
+		})
+		It(`UpdateWorkflowConfigs request example`, func() {
+			fmt.Println("\nUpdateWorkflowConfigs() result:")
+			// begin-update_workflow_configs
+
+			workflowMetadataModel := &appconfigurationv1.WorkflowMetadataExternalServiceNowMetadata{
+				ApprovalExpiration: core.Int64Ptr(int64(10)),
+				ApprovalGroupName: core.StringPtr("AppConfiguration Approvers Updated"),
+				SmSecretID: core.StringPtr("63476562-d5b4-02ae-e966-528f8df457bb"),
+				WorkflowURL: core.StringPtr("https://dev339579.service-now.com"),
+			}
+
+			workflowProviderModel := &appconfigurationv1.WorkflowProvider{
+				Type: core.StringPtr("SERVICENOW_EXTERNAL"),
+				Metadata: workflowMetadataModel,
+			}
+
+			workflowScopeModeModel := &appconfigurationv1.WorkflowScopeMode{
+				Mode: core.StringPtr("ALL"),
+				Ids: []string{},
+			}
+
+			workflowEnvironmentResourcesEnvironmentModel := &appconfigurationv1.WorkflowEnvironmentResourcesEnvironment{
+				Enable: core.BoolPtr(true),
+			}
+
+			workflowEnvironmentResourcesModel := &appconfigurationv1.WorkflowEnvironmentResources{
+				Environment: workflowEnvironmentResourcesEnvironmentModel,
+				Features: workflowScopeModeModel,
+				Properties: workflowScopeModeModel,
+			}
+
+			workflowEnvironmentModel := &appconfigurationv1.WorkflowEnvironment{
+				EnvironmentID: core.StringPtr("stage"),
+				Resources: workflowEnvironmentResourcesModel,
+			}
+
+			workflowScopeModel := &appconfigurationv1.WorkflowScope{
+				Collections: workflowScopeModeModel,
+				Segments: workflowScopeModeModel,
+				Environments: []appconfigurationv1.WorkflowEnvironment{*workflowEnvironmentModel},
+			}
+
+			updateWorkflowConfigsOptions := appConfigurationService.NewUpdateWorkflowConfigsOptions(
+				"workflow_config_id",
+				"ext-service-now-updated",
+				"workflow-id-1",
+				true,
+				workflowProviderModel,
+				workflowScopeModel,
+			)
+
+			workflowConfigResponse, response, err := appConfigurationService.UpdateWorkflowConfigs(updateWorkflowConfigsOptions)
+			if err != nil {
+				panic(err)
+			}
+			b, _ := json.MarshalIndent(workflowConfigResponse, "", "  ")
+			fmt.Println(string(b))
+
+			// end-update_workflow_configs
+
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(200))
+			Expect(workflowConfigResponse).ToNot(BeNil())
+		})
+		It(`ToggleWorkflowConfig request example`, func() {
+			fmt.Println("\nToggleWorkflowConfig() result:")
+			// begin-toggle_workflow_config
+
+			toggleWorkflowConfigOptions := appConfigurationService.NewToggleWorkflowConfigOptions(
+				"workflow_config_id",
+				true,
+			)
+
+			workflowConfigResponse, response, err := appConfigurationService.ToggleWorkflowConfig(toggleWorkflowConfigOptions)
+			if err != nil {
+				panic(err)
+			}
+			b, _ := json.MarshalIndent(workflowConfigResponse, "", "  ")
+			fmt.Println(string(b))
+
+			// end-toggle_workflow_config
+
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(200))
+			Expect(workflowConfigResponse).ToNot(BeNil())
+		})
+		It(`TestWorkflowConfig request example`, func() {
+			fmt.Println("\nTestWorkflowConfig() result:")
+			// begin-test_workflow_config
+
+			testWorkflowConfigOptions := appConfigurationService.NewTestWorkflowConfigOptions(
+				"workflow_config_id",
+			)
+
+			workflowProviderValidationResponse, response, err := appConfigurationService.TestWorkflowConfig(testWorkflowConfigOptions)
+			if err != nil {
+				panic(err)
+			}
+			b, _ := json.MarshalIndent(workflowProviderValidationResponse, "", "  ")
+			fmt.Println(string(b))
+
+			// end-test_workflow_config
+
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(200))
+			Expect(workflowProviderValidationResponse).ToNot(BeNil())
+		})
 		It(`ImportConfig request example`, func() {
 			fmt.Println("\nImportConfig() result:")
 			// begin-import_config
@@ -1309,6 +1583,7 @@ var _ = Describe(`AppConfigurationV1 Examples Tests`, func() {
 				DisabledValue: core.StringPtr("2"),
 				Enabled: core.BoolPtr(true),
 				RolloutPercentage: core.Int64Ptr(int64(100)),
+				RolloutType: core.StringPtr("MANUAL"),
 				SegmentRules: []appconfigurationv1.FeatureSegmentRule{*featureSegmentRuleModel},
 				Collections: []appconfigurationv1.CollectionRef{*collectionRefModel},
 			}
@@ -1442,46 +1717,49 @@ var _ = Describe(`AppConfigurationV1 Examples Tests`, func() {
 			Expect(instanceConfigStatusResponse).ToNot(BeNil())
 		})
 		It(`DeleteEnvironment request example`, func() {
+			fmt.Println("\nDeleteEnvironment() result:")
 			// begin-delete_environment
 
 			deleteEnvironmentOptions := appConfigurationService.NewDeleteEnvironmentOptions(
 				"environment_id",
 			)
 
-			response, err := appConfigurationService.DeleteEnvironment(deleteEnvironmentOptions)
+			workflowApprovalInitiatedResponse, response, err := appConfigurationService.DeleteEnvironment(deleteEnvironmentOptions)
 			if err != nil {
 				panic(err)
 			}
-			if response.StatusCode != 204 {
-				fmt.Printf("\nUnexpected response status code received from DeleteEnvironment(): %d\n", response.StatusCode)
-			}
+			b, _ := json.MarshalIndent(workflowApprovalInitiatedResponse, "", "  ")
+			fmt.Println(string(b))
 
 			// end-delete_environment
 
 			Expect(err).To(BeNil())
-			Expect(response.StatusCode).To(Equal(204))
+			Expect(response.StatusCode).To(Equal(202))
+			Expect(workflowApprovalInitiatedResponse).ToNot(BeNil())
 		})
 		It(`DeleteCollection request example`, func() {
+			fmt.Println("\nDeleteCollection() result:")
 			// begin-delete_collection
 
 			deleteCollectionOptions := appConfigurationService.NewDeleteCollectionOptions(
 				"collection_id",
 			)
 
-			response, err := appConfigurationService.DeleteCollection(deleteCollectionOptions)
+			workflowApprovalInitiatedResponse, response, err := appConfigurationService.DeleteCollection(deleteCollectionOptions)
 			if err != nil {
 				panic(err)
 			}
-			if response.StatusCode != 204 {
-				fmt.Printf("\nUnexpected response status code received from DeleteCollection(): %d\n", response.StatusCode)
-			}
+			b, _ := json.MarshalIndent(workflowApprovalInitiatedResponse, "", "  ")
+			fmt.Println(string(b))
 
 			// end-delete_collection
 
 			Expect(err).To(BeNil())
-			Expect(response.StatusCode).To(Equal(204))
+			Expect(response.StatusCode).To(Equal(202))
+			Expect(workflowApprovalInitiatedResponse).ToNot(BeNil())
 		})
 		It(`DeleteFeature request example`, func() {
+			fmt.Println("\nDeleteFeature() result:")
 			// begin-delete_feature
 
 			deleteFeatureOptions := appConfigurationService.NewDeleteFeatureOptions(
@@ -1489,20 +1767,21 @@ var _ = Describe(`AppConfigurationV1 Examples Tests`, func() {
 				"feature_id",
 			)
 
-			response, err := appConfigurationService.DeleteFeature(deleteFeatureOptions)
+			workflowApprovalInitiatedResponse, response, err := appConfigurationService.DeleteFeature(deleteFeatureOptions)
 			if err != nil {
 				panic(err)
 			}
-			if response.StatusCode != 204 {
-				fmt.Printf("\nUnexpected response status code received from DeleteFeature(): %d\n", response.StatusCode)
-			}
+			b, _ := json.MarshalIndent(workflowApprovalInitiatedResponse, "", "  ")
+			fmt.Println(string(b))
 
 			// end-delete_feature
 
 			Expect(err).To(BeNil())
-			Expect(response.StatusCode).To(Equal(204))
+			Expect(response.StatusCode).To(Equal(202))
+			Expect(workflowApprovalInitiatedResponse).ToNot(BeNil())
 		})
 		It(`DeleteFeatureRule request example`, func() {
+			fmt.Println("\nDeleteFeatureRule() result:")
 			// begin-delete_feature_rule
 
 			deleteFeatureRuleOptions := appConfigurationService.NewDeleteFeatureRuleOptions(
@@ -1511,20 +1790,21 @@ var _ = Describe(`AppConfigurationV1 Examples Tests`, func() {
 				"rule_id",
 			)
 
-			response, err := appConfigurationService.DeleteFeatureRule(deleteFeatureRuleOptions)
+			workflowApprovalInitiatedResponse, response, err := appConfigurationService.DeleteFeatureRule(deleteFeatureRuleOptions)
 			if err != nil {
 				panic(err)
 			}
-			if response.StatusCode != 204 {
-				fmt.Printf("\nUnexpected response status code received from DeleteFeatureRule(): %d\n", response.StatusCode)
-			}
+			b, _ := json.MarshalIndent(workflowApprovalInitiatedResponse, "", "  ")
+			fmt.Println(string(b))
 
 			// end-delete_feature_rule
 
 			Expect(err).To(BeNil())
-			Expect(response.StatusCode).To(Equal(204))
+			Expect(response.StatusCode).To(Equal(202))
+			Expect(workflowApprovalInitiatedResponse).ToNot(BeNil())
 		})
 		It(`DeleteProperty request example`, func() {
+			fmt.Println("\nDeleteProperty() result:")
 			// begin-delete_property
 
 			deletePropertyOptions := appConfigurationService.NewDeletePropertyOptions(
@@ -1532,38 +1812,39 @@ var _ = Describe(`AppConfigurationV1 Examples Tests`, func() {
 				"property_id",
 			)
 
-			response, err := appConfigurationService.DeleteProperty(deletePropertyOptions)
+			workflowApprovalInitiatedResponse, response, err := appConfigurationService.DeleteProperty(deletePropertyOptions)
 			if err != nil {
 				panic(err)
 			}
-			if response.StatusCode != 204 {
-				fmt.Printf("\nUnexpected response status code received from DeleteProperty(): %d\n", response.StatusCode)
-			}
+			b, _ := json.MarshalIndent(workflowApprovalInitiatedResponse, "", "  ")
+			fmt.Println(string(b))
 
 			// end-delete_property
 
 			Expect(err).To(BeNil())
-			Expect(response.StatusCode).To(Equal(204))
+			Expect(response.StatusCode).To(Equal(202))
+			Expect(workflowApprovalInitiatedResponse).ToNot(BeNil())
 		})
 		It(`DeleteSegment request example`, func() {
+			fmt.Println("\nDeleteSegment() result:")
 			// begin-delete_segment
 
 			deleteSegmentOptions := appConfigurationService.NewDeleteSegmentOptions(
 				"segment_id",
 			)
 
-			response, err := appConfigurationService.DeleteSegment(deleteSegmentOptions)
+			workflowApprovalInitiatedResponse, response, err := appConfigurationService.DeleteSegment(deleteSegmentOptions)
 			if err != nil {
 				panic(err)
 			}
-			if response.StatusCode != 204 {
-				fmt.Printf("\nUnexpected response status code received from DeleteSegment(): %d\n", response.StatusCode)
-			}
+			b, _ := json.MarshalIndent(workflowApprovalInitiatedResponse, "", "  ")
+			fmt.Println(string(b))
 
 			// end-delete_segment
 
 			Expect(err).To(BeNil())
-			Expect(response.StatusCode).To(Equal(204))
+			Expect(response.StatusCode).To(Equal(202))
+			Expect(workflowApprovalInitiatedResponse).ToNot(BeNil())
 		})
 		It(`DeleteGitconfig request example`, func() {
 			// begin-delete_gitconfig
@@ -1621,6 +1902,26 @@ var _ = Describe(`AppConfigurationV1 Examples Tests`, func() {
 			}
 
 			// end-delete_workflowconfig
+
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(204))
+		})
+		It(`DeleteWorkflowConfigs request example`, func() {
+			// begin-delete_workflow_configs
+
+			deleteWorkflowConfigsOptions := appConfigurationService.NewDeleteWorkflowConfigsOptions(
+				"workflow_config_id",
+			)
+
+			response, err := appConfigurationService.DeleteWorkflowConfigs(deleteWorkflowConfigsOptions)
+			if err != nil {
+				panic(err)
+			}
+			if response.StatusCode != 204 {
+				fmt.Printf("\nUnexpected response status code received from DeleteWorkflowConfigs(): %d\n", response.StatusCode)
+			}
+
+			// end-delete_workflow_configs
 
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(204))

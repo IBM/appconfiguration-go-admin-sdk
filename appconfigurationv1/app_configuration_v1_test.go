@@ -215,7 +215,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				listEnvironmentsOptionsModel.Expand = core.BoolPtr(true)
 				listEnvironmentsOptionsModel.Sort = core.StringPtr("created_time")
 				listEnvironmentsOptionsModel.Tags = core.StringPtr("version 1.1,pre-release")
-				listEnvironmentsOptionsModel.Include = []string{"features", "properties", "snapshots"}
+				listEnvironmentsOptionsModel.Include = []string{"features", "properties", "snapshots", "workflow_approval"}
 				listEnvironmentsOptionsModel.Limit = core.Int64Ptr(int64(10))
 				listEnvironmentsOptionsModel.Offset = core.Int64Ptr(int64(0))
 				listEnvironmentsOptionsModel.Search = core.StringPtr("test tag")
@@ -261,7 +261,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"environments": [{"name": "Name", "environment_id": "EnvironmentID", "description": "Description", "tags": "Tags", "color_code": "#FDD13A", "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "href": "Href", "features": [{"feature_id": "FeatureID", "name": "Name"}], "properties": [{"property_id": "PropertyID", "name": "Name"}], "snapshots": [{"git_config_id": "GitConfigID", "name": "Name"}]}], "limit": 10, "offset": 0, "total_count": 0, "first": {"href": "Href"}, "previous": {"href": "Href"}, "next": {"href": "Href"}, "last": {"href": "Href"}}`)
+					fmt.Fprintf(res, "%s", `{"environments": [{"name": "Name", "environment_id": "EnvironmentID", "description": "Description", "tags": "Tags", "color_code": "#FDD13A", "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "href": "Href", "features": [{"feature_id": "FeatureID", "name": "Name"}], "properties": [{"property_id": "PropertyID", "name": "Name"}], "snapshots": [{"git_config_id": "GitConfigID", "name": "Name"}], "workflow_approval": {"workflow_name": "WorkflowName", "workflow_id": "WorkflowID", "provider_type": "SERVICENOW_IBM", "change_request_number": "ChangeRequestNumber", "change_request_status": "PENDING", "execution_status": "PENDING", "approval_url": "ApprovalURL", "resource_type": "FEATURE", "resource_id": "ResourceID", "environment_id": "EnvironmentID", "created_time": "2019-01-01T12:00:00.000Z", "updated_time": "2019-01-01T12:00:00.000Z", "last_poll_time": "2019-01-01T12:00:00.000Z"}}], "limit": 10, "offset": 0, "total_count": 0, "first": {"href": "Href"}, "previous": {"href": "Href"}, "next": {"href": "Href"}, "last": {"href": "Href"}}`)
 				}))
 			})
 			It(`Invoke ListEnvironments successfully with retries`, func() {
@@ -278,7 +278,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				listEnvironmentsOptionsModel.Expand = core.BoolPtr(true)
 				listEnvironmentsOptionsModel.Sort = core.StringPtr("created_time")
 				listEnvironmentsOptionsModel.Tags = core.StringPtr("version 1.1,pre-release")
-				listEnvironmentsOptionsModel.Include = []string{"features", "properties", "snapshots"}
+				listEnvironmentsOptionsModel.Include = []string{"features", "properties", "snapshots", "workflow_approval"}
 				listEnvironmentsOptionsModel.Limit = core.Int64Ptr(int64(10))
 				listEnvironmentsOptionsModel.Offset = core.Int64Ptr(int64(0))
 				listEnvironmentsOptionsModel.Search = core.StringPtr("test tag")
@@ -327,7 +327,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"environments": [{"name": "Name", "environment_id": "EnvironmentID", "description": "Description", "tags": "Tags", "color_code": "#FDD13A", "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "href": "Href", "features": [{"feature_id": "FeatureID", "name": "Name"}], "properties": [{"property_id": "PropertyID", "name": "Name"}], "snapshots": [{"git_config_id": "GitConfigID", "name": "Name"}]}], "limit": 10, "offset": 0, "total_count": 0, "first": {"href": "Href"}, "previous": {"href": "Href"}, "next": {"href": "Href"}, "last": {"href": "Href"}}`)
+					fmt.Fprintf(res, "%s", `{"environments": [{"name": "Name", "environment_id": "EnvironmentID", "description": "Description", "tags": "Tags", "color_code": "#FDD13A", "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "href": "Href", "features": [{"feature_id": "FeatureID", "name": "Name"}], "properties": [{"property_id": "PropertyID", "name": "Name"}], "snapshots": [{"git_config_id": "GitConfigID", "name": "Name"}], "workflow_approval": {"workflow_name": "WorkflowName", "workflow_id": "WorkflowID", "provider_type": "SERVICENOW_IBM", "change_request_number": "ChangeRequestNumber", "change_request_status": "PENDING", "execution_status": "PENDING", "approval_url": "ApprovalURL", "resource_type": "FEATURE", "resource_id": "ResourceID", "environment_id": "EnvironmentID", "created_time": "2019-01-01T12:00:00.000Z", "updated_time": "2019-01-01T12:00:00.000Z", "last_poll_time": "2019-01-01T12:00:00.000Z"}}], "limit": 10, "offset": 0, "total_count": 0, "first": {"href": "Href"}, "previous": {"href": "Href"}, "next": {"href": "Href"}, "last": {"href": "Href"}}`)
 				}))
 			})
 			It(`Invoke ListEnvironments successfully`, func() {
@@ -349,7 +349,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				listEnvironmentsOptionsModel.Expand = core.BoolPtr(true)
 				listEnvironmentsOptionsModel.Sort = core.StringPtr("created_time")
 				listEnvironmentsOptionsModel.Tags = core.StringPtr("version 1.1,pre-release")
-				listEnvironmentsOptionsModel.Include = []string{"features", "properties", "snapshots"}
+				listEnvironmentsOptionsModel.Include = []string{"features", "properties", "snapshots", "workflow_approval"}
 				listEnvironmentsOptionsModel.Limit = core.Int64Ptr(int64(10))
 				listEnvironmentsOptionsModel.Offset = core.Int64Ptr(int64(0))
 				listEnvironmentsOptionsModel.Search = core.StringPtr("test tag")
@@ -375,7 +375,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				listEnvironmentsOptionsModel.Expand = core.BoolPtr(true)
 				listEnvironmentsOptionsModel.Sort = core.StringPtr("created_time")
 				listEnvironmentsOptionsModel.Tags = core.StringPtr("version 1.1,pre-release")
-				listEnvironmentsOptionsModel.Include = []string{"features", "properties", "snapshots"}
+				listEnvironmentsOptionsModel.Include = []string{"features", "properties", "snapshots", "workflow_approval"}
 				listEnvironmentsOptionsModel.Limit = core.Int64Ptr(int64(10))
 				listEnvironmentsOptionsModel.Offset = core.Int64Ptr(int64(0))
 				listEnvironmentsOptionsModel.Search = core.StringPtr("test tag")
@@ -415,7 +415,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				listEnvironmentsOptionsModel.Expand = core.BoolPtr(true)
 				listEnvironmentsOptionsModel.Sort = core.StringPtr("created_time")
 				listEnvironmentsOptionsModel.Tags = core.StringPtr("version 1.1,pre-release")
-				listEnvironmentsOptionsModel.Include = []string{"features", "properties", "snapshots"}
+				listEnvironmentsOptionsModel.Include = []string{"features", "properties", "snapshots", "workflow_approval"}
 				listEnvironmentsOptionsModel.Limit = core.Int64Ptr(int64(10))
 				listEnvironmentsOptionsModel.Offset = core.Int64Ptr(int64(0))
 				listEnvironmentsOptionsModel.Search = core.StringPtr("test tag")
@@ -474,7 +474,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 		})
 		Context(`Using mock server endpoint - paginated response`, func() {
 			BeforeEach(func() {
-				var requestNumber int = 0
+				requestNumber := 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -486,11 +486,12 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
 					requestNumber++
-					if requestNumber == 1 {
-						fmt.Fprintf(res, "%s", `{"next":{"href":"https://myhost.com/somePath?offset=1"},"environments":[{"name":"Name","environment_id":"EnvironmentID","description":"Description","tags":"Tags","color_code":"#FDD13A","created_time":"2021-05-12T23:20:50.520Z","updated_time":"2021-05-12T23:20:50.520Z","href":"Href","features":[{"feature_id":"FeatureID","name":"Name"}],"properties":[{"property_id":"PropertyID","name":"Name"}],"snapshots":[{"git_config_id":"GitConfigID","name":"Name"}]}],"total_count":2,"limit":1}`)
-					} else if requestNumber == 2 {
-						fmt.Fprintf(res, "%s", `{"environments":[{"name":"Name","environment_id":"EnvironmentID","description":"Description","tags":"Tags","color_code":"#FDD13A","created_time":"2021-05-12T23:20:50.520Z","updated_time":"2021-05-12T23:20:50.520Z","href":"Href","features":[{"feature_id":"FeatureID","name":"Name"}],"properties":[{"property_id":"PropertyID","name":"Name"}],"snapshots":[{"git_config_id":"GitConfigID","name":"Name"}]}],"total_count":2,"limit":1}`)
-					} else {
+					switch requestNumber {
+					case 1:
+						fmt.Fprintf(res, "%s", `{"next":{"href":"https://myhost.com/somePath?offset=1"},"environments":[{"name":"Name","environment_id":"EnvironmentID","description":"Description","tags":"Tags","color_code":"#FDD13A","created_time":"2021-05-12T23:20:50.520Z","updated_time":"2021-05-12T23:20:50.520Z","href":"Href","features":[{"feature_id":"FeatureID","name":"Name"}],"properties":[{"property_id":"PropertyID","name":"Name"}],"snapshots":[{"git_config_id":"GitConfigID","name":"Name"}],"workflow_approval":{"workflow_name":"WorkflowName","workflow_id":"WorkflowID","provider_type":"SERVICENOW_IBM","change_request_number":"ChangeRequestNumber","change_request_status":"PENDING","execution_status":"PENDING","approval_url":"ApprovalURL","resource_type":"FEATURE","resource_id":"ResourceID","environment_id":"EnvironmentID","created_time":"2019-01-01T12:00:00.000Z","updated_time":"2019-01-01T12:00:00.000Z","last_poll_time":"2019-01-01T12:00:00.000Z"}}],"total_count":2,"limit":1}`)
+					case 2:
+						fmt.Fprintf(res, "%s", `{"environments":[{"name":"Name","environment_id":"EnvironmentID","description":"Description","tags":"Tags","color_code":"#FDD13A","created_time":"2021-05-12T23:20:50.520Z","updated_time":"2021-05-12T23:20:50.520Z","href":"Href","features":[{"feature_id":"FeatureID","name":"Name"}],"properties":[{"property_id":"PropertyID","name":"Name"}],"snapshots":[{"git_config_id":"GitConfigID","name":"Name"}],"workflow_approval":{"workflow_name":"WorkflowName","workflow_id":"WorkflowID","provider_type":"SERVICENOW_IBM","change_request_number":"ChangeRequestNumber","change_request_status":"PENDING","execution_status":"PENDING","approval_url":"ApprovalURL","resource_type":"FEATURE","resource_id":"ResourceID","environment_id":"EnvironmentID","created_time":"2019-01-01T12:00:00.000Z","updated_time":"2019-01-01T12:00:00.000Z","last_poll_time":"2019-01-01T12:00:00.000Z"}}],"total_count":2,"limit":1}`)
+					default:
 						res.WriteHeader(400)
 					}
 				}))
@@ -507,7 +508,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					Expand: core.BoolPtr(true),
 					Sort: core.StringPtr("created_time"),
 					Tags: core.StringPtr("version 1.1,pre-release"),
-					Include: []string{"features", "properties", "snapshots"},
+					Include: []string{"features", "properties", "snapshots", "workflow_approval"},
 					Limit: core.Int64Ptr(int64(10)),
 					Search: core.StringPtr("test tag"),
 				}
@@ -537,7 +538,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					Expand: core.BoolPtr(true),
 					Sort: core.StringPtr("created_time"),
 					Tags: core.StringPtr("version 1.1,pre-release"),
-					Include: []string{"features", "properties", "snapshots"},
+					Include: []string{"features", "properties", "snapshots", "workflow_approval"},
 					Limit: core.Int64Ptr(int64(10)),
 					Search: core.StringPtr("test tag"),
 				}
@@ -635,7 +636,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
-					fmt.Fprintf(res, "%s", `{"name": "Name", "environment_id": "EnvironmentID", "description": "Description", "tags": "Tags", "color_code": "#FDD13A", "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "href": "Href", "features": [{"feature_id": "FeatureID", "name": "Name"}], "properties": [{"property_id": "PropertyID", "name": "Name"}], "snapshots": [{"git_config_id": "GitConfigID", "name": "Name"}]}`)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "environment_id": "EnvironmentID", "description": "Description", "tags": "Tags", "color_code": "#FDD13A", "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "href": "Href", "features": [{"feature_id": "FeatureID", "name": "Name"}], "properties": [{"property_id": "PropertyID", "name": "Name"}], "snapshots": [{"git_config_id": "GitConfigID", "name": "Name"}], "workflow_approval": {"workflow_name": "WorkflowName", "workflow_id": "WorkflowID", "provider_type": "SERVICENOW_IBM", "change_request_number": "ChangeRequestNumber", "change_request_status": "PENDING", "execution_status": "PENDING", "approval_url": "ApprovalURL", "resource_type": "FEATURE", "resource_id": "ResourceID", "environment_id": "EnvironmentID", "created_time": "2019-01-01T12:00:00.000Z", "updated_time": "2019-01-01T12:00:00.000Z", "last_poll_time": "2019-01-01T12:00:00.000Z"}}`)
 				}))
 			})
 			It(`Invoke CreateEnvironment successfully with retries`, func() {
@@ -709,7 +710,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
-					fmt.Fprintf(res, "%s", `{"name": "Name", "environment_id": "EnvironmentID", "description": "Description", "tags": "Tags", "color_code": "#FDD13A", "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "href": "Href", "features": [{"feature_id": "FeatureID", "name": "Name"}], "properties": [{"property_id": "PropertyID", "name": "Name"}], "snapshots": [{"git_config_id": "GitConfigID", "name": "Name"}]}`)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "environment_id": "EnvironmentID", "description": "Description", "tags": "Tags", "color_code": "#FDD13A", "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "href": "Href", "features": [{"feature_id": "FeatureID", "name": "Name"}], "properties": [{"property_id": "PropertyID", "name": "Name"}], "snapshots": [{"git_config_id": "GitConfigID", "name": "Name"}], "workflow_approval": {"workflow_name": "WorkflowName", "workflow_id": "WorkflowID", "provider_type": "SERVICENOW_IBM", "change_request_number": "ChangeRequestNumber", "change_request_status": "PENDING", "execution_status": "PENDING", "approval_url": "ApprovalURL", "resource_type": "FEATURE", "resource_id": "ResourceID", "environment_id": "EnvironmentID", "created_time": "2019-01-01T12:00:00.000Z", "updated_time": "2019-01-01T12:00:00.000Z", "last_poll_time": "2019-01-01T12:00:00.000Z"}}`)
 				}))
 			})
 			It(`Invoke CreateEnvironment successfully`, func() {
@@ -899,7 +900,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"name": "Name", "environment_id": "EnvironmentID", "description": "Description", "tags": "Tags", "color_code": "#FDD13A", "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "href": "Href", "features": [{"feature_id": "FeatureID", "name": "Name"}], "properties": [{"property_id": "PropertyID", "name": "Name"}], "snapshots": [{"git_config_id": "GitConfigID", "name": "Name"}]}`)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "environment_id": "EnvironmentID", "description": "Description", "tags": "Tags", "color_code": "#FDD13A", "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "href": "Href", "features": [{"feature_id": "FeatureID", "name": "Name"}], "properties": [{"property_id": "PropertyID", "name": "Name"}], "snapshots": [{"git_config_id": "GitConfigID", "name": "Name"}], "workflow_approval": {"workflow_name": "WorkflowName", "workflow_id": "WorkflowID", "provider_type": "SERVICENOW_IBM", "change_request_number": "ChangeRequestNumber", "change_request_status": "PENDING", "execution_status": "PENDING", "approval_url": "ApprovalURL", "resource_type": "FEATURE", "resource_id": "ResourceID", "environment_id": "EnvironmentID", "created_time": "2019-01-01T12:00:00.000Z", "updated_time": "2019-01-01T12:00:00.000Z", "last_poll_time": "2019-01-01T12:00:00.000Z"}}`)
 				}))
 			})
 			It(`Invoke UpdateEnvironment successfully with retries`, func() {
@@ -973,7 +974,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"name": "Name", "environment_id": "EnvironmentID", "description": "Description", "tags": "Tags", "color_code": "#FDD13A", "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "href": "Href", "features": [{"feature_id": "FeatureID", "name": "Name"}], "properties": [{"property_id": "PropertyID", "name": "Name"}], "snapshots": [{"git_config_id": "GitConfigID", "name": "Name"}]}`)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "environment_id": "EnvironmentID", "description": "Description", "tags": "Tags", "color_code": "#FDD13A", "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "href": "Href", "features": [{"feature_id": "FeatureID", "name": "Name"}], "properties": [{"property_id": "PropertyID", "name": "Name"}], "snapshots": [{"git_config_id": "GitConfigID", "name": "Name"}], "workflow_approval": {"workflow_name": "WorkflowName", "workflow_id": "WorkflowID", "provider_type": "SERVICENOW_IBM", "change_request_number": "ChangeRequestNumber", "change_request_status": "PENDING", "execution_status": "PENDING", "approval_url": "ApprovalURL", "resource_type": "FEATURE", "resource_id": "ResourceID", "environment_id": "EnvironmentID", "created_time": "2019-01-01T12:00:00.000Z", "updated_time": "2019-01-01T12:00:00.000Z", "last_poll_time": "2019-01-01T12:00:00.000Z"}}`)
 				}))
 			})
 			It(`Invoke UpdateEnvironment successfully`, func() {
@@ -1109,7 +1110,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				getEnvironmentOptionsModel := new(appconfigurationv1.GetEnvironmentOptions)
 				getEnvironmentOptionsModel.EnvironmentID = core.StringPtr("environment_id")
 				getEnvironmentOptionsModel.Expand = core.BoolPtr(true)
-				getEnvironmentOptionsModel.Include = []string{"features", "properties", "snapshots"}
+				getEnvironmentOptionsModel.Include = []string{"features", "properties", "snapshots", "workflow_approval"}
 				getEnvironmentOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
 				result, response, operationErr := appConfigurationService.GetEnvironment(getEnvironmentOptionsModel)
@@ -1147,7 +1148,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"name": "Name", "environment_id": "EnvironmentID", "description": "Description", "tags": "Tags", "color_code": "#FDD13A", "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "href": "Href", "features": [{"feature_id": "FeatureID", "name": "Name"}], "properties": [{"property_id": "PropertyID", "name": "Name"}], "snapshots": [{"git_config_id": "GitConfigID", "name": "Name"}]}`)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "environment_id": "EnvironmentID", "description": "Description", "tags": "Tags", "color_code": "#FDD13A", "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "href": "Href", "features": [{"feature_id": "FeatureID", "name": "Name"}], "properties": [{"property_id": "PropertyID", "name": "Name"}], "snapshots": [{"git_config_id": "GitConfigID", "name": "Name"}], "workflow_approval": {"workflow_name": "WorkflowName", "workflow_id": "WorkflowID", "provider_type": "SERVICENOW_IBM", "change_request_number": "ChangeRequestNumber", "change_request_status": "PENDING", "execution_status": "PENDING", "approval_url": "ApprovalURL", "resource_type": "FEATURE", "resource_id": "ResourceID", "environment_id": "EnvironmentID", "created_time": "2019-01-01T12:00:00.000Z", "updated_time": "2019-01-01T12:00:00.000Z", "last_poll_time": "2019-01-01T12:00:00.000Z"}}`)
 				}))
 			})
 			It(`Invoke GetEnvironment successfully with retries`, func() {
@@ -1163,7 +1164,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				getEnvironmentOptionsModel := new(appconfigurationv1.GetEnvironmentOptions)
 				getEnvironmentOptionsModel.EnvironmentID = core.StringPtr("environment_id")
 				getEnvironmentOptionsModel.Expand = core.BoolPtr(true)
-				getEnvironmentOptionsModel.Include = []string{"features", "properties", "snapshots"}
+				getEnvironmentOptionsModel.Include = []string{"features", "properties", "snapshots", "workflow_approval"}
 				getEnvironmentOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with a Context to test a timeout error
@@ -1204,7 +1205,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"name": "Name", "environment_id": "EnvironmentID", "description": "Description", "tags": "Tags", "color_code": "#FDD13A", "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "href": "Href", "features": [{"feature_id": "FeatureID", "name": "Name"}], "properties": [{"property_id": "PropertyID", "name": "Name"}], "snapshots": [{"git_config_id": "GitConfigID", "name": "Name"}]}`)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "environment_id": "EnvironmentID", "description": "Description", "tags": "Tags", "color_code": "#FDD13A", "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "href": "Href", "features": [{"feature_id": "FeatureID", "name": "Name"}], "properties": [{"property_id": "PropertyID", "name": "Name"}], "snapshots": [{"git_config_id": "GitConfigID", "name": "Name"}], "workflow_approval": {"workflow_name": "WorkflowName", "workflow_id": "WorkflowID", "provider_type": "SERVICENOW_IBM", "change_request_number": "ChangeRequestNumber", "change_request_status": "PENDING", "execution_status": "PENDING", "approval_url": "ApprovalURL", "resource_type": "FEATURE", "resource_id": "ResourceID", "environment_id": "EnvironmentID", "created_time": "2019-01-01T12:00:00.000Z", "updated_time": "2019-01-01T12:00:00.000Z", "last_poll_time": "2019-01-01T12:00:00.000Z"}}`)
 				}))
 			})
 			It(`Invoke GetEnvironment successfully`, func() {
@@ -1225,7 +1226,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				getEnvironmentOptionsModel := new(appconfigurationv1.GetEnvironmentOptions)
 				getEnvironmentOptionsModel.EnvironmentID = core.StringPtr("environment_id")
 				getEnvironmentOptionsModel.Expand = core.BoolPtr(true)
-				getEnvironmentOptionsModel.Include = []string{"features", "properties", "snapshots"}
+				getEnvironmentOptionsModel.Include = []string{"features", "properties", "snapshots", "workflow_approval"}
 				getEnvironmentOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
@@ -1247,7 +1248,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				getEnvironmentOptionsModel := new(appconfigurationv1.GetEnvironmentOptions)
 				getEnvironmentOptionsModel.EnvironmentID = core.StringPtr("environment_id")
 				getEnvironmentOptionsModel.Expand = core.BoolPtr(true)
-				getEnvironmentOptionsModel.Include = []string{"features", "properties", "snapshots"}
+				getEnvironmentOptionsModel.Include = []string{"features", "properties", "snapshots", "workflow_approval"}
 				getEnvironmentOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := appConfigurationService.SetServiceURL("")
@@ -1290,7 +1291,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				getEnvironmentOptionsModel := new(appconfigurationv1.GetEnvironmentOptions)
 				getEnvironmentOptionsModel.EnvironmentID = core.StringPtr("environment_id")
 				getEnvironmentOptionsModel.Expand = core.BoolPtr(true)
-				getEnvironmentOptionsModel.Include = []string{"features", "properties", "snapshots"}
+				getEnvironmentOptionsModel.Include = []string{"features", "properties", "snapshots", "workflow_approval"}
 				getEnvironmentOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation
@@ -1306,8 +1307,110 @@ var _ = Describe(`AppConfigurationV1`, func() {
 			})
 		})
 	})
+	Describe(`DeleteEnvironment(deleteEnvironmentOptions *DeleteEnvironmentOptions) - Operation response error`, func() {
+		deleteEnvironmentPath := "/environments/environment_id"
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(deleteEnvironmentPath))
+					Expect(req.Method).To(Equal("DELETE"))
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(202)
+					fmt.Fprint(res, `} this is not valid json {`)
+				}))
+			})
+			It(`Invoke DeleteEnvironment with error: Operation response processing error`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the DeleteEnvironmentOptions model
+				deleteEnvironmentOptionsModel := new(appconfigurationv1.DeleteEnvironmentOptions)
+				deleteEnvironmentOptionsModel.EnvironmentID = core.StringPtr("environment_id")
+				deleteEnvironmentOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Expect response parsing to fail since we are receiving a text/plain response
+				result, response, operationErr := appConfigurationService.DeleteEnvironment(deleteEnvironmentOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				appConfigurationService.EnableRetries(0, 0)
+				result, response, operationErr = appConfigurationService.DeleteEnvironment(deleteEnvironmentOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
 	Describe(`DeleteEnvironment(deleteEnvironmentOptions *DeleteEnvironmentOptions)`, func() {
 		deleteEnvironmentPath := "/environments/environment_id"
+		Context(`Using mock server endpoint with timeout`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(deleteEnvironmentPath))
+					Expect(req.Method).To(Equal("DELETE"))
+
+					// Sleep a short time to support a timeout test
+					time.Sleep(100 * time.Millisecond)
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(202)
+					fmt.Fprintf(res, "%s", `{"message": "Message", "workflow_approval": {"workflow_name": "WorkflowName", "workflow_id": "WorkflowID", "provider_type": "SERVICENOW_IBM", "change_request_number": "ChangeRequestNumber", "change_request_status": "PENDING", "execution_status": "PENDING", "approval_url": "ApprovalURL", "resource_type": "FEATURE", "resource_id": "ResourceID", "environment_id": "EnvironmentID", "created_time": "2019-01-01T12:00:00.000Z", "updated_time": "2019-01-01T12:00:00.000Z"}}`)
+				}))
+			})
+			It(`Invoke DeleteEnvironment successfully with retries`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+				appConfigurationService.EnableRetries(0, 0)
+
+				// Construct an instance of the DeleteEnvironmentOptions model
+				deleteEnvironmentOptionsModel := new(appconfigurationv1.DeleteEnvironmentOptions)
+				deleteEnvironmentOptionsModel.EnvironmentID = core.StringPtr("environment_id")
+				deleteEnvironmentOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with a Context to test a timeout error
+				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc()
+				_, _, operationErr := appConfigurationService.DeleteEnvironmentWithContext(ctx, deleteEnvironmentOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+
+				// Disable retries and test again
+				appConfigurationService.DisableRetries()
+				result, response, operationErr := appConfigurationService.DeleteEnvironment(deleteEnvironmentOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				_, _, operationErr = appConfigurationService.DeleteEnvironmentWithContext(ctx, deleteEnvironmentOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -1317,7 +1420,10 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(deleteEnvironmentPath))
 					Expect(req.Method).To(Equal("DELETE"))
 
-					res.WriteHeader(204)
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(202)
+					fmt.Fprintf(res, "%s", `{"message": "Message", "workflow_approval": {"workflow_name": "WorkflowName", "workflow_id": "WorkflowID", "provider_type": "SERVICENOW_IBM", "change_request_number": "ChangeRequestNumber", "change_request_status": "PENDING", "execution_status": "PENDING", "approval_url": "ApprovalURL", "resource_type": "FEATURE", "resource_id": "ResourceID", "environment_id": "EnvironmentID", "created_time": "2019-01-01T12:00:00.000Z", "updated_time": "2019-01-01T12:00:00.000Z"}}`)
 				}))
 			})
 			It(`Invoke DeleteEnvironment successfully`, func() {
@@ -1329,9 +1435,10 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(appConfigurationService).ToNot(BeNil())
 
 				// Invoke operation with nil options model (negative test)
-				response, operationErr := appConfigurationService.DeleteEnvironment(nil)
+				result, response, operationErr := appConfigurationService.DeleteEnvironment(nil)
 				Expect(operationErr).NotTo(BeNil())
 				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
 
 				// Construct an instance of the DeleteEnvironmentOptions model
 				deleteEnvironmentOptionsModel := new(appconfigurationv1.DeleteEnvironmentOptions)
@@ -1339,9 +1446,11 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				deleteEnvironmentOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
-				response, operationErr = appConfigurationService.DeleteEnvironment(deleteEnvironmentOptionsModel)
+				result, response, operationErr = appConfigurationService.DeleteEnvironment(deleteEnvironmentOptionsModel)
 				Expect(operationErr).To(BeNil())
 				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
 			})
 			It(`Invoke DeleteEnvironment with error: Operation validation and request error`, func() {
 				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
@@ -1358,16 +1467,52 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				// Invoke operation with empty URL (negative test)
 				err := appConfigurationService.SetServiceURL("")
 				Expect(err).To(BeNil())
-				response, operationErr := appConfigurationService.DeleteEnvironment(deleteEnvironmentOptionsModel)
+				result, response, operationErr := appConfigurationService.DeleteEnvironment(deleteEnvironmentOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
 				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
 				// Construct a second instance of the DeleteEnvironmentOptions model with no property values
 				deleteEnvironmentOptionsModelNew := new(appconfigurationv1.DeleteEnvironmentOptions)
 				// Invoke operation with invalid model (negative test)
-				response, operationErr = appConfigurationService.DeleteEnvironment(deleteEnvironmentOptionsModelNew)
+				result, response, operationErr = appConfigurationService.DeleteEnvironment(deleteEnvironmentOptionsModelNew)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(202)
+				}))
+			})
+			It(`Invoke DeleteEnvironment successfully`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the DeleteEnvironmentOptions model
+				deleteEnvironmentOptionsModel := new(appconfigurationv1.DeleteEnvironmentOptions)
+				deleteEnvironmentOptionsModel.EnvironmentID = core.StringPtr("environment_id")
+				deleteEnvironmentOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := appConfigurationService.DeleteEnvironment(deleteEnvironmentOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
 			})
 			AfterEach(func() {
 				testServer.Close()
@@ -1410,7 +1555,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				listCollectionsOptionsModel.Tags = core.StringPtr("version 1.1,pre-release")
 				listCollectionsOptionsModel.Features = []string{"my-feature-id", "cycle-rentals"}
 				listCollectionsOptionsModel.Properties = []string{"my-property-id", "email-property"}
-				listCollectionsOptionsModel.Include = []string{"features", "properties", "snapshots"}
+				listCollectionsOptionsModel.Include = []string{"features", "properties", "snapshots", "workflow_approval"}
 				listCollectionsOptionsModel.Limit = core.Int64Ptr(int64(10))
 				listCollectionsOptionsModel.Offset = core.Int64Ptr(int64(0))
 				listCollectionsOptionsModel.Search = core.StringPtr("test tag")
@@ -1456,7 +1601,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"collections": [{"name": "Name", "collection_id": "CollectionID", "description": "Description", "tags": "Tags", "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "href": "Href", "features": [{"feature_id": "FeatureID", "name": "Name"}], "properties": [{"property_id": "PropertyID", "name": "Name"}], "snapshots": [{"git_config_id": "GitConfigID", "name": "Name"}], "features_count": 13, "properties_count": 15, "snapshot_count": 13}], "limit": 10, "offset": 0, "total_count": 0, "first": {"href": "Href"}, "previous": {"href": "Href"}, "next": {"href": "Href"}, "last": {"href": "Href"}}`)
+					fmt.Fprintf(res, "%s", `{"collections": [{"name": "Name", "collection_id": "CollectionID", "description": "Description", "tags": "Tags", "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "href": "Href", "features": [{"feature_id": "FeatureID", "name": "Name"}], "properties": [{"property_id": "PropertyID", "name": "Name"}], "snapshots": [{"git_config_id": "GitConfigID", "name": "Name"}], "features_count": 13, "properties_count": 15, "snapshot_count": 13, "workflow_approval": {"workflow_name": "WorkflowName", "workflow_id": "WorkflowID", "provider_type": "SERVICENOW_IBM", "change_request_number": "ChangeRequestNumber", "change_request_status": "PENDING", "execution_status": "PENDING", "approval_url": "ApprovalURL", "resource_type": "FEATURE", "resource_id": "ResourceID", "environment_id": "EnvironmentID", "created_time": "2019-01-01T12:00:00.000Z", "updated_time": "2019-01-01T12:00:00.000Z", "last_poll_time": "2019-01-01T12:00:00.000Z"}}], "limit": 10, "offset": 0, "total_count": 0, "first": {"href": "Href"}, "previous": {"href": "Href"}, "next": {"href": "Href"}, "last": {"href": "Href"}}`)
 				}))
 			})
 			It(`Invoke ListCollections successfully with retries`, func() {
@@ -1475,7 +1620,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				listCollectionsOptionsModel.Tags = core.StringPtr("version 1.1,pre-release")
 				listCollectionsOptionsModel.Features = []string{"my-feature-id", "cycle-rentals"}
 				listCollectionsOptionsModel.Properties = []string{"my-property-id", "email-property"}
-				listCollectionsOptionsModel.Include = []string{"features", "properties", "snapshots"}
+				listCollectionsOptionsModel.Include = []string{"features", "properties", "snapshots", "workflow_approval"}
 				listCollectionsOptionsModel.Limit = core.Int64Ptr(int64(10))
 				listCollectionsOptionsModel.Offset = core.Int64Ptr(int64(0))
 				listCollectionsOptionsModel.Search = core.StringPtr("test tag")
@@ -1524,7 +1669,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"collections": [{"name": "Name", "collection_id": "CollectionID", "description": "Description", "tags": "Tags", "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "href": "Href", "features": [{"feature_id": "FeatureID", "name": "Name"}], "properties": [{"property_id": "PropertyID", "name": "Name"}], "snapshots": [{"git_config_id": "GitConfigID", "name": "Name"}], "features_count": 13, "properties_count": 15, "snapshot_count": 13}], "limit": 10, "offset": 0, "total_count": 0, "first": {"href": "Href"}, "previous": {"href": "Href"}, "next": {"href": "Href"}, "last": {"href": "Href"}}`)
+					fmt.Fprintf(res, "%s", `{"collections": [{"name": "Name", "collection_id": "CollectionID", "description": "Description", "tags": "Tags", "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "href": "Href", "features": [{"feature_id": "FeatureID", "name": "Name"}], "properties": [{"property_id": "PropertyID", "name": "Name"}], "snapshots": [{"git_config_id": "GitConfigID", "name": "Name"}], "features_count": 13, "properties_count": 15, "snapshot_count": 13, "workflow_approval": {"workflow_name": "WorkflowName", "workflow_id": "WorkflowID", "provider_type": "SERVICENOW_IBM", "change_request_number": "ChangeRequestNumber", "change_request_status": "PENDING", "execution_status": "PENDING", "approval_url": "ApprovalURL", "resource_type": "FEATURE", "resource_id": "ResourceID", "environment_id": "EnvironmentID", "created_time": "2019-01-01T12:00:00.000Z", "updated_time": "2019-01-01T12:00:00.000Z", "last_poll_time": "2019-01-01T12:00:00.000Z"}}], "limit": 10, "offset": 0, "total_count": 0, "first": {"href": "Href"}, "previous": {"href": "Href"}, "next": {"href": "Href"}, "last": {"href": "Href"}}`)
 				}))
 			})
 			It(`Invoke ListCollections successfully`, func() {
@@ -1548,7 +1693,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				listCollectionsOptionsModel.Tags = core.StringPtr("version 1.1,pre-release")
 				listCollectionsOptionsModel.Features = []string{"my-feature-id", "cycle-rentals"}
 				listCollectionsOptionsModel.Properties = []string{"my-property-id", "email-property"}
-				listCollectionsOptionsModel.Include = []string{"features", "properties", "snapshots"}
+				listCollectionsOptionsModel.Include = []string{"features", "properties", "snapshots", "workflow_approval"}
 				listCollectionsOptionsModel.Limit = core.Int64Ptr(int64(10))
 				listCollectionsOptionsModel.Offset = core.Int64Ptr(int64(0))
 				listCollectionsOptionsModel.Search = core.StringPtr("test tag")
@@ -1576,7 +1721,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				listCollectionsOptionsModel.Tags = core.StringPtr("version 1.1,pre-release")
 				listCollectionsOptionsModel.Features = []string{"my-feature-id", "cycle-rentals"}
 				listCollectionsOptionsModel.Properties = []string{"my-property-id", "email-property"}
-				listCollectionsOptionsModel.Include = []string{"features", "properties", "snapshots"}
+				listCollectionsOptionsModel.Include = []string{"features", "properties", "snapshots", "workflow_approval"}
 				listCollectionsOptionsModel.Limit = core.Int64Ptr(int64(10))
 				listCollectionsOptionsModel.Offset = core.Int64Ptr(int64(0))
 				listCollectionsOptionsModel.Search = core.StringPtr("test tag")
@@ -1618,7 +1763,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				listCollectionsOptionsModel.Tags = core.StringPtr("version 1.1,pre-release")
 				listCollectionsOptionsModel.Features = []string{"my-feature-id", "cycle-rentals"}
 				listCollectionsOptionsModel.Properties = []string{"my-property-id", "email-property"}
-				listCollectionsOptionsModel.Include = []string{"features", "properties", "snapshots"}
+				listCollectionsOptionsModel.Include = []string{"features", "properties", "snapshots", "workflow_approval"}
 				listCollectionsOptionsModel.Limit = core.Int64Ptr(int64(10))
 				listCollectionsOptionsModel.Offset = core.Int64Ptr(int64(0))
 				listCollectionsOptionsModel.Search = core.StringPtr("test tag")
@@ -1677,7 +1822,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 		})
 		Context(`Using mock server endpoint - paginated response`, func() {
 			BeforeEach(func() {
-				var requestNumber int = 0
+				requestNumber := 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -1689,11 +1834,12 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
 					requestNumber++
-					if requestNumber == 1 {
-						fmt.Fprintf(res, "%s", `{"next":{"href":"https://myhost.com/somePath?offset=1"},"collections":[{"name":"Name","collection_id":"CollectionID","description":"Description","tags":"Tags","created_time":"2021-05-12T23:20:50.520Z","updated_time":"2021-05-12T23:20:50.520Z","href":"Href","features":[{"feature_id":"FeatureID","name":"Name"}],"properties":[{"property_id":"PropertyID","name":"Name"}],"snapshots":[{"git_config_id":"GitConfigID","name":"Name"}],"features_count":13,"properties_count":15,"snapshot_count":13}],"total_count":2,"limit":1}`)
-					} else if requestNumber == 2 {
-						fmt.Fprintf(res, "%s", `{"collections":[{"name":"Name","collection_id":"CollectionID","description":"Description","tags":"Tags","created_time":"2021-05-12T23:20:50.520Z","updated_time":"2021-05-12T23:20:50.520Z","href":"Href","features":[{"feature_id":"FeatureID","name":"Name"}],"properties":[{"property_id":"PropertyID","name":"Name"}],"snapshots":[{"git_config_id":"GitConfigID","name":"Name"}],"features_count":13,"properties_count":15,"snapshot_count":13}],"total_count":2,"limit":1}`)
-					} else {
+					switch requestNumber {
+					case 1:
+						fmt.Fprintf(res, "%s", `{"next":{"href":"https://myhost.com/somePath?offset=1"},"collections":[{"name":"Name","collection_id":"CollectionID","description":"Description","tags":"Tags","created_time":"2021-05-12T23:20:50.520Z","updated_time":"2021-05-12T23:20:50.520Z","href":"Href","features":[{"feature_id":"FeatureID","name":"Name"}],"properties":[{"property_id":"PropertyID","name":"Name"}],"snapshots":[{"git_config_id":"GitConfigID","name":"Name"}],"features_count":13,"properties_count":15,"snapshot_count":13,"workflow_approval":{"workflow_name":"WorkflowName","workflow_id":"WorkflowID","provider_type":"SERVICENOW_IBM","change_request_number":"ChangeRequestNumber","change_request_status":"PENDING","execution_status":"PENDING","approval_url":"ApprovalURL","resource_type":"FEATURE","resource_id":"ResourceID","environment_id":"EnvironmentID","created_time":"2019-01-01T12:00:00.000Z","updated_time":"2019-01-01T12:00:00.000Z","last_poll_time":"2019-01-01T12:00:00.000Z"}}],"total_count":2,"limit":1}`)
+					case 2:
+						fmt.Fprintf(res, "%s", `{"collections":[{"name":"Name","collection_id":"CollectionID","description":"Description","tags":"Tags","created_time":"2021-05-12T23:20:50.520Z","updated_time":"2021-05-12T23:20:50.520Z","href":"Href","features":[{"feature_id":"FeatureID","name":"Name"}],"properties":[{"property_id":"PropertyID","name":"Name"}],"snapshots":[{"git_config_id":"GitConfigID","name":"Name"}],"features_count":13,"properties_count":15,"snapshot_count":13,"workflow_approval":{"workflow_name":"WorkflowName","workflow_id":"WorkflowID","provider_type":"SERVICENOW_IBM","change_request_number":"ChangeRequestNumber","change_request_status":"PENDING","execution_status":"PENDING","approval_url":"ApprovalURL","resource_type":"FEATURE","resource_id":"ResourceID","environment_id":"EnvironmentID","created_time":"2019-01-01T12:00:00.000Z","updated_time":"2019-01-01T12:00:00.000Z","last_poll_time":"2019-01-01T12:00:00.000Z"}}],"total_count":2,"limit":1}`)
+					default:
 						res.WriteHeader(400)
 					}
 				}))
@@ -1712,7 +1858,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					Tags: core.StringPtr("version 1.1,pre-release"),
 					Features: []string{"my-feature-id", "cycle-rentals"},
 					Properties: []string{"my-property-id", "email-property"},
-					Include: []string{"features", "properties", "snapshots"},
+					Include: []string{"features", "properties", "snapshots", "workflow_approval"},
 					Limit: core.Int64Ptr(int64(10)),
 					Search: core.StringPtr("test tag"),
 				}
@@ -1744,7 +1890,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					Tags: core.StringPtr("version 1.1,pre-release"),
 					Features: []string{"my-feature-id", "cycle-rentals"},
 					Properties: []string{"my-property-id", "email-property"},
-					Include: []string{"features", "properties", "snapshots"},
+					Include: []string{"features", "properties", "snapshots", "workflow_approval"},
 					Limit: core.Int64Ptr(int64(10)),
 					Search: core.StringPtr("test tag"),
 				}
@@ -2306,7 +2452,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				getCollectionOptionsModel := new(appconfigurationv1.GetCollectionOptions)
 				getCollectionOptionsModel.CollectionID = core.StringPtr("collection_id")
 				getCollectionOptionsModel.Expand = core.BoolPtr(true)
-				getCollectionOptionsModel.Include = []string{"features", "properties", "snapshots"}
+				getCollectionOptionsModel.Include = []string{"features", "properties", "snapshots", "workflow_approval"}
 				getCollectionOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
 				result, response, operationErr := appConfigurationService.GetCollection(getCollectionOptionsModel)
@@ -2344,7 +2490,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"name": "Name", "collection_id": "CollectionID", "description": "Description", "tags": "Tags", "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "href": "Href", "features": [{"feature_id": "FeatureID", "name": "Name"}], "properties": [{"property_id": "PropertyID", "name": "Name"}], "snapshots": [{"git_config_id": "GitConfigID", "name": "Name"}], "features_count": 13, "properties_count": 15, "snapshot_count": 13}`)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "collection_id": "CollectionID", "description": "Description", "tags": "Tags", "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "href": "Href", "features": [{"feature_id": "FeatureID", "name": "Name"}], "properties": [{"property_id": "PropertyID", "name": "Name"}], "snapshots": [{"git_config_id": "GitConfigID", "name": "Name"}], "features_count": 13, "properties_count": 15, "snapshot_count": 13, "workflow_approval": {"workflow_name": "WorkflowName", "workflow_id": "WorkflowID", "provider_type": "SERVICENOW_IBM", "change_request_number": "ChangeRequestNumber", "change_request_status": "PENDING", "execution_status": "PENDING", "approval_url": "ApprovalURL", "resource_type": "FEATURE", "resource_id": "ResourceID", "environment_id": "EnvironmentID", "created_time": "2019-01-01T12:00:00.000Z", "updated_time": "2019-01-01T12:00:00.000Z", "last_poll_time": "2019-01-01T12:00:00.000Z"}}`)
 				}))
 			})
 			It(`Invoke GetCollection successfully with retries`, func() {
@@ -2360,7 +2506,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				getCollectionOptionsModel := new(appconfigurationv1.GetCollectionOptions)
 				getCollectionOptionsModel.CollectionID = core.StringPtr("collection_id")
 				getCollectionOptionsModel.Expand = core.BoolPtr(true)
-				getCollectionOptionsModel.Include = []string{"features", "properties", "snapshots"}
+				getCollectionOptionsModel.Include = []string{"features", "properties", "snapshots", "workflow_approval"}
 				getCollectionOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with a Context to test a timeout error
@@ -2401,7 +2547,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"name": "Name", "collection_id": "CollectionID", "description": "Description", "tags": "Tags", "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "href": "Href", "features": [{"feature_id": "FeatureID", "name": "Name"}], "properties": [{"property_id": "PropertyID", "name": "Name"}], "snapshots": [{"git_config_id": "GitConfigID", "name": "Name"}], "features_count": 13, "properties_count": 15, "snapshot_count": 13}`)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "collection_id": "CollectionID", "description": "Description", "tags": "Tags", "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "href": "Href", "features": [{"feature_id": "FeatureID", "name": "Name"}], "properties": [{"property_id": "PropertyID", "name": "Name"}], "snapshots": [{"git_config_id": "GitConfigID", "name": "Name"}], "features_count": 13, "properties_count": 15, "snapshot_count": 13, "workflow_approval": {"workflow_name": "WorkflowName", "workflow_id": "WorkflowID", "provider_type": "SERVICENOW_IBM", "change_request_number": "ChangeRequestNumber", "change_request_status": "PENDING", "execution_status": "PENDING", "approval_url": "ApprovalURL", "resource_type": "FEATURE", "resource_id": "ResourceID", "environment_id": "EnvironmentID", "created_time": "2019-01-01T12:00:00.000Z", "updated_time": "2019-01-01T12:00:00.000Z", "last_poll_time": "2019-01-01T12:00:00.000Z"}}`)
 				}))
 			})
 			It(`Invoke GetCollection successfully`, func() {
@@ -2422,7 +2568,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				getCollectionOptionsModel := new(appconfigurationv1.GetCollectionOptions)
 				getCollectionOptionsModel.CollectionID = core.StringPtr("collection_id")
 				getCollectionOptionsModel.Expand = core.BoolPtr(true)
-				getCollectionOptionsModel.Include = []string{"features", "properties", "snapshots"}
+				getCollectionOptionsModel.Include = []string{"features", "properties", "snapshots", "workflow_approval"}
 				getCollectionOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
@@ -2444,7 +2590,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				getCollectionOptionsModel := new(appconfigurationv1.GetCollectionOptions)
 				getCollectionOptionsModel.CollectionID = core.StringPtr("collection_id")
 				getCollectionOptionsModel.Expand = core.BoolPtr(true)
-				getCollectionOptionsModel.Include = []string{"features", "properties", "snapshots"}
+				getCollectionOptionsModel.Include = []string{"features", "properties", "snapshots", "workflow_approval"}
 				getCollectionOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := appConfigurationService.SetServiceURL("")
@@ -2487,7 +2633,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				getCollectionOptionsModel := new(appconfigurationv1.GetCollectionOptions)
 				getCollectionOptionsModel.CollectionID = core.StringPtr("collection_id")
 				getCollectionOptionsModel.Expand = core.BoolPtr(true)
-				getCollectionOptionsModel.Include = []string{"features", "properties", "snapshots"}
+				getCollectionOptionsModel.Include = []string{"features", "properties", "snapshots", "workflow_approval"}
 				getCollectionOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation
@@ -2503,8 +2649,110 @@ var _ = Describe(`AppConfigurationV1`, func() {
 			})
 		})
 	})
+	Describe(`DeleteCollection(deleteCollectionOptions *DeleteCollectionOptions) - Operation response error`, func() {
+		deleteCollectionPath := "/collections/collection_id"
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(deleteCollectionPath))
+					Expect(req.Method).To(Equal("DELETE"))
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(202)
+					fmt.Fprint(res, `} this is not valid json {`)
+				}))
+			})
+			It(`Invoke DeleteCollection with error: Operation response processing error`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the DeleteCollectionOptions model
+				deleteCollectionOptionsModel := new(appconfigurationv1.DeleteCollectionOptions)
+				deleteCollectionOptionsModel.CollectionID = core.StringPtr("collection_id")
+				deleteCollectionOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Expect response parsing to fail since we are receiving a text/plain response
+				result, response, operationErr := appConfigurationService.DeleteCollection(deleteCollectionOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				appConfigurationService.EnableRetries(0, 0)
+				result, response, operationErr = appConfigurationService.DeleteCollection(deleteCollectionOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
 	Describe(`DeleteCollection(deleteCollectionOptions *DeleteCollectionOptions)`, func() {
 		deleteCollectionPath := "/collections/collection_id"
+		Context(`Using mock server endpoint with timeout`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(deleteCollectionPath))
+					Expect(req.Method).To(Equal("DELETE"))
+
+					// Sleep a short time to support a timeout test
+					time.Sleep(100 * time.Millisecond)
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(202)
+					fmt.Fprintf(res, "%s", `{"message": "Message", "workflow_approval": {"workflow_name": "WorkflowName", "workflow_id": "WorkflowID", "provider_type": "SERVICENOW_IBM", "change_request_number": "ChangeRequestNumber", "change_request_status": "PENDING", "execution_status": "PENDING", "approval_url": "ApprovalURL", "resource_type": "FEATURE", "resource_id": "ResourceID", "environment_id": "EnvironmentID", "created_time": "2019-01-01T12:00:00.000Z", "updated_time": "2019-01-01T12:00:00.000Z"}}`)
+				}))
+			})
+			It(`Invoke DeleteCollection successfully with retries`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+				appConfigurationService.EnableRetries(0, 0)
+
+				// Construct an instance of the DeleteCollectionOptions model
+				deleteCollectionOptionsModel := new(appconfigurationv1.DeleteCollectionOptions)
+				deleteCollectionOptionsModel.CollectionID = core.StringPtr("collection_id")
+				deleteCollectionOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with a Context to test a timeout error
+				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc()
+				_, _, operationErr := appConfigurationService.DeleteCollectionWithContext(ctx, deleteCollectionOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+
+				// Disable retries and test again
+				appConfigurationService.DisableRetries()
+				result, response, operationErr := appConfigurationService.DeleteCollection(deleteCollectionOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				_, _, operationErr = appConfigurationService.DeleteCollectionWithContext(ctx, deleteCollectionOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -2514,7 +2762,10 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(deleteCollectionPath))
 					Expect(req.Method).To(Equal("DELETE"))
 
-					res.WriteHeader(204)
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(202)
+					fmt.Fprintf(res, "%s", `{"message": "Message", "workflow_approval": {"workflow_name": "WorkflowName", "workflow_id": "WorkflowID", "provider_type": "SERVICENOW_IBM", "change_request_number": "ChangeRequestNumber", "change_request_status": "PENDING", "execution_status": "PENDING", "approval_url": "ApprovalURL", "resource_type": "FEATURE", "resource_id": "ResourceID", "environment_id": "EnvironmentID", "created_time": "2019-01-01T12:00:00.000Z", "updated_time": "2019-01-01T12:00:00.000Z"}}`)
 				}))
 			})
 			It(`Invoke DeleteCollection successfully`, func() {
@@ -2526,9 +2777,10 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(appConfigurationService).ToNot(BeNil())
 
 				// Invoke operation with nil options model (negative test)
-				response, operationErr := appConfigurationService.DeleteCollection(nil)
+				result, response, operationErr := appConfigurationService.DeleteCollection(nil)
 				Expect(operationErr).NotTo(BeNil())
 				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
 
 				// Construct an instance of the DeleteCollectionOptions model
 				deleteCollectionOptionsModel := new(appconfigurationv1.DeleteCollectionOptions)
@@ -2536,9 +2788,11 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				deleteCollectionOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
-				response, operationErr = appConfigurationService.DeleteCollection(deleteCollectionOptionsModel)
+				result, response, operationErr = appConfigurationService.DeleteCollection(deleteCollectionOptionsModel)
 				Expect(operationErr).To(BeNil())
 				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
 			})
 			It(`Invoke DeleteCollection with error: Operation validation and request error`, func() {
 				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
@@ -2555,16 +2809,52 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				// Invoke operation with empty URL (negative test)
 				err := appConfigurationService.SetServiceURL("")
 				Expect(err).To(BeNil())
-				response, operationErr := appConfigurationService.DeleteCollection(deleteCollectionOptionsModel)
+				result, response, operationErr := appConfigurationService.DeleteCollection(deleteCollectionOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
 				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
 				// Construct a second instance of the DeleteCollectionOptions model with no property values
 				deleteCollectionOptionsModelNew := new(appconfigurationv1.DeleteCollectionOptions)
 				// Invoke operation with invalid model (negative test)
-				response, operationErr = appConfigurationService.DeleteCollection(deleteCollectionOptionsModelNew)
+				result, response, operationErr = appConfigurationService.DeleteCollection(deleteCollectionOptionsModelNew)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(202)
+				}))
+			})
+			It(`Invoke DeleteCollection successfully`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the DeleteCollectionOptions model
+				deleteCollectionOptionsModel := new(appconfigurationv1.DeleteCollectionOptions)
+				deleteCollectionOptionsModel.CollectionID = core.StringPtr("collection_id")
+				deleteCollectionOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := appConfigurationService.DeleteCollection(deleteCollectionOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
 			})
 			AfterEach(func() {
 				testServer.Close()
@@ -2608,7 +2898,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				listFeaturesOptionsModel.Tags = core.StringPtr("version 1.1,pre-release")
 				listFeaturesOptionsModel.Collections = []string{"my-collection-id", "ghzindiapvtltd"}
 				listFeaturesOptionsModel.Segments = []string{"my-segment-id", "beta-users"}
-				listFeaturesOptionsModel.Include = []string{"collections", "rules", "change_request"}
+				listFeaturesOptionsModel.Include = []string{"collections", "rules", "workflow_approval"}
 				listFeaturesOptionsModel.Limit = core.Int64Ptr(int64(10))
 				listFeaturesOptionsModel.Offset = core.Int64Ptr(int64(0))
 				listFeaturesOptionsModel.Search = core.StringPtr("test tag")
@@ -2654,7 +2944,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"features": [{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100, "rule_id": "RuleID", "rule_name": "RuleName"}], "segment_exists": false, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "change_request_number": "ChangeRequestNumber", "change_request_status": "ChangeRequestStatus", "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href"}], "limit": 10, "offset": 0, "total_count": 0, "first": {"href": "Href"}, "previous": {"href": "Href"}, "next": {"href": "Href"}, "last": {"href": "Href"}}`)
+					fmt.Fprintf(res, "%s", `{"features": [{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED"}, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED"}, "rule_id": "RuleID", "rule_name": "RuleName"}], "segment_exists": false, "segment_count": 12, "rollout_rule": {"type": "MANUAL", "rule_id": "RuleID"}, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href", "workflow_approval": {"workflow_name": "WorkflowName", "workflow_id": "WorkflowID", "provider_type": "SERVICENOW_IBM", "change_request_number": "ChangeRequestNumber", "change_request_status": "PENDING", "execution_status": "PENDING", "approval_url": "ApprovalURL", "resource_type": "FEATURE", "resource_id": "ResourceID", "environment_id": "EnvironmentID", "created_time": "2019-01-01T12:00:00.000Z", "updated_time": "2019-01-01T12:00:00.000Z", "last_poll_time": "2019-01-01T12:00:00.000Z"}}], "limit": 10, "offset": 0, "total_count": 0, "first": {"href": "Href"}, "previous": {"href": "Href"}, "next": {"href": "Href"}, "last": {"href": "Href"}}`)
 				}))
 			})
 			It(`Invoke ListFeatures successfully with retries`, func() {
@@ -2674,7 +2964,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				listFeaturesOptionsModel.Tags = core.StringPtr("version 1.1,pre-release")
 				listFeaturesOptionsModel.Collections = []string{"my-collection-id", "ghzindiapvtltd"}
 				listFeaturesOptionsModel.Segments = []string{"my-segment-id", "beta-users"}
-				listFeaturesOptionsModel.Include = []string{"collections", "rules", "change_request"}
+				listFeaturesOptionsModel.Include = []string{"collections", "rules", "workflow_approval"}
 				listFeaturesOptionsModel.Limit = core.Int64Ptr(int64(10))
 				listFeaturesOptionsModel.Offset = core.Int64Ptr(int64(0))
 				listFeaturesOptionsModel.Search = core.StringPtr("test tag")
@@ -2723,7 +3013,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"features": [{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100, "rule_id": "RuleID", "rule_name": "RuleName"}], "segment_exists": false, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "change_request_number": "ChangeRequestNumber", "change_request_status": "ChangeRequestStatus", "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href"}], "limit": 10, "offset": 0, "total_count": 0, "first": {"href": "Href"}, "previous": {"href": "Href"}, "next": {"href": "Href"}, "last": {"href": "Href"}}`)
+					fmt.Fprintf(res, "%s", `{"features": [{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED"}, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED"}, "rule_id": "RuleID", "rule_name": "RuleName"}], "segment_exists": false, "segment_count": 12, "rollout_rule": {"type": "MANUAL", "rule_id": "RuleID"}, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href", "workflow_approval": {"workflow_name": "WorkflowName", "workflow_id": "WorkflowID", "provider_type": "SERVICENOW_IBM", "change_request_number": "ChangeRequestNumber", "change_request_status": "PENDING", "execution_status": "PENDING", "approval_url": "ApprovalURL", "resource_type": "FEATURE", "resource_id": "ResourceID", "environment_id": "EnvironmentID", "created_time": "2019-01-01T12:00:00.000Z", "updated_time": "2019-01-01T12:00:00.000Z", "last_poll_time": "2019-01-01T12:00:00.000Z"}}], "limit": 10, "offset": 0, "total_count": 0, "first": {"href": "Href"}, "previous": {"href": "Href"}, "next": {"href": "Href"}, "last": {"href": "Href"}}`)
 				}))
 			})
 			It(`Invoke ListFeatures successfully`, func() {
@@ -2748,7 +3038,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				listFeaturesOptionsModel.Tags = core.StringPtr("version 1.1,pre-release")
 				listFeaturesOptionsModel.Collections = []string{"my-collection-id", "ghzindiapvtltd"}
 				listFeaturesOptionsModel.Segments = []string{"my-segment-id", "beta-users"}
-				listFeaturesOptionsModel.Include = []string{"collections", "rules", "change_request"}
+				listFeaturesOptionsModel.Include = []string{"collections", "rules", "workflow_approval"}
 				listFeaturesOptionsModel.Limit = core.Int64Ptr(int64(10))
 				listFeaturesOptionsModel.Offset = core.Int64Ptr(int64(0))
 				listFeaturesOptionsModel.Search = core.StringPtr("test tag")
@@ -2777,7 +3067,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				listFeaturesOptionsModel.Tags = core.StringPtr("version 1.1,pre-release")
 				listFeaturesOptionsModel.Collections = []string{"my-collection-id", "ghzindiapvtltd"}
 				listFeaturesOptionsModel.Segments = []string{"my-segment-id", "beta-users"}
-				listFeaturesOptionsModel.Include = []string{"collections", "rules", "change_request"}
+				listFeaturesOptionsModel.Include = []string{"collections", "rules", "workflow_approval"}
 				listFeaturesOptionsModel.Limit = core.Int64Ptr(int64(10))
 				listFeaturesOptionsModel.Offset = core.Int64Ptr(int64(0))
 				listFeaturesOptionsModel.Search = core.StringPtr("test tag")
@@ -2827,7 +3117,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				listFeaturesOptionsModel.Tags = core.StringPtr("version 1.1,pre-release")
 				listFeaturesOptionsModel.Collections = []string{"my-collection-id", "ghzindiapvtltd"}
 				listFeaturesOptionsModel.Segments = []string{"my-segment-id", "beta-users"}
-				listFeaturesOptionsModel.Include = []string{"collections", "rules", "change_request"}
+				listFeaturesOptionsModel.Include = []string{"collections", "rules", "workflow_approval"}
 				listFeaturesOptionsModel.Limit = core.Int64Ptr(int64(10))
 				listFeaturesOptionsModel.Offset = core.Int64Ptr(int64(0))
 				listFeaturesOptionsModel.Search = core.StringPtr("test tag")
@@ -2886,7 +3176,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 		})
 		Context(`Using mock server endpoint - paginated response`, func() {
 			BeforeEach(func() {
-				var requestNumber int = 0
+				requestNumber := 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -2898,11 +3188,12 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
 					requestNumber++
-					if requestNumber == 1 {
-						fmt.Fprintf(res, "%s", `{"next":{"href":"https://myhost.com/somePath?offset=1"},"features":[{"name":"Name","feature_id":"FeatureID","description":"Description","type":"BOOLEAN","format":"TEXT","enabled_value":"anyValue","disabled_value":"anyValue","enabled":false,"rollout_percentage":100,"tags":"Tags","segment_rules":[{"rules":[{"segments":["Segments"]}],"value":"anyValue","order":5,"rollout_percentage":100,"rule_id":"RuleID","rule_name":"RuleName"}],"segment_exists":false,"collections":[{"collection_id":"CollectionID","name":"Name"}],"change_request_number":"ChangeRequestNumber","change_request_status":"ChangeRequestStatus","created_time":"2021-05-12T23:20:50.520Z","updated_time":"2021-05-12T23:20:50.520Z","evaluation_time":"2021-05-12T23:20:50.520Z","href":"Href"}],"total_count":2,"limit":1}`)
-					} else if requestNumber == 2 {
-						fmt.Fprintf(res, "%s", `{"features":[{"name":"Name","feature_id":"FeatureID","description":"Description","type":"BOOLEAN","format":"TEXT","enabled_value":"anyValue","disabled_value":"anyValue","enabled":false,"rollout_percentage":100,"tags":"Tags","segment_rules":[{"rules":[{"segments":["Segments"]}],"value":"anyValue","order":5,"rollout_percentage":100,"rule_id":"RuleID","rule_name":"RuleName"}],"segment_exists":false,"collections":[{"collection_id":"CollectionID","name":"Name"}],"change_request_number":"ChangeRequestNumber","change_request_status":"ChangeRequestStatus","created_time":"2021-05-12T23:20:50.520Z","updated_time":"2021-05-12T23:20:50.520Z","evaluation_time":"2021-05-12T23:20:50.520Z","href":"Href"}],"total_count":2,"limit":1}`)
-					} else {
+					switch requestNumber {
+					case 1:
+						fmt.Fprintf(res, "%s", `{"next":{"href":"https://myhost.com/somePath?offset=1"},"features":[{"name":"Name","feature_id":"FeatureID","description":"Description","type":"BOOLEAN","format":"TEXT","enabled_value":"anyValue","disabled_value":"anyValue","enabled":false,"rollout_percentage":100,"rollout_type":"MANUAL","rollout_configuration":{"duration_preset":"CUSTOM","start_at":"2019-01-01T12:00:00.000Z","phases":[{"percentage":1,"duration":8,"duration_type":"days"}],"status":"QUEUED"},"tags":"Tags","segment_rules":[{"rules":[{"segments":["Segments"]}],"value":"anyValue","order":5,"rollout_percentage":100,"rollout_type":"MANUAL","rollout_configuration":{"duration_preset":"CUSTOM","start_at":"2019-01-01T12:00:00.000Z","phases":[{"percentage":1,"duration":8,"duration_type":"days"}],"status":"QUEUED"},"rule_id":"RuleID","rule_name":"RuleName"}],"segment_exists":false,"segment_count":12,"rollout_rule":{"type":"MANUAL","rule_id":"RuleID"},"collections":[{"collection_id":"CollectionID","name":"Name"}],"created_time":"2021-05-12T23:20:50.520Z","updated_time":"2021-05-12T23:20:50.520Z","evaluation_time":"2021-05-12T23:20:50.520Z","href":"Href","workflow_approval":{"workflow_name":"WorkflowName","workflow_id":"WorkflowID","provider_type":"SERVICENOW_IBM","change_request_number":"ChangeRequestNumber","change_request_status":"PENDING","execution_status":"PENDING","approval_url":"ApprovalURL","resource_type":"FEATURE","resource_id":"ResourceID","environment_id":"EnvironmentID","created_time":"2019-01-01T12:00:00.000Z","updated_time":"2019-01-01T12:00:00.000Z","last_poll_time":"2019-01-01T12:00:00.000Z"}}],"total_count":2,"limit":1}`)
+					case 2:
+						fmt.Fprintf(res, "%s", `{"features":[{"name":"Name","feature_id":"FeatureID","description":"Description","type":"BOOLEAN","format":"TEXT","enabled_value":"anyValue","disabled_value":"anyValue","enabled":false,"rollout_percentage":100,"rollout_type":"MANUAL","rollout_configuration":{"duration_preset":"CUSTOM","start_at":"2019-01-01T12:00:00.000Z","phases":[{"percentage":1,"duration":8,"duration_type":"days"}],"status":"QUEUED"},"tags":"Tags","segment_rules":[{"rules":[{"segments":["Segments"]}],"value":"anyValue","order":5,"rollout_percentage":100,"rollout_type":"MANUAL","rollout_configuration":{"duration_preset":"CUSTOM","start_at":"2019-01-01T12:00:00.000Z","phases":[{"percentage":1,"duration":8,"duration_type":"days"}],"status":"QUEUED"},"rule_id":"RuleID","rule_name":"RuleName"}],"segment_exists":false,"segment_count":12,"rollout_rule":{"type":"MANUAL","rule_id":"RuleID"},"collections":[{"collection_id":"CollectionID","name":"Name"}],"created_time":"2021-05-12T23:20:50.520Z","updated_time":"2021-05-12T23:20:50.520Z","evaluation_time":"2021-05-12T23:20:50.520Z","href":"Href","workflow_approval":{"workflow_name":"WorkflowName","workflow_id":"WorkflowID","provider_type":"SERVICENOW_IBM","change_request_number":"ChangeRequestNumber","change_request_status":"PENDING","execution_status":"PENDING","approval_url":"ApprovalURL","resource_type":"FEATURE","resource_id":"ResourceID","environment_id":"EnvironmentID","created_time":"2019-01-01T12:00:00.000Z","updated_time":"2019-01-01T12:00:00.000Z","last_poll_time":"2019-01-01T12:00:00.000Z"}}],"total_count":2,"limit":1}`)
+					default:
 						res.WriteHeader(400)
 					}
 				}))
@@ -2922,7 +3213,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					Tags: core.StringPtr("version 1.1,pre-release"),
 					Collections: []string{"my-collection-id", "ghzindiapvtltd"},
 					Segments: []string{"my-segment-id", "beta-users"},
-					Include: []string{"collections", "rules", "change_request"},
+					Include: []string{"collections", "rules", "workflow_approval"},
 					Limit: core.Int64Ptr(int64(10)),
 					Search: core.StringPtr("test tag"),
 				}
@@ -2955,7 +3246,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					Tags: core.StringPtr("version 1.1,pre-release"),
 					Collections: []string{"my-collection-id", "ghzindiapvtltd"},
 					Segments: []string{"my-segment-id", "beta-users"},
-					Include: []string{"collections", "rules", "change_request"},
+					Include: []string{"collections", "rules", "workflow_approval"},
 					Limit: core.Int64Ptr(int64(10)),
 					Search: core.StringPtr("test tag"),
 				}
@@ -2994,6 +3285,18 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(appConfigurationService).ToNot(BeNil())
 
+				// Construct an instance of the RolloutPhase model
+				rolloutPhaseModel := new(appconfigurationv1.RolloutPhase)
+				rolloutPhaseModel.Percentage = core.Int64Ptr(int64(1))
+				rolloutPhaseModel.Duration = core.Int64Ptr(int64(38))
+				rolloutPhaseModel.DurationType = core.StringPtr("days")
+
+				// Construct an instance of the RolloutConfiguration model
+				rolloutConfigurationModel := new(appconfigurationv1.RolloutConfiguration)
+				rolloutConfigurationModel.DurationPreset = core.StringPtr("CUSTOM")
+				rolloutConfigurationModel.StartAt = CreateMockDateTime("2019-01-01T12:00:00.000Z")
+				rolloutConfigurationModel.Phases = []appconfigurationv1.RolloutPhase{*rolloutPhaseModel}
+
 				// Construct an instance of the TargetSegments model
 				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
 				targetSegmentsModel.Segments = []string{"betausers", "premiumusers"}
@@ -3004,6 +3307,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				featureSegmentRuleModel.Value = "true"
 				featureSegmentRuleModel.Order = core.Int64Ptr(int64(1))
 				featureSegmentRuleModel.RolloutPercentage = core.Int64Ptr(int64(50))
+				featureSegmentRuleModel.RolloutType = core.StringPtr("MANUAL")
+				featureSegmentRuleModel.RolloutConfiguration = rolloutConfigurationModel
 				featureSegmentRuleModel.RuleID = core.StringPtr("rule-id-1")
 				featureSegmentRuleModel.RuleName = core.StringPtr("rule-name-1")
 
@@ -3023,6 +3328,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				createFeatureOptionsModel.Format = core.StringPtr("TEXT")
 				createFeatureOptionsModel.Enabled = core.BoolPtr(true)
 				createFeatureOptionsModel.RolloutPercentage = core.Int64Ptr(int64(100))
+				createFeatureOptionsModel.RolloutType = core.StringPtr("MANUAL")
+				createFeatureOptionsModel.RolloutConfiguration = rolloutConfigurationModel
 				createFeatureOptionsModel.Tags = core.StringPtr("version: 1.1, pre-release")
 				createFeatureOptionsModel.SegmentRules = []appconfigurationv1.FeatureSegmentRule{*featureSegmentRuleModel}
 				createFeatureOptionsModel.Collections = []appconfigurationv1.CollectionRef{*collectionRefModel}
@@ -3078,7 +3385,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
-					fmt.Fprintf(res, "%s", `{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100, "rule_id": "RuleID", "rule_name": "RuleName"}], "segment_exists": false, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "change_request_number": "ChangeRequestNumber", "change_request_status": "ChangeRequestStatus", "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href"}`)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED"}, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED"}, "rule_id": "RuleID", "rule_name": "RuleName"}], "segment_exists": false, "segment_count": 12, "rollout_rule": {"type": "MANUAL", "rule_id": "RuleID"}, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href", "workflow_approval": {"workflow_name": "WorkflowName", "workflow_id": "WorkflowID", "provider_type": "SERVICENOW_IBM", "change_request_number": "ChangeRequestNumber", "change_request_status": "PENDING", "execution_status": "PENDING", "approval_url": "ApprovalURL", "resource_type": "FEATURE", "resource_id": "ResourceID", "environment_id": "EnvironmentID", "created_time": "2019-01-01T12:00:00.000Z", "updated_time": "2019-01-01T12:00:00.000Z", "last_poll_time": "2019-01-01T12:00:00.000Z"}}`)
 				}))
 			})
 			It(`Invoke CreateFeature successfully with retries`, func() {
@@ -3090,6 +3397,18 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(appConfigurationService).ToNot(BeNil())
 				appConfigurationService.EnableRetries(0, 0)
 
+				// Construct an instance of the RolloutPhase model
+				rolloutPhaseModel := new(appconfigurationv1.RolloutPhase)
+				rolloutPhaseModel.Percentage = core.Int64Ptr(int64(1))
+				rolloutPhaseModel.Duration = core.Int64Ptr(int64(38))
+				rolloutPhaseModel.DurationType = core.StringPtr("days")
+
+				// Construct an instance of the RolloutConfiguration model
+				rolloutConfigurationModel := new(appconfigurationv1.RolloutConfiguration)
+				rolloutConfigurationModel.DurationPreset = core.StringPtr("CUSTOM")
+				rolloutConfigurationModel.StartAt = CreateMockDateTime("2019-01-01T12:00:00.000Z")
+				rolloutConfigurationModel.Phases = []appconfigurationv1.RolloutPhase{*rolloutPhaseModel}
+
 				// Construct an instance of the TargetSegments model
 				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
 				targetSegmentsModel.Segments = []string{"betausers", "premiumusers"}
@@ -3100,6 +3419,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				featureSegmentRuleModel.Value = "true"
 				featureSegmentRuleModel.Order = core.Int64Ptr(int64(1))
 				featureSegmentRuleModel.RolloutPercentage = core.Int64Ptr(int64(50))
+				featureSegmentRuleModel.RolloutType = core.StringPtr("MANUAL")
+				featureSegmentRuleModel.RolloutConfiguration = rolloutConfigurationModel
 				featureSegmentRuleModel.RuleID = core.StringPtr("rule-id-1")
 				featureSegmentRuleModel.RuleName = core.StringPtr("rule-name-1")
 
@@ -3119,6 +3440,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				createFeatureOptionsModel.Format = core.StringPtr("TEXT")
 				createFeatureOptionsModel.Enabled = core.BoolPtr(true)
 				createFeatureOptionsModel.RolloutPercentage = core.Int64Ptr(int64(100))
+				createFeatureOptionsModel.RolloutType = core.StringPtr("MANUAL")
+				createFeatureOptionsModel.RolloutConfiguration = rolloutConfigurationModel
 				createFeatureOptionsModel.Tags = core.StringPtr("version: 1.1, pre-release")
 				createFeatureOptionsModel.SegmentRules = []appconfigurationv1.FeatureSegmentRule{*featureSegmentRuleModel}
 				createFeatureOptionsModel.Collections = []appconfigurationv1.CollectionRef{*collectionRefModel}
@@ -3177,7 +3500,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
-					fmt.Fprintf(res, "%s", `{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100, "rule_id": "RuleID", "rule_name": "RuleName"}], "segment_exists": false, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "change_request_number": "ChangeRequestNumber", "change_request_status": "ChangeRequestStatus", "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href"}`)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED"}, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED"}, "rule_id": "RuleID", "rule_name": "RuleName"}], "segment_exists": false, "segment_count": 12, "rollout_rule": {"type": "MANUAL", "rule_id": "RuleID"}, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href", "workflow_approval": {"workflow_name": "WorkflowName", "workflow_id": "WorkflowID", "provider_type": "SERVICENOW_IBM", "change_request_number": "ChangeRequestNumber", "change_request_status": "PENDING", "execution_status": "PENDING", "approval_url": "ApprovalURL", "resource_type": "FEATURE", "resource_id": "ResourceID", "environment_id": "EnvironmentID", "created_time": "2019-01-01T12:00:00.000Z", "updated_time": "2019-01-01T12:00:00.000Z", "last_poll_time": "2019-01-01T12:00:00.000Z"}}`)
 				}))
 			})
 			It(`Invoke CreateFeature successfully`, func() {
@@ -3194,6 +3517,18 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(response).To(BeNil())
 				Expect(result).To(BeNil())
 
+				// Construct an instance of the RolloutPhase model
+				rolloutPhaseModel := new(appconfigurationv1.RolloutPhase)
+				rolloutPhaseModel.Percentage = core.Int64Ptr(int64(1))
+				rolloutPhaseModel.Duration = core.Int64Ptr(int64(38))
+				rolloutPhaseModel.DurationType = core.StringPtr("days")
+
+				// Construct an instance of the RolloutConfiguration model
+				rolloutConfigurationModel := new(appconfigurationv1.RolloutConfiguration)
+				rolloutConfigurationModel.DurationPreset = core.StringPtr("CUSTOM")
+				rolloutConfigurationModel.StartAt = CreateMockDateTime("2019-01-01T12:00:00.000Z")
+				rolloutConfigurationModel.Phases = []appconfigurationv1.RolloutPhase{*rolloutPhaseModel}
+
 				// Construct an instance of the TargetSegments model
 				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
 				targetSegmentsModel.Segments = []string{"betausers", "premiumusers"}
@@ -3204,6 +3539,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				featureSegmentRuleModel.Value = "true"
 				featureSegmentRuleModel.Order = core.Int64Ptr(int64(1))
 				featureSegmentRuleModel.RolloutPercentage = core.Int64Ptr(int64(50))
+				featureSegmentRuleModel.RolloutType = core.StringPtr("MANUAL")
+				featureSegmentRuleModel.RolloutConfiguration = rolloutConfigurationModel
 				featureSegmentRuleModel.RuleID = core.StringPtr("rule-id-1")
 				featureSegmentRuleModel.RuleName = core.StringPtr("rule-name-1")
 
@@ -3223,6 +3560,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				createFeatureOptionsModel.Format = core.StringPtr("TEXT")
 				createFeatureOptionsModel.Enabled = core.BoolPtr(true)
 				createFeatureOptionsModel.RolloutPercentage = core.Int64Ptr(int64(100))
+				createFeatureOptionsModel.RolloutType = core.StringPtr("MANUAL")
+				createFeatureOptionsModel.RolloutConfiguration = rolloutConfigurationModel
 				createFeatureOptionsModel.Tags = core.StringPtr("version: 1.1, pre-release")
 				createFeatureOptionsModel.SegmentRules = []appconfigurationv1.FeatureSegmentRule{*featureSegmentRuleModel}
 				createFeatureOptionsModel.Collections = []appconfigurationv1.CollectionRef{*collectionRefModel}
@@ -3243,6 +3582,18 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(appConfigurationService).ToNot(BeNil())
 
+				// Construct an instance of the RolloutPhase model
+				rolloutPhaseModel := new(appconfigurationv1.RolloutPhase)
+				rolloutPhaseModel.Percentage = core.Int64Ptr(int64(1))
+				rolloutPhaseModel.Duration = core.Int64Ptr(int64(38))
+				rolloutPhaseModel.DurationType = core.StringPtr("days")
+
+				// Construct an instance of the RolloutConfiguration model
+				rolloutConfigurationModel := new(appconfigurationv1.RolloutConfiguration)
+				rolloutConfigurationModel.DurationPreset = core.StringPtr("CUSTOM")
+				rolloutConfigurationModel.StartAt = CreateMockDateTime("2019-01-01T12:00:00.000Z")
+				rolloutConfigurationModel.Phases = []appconfigurationv1.RolloutPhase{*rolloutPhaseModel}
+
 				// Construct an instance of the TargetSegments model
 				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
 				targetSegmentsModel.Segments = []string{"betausers", "premiumusers"}
@@ -3253,6 +3604,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				featureSegmentRuleModel.Value = "true"
 				featureSegmentRuleModel.Order = core.Int64Ptr(int64(1))
 				featureSegmentRuleModel.RolloutPercentage = core.Int64Ptr(int64(50))
+				featureSegmentRuleModel.RolloutType = core.StringPtr("MANUAL")
+				featureSegmentRuleModel.RolloutConfiguration = rolloutConfigurationModel
 				featureSegmentRuleModel.RuleID = core.StringPtr("rule-id-1")
 				featureSegmentRuleModel.RuleName = core.StringPtr("rule-name-1")
 
@@ -3272,6 +3625,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				createFeatureOptionsModel.Format = core.StringPtr("TEXT")
 				createFeatureOptionsModel.Enabled = core.BoolPtr(true)
 				createFeatureOptionsModel.RolloutPercentage = core.Int64Ptr(int64(100))
+				createFeatureOptionsModel.RolloutType = core.StringPtr("MANUAL")
+				createFeatureOptionsModel.RolloutConfiguration = rolloutConfigurationModel
 				createFeatureOptionsModel.Tags = core.StringPtr("version: 1.1, pre-release")
 				createFeatureOptionsModel.SegmentRules = []appconfigurationv1.FeatureSegmentRule{*featureSegmentRuleModel}
 				createFeatureOptionsModel.Collections = []appconfigurationv1.CollectionRef{*collectionRefModel}
@@ -3313,6 +3668,18 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(appConfigurationService).ToNot(BeNil())
 
+				// Construct an instance of the RolloutPhase model
+				rolloutPhaseModel := new(appconfigurationv1.RolloutPhase)
+				rolloutPhaseModel.Percentage = core.Int64Ptr(int64(1))
+				rolloutPhaseModel.Duration = core.Int64Ptr(int64(38))
+				rolloutPhaseModel.DurationType = core.StringPtr("days")
+
+				// Construct an instance of the RolloutConfiguration model
+				rolloutConfigurationModel := new(appconfigurationv1.RolloutConfiguration)
+				rolloutConfigurationModel.DurationPreset = core.StringPtr("CUSTOM")
+				rolloutConfigurationModel.StartAt = CreateMockDateTime("2019-01-01T12:00:00.000Z")
+				rolloutConfigurationModel.Phases = []appconfigurationv1.RolloutPhase{*rolloutPhaseModel}
+
 				// Construct an instance of the TargetSegments model
 				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
 				targetSegmentsModel.Segments = []string{"betausers", "premiumusers"}
@@ -3323,6 +3690,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				featureSegmentRuleModel.Value = "true"
 				featureSegmentRuleModel.Order = core.Int64Ptr(int64(1))
 				featureSegmentRuleModel.RolloutPercentage = core.Int64Ptr(int64(50))
+				featureSegmentRuleModel.RolloutType = core.StringPtr("MANUAL")
+				featureSegmentRuleModel.RolloutConfiguration = rolloutConfigurationModel
 				featureSegmentRuleModel.RuleID = core.StringPtr("rule-id-1")
 				featureSegmentRuleModel.RuleName = core.StringPtr("rule-name-1")
 
@@ -3342,6 +3711,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				createFeatureOptionsModel.Format = core.StringPtr("TEXT")
 				createFeatureOptionsModel.Enabled = core.BoolPtr(true)
 				createFeatureOptionsModel.RolloutPercentage = core.Int64Ptr(int64(100))
+				createFeatureOptionsModel.RolloutType = core.StringPtr("MANUAL")
+				createFeatureOptionsModel.RolloutConfiguration = rolloutConfigurationModel
 				createFeatureOptionsModel.Tags = core.StringPtr("version: 1.1, pre-release")
 				createFeatureOptionsModel.SegmentRules = []appconfigurationv1.FeatureSegmentRule{*featureSegmentRuleModel}
 				createFeatureOptionsModel.Collections = []appconfigurationv1.CollectionRef{*collectionRefModel}
@@ -3383,6 +3754,18 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(appConfigurationService).ToNot(BeNil())
 
+				// Construct an instance of the RolloutPhase model
+				rolloutPhaseModel := new(appconfigurationv1.RolloutPhase)
+				rolloutPhaseModel.Percentage = core.Int64Ptr(int64(1))
+				rolloutPhaseModel.Duration = core.Int64Ptr(int64(38))
+				rolloutPhaseModel.DurationType = core.StringPtr("days")
+
+				// Construct an instance of the RolloutConfiguration model
+				rolloutConfigurationModel := new(appconfigurationv1.RolloutConfiguration)
+				rolloutConfigurationModel.DurationPreset = core.StringPtr("CUSTOM")
+				rolloutConfigurationModel.StartAt = CreateMockDateTime("2019-01-01T12:00:00.000Z")
+				rolloutConfigurationModel.Phases = []appconfigurationv1.RolloutPhase{*rolloutPhaseModel}
+
 				// Construct an instance of the TargetSegments model
 				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
 				targetSegmentsModel.Segments = []string{"betausers", "premiumusers"}
@@ -3393,6 +3776,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				featureSegmentRuleModel.Value = "true"
 				featureSegmentRuleModel.Order = core.Int64Ptr(int64(1))
 				featureSegmentRuleModel.RolloutPercentage = core.Int64Ptr(int64(90))
+				featureSegmentRuleModel.RolloutType = core.StringPtr("MANUAL")
+				featureSegmentRuleModel.RolloutConfiguration = rolloutConfigurationModel
 				featureSegmentRuleModel.RuleID = core.StringPtr("rule-id-1")
 				featureSegmentRuleModel.RuleName = core.StringPtr("rule-name-1")
 
@@ -3411,6 +3796,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				updateFeatureOptionsModel.DisabledValue = "false"
 				updateFeatureOptionsModel.Enabled = core.BoolPtr(true)
 				updateFeatureOptionsModel.RolloutPercentage = core.Int64Ptr(int64(100))
+				updateFeatureOptionsModel.RolloutType = core.StringPtr("MANUAL")
+				updateFeatureOptionsModel.RolloutConfiguration = rolloutConfigurationModel
 				updateFeatureOptionsModel.Tags = core.StringPtr("version: 1.1, yet-to-release")
 				updateFeatureOptionsModel.SegmentRules = []appconfigurationv1.FeatureSegmentRule{*featureSegmentRuleModel}
 				updateFeatureOptionsModel.Collections = []appconfigurationv1.CollectionUpdateRef{*collectionUpdateRefModel}
@@ -3466,7 +3853,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100, "rule_id": "RuleID", "rule_name": "RuleName"}], "segment_exists": false, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "change_request_number": "ChangeRequestNumber", "change_request_status": "ChangeRequestStatus", "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href"}`)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED"}, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED"}, "rule_id": "RuleID", "rule_name": "RuleName"}], "segment_exists": false, "segment_count": 12, "rollout_rule": {"type": "MANUAL", "rule_id": "RuleID"}, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href", "workflow_approval": {"workflow_name": "WorkflowName", "workflow_id": "WorkflowID", "provider_type": "SERVICENOW_IBM", "change_request_number": "ChangeRequestNumber", "change_request_status": "PENDING", "execution_status": "PENDING", "approval_url": "ApprovalURL", "resource_type": "FEATURE", "resource_id": "ResourceID", "environment_id": "EnvironmentID", "created_time": "2019-01-01T12:00:00.000Z", "updated_time": "2019-01-01T12:00:00.000Z", "last_poll_time": "2019-01-01T12:00:00.000Z"}}`)
 				}))
 			})
 			It(`Invoke UpdateFeature successfully with retries`, func() {
@@ -3478,6 +3865,18 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(appConfigurationService).ToNot(BeNil())
 				appConfigurationService.EnableRetries(0, 0)
 
+				// Construct an instance of the RolloutPhase model
+				rolloutPhaseModel := new(appconfigurationv1.RolloutPhase)
+				rolloutPhaseModel.Percentage = core.Int64Ptr(int64(1))
+				rolloutPhaseModel.Duration = core.Int64Ptr(int64(38))
+				rolloutPhaseModel.DurationType = core.StringPtr("days")
+
+				// Construct an instance of the RolloutConfiguration model
+				rolloutConfigurationModel := new(appconfigurationv1.RolloutConfiguration)
+				rolloutConfigurationModel.DurationPreset = core.StringPtr("CUSTOM")
+				rolloutConfigurationModel.StartAt = CreateMockDateTime("2019-01-01T12:00:00.000Z")
+				rolloutConfigurationModel.Phases = []appconfigurationv1.RolloutPhase{*rolloutPhaseModel}
+
 				// Construct an instance of the TargetSegments model
 				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
 				targetSegmentsModel.Segments = []string{"betausers", "premiumusers"}
@@ -3488,6 +3887,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				featureSegmentRuleModel.Value = "true"
 				featureSegmentRuleModel.Order = core.Int64Ptr(int64(1))
 				featureSegmentRuleModel.RolloutPercentage = core.Int64Ptr(int64(90))
+				featureSegmentRuleModel.RolloutType = core.StringPtr("MANUAL")
+				featureSegmentRuleModel.RolloutConfiguration = rolloutConfigurationModel
 				featureSegmentRuleModel.RuleID = core.StringPtr("rule-id-1")
 				featureSegmentRuleModel.RuleName = core.StringPtr("rule-name-1")
 
@@ -3506,6 +3907,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				updateFeatureOptionsModel.DisabledValue = "false"
 				updateFeatureOptionsModel.Enabled = core.BoolPtr(true)
 				updateFeatureOptionsModel.RolloutPercentage = core.Int64Ptr(int64(100))
+				updateFeatureOptionsModel.RolloutType = core.StringPtr("MANUAL")
+				updateFeatureOptionsModel.RolloutConfiguration = rolloutConfigurationModel
 				updateFeatureOptionsModel.Tags = core.StringPtr("version: 1.1, yet-to-release")
 				updateFeatureOptionsModel.SegmentRules = []appconfigurationv1.FeatureSegmentRule{*featureSegmentRuleModel}
 				updateFeatureOptionsModel.Collections = []appconfigurationv1.CollectionUpdateRef{*collectionUpdateRefModel}
@@ -3564,7 +3967,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100, "rule_id": "RuleID", "rule_name": "RuleName"}], "segment_exists": false, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "change_request_number": "ChangeRequestNumber", "change_request_status": "ChangeRequestStatus", "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href"}`)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED"}, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED"}, "rule_id": "RuleID", "rule_name": "RuleName"}], "segment_exists": false, "segment_count": 12, "rollout_rule": {"type": "MANUAL", "rule_id": "RuleID"}, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href", "workflow_approval": {"workflow_name": "WorkflowName", "workflow_id": "WorkflowID", "provider_type": "SERVICENOW_IBM", "change_request_number": "ChangeRequestNumber", "change_request_status": "PENDING", "execution_status": "PENDING", "approval_url": "ApprovalURL", "resource_type": "FEATURE", "resource_id": "ResourceID", "environment_id": "EnvironmentID", "created_time": "2019-01-01T12:00:00.000Z", "updated_time": "2019-01-01T12:00:00.000Z", "last_poll_time": "2019-01-01T12:00:00.000Z"}}`)
 				}))
 			})
 			It(`Invoke UpdateFeature successfully`, func() {
@@ -3581,6 +3984,18 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(response).To(BeNil())
 				Expect(result).To(BeNil())
 
+				// Construct an instance of the RolloutPhase model
+				rolloutPhaseModel := new(appconfigurationv1.RolloutPhase)
+				rolloutPhaseModel.Percentage = core.Int64Ptr(int64(1))
+				rolloutPhaseModel.Duration = core.Int64Ptr(int64(38))
+				rolloutPhaseModel.DurationType = core.StringPtr("days")
+
+				// Construct an instance of the RolloutConfiguration model
+				rolloutConfigurationModel := new(appconfigurationv1.RolloutConfiguration)
+				rolloutConfigurationModel.DurationPreset = core.StringPtr("CUSTOM")
+				rolloutConfigurationModel.StartAt = CreateMockDateTime("2019-01-01T12:00:00.000Z")
+				rolloutConfigurationModel.Phases = []appconfigurationv1.RolloutPhase{*rolloutPhaseModel}
+
 				// Construct an instance of the TargetSegments model
 				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
 				targetSegmentsModel.Segments = []string{"betausers", "premiumusers"}
@@ -3591,6 +4006,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				featureSegmentRuleModel.Value = "true"
 				featureSegmentRuleModel.Order = core.Int64Ptr(int64(1))
 				featureSegmentRuleModel.RolloutPercentage = core.Int64Ptr(int64(90))
+				featureSegmentRuleModel.RolloutType = core.StringPtr("MANUAL")
+				featureSegmentRuleModel.RolloutConfiguration = rolloutConfigurationModel
 				featureSegmentRuleModel.RuleID = core.StringPtr("rule-id-1")
 				featureSegmentRuleModel.RuleName = core.StringPtr("rule-name-1")
 
@@ -3609,6 +4026,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				updateFeatureOptionsModel.DisabledValue = "false"
 				updateFeatureOptionsModel.Enabled = core.BoolPtr(true)
 				updateFeatureOptionsModel.RolloutPercentage = core.Int64Ptr(int64(100))
+				updateFeatureOptionsModel.RolloutType = core.StringPtr("MANUAL")
+				updateFeatureOptionsModel.RolloutConfiguration = rolloutConfigurationModel
 				updateFeatureOptionsModel.Tags = core.StringPtr("version: 1.1, yet-to-release")
 				updateFeatureOptionsModel.SegmentRules = []appconfigurationv1.FeatureSegmentRule{*featureSegmentRuleModel}
 				updateFeatureOptionsModel.Collections = []appconfigurationv1.CollectionUpdateRef{*collectionUpdateRefModel}
@@ -3629,6 +4048,18 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(appConfigurationService).ToNot(BeNil())
 
+				// Construct an instance of the RolloutPhase model
+				rolloutPhaseModel := new(appconfigurationv1.RolloutPhase)
+				rolloutPhaseModel.Percentage = core.Int64Ptr(int64(1))
+				rolloutPhaseModel.Duration = core.Int64Ptr(int64(38))
+				rolloutPhaseModel.DurationType = core.StringPtr("days")
+
+				// Construct an instance of the RolloutConfiguration model
+				rolloutConfigurationModel := new(appconfigurationv1.RolloutConfiguration)
+				rolloutConfigurationModel.DurationPreset = core.StringPtr("CUSTOM")
+				rolloutConfigurationModel.StartAt = CreateMockDateTime("2019-01-01T12:00:00.000Z")
+				rolloutConfigurationModel.Phases = []appconfigurationv1.RolloutPhase{*rolloutPhaseModel}
+
 				// Construct an instance of the TargetSegments model
 				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
 				targetSegmentsModel.Segments = []string{"betausers", "premiumusers"}
@@ -3639,6 +4070,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				featureSegmentRuleModel.Value = "true"
 				featureSegmentRuleModel.Order = core.Int64Ptr(int64(1))
 				featureSegmentRuleModel.RolloutPercentage = core.Int64Ptr(int64(90))
+				featureSegmentRuleModel.RolloutType = core.StringPtr("MANUAL")
+				featureSegmentRuleModel.RolloutConfiguration = rolloutConfigurationModel
 				featureSegmentRuleModel.RuleID = core.StringPtr("rule-id-1")
 				featureSegmentRuleModel.RuleName = core.StringPtr("rule-name-1")
 
@@ -3657,6 +4090,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				updateFeatureOptionsModel.DisabledValue = "false"
 				updateFeatureOptionsModel.Enabled = core.BoolPtr(true)
 				updateFeatureOptionsModel.RolloutPercentage = core.Int64Ptr(int64(100))
+				updateFeatureOptionsModel.RolloutType = core.StringPtr("MANUAL")
+				updateFeatureOptionsModel.RolloutConfiguration = rolloutConfigurationModel
 				updateFeatureOptionsModel.Tags = core.StringPtr("version: 1.1, yet-to-release")
 				updateFeatureOptionsModel.SegmentRules = []appconfigurationv1.FeatureSegmentRule{*featureSegmentRuleModel}
 				updateFeatureOptionsModel.Collections = []appconfigurationv1.CollectionUpdateRef{*collectionUpdateRefModel}
@@ -3698,6 +4133,18 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(appConfigurationService).ToNot(BeNil())
 
+				// Construct an instance of the RolloutPhase model
+				rolloutPhaseModel := new(appconfigurationv1.RolloutPhase)
+				rolloutPhaseModel.Percentage = core.Int64Ptr(int64(1))
+				rolloutPhaseModel.Duration = core.Int64Ptr(int64(38))
+				rolloutPhaseModel.DurationType = core.StringPtr("days")
+
+				// Construct an instance of the RolloutConfiguration model
+				rolloutConfigurationModel := new(appconfigurationv1.RolloutConfiguration)
+				rolloutConfigurationModel.DurationPreset = core.StringPtr("CUSTOM")
+				rolloutConfigurationModel.StartAt = CreateMockDateTime("2019-01-01T12:00:00.000Z")
+				rolloutConfigurationModel.Phases = []appconfigurationv1.RolloutPhase{*rolloutPhaseModel}
+
 				// Construct an instance of the TargetSegments model
 				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
 				targetSegmentsModel.Segments = []string{"betausers", "premiumusers"}
@@ -3708,6 +4155,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				featureSegmentRuleModel.Value = "true"
 				featureSegmentRuleModel.Order = core.Int64Ptr(int64(1))
 				featureSegmentRuleModel.RolloutPercentage = core.Int64Ptr(int64(90))
+				featureSegmentRuleModel.RolloutType = core.StringPtr("MANUAL")
+				featureSegmentRuleModel.RolloutConfiguration = rolloutConfigurationModel
 				featureSegmentRuleModel.RuleID = core.StringPtr("rule-id-1")
 				featureSegmentRuleModel.RuleName = core.StringPtr("rule-name-1")
 
@@ -3726,6 +4175,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				updateFeatureOptionsModel.DisabledValue = "false"
 				updateFeatureOptionsModel.Enabled = core.BoolPtr(true)
 				updateFeatureOptionsModel.RolloutPercentage = core.Int64Ptr(int64(100))
+				updateFeatureOptionsModel.RolloutType = core.StringPtr("MANUAL")
+				updateFeatureOptionsModel.RolloutConfiguration = rolloutConfigurationModel
 				updateFeatureOptionsModel.Tags = core.StringPtr("version: 1.1, yet-to-release")
 				updateFeatureOptionsModel.SegmentRules = []appconfigurationv1.FeatureSegmentRule{*featureSegmentRuleModel}
 				updateFeatureOptionsModel.Collections = []appconfigurationv1.CollectionUpdateRef{*collectionUpdateRefModel}
@@ -3767,6 +4218,18 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(appConfigurationService).ToNot(BeNil())
 
+				// Construct an instance of the RolloutPhase model
+				rolloutPhaseModel := new(appconfigurationv1.RolloutPhase)
+				rolloutPhaseModel.Percentage = core.Int64Ptr(int64(1))
+				rolloutPhaseModel.Duration = core.Int64Ptr(int64(38))
+				rolloutPhaseModel.DurationType = core.StringPtr("days")
+
+				// Construct an instance of the RolloutConfiguration model
+				rolloutConfigurationModel := new(appconfigurationv1.RolloutConfiguration)
+				rolloutConfigurationModel.DurationPreset = core.StringPtr("CUSTOM")
+				rolloutConfigurationModel.StartAt = CreateMockDateTime("2019-01-01T12:00:00.000Z")
+				rolloutConfigurationModel.Phases = []appconfigurationv1.RolloutPhase{*rolloutPhaseModel}
+
 				// Construct an instance of the TargetSegments model
 				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
 				targetSegmentsModel.Segments = []string{"betausers", "premiumusers"}
@@ -3777,6 +4240,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				featureSegmentRuleModel.Value = "true"
 				featureSegmentRuleModel.Order = core.Int64Ptr(int64(1))
 				featureSegmentRuleModel.RolloutPercentage = core.Int64Ptr(int64(100))
+				featureSegmentRuleModel.RolloutType = core.StringPtr("MANUAL")
+				featureSegmentRuleModel.RolloutConfiguration = rolloutConfigurationModel
 				featureSegmentRuleModel.RuleID = core.StringPtr("rule-id-1")
 				featureSegmentRuleModel.RuleName = core.StringPtr("rule-name-1")
 
@@ -3790,6 +4255,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				updateFeatureValuesOptionsModel.EnabledValue = "true"
 				updateFeatureValuesOptionsModel.DisabledValue = "false"
 				updateFeatureValuesOptionsModel.RolloutPercentage = core.Int64Ptr(int64(100))
+				updateFeatureValuesOptionsModel.RolloutType = core.StringPtr("MANUAL")
+				updateFeatureValuesOptionsModel.RolloutConfiguration = rolloutConfigurationModel
 				updateFeatureValuesOptionsModel.SegmentRules = []appconfigurationv1.FeatureSegmentRule{*featureSegmentRuleModel}
 				updateFeatureValuesOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
@@ -3843,7 +4310,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100, "rule_id": "RuleID", "rule_name": "RuleName"}], "segment_exists": false, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "change_request_number": "ChangeRequestNumber", "change_request_status": "ChangeRequestStatus", "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href"}`)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED"}, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED"}, "rule_id": "RuleID", "rule_name": "RuleName"}], "segment_exists": false, "segment_count": 12, "rollout_rule": {"type": "MANUAL", "rule_id": "RuleID"}, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href", "workflow_approval": {"workflow_name": "WorkflowName", "workflow_id": "WorkflowID", "provider_type": "SERVICENOW_IBM", "change_request_number": "ChangeRequestNumber", "change_request_status": "PENDING", "execution_status": "PENDING", "approval_url": "ApprovalURL", "resource_type": "FEATURE", "resource_id": "ResourceID", "environment_id": "EnvironmentID", "created_time": "2019-01-01T12:00:00.000Z", "updated_time": "2019-01-01T12:00:00.000Z", "last_poll_time": "2019-01-01T12:00:00.000Z"}}`)
 				}))
 			})
 			It(`Invoke UpdateFeatureValues successfully with retries`, func() {
@@ -3855,6 +4322,18 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(appConfigurationService).ToNot(BeNil())
 				appConfigurationService.EnableRetries(0, 0)
 
+				// Construct an instance of the RolloutPhase model
+				rolloutPhaseModel := new(appconfigurationv1.RolloutPhase)
+				rolloutPhaseModel.Percentage = core.Int64Ptr(int64(1))
+				rolloutPhaseModel.Duration = core.Int64Ptr(int64(38))
+				rolloutPhaseModel.DurationType = core.StringPtr("days")
+
+				// Construct an instance of the RolloutConfiguration model
+				rolloutConfigurationModel := new(appconfigurationv1.RolloutConfiguration)
+				rolloutConfigurationModel.DurationPreset = core.StringPtr("CUSTOM")
+				rolloutConfigurationModel.StartAt = CreateMockDateTime("2019-01-01T12:00:00.000Z")
+				rolloutConfigurationModel.Phases = []appconfigurationv1.RolloutPhase{*rolloutPhaseModel}
+
 				// Construct an instance of the TargetSegments model
 				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
 				targetSegmentsModel.Segments = []string{"betausers", "premiumusers"}
@@ -3865,6 +4344,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				featureSegmentRuleModel.Value = "true"
 				featureSegmentRuleModel.Order = core.Int64Ptr(int64(1))
 				featureSegmentRuleModel.RolloutPercentage = core.Int64Ptr(int64(100))
+				featureSegmentRuleModel.RolloutType = core.StringPtr("MANUAL")
+				featureSegmentRuleModel.RolloutConfiguration = rolloutConfigurationModel
 				featureSegmentRuleModel.RuleID = core.StringPtr("rule-id-1")
 				featureSegmentRuleModel.RuleName = core.StringPtr("rule-name-1")
 
@@ -3878,6 +4359,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				updateFeatureValuesOptionsModel.EnabledValue = "true"
 				updateFeatureValuesOptionsModel.DisabledValue = "false"
 				updateFeatureValuesOptionsModel.RolloutPercentage = core.Int64Ptr(int64(100))
+				updateFeatureValuesOptionsModel.RolloutType = core.StringPtr("MANUAL")
+				updateFeatureValuesOptionsModel.RolloutConfiguration = rolloutConfigurationModel
 				updateFeatureValuesOptionsModel.SegmentRules = []appconfigurationv1.FeatureSegmentRule{*featureSegmentRuleModel}
 				updateFeatureValuesOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
@@ -3934,7 +4417,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100, "rule_id": "RuleID", "rule_name": "RuleName"}], "segment_exists": false, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "change_request_number": "ChangeRequestNumber", "change_request_status": "ChangeRequestStatus", "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href"}`)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED"}, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED"}, "rule_id": "RuleID", "rule_name": "RuleName"}], "segment_exists": false, "segment_count": 12, "rollout_rule": {"type": "MANUAL", "rule_id": "RuleID"}, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href", "workflow_approval": {"workflow_name": "WorkflowName", "workflow_id": "WorkflowID", "provider_type": "SERVICENOW_IBM", "change_request_number": "ChangeRequestNumber", "change_request_status": "PENDING", "execution_status": "PENDING", "approval_url": "ApprovalURL", "resource_type": "FEATURE", "resource_id": "ResourceID", "environment_id": "EnvironmentID", "created_time": "2019-01-01T12:00:00.000Z", "updated_time": "2019-01-01T12:00:00.000Z", "last_poll_time": "2019-01-01T12:00:00.000Z"}}`)
 				}))
 			})
 			It(`Invoke UpdateFeatureValues successfully`, func() {
@@ -3951,6 +4434,18 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(response).To(BeNil())
 				Expect(result).To(BeNil())
 
+				// Construct an instance of the RolloutPhase model
+				rolloutPhaseModel := new(appconfigurationv1.RolloutPhase)
+				rolloutPhaseModel.Percentage = core.Int64Ptr(int64(1))
+				rolloutPhaseModel.Duration = core.Int64Ptr(int64(38))
+				rolloutPhaseModel.DurationType = core.StringPtr("days")
+
+				// Construct an instance of the RolloutConfiguration model
+				rolloutConfigurationModel := new(appconfigurationv1.RolloutConfiguration)
+				rolloutConfigurationModel.DurationPreset = core.StringPtr("CUSTOM")
+				rolloutConfigurationModel.StartAt = CreateMockDateTime("2019-01-01T12:00:00.000Z")
+				rolloutConfigurationModel.Phases = []appconfigurationv1.RolloutPhase{*rolloutPhaseModel}
+
 				// Construct an instance of the TargetSegments model
 				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
 				targetSegmentsModel.Segments = []string{"betausers", "premiumusers"}
@@ -3961,6 +4456,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				featureSegmentRuleModel.Value = "true"
 				featureSegmentRuleModel.Order = core.Int64Ptr(int64(1))
 				featureSegmentRuleModel.RolloutPercentage = core.Int64Ptr(int64(100))
+				featureSegmentRuleModel.RolloutType = core.StringPtr("MANUAL")
+				featureSegmentRuleModel.RolloutConfiguration = rolloutConfigurationModel
 				featureSegmentRuleModel.RuleID = core.StringPtr("rule-id-1")
 				featureSegmentRuleModel.RuleName = core.StringPtr("rule-name-1")
 
@@ -3974,6 +4471,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				updateFeatureValuesOptionsModel.EnabledValue = "true"
 				updateFeatureValuesOptionsModel.DisabledValue = "false"
 				updateFeatureValuesOptionsModel.RolloutPercentage = core.Int64Ptr(int64(100))
+				updateFeatureValuesOptionsModel.RolloutType = core.StringPtr("MANUAL")
+				updateFeatureValuesOptionsModel.RolloutConfiguration = rolloutConfigurationModel
 				updateFeatureValuesOptionsModel.SegmentRules = []appconfigurationv1.FeatureSegmentRule{*featureSegmentRuleModel}
 				updateFeatureValuesOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
@@ -3992,6 +4491,18 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(appConfigurationService).ToNot(BeNil())
 
+				// Construct an instance of the RolloutPhase model
+				rolloutPhaseModel := new(appconfigurationv1.RolloutPhase)
+				rolloutPhaseModel.Percentage = core.Int64Ptr(int64(1))
+				rolloutPhaseModel.Duration = core.Int64Ptr(int64(38))
+				rolloutPhaseModel.DurationType = core.StringPtr("days")
+
+				// Construct an instance of the RolloutConfiguration model
+				rolloutConfigurationModel := new(appconfigurationv1.RolloutConfiguration)
+				rolloutConfigurationModel.DurationPreset = core.StringPtr("CUSTOM")
+				rolloutConfigurationModel.StartAt = CreateMockDateTime("2019-01-01T12:00:00.000Z")
+				rolloutConfigurationModel.Phases = []appconfigurationv1.RolloutPhase{*rolloutPhaseModel}
+
 				// Construct an instance of the TargetSegments model
 				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
 				targetSegmentsModel.Segments = []string{"betausers", "premiumusers"}
@@ -4002,6 +4513,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				featureSegmentRuleModel.Value = "true"
 				featureSegmentRuleModel.Order = core.Int64Ptr(int64(1))
 				featureSegmentRuleModel.RolloutPercentage = core.Int64Ptr(int64(100))
+				featureSegmentRuleModel.RolloutType = core.StringPtr("MANUAL")
+				featureSegmentRuleModel.RolloutConfiguration = rolloutConfigurationModel
 				featureSegmentRuleModel.RuleID = core.StringPtr("rule-id-1")
 				featureSegmentRuleModel.RuleName = core.StringPtr("rule-name-1")
 
@@ -4015,6 +4528,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				updateFeatureValuesOptionsModel.EnabledValue = "true"
 				updateFeatureValuesOptionsModel.DisabledValue = "false"
 				updateFeatureValuesOptionsModel.RolloutPercentage = core.Int64Ptr(int64(100))
+				updateFeatureValuesOptionsModel.RolloutType = core.StringPtr("MANUAL")
+				updateFeatureValuesOptionsModel.RolloutConfiguration = rolloutConfigurationModel
 				updateFeatureValuesOptionsModel.SegmentRules = []appconfigurationv1.FeatureSegmentRule{*featureSegmentRuleModel}
 				updateFeatureValuesOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
@@ -4054,6 +4569,18 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(appConfigurationService).ToNot(BeNil())
 
+				// Construct an instance of the RolloutPhase model
+				rolloutPhaseModel := new(appconfigurationv1.RolloutPhase)
+				rolloutPhaseModel.Percentage = core.Int64Ptr(int64(1))
+				rolloutPhaseModel.Duration = core.Int64Ptr(int64(38))
+				rolloutPhaseModel.DurationType = core.StringPtr("days")
+
+				// Construct an instance of the RolloutConfiguration model
+				rolloutConfigurationModel := new(appconfigurationv1.RolloutConfiguration)
+				rolloutConfigurationModel.DurationPreset = core.StringPtr("CUSTOM")
+				rolloutConfigurationModel.StartAt = CreateMockDateTime("2019-01-01T12:00:00.000Z")
+				rolloutConfigurationModel.Phases = []appconfigurationv1.RolloutPhase{*rolloutPhaseModel}
+
 				// Construct an instance of the TargetSegments model
 				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
 				targetSegmentsModel.Segments = []string{"betausers", "premiumusers"}
@@ -4064,6 +4591,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				featureSegmentRuleModel.Value = "true"
 				featureSegmentRuleModel.Order = core.Int64Ptr(int64(1))
 				featureSegmentRuleModel.RolloutPercentage = core.Int64Ptr(int64(100))
+				featureSegmentRuleModel.RolloutType = core.StringPtr("MANUAL")
+				featureSegmentRuleModel.RolloutConfiguration = rolloutConfigurationModel
 				featureSegmentRuleModel.RuleID = core.StringPtr("rule-id-1")
 				featureSegmentRuleModel.RuleName = core.StringPtr("rule-name-1")
 
@@ -4077,6 +4606,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				updateFeatureValuesOptionsModel.EnabledValue = "true"
 				updateFeatureValuesOptionsModel.DisabledValue = "false"
 				updateFeatureValuesOptionsModel.RolloutPercentage = core.Int64Ptr(int64(100))
+				updateFeatureValuesOptionsModel.RolloutType = core.StringPtr("MANUAL")
+				updateFeatureValuesOptionsModel.RolloutConfiguration = rolloutConfigurationModel
 				updateFeatureValuesOptionsModel.SegmentRules = []appconfigurationv1.FeatureSegmentRule{*featureSegmentRuleModel}
 				updateFeatureValuesOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
@@ -4120,7 +4651,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				getFeatureOptionsModel := new(appconfigurationv1.GetFeatureOptions)
 				getFeatureOptionsModel.EnvironmentID = core.StringPtr("environment_id")
 				getFeatureOptionsModel.FeatureID = core.StringPtr("feature_id")
-				getFeatureOptionsModel.Include = []string{"collections", "rules", "change_request"}
+				getFeatureOptionsModel.Include = []string{"collections", "rules", "workflow_approval"}
 				getFeatureOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
 				result, response, operationErr := appConfigurationService.GetFeature(getFeatureOptionsModel)
@@ -4157,7 +4688,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100, "rule_id": "RuleID", "rule_name": "RuleName"}], "segment_exists": false, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "change_request_number": "ChangeRequestNumber", "change_request_status": "ChangeRequestStatus", "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href"}`)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED"}, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED"}, "rule_id": "RuleID", "rule_name": "RuleName"}], "segment_exists": false, "segment_count": 12, "rollout_rule": {"type": "MANUAL", "rule_id": "RuleID"}, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href", "workflow_approval": {"workflow_name": "WorkflowName", "workflow_id": "WorkflowID", "provider_type": "SERVICENOW_IBM", "change_request_number": "ChangeRequestNumber", "change_request_status": "PENDING", "execution_status": "PENDING", "approval_url": "ApprovalURL", "resource_type": "FEATURE", "resource_id": "ResourceID", "environment_id": "EnvironmentID", "created_time": "2019-01-01T12:00:00.000Z", "updated_time": "2019-01-01T12:00:00.000Z", "last_poll_time": "2019-01-01T12:00:00.000Z"}}`)
 				}))
 			})
 			It(`Invoke GetFeature successfully with retries`, func() {
@@ -4173,7 +4704,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				getFeatureOptionsModel := new(appconfigurationv1.GetFeatureOptions)
 				getFeatureOptionsModel.EnvironmentID = core.StringPtr("environment_id")
 				getFeatureOptionsModel.FeatureID = core.StringPtr("feature_id")
-				getFeatureOptionsModel.Include = []string{"collections", "rules", "change_request"}
+				getFeatureOptionsModel.Include = []string{"collections", "rules", "workflow_approval"}
 				getFeatureOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with a Context to test a timeout error
@@ -4213,7 +4744,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100, "rule_id": "RuleID", "rule_name": "RuleName"}], "segment_exists": false, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "change_request_number": "ChangeRequestNumber", "change_request_status": "ChangeRequestStatus", "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href"}`)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED"}, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED"}, "rule_id": "RuleID", "rule_name": "RuleName"}], "segment_exists": false, "segment_count": 12, "rollout_rule": {"type": "MANUAL", "rule_id": "RuleID"}, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href", "workflow_approval": {"workflow_name": "WorkflowName", "workflow_id": "WorkflowID", "provider_type": "SERVICENOW_IBM", "change_request_number": "ChangeRequestNumber", "change_request_status": "PENDING", "execution_status": "PENDING", "approval_url": "ApprovalURL", "resource_type": "FEATURE", "resource_id": "ResourceID", "environment_id": "EnvironmentID", "created_time": "2019-01-01T12:00:00.000Z", "updated_time": "2019-01-01T12:00:00.000Z", "last_poll_time": "2019-01-01T12:00:00.000Z"}}`)
 				}))
 			})
 			It(`Invoke GetFeature successfully`, func() {
@@ -4234,7 +4765,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				getFeatureOptionsModel := new(appconfigurationv1.GetFeatureOptions)
 				getFeatureOptionsModel.EnvironmentID = core.StringPtr("environment_id")
 				getFeatureOptionsModel.FeatureID = core.StringPtr("feature_id")
-				getFeatureOptionsModel.Include = []string{"collections", "rules", "change_request"}
+				getFeatureOptionsModel.Include = []string{"collections", "rules", "workflow_approval"}
 				getFeatureOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
@@ -4256,7 +4787,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				getFeatureOptionsModel := new(appconfigurationv1.GetFeatureOptions)
 				getFeatureOptionsModel.EnvironmentID = core.StringPtr("environment_id")
 				getFeatureOptionsModel.FeatureID = core.StringPtr("feature_id")
-				getFeatureOptionsModel.Include = []string{"collections", "rules", "change_request"}
+				getFeatureOptionsModel.Include = []string{"collections", "rules", "workflow_approval"}
 				getFeatureOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := appConfigurationService.SetServiceURL("")
@@ -4299,7 +4830,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				getFeatureOptionsModel := new(appconfigurationv1.GetFeatureOptions)
 				getFeatureOptionsModel.EnvironmentID = core.StringPtr("environment_id")
 				getFeatureOptionsModel.FeatureID = core.StringPtr("feature_id")
-				getFeatureOptionsModel.Include = []string{"collections", "rules", "change_request"}
+				getFeatureOptionsModel.Include = []string{"collections", "rules", "workflow_approval"}
 				getFeatureOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation
@@ -4315,8 +4846,112 @@ var _ = Describe(`AppConfigurationV1`, func() {
 			})
 		})
 	})
+	Describe(`DeleteFeature(deleteFeatureOptions *DeleteFeatureOptions) - Operation response error`, func() {
+		deleteFeaturePath := "/environments/environment_id/features/feature_id"
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(deleteFeaturePath))
+					Expect(req.Method).To(Equal("DELETE"))
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(202)
+					fmt.Fprint(res, `} this is not valid json {`)
+				}))
+			})
+			It(`Invoke DeleteFeature with error: Operation response processing error`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the DeleteFeatureOptions model
+				deleteFeatureOptionsModel := new(appconfigurationv1.DeleteFeatureOptions)
+				deleteFeatureOptionsModel.EnvironmentID = core.StringPtr("environment_id")
+				deleteFeatureOptionsModel.FeatureID = core.StringPtr("feature_id")
+				deleteFeatureOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Expect response parsing to fail since we are receiving a text/plain response
+				result, response, operationErr := appConfigurationService.DeleteFeature(deleteFeatureOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				appConfigurationService.EnableRetries(0, 0)
+				result, response, operationErr = appConfigurationService.DeleteFeature(deleteFeatureOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
 	Describe(`DeleteFeature(deleteFeatureOptions *DeleteFeatureOptions)`, func() {
 		deleteFeaturePath := "/environments/environment_id/features/feature_id"
+		Context(`Using mock server endpoint with timeout`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(deleteFeaturePath))
+					Expect(req.Method).To(Equal("DELETE"))
+
+					// Sleep a short time to support a timeout test
+					time.Sleep(100 * time.Millisecond)
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(202)
+					fmt.Fprintf(res, "%s", `{"message": "Message", "workflow_approval": {"workflow_name": "WorkflowName", "workflow_id": "WorkflowID", "provider_type": "SERVICENOW_IBM", "change_request_number": "ChangeRequestNumber", "change_request_status": "PENDING", "execution_status": "PENDING", "approval_url": "ApprovalURL", "resource_type": "FEATURE", "resource_id": "ResourceID", "environment_id": "EnvironmentID", "created_time": "2019-01-01T12:00:00.000Z", "updated_time": "2019-01-01T12:00:00.000Z"}}`)
+				}))
+			})
+			It(`Invoke DeleteFeature successfully with retries`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+				appConfigurationService.EnableRetries(0, 0)
+
+				// Construct an instance of the DeleteFeatureOptions model
+				deleteFeatureOptionsModel := new(appconfigurationv1.DeleteFeatureOptions)
+				deleteFeatureOptionsModel.EnvironmentID = core.StringPtr("environment_id")
+				deleteFeatureOptionsModel.FeatureID = core.StringPtr("feature_id")
+				deleteFeatureOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with a Context to test a timeout error
+				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc()
+				_, _, operationErr := appConfigurationService.DeleteFeatureWithContext(ctx, deleteFeatureOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+
+				// Disable retries and test again
+				appConfigurationService.DisableRetries()
+				result, response, operationErr := appConfigurationService.DeleteFeature(deleteFeatureOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				_, _, operationErr = appConfigurationService.DeleteFeatureWithContext(ctx, deleteFeatureOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -4326,7 +4961,10 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(deleteFeaturePath))
 					Expect(req.Method).To(Equal("DELETE"))
 
-					res.WriteHeader(204)
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(202)
+					fmt.Fprintf(res, "%s", `{"message": "Message", "workflow_approval": {"workflow_name": "WorkflowName", "workflow_id": "WorkflowID", "provider_type": "SERVICENOW_IBM", "change_request_number": "ChangeRequestNumber", "change_request_status": "PENDING", "execution_status": "PENDING", "approval_url": "ApprovalURL", "resource_type": "FEATURE", "resource_id": "ResourceID", "environment_id": "EnvironmentID", "created_time": "2019-01-01T12:00:00.000Z", "updated_time": "2019-01-01T12:00:00.000Z"}}`)
 				}))
 			})
 			It(`Invoke DeleteFeature successfully`, func() {
@@ -4338,9 +4976,10 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(appConfigurationService).ToNot(BeNil())
 
 				// Invoke operation with nil options model (negative test)
-				response, operationErr := appConfigurationService.DeleteFeature(nil)
+				result, response, operationErr := appConfigurationService.DeleteFeature(nil)
 				Expect(operationErr).NotTo(BeNil())
 				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
 
 				// Construct an instance of the DeleteFeatureOptions model
 				deleteFeatureOptionsModel := new(appconfigurationv1.DeleteFeatureOptions)
@@ -4349,9 +4988,11 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				deleteFeatureOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
-				response, operationErr = appConfigurationService.DeleteFeature(deleteFeatureOptionsModel)
+				result, response, operationErr = appConfigurationService.DeleteFeature(deleteFeatureOptionsModel)
 				Expect(operationErr).To(BeNil())
 				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
 			})
 			It(`Invoke DeleteFeature with error: Operation validation and request error`, func() {
 				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
@@ -4369,16 +5010,53 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				// Invoke operation with empty URL (negative test)
 				err := appConfigurationService.SetServiceURL("")
 				Expect(err).To(BeNil())
-				response, operationErr := appConfigurationService.DeleteFeature(deleteFeatureOptionsModel)
+				result, response, operationErr := appConfigurationService.DeleteFeature(deleteFeatureOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
 				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
 				// Construct a second instance of the DeleteFeatureOptions model with no property values
 				deleteFeatureOptionsModelNew := new(appconfigurationv1.DeleteFeatureOptions)
 				// Invoke operation with invalid model (negative test)
-				response, operationErr = appConfigurationService.DeleteFeature(deleteFeatureOptionsModelNew)
+				result, response, operationErr = appConfigurationService.DeleteFeature(deleteFeatureOptionsModelNew)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(202)
+				}))
+			})
+			It(`Invoke DeleteFeature successfully`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the DeleteFeatureOptions model
+				deleteFeatureOptionsModel := new(appconfigurationv1.DeleteFeatureOptions)
+				deleteFeatureOptionsModel.EnvironmentID = core.StringPtr("environment_id")
+				deleteFeatureOptionsModel.FeatureID = core.StringPtr("feature_id")
+				deleteFeatureOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := appConfigurationService.DeleteFeature(deleteFeatureOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
 			})
 			AfterEach(func() {
 				testServer.Close()
@@ -4465,7 +5143,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100, "rule_id": "RuleID", "rule_name": "RuleName"}], "segment_exists": false, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "change_request_number": "ChangeRequestNumber", "change_request_status": "ChangeRequestStatus", "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href"}`)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED"}, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED"}, "rule_id": "RuleID", "rule_name": "RuleName"}], "segment_exists": false, "segment_count": 12, "rollout_rule": {"type": "MANUAL", "rule_id": "RuleID"}, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href", "workflow_approval": {"workflow_name": "WorkflowName", "workflow_id": "WorkflowID", "provider_type": "SERVICENOW_IBM", "change_request_number": "ChangeRequestNumber", "change_request_status": "PENDING", "execution_status": "PENDING", "approval_url": "ApprovalURL", "resource_type": "FEATURE", "resource_id": "ResourceID", "environment_id": "EnvironmentID", "created_time": "2019-01-01T12:00:00.000Z", "updated_time": "2019-01-01T12:00:00.000Z", "last_poll_time": "2019-01-01T12:00:00.000Z"}}`)
 				}))
 			})
 			It(`Invoke ToggleFeature successfully with retries`, func() {
@@ -4537,7 +5215,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100, "rule_id": "RuleID", "rule_name": "RuleName"}], "segment_exists": false, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "change_request_number": "ChangeRequestNumber", "change_request_status": "ChangeRequestStatus", "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href"}`)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED"}, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED"}, "rule_id": "RuleID", "rule_name": "RuleName"}], "segment_exists": false, "segment_count": 12, "rollout_rule": {"type": "MANUAL", "rule_id": "RuleID"}, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href", "workflow_approval": {"workflow_name": "WorkflowName", "workflow_id": "WorkflowID", "provider_type": "SERVICENOW_IBM", "change_request_number": "ChangeRequestNumber", "change_request_status": "PENDING", "execution_status": "PENDING", "approval_url": "ApprovalURL", "resource_type": "FEATURE", "resource_id": "ResourceID", "environment_id": "EnvironmentID", "created_time": "2019-01-01T12:00:00.000Z", "updated_time": "2019-01-01T12:00:00.000Z", "last_poll_time": "2019-01-01T12:00:00.000Z"}}`)
 				}))
 			})
 			It(`Invoke ToggleFeature successfully`, func() {
@@ -4639,6 +5317,265 @@ var _ = Describe(`AppConfigurationV1`, func() {
 			})
 		})
 	})
+	Describe(`StopFeatureRollout(stopFeatureRolloutOptions *StopFeatureRolloutOptions) - Operation response error`, func() {
+		stopFeatureRolloutPath := "/environments/environment_id/features/feature_id/rollout"
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(stopFeatureRolloutPath))
+					Expect(req.Method).To(Equal("PATCH"))
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprint(res, `} this is not valid json {`)
+				}))
+			})
+			It(`Invoke StopFeatureRollout with error: Operation response processing error`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the StopFeatureRolloutOptions model
+				stopFeatureRolloutOptionsModel := new(appconfigurationv1.StopFeatureRolloutOptions)
+				stopFeatureRolloutOptionsModel.EnvironmentID = core.StringPtr("environment_id")
+				stopFeatureRolloutOptionsModel.FeatureID = core.StringPtr("feature_id")
+				stopFeatureRolloutOptionsModel.Action = core.StringPtr("stop")
+				stopFeatureRolloutOptionsModel.RolloutPercentage = core.Int64Ptr(int64(0))
+				stopFeatureRolloutOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Expect response parsing to fail since we are receiving a text/plain response
+				result, response, operationErr := appConfigurationService.StopFeatureRollout(stopFeatureRolloutOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				appConfigurationService.EnableRetries(0, 0)
+				result, response, operationErr = appConfigurationService.StopFeatureRollout(stopFeatureRolloutOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`StopFeatureRollout(stopFeatureRolloutOptions *StopFeatureRolloutOptions)`, func() {
+		stopFeatureRolloutPath := "/environments/environment_id/features/feature_id/rollout"
+		Context(`Using mock server endpoint with timeout`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(stopFeatureRolloutPath))
+					Expect(req.Method).To(Equal("PATCH"))
+
+					// For gzip-disabled operation, verify Content-Encoding is not set.
+					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+
+					// If there is a body, then make sure we can read it
+					bodyBuf := new(bytes.Buffer)
+					if req.Header.Get("Content-Encoding") == "gzip" {
+						body, err := core.NewGzipDecompressionReader(req.Body)
+						Expect(err).To(BeNil())
+						_, err = bodyBuf.ReadFrom(body)
+						Expect(err).To(BeNil())
+					} else {
+						_, err := bodyBuf.ReadFrom(req.Body)
+						Expect(err).To(BeNil())
+					}
+					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
+
+					// Sleep a short time to support a timeout test
+					time.Sleep(100 * time.Millisecond)
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED"}, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED"}, "rule_id": "RuleID", "rule_name": "RuleName"}], "segment_exists": false, "segment_count": 12, "rollout_rule": {"type": "MANUAL", "rule_id": "RuleID"}, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href", "workflow_approval": {"workflow_name": "WorkflowName", "workflow_id": "WorkflowID", "provider_type": "SERVICENOW_IBM", "change_request_number": "ChangeRequestNumber", "change_request_status": "PENDING", "execution_status": "PENDING", "approval_url": "ApprovalURL", "resource_type": "FEATURE", "resource_id": "ResourceID", "environment_id": "EnvironmentID", "created_time": "2019-01-01T12:00:00.000Z", "updated_time": "2019-01-01T12:00:00.000Z", "last_poll_time": "2019-01-01T12:00:00.000Z"}}`)
+				}))
+			})
+			It(`Invoke StopFeatureRollout successfully with retries`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+				appConfigurationService.EnableRetries(0, 0)
+
+				// Construct an instance of the StopFeatureRolloutOptions model
+				stopFeatureRolloutOptionsModel := new(appconfigurationv1.StopFeatureRolloutOptions)
+				stopFeatureRolloutOptionsModel.EnvironmentID = core.StringPtr("environment_id")
+				stopFeatureRolloutOptionsModel.FeatureID = core.StringPtr("feature_id")
+				stopFeatureRolloutOptionsModel.Action = core.StringPtr("stop")
+				stopFeatureRolloutOptionsModel.RolloutPercentage = core.Int64Ptr(int64(0))
+				stopFeatureRolloutOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with a Context to test a timeout error
+				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc()
+				_, _, operationErr := appConfigurationService.StopFeatureRolloutWithContext(ctx, stopFeatureRolloutOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+
+				// Disable retries and test again
+				appConfigurationService.DisableRetries()
+				result, response, operationErr := appConfigurationService.StopFeatureRollout(stopFeatureRolloutOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				_, _, operationErr = appConfigurationService.StopFeatureRolloutWithContext(ctx, stopFeatureRolloutOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(stopFeatureRolloutPath))
+					Expect(req.Method).To(Equal("PATCH"))
+
+					// For gzip-disabled operation, verify Content-Encoding is not set.
+					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+
+					// If there is a body, then make sure we can read it
+					bodyBuf := new(bytes.Buffer)
+					if req.Header.Get("Content-Encoding") == "gzip" {
+						body, err := core.NewGzipDecompressionReader(req.Body)
+						Expect(err).To(BeNil())
+						_, err = bodyBuf.ReadFrom(body)
+						Expect(err).To(BeNil())
+					} else {
+						_, err := bodyBuf.ReadFrom(req.Body)
+						Expect(err).To(BeNil())
+					}
+					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED"}, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED"}, "rule_id": "RuleID", "rule_name": "RuleName"}], "segment_exists": false, "segment_count": 12, "rollout_rule": {"type": "MANUAL", "rule_id": "RuleID"}, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href", "workflow_approval": {"workflow_name": "WorkflowName", "workflow_id": "WorkflowID", "provider_type": "SERVICENOW_IBM", "change_request_number": "ChangeRequestNumber", "change_request_status": "PENDING", "execution_status": "PENDING", "approval_url": "ApprovalURL", "resource_type": "FEATURE", "resource_id": "ResourceID", "environment_id": "EnvironmentID", "created_time": "2019-01-01T12:00:00.000Z", "updated_time": "2019-01-01T12:00:00.000Z", "last_poll_time": "2019-01-01T12:00:00.000Z"}}`)
+				}))
+			})
+			It(`Invoke StopFeatureRollout successfully`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Invoke operation with nil options model (negative test)
+				result, response, operationErr := appConfigurationService.StopFeatureRollout(nil)
+				Expect(operationErr).NotTo(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+
+				// Construct an instance of the StopFeatureRolloutOptions model
+				stopFeatureRolloutOptionsModel := new(appconfigurationv1.StopFeatureRolloutOptions)
+				stopFeatureRolloutOptionsModel.EnvironmentID = core.StringPtr("environment_id")
+				stopFeatureRolloutOptionsModel.FeatureID = core.StringPtr("feature_id")
+				stopFeatureRolloutOptionsModel.Action = core.StringPtr("stop")
+				stopFeatureRolloutOptionsModel.RolloutPercentage = core.Int64Ptr(int64(0))
+				stopFeatureRolloutOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with valid options model (positive test)
+				result, response, operationErr = appConfigurationService.StopFeatureRollout(stopFeatureRolloutOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+			})
+			It(`Invoke StopFeatureRollout with error: Operation validation and request error`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the StopFeatureRolloutOptions model
+				stopFeatureRolloutOptionsModel := new(appconfigurationv1.StopFeatureRolloutOptions)
+				stopFeatureRolloutOptionsModel.EnvironmentID = core.StringPtr("environment_id")
+				stopFeatureRolloutOptionsModel.FeatureID = core.StringPtr("feature_id")
+				stopFeatureRolloutOptionsModel.Action = core.StringPtr("stop")
+				stopFeatureRolloutOptionsModel.RolloutPercentage = core.Int64Ptr(int64(0))
+				stopFeatureRolloutOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Invoke operation with empty URL (negative test)
+				err := appConfigurationService.SetServiceURL("")
+				Expect(err).To(BeNil())
+				result, response, operationErr := appConfigurationService.StopFeatureRollout(stopFeatureRolloutOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+				// Construct a second instance of the StopFeatureRolloutOptions model with no property values
+				stopFeatureRolloutOptionsModelNew := new(appconfigurationv1.StopFeatureRolloutOptions)
+				// Invoke operation with invalid model (negative test)
+				result, response, operationErr = appConfigurationService.StopFeatureRollout(stopFeatureRolloutOptionsModelNew)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke StopFeatureRollout successfully`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the StopFeatureRolloutOptions model
+				stopFeatureRolloutOptionsModel := new(appconfigurationv1.StopFeatureRolloutOptions)
+				stopFeatureRolloutOptionsModel.EnvironmentID = core.StringPtr("environment_id")
+				stopFeatureRolloutOptionsModel.FeatureID = core.StringPtr("feature_id")
+				stopFeatureRolloutOptionsModel.Action = core.StringPtr("stop")
+				stopFeatureRolloutOptionsModel.RolloutPercentage = core.Int64Ptr(int64(0))
+				stopFeatureRolloutOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := appConfigurationService.StopFeatureRollout(stopFeatureRolloutOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
 	Describe(`CreateFeatureRule(createFeatureRuleOptions *CreateFeatureRuleOptions) - Operation response error`, func() {
 		createFeatureRulePath := "/environments/environment_id/features/feature_id/rules"
 		Context(`Using mock server endpoint with invalid JSON response`, func() {
@@ -4666,6 +5603,18 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
 				targetSegmentsModel.Segments = []string{"betausers", "premiumusers"}
 
+				// Construct an instance of the RolloutPhase model
+				rolloutPhaseModel := new(appconfigurationv1.RolloutPhase)
+				rolloutPhaseModel.Percentage = core.Int64Ptr(int64(1))
+				rolloutPhaseModel.Duration = core.Int64Ptr(int64(38))
+				rolloutPhaseModel.DurationType = core.StringPtr("days")
+
+				// Construct an instance of the RolloutConfiguration model
+				rolloutConfigurationModel := new(appconfigurationv1.RolloutConfiguration)
+				rolloutConfigurationModel.DurationPreset = core.StringPtr("CUSTOM")
+				rolloutConfigurationModel.StartAt = CreateMockDateTime("2019-01-01T12:00:00.000Z")
+				rolloutConfigurationModel.Phases = []appconfigurationv1.RolloutPhase{*rolloutPhaseModel}
+
 				// Construct an instance of the CreateFeatureRuleOptions model
 				createFeatureRuleOptionsModel := new(appconfigurationv1.CreateFeatureRuleOptions)
 				createFeatureRuleOptionsModel.EnvironmentID = core.StringPtr("environment_id")
@@ -4675,6 +5624,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				createFeatureRuleOptionsModel.RuleID = core.StringPtr("RuleA")
 				createFeatureRuleOptionsModel.RuleName = core.StringPtr("Rule Name")
 				createFeatureRuleOptionsModel.RolloutPercentage = core.Int64Ptr(int64(50))
+				createFeatureRuleOptionsModel.RolloutType = core.StringPtr("MANUAL")
+				createFeatureRuleOptionsModel.RolloutConfiguration = rolloutConfigurationModel
 				createFeatureRuleOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
 				result, response, operationErr := appConfigurationService.CreateFeatureRule(createFeatureRuleOptionsModel)
@@ -4727,7 +5678,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
-					fmt.Fprintf(res, "%s", `{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "rule_id": "RuleID", "rule_name": "RuleName", "rollout_percentage": 100, "order": 5, "href": "Href"}`)
+					fmt.Fprintf(res, "%s", `{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "rule_id": "RuleID", "rule_name": "RuleName", "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED"}, "order": 5, "href": "Href"}`)
 				}))
 			})
 			It(`Invoke CreateFeatureRule successfully with retries`, func() {
@@ -4743,6 +5694,18 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
 				targetSegmentsModel.Segments = []string{"betausers", "premiumusers"}
 
+				// Construct an instance of the RolloutPhase model
+				rolloutPhaseModel := new(appconfigurationv1.RolloutPhase)
+				rolloutPhaseModel.Percentage = core.Int64Ptr(int64(1))
+				rolloutPhaseModel.Duration = core.Int64Ptr(int64(38))
+				rolloutPhaseModel.DurationType = core.StringPtr("days")
+
+				// Construct an instance of the RolloutConfiguration model
+				rolloutConfigurationModel := new(appconfigurationv1.RolloutConfiguration)
+				rolloutConfigurationModel.DurationPreset = core.StringPtr("CUSTOM")
+				rolloutConfigurationModel.StartAt = CreateMockDateTime("2019-01-01T12:00:00.000Z")
+				rolloutConfigurationModel.Phases = []appconfigurationv1.RolloutPhase{*rolloutPhaseModel}
+
 				// Construct an instance of the CreateFeatureRuleOptions model
 				createFeatureRuleOptionsModel := new(appconfigurationv1.CreateFeatureRuleOptions)
 				createFeatureRuleOptionsModel.EnvironmentID = core.StringPtr("environment_id")
@@ -4752,6 +5715,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				createFeatureRuleOptionsModel.RuleID = core.StringPtr("RuleA")
 				createFeatureRuleOptionsModel.RuleName = core.StringPtr("Rule Name")
 				createFeatureRuleOptionsModel.RolloutPercentage = core.Int64Ptr(int64(50))
+				createFeatureRuleOptionsModel.RolloutType = core.StringPtr("MANUAL")
+				createFeatureRuleOptionsModel.RolloutConfiguration = rolloutConfigurationModel
 				createFeatureRuleOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with a Context to test a timeout error
@@ -4807,7 +5772,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
-					fmt.Fprintf(res, "%s", `{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "rule_id": "RuleID", "rule_name": "RuleName", "rollout_percentage": 100, "order": 5, "href": "Href"}`)
+					fmt.Fprintf(res, "%s", `{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "rule_id": "RuleID", "rule_name": "RuleName", "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED"}, "order": 5, "href": "Href"}`)
 				}))
 			})
 			It(`Invoke CreateFeatureRule successfully`, func() {
@@ -4828,6 +5793,18 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
 				targetSegmentsModel.Segments = []string{"betausers", "premiumusers"}
 
+				// Construct an instance of the RolloutPhase model
+				rolloutPhaseModel := new(appconfigurationv1.RolloutPhase)
+				rolloutPhaseModel.Percentage = core.Int64Ptr(int64(1))
+				rolloutPhaseModel.Duration = core.Int64Ptr(int64(38))
+				rolloutPhaseModel.DurationType = core.StringPtr("days")
+
+				// Construct an instance of the RolloutConfiguration model
+				rolloutConfigurationModel := new(appconfigurationv1.RolloutConfiguration)
+				rolloutConfigurationModel.DurationPreset = core.StringPtr("CUSTOM")
+				rolloutConfigurationModel.StartAt = CreateMockDateTime("2019-01-01T12:00:00.000Z")
+				rolloutConfigurationModel.Phases = []appconfigurationv1.RolloutPhase{*rolloutPhaseModel}
+
 				// Construct an instance of the CreateFeatureRuleOptions model
 				createFeatureRuleOptionsModel := new(appconfigurationv1.CreateFeatureRuleOptions)
 				createFeatureRuleOptionsModel.EnvironmentID = core.StringPtr("environment_id")
@@ -4837,6 +5814,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				createFeatureRuleOptionsModel.RuleID = core.StringPtr("RuleA")
 				createFeatureRuleOptionsModel.RuleName = core.StringPtr("Rule Name")
 				createFeatureRuleOptionsModel.RolloutPercentage = core.Int64Ptr(int64(50))
+				createFeatureRuleOptionsModel.RolloutType = core.StringPtr("MANUAL")
+				createFeatureRuleOptionsModel.RolloutConfiguration = rolloutConfigurationModel
 				createFeatureRuleOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
@@ -4858,6 +5837,18 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
 				targetSegmentsModel.Segments = []string{"betausers", "premiumusers"}
 
+				// Construct an instance of the RolloutPhase model
+				rolloutPhaseModel := new(appconfigurationv1.RolloutPhase)
+				rolloutPhaseModel.Percentage = core.Int64Ptr(int64(1))
+				rolloutPhaseModel.Duration = core.Int64Ptr(int64(38))
+				rolloutPhaseModel.DurationType = core.StringPtr("days")
+
+				// Construct an instance of the RolloutConfiguration model
+				rolloutConfigurationModel := new(appconfigurationv1.RolloutConfiguration)
+				rolloutConfigurationModel.DurationPreset = core.StringPtr("CUSTOM")
+				rolloutConfigurationModel.StartAt = CreateMockDateTime("2019-01-01T12:00:00.000Z")
+				rolloutConfigurationModel.Phases = []appconfigurationv1.RolloutPhase{*rolloutPhaseModel}
+
 				// Construct an instance of the CreateFeatureRuleOptions model
 				createFeatureRuleOptionsModel := new(appconfigurationv1.CreateFeatureRuleOptions)
 				createFeatureRuleOptionsModel.EnvironmentID = core.StringPtr("environment_id")
@@ -4867,6 +5858,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				createFeatureRuleOptionsModel.RuleID = core.StringPtr("RuleA")
 				createFeatureRuleOptionsModel.RuleName = core.StringPtr("Rule Name")
 				createFeatureRuleOptionsModel.RolloutPercentage = core.Int64Ptr(int64(50))
+				createFeatureRuleOptionsModel.RolloutType = core.StringPtr("MANUAL")
+				createFeatureRuleOptionsModel.RolloutConfiguration = rolloutConfigurationModel
 				createFeatureRuleOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := appConfigurationService.SetServiceURL("")
@@ -4909,6 +5902,18 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
 				targetSegmentsModel.Segments = []string{"betausers", "premiumusers"}
 
+				// Construct an instance of the RolloutPhase model
+				rolloutPhaseModel := new(appconfigurationv1.RolloutPhase)
+				rolloutPhaseModel.Percentage = core.Int64Ptr(int64(1))
+				rolloutPhaseModel.Duration = core.Int64Ptr(int64(38))
+				rolloutPhaseModel.DurationType = core.StringPtr("days")
+
+				// Construct an instance of the RolloutConfiguration model
+				rolloutConfigurationModel := new(appconfigurationv1.RolloutConfiguration)
+				rolloutConfigurationModel.DurationPreset = core.StringPtr("CUSTOM")
+				rolloutConfigurationModel.StartAt = CreateMockDateTime("2019-01-01T12:00:00.000Z")
+				rolloutConfigurationModel.Phases = []appconfigurationv1.RolloutPhase{*rolloutPhaseModel}
+
 				// Construct an instance of the CreateFeatureRuleOptions model
 				createFeatureRuleOptionsModel := new(appconfigurationv1.CreateFeatureRuleOptions)
 				createFeatureRuleOptionsModel.EnvironmentID = core.StringPtr("environment_id")
@@ -4918,6 +5923,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				createFeatureRuleOptionsModel.RuleID = core.StringPtr("RuleA")
 				createFeatureRuleOptionsModel.RuleName = core.StringPtr("Rule Name")
 				createFeatureRuleOptionsModel.RolloutPercentage = core.Int64Ptr(int64(50))
+				createFeatureRuleOptionsModel.RolloutType = core.StringPtr("MANUAL")
+				createFeatureRuleOptionsModel.RolloutConfiguration = rolloutConfigurationModel
 				createFeatureRuleOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation
@@ -4996,7 +6003,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "rule_id": "RuleID", "rule_name": "RuleName", "rollout_percentage": 100, "order": 5, "href": "Href"}], "limit": 10, "offset": 0, "total_count": 0, "first": {"href": "Href"}, "previous": {"href": "Href"}, "next": {"href": "Href"}, "last": {"href": "Href"}}`)
+					fmt.Fprintf(res, "%s", `{"segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "rule_id": "RuleID", "rule_name": "RuleName", "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED"}, "order": 5, "href": "Href"}], "limit": 10, "offset": 0, "total_count": 0, "first": {"href": "Href"}, "previous": {"href": "Href"}, "next": {"href": "Href"}, "last": {"href": "Href"}}`)
 				}))
 			})
 			It(`Invoke ListFeatureRules successfully with retries`, func() {
@@ -5051,7 +6058,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "rule_id": "RuleID", "rule_name": "RuleName", "rollout_percentage": 100, "order": 5, "href": "Href"}], "limit": 10, "offset": 0, "total_count": 0, "first": {"href": "Href"}, "previous": {"href": "Href"}, "next": {"href": "Href"}, "last": {"href": "Href"}}`)
+					fmt.Fprintf(res, "%s", `{"segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "rule_id": "RuleID", "rule_name": "RuleName", "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED"}, "order": 5, "href": "Href"}], "limit": 10, "offset": 0, "total_count": 0, "first": {"href": "Href"}, "previous": {"href": "Href"}, "next": {"href": "Href"}, "last": {"href": "Href"}}`)
 				}))
 			})
 			It(`Invoke ListFeatureRules successfully`, func() {
@@ -5214,7 +6221,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "rule_id": "RuleID", "rule_name": "RuleName", "rollout_percentage": 100, "order": 5, "href": "Href"}`)
+					fmt.Fprintf(res, "%s", `{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "rule_id": "RuleID", "rule_name": "RuleName", "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED"}, "order": 5, "href": "Href"}`)
 				}))
 			})
 			It(`Invoke GetFeatureRule successfully with retries`, func() {
@@ -5270,7 +6277,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "rule_id": "RuleID", "rule_name": "RuleName", "rollout_percentage": 100, "order": 5, "href": "Href"}`)
+					fmt.Fprintf(res, "%s", `{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "rule_id": "RuleID", "rule_name": "RuleName", "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED"}, "order": 5, "href": "Href"}`)
 				}))
 			})
 			It(`Invoke GetFeatureRule successfully`, func() {
@@ -5399,6 +6406,18 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
 				targetSegmentsModel.Segments = []string{"betausers", "premiumusers"}
 
+				// Construct an instance of the RolloutPhase model
+				rolloutPhaseModel := new(appconfigurationv1.RolloutPhase)
+				rolloutPhaseModel.Percentage = core.Int64Ptr(int64(1))
+				rolloutPhaseModel.Duration = core.Int64Ptr(int64(38))
+				rolloutPhaseModel.DurationType = core.StringPtr("days")
+
+				// Construct an instance of the RolloutConfiguration model
+				rolloutConfigurationModel := new(appconfigurationv1.RolloutConfiguration)
+				rolloutConfigurationModel.DurationPreset = core.StringPtr("CUSTOM")
+				rolloutConfigurationModel.StartAt = CreateMockDateTime("2019-01-01T12:00:00.000Z")
+				rolloutConfigurationModel.Phases = []appconfigurationv1.RolloutPhase{*rolloutPhaseModel}
+
 				// Construct an instance of the UpdateFeatureRuleOptions model
 				updateFeatureRuleOptionsModel := new(appconfigurationv1.UpdateFeatureRuleOptions)
 				updateFeatureRuleOptionsModel.EnvironmentID = core.StringPtr("environment_id")
@@ -5408,6 +6427,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				updateFeatureRuleOptionsModel.Value = "true"
 				updateFeatureRuleOptionsModel.RuleName = core.StringPtr("rule-name-1")
 				updateFeatureRuleOptionsModel.RolloutPercentage = core.Int64Ptr(int64(50))
+				updateFeatureRuleOptionsModel.RolloutType = core.StringPtr("MANUAL")
+				updateFeatureRuleOptionsModel.RolloutConfiguration = rolloutConfigurationModel
 				updateFeatureRuleOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
 				result, response, operationErr := appConfigurationService.UpdateFeatureRule(updateFeatureRuleOptionsModel)
@@ -5460,7 +6481,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "rule_id": "RuleID", "rule_name": "RuleName", "rollout_percentage": 100, "order": 5, "href": "Href"}`)
+					fmt.Fprintf(res, "%s", `{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "rule_id": "RuleID", "rule_name": "RuleName", "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED"}, "order": 5, "href": "Href"}`)
 				}))
 			})
 			It(`Invoke UpdateFeatureRule successfully with retries`, func() {
@@ -5476,6 +6497,18 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
 				targetSegmentsModel.Segments = []string{"betausers", "premiumusers"}
 
+				// Construct an instance of the RolloutPhase model
+				rolloutPhaseModel := new(appconfigurationv1.RolloutPhase)
+				rolloutPhaseModel.Percentage = core.Int64Ptr(int64(1))
+				rolloutPhaseModel.Duration = core.Int64Ptr(int64(38))
+				rolloutPhaseModel.DurationType = core.StringPtr("days")
+
+				// Construct an instance of the RolloutConfiguration model
+				rolloutConfigurationModel := new(appconfigurationv1.RolloutConfiguration)
+				rolloutConfigurationModel.DurationPreset = core.StringPtr("CUSTOM")
+				rolloutConfigurationModel.StartAt = CreateMockDateTime("2019-01-01T12:00:00.000Z")
+				rolloutConfigurationModel.Phases = []appconfigurationv1.RolloutPhase{*rolloutPhaseModel}
+
 				// Construct an instance of the UpdateFeatureRuleOptions model
 				updateFeatureRuleOptionsModel := new(appconfigurationv1.UpdateFeatureRuleOptions)
 				updateFeatureRuleOptionsModel.EnvironmentID = core.StringPtr("environment_id")
@@ -5485,6 +6518,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				updateFeatureRuleOptionsModel.Value = "true"
 				updateFeatureRuleOptionsModel.RuleName = core.StringPtr("rule-name-1")
 				updateFeatureRuleOptionsModel.RolloutPercentage = core.Int64Ptr(int64(50))
+				updateFeatureRuleOptionsModel.RolloutType = core.StringPtr("MANUAL")
+				updateFeatureRuleOptionsModel.RolloutConfiguration = rolloutConfigurationModel
 				updateFeatureRuleOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with a Context to test a timeout error
@@ -5540,7 +6575,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "rule_id": "RuleID", "rule_name": "RuleName", "rollout_percentage": 100, "order": 5, "href": "Href"}`)
+					fmt.Fprintf(res, "%s", `{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "rule_id": "RuleID", "rule_name": "RuleName", "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED"}, "order": 5, "href": "Href"}`)
 				}))
 			})
 			It(`Invoke UpdateFeatureRule successfully`, func() {
@@ -5561,6 +6596,18 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
 				targetSegmentsModel.Segments = []string{"betausers", "premiumusers"}
 
+				// Construct an instance of the RolloutPhase model
+				rolloutPhaseModel := new(appconfigurationv1.RolloutPhase)
+				rolloutPhaseModel.Percentage = core.Int64Ptr(int64(1))
+				rolloutPhaseModel.Duration = core.Int64Ptr(int64(38))
+				rolloutPhaseModel.DurationType = core.StringPtr("days")
+
+				// Construct an instance of the RolloutConfiguration model
+				rolloutConfigurationModel := new(appconfigurationv1.RolloutConfiguration)
+				rolloutConfigurationModel.DurationPreset = core.StringPtr("CUSTOM")
+				rolloutConfigurationModel.StartAt = CreateMockDateTime("2019-01-01T12:00:00.000Z")
+				rolloutConfigurationModel.Phases = []appconfigurationv1.RolloutPhase{*rolloutPhaseModel}
+
 				// Construct an instance of the UpdateFeatureRuleOptions model
 				updateFeatureRuleOptionsModel := new(appconfigurationv1.UpdateFeatureRuleOptions)
 				updateFeatureRuleOptionsModel.EnvironmentID = core.StringPtr("environment_id")
@@ -5570,6 +6617,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				updateFeatureRuleOptionsModel.Value = "true"
 				updateFeatureRuleOptionsModel.RuleName = core.StringPtr("rule-name-1")
 				updateFeatureRuleOptionsModel.RolloutPercentage = core.Int64Ptr(int64(50))
+				updateFeatureRuleOptionsModel.RolloutType = core.StringPtr("MANUAL")
+				updateFeatureRuleOptionsModel.RolloutConfiguration = rolloutConfigurationModel
 				updateFeatureRuleOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
@@ -5591,6 +6640,18 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
 				targetSegmentsModel.Segments = []string{"betausers", "premiumusers"}
 
+				// Construct an instance of the RolloutPhase model
+				rolloutPhaseModel := new(appconfigurationv1.RolloutPhase)
+				rolloutPhaseModel.Percentage = core.Int64Ptr(int64(1))
+				rolloutPhaseModel.Duration = core.Int64Ptr(int64(38))
+				rolloutPhaseModel.DurationType = core.StringPtr("days")
+
+				// Construct an instance of the RolloutConfiguration model
+				rolloutConfigurationModel := new(appconfigurationv1.RolloutConfiguration)
+				rolloutConfigurationModel.DurationPreset = core.StringPtr("CUSTOM")
+				rolloutConfigurationModel.StartAt = CreateMockDateTime("2019-01-01T12:00:00.000Z")
+				rolloutConfigurationModel.Phases = []appconfigurationv1.RolloutPhase{*rolloutPhaseModel}
+
 				// Construct an instance of the UpdateFeatureRuleOptions model
 				updateFeatureRuleOptionsModel := new(appconfigurationv1.UpdateFeatureRuleOptions)
 				updateFeatureRuleOptionsModel.EnvironmentID = core.StringPtr("environment_id")
@@ -5600,6 +6661,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				updateFeatureRuleOptionsModel.Value = "true"
 				updateFeatureRuleOptionsModel.RuleName = core.StringPtr("rule-name-1")
 				updateFeatureRuleOptionsModel.RolloutPercentage = core.Int64Ptr(int64(50))
+				updateFeatureRuleOptionsModel.RolloutType = core.StringPtr("MANUAL")
+				updateFeatureRuleOptionsModel.RolloutConfiguration = rolloutConfigurationModel
 				updateFeatureRuleOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := appConfigurationService.SetServiceURL("")
@@ -5642,6 +6705,18 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
 				targetSegmentsModel.Segments = []string{"betausers", "premiumusers"}
 
+				// Construct an instance of the RolloutPhase model
+				rolloutPhaseModel := new(appconfigurationv1.RolloutPhase)
+				rolloutPhaseModel.Percentage = core.Int64Ptr(int64(1))
+				rolloutPhaseModel.Duration = core.Int64Ptr(int64(38))
+				rolloutPhaseModel.DurationType = core.StringPtr("days")
+
+				// Construct an instance of the RolloutConfiguration model
+				rolloutConfigurationModel := new(appconfigurationv1.RolloutConfiguration)
+				rolloutConfigurationModel.DurationPreset = core.StringPtr("CUSTOM")
+				rolloutConfigurationModel.StartAt = CreateMockDateTime("2019-01-01T12:00:00.000Z")
+				rolloutConfigurationModel.Phases = []appconfigurationv1.RolloutPhase{*rolloutPhaseModel}
+
 				// Construct an instance of the UpdateFeatureRuleOptions model
 				updateFeatureRuleOptionsModel := new(appconfigurationv1.UpdateFeatureRuleOptions)
 				updateFeatureRuleOptionsModel.EnvironmentID = core.StringPtr("environment_id")
@@ -5651,6 +6726,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				updateFeatureRuleOptionsModel.Value = "true"
 				updateFeatureRuleOptionsModel.RuleName = core.StringPtr("rule-name-1")
 				updateFeatureRuleOptionsModel.RolloutPercentage = core.Int64Ptr(int64(50))
+				updateFeatureRuleOptionsModel.RolloutType = core.StringPtr("MANUAL")
+				updateFeatureRuleOptionsModel.RolloutConfiguration = rolloutConfigurationModel
 				updateFeatureRuleOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation
@@ -5666,8 +6743,114 @@ var _ = Describe(`AppConfigurationV1`, func() {
 			})
 		})
 	})
+	Describe(`DeleteFeatureRule(deleteFeatureRuleOptions *DeleteFeatureRuleOptions) - Operation response error`, func() {
+		deleteFeatureRulePath := "/environments/environment_id/features/feature_id/rules/rule_id"
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(deleteFeatureRulePath))
+					Expect(req.Method).To(Equal("DELETE"))
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(202)
+					fmt.Fprint(res, `} this is not valid json {`)
+				}))
+			})
+			It(`Invoke DeleteFeatureRule with error: Operation response processing error`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the DeleteFeatureRuleOptions model
+				deleteFeatureRuleOptionsModel := new(appconfigurationv1.DeleteFeatureRuleOptions)
+				deleteFeatureRuleOptionsModel.EnvironmentID = core.StringPtr("environment_id")
+				deleteFeatureRuleOptionsModel.FeatureID = core.StringPtr("feature_id")
+				deleteFeatureRuleOptionsModel.RuleID = core.StringPtr("rule_id")
+				deleteFeatureRuleOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Expect response parsing to fail since we are receiving a text/plain response
+				result, response, operationErr := appConfigurationService.DeleteFeatureRule(deleteFeatureRuleOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				appConfigurationService.EnableRetries(0, 0)
+				result, response, operationErr = appConfigurationService.DeleteFeatureRule(deleteFeatureRuleOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
 	Describe(`DeleteFeatureRule(deleteFeatureRuleOptions *DeleteFeatureRuleOptions)`, func() {
 		deleteFeatureRulePath := "/environments/environment_id/features/feature_id/rules/rule_id"
+		Context(`Using mock server endpoint with timeout`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(deleteFeatureRulePath))
+					Expect(req.Method).To(Equal("DELETE"))
+
+					// Sleep a short time to support a timeout test
+					time.Sleep(100 * time.Millisecond)
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(202)
+					fmt.Fprintf(res, "%s", `{"message": "Message", "workflow_approval": {"workflow_name": "WorkflowName", "workflow_id": "WorkflowID", "provider_type": "SERVICENOW_IBM", "change_request_number": "ChangeRequestNumber", "change_request_status": "PENDING", "execution_status": "PENDING", "approval_url": "ApprovalURL", "resource_type": "FEATURE", "resource_id": "ResourceID", "environment_id": "EnvironmentID", "created_time": "2019-01-01T12:00:00.000Z", "updated_time": "2019-01-01T12:00:00.000Z"}}`)
+				}))
+			})
+			It(`Invoke DeleteFeatureRule successfully with retries`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+				appConfigurationService.EnableRetries(0, 0)
+
+				// Construct an instance of the DeleteFeatureRuleOptions model
+				deleteFeatureRuleOptionsModel := new(appconfigurationv1.DeleteFeatureRuleOptions)
+				deleteFeatureRuleOptionsModel.EnvironmentID = core.StringPtr("environment_id")
+				deleteFeatureRuleOptionsModel.FeatureID = core.StringPtr("feature_id")
+				deleteFeatureRuleOptionsModel.RuleID = core.StringPtr("rule_id")
+				deleteFeatureRuleOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with a Context to test a timeout error
+				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc()
+				_, _, operationErr := appConfigurationService.DeleteFeatureRuleWithContext(ctx, deleteFeatureRuleOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+
+				// Disable retries and test again
+				appConfigurationService.DisableRetries()
+				result, response, operationErr := appConfigurationService.DeleteFeatureRule(deleteFeatureRuleOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				_, _, operationErr = appConfigurationService.DeleteFeatureRuleWithContext(ctx, deleteFeatureRuleOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -5677,7 +6860,10 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(deleteFeatureRulePath))
 					Expect(req.Method).To(Equal("DELETE"))
 
-					res.WriteHeader(204)
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(202)
+					fmt.Fprintf(res, "%s", `{"message": "Message", "workflow_approval": {"workflow_name": "WorkflowName", "workflow_id": "WorkflowID", "provider_type": "SERVICENOW_IBM", "change_request_number": "ChangeRequestNumber", "change_request_status": "PENDING", "execution_status": "PENDING", "approval_url": "ApprovalURL", "resource_type": "FEATURE", "resource_id": "ResourceID", "environment_id": "EnvironmentID", "created_time": "2019-01-01T12:00:00.000Z", "updated_time": "2019-01-01T12:00:00.000Z"}}`)
 				}))
 			})
 			It(`Invoke DeleteFeatureRule successfully`, func() {
@@ -5689,9 +6875,10 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(appConfigurationService).ToNot(BeNil())
 
 				// Invoke operation with nil options model (negative test)
-				response, operationErr := appConfigurationService.DeleteFeatureRule(nil)
+				result, response, operationErr := appConfigurationService.DeleteFeatureRule(nil)
 				Expect(operationErr).NotTo(BeNil())
 				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
 
 				// Construct an instance of the DeleteFeatureRuleOptions model
 				deleteFeatureRuleOptionsModel := new(appconfigurationv1.DeleteFeatureRuleOptions)
@@ -5701,9 +6888,11 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				deleteFeatureRuleOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
-				response, operationErr = appConfigurationService.DeleteFeatureRule(deleteFeatureRuleOptionsModel)
+				result, response, operationErr = appConfigurationService.DeleteFeatureRule(deleteFeatureRuleOptionsModel)
 				Expect(operationErr).To(BeNil())
 				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
 			})
 			It(`Invoke DeleteFeatureRule with error: Operation validation and request error`, func() {
 				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
@@ -5722,16 +6911,318 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				// Invoke operation with empty URL (negative test)
 				err := appConfigurationService.SetServiceURL("")
 				Expect(err).To(BeNil())
-				response, operationErr := appConfigurationService.DeleteFeatureRule(deleteFeatureRuleOptionsModel)
+				result, response, operationErr := appConfigurationService.DeleteFeatureRule(deleteFeatureRuleOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
 				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
 				// Construct a second instance of the DeleteFeatureRuleOptions model with no property values
 				deleteFeatureRuleOptionsModelNew := new(appconfigurationv1.DeleteFeatureRuleOptions)
 				// Invoke operation with invalid model (negative test)
-				response, operationErr = appConfigurationService.DeleteFeatureRule(deleteFeatureRuleOptionsModelNew)
+				result, response, operationErr = appConfigurationService.DeleteFeatureRule(deleteFeatureRuleOptionsModelNew)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(202)
+				}))
+			})
+			It(`Invoke DeleteFeatureRule successfully`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the DeleteFeatureRuleOptions model
+				deleteFeatureRuleOptionsModel := new(appconfigurationv1.DeleteFeatureRuleOptions)
+				deleteFeatureRuleOptionsModel.EnvironmentID = core.StringPtr("environment_id")
+				deleteFeatureRuleOptionsModel.FeatureID = core.StringPtr("feature_id")
+				deleteFeatureRuleOptionsModel.RuleID = core.StringPtr("rule_id")
+				deleteFeatureRuleOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := appConfigurationService.DeleteFeatureRule(deleteFeatureRuleOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`StopFeatureRuleRollout(stopFeatureRuleRolloutOptions *StopFeatureRuleRolloutOptions) - Operation response error`, func() {
+		stopFeatureRuleRolloutPath := "/environments/environment_id/features/feature_id/rules/rule_id/rollout"
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(stopFeatureRuleRolloutPath))
+					Expect(req.Method).To(Equal("PATCH"))
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprint(res, `} this is not valid json {`)
+				}))
+			})
+			It(`Invoke StopFeatureRuleRollout with error: Operation response processing error`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the StopFeatureRuleRolloutOptions model
+				stopFeatureRuleRolloutOptionsModel := new(appconfigurationv1.StopFeatureRuleRolloutOptions)
+				stopFeatureRuleRolloutOptionsModel.EnvironmentID = core.StringPtr("environment_id")
+				stopFeatureRuleRolloutOptionsModel.FeatureID = core.StringPtr("feature_id")
+				stopFeatureRuleRolloutOptionsModel.RuleID = core.StringPtr("rule_id")
+				stopFeatureRuleRolloutOptionsModel.Action = core.StringPtr("stop")
+				stopFeatureRuleRolloutOptionsModel.RolloutPercentage = core.Int64Ptr(int64(0))
+				stopFeatureRuleRolloutOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Expect response parsing to fail since we are receiving a text/plain response
+				result, response, operationErr := appConfigurationService.StopFeatureRuleRollout(stopFeatureRuleRolloutOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				appConfigurationService.EnableRetries(0, 0)
+				result, response, operationErr = appConfigurationService.StopFeatureRuleRollout(stopFeatureRuleRolloutOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`StopFeatureRuleRollout(stopFeatureRuleRolloutOptions *StopFeatureRuleRolloutOptions)`, func() {
+		stopFeatureRuleRolloutPath := "/environments/environment_id/features/feature_id/rules/rule_id/rollout"
+		Context(`Using mock server endpoint with timeout`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(stopFeatureRuleRolloutPath))
+					Expect(req.Method).To(Equal("PATCH"))
+
+					// For gzip-disabled operation, verify Content-Encoding is not set.
+					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+
+					// If there is a body, then make sure we can read it
+					bodyBuf := new(bytes.Buffer)
+					if req.Header.Get("Content-Encoding") == "gzip" {
+						body, err := core.NewGzipDecompressionReader(req.Body)
+						Expect(err).To(BeNil())
+						_, err = bodyBuf.ReadFrom(body)
+						Expect(err).To(BeNil())
+					} else {
+						_, err := bodyBuf.ReadFrom(req.Body)
+						Expect(err).To(BeNil())
+					}
+					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
+
+					// Sleep a short time to support a timeout test
+					time.Sleep(100 * time.Millisecond)
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "rule_id": "RuleID", "rule_name": "RuleName", "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED"}, "order": 5, "href": "Href"}`)
+				}))
+			})
+			It(`Invoke StopFeatureRuleRollout successfully with retries`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+				appConfigurationService.EnableRetries(0, 0)
+
+				// Construct an instance of the StopFeatureRuleRolloutOptions model
+				stopFeatureRuleRolloutOptionsModel := new(appconfigurationv1.StopFeatureRuleRolloutOptions)
+				stopFeatureRuleRolloutOptionsModel.EnvironmentID = core.StringPtr("environment_id")
+				stopFeatureRuleRolloutOptionsModel.FeatureID = core.StringPtr("feature_id")
+				stopFeatureRuleRolloutOptionsModel.RuleID = core.StringPtr("rule_id")
+				stopFeatureRuleRolloutOptionsModel.Action = core.StringPtr("stop")
+				stopFeatureRuleRolloutOptionsModel.RolloutPercentage = core.Int64Ptr(int64(0))
+				stopFeatureRuleRolloutOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with a Context to test a timeout error
+				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc()
+				_, _, operationErr := appConfigurationService.StopFeatureRuleRolloutWithContext(ctx, stopFeatureRuleRolloutOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+
+				// Disable retries and test again
+				appConfigurationService.DisableRetries()
+				result, response, operationErr := appConfigurationService.StopFeatureRuleRollout(stopFeatureRuleRolloutOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				_, _, operationErr = appConfigurationService.StopFeatureRuleRolloutWithContext(ctx, stopFeatureRuleRolloutOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(stopFeatureRuleRolloutPath))
+					Expect(req.Method).To(Equal("PATCH"))
+
+					// For gzip-disabled operation, verify Content-Encoding is not set.
+					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+
+					// If there is a body, then make sure we can read it
+					bodyBuf := new(bytes.Buffer)
+					if req.Header.Get("Content-Encoding") == "gzip" {
+						body, err := core.NewGzipDecompressionReader(req.Body)
+						Expect(err).To(BeNil())
+						_, err = bodyBuf.ReadFrom(body)
+						Expect(err).To(BeNil())
+					} else {
+						_, err := bodyBuf.ReadFrom(req.Body)
+						Expect(err).To(BeNil())
+					}
+					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "rule_id": "RuleID", "rule_name": "RuleName", "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED"}, "order": 5, "href": "Href"}`)
+				}))
+			})
+			It(`Invoke StopFeatureRuleRollout successfully`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Invoke operation with nil options model (negative test)
+				result, response, operationErr := appConfigurationService.StopFeatureRuleRollout(nil)
+				Expect(operationErr).NotTo(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+
+				// Construct an instance of the StopFeatureRuleRolloutOptions model
+				stopFeatureRuleRolloutOptionsModel := new(appconfigurationv1.StopFeatureRuleRolloutOptions)
+				stopFeatureRuleRolloutOptionsModel.EnvironmentID = core.StringPtr("environment_id")
+				stopFeatureRuleRolloutOptionsModel.FeatureID = core.StringPtr("feature_id")
+				stopFeatureRuleRolloutOptionsModel.RuleID = core.StringPtr("rule_id")
+				stopFeatureRuleRolloutOptionsModel.Action = core.StringPtr("stop")
+				stopFeatureRuleRolloutOptionsModel.RolloutPercentage = core.Int64Ptr(int64(0))
+				stopFeatureRuleRolloutOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with valid options model (positive test)
+				result, response, operationErr = appConfigurationService.StopFeatureRuleRollout(stopFeatureRuleRolloutOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+			})
+			It(`Invoke StopFeatureRuleRollout with error: Operation validation and request error`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the StopFeatureRuleRolloutOptions model
+				stopFeatureRuleRolloutOptionsModel := new(appconfigurationv1.StopFeatureRuleRolloutOptions)
+				stopFeatureRuleRolloutOptionsModel.EnvironmentID = core.StringPtr("environment_id")
+				stopFeatureRuleRolloutOptionsModel.FeatureID = core.StringPtr("feature_id")
+				stopFeatureRuleRolloutOptionsModel.RuleID = core.StringPtr("rule_id")
+				stopFeatureRuleRolloutOptionsModel.Action = core.StringPtr("stop")
+				stopFeatureRuleRolloutOptionsModel.RolloutPercentage = core.Int64Ptr(int64(0))
+				stopFeatureRuleRolloutOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Invoke operation with empty URL (negative test)
+				err := appConfigurationService.SetServiceURL("")
+				Expect(err).To(BeNil())
+				result, response, operationErr := appConfigurationService.StopFeatureRuleRollout(stopFeatureRuleRolloutOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+				// Construct a second instance of the StopFeatureRuleRolloutOptions model with no property values
+				stopFeatureRuleRolloutOptionsModelNew := new(appconfigurationv1.StopFeatureRuleRolloutOptions)
+				// Invoke operation with invalid model (negative test)
+				result, response, operationErr = appConfigurationService.StopFeatureRuleRollout(stopFeatureRuleRolloutOptionsModelNew)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke StopFeatureRuleRollout successfully`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the StopFeatureRuleRolloutOptions model
+				stopFeatureRuleRolloutOptionsModel := new(appconfigurationv1.StopFeatureRuleRolloutOptions)
+				stopFeatureRuleRolloutOptionsModel.EnvironmentID = core.StringPtr("environment_id")
+				stopFeatureRuleRolloutOptionsModel.FeatureID = core.StringPtr("feature_id")
+				stopFeatureRuleRolloutOptionsModel.RuleID = core.StringPtr("rule_id")
+				stopFeatureRuleRolloutOptionsModel.Action = core.StringPtr("stop")
+				stopFeatureRuleRolloutOptionsModel.RolloutPercentage = core.Int64Ptr(int64(0))
+				stopFeatureRuleRolloutOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := appConfigurationService.StopFeatureRuleRollout(stopFeatureRuleRolloutOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
 			})
 			AfterEach(func() {
 				testServer.Close()
@@ -5771,7 +7262,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `"{\"rules\":[{\"segments\":[\"betausers\",\"premiumusers\"]}],\"value\":true,\"order\":1,\"rollout_percentage\":50,\"rule_id\":\"RuleA\",\"rule_name\":\"Rule Name\",\"href\":\"https://us-south.apprapp.cloud.ibm.com/apprapp/feature/v1/instances/9xxxxx-xxxxx-xxxxx-b3cd-xxxxx/environments/dev/features/cycle-rentals/rules/RuleA\"}"`)
+					fmt.Fprintf(res, "%s", `"{\"rules\":[{\"segments\":[\"betausers\",\"premiumusers\"]}],\"value\":true,\"order\":1,\"rollout_percentage\":50,\"rule_id\":\"RuleA\",\"rule_name\":\"Rule Name\",\"rollout_type\":\"MANUAL\",\"href\":\"https://us-south.apprapp.cloud.ibm.com/apprapp/feature/v1/instances/9xxxxx-xxxxx-xxxxx-b3cd-xxxxx/environments/dev/features/cycle-rentals/rules/RuleA\"}"`)
 				}))
 			})
 			It(`Invoke UpdateFeatureRuleOrder successfully with retries`, func() {
@@ -5849,7 +7340,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `"{\"rules\":[{\"segments\":[\"betausers\",\"premiumusers\"]}],\"value\":true,\"order\":1,\"rollout_percentage\":50,\"rule_id\":\"RuleA\",\"rule_name\":\"Rule Name\",\"href\":\"https://us-south.apprapp.cloud.ibm.com/apprapp/feature/v1/instances/9xxxxx-xxxxx-xxxxx-b3cd-xxxxx/environments/dev/features/cycle-rentals/rules/RuleA\"}"`)
+					fmt.Fprintf(res, "%s", `"{\"rules\":[{\"segments\":[\"betausers\",\"premiumusers\"]}],\"value\":true,\"order\":1,\"rollout_percentage\":50,\"rule_id\":\"RuleA\",\"rule_name\":\"Rule Name\",\"rollout_type\":\"MANUAL\",\"href\":\"https://us-south.apprapp.cloud.ibm.com/apprapp/feature/v1/instances/9xxxxx-xxxxx-xxxxx-b3cd-xxxxx/environments/dev/features/cycle-rentals/rules/RuleA\"}"`)
 				}))
 			})
 			It(`Invoke UpdateFeatureRuleOrder successfully`, func() {
@@ -6006,7 +7497,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				listPropertiesOptionsModel.Tags = core.StringPtr("version 1.1,pre-release")
 				listPropertiesOptionsModel.Collections = []string{"my-collection-id", "ghzindiapvtltd"}
 				listPropertiesOptionsModel.Segments = []string{"my-segment-id", "beta-users"}
-				listPropertiesOptionsModel.Include = []string{"collections", "rules"}
+				listPropertiesOptionsModel.Include = []string{"collections", "rules", "workflow_approval"}
 				listPropertiesOptionsModel.Limit = core.Int64Ptr(int64(10))
 				listPropertiesOptionsModel.Offset = core.Int64Ptr(int64(0))
 				listPropertiesOptionsModel.Search = core.StringPtr("test tag")
@@ -6052,7 +7543,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"properties": [{"name": "Name", "property_id": "PropertyID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "value": "anyValue", "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5}], "segment_exists": false, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href"}], "limit": 10, "offset": 0, "total_count": 0, "first": {"href": "Href"}, "previous": {"href": "Href"}, "next": {"href": "Href"}, "last": {"href": "Href"}}`)
+					fmt.Fprintf(res, "%s", `{"properties": [{"name": "Name", "property_id": "PropertyID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "value": "anyValue", "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5}], "segment_exists": false, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href", "workflow_approval": {"workflow_name": "WorkflowName", "workflow_id": "WorkflowID", "provider_type": "SERVICENOW_IBM", "change_request_number": "ChangeRequestNumber", "change_request_status": "PENDING", "execution_status": "PENDING", "approval_url": "ApprovalURL", "resource_type": "FEATURE", "resource_id": "ResourceID", "environment_id": "EnvironmentID", "created_time": "2019-01-01T12:00:00.000Z", "updated_time": "2019-01-01T12:00:00.000Z", "last_poll_time": "2019-01-01T12:00:00.000Z"}}], "limit": 10, "offset": 0, "total_count": 0, "first": {"href": "Href"}, "previous": {"href": "Href"}, "next": {"href": "Href"}, "last": {"href": "Href"}}`)
 				}))
 			})
 			It(`Invoke ListProperties successfully with retries`, func() {
@@ -6072,7 +7563,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				listPropertiesOptionsModel.Tags = core.StringPtr("version 1.1,pre-release")
 				listPropertiesOptionsModel.Collections = []string{"my-collection-id", "ghzindiapvtltd"}
 				listPropertiesOptionsModel.Segments = []string{"my-segment-id", "beta-users"}
-				listPropertiesOptionsModel.Include = []string{"collections", "rules"}
+				listPropertiesOptionsModel.Include = []string{"collections", "rules", "workflow_approval"}
 				listPropertiesOptionsModel.Limit = core.Int64Ptr(int64(10))
 				listPropertiesOptionsModel.Offset = core.Int64Ptr(int64(0))
 				listPropertiesOptionsModel.Search = core.StringPtr("test tag")
@@ -6121,7 +7612,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"properties": [{"name": "Name", "property_id": "PropertyID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "value": "anyValue", "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5}], "segment_exists": false, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href"}], "limit": 10, "offset": 0, "total_count": 0, "first": {"href": "Href"}, "previous": {"href": "Href"}, "next": {"href": "Href"}, "last": {"href": "Href"}}`)
+					fmt.Fprintf(res, "%s", `{"properties": [{"name": "Name", "property_id": "PropertyID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "value": "anyValue", "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5}], "segment_exists": false, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href", "workflow_approval": {"workflow_name": "WorkflowName", "workflow_id": "WorkflowID", "provider_type": "SERVICENOW_IBM", "change_request_number": "ChangeRequestNumber", "change_request_status": "PENDING", "execution_status": "PENDING", "approval_url": "ApprovalURL", "resource_type": "FEATURE", "resource_id": "ResourceID", "environment_id": "EnvironmentID", "created_time": "2019-01-01T12:00:00.000Z", "updated_time": "2019-01-01T12:00:00.000Z", "last_poll_time": "2019-01-01T12:00:00.000Z"}}], "limit": 10, "offset": 0, "total_count": 0, "first": {"href": "Href"}, "previous": {"href": "Href"}, "next": {"href": "Href"}, "last": {"href": "Href"}}`)
 				}))
 			})
 			It(`Invoke ListProperties successfully`, func() {
@@ -6146,7 +7637,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				listPropertiesOptionsModel.Tags = core.StringPtr("version 1.1,pre-release")
 				listPropertiesOptionsModel.Collections = []string{"my-collection-id", "ghzindiapvtltd"}
 				listPropertiesOptionsModel.Segments = []string{"my-segment-id", "beta-users"}
-				listPropertiesOptionsModel.Include = []string{"collections", "rules"}
+				listPropertiesOptionsModel.Include = []string{"collections", "rules", "workflow_approval"}
 				listPropertiesOptionsModel.Limit = core.Int64Ptr(int64(10))
 				listPropertiesOptionsModel.Offset = core.Int64Ptr(int64(0))
 				listPropertiesOptionsModel.Search = core.StringPtr("test tag")
@@ -6175,7 +7666,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				listPropertiesOptionsModel.Tags = core.StringPtr("version 1.1,pre-release")
 				listPropertiesOptionsModel.Collections = []string{"my-collection-id", "ghzindiapvtltd"}
 				listPropertiesOptionsModel.Segments = []string{"my-segment-id", "beta-users"}
-				listPropertiesOptionsModel.Include = []string{"collections", "rules"}
+				listPropertiesOptionsModel.Include = []string{"collections", "rules", "workflow_approval"}
 				listPropertiesOptionsModel.Limit = core.Int64Ptr(int64(10))
 				listPropertiesOptionsModel.Offset = core.Int64Ptr(int64(0))
 				listPropertiesOptionsModel.Search = core.StringPtr("test tag")
@@ -6225,7 +7716,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				listPropertiesOptionsModel.Tags = core.StringPtr("version 1.1,pre-release")
 				listPropertiesOptionsModel.Collections = []string{"my-collection-id", "ghzindiapvtltd"}
 				listPropertiesOptionsModel.Segments = []string{"my-segment-id", "beta-users"}
-				listPropertiesOptionsModel.Include = []string{"collections", "rules"}
+				listPropertiesOptionsModel.Include = []string{"collections", "rules", "workflow_approval"}
 				listPropertiesOptionsModel.Limit = core.Int64Ptr(int64(10))
 				listPropertiesOptionsModel.Offset = core.Int64Ptr(int64(0))
 				listPropertiesOptionsModel.Search = core.StringPtr("test tag")
@@ -6284,7 +7775,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 		})
 		Context(`Using mock server endpoint - paginated response`, func() {
 			BeforeEach(func() {
-				var requestNumber int = 0
+				requestNumber := 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -6296,11 +7787,12 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
 					requestNumber++
-					if requestNumber == 1 {
-						fmt.Fprintf(res, "%s", `{"next":{"href":"https://myhost.com/somePath?offset=1"},"total_count":2,"limit":1,"properties":[{"name":"Name","property_id":"PropertyID","description":"Description","type":"BOOLEAN","format":"TEXT","value":"anyValue","tags":"Tags","segment_rules":[{"rules":[{"segments":["Segments"]}],"value":"anyValue","order":5}],"segment_exists":false,"collections":[{"collection_id":"CollectionID","name":"Name"}],"created_time":"2021-05-12T23:20:50.520Z","updated_time":"2021-05-12T23:20:50.520Z","evaluation_time":"2021-05-12T23:20:50.520Z","href":"Href"}]}`)
-					} else if requestNumber == 2 {
-						fmt.Fprintf(res, "%s", `{"total_count":2,"limit":1,"properties":[{"name":"Name","property_id":"PropertyID","description":"Description","type":"BOOLEAN","format":"TEXT","value":"anyValue","tags":"Tags","segment_rules":[{"rules":[{"segments":["Segments"]}],"value":"anyValue","order":5}],"segment_exists":false,"collections":[{"collection_id":"CollectionID","name":"Name"}],"created_time":"2021-05-12T23:20:50.520Z","updated_time":"2021-05-12T23:20:50.520Z","evaluation_time":"2021-05-12T23:20:50.520Z","href":"Href"}]}`)
-					} else {
+					switch requestNumber {
+					case 1:
+						fmt.Fprintf(res, "%s", `{"next":{"href":"https://myhost.com/somePath?offset=1"},"total_count":2,"limit":1,"properties":[{"name":"Name","property_id":"PropertyID","description":"Description","type":"BOOLEAN","format":"TEXT","value":"anyValue","tags":"Tags","segment_rules":[{"rules":[{"segments":["Segments"]}],"value":"anyValue","order":5}],"segment_exists":false,"collections":[{"collection_id":"CollectionID","name":"Name"}],"created_time":"2021-05-12T23:20:50.520Z","updated_time":"2021-05-12T23:20:50.520Z","evaluation_time":"2021-05-12T23:20:50.520Z","href":"Href","workflow_approval":{"workflow_name":"WorkflowName","workflow_id":"WorkflowID","provider_type":"SERVICENOW_IBM","change_request_number":"ChangeRequestNumber","change_request_status":"PENDING","execution_status":"PENDING","approval_url":"ApprovalURL","resource_type":"FEATURE","resource_id":"ResourceID","environment_id":"EnvironmentID","created_time":"2019-01-01T12:00:00.000Z","updated_time":"2019-01-01T12:00:00.000Z","last_poll_time":"2019-01-01T12:00:00.000Z"}}]}`)
+					case 2:
+						fmt.Fprintf(res, "%s", `{"total_count":2,"limit":1,"properties":[{"name":"Name","property_id":"PropertyID","description":"Description","type":"BOOLEAN","format":"TEXT","value":"anyValue","tags":"Tags","segment_rules":[{"rules":[{"segments":["Segments"]}],"value":"anyValue","order":5}],"segment_exists":false,"collections":[{"collection_id":"CollectionID","name":"Name"}],"created_time":"2021-05-12T23:20:50.520Z","updated_time":"2021-05-12T23:20:50.520Z","evaluation_time":"2021-05-12T23:20:50.520Z","href":"Href","workflow_approval":{"workflow_name":"WorkflowName","workflow_id":"WorkflowID","provider_type":"SERVICENOW_IBM","change_request_number":"ChangeRequestNumber","change_request_status":"PENDING","execution_status":"PENDING","approval_url":"ApprovalURL","resource_type":"FEATURE","resource_id":"ResourceID","environment_id":"EnvironmentID","created_time":"2019-01-01T12:00:00.000Z","updated_time":"2019-01-01T12:00:00.000Z","last_poll_time":"2019-01-01T12:00:00.000Z"}}]}`)
+					default:
 						res.WriteHeader(400)
 					}
 				}))
@@ -6320,7 +7812,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					Tags: core.StringPtr("version 1.1,pre-release"),
 					Collections: []string{"my-collection-id", "ghzindiapvtltd"},
 					Segments: []string{"my-segment-id", "beta-users"},
-					Include: []string{"collections", "rules"},
+					Include: []string{"collections", "rules", "workflow_approval"},
 					Limit: core.Int64Ptr(int64(10)),
 					Search: core.StringPtr("test tag"),
 				}
@@ -6353,7 +7845,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					Tags: core.StringPtr("version 1.1,pre-release"),
 					Collections: []string{"my-collection-id", "ghzindiapvtltd"},
 					Segments: []string{"my-segment-id", "beta-users"},
-					Include: []string{"collections", "rules"},
+					Include: []string{"collections", "rules", "workflow_approval"},
 					Limit: core.Int64Ptr(int64(10)),
 					Search: core.StringPtr("test tag"),
 				}
@@ -6470,7 +7962,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
-					fmt.Fprintf(res, "%s", `{"name": "Name", "property_id": "PropertyID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "value": "anyValue", "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5}], "segment_exists": false, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href"}`)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "property_id": "PropertyID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "value": "anyValue", "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5}], "segment_exists": false, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href", "workflow_approval": {"workflow_name": "WorkflowName", "workflow_id": "WorkflowID", "provider_type": "SERVICENOW_IBM", "change_request_number": "ChangeRequestNumber", "change_request_status": "PENDING", "execution_status": "PENDING", "approval_url": "ApprovalURL", "resource_type": "FEATURE", "resource_id": "ResourceID", "environment_id": "EnvironmentID", "created_time": "2019-01-01T12:00:00.000Z", "updated_time": "2019-01-01T12:00:00.000Z", "last_poll_time": "2019-01-01T12:00:00.000Z"}}`)
 				}))
 			})
 			It(`Invoke CreateProperty successfully with retries`, func() {
@@ -6563,7 +8055,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
-					fmt.Fprintf(res, "%s", `{"name": "Name", "property_id": "PropertyID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "value": "anyValue", "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5}], "segment_exists": false, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href"}`)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "property_id": "PropertyID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "value": "anyValue", "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5}], "segment_exists": false, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href", "workflow_approval": {"workflow_name": "WorkflowName", "workflow_id": "WorkflowID", "provider_type": "SERVICENOW_IBM", "change_request_number": "ChangeRequestNumber", "change_request_status": "PENDING", "execution_status": "PENDING", "approval_url": "ApprovalURL", "resource_type": "FEATURE", "resource_id": "ResourceID", "environment_id": "EnvironmentID", "created_time": "2019-01-01T12:00:00.000Z", "updated_time": "2019-01-01T12:00:00.000Z", "last_poll_time": "2019-01-01T12:00:00.000Z"}}`)
 				}))
 			})
 			It(`Invoke CreateProperty successfully`, func() {
@@ -6828,7 +8320,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"name": "Name", "property_id": "PropertyID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "value": "anyValue", "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5}], "segment_exists": false, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href"}`)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "property_id": "PropertyID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "value": "anyValue", "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5}], "segment_exists": false, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href", "workflow_approval": {"workflow_name": "WorkflowName", "workflow_id": "WorkflowID", "provider_type": "SERVICENOW_IBM", "change_request_number": "ChangeRequestNumber", "change_request_status": "PENDING", "execution_status": "PENDING", "approval_url": "ApprovalURL", "resource_type": "FEATURE", "resource_id": "ResourceID", "environment_id": "EnvironmentID", "created_time": "2019-01-01T12:00:00.000Z", "updated_time": "2019-01-01T12:00:00.000Z", "last_poll_time": "2019-01-01T12:00:00.000Z"}}`)
 				}))
 			})
 			It(`Invoke UpdateProperty successfully with retries`, func() {
@@ -6920,7 +8412,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"name": "Name", "property_id": "PropertyID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "value": "anyValue", "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5}], "segment_exists": false, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href"}`)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "property_id": "PropertyID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "value": "anyValue", "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5}], "segment_exists": false, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href", "workflow_approval": {"workflow_name": "WorkflowName", "workflow_id": "WorkflowID", "provider_type": "SERVICENOW_IBM", "change_request_number": "ChangeRequestNumber", "change_request_status": "PENDING", "execution_status": "PENDING", "approval_url": "ApprovalURL", "resource_type": "FEATURE", "resource_id": "ResourceID", "environment_id": "EnvironmentID", "created_time": "2019-01-01T12:00:00.000Z", "updated_time": "2019-01-01T12:00:00.000Z", "last_poll_time": "2019-01-01T12:00:00.000Z"}}`)
 				}))
 			})
 			It(`Invoke UpdateProperty successfully`, func() {
@@ -7176,7 +8668,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"name": "Name", "property_id": "PropertyID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "value": "anyValue", "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5}], "segment_exists": false, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href"}`)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "property_id": "PropertyID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "value": "anyValue", "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5}], "segment_exists": false, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href", "workflow_approval": {"workflow_name": "WorkflowName", "workflow_id": "WorkflowID", "provider_type": "SERVICENOW_IBM", "change_request_number": "ChangeRequestNumber", "change_request_status": "PENDING", "execution_status": "PENDING", "approval_url": "ApprovalURL", "resource_type": "FEATURE", "resource_id": "ResourceID", "environment_id": "EnvironmentID", "created_time": "2019-01-01T12:00:00.000Z", "updated_time": "2019-01-01T12:00:00.000Z", "last_poll_time": "2019-01-01T12:00:00.000Z"}}`)
 				}))
 			})
 			It(`Invoke UpdatePropertyValues successfully with retries`, func() {
@@ -7262,7 +8754,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"name": "Name", "property_id": "PropertyID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "value": "anyValue", "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5}], "segment_exists": false, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href"}`)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "property_id": "PropertyID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "value": "anyValue", "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5}], "segment_exists": false, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href", "workflow_approval": {"workflow_name": "WorkflowName", "workflow_id": "WorkflowID", "provider_type": "SERVICENOW_IBM", "change_request_number": "ChangeRequestNumber", "change_request_status": "PENDING", "execution_status": "PENDING", "approval_url": "ApprovalURL", "resource_type": "FEATURE", "resource_id": "ResourceID", "environment_id": "EnvironmentID", "created_time": "2019-01-01T12:00:00.000Z", "updated_time": "2019-01-01T12:00:00.000Z", "last_poll_time": "2019-01-01T12:00:00.000Z"}}`)
 				}))
 			})
 			It(`Invoke UpdatePropertyValues successfully`, func() {
@@ -7433,7 +8925,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				getPropertyOptionsModel := new(appconfigurationv1.GetPropertyOptions)
 				getPropertyOptionsModel.EnvironmentID = core.StringPtr("environment_id")
 				getPropertyOptionsModel.PropertyID = core.StringPtr("property_id")
-				getPropertyOptionsModel.Include = []string{"collections", "rules"}
+				getPropertyOptionsModel.Include = []string{"collections", "rules", "workflow_approval"}
 				getPropertyOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
 				result, response, operationErr := appConfigurationService.GetProperty(getPropertyOptionsModel)
@@ -7470,7 +8962,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"name": "Name", "property_id": "PropertyID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "value": "anyValue", "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5}], "segment_exists": false, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href"}`)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "property_id": "PropertyID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "value": "anyValue", "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5}], "segment_exists": false, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href", "workflow_approval": {"workflow_name": "WorkflowName", "workflow_id": "WorkflowID", "provider_type": "SERVICENOW_IBM", "change_request_number": "ChangeRequestNumber", "change_request_status": "PENDING", "execution_status": "PENDING", "approval_url": "ApprovalURL", "resource_type": "FEATURE", "resource_id": "ResourceID", "environment_id": "EnvironmentID", "created_time": "2019-01-01T12:00:00.000Z", "updated_time": "2019-01-01T12:00:00.000Z", "last_poll_time": "2019-01-01T12:00:00.000Z"}}`)
 				}))
 			})
 			It(`Invoke GetProperty successfully with retries`, func() {
@@ -7486,7 +8978,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				getPropertyOptionsModel := new(appconfigurationv1.GetPropertyOptions)
 				getPropertyOptionsModel.EnvironmentID = core.StringPtr("environment_id")
 				getPropertyOptionsModel.PropertyID = core.StringPtr("property_id")
-				getPropertyOptionsModel.Include = []string{"collections", "rules"}
+				getPropertyOptionsModel.Include = []string{"collections", "rules", "workflow_approval"}
 				getPropertyOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with a Context to test a timeout error
@@ -7526,7 +9018,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"name": "Name", "property_id": "PropertyID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "value": "anyValue", "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5}], "segment_exists": false, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href"}`)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "property_id": "PropertyID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "value": "anyValue", "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5}], "segment_exists": false, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href", "workflow_approval": {"workflow_name": "WorkflowName", "workflow_id": "WorkflowID", "provider_type": "SERVICENOW_IBM", "change_request_number": "ChangeRequestNumber", "change_request_status": "PENDING", "execution_status": "PENDING", "approval_url": "ApprovalURL", "resource_type": "FEATURE", "resource_id": "ResourceID", "environment_id": "EnvironmentID", "created_time": "2019-01-01T12:00:00.000Z", "updated_time": "2019-01-01T12:00:00.000Z", "last_poll_time": "2019-01-01T12:00:00.000Z"}}`)
 				}))
 			})
 			It(`Invoke GetProperty successfully`, func() {
@@ -7547,7 +9039,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				getPropertyOptionsModel := new(appconfigurationv1.GetPropertyOptions)
 				getPropertyOptionsModel.EnvironmentID = core.StringPtr("environment_id")
 				getPropertyOptionsModel.PropertyID = core.StringPtr("property_id")
-				getPropertyOptionsModel.Include = []string{"collections", "rules"}
+				getPropertyOptionsModel.Include = []string{"collections", "rules", "workflow_approval"}
 				getPropertyOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
@@ -7569,7 +9061,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				getPropertyOptionsModel := new(appconfigurationv1.GetPropertyOptions)
 				getPropertyOptionsModel.EnvironmentID = core.StringPtr("environment_id")
 				getPropertyOptionsModel.PropertyID = core.StringPtr("property_id")
-				getPropertyOptionsModel.Include = []string{"collections", "rules"}
+				getPropertyOptionsModel.Include = []string{"collections", "rules", "workflow_approval"}
 				getPropertyOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := appConfigurationService.SetServiceURL("")
@@ -7612,7 +9104,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				getPropertyOptionsModel := new(appconfigurationv1.GetPropertyOptions)
 				getPropertyOptionsModel.EnvironmentID = core.StringPtr("environment_id")
 				getPropertyOptionsModel.PropertyID = core.StringPtr("property_id")
-				getPropertyOptionsModel.Include = []string{"collections", "rules"}
+				getPropertyOptionsModel.Include = []string{"collections", "rules", "workflow_approval"}
 				getPropertyOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation
@@ -7628,8 +9120,112 @@ var _ = Describe(`AppConfigurationV1`, func() {
 			})
 		})
 	})
+	Describe(`DeleteProperty(deletePropertyOptions *DeletePropertyOptions) - Operation response error`, func() {
+		deletePropertyPath := "/environments/environment_id/properties/property_id"
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(deletePropertyPath))
+					Expect(req.Method).To(Equal("DELETE"))
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(202)
+					fmt.Fprint(res, `} this is not valid json {`)
+				}))
+			})
+			It(`Invoke DeleteProperty with error: Operation response processing error`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the DeletePropertyOptions model
+				deletePropertyOptionsModel := new(appconfigurationv1.DeletePropertyOptions)
+				deletePropertyOptionsModel.EnvironmentID = core.StringPtr("environment_id")
+				deletePropertyOptionsModel.PropertyID = core.StringPtr("property_id")
+				deletePropertyOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Expect response parsing to fail since we are receiving a text/plain response
+				result, response, operationErr := appConfigurationService.DeleteProperty(deletePropertyOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				appConfigurationService.EnableRetries(0, 0)
+				result, response, operationErr = appConfigurationService.DeleteProperty(deletePropertyOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
 	Describe(`DeleteProperty(deletePropertyOptions *DeletePropertyOptions)`, func() {
 		deletePropertyPath := "/environments/environment_id/properties/property_id"
+		Context(`Using mock server endpoint with timeout`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(deletePropertyPath))
+					Expect(req.Method).To(Equal("DELETE"))
+
+					// Sleep a short time to support a timeout test
+					time.Sleep(100 * time.Millisecond)
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(202)
+					fmt.Fprintf(res, "%s", `{"message": "Message", "workflow_approval": {"workflow_name": "WorkflowName", "workflow_id": "WorkflowID", "provider_type": "SERVICENOW_IBM", "change_request_number": "ChangeRequestNumber", "change_request_status": "PENDING", "execution_status": "PENDING", "approval_url": "ApprovalURL", "resource_type": "FEATURE", "resource_id": "ResourceID", "environment_id": "EnvironmentID", "created_time": "2019-01-01T12:00:00.000Z", "updated_time": "2019-01-01T12:00:00.000Z"}}`)
+				}))
+			})
+			It(`Invoke DeleteProperty successfully with retries`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+				appConfigurationService.EnableRetries(0, 0)
+
+				// Construct an instance of the DeletePropertyOptions model
+				deletePropertyOptionsModel := new(appconfigurationv1.DeletePropertyOptions)
+				deletePropertyOptionsModel.EnvironmentID = core.StringPtr("environment_id")
+				deletePropertyOptionsModel.PropertyID = core.StringPtr("property_id")
+				deletePropertyOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with a Context to test a timeout error
+				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc()
+				_, _, operationErr := appConfigurationService.DeletePropertyWithContext(ctx, deletePropertyOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+
+				// Disable retries and test again
+				appConfigurationService.DisableRetries()
+				result, response, operationErr := appConfigurationService.DeleteProperty(deletePropertyOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				_, _, operationErr = appConfigurationService.DeletePropertyWithContext(ctx, deletePropertyOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -7639,7 +9235,10 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(deletePropertyPath))
 					Expect(req.Method).To(Equal("DELETE"))
 
-					res.WriteHeader(204)
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(202)
+					fmt.Fprintf(res, "%s", `{"message": "Message", "workflow_approval": {"workflow_name": "WorkflowName", "workflow_id": "WorkflowID", "provider_type": "SERVICENOW_IBM", "change_request_number": "ChangeRequestNumber", "change_request_status": "PENDING", "execution_status": "PENDING", "approval_url": "ApprovalURL", "resource_type": "FEATURE", "resource_id": "ResourceID", "environment_id": "EnvironmentID", "created_time": "2019-01-01T12:00:00.000Z", "updated_time": "2019-01-01T12:00:00.000Z"}}`)
 				}))
 			})
 			It(`Invoke DeleteProperty successfully`, func() {
@@ -7651,9 +9250,10 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(appConfigurationService).ToNot(BeNil())
 
 				// Invoke operation with nil options model (negative test)
-				response, operationErr := appConfigurationService.DeleteProperty(nil)
+				result, response, operationErr := appConfigurationService.DeleteProperty(nil)
 				Expect(operationErr).NotTo(BeNil())
 				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
 
 				// Construct an instance of the DeletePropertyOptions model
 				deletePropertyOptionsModel := new(appconfigurationv1.DeletePropertyOptions)
@@ -7662,9 +9262,11 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				deletePropertyOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
-				response, operationErr = appConfigurationService.DeleteProperty(deletePropertyOptionsModel)
+				result, response, operationErr = appConfigurationService.DeleteProperty(deletePropertyOptionsModel)
 				Expect(operationErr).To(BeNil())
 				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
 			})
 			It(`Invoke DeleteProperty with error: Operation validation and request error`, func() {
 				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
@@ -7682,16 +9284,53 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				// Invoke operation with empty URL (negative test)
 				err := appConfigurationService.SetServiceURL("")
 				Expect(err).To(BeNil())
-				response, operationErr := appConfigurationService.DeleteProperty(deletePropertyOptionsModel)
+				result, response, operationErr := appConfigurationService.DeleteProperty(deletePropertyOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
 				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
 				// Construct a second instance of the DeletePropertyOptions model with no property values
 				deletePropertyOptionsModelNew := new(appconfigurationv1.DeletePropertyOptions)
 				// Invoke operation with invalid model (negative test)
-				response, operationErr = appConfigurationService.DeleteProperty(deletePropertyOptionsModelNew)
+				result, response, operationErr = appConfigurationService.DeleteProperty(deletePropertyOptionsModelNew)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(202)
+				}))
+			})
+			It(`Invoke DeleteProperty successfully`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the DeletePropertyOptions model
+				deletePropertyOptionsModel := new(appconfigurationv1.DeletePropertyOptions)
+				deletePropertyOptionsModel.EnvironmentID = core.StringPtr("environment_id")
+				deletePropertyOptionsModel.PropertyID = core.StringPtr("property_id")
+				deletePropertyOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := appConfigurationService.DeleteProperty(deletePropertyOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
 			})
 			AfterEach(func() {
 				testServer.Close()
@@ -7711,7 +9350,6 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// TODO: Add check for expand query parameter
 					Expect(req.URL.Query()["sort"]).To(Equal([]string{"created_time"}))
 					Expect(req.URL.Query()["tags"]).To(Equal([]string{"version 1.1,pre-release"}))
-					Expect(req.URL.Query()["include"]).To(Equal([]string{"rules"}))
 					Expect(req.URL.Query()["limit"]).To(Equal([]string{fmt.Sprint(int64(10))}))
 					Expect(req.URL.Query()["offset"]).To(Equal([]string{fmt.Sprint(int64(0))}))
 					Expect(req.URL.Query()["search"]).To(Equal([]string{"test tag"}))
@@ -7733,7 +9371,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				listSegmentsOptionsModel.Expand = core.BoolPtr(true)
 				listSegmentsOptionsModel.Sort = core.StringPtr("created_time")
 				listSegmentsOptionsModel.Tags = core.StringPtr("version 1.1,pre-release")
-				listSegmentsOptionsModel.Include = core.StringPtr("rules")
+				listSegmentsOptionsModel.Include = []string{"rules", "workflow_approval"}
 				listSegmentsOptionsModel.Limit = core.Int64Ptr(int64(10))
 				listSegmentsOptionsModel.Offset = core.Int64Ptr(int64(0))
 				listSegmentsOptionsModel.Search = core.StringPtr("test tag")
@@ -7770,7 +9408,6 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// TODO: Add check for expand query parameter
 					Expect(req.URL.Query()["sort"]).To(Equal([]string{"created_time"}))
 					Expect(req.URL.Query()["tags"]).To(Equal([]string{"version 1.1,pre-release"}))
-					Expect(req.URL.Query()["include"]).To(Equal([]string{"rules"}))
 					Expect(req.URL.Query()["limit"]).To(Equal([]string{fmt.Sprint(int64(10))}))
 					Expect(req.URL.Query()["offset"]).To(Equal([]string{fmt.Sprint(int64(0))}))
 					Expect(req.URL.Query()["search"]).To(Equal([]string{"test tag"}))
@@ -7780,7 +9417,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"segments": [{"name": "Name", "segment_id": "SegmentID", "description": "Description", "tags": "Tags", "rules": [{"attribute_name": "AttributeName", "operator": "is", "values": ["Values"]}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "href": "Href", "features": [{"feature_id": "FeatureID", "name": "Name"}], "properties": [{"property_id": "PropertyID", "name": "Name"}]}], "limit": 10, "offset": 0, "total_count": 0, "first": {"href": "Href"}, "previous": {"href": "Href"}, "next": {"href": "Href"}, "last": {"href": "Href"}}`)
+					fmt.Fprintf(res, "%s", `{"segments": [{"name": "Name", "segment_id": "SegmentID", "description": "Description", "tags": "Tags", "rules": [{"attribute_name": "AttributeName", "operator": "is", "values": ["Values"]}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "href": "Href", "features": [{"feature_id": "FeatureID", "name": "Name"}], "properties": [{"property_id": "PropertyID", "name": "Name"}], "workflow_approval": {"workflow_name": "WorkflowName", "workflow_id": "WorkflowID", "provider_type": "SERVICENOW_IBM", "change_request_number": "ChangeRequestNumber", "change_request_status": "PENDING", "execution_status": "PENDING", "approval_url": "ApprovalURL", "resource_type": "FEATURE", "resource_id": "ResourceID", "environment_id": "EnvironmentID", "created_time": "2019-01-01T12:00:00.000Z", "updated_time": "2019-01-01T12:00:00.000Z", "last_poll_time": "2019-01-01T12:00:00.000Z"}}], "limit": 10, "offset": 0, "total_count": 0, "first": {"href": "Href"}, "previous": {"href": "Href"}, "next": {"href": "Href"}, "last": {"href": "Href"}}`)
 				}))
 			})
 			It(`Invoke ListSegments successfully with retries`, func() {
@@ -7797,7 +9434,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				listSegmentsOptionsModel.Expand = core.BoolPtr(true)
 				listSegmentsOptionsModel.Sort = core.StringPtr("created_time")
 				listSegmentsOptionsModel.Tags = core.StringPtr("version 1.1,pre-release")
-				listSegmentsOptionsModel.Include = core.StringPtr("rules")
+				listSegmentsOptionsModel.Include = []string{"rules", "workflow_approval"}
 				listSegmentsOptionsModel.Limit = core.Int64Ptr(int64(10))
 				listSegmentsOptionsModel.Offset = core.Int64Ptr(int64(0))
 				listSegmentsOptionsModel.Search = core.StringPtr("test tag")
@@ -7840,14 +9477,13 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// TODO: Add check for expand query parameter
 					Expect(req.URL.Query()["sort"]).To(Equal([]string{"created_time"}))
 					Expect(req.URL.Query()["tags"]).To(Equal([]string{"version 1.1,pre-release"}))
-					Expect(req.URL.Query()["include"]).To(Equal([]string{"rules"}))
 					Expect(req.URL.Query()["limit"]).To(Equal([]string{fmt.Sprint(int64(10))}))
 					Expect(req.URL.Query()["offset"]).To(Equal([]string{fmt.Sprint(int64(0))}))
 					Expect(req.URL.Query()["search"]).To(Equal([]string{"test tag"}))
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"segments": [{"name": "Name", "segment_id": "SegmentID", "description": "Description", "tags": "Tags", "rules": [{"attribute_name": "AttributeName", "operator": "is", "values": ["Values"]}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "href": "Href", "features": [{"feature_id": "FeatureID", "name": "Name"}], "properties": [{"property_id": "PropertyID", "name": "Name"}]}], "limit": 10, "offset": 0, "total_count": 0, "first": {"href": "Href"}, "previous": {"href": "Href"}, "next": {"href": "Href"}, "last": {"href": "Href"}}`)
+					fmt.Fprintf(res, "%s", `{"segments": [{"name": "Name", "segment_id": "SegmentID", "description": "Description", "tags": "Tags", "rules": [{"attribute_name": "AttributeName", "operator": "is", "values": ["Values"]}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "href": "Href", "features": [{"feature_id": "FeatureID", "name": "Name"}], "properties": [{"property_id": "PropertyID", "name": "Name"}], "workflow_approval": {"workflow_name": "WorkflowName", "workflow_id": "WorkflowID", "provider_type": "SERVICENOW_IBM", "change_request_number": "ChangeRequestNumber", "change_request_status": "PENDING", "execution_status": "PENDING", "approval_url": "ApprovalURL", "resource_type": "FEATURE", "resource_id": "ResourceID", "environment_id": "EnvironmentID", "created_time": "2019-01-01T12:00:00.000Z", "updated_time": "2019-01-01T12:00:00.000Z", "last_poll_time": "2019-01-01T12:00:00.000Z"}}], "limit": 10, "offset": 0, "total_count": 0, "first": {"href": "Href"}, "previous": {"href": "Href"}, "next": {"href": "Href"}, "last": {"href": "Href"}}`)
 				}))
 			})
 			It(`Invoke ListSegments successfully`, func() {
@@ -7869,7 +9505,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				listSegmentsOptionsModel.Expand = core.BoolPtr(true)
 				listSegmentsOptionsModel.Sort = core.StringPtr("created_time")
 				listSegmentsOptionsModel.Tags = core.StringPtr("version 1.1,pre-release")
-				listSegmentsOptionsModel.Include = core.StringPtr("rules")
+				listSegmentsOptionsModel.Include = []string{"rules", "workflow_approval"}
 				listSegmentsOptionsModel.Limit = core.Int64Ptr(int64(10))
 				listSegmentsOptionsModel.Offset = core.Int64Ptr(int64(0))
 				listSegmentsOptionsModel.Search = core.StringPtr("test tag")
@@ -7895,7 +9531,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				listSegmentsOptionsModel.Expand = core.BoolPtr(true)
 				listSegmentsOptionsModel.Sort = core.StringPtr("created_time")
 				listSegmentsOptionsModel.Tags = core.StringPtr("version 1.1,pre-release")
-				listSegmentsOptionsModel.Include = core.StringPtr("rules")
+				listSegmentsOptionsModel.Include = []string{"rules", "workflow_approval"}
 				listSegmentsOptionsModel.Limit = core.Int64Ptr(int64(10))
 				listSegmentsOptionsModel.Offset = core.Int64Ptr(int64(0))
 				listSegmentsOptionsModel.Search = core.StringPtr("test tag")
@@ -7935,7 +9571,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				listSegmentsOptionsModel.Expand = core.BoolPtr(true)
 				listSegmentsOptionsModel.Sort = core.StringPtr("created_time")
 				listSegmentsOptionsModel.Tags = core.StringPtr("version 1.1,pre-release")
-				listSegmentsOptionsModel.Include = core.StringPtr("rules")
+				listSegmentsOptionsModel.Include = []string{"rules", "workflow_approval"}
 				listSegmentsOptionsModel.Limit = core.Int64Ptr(int64(10))
 				listSegmentsOptionsModel.Offset = core.Int64Ptr(int64(0))
 				listSegmentsOptionsModel.Search = core.StringPtr("test tag")
@@ -7994,7 +9630,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 		})
 		Context(`Using mock server endpoint - paginated response`, func() {
 			BeforeEach(func() {
-				var requestNumber int = 0
+				requestNumber := 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -8006,11 +9642,12 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
 					requestNumber++
-					if requestNumber == 1 {
-						fmt.Fprintf(res, "%s", `{"next":{"href":"https://myhost.com/somePath?offset=1"},"total_count":2,"limit":1,"segments":[{"name":"Name","segment_id":"SegmentID","description":"Description","tags":"Tags","rules":[{"attribute_name":"AttributeName","operator":"is","values":["Values"]}],"created_time":"2021-05-12T23:20:50.520Z","updated_time":"2021-05-12T23:20:50.520Z","href":"Href","features":[{"feature_id":"FeatureID","name":"Name"}],"properties":[{"property_id":"PropertyID","name":"Name"}]}]}`)
-					} else if requestNumber == 2 {
-						fmt.Fprintf(res, "%s", `{"total_count":2,"limit":1,"segments":[{"name":"Name","segment_id":"SegmentID","description":"Description","tags":"Tags","rules":[{"attribute_name":"AttributeName","operator":"is","values":["Values"]}],"created_time":"2021-05-12T23:20:50.520Z","updated_time":"2021-05-12T23:20:50.520Z","href":"Href","features":[{"feature_id":"FeatureID","name":"Name"}],"properties":[{"property_id":"PropertyID","name":"Name"}]}]}`)
-					} else {
+					switch requestNumber {
+					case 1:
+						fmt.Fprintf(res, "%s", `{"next":{"href":"https://myhost.com/somePath?offset=1"},"total_count":2,"limit":1,"segments":[{"name":"Name","segment_id":"SegmentID","description":"Description","tags":"Tags","rules":[{"attribute_name":"AttributeName","operator":"is","values":["Values"]}],"created_time":"2021-05-12T23:20:50.520Z","updated_time":"2021-05-12T23:20:50.520Z","href":"Href","features":[{"feature_id":"FeatureID","name":"Name"}],"properties":[{"property_id":"PropertyID","name":"Name"}],"workflow_approval":{"workflow_name":"WorkflowName","workflow_id":"WorkflowID","provider_type":"SERVICENOW_IBM","change_request_number":"ChangeRequestNumber","change_request_status":"PENDING","execution_status":"PENDING","approval_url":"ApprovalURL","resource_type":"FEATURE","resource_id":"ResourceID","environment_id":"EnvironmentID","created_time":"2019-01-01T12:00:00.000Z","updated_time":"2019-01-01T12:00:00.000Z","last_poll_time":"2019-01-01T12:00:00.000Z"}}]}`)
+					case 2:
+						fmt.Fprintf(res, "%s", `{"total_count":2,"limit":1,"segments":[{"name":"Name","segment_id":"SegmentID","description":"Description","tags":"Tags","rules":[{"attribute_name":"AttributeName","operator":"is","values":["Values"]}],"created_time":"2021-05-12T23:20:50.520Z","updated_time":"2021-05-12T23:20:50.520Z","href":"Href","features":[{"feature_id":"FeatureID","name":"Name"}],"properties":[{"property_id":"PropertyID","name":"Name"}],"workflow_approval":{"workflow_name":"WorkflowName","workflow_id":"WorkflowID","provider_type":"SERVICENOW_IBM","change_request_number":"ChangeRequestNumber","change_request_status":"PENDING","execution_status":"PENDING","approval_url":"ApprovalURL","resource_type":"FEATURE","resource_id":"ResourceID","environment_id":"EnvironmentID","created_time":"2019-01-01T12:00:00.000Z","updated_time":"2019-01-01T12:00:00.000Z","last_poll_time":"2019-01-01T12:00:00.000Z"}}]}`)
+					default:
 						res.WriteHeader(400)
 					}
 				}))
@@ -8027,7 +9664,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					Expand: core.BoolPtr(true),
 					Sort: core.StringPtr("created_time"),
 					Tags: core.StringPtr("version 1.1,pre-release"),
-					Include: core.StringPtr("rules"),
+					Include: []string{"rules", "workflow_approval"},
 					Limit: core.Int64Ptr(int64(10)),
 					Search: core.StringPtr("test tag"),
 				}
@@ -8057,7 +9694,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					Expand: core.BoolPtr(true),
 					Sort: core.StringPtr("created_time"),
 					Tags: core.StringPtr("version 1.1,pre-release"),
-					Include: core.StringPtr("rules"),
+					Include: []string{"rules", "workflow_approval"},
 					Limit: core.Int64Ptr(int64(10)),
 					Search: core.StringPtr("test tag"),
 				}
@@ -8161,7 +9798,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
-					fmt.Fprintf(res, "%s", `{"name": "Name", "segment_id": "SegmentID", "description": "Description", "tags": "Tags", "rules": [{"attribute_name": "AttributeName", "operator": "is", "values": ["Values"]}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "href": "Href", "features": [{"feature_id": "FeatureID", "name": "Name"}], "properties": [{"property_id": "PropertyID", "name": "Name"}]}`)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "segment_id": "SegmentID", "description": "Description", "tags": "Tags", "rules": [{"attribute_name": "AttributeName", "operator": "is", "values": ["Values"]}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "href": "Href", "features": [{"feature_id": "FeatureID", "name": "Name"}], "properties": [{"property_id": "PropertyID", "name": "Name"}], "workflow_approval": {"workflow_name": "WorkflowName", "workflow_id": "WorkflowID", "provider_type": "SERVICENOW_IBM", "change_request_number": "ChangeRequestNumber", "change_request_status": "PENDING", "execution_status": "PENDING", "approval_url": "ApprovalURL", "resource_type": "FEATURE", "resource_id": "ResourceID", "environment_id": "EnvironmentID", "created_time": "2019-01-01T12:00:00.000Z", "updated_time": "2019-01-01T12:00:00.000Z", "last_poll_time": "2019-01-01T12:00:00.000Z"}}`)
 				}))
 			})
 			It(`Invoke CreateSegment successfully with retries`, func() {
@@ -8241,7 +9878,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
-					fmt.Fprintf(res, "%s", `{"name": "Name", "segment_id": "SegmentID", "description": "Description", "tags": "Tags", "rules": [{"attribute_name": "AttributeName", "operator": "is", "values": ["Values"]}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "href": "Href", "features": [{"feature_id": "FeatureID", "name": "Name"}], "properties": [{"property_id": "PropertyID", "name": "Name"}]}`)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "segment_id": "SegmentID", "description": "Description", "tags": "Tags", "rules": [{"attribute_name": "AttributeName", "operator": "is", "values": ["Values"]}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "href": "Href", "features": [{"feature_id": "FeatureID", "name": "Name"}], "properties": [{"property_id": "PropertyID", "name": "Name"}], "workflow_approval": {"workflow_name": "WorkflowName", "workflow_id": "WorkflowID", "provider_type": "SERVICENOW_IBM", "change_request_number": "ChangeRequestNumber", "change_request_status": "PENDING", "execution_status": "PENDING", "approval_url": "ApprovalURL", "resource_type": "FEATURE", "resource_id": "ResourceID", "environment_id": "EnvironmentID", "created_time": "2019-01-01T12:00:00.000Z", "updated_time": "2019-01-01T12:00:00.000Z", "last_poll_time": "2019-01-01T12:00:00.000Z"}}`)
 				}))
 			})
 			It(`Invoke CreateSegment successfully`, func() {
@@ -8455,7 +10092,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"name": "Name", "segment_id": "SegmentID", "description": "Description", "tags": "Tags", "rules": [{"attribute_name": "AttributeName", "operator": "is", "values": ["Values"]}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "href": "Href", "features": [{"feature_id": "FeatureID", "name": "Name"}], "properties": [{"property_id": "PropertyID", "name": "Name"}]}`)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "segment_id": "SegmentID", "description": "Description", "tags": "Tags", "rules": [{"attribute_name": "AttributeName", "operator": "is", "values": ["Values"]}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "href": "Href", "features": [{"feature_id": "FeatureID", "name": "Name"}], "properties": [{"property_id": "PropertyID", "name": "Name"}], "workflow_approval": {"workflow_name": "WorkflowName", "workflow_id": "WorkflowID", "provider_type": "SERVICENOW_IBM", "change_request_number": "ChangeRequestNumber", "change_request_status": "PENDING", "execution_status": "PENDING", "approval_url": "ApprovalURL", "resource_type": "FEATURE", "resource_id": "ResourceID", "environment_id": "EnvironmentID", "created_time": "2019-01-01T12:00:00.000Z", "updated_time": "2019-01-01T12:00:00.000Z", "last_poll_time": "2019-01-01T12:00:00.000Z"}}`)
 				}))
 			})
 			It(`Invoke UpdateSegment successfully with retries`, func() {
@@ -8535,7 +10172,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"name": "Name", "segment_id": "SegmentID", "description": "Description", "tags": "Tags", "rules": [{"attribute_name": "AttributeName", "operator": "is", "values": ["Values"]}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "href": "Href", "features": [{"feature_id": "FeatureID", "name": "Name"}], "properties": [{"property_id": "PropertyID", "name": "Name"}]}`)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "segment_id": "SegmentID", "description": "Description", "tags": "Tags", "rules": [{"attribute_name": "AttributeName", "operator": "is", "values": ["Values"]}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "href": "Href", "features": [{"feature_id": "FeatureID", "name": "Name"}], "properties": [{"property_id": "PropertyID", "name": "Name"}], "workflow_approval": {"workflow_name": "WorkflowName", "workflow_id": "WorkflowID", "provider_type": "SERVICENOW_IBM", "change_request_number": "ChangeRequestNumber", "change_request_status": "PENDING", "execution_status": "PENDING", "approval_url": "ApprovalURL", "resource_type": "FEATURE", "resource_id": "ResourceID", "environment_id": "EnvironmentID", "created_time": "2019-01-01T12:00:00.000Z", "updated_time": "2019-01-01T12:00:00.000Z", "last_poll_time": "2019-01-01T12:00:00.000Z"}}`)
 				}))
 			})
 			It(`Invoke UpdateSegment successfully`, func() {
@@ -8687,7 +10324,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				// Construct an instance of the GetSegmentOptions model
 				getSegmentOptionsModel := new(appconfigurationv1.GetSegmentOptions)
 				getSegmentOptionsModel.SegmentID = core.StringPtr("segment_id")
-				getSegmentOptionsModel.Include = []string{"features", "properties"}
+				getSegmentOptionsModel.Include = []string{"features", "properties", "workflow_approval"}
 				getSegmentOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
 				result, response, operationErr := appConfigurationService.GetSegment(getSegmentOptionsModel)
@@ -8724,7 +10361,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"name": "Name", "segment_id": "SegmentID", "description": "Description", "tags": "Tags", "rules": [{"attribute_name": "AttributeName", "operator": "is", "values": ["Values"]}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "href": "Href", "features": [{"feature_id": "FeatureID", "name": "Name"}], "properties": [{"property_id": "PropertyID", "name": "Name"}]}`)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "segment_id": "SegmentID", "description": "Description", "tags": "Tags", "rules": [{"attribute_name": "AttributeName", "operator": "is", "values": ["Values"]}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "href": "Href", "features": [{"feature_id": "FeatureID", "name": "Name"}], "properties": [{"property_id": "PropertyID", "name": "Name"}], "workflow_approval": {"workflow_name": "WorkflowName", "workflow_id": "WorkflowID", "provider_type": "SERVICENOW_IBM", "change_request_number": "ChangeRequestNumber", "change_request_status": "PENDING", "execution_status": "PENDING", "approval_url": "ApprovalURL", "resource_type": "FEATURE", "resource_id": "ResourceID", "environment_id": "EnvironmentID", "created_time": "2019-01-01T12:00:00.000Z", "updated_time": "2019-01-01T12:00:00.000Z", "last_poll_time": "2019-01-01T12:00:00.000Z"}}`)
 				}))
 			})
 			It(`Invoke GetSegment successfully with retries`, func() {
@@ -8739,7 +10376,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				// Construct an instance of the GetSegmentOptions model
 				getSegmentOptionsModel := new(appconfigurationv1.GetSegmentOptions)
 				getSegmentOptionsModel.SegmentID = core.StringPtr("segment_id")
-				getSegmentOptionsModel.Include = []string{"features", "properties"}
+				getSegmentOptionsModel.Include = []string{"features", "properties", "workflow_approval"}
 				getSegmentOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with a Context to test a timeout error
@@ -8779,7 +10416,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"name": "Name", "segment_id": "SegmentID", "description": "Description", "tags": "Tags", "rules": [{"attribute_name": "AttributeName", "operator": "is", "values": ["Values"]}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "href": "Href", "features": [{"feature_id": "FeatureID", "name": "Name"}], "properties": [{"property_id": "PropertyID", "name": "Name"}]}`)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "segment_id": "SegmentID", "description": "Description", "tags": "Tags", "rules": [{"attribute_name": "AttributeName", "operator": "is", "values": ["Values"]}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "href": "Href", "features": [{"feature_id": "FeatureID", "name": "Name"}], "properties": [{"property_id": "PropertyID", "name": "Name"}], "workflow_approval": {"workflow_name": "WorkflowName", "workflow_id": "WorkflowID", "provider_type": "SERVICENOW_IBM", "change_request_number": "ChangeRequestNumber", "change_request_status": "PENDING", "execution_status": "PENDING", "approval_url": "ApprovalURL", "resource_type": "FEATURE", "resource_id": "ResourceID", "environment_id": "EnvironmentID", "created_time": "2019-01-01T12:00:00.000Z", "updated_time": "2019-01-01T12:00:00.000Z", "last_poll_time": "2019-01-01T12:00:00.000Z"}}`)
 				}))
 			})
 			It(`Invoke GetSegment successfully`, func() {
@@ -8799,7 +10436,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				// Construct an instance of the GetSegmentOptions model
 				getSegmentOptionsModel := new(appconfigurationv1.GetSegmentOptions)
 				getSegmentOptionsModel.SegmentID = core.StringPtr("segment_id")
-				getSegmentOptionsModel.Include = []string{"features", "properties"}
+				getSegmentOptionsModel.Include = []string{"features", "properties", "workflow_approval"}
 				getSegmentOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
@@ -8820,7 +10457,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				// Construct an instance of the GetSegmentOptions model
 				getSegmentOptionsModel := new(appconfigurationv1.GetSegmentOptions)
 				getSegmentOptionsModel.SegmentID = core.StringPtr("segment_id")
-				getSegmentOptionsModel.Include = []string{"features", "properties"}
+				getSegmentOptionsModel.Include = []string{"features", "properties", "workflow_approval"}
 				getSegmentOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := appConfigurationService.SetServiceURL("")
@@ -8862,7 +10499,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				// Construct an instance of the GetSegmentOptions model
 				getSegmentOptionsModel := new(appconfigurationv1.GetSegmentOptions)
 				getSegmentOptionsModel.SegmentID = core.StringPtr("segment_id")
-				getSegmentOptionsModel.Include = []string{"features", "properties"}
+				getSegmentOptionsModel.Include = []string{"features", "properties", "workflow_approval"}
 				getSegmentOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation
@@ -8878,8 +10515,110 @@ var _ = Describe(`AppConfigurationV1`, func() {
 			})
 		})
 	})
+	Describe(`DeleteSegment(deleteSegmentOptions *DeleteSegmentOptions) - Operation response error`, func() {
+		deleteSegmentPath := "/segments/segment_id"
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(deleteSegmentPath))
+					Expect(req.Method).To(Equal("DELETE"))
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(202)
+					fmt.Fprint(res, `} this is not valid json {`)
+				}))
+			})
+			It(`Invoke DeleteSegment with error: Operation response processing error`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the DeleteSegmentOptions model
+				deleteSegmentOptionsModel := new(appconfigurationv1.DeleteSegmentOptions)
+				deleteSegmentOptionsModel.SegmentID = core.StringPtr("segment_id")
+				deleteSegmentOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Expect response parsing to fail since we are receiving a text/plain response
+				result, response, operationErr := appConfigurationService.DeleteSegment(deleteSegmentOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				appConfigurationService.EnableRetries(0, 0)
+				result, response, operationErr = appConfigurationService.DeleteSegment(deleteSegmentOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
 	Describe(`DeleteSegment(deleteSegmentOptions *DeleteSegmentOptions)`, func() {
 		deleteSegmentPath := "/segments/segment_id"
+		Context(`Using mock server endpoint with timeout`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(deleteSegmentPath))
+					Expect(req.Method).To(Equal("DELETE"))
+
+					// Sleep a short time to support a timeout test
+					time.Sleep(100 * time.Millisecond)
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(202)
+					fmt.Fprintf(res, "%s", `{"message": "Message", "workflow_approval": {"workflow_name": "WorkflowName", "workflow_id": "WorkflowID", "provider_type": "SERVICENOW_IBM", "change_request_number": "ChangeRequestNumber", "change_request_status": "PENDING", "execution_status": "PENDING", "approval_url": "ApprovalURL", "resource_type": "FEATURE", "resource_id": "ResourceID", "environment_id": "EnvironmentID", "created_time": "2019-01-01T12:00:00.000Z", "updated_time": "2019-01-01T12:00:00.000Z"}}`)
+				}))
+			})
+			It(`Invoke DeleteSegment successfully with retries`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+				appConfigurationService.EnableRetries(0, 0)
+
+				// Construct an instance of the DeleteSegmentOptions model
+				deleteSegmentOptionsModel := new(appconfigurationv1.DeleteSegmentOptions)
+				deleteSegmentOptionsModel.SegmentID = core.StringPtr("segment_id")
+				deleteSegmentOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with a Context to test a timeout error
+				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc()
+				_, _, operationErr := appConfigurationService.DeleteSegmentWithContext(ctx, deleteSegmentOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+
+				// Disable retries and test again
+				appConfigurationService.DisableRetries()
+				result, response, operationErr := appConfigurationService.DeleteSegment(deleteSegmentOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				_, _, operationErr = appConfigurationService.DeleteSegmentWithContext(ctx, deleteSegmentOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -8889,7 +10628,10 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(deleteSegmentPath))
 					Expect(req.Method).To(Equal("DELETE"))
 
-					res.WriteHeader(204)
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(202)
+					fmt.Fprintf(res, "%s", `{"message": "Message", "workflow_approval": {"workflow_name": "WorkflowName", "workflow_id": "WorkflowID", "provider_type": "SERVICENOW_IBM", "change_request_number": "ChangeRequestNumber", "change_request_status": "PENDING", "execution_status": "PENDING", "approval_url": "ApprovalURL", "resource_type": "FEATURE", "resource_id": "ResourceID", "environment_id": "EnvironmentID", "created_time": "2019-01-01T12:00:00.000Z", "updated_time": "2019-01-01T12:00:00.000Z"}}`)
 				}))
 			})
 			It(`Invoke DeleteSegment successfully`, func() {
@@ -8901,9 +10643,10 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(appConfigurationService).ToNot(BeNil())
 
 				// Invoke operation with nil options model (negative test)
-				response, operationErr := appConfigurationService.DeleteSegment(nil)
+				result, response, operationErr := appConfigurationService.DeleteSegment(nil)
 				Expect(operationErr).NotTo(BeNil())
 				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
 
 				// Construct an instance of the DeleteSegmentOptions model
 				deleteSegmentOptionsModel := new(appconfigurationv1.DeleteSegmentOptions)
@@ -8911,9 +10654,11 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				deleteSegmentOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
-				response, operationErr = appConfigurationService.DeleteSegment(deleteSegmentOptionsModel)
+				result, response, operationErr = appConfigurationService.DeleteSegment(deleteSegmentOptionsModel)
 				Expect(operationErr).To(BeNil())
 				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
 			})
 			It(`Invoke DeleteSegment with error: Operation validation and request error`, func() {
 				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
@@ -8930,16 +10675,52 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				// Invoke operation with empty URL (negative test)
 				err := appConfigurationService.SetServiceURL("")
 				Expect(err).To(BeNil())
-				response, operationErr := appConfigurationService.DeleteSegment(deleteSegmentOptionsModel)
+				result, response, operationErr := appConfigurationService.DeleteSegment(deleteSegmentOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
 				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
 				// Construct a second instance of the DeleteSegmentOptions model with no property values
 				deleteSegmentOptionsModelNew := new(appconfigurationv1.DeleteSegmentOptions)
 				// Invoke operation with invalid model (negative test)
-				response, operationErr = appConfigurationService.DeleteSegment(deleteSegmentOptionsModelNew)
+				result, response, operationErr = appConfigurationService.DeleteSegment(deleteSegmentOptionsModelNew)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(202)
+				}))
+			})
+			It(`Invoke DeleteSegment successfully`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the DeleteSegmentOptions model
+				deleteSegmentOptionsModel := new(appconfigurationv1.DeleteSegmentOptions)
+				deleteSegmentOptionsModel.SegmentID = core.StringPtr("segment_id")
+				deleteSegmentOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := appConfigurationService.DeleteSegment(deleteSegmentOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
 			})
 			AfterEach(func() {
 				testServer.Close()
@@ -9234,7 +11015,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 		})
 		Context(`Using mock server endpoint - paginated response`, func() {
 			BeforeEach(func() {
-				var requestNumber int = 0
+				requestNumber := 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -9246,11 +11027,12 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
 					requestNumber++
-					if requestNumber == 1 {
+					switch requestNumber {
+					case 1:
 						fmt.Fprintf(res, "%s", `{"next":{"href":"https://myhost.com/somePath?offset=1"},"total_count":2,"limit":1,"git_config":[{"git_config_name":"GitConfigName","git_config_id":"GitConfigID","collection":{"name":"Name","collection_id":"CollectionID"},"environment":{"name":"Name","environment_id":"EnvironmentID","color_code":"ColorCode"},"git_url":"GitURL","git_branch":"GitBranch","git_file_path":"GitFilePath","last_sync_time":"2022-05-27T23:20:50.520Z","created_time":"2021-05-12T23:20:50.520Z","updated_time":"2021-05-12T23:20:50.520Z","href":"Href"}]}`)
-					} else if requestNumber == 2 {
+					case 2:
 						fmt.Fprintf(res, "%s", `{"total_count":2,"limit":1,"git_config":[{"git_config_name":"GitConfigName","git_config_id":"GitConfigID","collection":{"name":"Name","collection_id":"CollectionID"},"environment":{"name":"Name","environment_id":"EnvironmentID","color_code":"ColorCode"},"git_url":"GitURL","git_branch":"GitBranch","git_file_path":"GitFilePath","last_sync_time":"2022-05-27T23:20:50.520Z","created_time":"2021-05-12T23:20:50.520Z","updated_time":"2021-05-12T23:20:50.520Z","href":"Href"}]}`)
-					} else {
+					default:
 						res.WriteHeader(400)
 					}
 				}))
@@ -10423,7 +12205,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"environments": [{"name": "Name", "environment_id": "EnvironmentID", "description": "Description", "tags": "Tags", "color_code": "#FDD13A", "features": [{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100, "rule_id": "RuleID", "rule_name": "RuleName"}], "collections": [{"collection_id": "CollectionID", "name": "Name"}]}], "properties": [{"name": "Name", "property_id": "PropertyID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "value": "anyValue", "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5}], "collections": [{"collection_id": "CollectionID", "name": "Name"}]}]}], "segments": [{"name": "Name", "segment_id": "SegmentID", "description": "Description", "tags": "Tags", "rules": [{"attribute_name": "AttributeName", "operator": "is", "values": ["Values"]}]}]}`)
+					fmt.Fprintf(res, "%s", `{"environments": [{"name": "Name", "environment_id": "EnvironmentID", "description": "Description", "tags": "Tags", "color_code": "#FDD13A", "features": [{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED"}, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED"}, "rule_id": "RuleID", "rule_name": "RuleName"}], "collections": [{"collection_id": "CollectionID", "name": "Name"}]}], "properties": [{"name": "Name", "property_id": "PropertyID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "value": "anyValue", "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5}], "collections": [{"collection_id": "CollectionID", "name": "Name"}]}]}], "segments": [{"name": "Name", "segment_id": "SegmentID", "description": "Description", "tags": "Tags", "rules": [{"attribute_name": "AttributeName", "operator": "is", "values": ["Values"]}]}]}`)
 				}))
 			})
 			It(`Invoke RestoreGitconfig successfully with retries`, func() {
@@ -10477,7 +12259,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"environments": [{"name": "Name", "environment_id": "EnvironmentID", "description": "Description", "tags": "Tags", "color_code": "#FDD13A", "features": [{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100, "rule_id": "RuleID", "rule_name": "RuleName"}], "collections": [{"collection_id": "CollectionID", "name": "Name"}]}], "properties": [{"name": "Name", "property_id": "PropertyID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "value": "anyValue", "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5}], "collections": [{"collection_id": "CollectionID", "name": "Name"}]}]}], "segments": [{"name": "Name", "segment_id": "SegmentID", "description": "Description", "tags": "Tags", "rules": [{"attribute_name": "AttributeName", "operator": "is", "values": ["Values"]}]}]}`)
+					fmt.Fprintf(res, "%s", `{"environments": [{"name": "Name", "environment_id": "EnvironmentID", "description": "Description", "tags": "Tags", "color_code": "#FDD13A", "features": [{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED"}, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED"}, "rule_id": "RuleID", "rule_name": "RuleName"}], "collections": [{"collection_id": "CollectionID", "name": "Name"}]}], "properties": [{"name": "Name", "property_id": "PropertyID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "value": "anyValue", "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5}], "collections": [{"collection_id": "CollectionID", "name": "Name"}]}]}], "segments": [{"name": "Name", "segment_id": "SegmentID", "description": "Description", "tags": "Tags", "rules": [{"attribute_name": "AttributeName", "operator": "is", "values": ["Values"]}]}]}`)
 				}))
 			})
 			It(`Invoke RestoreGitconfig successfully`, func() {
@@ -10837,7 +12619,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 		})
 		Context(`Using mock server endpoint - paginated response`, func() {
 			BeforeEach(func() {
-				var requestNumber int = 0
+				requestNumber := 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -10849,11 +12631,12 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
 					requestNumber++
-					if requestNumber == 1 {
+					switch requestNumber {
+					case 1:
 						fmt.Fprintf(res, "%s", `{"next":{"href":"https://myhost.com/somePath?offset=1"},"total_count":2,"limit":1,"integrations":[{"integration_id":"IntegrationID","integration_type":"IntegrationType","metadata":{"event_notifications_source_id":"EventNotificationsSourceID","event_notifications_endpoint":"EventNotificationsEndpoint","event_notifications_instance_crn":"EventNotificationsInstanceCrn"},"created_time":"2021-05-12T23:20:50.520Z","updated_time":"2021-05-12T23:20:50.520Z","href":"Href"}]}`)
-					} else if requestNumber == 2 {
+					case 2:
 						fmt.Fprintf(res, "%s", `{"total_count":2,"limit":1,"integrations":[{"integration_id":"IntegrationID","integration_type":"IntegrationType","metadata":{"event_notifications_source_id":"EventNotificationsSourceID","event_notifications_endpoint":"EventNotificationsEndpoint","event_notifications_instance_crn":"EventNotificationsInstanceCrn"},"created_time":"2021-05-12T23:20:50.520Z","updated_time":"2021-05-12T23:20:50.520Z","href":"Href"}]}`)
-					} else {
+					default:
 						res.WriteHeader(400)
 					}
 				}))
@@ -12849,6 +14632,2006 @@ var _ = Describe(`AppConfigurationV1`, func() {
 			})
 		})
 	})
+	Describe(`ListWorkflowConfigs(listWorkflowConfigsOptions *ListWorkflowConfigsOptions) - Operation response error`, func() {
+		listWorkflowConfigsPath := "/workflow/configs"
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(listWorkflowConfigsPath))
+					Expect(req.Method).To(Equal("GET"))
+					Expect(req.URL.Query()["sort"]).To(Equal([]string{"created_time"}))
+					Expect(req.URL.Query()["search"]).To(Equal([]string{"search_string"}))
+					Expect(req.URL.Query()["limit"]).To(Equal([]string{fmt.Sprint(int64(10))}))
+					Expect(req.URL.Query()["offset"]).To(Equal([]string{fmt.Sprint(int64(0))}))
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprint(res, `} this is not valid json {`)
+				}))
+			})
+			It(`Invoke ListWorkflowConfigs with error: Operation response processing error`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the ListWorkflowConfigsOptions model
+				listWorkflowConfigsOptionsModel := new(appconfigurationv1.ListWorkflowConfigsOptions)
+				listWorkflowConfigsOptionsModel.Sort = core.StringPtr("created_time")
+				listWorkflowConfigsOptionsModel.Search = core.StringPtr("search_string")
+				listWorkflowConfigsOptionsModel.Limit = core.Int64Ptr(int64(10))
+				listWorkflowConfigsOptionsModel.Offset = core.Int64Ptr(int64(0))
+				listWorkflowConfigsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Expect response parsing to fail since we are receiving a text/plain response
+				result, response, operationErr := appConfigurationService.ListWorkflowConfigs(listWorkflowConfigsOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				appConfigurationService.EnableRetries(0, 0)
+				result, response, operationErr = appConfigurationService.ListWorkflowConfigs(listWorkflowConfigsOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`ListWorkflowConfigs(listWorkflowConfigsOptions *ListWorkflowConfigsOptions)`, func() {
+		listWorkflowConfigsPath := "/workflow/configs"
+		Context(`Using mock server endpoint with timeout`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(listWorkflowConfigsPath))
+					Expect(req.Method).To(Equal("GET"))
+
+					Expect(req.URL.Query()["sort"]).To(Equal([]string{"created_time"}))
+					Expect(req.URL.Query()["search"]).To(Equal([]string{"search_string"}))
+					Expect(req.URL.Query()["limit"]).To(Equal([]string{fmt.Sprint(int64(10))}))
+					Expect(req.URL.Query()["offset"]).To(Equal([]string{fmt.Sprint(int64(0))}))
+					// Sleep a short time to support a timeout test
+					time.Sleep(100 * time.Millisecond)
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"workflow_configs": [{"name": "My Approval Process", "workflow_id": "workflow-id-1", "enabled": true, "provider": {"type": "SERVICENOW_IBM", "metadata": {"approval_expiration": 7, "approval_group_name": "AppConfiguration Approvers", "sm_secret_id": "63476562-d5b4-02ae-e966-528f8df457bb", "workflow_url": "https://dev339579.service-now.com"}}, "scope": {"collections": {"mode": "ALL", "ids": ["Ids"]}, "segments": {"mode": "ALL", "ids": ["Ids"]}, "environments": [{"environment_id": "stage", "resources": {"environment": {"enable": true}, "features": {"mode": "ALL", "ids": ["Ids"]}, "properties": {"mode": "ALL", "ids": ["Ids"]}}}]}, "created_time": "2026-05-29T09:55:01.000Z", "updated_time": "2026-05-29T09:55:01.000Z", "href": "https://au-syd.apprapp.cloud.ibm.com/apprapp/feature/v1/instances/65622bd1-0d0b-4ce4-8d26-aa6920ed1a1b/workflow/configs/mpdulwn7"}], "limit": 10, "offset": 0, "total_count": 0, "first": {"href": "Href"}, "previous": {"href": "Href"}, "next": {"href": "Href"}, "last": {"href": "Href"}}`)
+				}))
+			})
+			It(`Invoke ListWorkflowConfigs successfully with retries`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+				appConfigurationService.EnableRetries(0, 0)
+
+				// Construct an instance of the ListWorkflowConfigsOptions model
+				listWorkflowConfigsOptionsModel := new(appconfigurationv1.ListWorkflowConfigsOptions)
+				listWorkflowConfigsOptionsModel.Sort = core.StringPtr("created_time")
+				listWorkflowConfigsOptionsModel.Search = core.StringPtr("search_string")
+				listWorkflowConfigsOptionsModel.Limit = core.Int64Ptr(int64(10))
+				listWorkflowConfigsOptionsModel.Offset = core.Int64Ptr(int64(0))
+				listWorkflowConfigsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with a Context to test a timeout error
+				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc()
+				_, _, operationErr := appConfigurationService.ListWorkflowConfigsWithContext(ctx, listWorkflowConfigsOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+
+				// Disable retries and test again
+				appConfigurationService.DisableRetries()
+				result, response, operationErr := appConfigurationService.ListWorkflowConfigs(listWorkflowConfigsOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				_, _, operationErr = appConfigurationService.ListWorkflowConfigsWithContext(ctx, listWorkflowConfigsOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(listWorkflowConfigsPath))
+					Expect(req.Method).To(Equal("GET"))
+
+					Expect(req.URL.Query()["sort"]).To(Equal([]string{"created_time"}))
+					Expect(req.URL.Query()["search"]).To(Equal([]string{"search_string"}))
+					Expect(req.URL.Query()["limit"]).To(Equal([]string{fmt.Sprint(int64(10))}))
+					Expect(req.URL.Query()["offset"]).To(Equal([]string{fmt.Sprint(int64(0))}))
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"workflow_configs": [{"name": "My Approval Process", "workflow_id": "workflow-id-1", "enabled": true, "provider": {"type": "SERVICENOW_IBM", "metadata": {"approval_expiration": 7, "approval_group_name": "AppConfiguration Approvers", "sm_secret_id": "63476562-d5b4-02ae-e966-528f8df457bb", "workflow_url": "https://dev339579.service-now.com"}}, "scope": {"collections": {"mode": "ALL", "ids": ["Ids"]}, "segments": {"mode": "ALL", "ids": ["Ids"]}, "environments": [{"environment_id": "stage", "resources": {"environment": {"enable": true}, "features": {"mode": "ALL", "ids": ["Ids"]}, "properties": {"mode": "ALL", "ids": ["Ids"]}}}]}, "created_time": "2026-05-29T09:55:01.000Z", "updated_time": "2026-05-29T09:55:01.000Z", "href": "https://au-syd.apprapp.cloud.ibm.com/apprapp/feature/v1/instances/65622bd1-0d0b-4ce4-8d26-aa6920ed1a1b/workflow/configs/mpdulwn7"}], "limit": 10, "offset": 0, "total_count": 0, "first": {"href": "Href"}, "previous": {"href": "Href"}, "next": {"href": "Href"}, "last": {"href": "Href"}}`)
+				}))
+			})
+			It(`Invoke ListWorkflowConfigs successfully`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Invoke operation with nil options model (negative test)
+				result, response, operationErr := appConfigurationService.ListWorkflowConfigs(nil)
+				Expect(operationErr).NotTo(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+
+				// Construct an instance of the ListWorkflowConfigsOptions model
+				listWorkflowConfigsOptionsModel := new(appconfigurationv1.ListWorkflowConfigsOptions)
+				listWorkflowConfigsOptionsModel.Sort = core.StringPtr("created_time")
+				listWorkflowConfigsOptionsModel.Search = core.StringPtr("search_string")
+				listWorkflowConfigsOptionsModel.Limit = core.Int64Ptr(int64(10))
+				listWorkflowConfigsOptionsModel.Offset = core.Int64Ptr(int64(0))
+				listWorkflowConfigsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with valid options model (positive test)
+				result, response, operationErr = appConfigurationService.ListWorkflowConfigs(listWorkflowConfigsOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+			})
+			It(`Invoke ListWorkflowConfigs with error: Operation request error`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the ListWorkflowConfigsOptions model
+				listWorkflowConfigsOptionsModel := new(appconfigurationv1.ListWorkflowConfigsOptions)
+				listWorkflowConfigsOptionsModel.Sort = core.StringPtr("created_time")
+				listWorkflowConfigsOptionsModel.Search = core.StringPtr("search_string")
+				listWorkflowConfigsOptionsModel.Limit = core.Int64Ptr(int64(10))
+				listWorkflowConfigsOptionsModel.Offset = core.Int64Ptr(int64(0))
+				listWorkflowConfigsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Invoke operation with empty URL (negative test)
+				err := appConfigurationService.SetServiceURL("")
+				Expect(err).To(BeNil())
+				result, response, operationErr := appConfigurationService.ListWorkflowConfigs(listWorkflowConfigsOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke ListWorkflowConfigs successfully`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the ListWorkflowConfigsOptions model
+				listWorkflowConfigsOptionsModel := new(appconfigurationv1.ListWorkflowConfigsOptions)
+				listWorkflowConfigsOptionsModel.Sort = core.StringPtr("created_time")
+				listWorkflowConfigsOptionsModel.Search = core.StringPtr("search_string")
+				listWorkflowConfigsOptionsModel.Limit = core.Int64Ptr(int64(10))
+				listWorkflowConfigsOptionsModel.Offset = core.Int64Ptr(int64(0))
+				listWorkflowConfigsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := appConfigurationService.ListWorkflowConfigs(listWorkflowConfigsOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Test pagination helper method on response`, func() {
+			It(`Invoke GetNextOffset successfully`, func() {
+				responseObject := new(appconfigurationv1.WorkflowConfigsList)
+				nextObject := new(appconfigurationv1.PaginatedListNext)
+				nextObject.Href = core.StringPtr("ibm.com?offset=135")
+				responseObject.Next = nextObject
+
+				value, err := responseObject.GetNextOffset()
+				Expect(err).To(BeNil())
+				Expect(value).To(Equal(core.Int64Ptr(int64(135))))
+			})
+			It(`Invoke GetNextOffset without a "Next" property in the response`, func() {
+				responseObject := new(appconfigurationv1.WorkflowConfigsList)
+
+				value, err := responseObject.GetNextOffset()
+				Expect(err).To(BeNil())
+				Expect(value).To(BeNil())
+			})
+			It(`Invoke GetNextOffset without any query params in the "Next" URL`, func() {
+				responseObject := new(appconfigurationv1.WorkflowConfigsList)
+				nextObject := new(appconfigurationv1.PaginatedListNext)
+				nextObject.Href = core.StringPtr("ibm.com")
+				responseObject.Next = nextObject
+
+				value, err := responseObject.GetNextOffset()
+				Expect(err).To(BeNil())
+				Expect(value).To(BeNil())
+			})
+			It(`Invoke GetNextOffset with a non-integer query param in the "Next" URL`, func() {
+				responseObject := new(appconfigurationv1.WorkflowConfigsList)
+				nextObject := new(appconfigurationv1.PaginatedListNext)
+				nextObject.Href = core.StringPtr("ibm.com?offset=tiger")
+				responseObject.Next = nextObject
+
+				value, err := responseObject.GetNextOffset()
+				Expect(err).NotTo(BeNil())
+				Expect(value).To(BeNil())
+			})
+		})
+		Context(`Using mock server endpoint - paginated response`, func() {
+			BeforeEach(func() {
+				requestNumber := 0
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(listWorkflowConfigsPath))
+					Expect(req.Method).To(Equal("GET"))
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					requestNumber++
+					switch requestNumber {
+					case 1:
+						fmt.Fprintf(res, "%s", `{"next":{"href":"https://myhost.com/somePath?offset=1"},"workflow_configs":[{"name":"My Approval Process","workflow_id":"workflow-id-1","enabled":true,"provider":{"type":"SERVICENOW_IBM","metadata":{"approval_expiration":7,"approval_group_name":"AppConfiguration Approvers","sm_secret_id":"63476562-d5b4-02ae-e966-528f8df457bb","workflow_url":"https://dev339579.service-now.com"}},"scope":{"collections":{"mode":"ALL","ids":["Ids"]},"segments":{"mode":"ALL","ids":["Ids"]},"environments":[{"environment_id":"stage","resources":{"environment":{"enable":true},"features":{"mode":"ALL","ids":["Ids"]},"properties":{"mode":"ALL","ids":["Ids"]}}}]},"created_time":"2026-05-29T09:55:01.000Z","updated_time":"2026-05-29T09:55:01.000Z","href":"https://au-syd.apprapp.cloud.ibm.com/apprapp/feature/v1/instances/65622bd1-0d0b-4ce4-8d26-aa6920ed1a1b/workflow/configs/mpdulwn7"}],"total_count":2,"limit":1}`)
+					case 2:
+						fmt.Fprintf(res, "%s", `{"workflow_configs":[{"name":"My Approval Process","workflow_id":"workflow-id-1","enabled":true,"provider":{"type":"SERVICENOW_IBM","metadata":{"approval_expiration":7,"approval_group_name":"AppConfiguration Approvers","sm_secret_id":"63476562-d5b4-02ae-e966-528f8df457bb","workflow_url":"https://dev339579.service-now.com"}},"scope":{"collections":{"mode":"ALL","ids":["Ids"]},"segments":{"mode":"ALL","ids":["Ids"]},"environments":[{"environment_id":"stage","resources":{"environment":{"enable":true},"features":{"mode":"ALL","ids":["Ids"]},"properties":{"mode":"ALL","ids":["Ids"]}}}]},"created_time":"2026-05-29T09:55:01.000Z","updated_time":"2026-05-29T09:55:01.000Z","href":"https://au-syd.apprapp.cloud.ibm.com/apprapp/feature/v1/instances/65622bd1-0d0b-4ce4-8d26-aa6920ed1a1b/workflow/configs/mpdulwn7"}],"total_count":2,"limit":1}`)
+					default:
+						res.WriteHeader(400)
+					}
+				}))
+			})
+			It(`Use WorkflowConfigsPager.GetNext successfully`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				listWorkflowConfigsOptionsModel := &appconfigurationv1.ListWorkflowConfigsOptions{
+					Sort: core.StringPtr("created_time"),
+					Search: core.StringPtr("search_string"),
+					Limit: core.Int64Ptr(int64(10)),
+				}
+
+				pager, err := appConfigurationService.NewWorkflowConfigsPager(listWorkflowConfigsOptionsModel)
+				Expect(err).To(BeNil())
+				Expect(pager).ToNot(BeNil())
+
+				var allResults []appconfigurationv1.WorkflowConfigResponse
+				for pager.HasNext() {
+					nextPage, err := pager.GetNext()
+					Expect(err).To(BeNil())
+					Expect(nextPage).ToNot(BeNil())
+					allResults = append(allResults, nextPage...)
+				}
+				Expect(len(allResults)).To(Equal(2))
+			})
+			It(`Use WorkflowConfigsPager.GetAll successfully`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				listWorkflowConfigsOptionsModel := &appconfigurationv1.ListWorkflowConfigsOptions{
+					Sort: core.StringPtr("created_time"),
+					Search: core.StringPtr("search_string"),
+					Limit: core.Int64Ptr(int64(10)),
+				}
+
+				pager, err := appConfigurationService.NewWorkflowConfigsPager(listWorkflowConfigsOptionsModel)
+				Expect(err).To(BeNil())
+				Expect(pager).ToNot(BeNil())
+
+				allResults, err := pager.GetAll()
+				Expect(err).To(BeNil())
+				Expect(allResults).ToNot(BeNil())
+				Expect(len(allResults)).To(Equal(2))
+			})
+		})
+	})
+	Describe(`CreateWorkflowConfigs(createWorkflowConfigsOptions *CreateWorkflowConfigsOptions) - Operation response error`, func() {
+		createWorkflowConfigsPath := "/workflow/configs"
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(createWorkflowConfigsPath))
+					Expect(req.Method).To(Equal("POST"))
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(201)
+					fmt.Fprint(res, `} this is not valid json {`)
+				}))
+			})
+			It(`Invoke CreateWorkflowConfigs with error: Operation response processing error`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the WorkflowMetadataExternalServiceNowMetadata model
+				workflowMetadataModel := new(appconfigurationv1.WorkflowMetadataExternalServiceNowMetadata)
+				workflowMetadataModel.ApprovalExpiration = core.Int64Ptr(int64(7))
+				workflowMetadataModel.ApprovalGroupName = core.StringPtr("AppConfiguration Approvers")
+				workflowMetadataModel.SmSecretID = core.StringPtr("63476562-d5b4-02ae-e966-528f8df457bb")
+				workflowMetadataModel.WorkflowURL = core.StringPtr("https://dev339579.service-now.com")
+
+				// Construct an instance of the WorkflowProvider model
+				workflowProviderModel := new(appconfigurationv1.WorkflowProvider)
+				workflowProviderModel.Type = core.StringPtr("SERVICENOW_EXTERNAL")
+				workflowProviderModel.Metadata = workflowMetadataModel
+
+				// Construct an instance of the WorkflowScopeMode model
+				workflowScopeModeModel := new(appconfigurationv1.WorkflowScopeMode)
+				workflowScopeModeModel.Mode = core.StringPtr("ALL")
+				workflowScopeModeModel.Ids = []string{}
+
+				// Construct an instance of the WorkflowEnvironmentResourcesEnvironment model
+				workflowEnvironmentResourcesEnvironmentModel := new(appconfigurationv1.WorkflowEnvironmentResourcesEnvironment)
+				workflowEnvironmentResourcesEnvironmentModel.Enable = core.BoolPtr(true)
+
+				// Construct an instance of the WorkflowEnvironmentResources model
+				workflowEnvironmentResourcesModel := new(appconfigurationv1.WorkflowEnvironmentResources)
+				workflowEnvironmentResourcesModel.Environment = workflowEnvironmentResourcesEnvironmentModel
+				workflowEnvironmentResourcesModel.Features = workflowScopeModeModel
+				workflowEnvironmentResourcesModel.Properties = workflowScopeModeModel
+
+				// Construct an instance of the WorkflowEnvironment model
+				workflowEnvironmentModel := new(appconfigurationv1.WorkflowEnvironment)
+				workflowEnvironmentModel.EnvironmentID = core.StringPtr("stage")
+				workflowEnvironmentModel.Resources = workflowEnvironmentResourcesModel
+
+				// Construct an instance of the WorkflowScope model
+				workflowScopeModel := new(appconfigurationv1.WorkflowScope)
+				workflowScopeModel.Collections = workflowScopeModeModel
+				workflowScopeModel.Segments = workflowScopeModeModel
+				workflowScopeModel.Environments = []appconfigurationv1.WorkflowEnvironment{*workflowEnvironmentModel}
+
+				// Construct an instance of the CreateWorkflowConfigsOptions model
+				createWorkflowConfigsOptionsModel := new(appconfigurationv1.CreateWorkflowConfigsOptions)
+				createWorkflowConfigsOptionsModel.Name = core.StringPtr("ext-service-now")
+				createWorkflowConfigsOptionsModel.WorkflowID = core.StringPtr("workflow-id-1")
+				createWorkflowConfigsOptionsModel.Enabled = core.BoolPtr(true)
+				createWorkflowConfigsOptionsModel.Provider = workflowProviderModel
+				createWorkflowConfigsOptionsModel.Scope = workflowScopeModel
+				createWorkflowConfigsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Expect response parsing to fail since we are receiving a text/plain response
+				result, response, operationErr := appConfigurationService.CreateWorkflowConfigs(createWorkflowConfigsOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				appConfigurationService.EnableRetries(0, 0)
+				result, response, operationErr = appConfigurationService.CreateWorkflowConfigs(createWorkflowConfigsOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`CreateWorkflowConfigs(createWorkflowConfigsOptions *CreateWorkflowConfigsOptions)`, func() {
+		createWorkflowConfigsPath := "/workflow/configs"
+		Context(`Using mock server endpoint with timeout`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(createWorkflowConfigsPath))
+					Expect(req.Method).To(Equal("POST"))
+
+					// For gzip-disabled operation, verify Content-Encoding is not set.
+					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+
+					// If there is a body, then make sure we can read it
+					bodyBuf := new(bytes.Buffer)
+					if req.Header.Get("Content-Encoding") == "gzip" {
+						body, err := core.NewGzipDecompressionReader(req.Body)
+						Expect(err).To(BeNil())
+						_, err = bodyBuf.ReadFrom(body)
+						Expect(err).To(BeNil())
+					} else {
+						_, err := bodyBuf.ReadFrom(req.Body)
+						Expect(err).To(BeNil())
+					}
+					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
+
+					// Sleep a short time to support a timeout test
+					time.Sleep(100 * time.Millisecond)
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(201)
+					fmt.Fprintf(res, "%s", `{"name": "My Approval Process", "workflow_id": "workflow-id-1", "enabled": true, "provider": {"type": "SERVICENOW_IBM", "metadata": {"approval_expiration": 7, "approval_group_name": "AppConfiguration Approvers", "sm_secret_id": "63476562-d5b4-02ae-e966-528f8df457bb", "workflow_url": "https://dev339579.service-now.com"}}, "scope": {"collections": {"mode": "ALL", "ids": ["Ids"]}, "segments": {"mode": "ALL", "ids": ["Ids"]}, "environments": [{"environment_id": "stage", "resources": {"environment": {"enable": true}, "features": {"mode": "ALL", "ids": ["Ids"]}, "properties": {"mode": "ALL", "ids": ["Ids"]}}}]}, "created_time": "2026-05-29T09:55:01.000Z", "updated_time": "2026-05-29T09:55:01.000Z", "href": "https://au-syd.apprapp.cloud.ibm.com/apprapp/feature/v1/instances/65622bd1-0d0b-4ce4-8d26-aa6920ed1a1b/workflow/configs/mpdulwn7"}`)
+				}))
+			})
+			It(`Invoke CreateWorkflowConfigs successfully with retries`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+				appConfigurationService.EnableRetries(0, 0)
+
+				// Construct an instance of the WorkflowMetadataExternalServiceNowMetadata model
+				workflowMetadataModel := new(appconfigurationv1.WorkflowMetadataExternalServiceNowMetadata)
+				workflowMetadataModel.ApprovalExpiration = core.Int64Ptr(int64(7))
+				workflowMetadataModel.ApprovalGroupName = core.StringPtr("AppConfiguration Approvers")
+				workflowMetadataModel.SmSecretID = core.StringPtr("63476562-d5b4-02ae-e966-528f8df457bb")
+				workflowMetadataModel.WorkflowURL = core.StringPtr("https://dev339579.service-now.com")
+
+				// Construct an instance of the WorkflowProvider model
+				workflowProviderModel := new(appconfigurationv1.WorkflowProvider)
+				workflowProviderModel.Type = core.StringPtr("SERVICENOW_EXTERNAL")
+				workflowProviderModel.Metadata = workflowMetadataModel
+
+				// Construct an instance of the WorkflowScopeMode model
+				workflowScopeModeModel := new(appconfigurationv1.WorkflowScopeMode)
+				workflowScopeModeModel.Mode = core.StringPtr("ALL")
+				workflowScopeModeModel.Ids = []string{}
+
+				// Construct an instance of the WorkflowEnvironmentResourcesEnvironment model
+				workflowEnvironmentResourcesEnvironmentModel := new(appconfigurationv1.WorkflowEnvironmentResourcesEnvironment)
+				workflowEnvironmentResourcesEnvironmentModel.Enable = core.BoolPtr(true)
+
+				// Construct an instance of the WorkflowEnvironmentResources model
+				workflowEnvironmentResourcesModel := new(appconfigurationv1.WorkflowEnvironmentResources)
+				workflowEnvironmentResourcesModel.Environment = workflowEnvironmentResourcesEnvironmentModel
+				workflowEnvironmentResourcesModel.Features = workflowScopeModeModel
+				workflowEnvironmentResourcesModel.Properties = workflowScopeModeModel
+
+				// Construct an instance of the WorkflowEnvironment model
+				workflowEnvironmentModel := new(appconfigurationv1.WorkflowEnvironment)
+				workflowEnvironmentModel.EnvironmentID = core.StringPtr("stage")
+				workflowEnvironmentModel.Resources = workflowEnvironmentResourcesModel
+
+				// Construct an instance of the WorkflowScope model
+				workflowScopeModel := new(appconfigurationv1.WorkflowScope)
+				workflowScopeModel.Collections = workflowScopeModeModel
+				workflowScopeModel.Segments = workflowScopeModeModel
+				workflowScopeModel.Environments = []appconfigurationv1.WorkflowEnvironment{*workflowEnvironmentModel}
+
+				// Construct an instance of the CreateWorkflowConfigsOptions model
+				createWorkflowConfigsOptionsModel := new(appconfigurationv1.CreateWorkflowConfigsOptions)
+				createWorkflowConfigsOptionsModel.Name = core.StringPtr("ext-service-now")
+				createWorkflowConfigsOptionsModel.WorkflowID = core.StringPtr("workflow-id-1")
+				createWorkflowConfigsOptionsModel.Enabled = core.BoolPtr(true)
+				createWorkflowConfigsOptionsModel.Provider = workflowProviderModel
+				createWorkflowConfigsOptionsModel.Scope = workflowScopeModel
+				createWorkflowConfigsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with a Context to test a timeout error
+				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc()
+				_, _, operationErr := appConfigurationService.CreateWorkflowConfigsWithContext(ctx, createWorkflowConfigsOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+
+				// Disable retries and test again
+				appConfigurationService.DisableRetries()
+				result, response, operationErr := appConfigurationService.CreateWorkflowConfigs(createWorkflowConfigsOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				_, _, operationErr = appConfigurationService.CreateWorkflowConfigsWithContext(ctx, createWorkflowConfigsOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(createWorkflowConfigsPath))
+					Expect(req.Method).To(Equal("POST"))
+
+					// For gzip-disabled operation, verify Content-Encoding is not set.
+					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+
+					// If there is a body, then make sure we can read it
+					bodyBuf := new(bytes.Buffer)
+					if req.Header.Get("Content-Encoding") == "gzip" {
+						body, err := core.NewGzipDecompressionReader(req.Body)
+						Expect(err).To(BeNil())
+						_, err = bodyBuf.ReadFrom(body)
+						Expect(err).To(BeNil())
+					} else {
+						_, err := bodyBuf.ReadFrom(req.Body)
+						Expect(err).To(BeNil())
+					}
+					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(201)
+					fmt.Fprintf(res, "%s", `{"name": "My Approval Process", "workflow_id": "workflow-id-1", "enabled": true, "provider": {"type": "SERVICENOW_IBM", "metadata": {"approval_expiration": 7, "approval_group_name": "AppConfiguration Approvers", "sm_secret_id": "63476562-d5b4-02ae-e966-528f8df457bb", "workflow_url": "https://dev339579.service-now.com"}}, "scope": {"collections": {"mode": "ALL", "ids": ["Ids"]}, "segments": {"mode": "ALL", "ids": ["Ids"]}, "environments": [{"environment_id": "stage", "resources": {"environment": {"enable": true}, "features": {"mode": "ALL", "ids": ["Ids"]}, "properties": {"mode": "ALL", "ids": ["Ids"]}}}]}, "created_time": "2026-05-29T09:55:01.000Z", "updated_time": "2026-05-29T09:55:01.000Z", "href": "https://au-syd.apprapp.cloud.ibm.com/apprapp/feature/v1/instances/65622bd1-0d0b-4ce4-8d26-aa6920ed1a1b/workflow/configs/mpdulwn7"}`)
+				}))
+			})
+			It(`Invoke CreateWorkflowConfigs successfully`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Invoke operation with nil options model (negative test)
+				result, response, operationErr := appConfigurationService.CreateWorkflowConfigs(nil)
+				Expect(operationErr).NotTo(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+
+				// Construct an instance of the WorkflowMetadataExternalServiceNowMetadata model
+				workflowMetadataModel := new(appconfigurationv1.WorkflowMetadataExternalServiceNowMetadata)
+				workflowMetadataModel.ApprovalExpiration = core.Int64Ptr(int64(7))
+				workflowMetadataModel.ApprovalGroupName = core.StringPtr("AppConfiguration Approvers")
+				workflowMetadataModel.SmSecretID = core.StringPtr("63476562-d5b4-02ae-e966-528f8df457bb")
+				workflowMetadataModel.WorkflowURL = core.StringPtr("https://dev339579.service-now.com")
+
+				// Construct an instance of the WorkflowProvider model
+				workflowProviderModel := new(appconfigurationv1.WorkflowProvider)
+				workflowProviderModel.Type = core.StringPtr("SERVICENOW_EXTERNAL")
+				workflowProviderModel.Metadata = workflowMetadataModel
+
+				// Construct an instance of the WorkflowScopeMode model
+				workflowScopeModeModel := new(appconfigurationv1.WorkflowScopeMode)
+				workflowScopeModeModel.Mode = core.StringPtr("ALL")
+				workflowScopeModeModel.Ids = []string{}
+
+				// Construct an instance of the WorkflowEnvironmentResourcesEnvironment model
+				workflowEnvironmentResourcesEnvironmentModel := new(appconfigurationv1.WorkflowEnvironmentResourcesEnvironment)
+				workflowEnvironmentResourcesEnvironmentModel.Enable = core.BoolPtr(true)
+
+				// Construct an instance of the WorkflowEnvironmentResources model
+				workflowEnvironmentResourcesModel := new(appconfigurationv1.WorkflowEnvironmentResources)
+				workflowEnvironmentResourcesModel.Environment = workflowEnvironmentResourcesEnvironmentModel
+				workflowEnvironmentResourcesModel.Features = workflowScopeModeModel
+				workflowEnvironmentResourcesModel.Properties = workflowScopeModeModel
+
+				// Construct an instance of the WorkflowEnvironment model
+				workflowEnvironmentModel := new(appconfigurationv1.WorkflowEnvironment)
+				workflowEnvironmentModel.EnvironmentID = core.StringPtr("stage")
+				workflowEnvironmentModel.Resources = workflowEnvironmentResourcesModel
+
+				// Construct an instance of the WorkflowScope model
+				workflowScopeModel := new(appconfigurationv1.WorkflowScope)
+				workflowScopeModel.Collections = workflowScopeModeModel
+				workflowScopeModel.Segments = workflowScopeModeModel
+				workflowScopeModel.Environments = []appconfigurationv1.WorkflowEnvironment{*workflowEnvironmentModel}
+
+				// Construct an instance of the CreateWorkflowConfigsOptions model
+				createWorkflowConfigsOptionsModel := new(appconfigurationv1.CreateWorkflowConfigsOptions)
+				createWorkflowConfigsOptionsModel.Name = core.StringPtr("ext-service-now")
+				createWorkflowConfigsOptionsModel.WorkflowID = core.StringPtr("workflow-id-1")
+				createWorkflowConfigsOptionsModel.Enabled = core.BoolPtr(true)
+				createWorkflowConfigsOptionsModel.Provider = workflowProviderModel
+				createWorkflowConfigsOptionsModel.Scope = workflowScopeModel
+				createWorkflowConfigsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with valid options model (positive test)
+				result, response, operationErr = appConfigurationService.CreateWorkflowConfigs(createWorkflowConfigsOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+			})
+			It(`Invoke CreateWorkflowConfigs with error: Operation validation and request error`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the WorkflowMetadataExternalServiceNowMetadata model
+				workflowMetadataModel := new(appconfigurationv1.WorkflowMetadataExternalServiceNowMetadata)
+				workflowMetadataModel.ApprovalExpiration = core.Int64Ptr(int64(7))
+				workflowMetadataModel.ApprovalGroupName = core.StringPtr("AppConfiguration Approvers")
+				workflowMetadataModel.SmSecretID = core.StringPtr("63476562-d5b4-02ae-e966-528f8df457bb")
+				workflowMetadataModel.WorkflowURL = core.StringPtr("https://dev339579.service-now.com")
+
+				// Construct an instance of the WorkflowProvider model
+				workflowProviderModel := new(appconfigurationv1.WorkflowProvider)
+				workflowProviderModel.Type = core.StringPtr("SERVICENOW_EXTERNAL")
+				workflowProviderModel.Metadata = workflowMetadataModel
+
+				// Construct an instance of the WorkflowScopeMode model
+				workflowScopeModeModel := new(appconfigurationv1.WorkflowScopeMode)
+				workflowScopeModeModel.Mode = core.StringPtr("ALL")
+				workflowScopeModeModel.Ids = []string{}
+
+				// Construct an instance of the WorkflowEnvironmentResourcesEnvironment model
+				workflowEnvironmentResourcesEnvironmentModel := new(appconfigurationv1.WorkflowEnvironmentResourcesEnvironment)
+				workflowEnvironmentResourcesEnvironmentModel.Enable = core.BoolPtr(true)
+
+				// Construct an instance of the WorkflowEnvironmentResources model
+				workflowEnvironmentResourcesModel := new(appconfigurationv1.WorkflowEnvironmentResources)
+				workflowEnvironmentResourcesModel.Environment = workflowEnvironmentResourcesEnvironmentModel
+				workflowEnvironmentResourcesModel.Features = workflowScopeModeModel
+				workflowEnvironmentResourcesModel.Properties = workflowScopeModeModel
+
+				// Construct an instance of the WorkflowEnvironment model
+				workflowEnvironmentModel := new(appconfigurationv1.WorkflowEnvironment)
+				workflowEnvironmentModel.EnvironmentID = core.StringPtr("stage")
+				workflowEnvironmentModel.Resources = workflowEnvironmentResourcesModel
+
+				// Construct an instance of the WorkflowScope model
+				workflowScopeModel := new(appconfigurationv1.WorkflowScope)
+				workflowScopeModel.Collections = workflowScopeModeModel
+				workflowScopeModel.Segments = workflowScopeModeModel
+				workflowScopeModel.Environments = []appconfigurationv1.WorkflowEnvironment{*workflowEnvironmentModel}
+
+				// Construct an instance of the CreateWorkflowConfigsOptions model
+				createWorkflowConfigsOptionsModel := new(appconfigurationv1.CreateWorkflowConfigsOptions)
+				createWorkflowConfigsOptionsModel.Name = core.StringPtr("ext-service-now")
+				createWorkflowConfigsOptionsModel.WorkflowID = core.StringPtr("workflow-id-1")
+				createWorkflowConfigsOptionsModel.Enabled = core.BoolPtr(true)
+				createWorkflowConfigsOptionsModel.Provider = workflowProviderModel
+				createWorkflowConfigsOptionsModel.Scope = workflowScopeModel
+				createWorkflowConfigsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Invoke operation with empty URL (negative test)
+				err := appConfigurationService.SetServiceURL("")
+				Expect(err).To(BeNil())
+				result, response, operationErr := appConfigurationService.CreateWorkflowConfigs(createWorkflowConfigsOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+				// Construct a second instance of the CreateWorkflowConfigsOptions model with no property values
+				createWorkflowConfigsOptionsModelNew := new(appconfigurationv1.CreateWorkflowConfigsOptions)
+				// Invoke operation with invalid model (negative test)
+				result, response, operationErr = appConfigurationService.CreateWorkflowConfigs(createWorkflowConfigsOptionsModelNew)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(201)
+				}))
+			})
+			It(`Invoke CreateWorkflowConfigs successfully`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the WorkflowMetadataExternalServiceNowMetadata model
+				workflowMetadataModel := new(appconfigurationv1.WorkflowMetadataExternalServiceNowMetadata)
+				workflowMetadataModel.ApprovalExpiration = core.Int64Ptr(int64(7))
+				workflowMetadataModel.ApprovalGroupName = core.StringPtr("AppConfiguration Approvers")
+				workflowMetadataModel.SmSecretID = core.StringPtr("63476562-d5b4-02ae-e966-528f8df457bb")
+				workflowMetadataModel.WorkflowURL = core.StringPtr("https://dev339579.service-now.com")
+
+				// Construct an instance of the WorkflowProvider model
+				workflowProviderModel := new(appconfigurationv1.WorkflowProvider)
+				workflowProviderModel.Type = core.StringPtr("SERVICENOW_EXTERNAL")
+				workflowProviderModel.Metadata = workflowMetadataModel
+
+				// Construct an instance of the WorkflowScopeMode model
+				workflowScopeModeModel := new(appconfigurationv1.WorkflowScopeMode)
+				workflowScopeModeModel.Mode = core.StringPtr("ALL")
+				workflowScopeModeModel.Ids = []string{}
+
+				// Construct an instance of the WorkflowEnvironmentResourcesEnvironment model
+				workflowEnvironmentResourcesEnvironmentModel := new(appconfigurationv1.WorkflowEnvironmentResourcesEnvironment)
+				workflowEnvironmentResourcesEnvironmentModel.Enable = core.BoolPtr(true)
+
+				// Construct an instance of the WorkflowEnvironmentResources model
+				workflowEnvironmentResourcesModel := new(appconfigurationv1.WorkflowEnvironmentResources)
+				workflowEnvironmentResourcesModel.Environment = workflowEnvironmentResourcesEnvironmentModel
+				workflowEnvironmentResourcesModel.Features = workflowScopeModeModel
+				workflowEnvironmentResourcesModel.Properties = workflowScopeModeModel
+
+				// Construct an instance of the WorkflowEnvironment model
+				workflowEnvironmentModel := new(appconfigurationv1.WorkflowEnvironment)
+				workflowEnvironmentModel.EnvironmentID = core.StringPtr("stage")
+				workflowEnvironmentModel.Resources = workflowEnvironmentResourcesModel
+
+				// Construct an instance of the WorkflowScope model
+				workflowScopeModel := new(appconfigurationv1.WorkflowScope)
+				workflowScopeModel.Collections = workflowScopeModeModel
+				workflowScopeModel.Segments = workflowScopeModeModel
+				workflowScopeModel.Environments = []appconfigurationv1.WorkflowEnvironment{*workflowEnvironmentModel}
+
+				// Construct an instance of the CreateWorkflowConfigsOptions model
+				createWorkflowConfigsOptionsModel := new(appconfigurationv1.CreateWorkflowConfigsOptions)
+				createWorkflowConfigsOptionsModel.Name = core.StringPtr("ext-service-now")
+				createWorkflowConfigsOptionsModel.WorkflowID = core.StringPtr("workflow-id-1")
+				createWorkflowConfigsOptionsModel.Enabled = core.BoolPtr(true)
+				createWorkflowConfigsOptionsModel.Provider = workflowProviderModel
+				createWorkflowConfigsOptionsModel.Scope = workflowScopeModel
+				createWorkflowConfigsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := appConfigurationService.CreateWorkflowConfigs(createWorkflowConfigsOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`GetWorkflowConfig(getWorkflowConfigOptions *GetWorkflowConfigOptions) - Operation response error`, func() {
+		getWorkflowConfigPath := "/workflow/configs/workflow_config_id"
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(getWorkflowConfigPath))
+					Expect(req.Method).To(Equal("GET"))
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprint(res, `} this is not valid json {`)
+				}))
+			})
+			It(`Invoke GetWorkflowConfig with error: Operation response processing error`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the GetWorkflowConfigOptions model
+				getWorkflowConfigOptionsModel := new(appconfigurationv1.GetWorkflowConfigOptions)
+				getWorkflowConfigOptionsModel.WorkflowConfigID = core.StringPtr("workflow_config_id")
+				getWorkflowConfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Expect response parsing to fail since we are receiving a text/plain response
+				result, response, operationErr := appConfigurationService.GetWorkflowConfig(getWorkflowConfigOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				appConfigurationService.EnableRetries(0, 0)
+				result, response, operationErr = appConfigurationService.GetWorkflowConfig(getWorkflowConfigOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`GetWorkflowConfig(getWorkflowConfigOptions *GetWorkflowConfigOptions)`, func() {
+		getWorkflowConfigPath := "/workflow/configs/workflow_config_id"
+		Context(`Using mock server endpoint with timeout`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(getWorkflowConfigPath))
+					Expect(req.Method).To(Equal("GET"))
+
+					// Sleep a short time to support a timeout test
+					time.Sleep(100 * time.Millisecond)
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"name": "My Approval Process", "workflow_id": "workflow-id-1", "enabled": true, "provider": {"type": "SERVICENOW_IBM", "metadata": {"approval_expiration": 7, "approval_group_name": "AppConfiguration Approvers", "sm_secret_id": "63476562-d5b4-02ae-e966-528f8df457bb", "workflow_url": "https://dev339579.service-now.com"}}, "scope": {"collections": {"mode": "ALL", "ids": ["Ids"]}, "segments": {"mode": "ALL", "ids": ["Ids"]}, "environments": [{"environment_id": "stage", "resources": {"environment": {"enable": true}, "features": {"mode": "ALL", "ids": ["Ids"]}, "properties": {"mode": "ALL", "ids": ["Ids"]}}}]}, "created_time": "2026-05-29T09:55:01.000Z", "updated_time": "2026-05-29T09:55:01.000Z", "href": "https://au-syd.apprapp.cloud.ibm.com/apprapp/feature/v1/instances/65622bd1-0d0b-4ce4-8d26-aa6920ed1a1b/workflow/configs/mpdulwn7"}`)
+				}))
+			})
+			It(`Invoke GetWorkflowConfig successfully with retries`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+				appConfigurationService.EnableRetries(0, 0)
+
+				// Construct an instance of the GetWorkflowConfigOptions model
+				getWorkflowConfigOptionsModel := new(appconfigurationv1.GetWorkflowConfigOptions)
+				getWorkflowConfigOptionsModel.WorkflowConfigID = core.StringPtr("workflow_config_id")
+				getWorkflowConfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with a Context to test a timeout error
+				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc()
+				_, _, operationErr := appConfigurationService.GetWorkflowConfigWithContext(ctx, getWorkflowConfigOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+
+				// Disable retries and test again
+				appConfigurationService.DisableRetries()
+				result, response, operationErr := appConfigurationService.GetWorkflowConfig(getWorkflowConfigOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				_, _, operationErr = appConfigurationService.GetWorkflowConfigWithContext(ctx, getWorkflowConfigOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(getWorkflowConfigPath))
+					Expect(req.Method).To(Equal("GET"))
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"name": "My Approval Process", "workflow_id": "workflow-id-1", "enabled": true, "provider": {"type": "SERVICENOW_IBM", "metadata": {"approval_expiration": 7, "approval_group_name": "AppConfiguration Approvers", "sm_secret_id": "63476562-d5b4-02ae-e966-528f8df457bb", "workflow_url": "https://dev339579.service-now.com"}}, "scope": {"collections": {"mode": "ALL", "ids": ["Ids"]}, "segments": {"mode": "ALL", "ids": ["Ids"]}, "environments": [{"environment_id": "stage", "resources": {"environment": {"enable": true}, "features": {"mode": "ALL", "ids": ["Ids"]}, "properties": {"mode": "ALL", "ids": ["Ids"]}}}]}, "created_time": "2026-05-29T09:55:01.000Z", "updated_time": "2026-05-29T09:55:01.000Z", "href": "https://au-syd.apprapp.cloud.ibm.com/apprapp/feature/v1/instances/65622bd1-0d0b-4ce4-8d26-aa6920ed1a1b/workflow/configs/mpdulwn7"}`)
+				}))
+			})
+			It(`Invoke GetWorkflowConfig successfully`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Invoke operation with nil options model (negative test)
+				result, response, operationErr := appConfigurationService.GetWorkflowConfig(nil)
+				Expect(operationErr).NotTo(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+
+				// Construct an instance of the GetWorkflowConfigOptions model
+				getWorkflowConfigOptionsModel := new(appconfigurationv1.GetWorkflowConfigOptions)
+				getWorkflowConfigOptionsModel.WorkflowConfigID = core.StringPtr("workflow_config_id")
+				getWorkflowConfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with valid options model (positive test)
+				result, response, operationErr = appConfigurationService.GetWorkflowConfig(getWorkflowConfigOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+			})
+			It(`Invoke GetWorkflowConfig with error: Operation validation and request error`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the GetWorkflowConfigOptions model
+				getWorkflowConfigOptionsModel := new(appconfigurationv1.GetWorkflowConfigOptions)
+				getWorkflowConfigOptionsModel.WorkflowConfigID = core.StringPtr("workflow_config_id")
+				getWorkflowConfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Invoke operation with empty URL (negative test)
+				err := appConfigurationService.SetServiceURL("")
+				Expect(err).To(BeNil())
+				result, response, operationErr := appConfigurationService.GetWorkflowConfig(getWorkflowConfigOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+				// Construct a second instance of the GetWorkflowConfigOptions model with no property values
+				getWorkflowConfigOptionsModelNew := new(appconfigurationv1.GetWorkflowConfigOptions)
+				// Invoke operation with invalid model (negative test)
+				result, response, operationErr = appConfigurationService.GetWorkflowConfig(getWorkflowConfigOptionsModelNew)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke GetWorkflowConfig successfully`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the GetWorkflowConfigOptions model
+				getWorkflowConfigOptionsModel := new(appconfigurationv1.GetWorkflowConfigOptions)
+				getWorkflowConfigOptionsModel.WorkflowConfigID = core.StringPtr("workflow_config_id")
+				getWorkflowConfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := appConfigurationService.GetWorkflowConfig(getWorkflowConfigOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`UpdateWorkflowConfigs(updateWorkflowConfigsOptions *UpdateWorkflowConfigsOptions) - Operation response error`, func() {
+		updateWorkflowConfigsPath := "/workflow/configs/workflow_config_id"
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(updateWorkflowConfigsPath))
+					Expect(req.Method).To(Equal("PUT"))
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprint(res, `} this is not valid json {`)
+				}))
+			})
+			It(`Invoke UpdateWorkflowConfigs with error: Operation response processing error`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the WorkflowMetadataExternalServiceNowMetadata model
+				workflowMetadataModel := new(appconfigurationv1.WorkflowMetadataExternalServiceNowMetadata)
+				workflowMetadataModel.ApprovalExpiration = core.Int64Ptr(int64(10))
+				workflowMetadataModel.ApprovalGroupName = core.StringPtr("AppConfiguration Approvers Updated")
+				workflowMetadataModel.SmSecretID = core.StringPtr("63476562-d5b4-02ae-e966-528f8df457bb")
+				workflowMetadataModel.WorkflowURL = core.StringPtr("https://dev339579.service-now.com")
+
+				// Construct an instance of the WorkflowProvider model
+				workflowProviderModel := new(appconfigurationv1.WorkflowProvider)
+				workflowProviderModel.Type = core.StringPtr("SERVICENOW_EXTERNAL")
+				workflowProviderModel.Metadata = workflowMetadataModel
+
+				// Construct an instance of the WorkflowScopeMode model
+				workflowScopeModeModel := new(appconfigurationv1.WorkflowScopeMode)
+				workflowScopeModeModel.Mode = core.StringPtr("ALL")
+				workflowScopeModeModel.Ids = []string{}
+
+				// Construct an instance of the WorkflowEnvironmentResourcesEnvironment model
+				workflowEnvironmentResourcesEnvironmentModel := new(appconfigurationv1.WorkflowEnvironmentResourcesEnvironment)
+				workflowEnvironmentResourcesEnvironmentModel.Enable = core.BoolPtr(true)
+
+				// Construct an instance of the WorkflowEnvironmentResources model
+				workflowEnvironmentResourcesModel := new(appconfigurationv1.WorkflowEnvironmentResources)
+				workflowEnvironmentResourcesModel.Environment = workflowEnvironmentResourcesEnvironmentModel
+				workflowEnvironmentResourcesModel.Features = workflowScopeModeModel
+				workflowEnvironmentResourcesModel.Properties = workflowScopeModeModel
+
+				// Construct an instance of the WorkflowEnvironment model
+				workflowEnvironmentModel := new(appconfigurationv1.WorkflowEnvironment)
+				workflowEnvironmentModel.EnvironmentID = core.StringPtr("stage")
+				workflowEnvironmentModel.Resources = workflowEnvironmentResourcesModel
+
+				// Construct an instance of the WorkflowScope model
+				workflowScopeModel := new(appconfigurationv1.WorkflowScope)
+				workflowScopeModel.Collections = workflowScopeModeModel
+				workflowScopeModel.Segments = workflowScopeModeModel
+				workflowScopeModel.Environments = []appconfigurationv1.WorkflowEnvironment{*workflowEnvironmentModel}
+
+				// Construct an instance of the UpdateWorkflowConfigsOptions model
+				updateWorkflowConfigsOptionsModel := new(appconfigurationv1.UpdateWorkflowConfigsOptions)
+				updateWorkflowConfigsOptionsModel.WorkflowConfigID = core.StringPtr("workflow_config_id")
+				updateWorkflowConfigsOptionsModel.Name = core.StringPtr("ext-service-now-updated")
+				updateWorkflowConfigsOptionsModel.WorkflowID = core.StringPtr("workflow-id-1")
+				updateWorkflowConfigsOptionsModel.Enabled = core.BoolPtr(true)
+				updateWorkflowConfigsOptionsModel.Provider = workflowProviderModel
+				updateWorkflowConfigsOptionsModel.Scope = workflowScopeModel
+				updateWorkflowConfigsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Expect response parsing to fail since we are receiving a text/plain response
+				result, response, operationErr := appConfigurationService.UpdateWorkflowConfigs(updateWorkflowConfigsOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				appConfigurationService.EnableRetries(0, 0)
+				result, response, operationErr = appConfigurationService.UpdateWorkflowConfigs(updateWorkflowConfigsOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`UpdateWorkflowConfigs(updateWorkflowConfigsOptions *UpdateWorkflowConfigsOptions)`, func() {
+		updateWorkflowConfigsPath := "/workflow/configs/workflow_config_id"
+		Context(`Using mock server endpoint with timeout`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(updateWorkflowConfigsPath))
+					Expect(req.Method).To(Equal("PUT"))
+
+					// For gzip-disabled operation, verify Content-Encoding is not set.
+					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+
+					// If there is a body, then make sure we can read it
+					bodyBuf := new(bytes.Buffer)
+					if req.Header.Get("Content-Encoding") == "gzip" {
+						body, err := core.NewGzipDecompressionReader(req.Body)
+						Expect(err).To(BeNil())
+						_, err = bodyBuf.ReadFrom(body)
+						Expect(err).To(BeNil())
+					} else {
+						_, err := bodyBuf.ReadFrom(req.Body)
+						Expect(err).To(BeNil())
+					}
+					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
+
+					// Sleep a short time to support a timeout test
+					time.Sleep(100 * time.Millisecond)
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"name": "My Approval Process", "workflow_id": "workflow-id-1", "enabled": true, "provider": {"type": "SERVICENOW_IBM", "metadata": {"approval_expiration": 7, "approval_group_name": "AppConfiguration Approvers", "sm_secret_id": "63476562-d5b4-02ae-e966-528f8df457bb", "workflow_url": "https://dev339579.service-now.com"}}, "scope": {"collections": {"mode": "ALL", "ids": ["Ids"]}, "segments": {"mode": "ALL", "ids": ["Ids"]}, "environments": [{"environment_id": "stage", "resources": {"environment": {"enable": true}, "features": {"mode": "ALL", "ids": ["Ids"]}, "properties": {"mode": "ALL", "ids": ["Ids"]}}}]}, "created_time": "2026-05-29T09:55:01.000Z", "updated_time": "2026-05-29T09:55:01.000Z", "href": "https://au-syd.apprapp.cloud.ibm.com/apprapp/feature/v1/instances/65622bd1-0d0b-4ce4-8d26-aa6920ed1a1b/workflow/configs/mpdulwn7"}`)
+				}))
+			})
+			It(`Invoke UpdateWorkflowConfigs successfully with retries`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+				appConfigurationService.EnableRetries(0, 0)
+
+				// Construct an instance of the WorkflowMetadataExternalServiceNowMetadata model
+				workflowMetadataModel := new(appconfigurationv1.WorkflowMetadataExternalServiceNowMetadata)
+				workflowMetadataModel.ApprovalExpiration = core.Int64Ptr(int64(10))
+				workflowMetadataModel.ApprovalGroupName = core.StringPtr("AppConfiguration Approvers Updated")
+				workflowMetadataModel.SmSecretID = core.StringPtr("63476562-d5b4-02ae-e966-528f8df457bb")
+				workflowMetadataModel.WorkflowURL = core.StringPtr("https://dev339579.service-now.com")
+
+				// Construct an instance of the WorkflowProvider model
+				workflowProviderModel := new(appconfigurationv1.WorkflowProvider)
+				workflowProviderModel.Type = core.StringPtr("SERVICENOW_EXTERNAL")
+				workflowProviderModel.Metadata = workflowMetadataModel
+
+				// Construct an instance of the WorkflowScopeMode model
+				workflowScopeModeModel := new(appconfigurationv1.WorkflowScopeMode)
+				workflowScopeModeModel.Mode = core.StringPtr("ALL")
+				workflowScopeModeModel.Ids = []string{}
+
+				// Construct an instance of the WorkflowEnvironmentResourcesEnvironment model
+				workflowEnvironmentResourcesEnvironmentModel := new(appconfigurationv1.WorkflowEnvironmentResourcesEnvironment)
+				workflowEnvironmentResourcesEnvironmentModel.Enable = core.BoolPtr(true)
+
+				// Construct an instance of the WorkflowEnvironmentResources model
+				workflowEnvironmentResourcesModel := new(appconfigurationv1.WorkflowEnvironmentResources)
+				workflowEnvironmentResourcesModel.Environment = workflowEnvironmentResourcesEnvironmentModel
+				workflowEnvironmentResourcesModel.Features = workflowScopeModeModel
+				workflowEnvironmentResourcesModel.Properties = workflowScopeModeModel
+
+				// Construct an instance of the WorkflowEnvironment model
+				workflowEnvironmentModel := new(appconfigurationv1.WorkflowEnvironment)
+				workflowEnvironmentModel.EnvironmentID = core.StringPtr("stage")
+				workflowEnvironmentModel.Resources = workflowEnvironmentResourcesModel
+
+				// Construct an instance of the WorkflowScope model
+				workflowScopeModel := new(appconfigurationv1.WorkflowScope)
+				workflowScopeModel.Collections = workflowScopeModeModel
+				workflowScopeModel.Segments = workflowScopeModeModel
+				workflowScopeModel.Environments = []appconfigurationv1.WorkflowEnvironment{*workflowEnvironmentModel}
+
+				// Construct an instance of the UpdateWorkflowConfigsOptions model
+				updateWorkflowConfigsOptionsModel := new(appconfigurationv1.UpdateWorkflowConfigsOptions)
+				updateWorkflowConfigsOptionsModel.WorkflowConfigID = core.StringPtr("workflow_config_id")
+				updateWorkflowConfigsOptionsModel.Name = core.StringPtr("ext-service-now-updated")
+				updateWorkflowConfigsOptionsModel.WorkflowID = core.StringPtr("workflow-id-1")
+				updateWorkflowConfigsOptionsModel.Enabled = core.BoolPtr(true)
+				updateWorkflowConfigsOptionsModel.Provider = workflowProviderModel
+				updateWorkflowConfigsOptionsModel.Scope = workflowScopeModel
+				updateWorkflowConfigsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with a Context to test a timeout error
+				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc()
+				_, _, operationErr := appConfigurationService.UpdateWorkflowConfigsWithContext(ctx, updateWorkflowConfigsOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+
+				// Disable retries and test again
+				appConfigurationService.DisableRetries()
+				result, response, operationErr := appConfigurationService.UpdateWorkflowConfigs(updateWorkflowConfigsOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				_, _, operationErr = appConfigurationService.UpdateWorkflowConfigsWithContext(ctx, updateWorkflowConfigsOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(updateWorkflowConfigsPath))
+					Expect(req.Method).To(Equal("PUT"))
+
+					// For gzip-disabled operation, verify Content-Encoding is not set.
+					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+
+					// If there is a body, then make sure we can read it
+					bodyBuf := new(bytes.Buffer)
+					if req.Header.Get("Content-Encoding") == "gzip" {
+						body, err := core.NewGzipDecompressionReader(req.Body)
+						Expect(err).To(BeNil())
+						_, err = bodyBuf.ReadFrom(body)
+						Expect(err).To(BeNil())
+					} else {
+						_, err := bodyBuf.ReadFrom(req.Body)
+						Expect(err).To(BeNil())
+					}
+					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"name": "My Approval Process", "workflow_id": "workflow-id-1", "enabled": true, "provider": {"type": "SERVICENOW_IBM", "metadata": {"approval_expiration": 7, "approval_group_name": "AppConfiguration Approvers", "sm_secret_id": "63476562-d5b4-02ae-e966-528f8df457bb", "workflow_url": "https://dev339579.service-now.com"}}, "scope": {"collections": {"mode": "ALL", "ids": ["Ids"]}, "segments": {"mode": "ALL", "ids": ["Ids"]}, "environments": [{"environment_id": "stage", "resources": {"environment": {"enable": true}, "features": {"mode": "ALL", "ids": ["Ids"]}, "properties": {"mode": "ALL", "ids": ["Ids"]}}}]}, "created_time": "2026-05-29T09:55:01.000Z", "updated_time": "2026-05-29T09:55:01.000Z", "href": "https://au-syd.apprapp.cloud.ibm.com/apprapp/feature/v1/instances/65622bd1-0d0b-4ce4-8d26-aa6920ed1a1b/workflow/configs/mpdulwn7"}`)
+				}))
+			})
+			It(`Invoke UpdateWorkflowConfigs successfully`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Invoke operation with nil options model (negative test)
+				result, response, operationErr := appConfigurationService.UpdateWorkflowConfigs(nil)
+				Expect(operationErr).NotTo(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+
+				// Construct an instance of the WorkflowMetadataExternalServiceNowMetadata model
+				workflowMetadataModel := new(appconfigurationv1.WorkflowMetadataExternalServiceNowMetadata)
+				workflowMetadataModel.ApprovalExpiration = core.Int64Ptr(int64(10))
+				workflowMetadataModel.ApprovalGroupName = core.StringPtr("AppConfiguration Approvers Updated")
+				workflowMetadataModel.SmSecretID = core.StringPtr("63476562-d5b4-02ae-e966-528f8df457bb")
+				workflowMetadataModel.WorkflowURL = core.StringPtr("https://dev339579.service-now.com")
+
+				// Construct an instance of the WorkflowProvider model
+				workflowProviderModel := new(appconfigurationv1.WorkflowProvider)
+				workflowProviderModel.Type = core.StringPtr("SERVICENOW_EXTERNAL")
+				workflowProviderModel.Metadata = workflowMetadataModel
+
+				// Construct an instance of the WorkflowScopeMode model
+				workflowScopeModeModel := new(appconfigurationv1.WorkflowScopeMode)
+				workflowScopeModeModel.Mode = core.StringPtr("ALL")
+				workflowScopeModeModel.Ids = []string{}
+
+				// Construct an instance of the WorkflowEnvironmentResourcesEnvironment model
+				workflowEnvironmentResourcesEnvironmentModel := new(appconfigurationv1.WorkflowEnvironmentResourcesEnvironment)
+				workflowEnvironmentResourcesEnvironmentModel.Enable = core.BoolPtr(true)
+
+				// Construct an instance of the WorkflowEnvironmentResources model
+				workflowEnvironmentResourcesModel := new(appconfigurationv1.WorkflowEnvironmentResources)
+				workflowEnvironmentResourcesModel.Environment = workflowEnvironmentResourcesEnvironmentModel
+				workflowEnvironmentResourcesModel.Features = workflowScopeModeModel
+				workflowEnvironmentResourcesModel.Properties = workflowScopeModeModel
+
+				// Construct an instance of the WorkflowEnvironment model
+				workflowEnvironmentModel := new(appconfigurationv1.WorkflowEnvironment)
+				workflowEnvironmentModel.EnvironmentID = core.StringPtr("stage")
+				workflowEnvironmentModel.Resources = workflowEnvironmentResourcesModel
+
+				// Construct an instance of the WorkflowScope model
+				workflowScopeModel := new(appconfigurationv1.WorkflowScope)
+				workflowScopeModel.Collections = workflowScopeModeModel
+				workflowScopeModel.Segments = workflowScopeModeModel
+				workflowScopeModel.Environments = []appconfigurationv1.WorkflowEnvironment{*workflowEnvironmentModel}
+
+				// Construct an instance of the UpdateWorkflowConfigsOptions model
+				updateWorkflowConfigsOptionsModel := new(appconfigurationv1.UpdateWorkflowConfigsOptions)
+				updateWorkflowConfigsOptionsModel.WorkflowConfigID = core.StringPtr("workflow_config_id")
+				updateWorkflowConfigsOptionsModel.Name = core.StringPtr("ext-service-now-updated")
+				updateWorkflowConfigsOptionsModel.WorkflowID = core.StringPtr("workflow-id-1")
+				updateWorkflowConfigsOptionsModel.Enabled = core.BoolPtr(true)
+				updateWorkflowConfigsOptionsModel.Provider = workflowProviderModel
+				updateWorkflowConfigsOptionsModel.Scope = workflowScopeModel
+				updateWorkflowConfigsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with valid options model (positive test)
+				result, response, operationErr = appConfigurationService.UpdateWorkflowConfigs(updateWorkflowConfigsOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+			})
+			It(`Invoke UpdateWorkflowConfigs with error: Operation validation and request error`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the WorkflowMetadataExternalServiceNowMetadata model
+				workflowMetadataModel := new(appconfigurationv1.WorkflowMetadataExternalServiceNowMetadata)
+				workflowMetadataModel.ApprovalExpiration = core.Int64Ptr(int64(10))
+				workflowMetadataModel.ApprovalGroupName = core.StringPtr("AppConfiguration Approvers Updated")
+				workflowMetadataModel.SmSecretID = core.StringPtr("63476562-d5b4-02ae-e966-528f8df457bb")
+				workflowMetadataModel.WorkflowURL = core.StringPtr("https://dev339579.service-now.com")
+
+				// Construct an instance of the WorkflowProvider model
+				workflowProviderModel := new(appconfigurationv1.WorkflowProvider)
+				workflowProviderModel.Type = core.StringPtr("SERVICENOW_EXTERNAL")
+				workflowProviderModel.Metadata = workflowMetadataModel
+
+				// Construct an instance of the WorkflowScopeMode model
+				workflowScopeModeModel := new(appconfigurationv1.WorkflowScopeMode)
+				workflowScopeModeModel.Mode = core.StringPtr("ALL")
+				workflowScopeModeModel.Ids = []string{}
+
+				// Construct an instance of the WorkflowEnvironmentResourcesEnvironment model
+				workflowEnvironmentResourcesEnvironmentModel := new(appconfigurationv1.WorkflowEnvironmentResourcesEnvironment)
+				workflowEnvironmentResourcesEnvironmentModel.Enable = core.BoolPtr(true)
+
+				// Construct an instance of the WorkflowEnvironmentResources model
+				workflowEnvironmentResourcesModel := new(appconfigurationv1.WorkflowEnvironmentResources)
+				workflowEnvironmentResourcesModel.Environment = workflowEnvironmentResourcesEnvironmentModel
+				workflowEnvironmentResourcesModel.Features = workflowScopeModeModel
+				workflowEnvironmentResourcesModel.Properties = workflowScopeModeModel
+
+				// Construct an instance of the WorkflowEnvironment model
+				workflowEnvironmentModel := new(appconfigurationv1.WorkflowEnvironment)
+				workflowEnvironmentModel.EnvironmentID = core.StringPtr("stage")
+				workflowEnvironmentModel.Resources = workflowEnvironmentResourcesModel
+
+				// Construct an instance of the WorkflowScope model
+				workflowScopeModel := new(appconfigurationv1.WorkflowScope)
+				workflowScopeModel.Collections = workflowScopeModeModel
+				workflowScopeModel.Segments = workflowScopeModeModel
+				workflowScopeModel.Environments = []appconfigurationv1.WorkflowEnvironment{*workflowEnvironmentModel}
+
+				// Construct an instance of the UpdateWorkflowConfigsOptions model
+				updateWorkflowConfigsOptionsModel := new(appconfigurationv1.UpdateWorkflowConfigsOptions)
+				updateWorkflowConfigsOptionsModel.WorkflowConfigID = core.StringPtr("workflow_config_id")
+				updateWorkflowConfigsOptionsModel.Name = core.StringPtr("ext-service-now-updated")
+				updateWorkflowConfigsOptionsModel.WorkflowID = core.StringPtr("workflow-id-1")
+				updateWorkflowConfigsOptionsModel.Enabled = core.BoolPtr(true)
+				updateWorkflowConfigsOptionsModel.Provider = workflowProviderModel
+				updateWorkflowConfigsOptionsModel.Scope = workflowScopeModel
+				updateWorkflowConfigsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Invoke operation with empty URL (negative test)
+				err := appConfigurationService.SetServiceURL("")
+				Expect(err).To(BeNil())
+				result, response, operationErr := appConfigurationService.UpdateWorkflowConfigs(updateWorkflowConfigsOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+				// Construct a second instance of the UpdateWorkflowConfigsOptions model with no property values
+				updateWorkflowConfigsOptionsModelNew := new(appconfigurationv1.UpdateWorkflowConfigsOptions)
+				// Invoke operation with invalid model (negative test)
+				result, response, operationErr = appConfigurationService.UpdateWorkflowConfigs(updateWorkflowConfigsOptionsModelNew)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke UpdateWorkflowConfigs successfully`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the WorkflowMetadataExternalServiceNowMetadata model
+				workflowMetadataModel := new(appconfigurationv1.WorkflowMetadataExternalServiceNowMetadata)
+				workflowMetadataModel.ApprovalExpiration = core.Int64Ptr(int64(10))
+				workflowMetadataModel.ApprovalGroupName = core.StringPtr("AppConfiguration Approvers Updated")
+				workflowMetadataModel.SmSecretID = core.StringPtr("63476562-d5b4-02ae-e966-528f8df457bb")
+				workflowMetadataModel.WorkflowURL = core.StringPtr("https://dev339579.service-now.com")
+
+				// Construct an instance of the WorkflowProvider model
+				workflowProviderModel := new(appconfigurationv1.WorkflowProvider)
+				workflowProviderModel.Type = core.StringPtr("SERVICENOW_EXTERNAL")
+				workflowProviderModel.Metadata = workflowMetadataModel
+
+				// Construct an instance of the WorkflowScopeMode model
+				workflowScopeModeModel := new(appconfigurationv1.WorkflowScopeMode)
+				workflowScopeModeModel.Mode = core.StringPtr("ALL")
+				workflowScopeModeModel.Ids = []string{}
+
+				// Construct an instance of the WorkflowEnvironmentResourcesEnvironment model
+				workflowEnvironmentResourcesEnvironmentModel := new(appconfigurationv1.WorkflowEnvironmentResourcesEnvironment)
+				workflowEnvironmentResourcesEnvironmentModel.Enable = core.BoolPtr(true)
+
+				// Construct an instance of the WorkflowEnvironmentResources model
+				workflowEnvironmentResourcesModel := new(appconfigurationv1.WorkflowEnvironmentResources)
+				workflowEnvironmentResourcesModel.Environment = workflowEnvironmentResourcesEnvironmentModel
+				workflowEnvironmentResourcesModel.Features = workflowScopeModeModel
+				workflowEnvironmentResourcesModel.Properties = workflowScopeModeModel
+
+				// Construct an instance of the WorkflowEnvironment model
+				workflowEnvironmentModel := new(appconfigurationv1.WorkflowEnvironment)
+				workflowEnvironmentModel.EnvironmentID = core.StringPtr("stage")
+				workflowEnvironmentModel.Resources = workflowEnvironmentResourcesModel
+
+				// Construct an instance of the WorkflowScope model
+				workflowScopeModel := new(appconfigurationv1.WorkflowScope)
+				workflowScopeModel.Collections = workflowScopeModeModel
+				workflowScopeModel.Segments = workflowScopeModeModel
+				workflowScopeModel.Environments = []appconfigurationv1.WorkflowEnvironment{*workflowEnvironmentModel}
+
+				// Construct an instance of the UpdateWorkflowConfigsOptions model
+				updateWorkflowConfigsOptionsModel := new(appconfigurationv1.UpdateWorkflowConfigsOptions)
+				updateWorkflowConfigsOptionsModel.WorkflowConfigID = core.StringPtr("workflow_config_id")
+				updateWorkflowConfigsOptionsModel.Name = core.StringPtr("ext-service-now-updated")
+				updateWorkflowConfigsOptionsModel.WorkflowID = core.StringPtr("workflow-id-1")
+				updateWorkflowConfigsOptionsModel.Enabled = core.BoolPtr(true)
+				updateWorkflowConfigsOptionsModel.Provider = workflowProviderModel
+				updateWorkflowConfigsOptionsModel.Scope = workflowScopeModel
+				updateWorkflowConfigsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := appConfigurationService.UpdateWorkflowConfigs(updateWorkflowConfigsOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`DeleteWorkflowConfigs(deleteWorkflowConfigsOptions *DeleteWorkflowConfigsOptions)`, func() {
+		deleteWorkflowConfigsPath := "/workflow/configs/workflow_config_id"
+		Context(`Using mock server endpoint`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(deleteWorkflowConfigsPath))
+					Expect(req.Method).To(Equal("DELETE"))
+
+					res.WriteHeader(204)
+				}))
+			})
+			It(`Invoke DeleteWorkflowConfigs successfully`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Invoke operation with nil options model (negative test)
+				response, operationErr := appConfigurationService.DeleteWorkflowConfigs(nil)
+				Expect(operationErr).NotTo(BeNil())
+				Expect(response).To(BeNil())
+
+				// Construct an instance of the DeleteWorkflowConfigsOptions model
+				deleteWorkflowConfigsOptionsModel := new(appconfigurationv1.DeleteWorkflowConfigsOptions)
+				deleteWorkflowConfigsOptionsModel.WorkflowConfigID = core.StringPtr("workflow_config_id")
+				deleteWorkflowConfigsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with valid options model (positive test)
+				response, operationErr = appConfigurationService.DeleteWorkflowConfigs(deleteWorkflowConfigsOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+			})
+			It(`Invoke DeleteWorkflowConfigs with error: Operation validation and request error`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the DeleteWorkflowConfigsOptions model
+				deleteWorkflowConfigsOptionsModel := new(appconfigurationv1.DeleteWorkflowConfigsOptions)
+				deleteWorkflowConfigsOptionsModel.WorkflowConfigID = core.StringPtr("workflow_config_id")
+				deleteWorkflowConfigsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Invoke operation with empty URL (negative test)
+				err := appConfigurationService.SetServiceURL("")
+				Expect(err).To(BeNil())
+				response, operationErr := appConfigurationService.DeleteWorkflowConfigs(deleteWorkflowConfigsOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
+				Expect(response).To(BeNil())
+				// Construct a second instance of the DeleteWorkflowConfigsOptions model with no property values
+				deleteWorkflowConfigsOptionsModelNew := new(appconfigurationv1.DeleteWorkflowConfigsOptions)
+				// Invoke operation with invalid model (negative test)
+				response, operationErr = appConfigurationService.DeleteWorkflowConfigs(deleteWorkflowConfigsOptionsModelNew)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`ToggleWorkflowConfig(toggleWorkflowConfigOptions *ToggleWorkflowConfigOptions) - Operation response error`, func() {
+		toggleWorkflowConfigPath := "/workflow/configs/workflow_config_id/toggle"
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(toggleWorkflowConfigPath))
+					Expect(req.Method).To(Equal("PUT"))
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprint(res, `} this is not valid json {`)
+				}))
+			})
+			It(`Invoke ToggleWorkflowConfig with error: Operation response processing error`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the ToggleWorkflowConfigOptions model
+				toggleWorkflowConfigOptionsModel := new(appconfigurationv1.ToggleWorkflowConfigOptions)
+				toggleWorkflowConfigOptionsModel.WorkflowConfigID = core.StringPtr("workflow_config_id")
+				toggleWorkflowConfigOptionsModel.Enabled = core.BoolPtr(true)
+				toggleWorkflowConfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Expect response parsing to fail since we are receiving a text/plain response
+				result, response, operationErr := appConfigurationService.ToggleWorkflowConfig(toggleWorkflowConfigOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				appConfigurationService.EnableRetries(0, 0)
+				result, response, operationErr = appConfigurationService.ToggleWorkflowConfig(toggleWorkflowConfigOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`ToggleWorkflowConfig(toggleWorkflowConfigOptions *ToggleWorkflowConfigOptions)`, func() {
+		toggleWorkflowConfigPath := "/workflow/configs/workflow_config_id/toggle"
+		Context(`Using mock server endpoint with timeout`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(toggleWorkflowConfigPath))
+					Expect(req.Method).To(Equal("PUT"))
+
+					// For gzip-disabled operation, verify Content-Encoding is not set.
+					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+
+					// If there is a body, then make sure we can read it
+					bodyBuf := new(bytes.Buffer)
+					if req.Header.Get("Content-Encoding") == "gzip" {
+						body, err := core.NewGzipDecompressionReader(req.Body)
+						Expect(err).To(BeNil())
+						_, err = bodyBuf.ReadFrom(body)
+						Expect(err).To(BeNil())
+					} else {
+						_, err := bodyBuf.ReadFrom(req.Body)
+						Expect(err).To(BeNil())
+					}
+					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
+
+					// Sleep a short time to support a timeout test
+					time.Sleep(100 * time.Millisecond)
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"name": "My Approval Process", "workflow_id": "workflow-id-1", "enabled": true, "provider": {"type": "SERVICENOW_IBM", "metadata": {"approval_expiration": 7, "approval_group_name": "AppConfiguration Approvers", "sm_secret_id": "63476562-d5b4-02ae-e966-528f8df457bb", "workflow_url": "https://dev339579.service-now.com"}}, "scope": {"collections": {"mode": "ALL", "ids": ["Ids"]}, "segments": {"mode": "ALL", "ids": ["Ids"]}, "environments": [{"environment_id": "stage", "resources": {"environment": {"enable": true}, "features": {"mode": "ALL", "ids": ["Ids"]}, "properties": {"mode": "ALL", "ids": ["Ids"]}}}]}, "created_time": "2026-05-29T09:55:01.000Z", "updated_time": "2026-05-29T09:55:01.000Z", "href": "https://au-syd.apprapp.cloud.ibm.com/apprapp/feature/v1/instances/65622bd1-0d0b-4ce4-8d26-aa6920ed1a1b/workflow/configs/mpdulwn7"}`)
+				}))
+			})
+			It(`Invoke ToggleWorkflowConfig successfully with retries`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+				appConfigurationService.EnableRetries(0, 0)
+
+				// Construct an instance of the ToggleWorkflowConfigOptions model
+				toggleWorkflowConfigOptionsModel := new(appconfigurationv1.ToggleWorkflowConfigOptions)
+				toggleWorkflowConfigOptionsModel.WorkflowConfigID = core.StringPtr("workflow_config_id")
+				toggleWorkflowConfigOptionsModel.Enabled = core.BoolPtr(true)
+				toggleWorkflowConfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with a Context to test a timeout error
+				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc()
+				_, _, operationErr := appConfigurationService.ToggleWorkflowConfigWithContext(ctx, toggleWorkflowConfigOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+
+				// Disable retries and test again
+				appConfigurationService.DisableRetries()
+				result, response, operationErr := appConfigurationService.ToggleWorkflowConfig(toggleWorkflowConfigOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				_, _, operationErr = appConfigurationService.ToggleWorkflowConfigWithContext(ctx, toggleWorkflowConfigOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(toggleWorkflowConfigPath))
+					Expect(req.Method).To(Equal("PUT"))
+
+					// For gzip-disabled operation, verify Content-Encoding is not set.
+					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+
+					// If there is a body, then make sure we can read it
+					bodyBuf := new(bytes.Buffer)
+					if req.Header.Get("Content-Encoding") == "gzip" {
+						body, err := core.NewGzipDecompressionReader(req.Body)
+						Expect(err).To(BeNil())
+						_, err = bodyBuf.ReadFrom(body)
+						Expect(err).To(BeNil())
+					} else {
+						_, err := bodyBuf.ReadFrom(req.Body)
+						Expect(err).To(BeNil())
+					}
+					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"name": "My Approval Process", "workflow_id": "workflow-id-1", "enabled": true, "provider": {"type": "SERVICENOW_IBM", "metadata": {"approval_expiration": 7, "approval_group_name": "AppConfiguration Approvers", "sm_secret_id": "63476562-d5b4-02ae-e966-528f8df457bb", "workflow_url": "https://dev339579.service-now.com"}}, "scope": {"collections": {"mode": "ALL", "ids": ["Ids"]}, "segments": {"mode": "ALL", "ids": ["Ids"]}, "environments": [{"environment_id": "stage", "resources": {"environment": {"enable": true}, "features": {"mode": "ALL", "ids": ["Ids"]}, "properties": {"mode": "ALL", "ids": ["Ids"]}}}]}, "created_time": "2026-05-29T09:55:01.000Z", "updated_time": "2026-05-29T09:55:01.000Z", "href": "https://au-syd.apprapp.cloud.ibm.com/apprapp/feature/v1/instances/65622bd1-0d0b-4ce4-8d26-aa6920ed1a1b/workflow/configs/mpdulwn7"}`)
+				}))
+			})
+			It(`Invoke ToggleWorkflowConfig successfully`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Invoke operation with nil options model (negative test)
+				result, response, operationErr := appConfigurationService.ToggleWorkflowConfig(nil)
+				Expect(operationErr).NotTo(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+
+				// Construct an instance of the ToggleWorkflowConfigOptions model
+				toggleWorkflowConfigOptionsModel := new(appconfigurationv1.ToggleWorkflowConfigOptions)
+				toggleWorkflowConfigOptionsModel.WorkflowConfigID = core.StringPtr("workflow_config_id")
+				toggleWorkflowConfigOptionsModel.Enabled = core.BoolPtr(true)
+				toggleWorkflowConfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with valid options model (positive test)
+				result, response, operationErr = appConfigurationService.ToggleWorkflowConfig(toggleWorkflowConfigOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+			})
+			It(`Invoke ToggleWorkflowConfig with error: Operation validation and request error`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the ToggleWorkflowConfigOptions model
+				toggleWorkflowConfigOptionsModel := new(appconfigurationv1.ToggleWorkflowConfigOptions)
+				toggleWorkflowConfigOptionsModel.WorkflowConfigID = core.StringPtr("workflow_config_id")
+				toggleWorkflowConfigOptionsModel.Enabled = core.BoolPtr(true)
+				toggleWorkflowConfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Invoke operation with empty URL (negative test)
+				err := appConfigurationService.SetServiceURL("")
+				Expect(err).To(BeNil())
+				result, response, operationErr := appConfigurationService.ToggleWorkflowConfig(toggleWorkflowConfigOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+				// Construct a second instance of the ToggleWorkflowConfigOptions model with no property values
+				toggleWorkflowConfigOptionsModelNew := new(appconfigurationv1.ToggleWorkflowConfigOptions)
+				// Invoke operation with invalid model (negative test)
+				result, response, operationErr = appConfigurationService.ToggleWorkflowConfig(toggleWorkflowConfigOptionsModelNew)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke ToggleWorkflowConfig successfully`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the ToggleWorkflowConfigOptions model
+				toggleWorkflowConfigOptionsModel := new(appconfigurationv1.ToggleWorkflowConfigOptions)
+				toggleWorkflowConfigOptionsModel.WorkflowConfigID = core.StringPtr("workflow_config_id")
+				toggleWorkflowConfigOptionsModel.Enabled = core.BoolPtr(true)
+				toggleWorkflowConfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := appConfigurationService.ToggleWorkflowConfig(toggleWorkflowConfigOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`TestWorkflowConfig(testWorkflowConfigOptions *TestWorkflowConfigOptions) - Operation response error`, func() {
+		testWorkflowConfigPath := "/workflow/configs/workflow_config_id/test"
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(testWorkflowConfigPath))
+					Expect(req.Method).To(Equal("POST"))
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprint(res, `} this is not valid json {`)
+				}))
+			})
+			It(`Invoke TestWorkflowConfig with error: Operation response processing error`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the TestWorkflowConfigOptions model
+				testWorkflowConfigOptionsModel := new(appconfigurationv1.TestWorkflowConfigOptions)
+				testWorkflowConfigOptionsModel.WorkflowConfigID = core.StringPtr("workflow_config_id")
+				testWorkflowConfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Expect response parsing to fail since we are receiving a text/plain response
+				result, response, operationErr := appConfigurationService.TestWorkflowConfig(testWorkflowConfigOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				appConfigurationService.EnableRetries(0, 0)
+				result, response, operationErr = appConfigurationService.TestWorkflowConfig(testWorkflowConfigOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`TestWorkflowConfig(testWorkflowConfigOptions *TestWorkflowConfigOptions)`, func() {
+		testWorkflowConfigPath := "/workflow/configs/workflow_config_id/test"
+		Context(`Using mock server endpoint with timeout`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(testWorkflowConfigPath))
+					Expect(req.Method).To(Equal("POST"))
+
+					// Sleep a short time to support a timeout test
+					time.Sleep(100 * time.Millisecond)
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"message": "Workflow provider validation successful", "success": true}`)
+				}))
+			})
+			It(`Invoke TestWorkflowConfig successfully with retries`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+				appConfigurationService.EnableRetries(0, 0)
+
+				// Construct an instance of the TestWorkflowConfigOptions model
+				testWorkflowConfigOptionsModel := new(appconfigurationv1.TestWorkflowConfigOptions)
+				testWorkflowConfigOptionsModel.WorkflowConfigID = core.StringPtr("workflow_config_id")
+				testWorkflowConfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with a Context to test a timeout error
+				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc()
+				_, _, operationErr := appConfigurationService.TestWorkflowConfigWithContext(ctx, testWorkflowConfigOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+
+				// Disable retries and test again
+				appConfigurationService.DisableRetries()
+				result, response, operationErr := appConfigurationService.TestWorkflowConfig(testWorkflowConfigOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				_, _, operationErr = appConfigurationService.TestWorkflowConfigWithContext(ctx, testWorkflowConfigOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(testWorkflowConfigPath))
+					Expect(req.Method).To(Equal("POST"))
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"message": "Workflow provider validation successful", "success": true}`)
+				}))
+			})
+			It(`Invoke TestWorkflowConfig successfully`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Invoke operation with nil options model (negative test)
+				result, response, operationErr := appConfigurationService.TestWorkflowConfig(nil)
+				Expect(operationErr).NotTo(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+
+				// Construct an instance of the TestWorkflowConfigOptions model
+				testWorkflowConfigOptionsModel := new(appconfigurationv1.TestWorkflowConfigOptions)
+				testWorkflowConfigOptionsModel.WorkflowConfigID = core.StringPtr("workflow_config_id")
+				testWorkflowConfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with valid options model (positive test)
+				result, response, operationErr = appConfigurationService.TestWorkflowConfig(testWorkflowConfigOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+			})
+			It(`Invoke TestWorkflowConfig with error: Operation validation and request error`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the TestWorkflowConfigOptions model
+				testWorkflowConfigOptionsModel := new(appconfigurationv1.TestWorkflowConfigOptions)
+				testWorkflowConfigOptionsModel.WorkflowConfigID = core.StringPtr("workflow_config_id")
+				testWorkflowConfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Invoke operation with empty URL (negative test)
+				err := appConfigurationService.SetServiceURL("")
+				Expect(err).To(BeNil())
+				result, response, operationErr := appConfigurationService.TestWorkflowConfig(testWorkflowConfigOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+				// Construct a second instance of the TestWorkflowConfigOptions model with no property values
+				testWorkflowConfigOptionsModelNew := new(appconfigurationv1.TestWorkflowConfigOptions)
+				// Invoke operation with invalid model (negative test)
+				result, response, operationErr = appConfigurationService.TestWorkflowConfig(testWorkflowConfigOptionsModelNew)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke TestWorkflowConfig successfully`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the TestWorkflowConfigOptions model
+				testWorkflowConfigOptionsModel := new(appconfigurationv1.TestWorkflowConfigOptions)
+				testWorkflowConfigOptionsModel.WorkflowConfigID = core.StringPtr("workflow_config_id")
+				testWorkflowConfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := appConfigurationService.TestWorkflowConfig(testWorkflowConfigOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
 	Describe(`ImportConfig(importConfigOptions *ImportConfigOptions) - Operation response error`, func() {
 		importConfigPath := "/config"
 		Context(`Using mock server endpoint with invalid JSON response`, func() {
@@ -12873,6 +16656,18 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(appConfigurationService).ToNot(BeNil())
 
+				// Construct an instance of the RolloutPhase model
+				rolloutPhaseModel := new(appconfigurationv1.RolloutPhase)
+				rolloutPhaseModel.Percentage = core.Int64Ptr(int64(1))
+				rolloutPhaseModel.Duration = core.Int64Ptr(int64(38))
+				rolloutPhaseModel.DurationType = core.StringPtr("days")
+
+				// Construct an instance of the RolloutConfiguration model
+				rolloutConfigurationModel := new(appconfigurationv1.RolloutConfiguration)
+				rolloutConfigurationModel.DurationPreset = core.StringPtr("CUSTOM")
+				rolloutConfigurationModel.StartAt = CreateMockDateTime("2019-01-01T12:00:00.000Z")
+				rolloutConfigurationModel.Phases = []appconfigurationv1.RolloutPhase{*rolloutPhaseModel}
+
 				// Construct an instance of the TargetSegments model
 				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
 				targetSegmentsModel.Segments = []string{"testString"}
@@ -12883,6 +16678,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				featureSegmentRuleModel.Value = "testString"
 				featureSegmentRuleModel.Order = core.Int64Ptr(int64(38))
 				featureSegmentRuleModel.RolloutPercentage = core.Int64Ptr(int64(100))
+				featureSegmentRuleModel.RolloutType = core.StringPtr("MANUAL")
+				featureSegmentRuleModel.RolloutConfiguration = rolloutConfigurationModel
 				featureSegmentRuleModel.RuleID = core.StringPtr("testString")
 				featureSegmentRuleModel.RuleName = core.StringPtr("testString")
 
@@ -12901,6 +16698,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				importFeatureRequestBodyModel.DisabledValue = "2"
 				importFeatureRequestBodyModel.Enabled = core.BoolPtr(true)
 				importFeatureRequestBodyModel.RolloutPercentage = core.Int64Ptr(int64(100))
+				importFeatureRequestBodyModel.RolloutType = core.StringPtr("MANUAL")
+				importFeatureRequestBodyModel.RolloutConfiguration = rolloutConfigurationModel
 				importFeatureRequestBodyModel.Tags = core.StringPtr("testString")
 				importFeatureRequestBodyModel.SegmentRules = []appconfigurationv1.FeatureSegmentRule{*featureSegmentRuleModel}
 				importFeatureRequestBodyModel.Collections = []appconfigurationv1.CollectionRef{*collectionRefModel}
@@ -13025,6 +16824,18 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(appConfigurationService).ToNot(BeNil())
 				appConfigurationService.EnableRetries(0, 0)
 
+				// Construct an instance of the RolloutPhase model
+				rolloutPhaseModel := new(appconfigurationv1.RolloutPhase)
+				rolloutPhaseModel.Percentage = core.Int64Ptr(int64(1))
+				rolloutPhaseModel.Duration = core.Int64Ptr(int64(38))
+				rolloutPhaseModel.DurationType = core.StringPtr("days")
+
+				// Construct an instance of the RolloutConfiguration model
+				rolloutConfigurationModel := new(appconfigurationv1.RolloutConfiguration)
+				rolloutConfigurationModel.DurationPreset = core.StringPtr("CUSTOM")
+				rolloutConfigurationModel.StartAt = CreateMockDateTime("2019-01-01T12:00:00.000Z")
+				rolloutConfigurationModel.Phases = []appconfigurationv1.RolloutPhase{*rolloutPhaseModel}
+
 				// Construct an instance of the TargetSegments model
 				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
 				targetSegmentsModel.Segments = []string{"testString"}
@@ -13035,6 +16846,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				featureSegmentRuleModel.Value = "testString"
 				featureSegmentRuleModel.Order = core.Int64Ptr(int64(38))
 				featureSegmentRuleModel.RolloutPercentage = core.Int64Ptr(int64(100))
+				featureSegmentRuleModel.RolloutType = core.StringPtr("MANUAL")
+				featureSegmentRuleModel.RolloutConfiguration = rolloutConfigurationModel
 				featureSegmentRuleModel.RuleID = core.StringPtr("testString")
 				featureSegmentRuleModel.RuleName = core.StringPtr("testString")
 
@@ -13053,6 +16866,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				importFeatureRequestBodyModel.DisabledValue = "2"
 				importFeatureRequestBodyModel.Enabled = core.BoolPtr(true)
 				importFeatureRequestBodyModel.RolloutPercentage = core.Int64Ptr(int64(100))
+				importFeatureRequestBodyModel.RolloutType = core.StringPtr("MANUAL")
+				importFeatureRequestBodyModel.RolloutConfiguration = rolloutConfigurationModel
 				importFeatureRequestBodyModel.Tags = core.StringPtr("testString")
 				importFeatureRequestBodyModel.SegmentRules = []appconfigurationv1.FeatureSegmentRule{*featureSegmentRuleModel}
 				importFeatureRequestBodyModel.Collections = []appconfigurationv1.CollectionRef{*collectionRefModel}
@@ -13185,6 +17000,18 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(response).To(BeNil())
 				Expect(result).To(BeNil())
 
+				// Construct an instance of the RolloutPhase model
+				rolloutPhaseModel := new(appconfigurationv1.RolloutPhase)
+				rolloutPhaseModel.Percentage = core.Int64Ptr(int64(1))
+				rolloutPhaseModel.Duration = core.Int64Ptr(int64(38))
+				rolloutPhaseModel.DurationType = core.StringPtr("days")
+
+				// Construct an instance of the RolloutConfiguration model
+				rolloutConfigurationModel := new(appconfigurationv1.RolloutConfiguration)
+				rolloutConfigurationModel.DurationPreset = core.StringPtr("CUSTOM")
+				rolloutConfigurationModel.StartAt = CreateMockDateTime("2019-01-01T12:00:00.000Z")
+				rolloutConfigurationModel.Phases = []appconfigurationv1.RolloutPhase{*rolloutPhaseModel}
+
 				// Construct an instance of the TargetSegments model
 				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
 				targetSegmentsModel.Segments = []string{"testString"}
@@ -13195,6 +17022,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				featureSegmentRuleModel.Value = "testString"
 				featureSegmentRuleModel.Order = core.Int64Ptr(int64(38))
 				featureSegmentRuleModel.RolloutPercentage = core.Int64Ptr(int64(100))
+				featureSegmentRuleModel.RolloutType = core.StringPtr("MANUAL")
+				featureSegmentRuleModel.RolloutConfiguration = rolloutConfigurationModel
 				featureSegmentRuleModel.RuleID = core.StringPtr("testString")
 				featureSegmentRuleModel.RuleName = core.StringPtr("testString")
 
@@ -13213,6 +17042,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				importFeatureRequestBodyModel.DisabledValue = "2"
 				importFeatureRequestBodyModel.Enabled = core.BoolPtr(true)
 				importFeatureRequestBodyModel.RolloutPercentage = core.Int64Ptr(int64(100))
+				importFeatureRequestBodyModel.RolloutType = core.StringPtr("MANUAL")
+				importFeatureRequestBodyModel.RolloutConfiguration = rolloutConfigurationModel
 				importFeatureRequestBodyModel.Tags = core.StringPtr("testString")
 				importFeatureRequestBodyModel.SegmentRules = []appconfigurationv1.FeatureSegmentRule{*featureSegmentRuleModel}
 				importFeatureRequestBodyModel.Collections = []appconfigurationv1.CollectionRef{*collectionRefModel}
@@ -13289,6 +17120,18 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(appConfigurationService).ToNot(BeNil())
 
+				// Construct an instance of the RolloutPhase model
+				rolloutPhaseModel := new(appconfigurationv1.RolloutPhase)
+				rolloutPhaseModel.Percentage = core.Int64Ptr(int64(1))
+				rolloutPhaseModel.Duration = core.Int64Ptr(int64(38))
+				rolloutPhaseModel.DurationType = core.StringPtr("days")
+
+				// Construct an instance of the RolloutConfiguration model
+				rolloutConfigurationModel := new(appconfigurationv1.RolloutConfiguration)
+				rolloutConfigurationModel.DurationPreset = core.StringPtr("CUSTOM")
+				rolloutConfigurationModel.StartAt = CreateMockDateTime("2019-01-01T12:00:00.000Z")
+				rolloutConfigurationModel.Phases = []appconfigurationv1.RolloutPhase{*rolloutPhaseModel}
+
 				// Construct an instance of the TargetSegments model
 				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
 				targetSegmentsModel.Segments = []string{"testString"}
@@ -13299,6 +17142,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				featureSegmentRuleModel.Value = "testString"
 				featureSegmentRuleModel.Order = core.Int64Ptr(int64(38))
 				featureSegmentRuleModel.RolloutPercentage = core.Int64Ptr(int64(100))
+				featureSegmentRuleModel.RolloutType = core.StringPtr("MANUAL")
+				featureSegmentRuleModel.RolloutConfiguration = rolloutConfigurationModel
 				featureSegmentRuleModel.RuleID = core.StringPtr("testString")
 				featureSegmentRuleModel.RuleName = core.StringPtr("testString")
 
@@ -13317,6 +17162,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				importFeatureRequestBodyModel.DisabledValue = "2"
 				importFeatureRequestBodyModel.Enabled = core.BoolPtr(true)
 				importFeatureRequestBodyModel.RolloutPercentage = core.Int64Ptr(int64(100))
+				importFeatureRequestBodyModel.RolloutType = core.StringPtr("MANUAL")
+				importFeatureRequestBodyModel.RolloutConfiguration = rolloutConfigurationModel
 				importFeatureRequestBodyModel.Tags = core.StringPtr("testString")
 				importFeatureRequestBodyModel.SegmentRules = []appconfigurationv1.FeatureSegmentRule{*featureSegmentRuleModel}
 				importFeatureRequestBodyModel.Collections = []appconfigurationv1.CollectionRef{*collectionRefModel}
@@ -13407,6 +17254,18 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(appConfigurationService).ToNot(BeNil())
 
+				// Construct an instance of the RolloutPhase model
+				rolloutPhaseModel := new(appconfigurationv1.RolloutPhase)
+				rolloutPhaseModel.Percentage = core.Int64Ptr(int64(1))
+				rolloutPhaseModel.Duration = core.Int64Ptr(int64(38))
+				rolloutPhaseModel.DurationType = core.StringPtr("days")
+
+				// Construct an instance of the RolloutConfiguration model
+				rolloutConfigurationModel := new(appconfigurationv1.RolloutConfiguration)
+				rolloutConfigurationModel.DurationPreset = core.StringPtr("CUSTOM")
+				rolloutConfigurationModel.StartAt = CreateMockDateTime("2019-01-01T12:00:00.000Z")
+				rolloutConfigurationModel.Phases = []appconfigurationv1.RolloutPhase{*rolloutPhaseModel}
+
 				// Construct an instance of the TargetSegments model
 				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
 				targetSegmentsModel.Segments = []string{"testString"}
@@ -13417,6 +17276,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				featureSegmentRuleModel.Value = "testString"
 				featureSegmentRuleModel.Order = core.Int64Ptr(int64(38))
 				featureSegmentRuleModel.RolloutPercentage = core.Int64Ptr(int64(100))
+				featureSegmentRuleModel.RolloutType = core.StringPtr("MANUAL")
+				featureSegmentRuleModel.RolloutConfiguration = rolloutConfigurationModel
 				featureSegmentRuleModel.RuleID = core.StringPtr("testString")
 				featureSegmentRuleModel.RuleName = core.StringPtr("testString")
 
@@ -13435,6 +17296,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				importFeatureRequestBodyModel.DisabledValue = "2"
 				importFeatureRequestBodyModel.Enabled = core.BoolPtr(true)
 				importFeatureRequestBodyModel.RolloutPercentage = core.Int64Ptr(int64(100))
+				importFeatureRequestBodyModel.RolloutType = core.StringPtr("MANUAL")
+				importFeatureRequestBodyModel.RolloutConfiguration = rolloutConfigurationModel
 				importFeatureRequestBodyModel.Tags = core.StringPtr("testString")
 				importFeatureRequestBodyModel.SegmentRules = []appconfigurationv1.FeatureSegmentRule{*featureSegmentRuleModel}
 				importFeatureRequestBodyModel.Collections = []appconfigurationv1.CollectionRef{*collectionRefModel}
@@ -13570,7 +17433,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"environments": [{"name": "Name", "environment_id": "EnvironmentID", "description": "Description", "tags": "Tags", "color_code": "#FDD13A", "features": [{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100, "rule_id": "RuleID", "rule_name": "RuleName"}], "collections": [{"collection_id": "CollectionID", "name": "Name"}]}], "properties": [{"name": "Name", "property_id": "PropertyID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "value": "anyValue", "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5}], "collections": [{"collection_id": "CollectionID", "name": "Name"}]}]}], "collections": [{"collection_id": "CollectionID", "name": "Name", "description": "Description", "tags": "Tags"}], "segments": [{"name": "Name", "segment_id": "SegmentID", "description": "Description", "tags": "Tags", "rules": [{"attribute_name": "AttributeName", "operator": "is", "values": ["Values"]}]}]}`)
+					fmt.Fprintf(res, "%s", `{"environments": [{"name": "Name", "environment_id": "EnvironmentID", "description": "Description", "tags": "Tags", "color_code": "#FDD13A", "features": [{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED"}, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED"}, "rule_id": "RuleID", "rule_name": "RuleName"}], "collections": [{"collection_id": "CollectionID", "name": "Name"}]}], "properties": [{"name": "Name", "property_id": "PropertyID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "value": "anyValue", "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5}], "collections": [{"collection_id": "CollectionID", "name": "Name"}]}]}], "collections": [{"collection_id": "CollectionID", "name": "Name", "description": "Description", "tags": "Tags"}], "segments": [{"name": "Name", "segment_id": "SegmentID", "description": "Description", "tags": "Tags", "rules": [{"attribute_name": "AttributeName", "operator": "is", "values": ["Values"]}]}]}`)
 				}))
 			})
 			It(`Invoke ListInstanceConfig successfully with retries`, func() {
@@ -13623,7 +17486,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"environments": [{"name": "Name", "environment_id": "EnvironmentID", "description": "Description", "tags": "Tags", "color_code": "#FDD13A", "features": [{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100, "rule_id": "RuleID", "rule_name": "RuleName"}], "collections": [{"collection_id": "CollectionID", "name": "Name"}]}], "properties": [{"name": "Name", "property_id": "PropertyID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "value": "anyValue", "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5}], "collections": [{"collection_id": "CollectionID", "name": "Name"}]}]}], "collections": [{"collection_id": "CollectionID", "name": "Name", "description": "Description", "tags": "Tags"}], "segments": [{"name": "Name", "segment_id": "SegmentID", "description": "Description", "tags": "Tags", "rules": [{"attribute_name": "AttributeName", "operator": "is", "values": ["Values"]}]}]}`)
+					fmt.Fprintf(res, "%s", `{"environments": [{"name": "Name", "environment_id": "EnvironmentID", "description": "Description", "tags": "Tags", "color_code": "#FDD13A", "features": [{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED"}, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED"}, "rule_id": "RuleID", "rule_name": "RuleName"}], "collections": [{"collection_id": "CollectionID", "name": "Name"}]}], "properties": [{"name": "Name", "property_id": "PropertyID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "value": "anyValue", "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5}], "collections": [{"collection_id": "CollectionID", "name": "Name"}]}]}], "collections": [{"collection_id": "CollectionID", "name": "Name", "description": "Description", "tags": "Tags"}], "segments": [{"name": "Name", "segment_id": "SegmentID", "description": "Description", "tags": "Tags", "rules": [{"attribute_name": "AttributeName", "operator": "is", "values": ["Values"]}]}]}`)
 				}))
 			})
 			It(`Invoke ListInstanceConfig successfully`, func() {
@@ -14214,6 +18077,26 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(createEnvironmentOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewCreateFeatureOptions successfully`, func() {
+				// Construct an instance of the RolloutPhase model
+				rolloutPhaseModel := new(appconfigurationv1.RolloutPhase)
+				Expect(rolloutPhaseModel).ToNot(BeNil())
+				rolloutPhaseModel.Percentage = core.Int64Ptr(int64(1))
+				rolloutPhaseModel.Duration = core.Int64Ptr(int64(38))
+				rolloutPhaseModel.DurationType = core.StringPtr("days")
+				Expect(rolloutPhaseModel.Percentage).To(Equal(core.Int64Ptr(int64(1))))
+				Expect(rolloutPhaseModel.Duration).To(Equal(core.Int64Ptr(int64(38))))
+				Expect(rolloutPhaseModel.DurationType).To(Equal(core.StringPtr("days")))
+
+				// Construct an instance of the RolloutConfiguration model
+				rolloutConfigurationModel := new(appconfigurationv1.RolloutConfiguration)
+				Expect(rolloutConfigurationModel).ToNot(BeNil())
+				rolloutConfigurationModel.DurationPreset = core.StringPtr("CUSTOM")
+				rolloutConfigurationModel.StartAt = CreateMockDateTime("2019-01-01T12:00:00.000Z")
+				rolloutConfigurationModel.Phases = []appconfigurationv1.RolloutPhase{*rolloutPhaseModel}
+				Expect(rolloutConfigurationModel.DurationPreset).To(Equal(core.StringPtr("CUSTOM")))
+				Expect(rolloutConfigurationModel.StartAt).To(Equal(CreateMockDateTime("2019-01-01T12:00:00.000Z")))
+				Expect(rolloutConfigurationModel.Phases).To(Equal([]appconfigurationv1.RolloutPhase{*rolloutPhaseModel}))
+
 				// Construct an instance of the TargetSegments model
 				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
 				Expect(targetSegmentsModel).ToNot(BeNil())
@@ -14227,12 +18110,16 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				featureSegmentRuleModel.Value = "true"
 				featureSegmentRuleModel.Order = core.Int64Ptr(int64(1))
 				featureSegmentRuleModel.RolloutPercentage = core.Int64Ptr(int64(50))
+				featureSegmentRuleModel.RolloutType = core.StringPtr("MANUAL")
+				featureSegmentRuleModel.RolloutConfiguration = rolloutConfigurationModel
 				featureSegmentRuleModel.RuleID = core.StringPtr("rule-id-1")
 				featureSegmentRuleModel.RuleName = core.StringPtr("rule-name-1")
 				Expect(featureSegmentRuleModel.Rules).To(Equal([]appconfigurationv1.TargetSegments{*targetSegmentsModel}))
 				Expect(featureSegmentRuleModel.Value).To(Equal("true"))
 				Expect(featureSegmentRuleModel.Order).To(Equal(core.Int64Ptr(int64(1))))
 				Expect(featureSegmentRuleModel.RolloutPercentage).To(Equal(core.Int64Ptr(int64(50))))
+				Expect(featureSegmentRuleModel.RolloutType).To(Equal(core.StringPtr("MANUAL")))
+				Expect(featureSegmentRuleModel.RolloutConfiguration).To(Equal(rolloutConfigurationModel))
 				Expect(featureSegmentRuleModel.RuleID).To(Equal(core.StringPtr("rule-id-1")))
 				Expect(featureSegmentRuleModel.RuleName).To(Equal(core.StringPtr("rule-name-1")))
 
@@ -14260,6 +18147,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				createFeatureOptionsModel.SetFormat("TEXT")
 				createFeatureOptionsModel.SetEnabled(true)
 				createFeatureOptionsModel.SetRolloutPercentage(int64(100))
+				createFeatureOptionsModel.SetRolloutType("MANUAL")
+				createFeatureOptionsModel.SetRolloutConfiguration(rolloutConfigurationModel)
 				createFeatureOptionsModel.SetTags("version: 1.1, pre-release")
 				createFeatureOptionsModel.SetSegmentRules([]appconfigurationv1.FeatureSegmentRule{*featureSegmentRuleModel})
 				createFeatureOptionsModel.SetCollections([]appconfigurationv1.CollectionRef{*collectionRefModel})
@@ -14275,6 +18164,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(createFeatureOptionsModel.Format).To(Equal(core.StringPtr("TEXT")))
 				Expect(createFeatureOptionsModel.Enabled).To(Equal(core.BoolPtr(true)))
 				Expect(createFeatureOptionsModel.RolloutPercentage).To(Equal(core.Int64Ptr(int64(100))))
+				Expect(createFeatureOptionsModel.RolloutType).To(Equal(core.StringPtr("MANUAL")))
+				Expect(createFeatureOptionsModel.RolloutConfiguration).To(Equal(rolloutConfigurationModel))
 				Expect(createFeatureOptionsModel.Tags).To(Equal(core.StringPtr("version: 1.1, pre-release")))
 				Expect(createFeatureOptionsModel.SegmentRules).To(Equal([]appconfigurationv1.FeatureSegmentRule{*featureSegmentRuleModel}))
 				Expect(createFeatureOptionsModel.Collections).To(Equal([]appconfigurationv1.CollectionRef{*collectionRefModel}))
@@ -14286,6 +18177,26 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(targetSegmentsModel).ToNot(BeNil())
 				targetSegmentsModel.Segments = []string{"betausers", "premiumusers"}
 				Expect(targetSegmentsModel.Segments).To(Equal([]string{"betausers", "premiumusers"}))
+
+				// Construct an instance of the RolloutPhase model
+				rolloutPhaseModel := new(appconfigurationv1.RolloutPhase)
+				Expect(rolloutPhaseModel).ToNot(BeNil())
+				rolloutPhaseModel.Percentage = core.Int64Ptr(int64(1))
+				rolloutPhaseModel.Duration = core.Int64Ptr(int64(38))
+				rolloutPhaseModel.DurationType = core.StringPtr("days")
+				Expect(rolloutPhaseModel.Percentage).To(Equal(core.Int64Ptr(int64(1))))
+				Expect(rolloutPhaseModel.Duration).To(Equal(core.Int64Ptr(int64(38))))
+				Expect(rolloutPhaseModel.DurationType).To(Equal(core.StringPtr("days")))
+
+				// Construct an instance of the RolloutConfiguration model
+				rolloutConfigurationModel := new(appconfigurationv1.RolloutConfiguration)
+				Expect(rolloutConfigurationModel).ToNot(BeNil())
+				rolloutConfigurationModel.DurationPreset = core.StringPtr("CUSTOM")
+				rolloutConfigurationModel.StartAt = CreateMockDateTime("2019-01-01T12:00:00.000Z")
+				rolloutConfigurationModel.Phases = []appconfigurationv1.RolloutPhase{*rolloutPhaseModel}
+				Expect(rolloutConfigurationModel.DurationPreset).To(Equal(core.StringPtr("CUSTOM")))
+				Expect(rolloutConfigurationModel.StartAt).To(Equal(CreateMockDateTime("2019-01-01T12:00:00.000Z")))
+				Expect(rolloutConfigurationModel.Phases).To(Equal([]appconfigurationv1.RolloutPhase{*rolloutPhaseModel}))
 
 				// Construct an instance of the CreateFeatureRuleOptions model
 				environmentID := "environment_id"
@@ -14301,6 +18212,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				createFeatureRuleOptionsModel.SetRuleID("RuleA")
 				createFeatureRuleOptionsModel.SetRuleName("Rule Name")
 				createFeatureRuleOptionsModel.SetRolloutPercentage(int64(50))
+				createFeatureRuleOptionsModel.SetRolloutType("MANUAL")
+				createFeatureRuleOptionsModel.SetRolloutConfiguration(rolloutConfigurationModel)
 				createFeatureRuleOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(createFeatureRuleOptionsModel).ToNot(BeNil())
 				Expect(createFeatureRuleOptionsModel.EnvironmentID).To(Equal(core.StringPtr("environment_id")))
@@ -14310,6 +18223,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(createFeatureRuleOptionsModel.RuleID).To(Equal(core.StringPtr("RuleA")))
 				Expect(createFeatureRuleOptionsModel.RuleName).To(Equal(core.StringPtr("Rule Name")))
 				Expect(createFeatureRuleOptionsModel.RolloutPercentage).To(Equal(core.Int64Ptr(int64(50))))
+				Expect(createFeatureRuleOptionsModel.RolloutType).To(Equal(core.StringPtr("MANUAL")))
+				Expect(createFeatureRuleOptionsModel.RolloutConfiguration).To(Equal(rolloutConfigurationModel))
 				Expect(createFeatureRuleOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewCreateGitconfigOptions successfully`, func() {
@@ -14455,6 +18370,90 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(createSegmentOptionsModel.Tags).To(Equal(core.StringPtr("version: 1.1, stage")))
 				Expect(createSegmentOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
+			It(`Invoke NewCreateWorkflowConfigsOptions successfully`, func() {
+				// Construct an instance of the WorkflowMetadataExternalServiceNowMetadata model
+				workflowMetadataModel := new(appconfigurationv1.WorkflowMetadataExternalServiceNowMetadata)
+				Expect(workflowMetadataModel).ToNot(BeNil())
+				workflowMetadataModel.ApprovalExpiration = core.Int64Ptr(int64(7))
+				workflowMetadataModel.ApprovalGroupName = core.StringPtr("AppConfiguration Approvers")
+				workflowMetadataModel.SmSecretID = core.StringPtr("63476562-d5b4-02ae-e966-528f8df457bb")
+				workflowMetadataModel.WorkflowURL = core.StringPtr("https://dev339579.service-now.com")
+				Expect(workflowMetadataModel.ApprovalExpiration).To(Equal(core.Int64Ptr(int64(7))))
+				Expect(workflowMetadataModel.ApprovalGroupName).To(Equal(core.StringPtr("AppConfiguration Approvers")))
+				Expect(workflowMetadataModel.SmSecretID).To(Equal(core.StringPtr("63476562-d5b4-02ae-e966-528f8df457bb")))
+				Expect(workflowMetadataModel.WorkflowURL).To(Equal(core.StringPtr("https://dev339579.service-now.com")))
+
+				// Construct an instance of the WorkflowProvider model
+				workflowProviderModel := new(appconfigurationv1.WorkflowProvider)
+				Expect(workflowProviderModel).ToNot(BeNil())
+				workflowProviderModel.Type = core.StringPtr("SERVICENOW_EXTERNAL")
+				workflowProviderModel.Metadata = workflowMetadataModel
+				Expect(workflowProviderModel.Type).To(Equal(core.StringPtr("SERVICENOW_EXTERNAL")))
+				Expect(workflowProviderModel.Metadata).To(Equal(workflowMetadataModel))
+
+				// Construct an instance of the WorkflowScopeMode model
+				workflowScopeModeModel := new(appconfigurationv1.WorkflowScopeMode)
+				Expect(workflowScopeModeModel).ToNot(BeNil())
+				workflowScopeModeModel.Mode = core.StringPtr("ALL")
+				workflowScopeModeModel.Ids = []string{}
+				Expect(workflowScopeModeModel.Mode).To(Equal(core.StringPtr("ALL")))
+				Expect(workflowScopeModeModel.Ids).To(Equal([]string{}))
+
+				// Construct an instance of the WorkflowEnvironmentResourcesEnvironment model
+				workflowEnvironmentResourcesEnvironmentModel := new(appconfigurationv1.WorkflowEnvironmentResourcesEnvironment)
+				Expect(workflowEnvironmentResourcesEnvironmentModel).ToNot(BeNil())
+				workflowEnvironmentResourcesEnvironmentModel.Enable = core.BoolPtr(true)
+				Expect(workflowEnvironmentResourcesEnvironmentModel.Enable).To(Equal(core.BoolPtr(true)))
+
+				// Construct an instance of the WorkflowEnvironmentResources model
+				workflowEnvironmentResourcesModel := new(appconfigurationv1.WorkflowEnvironmentResources)
+				Expect(workflowEnvironmentResourcesModel).ToNot(BeNil())
+				workflowEnvironmentResourcesModel.Environment = workflowEnvironmentResourcesEnvironmentModel
+				workflowEnvironmentResourcesModel.Features = workflowScopeModeModel
+				workflowEnvironmentResourcesModel.Properties = workflowScopeModeModel
+				Expect(workflowEnvironmentResourcesModel.Environment).To(Equal(workflowEnvironmentResourcesEnvironmentModel))
+				Expect(workflowEnvironmentResourcesModel.Features).To(Equal(workflowScopeModeModel))
+				Expect(workflowEnvironmentResourcesModel.Properties).To(Equal(workflowScopeModeModel))
+
+				// Construct an instance of the WorkflowEnvironment model
+				workflowEnvironmentModel := new(appconfigurationv1.WorkflowEnvironment)
+				Expect(workflowEnvironmentModel).ToNot(BeNil())
+				workflowEnvironmentModel.EnvironmentID = core.StringPtr("stage")
+				workflowEnvironmentModel.Resources = workflowEnvironmentResourcesModel
+				Expect(workflowEnvironmentModel.EnvironmentID).To(Equal(core.StringPtr("stage")))
+				Expect(workflowEnvironmentModel.Resources).To(Equal(workflowEnvironmentResourcesModel))
+
+				// Construct an instance of the WorkflowScope model
+				workflowScopeModel := new(appconfigurationv1.WorkflowScope)
+				Expect(workflowScopeModel).ToNot(BeNil())
+				workflowScopeModel.Collections = workflowScopeModeModel
+				workflowScopeModel.Segments = workflowScopeModeModel
+				workflowScopeModel.Environments = []appconfigurationv1.WorkflowEnvironment{*workflowEnvironmentModel}
+				Expect(workflowScopeModel.Collections).To(Equal(workflowScopeModeModel))
+				Expect(workflowScopeModel.Segments).To(Equal(workflowScopeModeModel))
+				Expect(workflowScopeModel.Environments).To(Equal([]appconfigurationv1.WorkflowEnvironment{*workflowEnvironmentModel}))
+
+				// Construct an instance of the CreateWorkflowConfigsOptions model
+				createWorkflowConfigsOptionsName := "ext-service-now"
+				createWorkflowConfigsOptionsWorkflowID := "workflow-id-1"
+				createWorkflowConfigsOptionsEnabled := true
+				var createWorkflowConfigsOptionsProvider *appconfigurationv1.WorkflowProvider = nil
+				var createWorkflowConfigsOptionsScope *appconfigurationv1.WorkflowScope = nil
+				createWorkflowConfigsOptionsModel := appConfigurationService.NewCreateWorkflowConfigsOptions(createWorkflowConfigsOptionsName, createWorkflowConfigsOptionsWorkflowID, createWorkflowConfigsOptionsEnabled, createWorkflowConfigsOptionsProvider, createWorkflowConfigsOptionsScope)
+				createWorkflowConfigsOptionsModel.SetName("ext-service-now")
+				createWorkflowConfigsOptionsModel.SetWorkflowID("workflow-id-1")
+				createWorkflowConfigsOptionsModel.SetEnabled(true)
+				createWorkflowConfigsOptionsModel.SetProvider(workflowProviderModel)
+				createWorkflowConfigsOptionsModel.SetScope(workflowScopeModel)
+				createWorkflowConfigsOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
+				Expect(createWorkflowConfigsOptionsModel).ToNot(BeNil())
+				Expect(createWorkflowConfigsOptionsModel.Name).To(Equal(core.StringPtr("ext-service-now")))
+				Expect(createWorkflowConfigsOptionsModel.WorkflowID).To(Equal(core.StringPtr("workflow-id-1")))
+				Expect(createWorkflowConfigsOptionsModel.Enabled).To(Equal(core.BoolPtr(true)))
+				Expect(createWorkflowConfigsOptionsModel.Provider).To(Equal(workflowProviderModel))
+				Expect(createWorkflowConfigsOptionsModel.Scope).To(Equal(workflowScopeModel))
+				Expect(createWorkflowConfigsOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
+			})
 			It(`Invoke NewCreateWorkflowconfigOptions successfully`, func() {
 				// Construct an instance of the ExternalServiceNowCredentials model
 				externalServiceNowCredentialsModel := new(appconfigurationv1.ExternalServiceNowCredentials)
@@ -14586,6 +18585,16 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(deleteSegmentOptionsModel.SegmentID).To(Equal(core.StringPtr("segment_id")))
 				Expect(deleteSegmentOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
+			It(`Invoke NewDeleteWorkflowConfigsOptions successfully`, func() {
+				// Construct an instance of the DeleteWorkflowConfigsOptions model
+				workflowConfigID := "workflow_config_id"
+				deleteWorkflowConfigsOptionsModel := appConfigurationService.NewDeleteWorkflowConfigsOptions(workflowConfigID)
+				deleteWorkflowConfigsOptionsModel.SetWorkflowConfigID("workflow_config_id")
+				deleteWorkflowConfigsOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
+				Expect(deleteWorkflowConfigsOptionsModel).ToNot(BeNil())
+				Expect(deleteWorkflowConfigsOptionsModel.WorkflowConfigID).To(Equal(core.StringPtr("workflow_config_id")))
+				Expect(deleteWorkflowConfigsOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
+			})
 			It(`Invoke NewDeleteWorkflowconfigOptions successfully`, func() {
 				// Construct an instance of the DeleteWorkflowconfigOptions model
 				environmentID := "environment_id"
@@ -14633,12 +18642,12 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				getCollectionOptionsModel := appConfigurationService.NewGetCollectionOptions(collectionID)
 				getCollectionOptionsModel.SetCollectionID("collection_id")
 				getCollectionOptionsModel.SetExpand(true)
-				getCollectionOptionsModel.SetInclude([]string{"features", "properties", "snapshots"})
+				getCollectionOptionsModel.SetInclude([]string{"features", "properties", "snapshots", "workflow_approval"})
 				getCollectionOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(getCollectionOptionsModel).ToNot(BeNil())
 				Expect(getCollectionOptionsModel.CollectionID).To(Equal(core.StringPtr("collection_id")))
 				Expect(getCollectionOptionsModel.Expand).To(Equal(core.BoolPtr(true)))
-				Expect(getCollectionOptionsModel.Include).To(Equal([]string{"features", "properties", "snapshots"}))
+				Expect(getCollectionOptionsModel.Include).To(Equal([]string{"features", "properties", "snapshots", "workflow_approval"}))
 				Expect(getCollectionOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewGetEnvironmentOptions successfully`, func() {
@@ -14647,12 +18656,12 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				getEnvironmentOptionsModel := appConfigurationService.NewGetEnvironmentOptions(environmentID)
 				getEnvironmentOptionsModel.SetEnvironmentID("environment_id")
 				getEnvironmentOptionsModel.SetExpand(true)
-				getEnvironmentOptionsModel.SetInclude([]string{"features", "properties", "snapshots"})
+				getEnvironmentOptionsModel.SetInclude([]string{"features", "properties", "snapshots", "workflow_approval"})
 				getEnvironmentOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(getEnvironmentOptionsModel).ToNot(BeNil())
 				Expect(getEnvironmentOptionsModel.EnvironmentID).To(Equal(core.StringPtr("environment_id")))
 				Expect(getEnvironmentOptionsModel.Expand).To(Equal(core.BoolPtr(true)))
-				Expect(getEnvironmentOptionsModel.Include).To(Equal([]string{"features", "properties", "snapshots"}))
+				Expect(getEnvironmentOptionsModel.Include).To(Equal([]string{"features", "properties", "snapshots", "workflow_approval"}))
 				Expect(getEnvironmentOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewGetFeatureOptions successfully`, func() {
@@ -14662,12 +18671,12 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				getFeatureOptionsModel := appConfigurationService.NewGetFeatureOptions(environmentID, featureID)
 				getFeatureOptionsModel.SetEnvironmentID("environment_id")
 				getFeatureOptionsModel.SetFeatureID("feature_id")
-				getFeatureOptionsModel.SetInclude([]string{"collections", "rules", "change_request"})
+				getFeatureOptionsModel.SetInclude([]string{"collections", "rules", "workflow_approval"})
 				getFeatureOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(getFeatureOptionsModel).ToNot(BeNil())
 				Expect(getFeatureOptionsModel.EnvironmentID).To(Equal(core.StringPtr("environment_id")))
 				Expect(getFeatureOptionsModel.FeatureID).To(Equal(core.StringPtr("feature_id")))
-				Expect(getFeatureOptionsModel.Include).To(Equal([]string{"collections", "rules", "change_request"}))
+				Expect(getFeatureOptionsModel.Include).To(Equal([]string{"collections", "rules", "workflow_approval"}))
 				Expect(getFeatureOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewGetFeatureRuleOptions successfully`, func() {
@@ -14713,12 +18722,12 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				getPropertyOptionsModel := appConfigurationService.NewGetPropertyOptions(environmentID, propertyID)
 				getPropertyOptionsModel.SetEnvironmentID("environment_id")
 				getPropertyOptionsModel.SetPropertyID("property_id")
-				getPropertyOptionsModel.SetInclude([]string{"collections", "rules"})
+				getPropertyOptionsModel.SetInclude([]string{"collections", "rules", "workflow_approval"})
 				getPropertyOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(getPropertyOptionsModel).ToNot(BeNil())
 				Expect(getPropertyOptionsModel.EnvironmentID).To(Equal(core.StringPtr("environment_id")))
 				Expect(getPropertyOptionsModel.PropertyID).To(Equal(core.StringPtr("property_id")))
-				Expect(getPropertyOptionsModel.Include).To(Equal([]string{"collections", "rules"}))
+				Expect(getPropertyOptionsModel.Include).To(Equal([]string{"collections", "rules", "workflow_approval"}))
 				Expect(getPropertyOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewGetSegmentOptions successfully`, func() {
@@ -14726,12 +18735,22 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				segmentID := "segment_id"
 				getSegmentOptionsModel := appConfigurationService.NewGetSegmentOptions(segmentID)
 				getSegmentOptionsModel.SetSegmentID("segment_id")
-				getSegmentOptionsModel.SetInclude([]string{"features", "properties"})
+				getSegmentOptionsModel.SetInclude([]string{"features", "properties", "workflow_approval"})
 				getSegmentOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(getSegmentOptionsModel).ToNot(BeNil())
 				Expect(getSegmentOptionsModel.SegmentID).To(Equal(core.StringPtr("segment_id")))
-				Expect(getSegmentOptionsModel.Include).To(Equal([]string{"features", "properties"}))
+				Expect(getSegmentOptionsModel.Include).To(Equal([]string{"features", "properties", "workflow_approval"}))
 				Expect(getSegmentOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
+			})
+			It(`Invoke NewGetWorkflowConfigOptions successfully`, func() {
+				// Construct an instance of the GetWorkflowConfigOptions model
+				workflowConfigID := "workflow_config_id"
+				getWorkflowConfigOptionsModel := appConfigurationService.NewGetWorkflowConfigOptions(workflowConfigID)
+				getWorkflowConfigOptionsModel.SetWorkflowConfigID("workflow_config_id")
+				getWorkflowConfigOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
+				Expect(getWorkflowConfigOptionsModel).ToNot(BeNil())
+				Expect(getWorkflowConfigOptionsModel.WorkflowConfigID).To(Equal(core.StringPtr("workflow_config_id")))
+				Expect(getWorkflowConfigOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewImportCollectionSchema successfully`, func() {
 				collectionID := "testString"
@@ -14741,6 +18760,26 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(err).To(BeNil())
 			})
 			It(`Invoke NewImportConfigOptions successfully`, func() {
+				// Construct an instance of the RolloutPhase model
+				rolloutPhaseModel := new(appconfigurationv1.RolloutPhase)
+				Expect(rolloutPhaseModel).ToNot(BeNil())
+				rolloutPhaseModel.Percentage = core.Int64Ptr(int64(1))
+				rolloutPhaseModel.Duration = core.Int64Ptr(int64(38))
+				rolloutPhaseModel.DurationType = core.StringPtr("days")
+				Expect(rolloutPhaseModel.Percentage).To(Equal(core.Int64Ptr(int64(1))))
+				Expect(rolloutPhaseModel.Duration).To(Equal(core.Int64Ptr(int64(38))))
+				Expect(rolloutPhaseModel.DurationType).To(Equal(core.StringPtr("days")))
+
+				// Construct an instance of the RolloutConfiguration model
+				rolloutConfigurationModel := new(appconfigurationv1.RolloutConfiguration)
+				Expect(rolloutConfigurationModel).ToNot(BeNil())
+				rolloutConfigurationModel.DurationPreset = core.StringPtr("CUSTOM")
+				rolloutConfigurationModel.StartAt = CreateMockDateTime("2019-01-01T12:00:00.000Z")
+				rolloutConfigurationModel.Phases = []appconfigurationv1.RolloutPhase{*rolloutPhaseModel}
+				Expect(rolloutConfigurationModel.DurationPreset).To(Equal(core.StringPtr("CUSTOM")))
+				Expect(rolloutConfigurationModel.StartAt).To(Equal(CreateMockDateTime("2019-01-01T12:00:00.000Z")))
+				Expect(rolloutConfigurationModel.Phases).To(Equal([]appconfigurationv1.RolloutPhase{*rolloutPhaseModel}))
+
 				// Construct an instance of the TargetSegments model
 				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
 				Expect(targetSegmentsModel).ToNot(BeNil())
@@ -14754,12 +18793,16 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				featureSegmentRuleModel.Value = "testString"
 				featureSegmentRuleModel.Order = core.Int64Ptr(int64(38))
 				featureSegmentRuleModel.RolloutPercentage = core.Int64Ptr(int64(100))
+				featureSegmentRuleModel.RolloutType = core.StringPtr("MANUAL")
+				featureSegmentRuleModel.RolloutConfiguration = rolloutConfigurationModel
 				featureSegmentRuleModel.RuleID = core.StringPtr("testString")
 				featureSegmentRuleModel.RuleName = core.StringPtr("testString")
 				Expect(featureSegmentRuleModel.Rules).To(Equal([]appconfigurationv1.TargetSegments{*targetSegmentsModel}))
 				Expect(featureSegmentRuleModel.Value).To(Equal("testString"))
 				Expect(featureSegmentRuleModel.Order).To(Equal(core.Int64Ptr(int64(38))))
 				Expect(featureSegmentRuleModel.RolloutPercentage).To(Equal(core.Int64Ptr(int64(100))))
+				Expect(featureSegmentRuleModel.RolloutType).To(Equal(core.StringPtr("MANUAL")))
+				Expect(featureSegmentRuleModel.RolloutConfiguration).To(Equal(rolloutConfigurationModel))
 				Expect(featureSegmentRuleModel.RuleID).To(Equal(core.StringPtr("testString")))
 				Expect(featureSegmentRuleModel.RuleName).To(Equal(core.StringPtr("testString")))
 
@@ -14781,6 +18824,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				importFeatureRequestBodyModel.DisabledValue = "2"
 				importFeatureRequestBodyModel.Enabled = core.BoolPtr(true)
 				importFeatureRequestBodyModel.RolloutPercentage = core.Int64Ptr(int64(100))
+				importFeatureRequestBodyModel.RolloutType = core.StringPtr("MANUAL")
+				importFeatureRequestBodyModel.RolloutConfiguration = rolloutConfigurationModel
 				importFeatureRequestBodyModel.Tags = core.StringPtr("testString")
 				importFeatureRequestBodyModel.SegmentRules = []appconfigurationv1.FeatureSegmentRule{*featureSegmentRuleModel}
 				importFeatureRequestBodyModel.Collections = []appconfigurationv1.CollectionRef{*collectionRefModel}
@@ -14793,6 +18838,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(importFeatureRequestBodyModel.DisabledValue).To(Equal("2"))
 				Expect(importFeatureRequestBodyModel.Enabled).To(Equal(core.BoolPtr(true)))
 				Expect(importFeatureRequestBodyModel.RolloutPercentage).To(Equal(core.Int64Ptr(int64(100))))
+				Expect(importFeatureRequestBodyModel.RolloutType).To(Equal(core.StringPtr("MANUAL")))
+				Expect(importFeatureRequestBodyModel.RolloutConfiguration).To(Equal(rolloutConfigurationModel))
 				Expect(importFeatureRequestBodyModel.Tags).To(Equal(core.StringPtr("testString")))
 				Expect(importFeatureRequestBodyModel.SegmentRules).To(Equal([]appconfigurationv1.FeatureSegmentRule{*featureSegmentRuleModel}))
 				Expect(importFeatureRequestBodyModel.Collections).To(Equal([]appconfigurationv1.CollectionRef{*collectionRefModel}))
@@ -14952,7 +18999,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				listCollectionsOptionsModel.SetTags("version 1.1,pre-release")
 				listCollectionsOptionsModel.SetFeatures([]string{"my-feature-id", "cycle-rentals"})
 				listCollectionsOptionsModel.SetProperties([]string{"my-property-id", "email-property"})
-				listCollectionsOptionsModel.SetInclude([]string{"features", "properties", "snapshots"})
+				listCollectionsOptionsModel.SetInclude([]string{"features", "properties", "snapshots", "workflow_approval"})
 				listCollectionsOptionsModel.SetLimit(int64(10))
 				listCollectionsOptionsModel.SetOffset(int64(0))
 				listCollectionsOptionsModel.SetSearch("test tag")
@@ -14963,7 +19010,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(listCollectionsOptionsModel.Tags).To(Equal(core.StringPtr("version 1.1,pre-release")))
 				Expect(listCollectionsOptionsModel.Features).To(Equal([]string{"my-feature-id", "cycle-rentals"}))
 				Expect(listCollectionsOptionsModel.Properties).To(Equal([]string{"my-property-id", "email-property"}))
-				Expect(listCollectionsOptionsModel.Include).To(Equal([]string{"features", "properties", "snapshots"}))
+				Expect(listCollectionsOptionsModel.Include).To(Equal([]string{"features", "properties", "snapshots", "workflow_approval"}))
 				Expect(listCollectionsOptionsModel.Limit).To(Equal(core.Int64Ptr(int64(10))))
 				Expect(listCollectionsOptionsModel.Offset).To(Equal(core.Int64Ptr(int64(0))))
 				Expect(listCollectionsOptionsModel.Search).To(Equal(core.StringPtr("test tag")))
@@ -14975,7 +19022,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				listEnvironmentsOptionsModel.SetExpand(true)
 				listEnvironmentsOptionsModel.SetSort("created_time")
 				listEnvironmentsOptionsModel.SetTags("version 1.1,pre-release")
-				listEnvironmentsOptionsModel.SetInclude([]string{"features", "properties", "snapshots"})
+				listEnvironmentsOptionsModel.SetInclude([]string{"features", "properties", "snapshots", "workflow_approval"})
 				listEnvironmentsOptionsModel.SetLimit(int64(10))
 				listEnvironmentsOptionsModel.SetOffset(int64(0))
 				listEnvironmentsOptionsModel.SetSearch("test tag")
@@ -14984,7 +19031,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(listEnvironmentsOptionsModel.Expand).To(Equal(core.BoolPtr(true)))
 				Expect(listEnvironmentsOptionsModel.Sort).To(Equal(core.StringPtr("created_time")))
 				Expect(listEnvironmentsOptionsModel.Tags).To(Equal(core.StringPtr("version 1.1,pre-release")))
-				Expect(listEnvironmentsOptionsModel.Include).To(Equal([]string{"features", "properties", "snapshots"}))
+				Expect(listEnvironmentsOptionsModel.Include).To(Equal([]string{"features", "properties", "snapshots", "workflow_approval"}))
 				Expect(listEnvironmentsOptionsModel.Limit).To(Equal(core.Int64Ptr(int64(10))))
 				Expect(listEnvironmentsOptionsModel.Offset).To(Equal(core.Int64Ptr(int64(0))))
 				Expect(listEnvironmentsOptionsModel.Search).To(Equal(core.StringPtr("test tag")))
@@ -15013,7 +19060,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				listFeaturesOptionsModel.SetTags("version 1.1,pre-release")
 				listFeaturesOptionsModel.SetCollections([]string{"my-collection-id", "ghzindiapvtltd"})
 				listFeaturesOptionsModel.SetSegments([]string{"my-segment-id", "beta-users"})
-				listFeaturesOptionsModel.SetInclude([]string{"collections", "rules", "change_request"})
+				listFeaturesOptionsModel.SetInclude([]string{"collections", "rules", "workflow_approval"})
 				listFeaturesOptionsModel.SetLimit(int64(10))
 				listFeaturesOptionsModel.SetOffset(int64(0))
 				listFeaturesOptionsModel.SetSearch("test tag")
@@ -15025,7 +19072,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(listFeaturesOptionsModel.Tags).To(Equal(core.StringPtr("version 1.1,pre-release")))
 				Expect(listFeaturesOptionsModel.Collections).To(Equal([]string{"my-collection-id", "ghzindiapvtltd"}))
 				Expect(listFeaturesOptionsModel.Segments).To(Equal([]string{"my-segment-id", "beta-users"}))
-				Expect(listFeaturesOptionsModel.Include).To(Equal([]string{"collections", "rules", "change_request"}))
+				Expect(listFeaturesOptionsModel.Include).To(Equal([]string{"collections", "rules", "workflow_approval"}))
 				Expect(listFeaturesOptionsModel.Limit).To(Equal(core.Int64Ptr(int64(10))))
 				Expect(listFeaturesOptionsModel.Offset).To(Equal(core.Int64Ptr(int64(0))))
 				Expect(listFeaturesOptionsModel.Search).To(Equal(core.StringPtr("test tag")))
@@ -15087,7 +19134,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				listPropertiesOptionsModel.SetTags("version 1.1,pre-release")
 				listPropertiesOptionsModel.SetCollections([]string{"my-collection-id", "ghzindiapvtltd"})
 				listPropertiesOptionsModel.SetSegments([]string{"my-segment-id", "beta-users"})
-				listPropertiesOptionsModel.SetInclude([]string{"collections", "rules"})
+				listPropertiesOptionsModel.SetInclude([]string{"collections", "rules", "workflow_approval"})
 				listPropertiesOptionsModel.SetLimit(int64(10))
 				listPropertiesOptionsModel.SetOffset(int64(0))
 				listPropertiesOptionsModel.SetSearch("test tag")
@@ -15099,7 +19146,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(listPropertiesOptionsModel.Tags).To(Equal(core.StringPtr("version 1.1,pre-release")))
 				Expect(listPropertiesOptionsModel.Collections).To(Equal([]string{"my-collection-id", "ghzindiapvtltd"}))
 				Expect(listPropertiesOptionsModel.Segments).To(Equal([]string{"my-segment-id", "beta-users"}))
-				Expect(listPropertiesOptionsModel.Include).To(Equal([]string{"collections", "rules"}))
+				Expect(listPropertiesOptionsModel.Include).To(Equal([]string{"collections", "rules", "workflow_approval"}))
 				Expect(listPropertiesOptionsModel.Limit).To(Equal(core.Int64Ptr(int64(10))))
 				Expect(listPropertiesOptionsModel.Offset).To(Equal(core.Int64Ptr(int64(0))))
 				Expect(listPropertiesOptionsModel.Search).To(Equal(core.StringPtr("test tag")))
@@ -15111,7 +19158,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				listSegmentsOptionsModel.SetExpand(true)
 				listSegmentsOptionsModel.SetSort("created_time")
 				listSegmentsOptionsModel.SetTags("version 1.1,pre-release")
-				listSegmentsOptionsModel.SetInclude("rules")
+				listSegmentsOptionsModel.SetInclude([]string{"rules", "workflow_approval"})
 				listSegmentsOptionsModel.SetLimit(int64(10))
 				listSegmentsOptionsModel.SetOffset(int64(0))
 				listSegmentsOptionsModel.SetSearch("test tag")
@@ -15120,11 +19167,26 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(listSegmentsOptionsModel.Expand).To(Equal(core.BoolPtr(true)))
 				Expect(listSegmentsOptionsModel.Sort).To(Equal(core.StringPtr("created_time")))
 				Expect(listSegmentsOptionsModel.Tags).To(Equal(core.StringPtr("version 1.1,pre-release")))
-				Expect(listSegmentsOptionsModel.Include).To(Equal(core.StringPtr("rules")))
+				Expect(listSegmentsOptionsModel.Include).To(Equal([]string{"rules", "workflow_approval"}))
 				Expect(listSegmentsOptionsModel.Limit).To(Equal(core.Int64Ptr(int64(10))))
 				Expect(listSegmentsOptionsModel.Offset).To(Equal(core.Int64Ptr(int64(0))))
 				Expect(listSegmentsOptionsModel.Search).To(Equal(core.StringPtr("test tag")))
 				Expect(listSegmentsOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
+			})
+			It(`Invoke NewListWorkflowConfigsOptions successfully`, func() {
+				// Construct an instance of the ListWorkflowConfigsOptions model
+				listWorkflowConfigsOptionsModel := appConfigurationService.NewListWorkflowConfigsOptions()
+				listWorkflowConfigsOptionsModel.SetSort("created_time")
+				listWorkflowConfigsOptionsModel.SetSearch("search_string")
+				listWorkflowConfigsOptionsModel.SetLimit(int64(10))
+				listWorkflowConfigsOptionsModel.SetOffset(int64(0))
+				listWorkflowConfigsOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
+				Expect(listWorkflowConfigsOptionsModel).ToNot(BeNil())
+				Expect(listWorkflowConfigsOptionsModel.Sort).To(Equal(core.StringPtr("created_time")))
+				Expect(listWorkflowConfigsOptionsModel.Search).To(Equal(core.StringPtr("search_string")))
+				Expect(listWorkflowConfigsOptionsModel.Limit).To(Equal(core.Int64Ptr(int64(10))))
+				Expect(listWorkflowConfigsOptionsModel.Offset).To(Equal(core.Int64Ptr(int64(0))))
+				Expect(listWorkflowConfigsOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewListWorkflowconfigOptions successfully`, func() {
 				// Construct an instance of the ListWorkflowconfigOptions model
@@ -15185,6 +19247,19 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(restoreGitconfigOptionsModel.GitConfigID).To(Equal(core.StringPtr("git_config_id")))
 				Expect(restoreGitconfigOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
+			It(`Invoke NewRolloutConfiguration successfully`, func() {
+				durationPreset := "CUSTOM"
+				phases := []appconfigurationv1.RolloutPhase{}
+				_model, err := appConfigurationService.NewRolloutConfiguration(durationPreset, phases)
+				Expect(_model).ToNot(BeNil())
+				Expect(err).To(BeNil())
+			})
+			It(`Invoke NewRolloutPhase successfully`, func() {
+				percentage := int64(1)
+				_model, err := appConfigurationService.NewRolloutPhase(percentage)
+				Expect(_model).ToNot(BeNil())
+				Expect(err).To(BeNil())
+			})
 			It(`Invoke NewRule successfully`, func() {
 				attributeName := "testString"
 				operator := "is"
@@ -15216,11 +19291,62 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(_model).ToNot(BeNil())
 				Expect(err).To(BeNil())
 			})
+			It(`Invoke NewStopFeatureRolloutOptions successfully`, func() {
+				// Construct an instance of the StopFeatureRolloutOptions model
+				environmentID := "environment_id"
+				featureID := "feature_id"
+				stopFeatureRolloutOptionsAction := "stop"
+				stopFeatureRolloutOptionsRolloutPercentage := int64(0)
+				stopFeatureRolloutOptionsModel := appConfigurationService.NewStopFeatureRolloutOptions(environmentID, featureID, stopFeatureRolloutOptionsAction, stopFeatureRolloutOptionsRolloutPercentage)
+				stopFeatureRolloutOptionsModel.SetEnvironmentID("environment_id")
+				stopFeatureRolloutOptionsModel.SetFeatureID("feature_id")
+				stopFeatureRolloutOptionsModel.SetAction("stop")
+				stopFeatureRolloutOptionsModel.SetRolloutPercentage(int64(0))
+				stopFeatureRolloutOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
+				Expect(stopFeatureRolloutOptionsModel).ToNot(BeNil())
+				Expect(stopFeatureRolloutOptionsModel.EnvironmentID).To(Equal(core.StringPtr("environment_id")))
+				Expect(stopFeatureRolloutOptionsModel.FeatureID).To(Equal(core.StringPtr("feature_id")))
+				Expect(stopFeatureRolloutOptionsModel.Action).To(Equal(core.StringPtr("stop")))
+				Expect(stopFeatureRolloutOptionsModel.RolloutPercentage).To(Equal(core.Int64Ptr(int64(0))))
+				Expect(stopFeatureRolloutOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
+			})
+			It(`Invoke NewStopFeatureRuleRolloutOptions successfully`, func() {
+				// Construct an instance of the StopFeatureRuleRolloutOptions model
+				environmentID := "environment_id"
+				featureID := "feature_id"
+				ruleID := "rule_id"
+				stopFeatureRuleRolloutOptionsAction := "stop"
+				stopFeatureRuleRolloutOptionsRolloutPercentage := int64(0)
+				stopFeatureRuleRolloutOptionsModel := appConfigurationService.NewStopFeatureRuleRolloutOptions(environmentID, featureID, ruleID, stopFeatureRuleRolloutOptionsAction, stopFeatureRuleRolloutOptionsRolloutPercentage)
+				stopFeatureRuleRolloutOptionsModel.SetEnvironmentID("environment_id")
+				stopFeatureRuleRolloutOptionsModel.SetFeatureID("feature_id")
+				stopFeatureRuleRolloutOptionsModel.SetRuleID("rule_id")
+				stopFeatureRuleRolloutOptionsModel.SetAction("stop")
+				stopFeatureRuleRolloutOptionsModel.SetRolloutPercentage(int64(0))
+				stopFeatureRuleRolloutOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
+				Expect(stopFeatureRuleRolloutOptionsModel).ToNot(BeNil())
+				Expect(stopFeatureRuleRolloutOptionsModel.EnvironmentID).To(Equal(core.StringPtr("environment_id")))
+				Expect(stopFeatureRuleRolloutOptionsModel.FeatureID).To(Equal(core.StringPtr("feature_id")))
+				Expect(stopFeatureRuleRolloutOptionsModel.RuleID).To(Equal(core.StringPtr("rule_id")))
+				Expect(stopFeatureRuleRolloutOptionsModel.Action).To(Equal(core.StringPtr("stop")))
+				Expect(stopFeatureRuleRolloutOptionsModel.RolloutPercentage).To(Equal(core.Int64Ptr(int64(0))))
+				Expect(stopFeatureRuleRolloutOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
+			})
 			It(`Invoke NewTargetSegments successfully`, func() {
 				segments := []string{"testString"}
 				_model, err := appConfigurationService.NewTargetSegments(segments)
 				Expect(_model).ToNot(BeNil())
 				Expect(err).To(BeNil())
+			})
+			It(`Invoke NewTestWorkflowConfigOptions successfully`, func() {
+				// Construct an instance of the TestWorkflowConfigOptions model
+				workflowConfigID := "workflow_config_id"
+				testWorkflowConfigOptionsModel := appConfigurationService.NewTestWorkflowConfigOptions(workflowConfigID)
+				testWorkflowConfigOptionsModel.SetWorkflowConfigID("workflow_config_id")
+				testWorkflowConfigOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
+				Expect(testWorkflowConfigOptionsModel).ToNot(BeNil())
+				Expect(testWorkflowConfigOptionsModel.WorkflowConfigID).To(Equal(core.StringPtr("workflow_config_id")))
+				Expect(testWorkflowConfigOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewToggleFeatureOptions successfully`, func() {
 				// Construct an instance of the ToggleFeatureOptions model
@@ -15237,6 +19363,19 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(toggleFeatureOptionsModel.FeatureID).To(Equal(core.StringPtr("feature_id")))
 				Expect(toggleFeatureOptionsModel.Enabled).To(Equal(core.BoolPtr(true)))
 				Expect(toggleFeatureOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
+			})
+			It(`Invoke NewToggleWorkflowConfigOptions successfully`, func() {
+				// Construct an instance of the ToggleWorkflowConfigOptions model
+				workflowConfigID := "workflow_config_id"
+				toggleWorkflowConfigOptionsEnabled := true
+				toggleWorkflowConfigOptionsModel := appConfigurationService.NewToggleWorkflowConfigOptions(workflowConfigID, toggleWorkflowConfigOptionsEnabled)
+				toggleWorkflowConfigOptionsModel.SetWorkflowConfigID("workflow_config_id")
+				toggleWorkflowConfigOptionsModel.SetEnabled(true)
+				toggleWorkflowConfigOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
+				Expect(toggleWorkflowConfigOptionsModel).ToNot(BeNil())
+				Expect(toggleWorkflowConfigOptionsModel.WorkflowConfigID).To(Equal(core.StringPtr("workflow_config_id")))
+				Expect(toggleWorkflowConfigOptionsModel.Enabled).To(Equal(core.BoolPtr(true)))
+				Expect(toggleWorkflowConfigOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewUpdateCollectionOptions successfully`, func() {
 				// Construct an instance of the UpdateCollectionOptions model
@@ -15273,6 +19412,26 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(updateEnvironmentOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewUpdateFeatureOptions successfully`, func() {
+				// Construct an instance of the RolloutPhase model
+				rolloutPhaseModel := new(appconfigurationv1.RolloutPhase)
+				Expect(rolloutPhaseModel).ToNot(BeNil())
+				rolloutPhaseModel.Percentage = core.Int64Ptr(int64(1))
+				rolloutPhaseModel.Duration = core.Int64Ptr(int64(38))
+				rolloutPhaseModel.DurationType = core.StringPtr("days")
+				Expect(rolloutPhaseModel.Percentage).To(Equal(core.Int64Ptr(int64(1))))
+				Expect(rolloutPhaseModel.Duration).To(Equal(core.Int64Ptr(int64(38))))
+				Expect(rolloutPhaseModel.DurationType).To(Equal(core.StringPtr("days")))
+
+				// Construct an instance of the RolloutConfiguration model
+				rolloutConfigurationModel := new(appconfigurationv1.RolloutConfiguration)
+				Expect(rolloutConfigurationModel).ToNot(BeNil())
+				rolloutConfigurationModel.DurationPreset = core.StringPtr("CUSTOM")
+				rolloutConfigurationModel.StartAt = CreateMockDateTime("2019-01-01T12:00:00.000Z")
+				rolloutConfigurationModel.Phases = []appconfigurationv1.RolloutPhase{*rolloutPhaseModel}
+				Expect(rolloutConfigurationModel.DurationPreset).To(Equal(core.StringPtr("CUSTOM")))
+				Expect(rolloutConfigurationModel.StartAt).To(Equal(CreateMockDateTime("2019-01-01T12:00:00.000Z")))
+				Expect(rolloutConfigurationModel.Phases).To(Equal([]appconfigurationv1.RolloutPhase{*rolloutPhaseModel}))
+
 				// Construct an instance of the TargetSegments model
 				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
 				Expect(targetSegmentsModel).ToNot(BeNil())
@@ -15286,12 +19445,16 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				featureSegmentRuleModel.Value = "true"
 				featureSegmentRuleModel.Order = core.Int64Ptr(int64(1))
 				featureSegmentRuleModel.RolloutPercentage = core.Int64Ptr(int64(90))
+				featureSegmentRuleModel.RolloutType = core.StringPtr("MANUAL")
+				featureSegmentRuleModel.RolloutConfiguration = rolloutConfigurationModel
 				featureSegmentRuleModel.RuleID = core.StringPtr("rule-id-1")
 				featureSegmentRuleModel.RuleName = core.StringPtr("rule-name-1")
 				Expect(featureSegmentRuleModel.Rules).To(Equal([]appconfigurationv1.TargetSegments{*targetSegmentsModel}))
 				Expect(featureSegmentRuleModel.Value).To(Equal("true"))
 				Expect(featureSegmentRuleModel.Order).To(Equal(core.Int64Ptr(int64(1))))
 				Expect(featureSegmentRuleModel.RolloutPercentage).To(Equal(core.Int64Ptr(int64(90))))
+				Expect(featureSegmentRuleModel.RolloutType).To(Equal(core.StringPtr("MANUAL")))
+				Expect(featureSegmentRuleModel.RolloutConfiguration).To(Equal(rolloutConfigurationModel))
 				Expect(featureSegmentRuleModel.RuleID).To(Equal(core.StringPtr("rule-id-1")))
 				Expect(featureSegmentRuleModel.RuleName).To(Equal(core.StringPtr("rule-name-1")))
 
@@ -15315,6 +19478,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				updateFeatureOptionsModel.SetDisabledValue("false")
 				updateFeatureOptionsModel.SetEnabled(true)
 				updateFeatureOptionsModel.SetRolloutPercentage(int64(100))
+				updateFeatureOptionsModel.SetRolloutType("MANUAL")
+				updateFeatureOptionsModel.SetRolloutConfiguration(rolloutConfigurationModel)
 				updateFeatureOptionsModel.SetTags("version: 1.1, yet-to-release")
 				updateFeatureOptionsModel.SetSegmentRules([]appconfigurationv1.FeatureSegmentRule{*featureSegmentRuleModel})
 				updateFeatureOptionsModel.SetCollections([]appconfigurationv1.CollectionUpdateRef{*collectionUpdateRefModel})
@@ -15328,6 +19493,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(updateFeatureOptionsModel.DisabledValue).To(Equal("false"))
 				Expect(updateFeatureOptionsModel.Enabled).To(Equal(core.BoolPtr(true)))
 				Expect(updateFeatureOptionsModel.RolloutPercentage).To(Equal(core.Int64Ptr(int64(100))))
+				Expect(updateFeatureOptionsModel.RolloutType).To(Equal(core.StringPtr("MANUAL")))
+				Expect(updateFeatureOptionsModel.RolloutConfiguration).To(Equal(rolloutConfigurationModel))
 				Expect(updateFeatureOptionsModel.Tags).To(Equal(core.StringPtr("version: 1.1, yet-to-release")))
 				Expect(updateFeatureOptionsModel.SegmentRules).To(Equal([]appconfigurationv1.FeatureSegmentRule{*featureSegmentRuleModel}))
 				Expect(updateFeatureOptionsModel.Collections).To(Equal([]appconfigurationv1.CollectionUpdateRef{*collectionUpdateRefModel}))
@@ -15339,6 +19506,26 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(targetSegmentsModel).ToNot(BeNil())
 				targetSegmentsModel.Segments = []string{"betausers", "premiumusers"}
 				Expect(targetSegmentsModel.Segments).To(Equal([]string{"betausers", "premiumusers"}))
+
+				// Construct an instance of the RolloutPhase model
+				rolloutPhaseModel := new(appconfigurationv1.RolloutPhase)
+				Expect(rolloutPhaseModel).ToNot(BeNil())
+				rolloutPhaseModel.Percentage = core.Int64Ptr(int64(1))
+				rolloutPhaseModel.Duration = core.Int64Ptr(int64(38))
+				rolloutPhaseModel.DurationType = core.StringPtr("days")
+				Expect(rolloutPhaseModel.Percentage).To(Equal(core.Int64Ptr(int64(1))))
+				Expect(rolloutPhaseModel.Duration).To(Equal(core.Int64Ptr(int64(38))))
+				Expect(rolloutPhaseModel.DurationType).To(Equal(core.StringPtr("days")))
+
+				// Construct an instance of the RolloutConfiguration model
+				rolloutConfigurationModel := new(appconfigurationv1.RolloutConfiguration)
+				Expect(rolloutConfigurationModel).ToNot(BeNil())
+				rolloutConfigurationModel.DurationPreset = core.StringPtr("CUSTOM")
+				rolloutConfigurationModel.StartAt = CreateMockDateTime("2019-01-01T12:00:00.000Z")
+				rolloutConfigurationModel.Phases = []appconfigurationv1.RolloutPhase{*rolloutPhaseModel}
+				Expect(rolloutConfigurationModel.DurationPreset).To(Equal(core.StringPtr("CUSTOM")))
+				Expect(rolloutConfigurationModel.StartAt).To(Equal(CreateMockDateTime("2019-01-01T12:00:00.000Z")))
+				Expect(rolloutConfigurationModel.Phases).To(Equal([]appconfigurationv1.RolloutPhase{*rolloutPhaseModel}))
 
 				// Construct an instance of the UpdateFeatureRuleOptions model
 				environmentID := "environment_id"
@@ -15352,6 +19539,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				updateFeatureRuleOptionsModel.SetValue("true")
 				updateFeatureRuleOptionsModel.SetRuleName("rule-name-1")
 				updateFeatureRuleOptionsModel.SetRolloutPercentage(int64(50))
+				updateFeatureRuleOptionsModel.SetRolloutType("MANUAL")
+				updateFeatureRuleOptionsModel.SetRolloutConfiguration(rolloutConfigurationModel)
 				updateFeatureRuleOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(updateFeatureRuleOptionsModel).ToNot(BeNil())
 				Expect(updateFeatureRuleOptionsModel.EnvironmentID).To(Equal(core.StringPtr("environment_id")))
@@ -15361,6 +19550,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(updateFeatureRuleOptionsModel.Value).To(Equal("true"))
 				Expect(updateFeatureRuleOptionsModel.RuleName).To(Equal(core.StringPtr("rule-name-1")))
 				Expect(updateFeatureRuleOptionsModel.RolloutPercentage).To(Equal(core.Int64Ptr(int64(50))))
+				Expect(updateFeatureRuleOptionsModel.RolloutType).To(Equal(core.StringPtr("MANUAL")))
+				Expect(updateFeatureRuleOptionsModel.RolloutConfiguration).To(Equal(rolloutConfigurationModel))
 				Expect(updateFeatureRuleOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewUpdateFeatureRuleOrderOptions successfully`, func() {
@@ -15390,6 +19581,26 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(updateFeatureRuleOrderOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewUpdateFeatureValuesOptions successfully`, func() {
+				// Construct an instance of the RolloutPhase model
+				rolloutPhaseModel := new(appconfigurationv1.RolloutPhase)
+				Expect(rolloutPhaseModel).ToNot(BeNil())
+				rolloutPhaseModel.Percentage = core.Int64Ptr(int64(1))
+				rolloutPhaseModel.Duration = core.Int64Ptr(int64(38))
+				rolloutPhaseModel.DurationType = core.StringPtr("days")
+				Expect(rolloutPhaseModel.Percentage).To(Equal(core.Int64Ptr(int64(1))))
+				Expect(rolloutPhaseModel.Duration).To(Equal(core.Int64Ptr(int64(38))))
+				Expect(rolloutPhaseModel.DurationType).To(Equal(core.StringPtr("days")))
+
+				// Construct an instance of the RolloutConfiguration model
+				rolloutConfigurationModel := new(appconfigurationv1.RolloutConfiguration)
+				Expect(rolloutConfigurationModel).ToNot(BeNil())
+				rolloutConfigurationModel.DurationPreset = core.StringPtr("CUSTOM")
+				rolloutConfigurationModel.StartAt = CreateMockDateTime("2019-01-01T12:00:00.000Z")
+				rolloutConfigurationModel.Phases = []appconfigurationv1.RolloutPhase{*rolloutPhaseModel}
+				Expect(rolloutConfigurationModel.DurationPreset).To(Equal(core.StringPtr("CUSTOM")))
+				Expect(rolloutConfigurationModel.StartAt).To(Equal(CreateMockDateTime("2019-01-01T12:00:00.000Z")))
+				Expect(rolloutConfigurationModel.Phases).To(Equal([]appconfigurationv1.RolloutPhase{*rolloutPhaseModel}))
+
 				// Construct an instance of the TargetSegments model
 				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
 				Expect(targetSegmentsModel).ToNot(BeNil())
@@ -15403,12 +19614,16 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				featureSegmentRuleModel.Value = "true"
 				featureSegmentRuleModel.Order = core.Int64Ptr(int64(1))
 				featureSegmentRuleModel.RolloutPercentage = core.Int64Ptr(int64(100))
+				featureSegmentRuleModel.RolloutType = core.StringPtr("MANUAL")
+				featureSegmentRuleModel.RolloutConfiguration = rolloutConfigurationModel
 				featureSegmentRuleModel.RuleID = core.StringPtr("rule-id-1")
 				featureSegmentRuleModel.RuleName = core.StringPtr("rule-name-1")
 				Expect(featureSegmentRuleModel.Rules).To(Equal([]appconfigurationv1.TargetSegments{*targetSegmentsModel}))
 				Expect(featureSegmentRuleModel.Value).To(Equal("true"))
 				Expect(featureSegmentRuleModel.Order).To(Equal(core.Int64Ptr(int64(1))))
 				Expect(featureSegmentRuleModel.RolloutPercentage).To(Equal(core.Int64Ptr(int64(100))))
+				Expect(featureSegmentRuleModel.RolloutType).To(Equal(core.StringPtr("MANUAL")))
+				Expect(featureSegmentRuleModel.RolloutConfiguration).To(Equal(rolloutConfigurationModel))
 				Expect(featureSegmentRuleModel.RuleID).To(Equal(core.StringPtr("rule-id-1")))
 				Expect(featureSegmentRuleModel.RuleName).To(Equal(core.StringPtr("rule-name-1")))
 
@@ -15424,6 +19639,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				updateFeatureValuesOptionsModel.SetEnabledValue("true")
 				updateFeatureValuesOptionsModel.SetDisabledValue("false")
 				updateFeatureValuesOptionsModel.SetRolloutPercentage(int64(100))
+				updateFeatureValuesOptionsModel.SetRolloutType("MANUAL")
+				updateFeatureValuesOptionsModel.SetRolloutConfiguration(rolloutConfigurationModel)
 				updateFeatureValuesOptionsModel.SetSegmentRules([]appconfigurationv1.FeatureSegmentRule{*featureSegmentRuleModel})
 				updateFeatureValuesOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(updateFeatureValuesOptionsModel).ToNot(BeNil())
@@ -15435,6 +19652,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(updateFeatureValuesOptionsModel.EnabledValue).To(Equal("true"))
 				Expect(updateFeatureValuesOptionsModel.DisabledValue).To(Equal("false"))
 				Expect(updateFeatureValuesOptionsModel.RolloutPercentage).To(Equal(core.Int64Ptr(int64(100))))
+				Expect(updateFeatureValuesOptionsModel.RolloutType).To(Equal(core.StringPtr("MANUAL")))
+				Expect(updateFeatureValuesOptionsModel.RolloutConfiguration).To(Equal(rolloutConfigurationModel))
 				Expect(updateFeatureValuesOptionsModel.SegmentRules).To(Equal([]appconfigurationv1.FeatureSegmentRule{*featureSegmentRuleModel}))
 				Expect(updateFeatureValuesOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
@@ -15588,6 +19807,93 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(updateSegmentOptionsModel.Rules).To(Equal([]appconfigurationv1.Rule{*ruleModel}))
 				Expect(updateSegmentOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
+			It(`Invoke NewUpdateWorkflowConfigsOptions successfully`, func() {
+				// Construct an instance of the WorkflowMetadataExternalServiceNowMetadata model
+				workflowMetadataModel := new(appconfigurationv1.WorkflowMetadataExternalServiceNowMetadata)
+				Expect(workflowMetadataModel).ToNot(BeNil())
+				workflowMetadataModel.ApprovalExpiration = core.Int64Ptr(int64(10))
+				workflowMetadataModel.ApprovalGroupName = core.StringPtr("AppConfiguration Approvers Updated")
+				workflowMetadataModel.SmSecretID = core.StringPtr("63476562-d5b4-02ae-e966-528f8df457bb")
+				workflowMetadataModel.WorkflowURL = core.StringPtr("https://dev339579.service-now.com")
+				Expect(workflowMetadataModel.ApprovalExpiration).To(Equal(core.Int64Ptr(int64(10))))
+				Expect(workflowMetadataModel.ApprovalGroupName).To(Equal(core.StringPtr("AppConfiguration Approvers Updated")))
+				Expect(workflowMetadataModel.SmSecretID).To(Equal(core.StringPtr("63476562-d5b4-02ae-e966-528f8df457bb")))
+				Expect(workflowMetadataModel.WorkflowURL).To(Equal(core.StringPtr("https://dev339579.service-now.com")))
+
+				// Construct an instance of the WorkflowProvider model
+				workflowProviderModel := new(appconfigurationv1.WorkflowProvider)
+				Expect(workflowProviderModel).ToNot(BeNil())
+				workflowProviderModel.Type = core.StringPtr("SERVICENOW_EXTERNAL")
+				workflowProviderModel.Metadata = workflowMetadataModel
+				Expect(workflowProviderModel.Type).To(Equal(core.StringPtr("SERVICENOW_EXTERNAL")))
+				Expect(workflowProviderModel.Metadata).To(Equal(workflowMetadataModel))
+
+				// Construct an instance of the WorkflowScopeMode model
+				workflowScopeModeModel := new(appconfigurationv1.WorkflowScopeMode)
+				Expect(workflowScopeModeModel).ToNot(BeNil())
+				workflowScopeModeModel.Mode = core.StringPtr("ALL")
+				workflowScopeModeModel.Ids = []string{}
+				Expect(workflowScopeModeModel.Mode).To(Equal(core.StringPtr("ALL")))
+				Expect(workflowScopeModeModel.Ids).To(Equal([]string{}))
+
+				// Construct an instance of the WorkflowEnvironmentResourcesEnvironment model
+				workflowEnvironmentResourcesEnvironmentModel := new(appconfigurationv1.WorkflowEnvironmentResourcesEnvironment)
+				Expect(workflowEnvironmentResourcesEnvironmentModel).ToNot(BeNil())
+				workflowEnvironmentResourcesEnvironmentModel.Enable = core.BoolPtr(true)
+				Expect(workflowEnvironmentResourcesEnvironmentModel.Enable).To(Equal(core.BoolPtr(true)))
+
+				// Construct an instance of the WorkflowEnvironmentResources model
+				workflowEnvironmentResourcesModel := new(appconfigurationv1.WorkflowEnvironmentResources)
+				Expect(workflowEnvironmentResourcesModel).ToNot(BeNil())
+				workflowEnvironmentResourcesModel.Environment = workflowEnvironmentResourcesEnvironmentModel
+				workflowEnvironmentResourcesModel.Features = workflowScopeModeModel
+				workflowEnvironmentResourcesModel.Properties = workflowScopeModeModel
+				Expect(workflowEnvironmentResourcesModel.Environment).To(Equal(workflowEnvironmentResourcesEnvironmentModel))
+				Expect(workflowEnvironmentResourcesModel.Features).To(Equal(workflowScopeModeModel))
+				Expect(workflowEnvironmentResourcesModel.Properties).To(Equal(workflowScopeModeModel))
+
+				// Construct an instance of the WorkflowEnvironment model
+				workflowEnvironmentModel := new(appconfigurationv1.WorkflowEnvironment)
+				Expect(workflowEnvironmentModel).ToNot(BeNil())
+				workflowEnvironmentModel.EnvironmentID = core.StringPtr("stage")
+				workflowEnvironmentModel.Resources = workflowEnvironmentResourcesModel
+				Expect(workflowEnvironmentModel.EnvironmentID).To(Equal(core.StringPtr("stage")))
+				Expect(workflowEnvironmentModel.Resources).To(Equal(workflowEnvironmentResourcesModel))
+
+				// Construct an instance of the WorkflowScope model
+				workflowScopeModel := new(appconfigurationv1.WorkflowScope)
+				Expect(workflowScopeModel).ToNot(BeNil())
+				workflowScopeModel.Collections = workflowScopeModeModel
+				workflowScopeModel.Segments = workflowScopeModeModel
+				workflowScopeModel.Environments = []appconfigurationv1.WorkflowEnvironment{*workflowEnvironmentModel}
+				Expect(workflowScopeModel.Collections).To(Equal(workflowScopeModeModel))
+				Expect(workflowScopeModel.Segments).To(Equal(workflowScopeModeModel))
+				Expect(workflowScopeModel.Environments).To(Equal([]appconfigurationv1.WorkflowEnvironment{*workflowEnvironmentModel}))
+
+				// Construct an instance of the UpdateWorkflowConfigsOptions model
+				workflowConfigID := "workflow_config_id"
+				updateWorkflowConfigsOptionsName := "ext-service-now-updated"
+				updateWorkflowConfigsOptionsWorkflowID := "workflow-id-1"
+				updateWorkflowConfigsOptionsEnabled := true
+				var updateWorkflowConfigsOptionsProvider *appconfigurationv1.WorkflowProvider = nil
+				var updateWorkflowConfigsOptionsScope *appconfigurationv1.WorkflowScope = nil
+				updateWorkflowConfigsOptionsModel := appConfigurationService.NewUpdateWorkflowConfigsOptions(workflowConfigID, updateWorkflowConfigsOptionsName, updateWorkflowConfigsOptionsWorkflowID, updateWorkflowConfigsOptionsEnabled, updateWorkflowConfigsOptionsProvider, updateWorkflowConfigsOptionsScope)
+				updateWorkflowConfigsOptionsModel.SetWorkflowConfigID("workflow_config_id")
+				updateWorkflowConfigsOptionsModel.SetName("ext-service-now-updated")
+				updateWorkflowConfigsOptionsModel.SetWorkflowID("workflow-id-1")
+				updateWorkflowConfigsOptionsModel.SetEnabled(true)
+				updateWorkflowConfigsOptionsModel.SetProvider(workflowProviderModel)
+				updateWorkflowConfigsOptionsModel.SetScope(workflowScopeModel)
+				updateWorkflowConfigsOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
+				Expect(updateWorkflowConfigsOptionsModel).ToNot(BeNil())
+				Expect(updateWorkflowConfigsOptionsModel.WorkflowConfigID).To(Equal(core.StringPtr("workflow_config_id")))
+				Expect(updateWorkflowConfigsOptionsModel.Name).To(Equal(core.StringPtr("ext-service-now-updated")))
+				Expect(updateWorkflowConfigsOptionsModel.WorkflowID).To(Equal(core.StringPtr("workflow-id-1")))
+				Expect(updateWorkflowConfigsOptionsModel.Enabled).To(Equal(core.BoolPtr(true)))
+				Expect(updateWorkflowConfigsOptionsModel.Provider).To(Equal(workflowProviderModel))
+				Expect(updateWorkflowConfigsOptionsModel.Scope).To(Equal(workflowScopeModel))
+				Expect(updateWorkflowConfigsOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
+			})
 			It(`Invoke NewUpdateWorkflowconfigOptions successfully`, func() {
 				// Construct an instance of the ExternalServiceNowCredentials model
 				externalServiceNowCredentialsModel := new(appconfigurationv1.ExternalServiceNowCredentials)
@@ -15626,6 +19932,40 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(updateWorkflowconfigOptionsModel.EnvironmentID).To(Equal(core.StringPtr("environment_id")))
 				Expect(updateWorkflowconfigOptionsModel.UpdateWorkflowConfig).To(Equal(updateWorkflowConfigModel))
 				Expect(updateWorkflowconfigOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
+			})
+			It(`Invoke NewWorkflowApprovalInfo successfully`, func() {
+				workflowName := "testString"
+				workflowID := "testString"
+				providerType := "SERVICENOW_IBM"
+				changeRequestNumber := "testString"
+				changeRequestStatus := "PENDING"
+				executionStatus := "PENDING"
+				approvalURL := "testString"
+				resourceType := "FEATURE"
+				createdTime := CreateMockDateTime("2019-01-01T12:00:00.000Z")
+				updatedTime := CreateMockDateTime("2019-01-01T12:00:00.000Z")
+				_model, err := appConfigurationService.NewWorkflowApprovalInfo(workflowName, workflowID, providerType, changeRequestNumber, changeRequestStatus, executionStatus, approvalURL, resourceType, createdTime, updatedTime)
+				Expect(_model).ToNot(BeNil())
+				Expect(err).To(BeNil())
+			})
+			It(`Invoke NewWorkflowEnvironment successfully`, func() {
+				environmentID := "stage"
+				_model, err := appConfigurationService.NewWorkflowEnvironment(environmentID)
+				Expect(_model).ToNot(BeNil())
+				Expect(err).To(BeNil())
+			})
+			It(`Invoke NewWorkflowProvider successfully`, func() {
+				typeVar := "SERVICENOW_IBM"
+				var metadata appconfigurationv1.WorkflowMetadataIntf = nil
+				_, err := appConfigurationService.NewWorkflowProvider(typeVar, metadata)
+				Expect(err).ToNot(BeNil())
+			})
+			It(`Invoke NewWorkflowScopeMode successfully`, func() {
+				mode := "ALL"
+				ids := []string{}
+				_model, err := appConfigurationService.NewWorkflowScopeMode(mode, ids)
+				Expect(_model).ToNot(BeNil())
+				Expect(err).To(BeNil())
 			})
 			It(`Invoke NewCreateIntegrationMetadataCreateEnIntegrationMetadata successfully`, func() {
 				eventNotificationsInstanceCrn := "crn:v1:bluemix:public:event-notifications:eu-gb:a/4f631ea3b3204b2b878a295604994acf:0eb42def-21aa-4f0a-a975-0812ead6ceee::"
@@ -15679,6 +20019,23 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(_model).ToNot(BeNil())
 				Expect(err).To(BeNil())
 			})
+			It(`Invoke NewWorkflowMetadataExternalServiceNowMetadata successfully`, func() {
+				approvalExpiration := int64(7)
+				approvalGroupName := "AppConfiguration Approvers"
+				smSecretID := "63476562-d5b4-02ae-e966-528f8df457bb"
+				workflowURL := "https://dev339579.service-now.com"
+				_model, err := appConfigurationService.NewWorkflowMetadataExternalServiceNowMetadata(approvalExpiration, approvalGroupName, smSecretID, workflowURL)
+				Expect(_model).ToNot(BeNil())
+				Expect(err).To(BeNil())
+			})
+			It(`Invoke NewWorkflowMetadataIBMServiceNowMetadata successfully`, func() {
+				approvalExpiration := int64(7)
+				crnMask := "crn:v1:bluemix:public:apprapp:au-syd::::"
+				smSecretCrn := "crn:v1:bluemix:public:secrets-manager:eu-gb:a/4f631ea3b3204b2b878a295604994acf:cc7a5695-989e-467a-b557-12f3d5c5b1a0:secret:18211326-d511-c6f5-df44-aef7d5f985a2"
+				_model, err := appConfigurationService.NewWorkflowMetadataIBMServiceNowMetadata(approvalExpiration, crnMask, smSecretCrn)
+				Expect(_model).ToNot(BeNil())
+				Expect(err).To(BeNil())
+			})
 		})
 	})
 	Describe(`Model unmarshaling tests`, func() {
@@ -15698,6 +20055,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 			model.FeaturesCount = core.Int64Ptr(int64(38))
 			model.PropertiesCount = core.Int64Ptr(int64(38))
 			model.SnapshotCount = core.Int64Ptr(int64(38))
+			model.WorkflowApproval = nil
 
 			b, err := json.Marshal(model)
 			Expect(err).To(BeNil())
@@ -15819,6 +20177,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 			model.Features = nil
 			model.Properties = nil
 			model.Snapshots = nil
+			model.WorkflowApproval = nil
 
 			b, err := json.Marshal(model)
 			Expect(err).To(BeNil())
@@ -15880,6 +20239,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 			model.Value = "testString"
 			model.Order = core.Int64Ptr(int64(38))
 			model.RolloutPercentage = core.Int64Ptr(int64(100))
+			model.RolloutType = core.StringPtr("MANUAL")
+			model.RolloutConfiguration = nil
 			model.RuleID = core.StringPtr("testString")
 			model.RuleName = core.StringPtr("testString")
 
@@ -15973,6 +20334,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 			model.DisabledValue = "testString"
 			model.Enabled = core.BoolPtr(true)
 			model.RolloutPercentage = core.Int64Ptr(int64(100))
+			model.RolloutType = core.StringPtr("MANUAL")
+			model.RolloutConfiguration = nil
 			model.Tags = core.StringPtr("testString")
 			model.SegmentRules = nil
 			model.Collections = nil
@@ -16055,6 +20418,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 			model.UpdatedTime = CreateMockDateTime("2021-05-12T23:20:50.520Z")
 			model.EvaluationTime = CreateMockDateTime("2021-05-12T23:20:50.520Z")
 			model.Href = core.StringPtr("testString")
+			model.WorkflowApproval = nil
 
 			b, err := json.Marshal(model)
 			Expect(err).To(BeNil())
@@ -16110,6 +20474,47 @@ var _ = Describe(`AppConfigurationV1`, func() {
 			Expect(result).ToNot(BeNil())
 			Expect(result).To(Equal(model))
 		})
+		It(`Invoke UnmarshalRolloutConfiguration successfully`, func() {
+			// Construct an instance of the model.
+			model := new(appconfigurationv1.RolloutConfiguration)
+			model.DurationPreset = core.StringPtr("CUSTOM")
+			model.StartAt = CreateMockDateTime("2019-01-01T12:00:00.000Z")
+			model.Phases = nil
+			model.Status = core.StringPtr("QUEUED")
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *appconfigurationv1.RolloutConfiguration
+			err = appconfigurationv1.UnmarshalRolloutConfiguration(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalRolloutPhase successfully`, func() {
+			// Construct an instance of the model.
+			model := new(appconfigurationv1.RolloutPhase)
+			model.Percentage = core.Int64Ptr(int64(1))
+			model.Duration = core.Int64Ptr(int64(38))
+			model.DurationType = core.StringPtr("days")
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *appconfigurationv1.RolloutPhase
+			err = appconfigurationv1.UnmarshalRolloutPhase(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
 		It(`Invoke UnmarshalRule successfully`, func() {
 			// Construct an instance of the model.
 			model := new(appconfigurationv1.Rule)
@@ -16143,6 +20548,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 			model.Href = core.StringPtr("testString")
 			model.Features = nil
 			model.Properties = nil
+			model.WorkflowApproval = nil
 
 			b, err := json.Marshal(model)
 			Expect(err).To(BeNil())
@@ -16235,6 +20641,175 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 			var result *appconfigurationv1.UpdateWorkflowConfig
 			err = appconfigurationv1.UnmarshalUpdateWorkflowConfig(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalWorkflowApprovalInfo successfully`, func() {
+			// Construct an instance of the model.
+			model := new(appconfigurationv1.WorkflowApprovalInfo)
+			model.WorkflowName = core.StringPtr("testString")
+			model.WorkflowID = core.StringPtr("testString")
+			model.ProviderType = core.StringPtr("SERVICENOW_IBM")
+			model.ChangeRequestNumber = core.StringPtr("testString")
+			model.ChangeRequestStatus = core.StringPtr("PENDING")
+			model.ExecutionStatus = core.StringPtr("PENDING")
+			model.ApprovalURL = core.StringPtr("testString")
+			model.ResourceType = core.StringPtr("FEATURE")
+			model.ResourceID = core.StringPtr("testString")
+			model.EnvironmentID = core.StringPtr("testString")
+			model.CreatedTime = CreateMockDateTime("2019-01-01T12:00:00.000Z")
+			model.UpdatedTime = CreateMockDateTime("2019-01-01T12:00:00.000Z")
+			model.LastPollTime = CreateMockDateTime("2019-01-01T12:00:00.000Z")
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *appconfigurationv1.WorkflowApprovalInfo
+			err = appconfigurationv1.UnmarshalWorkflowApprovalInfo(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalWorkflowEnvironment successfully`, func() {
+			// Construct an instance of the model.
+			model := new(appconfigurationv1.WorkflowEnvironment)
+			model.EnvironmentID = core.StringPtr("stage")
+			model.Resources = nil
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *appconfigurationv1.WorkflowEnvironment
+			err = appconfigurationv1.UnmarshalWorkflowEnvironment(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalWorkflowEnvironmentResources successfully`, func() {
+			// Construct an instance of the model.
+			model := new(appconfigurationv1.WorkflowEnvironmentResources)
+			model.Environment = nil
+			model.Features = nil
+			model.Properties = nil
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *appconfigurationv1.WorkflowEnvironmentResources
+			err = appconfigurationv1.UnmarshalWorkflowEnvironmentResources(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalWorkflowEnvironmentResourcesEnvironment successfully`, func() {
+			// Construct an instance of the model.
+			model := new(appconfigurationv1.WorkflowEnvironmentResourcesEnvironment)
+			model.Enable = core.BoolPtr(true)
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *appconfigurationv1.WorkflowEnvironmentResourcesEnvironment
+			err = appconfigurationv1.UnmarshalWorkflowEnvironmentResourcesEnvironment(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalWorkflowMetadata successfully`, func() {
+			// Construct an instance of the model.
+			model := new(appconfigurationv1.WorkflowMetadata)
+			model.ApprovalExpiration = core.Int64Ptr(int64(7))
+			model.ApprovalGroupName = core.StringPtr("AppConfiguration Approvers")
+			model.SmSecretID = core.StringPtr("63476562-d5b4-02ae-e966-528f8df457bb")
+			model.WorkflowURL = core.StringPtr("https://dev339579.service-now.com")
+			model.CrnMask = core.StringPtr("crn:v1:bluemix:public:apprapp:au-syd::::")
+			model.DefaultEmail = core.StringPtr("sai.kumar4@ibm.com")
+			model.SmSecretCrn = core.StringPtr("crn:v1:bluemix:public:secrets-manager:eu-gb:a/4f631ea3b3204b2b878a295604994acf:cc7a5695-989e-467a-b557-12f3d5c5b1a0:secret:18211326-d511-c6f5-df44-aef7d5f985a2")
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *appconfigurationv1.WorkflowMetadata
+			err = appconfigurationv1.UnmarshalWorkflowMetadata(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalWorkflowProvider successfully`, func() {
+			// Construct an instance of the model.
+			model := new(appconfigurationv1.WorkflowProvider)
+			model.Type = core.StringPtr("SERVICENOW_IBM")
+			model.Metadata = nil
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *appconfigurationv1.WorkflowProvider
+			err = appconfigurationv1.UnmarshalWorkflowProvider(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalWorkflowScope successfully`, func() {
+			// Construct an instance of the model.
+			model := new(appconfigurationv1.WorkflowScope)
+			model.Collections = nil
+			model.Segments = nil
+			model.Environments = nil
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *appconfigurationv1.WorkflowScope
+			err = appconfigurationv1.UnmarshalWorkflowScope(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalWorkflowScopeMode successfully`, func() {
+			// Construct an instance of the model.
+			model := new(appconfigurationv1.WorkflowScopeMode)
+			model.Mode = core.StringPtr("ALL")
+			model.Ids = []string{}
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *appconfigurationv1.WorkflowScopeMode
+			err = appconfigurationv1.UnmarshalWorkflowScopeMode(raw, &result)
 			Expect(err).To(BeNil())
 			Expect(result).ToNot(BeNil())
 			Expect(result).To(Equal(model))
@@ -16415,6 +20990,48 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 			var result *appconfigurationv1.UpdateWorkflowConfigUpdateIBMServiceNow
 			err = appconfigurationv1.UnmarshalUpdateWorkflowConfigUpdateIBMServiceNow(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalWorkflowMetadataExternalServiceNowMetadata successfully`, func() {
+			// Construct an instance of the model.
+			model := new(appconfigurationv1.WorkflowMetadataExternalServiceNowMetadata)
+			model.ApprovalExpiration = core.Int64Ptr(int64(7))
+			model.ApprovalGroupName = core.StringPtr("AppConfiguration Approvers")
+			model.SmSecretID = core.StringPtr("63476562-d5b4-02ae-e966-528f8df457bb")
+			model.WorkflowURL = core.StringPtr("https://dev339579.service-now.com")
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *appconfigurationv1.WorkflowMetadataExternalServiceNowMetadata
+			err = appconfigurationv1.UnmarshalWorkflowMetadataExternalServiceNowMetadata(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalWorkflowMetadataIBMServiceNowMetadata successfully`, func() {
+			// Construct an instance of the model.
+			model := new(appconfigurationv1.WorkflowMetadataIBMServiceNowMetadata)
+			model.ApprovalExpiration = core.Int64Ptr(int64(7))
+			model.CrnMask = core.StringPtr("crn:v1:bluemix:public:apprapp:au-syd::::")
+			model.DefaultEmail = core.StringPtr("sai.kumar4@ibm.com")
+			model.SmSecretCrn = core.StringPtr("crn:v1:bluemix:public:secrets-manager:eu-gb:a/4f631ea3b3204b2b878a295604994acf:cc7a5695-989e-467a-b557-12f3d5c5b1a0:secret:18211326-d511-c6f5-df44-aef7d5f985a2")
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *appconfigurationv1.WorkflowMetadataIBMServiceNowMetadata
+			err = appconfigurationv1.UnmarshalWorkflowMetadataIBMServiceNowMetadata(raw, &result)
 			Expect(err).To(BeNil())
 			Expect(result).ToNot(BeNil())
 			Expect(result).To(Equal(model))

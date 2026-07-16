@@ -100,7 +100,7 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 				Expand: core.BoolPtr(true),
 				Sort: core.StringPtr("created_time"),
 				Tags: core.StringPtr("version 1.1,pre-release"),
-				Include: []string{"features", "properties", "snapshots"},
+				Include: []string{"features", "properties", "snapshots", "workflow_approval"},
 				Limit: core.Int64Ptr(int64(10)),
 				Offset: core.Int64Ptr(int64(0)),
 				Search: core.StringPtr("test tag"),
@@ -131,7 +131,7 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 				Expand: core.BoolPtr(true),
 				Sort: core.StringPtr("created_time"),
 				Tags: core.StringPtr("version 1.1,pre-release"),
-				Include: []string{"features", "properties", "snapshots"},
+				Include: []string{"features", "properties", "snapshots", "workflow_approval"},
 				Limit: core.Int64Ptr(int64(10)),
 				Search: core.StringPtr("test tag"),
 			}
@@ -143,8 +143,8 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 
 			var allResults []appconfigurationv1.Environment
 			for pager.HasNext() {
-				nextPage, err := pager.GetNext()
-				Expect(err).To(BeNil())
+				nextPage, nextPageErr := pager.GetNext()
+				Expect(nextPageErr).To(BeNil())
 				Expect(nextPage).ToNot(BeNil())
 				allResults = append(allResults, nextPage...)
 			}
@@ -211,7 +211,7 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 			getEnvironmentOptions := &appconfigurationv1.GetEnvironmentOptions{
 				EnvironmentID: core.StringPtr("environment_id"),
 				Expand: core.BoolPtr(true),
-				Include: []string{"features", "properties", "snapshots"},
+				Include: []string{"features", "properties", "snapshots", "workflow_approval"},
 			}
 
 			environment, response, err := appConfigurationService.GetEnvironment(getEnvironmentOptions)
@@ -232,7 +232,7 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 				Tags: core.StringPtr("version 1.1,pre-release"),
 				Features: []string{"my-feature-id", "cycle-rentals"},
 				Properties: []string{"my-property-id", "email-property"},
-				Include: []string{"features", "properties", "snapshots"},
+				Include: []string{"features", "properties", "snapshots", "workflow_approval"},
 				Limit: core.Int64Ptr(int64(10)),
 				Offset: core.Int64Ptr(int64(0)),
 				Search: core.StringPtr("test tag"),
@@ -265,7 +265,7 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 				Tags: core.StringPtr("version 1.1,pre-release"),
 				Features: []string{"my-feature-id", "cycle-rentals"},
 				Properties: []string{"my-property-id", "email-property"},
-				Include: []string{"features", "properties", "snapshots"},
+				Include: []string{"features", "properties", "snapshots", "workflow_approval"},
 				Limit: core.Int64Ptr(int64(10)),
 				Search: core.StringPtr("test tag"),
 			}
@@ -277,8 +277,8 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 
 			var allResults []appconfigurationv1.Collection
 			for pager.HasNext() {
-				nextPage, err := pager.GetNext()
-				Expect(err).To(BeNil())
+				nextPage, nextPageErr := pager.GetNext()
+				Expect(nextPageErr).To(BeNil())
 				Expect(nextPage).ToNot(BeNil())
 				allResults = append(allResults, nextPage...)
 			}
@@ -343,7 +343,7 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 			getCollectionOptions := &appconfigurationv1.GetCollectionOptions{
 				CollectionID: core.StringPtr("collection_id"),
 				Expand: core.BoolPtr(true),
-				Include: []string{"features", "properties", "snapshots"},
+				Include: []string{"features", "properties", "snapshots", "workflow_approval"},
 			}
 
 			collection, response, err := appConfigurationService.GetCollection(getCollectionOptions)
@@ -365,7 +365,7 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 				Tags: core.StringPtr("version 1.1,pre-release"),
 				Collections: []string{"my-collection-id", "ghzindiapvtltd"},
 				Segments: []string{"my-segment-id", "beta-users"},
-				Include: []string{"collections", "rules", "change_request"},
+				Include: []string{"collections", "rules", "workflow_approval"},
 				Limit: core.Int64Ptr(int64(10)),
 				Offset: core.Int64Ptr(int64(0)),
 				Search: core.StringPtr("test tag"),
@@ -399,7 +399,7 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 				Tags: core.StringPtr("version 1.1,pre-release"),
 				Collections: []string{"my-collection-id", "ghzindiapvtltd"},
 				Segments: []string{"my-segment-id", "beta-users"},
-				Include: []string{"collections", "rules", "change_request"},
+				Include: []string{"collections", "rules", "workflow_approval"},
 				Limit: core.Int64Ptr(int64(10)),
 				Search: core.StringPtr("test tag"),
 			}
@@ -411,8 +411,8 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 
 			var allResults []appconfigurationv1.Feature
 			for pager.HasNext() {
-				nextPage, err := pager.GetNext()
-				Expect(err).To(BeNil())
+				nextPage, nextPageErr := pager.GetNext()
+				Expect(nextPageErr).To(BeNil())
 				Expect(nextPage).ToNot(BeNil())
 				allResults = append(allResults, nextPage...)
 			}
@@ -436,6 +436,18 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 			shouldSkipTest()
 		})
 		It(`CreateFeature(createFeatureOptions *CreateFeatureOptions)`, func() {
+			rolloutPhaseModel := &appconfigurationv1.RolloutPhase{
+				Percentage: core.Int64Ptr(int64(1)),
+				Duration: core.Int64Ptr(int64(38)),
+				DurationType: core.StringPtr("days"),
+			}
+
+			rolloutConfigurationModel := &appconfigurationv1.RolloutConfiguration{
+				DurationPreset: core.StringPtr("CUSTOM"),
+				StartAt: CreateMockDateTime("2019-01-01T12:00:00.000Z"),
+				Phases: []appconfigurationv1.RolloutPhase{*rolloutPhaseModel},
+			}
+
 			targetSegmentsModel := &appconfigurationv1.TargetSegments{
 				Segments: []string{"betausers", "premiumusers"},
 			}
@@ -445,6 +457,8 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 				Value: core.StringPtr("true"),
 				Order: core.Int64Ptr(int64(1)),
 				RolloutPercentage: core.Int64Ptr(int64(50)),
+				RolloutType: core.StringPtr("MANUAL"),
+				RolloutConfiguration: rolloutConfigurationModel,
 				RuleID: core.StringPtr("rule-id-1"),
 				RuleName: core.StringPtr("rule-name-1"),
 			}
@@ -464,6 +478,8 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 				Format: core.StringPtr("TEXT"),
 				Enabled: core.BoolPtr(true),
 				RolloutPercentage: core.Int64Ptr(int64(100)),
+				RolloutType: core.StringPtr("MANUAL"),
+				RolloutConfiguration: rolloutConfigurationModel,
 				Tags: core.StringPtr("version: 1.1, pre-release"),
 				SegmentRules: []appconfigurationv1.FeatureSegmentRule{*featureSegmentRuleModel},
 				Collections: []appconfigurationv1.CollectionRef{*collectionRefModel},
@@ -481,6 +497,18 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 			shouldSkipTest()
 		})
 		It(`UpdateFeature(updateFeatureOptions *UpdateFeatureOptions)`, func() {
+			rolloutPhaseModel := &appconfigurationv1.RolloutPhase{
+				Percentage: core.Int64Ptr(int64(1)),
+				Duration: core.Int64Ptr(int64(38)),
+				DurationType: core.StringPtr("days"),
+			}
+
+			rolloutConfigurationModel := &appconfigurationv1.RolloutConfiguration{
+				DurationPreset: core.StringPtr("CUSTOM"),
+				StartAt: CreateMockDateTime("2019-01-01T12:00:00.000Z"),
+				Phases: []appconfigurationv1.RolloutPhase{*rolloutPhaseModel},
+			}
+
 			targetSegmentsModel := &appconfigurationv1.TargetSegments{
 				Segments: []string{"betausers", "premiumusers"},
 			}
@@ -490,6 +518,8 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 				Value: core.StringPtr("true"),
 				Order: core.Int64Ptr(int64(1)),
 				RolloutPercentage: core.Int64Ptr(int64(90)),
+				RolloutType: core.StringPtr("MANUAL"),
+				RolloutConfiguration: rolloutConfigurationModel,
 				RuleID: core.StringPtr("rule-id-1"),
 				RuleName: core.StringPtr("rule-name-1"),
 			}
@@ -508,6 +538,8 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 				DisabledValue: core.StringPtr("false"),
 				Enabled: core.BoolPtr(true),
 				RolloutPercentage: core.Int64Ptr(int64(100)),
+				RolloutType: core.StringPtr("MANUAL"),
+				RolloutConfiguration: rolloutConfigurationModel,
 				Tags: core.StringPtr("version: 1.1, yet-to-release"),
 				SegmentRules: []appconfigurationv1.FeatureSegmentRule{*featureSegmentRuleModel},
 				Collections: []appconfigurationv1.CollectionUpdateRef{*collectionUpdateRefModel},
@@ -525,6 +557,18 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 			shouldSkipTest()
 		})
 		It(`UpdateFeatureValues(updateFeatureValuesOptions *UpdateFeatureValuesOptions)`, func() {
+			rolloutPhaseModel := &appconfigurationv1.RolloutPhase{
+				Percentage: core.Int64Ptr(int64(1)),
+				Duration: core.Int64Ptr(int64(38)),
+				DurationType: core.StringPtr("days"),
+			}
+
+			rolloutConfigurationModel := &appconfigurationv1.RolloutConfiguration{
+				DurationPreset: core.StringPtr("CUSTOM"),
+				StartAt: CreateMockDateTime("2019-01-01T12:00:00.000Z"),
+				Phases: []appconfigurationv1.RolloutPhase{*rolloutPhaseModel},
+			}
+
 			targetSegmentsModel := &appconfigurationv1.TargetSegments{
 				Segments: []string{"betausers", "premiumusers"},
 			}
@@ -534,6 +578,8 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 				Value: core.StringPtr("true"),
 				Order: core.Int64Ptr(int64(1)),
 				RolloutPercentage: core.Int64Ptr(int64(100)),
+				RolloutType: core.StringPtr("MANUAL"),
+				RolloutConfiguration: rolloutConfigurationModel,
 				RuleID: core.StringPtr("rule-id-1"),
 				RuleName: core.StringPtr("rule-name-1"),
 			}
@@ -547,6 +593,8 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 				EnabledValue: core.StringPtr("true"),
 				DisabledValue: core.StringPtr("false"),
 				RolloutPercentage: core.Int64Ptr(int64(100)),
+				RolloutType: core.StringPtr("MANUAL"),
+				RolloutConfiguration: rolloutConfigurationModel,
 				SegmentRules: []appconfigurationv1.FeatureSegmentRule{*featureSegmentRuleModel},
 			}
 
@@ -565,7 +613,7 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 			getFeatureOptions := &appconfigurationv1.GetFeatureOptions{
 				EnvironmentID: core.StringPtr("environment_id"),
 				FeatureID: core.StringPtr("feature_id"),
-				Include: []string{"collections", "rules", "change_request"},
+				Include: []string{"collections", "rules", "workflow_approval"},
 			}
 
 			feature, response, err := appConfigurationService.GetFeature(getFeatureOptions)
@@ -593,6 +641,25 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 		})
 	})
 
+	Describe(`StopFeatureRollout - Stop Feature Rollout`, func() {
+		BeforeEach(func() {
+			shouldSkipTest()
+		})
+		It(`StopFeatureRollout(stopFeatureRolloutOptions *StopFeatureRolloutOptions)`, func() {
+			stopFeatureRolloutOptions := &appconfigurationv1.StopFeatureRolloutOptions{
+				EnvironmentID: core.StringPtr("environment_id"),
+				FeatureID: core.StringPtr("feature_id"),
+				Action: core.StringPtr("stop"),
+				RolloutPercentage: core.Int64Ptr(int64(0)),
+			}
+
+			feature, response, err := appConfigurationService.StopFeatureRollout(stopFeatureRolloutOptions)
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(200))
+			Expect(feature).ToNot(BeNil())
+		})
+	})
+
 	Describe(`CreateFeatureRule - Create Feature Rule`, func() {
 		BeforeEach(func() {
 			shouldSkipTest()
@@ -600,6 +667,18 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 		It(`CreateFeatureRule(createFeatureRuleOptions *CreateFeatureRuleOptions)`, func() {
 			targetSegmentsModel := &appconfigurationv1.TargetSegments{
 				Segments: []string{"betausers", "premiumusers"},
+			}
+
+			rolloutPhaseModel := &appconfigurationv1.RolloutPhase{
+				Percentage: core.Int64Ptr(int64(1)),
+				Duration: core.Int64Ptr(int64(38)),
+				DurationType: core.StringPtr("days"),
+			}
+
+			rolloutConfigurationModel := &appconfigurationv1.RolloutConfiguration{
+				DurationPreset: core.StringPtr("CUSTOM"),
+				StartAt: CreateMockDateTime("2019-01-01T12:00:00.000Z"),
+				Phases: []appconfigurationv1.RolloutPhase{*rolloutPhaseModel},
 			}
 
 			createFeatureRuleOptions := &appconfigurationv1.CreateFeatureRuleOptions{
@@ -610,6 +689,8 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 				RuleID: core.StringPtr("RuleA"),
 				RuleName: core.StringPtr("Rule Name"),
 				RolloutPercentage: core.Int64Ptr(int64(50)),
+				RolloutType: core.StringPtr("MANUAL"),
+				RolloutConfiguration: rolloutConfigurationModel,
 			}
 
 			featureSegmentRuleWithRuleID, response, err := appConfigurationService.CreateFeatureRule(createFeatureRuleOptions)
@@ -663,6 +744,18 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 				Segments: []string{"betausers", "premiumusers"},
 			}
 
+			rolloutPhaseModel := &appconfigurationv1.RolloutPhase{
+				Percentage: core.Int64Ptr(int64(1)),
+				Duration: core.Int64Ptr(int64(38)),
+				DurationType: core.StringPtr("days"),
+			}
+
+			rolloutConfigurationModel := &appconfigurationv1.RolloutConfiguration{
+				DurationPreset: core.StringPtr("CUSTOM"),
+				StartAt: CreateMockDateTime("2019-01-01T12:00:00.000Z"),
+				Phases: []appconfigurationv1.RolloutPhase{*rolloutPhaseModel},
+			}
+
 			updateFeatureRuleOptions := &appconfigurationv1.UpdateFeatureRuleOptions{
 				EnvironmentID: core.StringPtr("environment_id"),
 				FeatureID: core.StringPtr("feature_id"),
@@ -671,9 +764,31 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 				Value: core.StringPtr("true"),
 				RuleName: core.StringPtr("rule-name-1"),
 				RolloutPercentage: core.Int64Ptr(int64(50)),
+				RolloutType: core.StringPtr("MANUAL"),
+				RolloutConfiguration: rolloutConfigurationModel,
 			}
 
 			featureSegmentRuleWithRuleID, response, err := appConfigurationService.UpdateFeatureRule(updateFeatureRuleOptions)
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(200))
+			Expect(featureSegmentRuleWithRuleID).ToNot(BeNil())
+		})
+	})
+
+	Describe(`StopFeatureRuleRollout - Stop Feature Rule Rollout`, func() {
+		BeforeEach(func() {
+			shouldSkipTest()
+		})
+		It(`StopFeatureRuleRollout(stopFeatureRuleRolloutOptions *StopFeatureRuleRolloutOptions)`, func() {
+			stopFeatureRuleRolloutOptions := &appconfigurationv1.StopFeatureRuleRolloutOptions{
+				EnvironmentID: core.StringPtr("environment_id"),
+				FeatureID: core.StringPtr("feature_id"),
+				RuleID: core.StringPtr("rule_id"),
+				Action: core.StringPtr("stop"),
+				RolloutPercentage: core.Int64Ptr(int64(0)),
+			}
+
+			featureSegmentRuleWithRuleID, response, err := appConfigurationService.StopFeatureRuleRollout(stopFeatureRuleRolloutOptions)
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(200))
 			Expect(featureSegmentRuleWithRuleID).ToNot(BeNil())
@@ -716,7 +831,7 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 				Tags: core.StringPtr("version 1.1,pre-release"),
 				Collections: []string{"my-collection-id", "ghzindiapvtltd"},
 				Segments: []string{"my-segment-id", "beta-users"},
-				Include: []string{"collections", "rules"},
+				Include: []string{"collections", "rules", "workflow_approval"},
 				Limit: core.Int64Ptr(int64(10)),
 				Offset: core.Int64Ptr(int64(0)),
 				Search: core.StringPtr("test tag"),
@@ -750,7 +865,7 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 				Tags: core.StringPtr("version 1.1,pre-release"),
 				Collections: []string{"my-collection-id", "ghzindiapvtltd"},
 				Segments: []string{"my-segment-id", "beta-users"},
-				Include: []string{"collections", "rules"},
+				Include: []string{"collections", "rules", "workflow_approval"},
 				Limit: core.Int64Ptr(int64(10)),
 				Search: core.StringPtr("test tag"),
 			}
@@ -762,8 +877,8 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 
 			var allResults []appconfigurationv1.Property
 			for pager.HasNext() {
-				nextPage, err := pager.GetNext()
-				Expect(err).To(BeNil())
+				nextPage, nextPageErr := pager.GetNext()
+				Expect(nextPageErr).To(BeNil())
 				Expect(nextPage).ToNot(BeNil())
 				allResults = append(allResults, nextPage...)
 			}
@@ -899,7 +1014,7 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 			getPropertyOptions := &appconfigurationv1.GetPropertyOptions{
 				EnvironmentID: core.StringPtr("environment_id"),
 				PropertyID: core.StringPtr("property_id"),
-				Include: []string{"collections", "rules"},
+				Include: []string{"collections", "rules", "workflow_approval"},
 			}
 
 			property, response, err := appConfigurationService.GetProperty(getPropertyOptions)
@@ -918,7 +1033,7 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 				Expand: core.BoolPtr(true),
 				Sort: core.StringPtr("created_time"),
 				Tags: core.StringPtr("version 1.1,pre-release"),
-				Include: core.StringPtr("rules"),
+				Include: []string{"rules", "workflow_approval"},
 				Limit: core.Int64Ptr(int64(10)),
 				Offset: core.Int64Ptr(int64(0)),
 				Search: core.StringPtr("test tag"),
@@ -949,7 +1064,7 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 				Expand: core.BoolPtr(true),
 				Sort: core.StringPtr("created_time"),
 				Tags: core.StringPtr("version 1.1,pre-release"),
-				Include: core.StringPtr("rules"),
+				Include: []string{"rules", "workflow_approval"},
 				Limit: core.Int64Ptr(int64(10)),
 				Search: core.StringPtr("test tag"),
 			}
@@ -961,8 +1076,8 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 
 			var allResults []appconfigurationv1.Segment
 			for pager.HasNext() {
-				nextPage, err := pager.GetNext()
-				Expect(err).To(BeNil())
+				nextPage, nextPageErr := pager.GetNext()
+				Expect(nextPageErr).To(BeNil())
 				Expect(nextPage).ToNot(BeNil())
 				allResults = append(allResults, nextPage...)
 			}
@@ -1040,7 +1155,7 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 		It(`GetSegment(getSegmentOptions *GetSegmentOptions)`, func() {
 			getSegmentOptions := &appconfigurationv1.GetSegmentOptions{
 				SegmentID: core.StringPtr("segment_id"),
-				Include: []string{"features", "properties"},
+				Include: []string{"features", "properties", "workflow_approval"},
 			}
 
 			segment, response, err := appConfigurationService.GetSegment(getSegmentOptions)
@@ -1100,8 +1215,8 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 
 			var allResults []appconfigurationv1.GitConfig
 			for pager.HasNext() {
-				nextPage, err := pager.GetNext()
-				Expect(err).To(BeNil())
+				nextPage, nextPageErr := pager.GetNext()
+				Expect(nextPageErr).To(BeNil())
 				Expect(nextPage).ToNot(BeNil())
 				allResults = append(allResults, nextPage...)
 			}
@@ -1258,8 +1373,8 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 
 			var allResults []appconfigurationv1.Integration
 			for pager.HasNext() {
-				nextPage, err := pager.GetNext()
-				Expect(err).To(BeNil())
+				nextPage, nextPageErr := pager.GetNext()
+				Expect(nextPageErr).To(BeNil())
 				Expect(nextPage).ToNot(BeNil())
 				allResults = append(allResults, nextPage...)
 			}
@@ -1430,11 +1545,255 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 		})
 	})
 
+	Describe(`ListWorkflowConfigs - List Workflow Config`, func() {
+		BeforeEach(func() {
+			shouldSkipTest()
+		})
+		It(`ListWorkflowConfigs(listWorkflowConfigsOptions *ListWorkflowConfigsOptions) with pagination`, func(){
+			listWorkflowConfigsOptions := &appconfigurationv1.ListWorkflowConfigsOptions{
+				Sort: core.StringPtr("created_time"),
+				Search: core.StringPtr("search_string"),
+				Limit: core.Int64Ptr(int64(10)),
+				Offset: core.Int64Ptr(int64(0)),
+			}
+
+			listWorkflowConfigsOptions.Offset = nil
+			listWorkflowConfigsOptions.Limit = core.Int64Ptr(1)
+
+			var allResults []appconfigurationv1.WorkflowConfigResponse
+			for {
+				workflowConfigsList, response, err := appConfigurationService.ListWorkflowConfigs(listWorkflowConfigsOptions)
+				Expect(err).To(BeNil())
+				Expect(response.StatusCode).To(Equal(200))
+				Expect(workflowConfigsList).ToNot(BeNil())
+				allResults = append(allResults, workflowConfigsList.WorkflowConfigs...)
+
+				listWorkflowConfigsOptions.Offset, err = workflowConfigsList.GetNextOffset()
+				Expect(err).To(BeNil())
+
+				if listWorkflowConfigsOptions.Offset == nil {
+					break
+				}
+			}
+			fmt.Fprintf(GinkgoWriter, "Retrieved a total of %d item(s) with pagination.\n", len(allResults))
+		})
+		It(`ListWorkflowConfigs(listWorkflowConfigsOptions *ListWorkflowConfigsOptions) using WorkflowConfigsPager`, func(){
+			listWorkflowConfigsOptions := &appconfigurationv1.ListWorkflowConfigsOptions{
+				Sort: core.StringPtr("created_time"),
+				Search: core.StringPtr("search_string"),
+				Limit: core.Int64Ptr(int64(10)),
+			}
+
+			// Test GetNext().
+			pager, err := appConfigurationService.NewWorkflowConfigsPager(listWorkflowConfigsOptions)
+			Expect(err).To(BeNil())
+			Expect(pager).ToNot(BeNil())
+
+			var allResults []appconfigurationv1.WorkflowConfigResponse
+			for pager.HasNext() {
+				nextPage, nextPageErr := pager.GetNext()
+				Expect(nextPageErr).To(BeNil())
+				Expect(nextPage).ToNot(BeNil())
+				allResults = append(allResults, nextPage...)
+			}
+
+			// Test GetAll().
+			pager, err = appConfigurationService.NewWorkflowConfigsPager(listWorkflowConfigsOptions)
+			Expect(err).To(BeNil())
+			Expect(pager).ToNot(BeNil())
+
+			allItems, err := pager.GetAll()
+			Expect(err).To(BeNil())
+			Expect(allItems).ToNot(BeNil())
+
+			Expect(len(allItems)).To(Equal(len(allResults)))
+			fmt.Fprintf(GinkgoWriter, "ListWorkflowConfigs() returned a total of %d item(s) using WorkflowConfigsPager.\n", len(allResults))
+		})
+	})
+
+	Describe(`CreateWorkflowConfigs - Create Approval Workflow config`, func() {
+		BeforeEach(func() {
+			shouldSkipTest()
+		})
+		It(`CreateWorkflowConfigs(createWorkflowConfigsOptions *CreateWorkflowConfigsOptions)`, func() {
+			workflowMetadataModel := &appconfigurationv1.WorkflowMetadataExternalServiceNowMetadata{
+				ApprovalExpiration: core.Int64Ptr(int64(7)),
+				ApprovalGroupName: core.StringPtr("AppConfiguration Approvers"),
+				SmSecretID: core.StringPtr("63476562-d5b4-02ae-e966-528f8df457bb"),
+				WorkflowURL: core.StringPtr("https://dev339579.service-now.com"),
+			}
+
+			workflowProviderModel := &appconfigurationv1.WorkflowProvider{
+				Type: core.StringPtr("SERVICENOW_EXTERNAL"),
+				Metadata: workflowMetadataModel,
+			}
+
+			workflowScopeModeModel := &appconfigurationv1.WorkflowScopeMode{
+				Mode: core.StringPtr("ALL"),
+				Ids: []string{},
+			}
+
+			workflowEnvironmentResourcesEnvironmentModel := &appconfigurationv1.WorkflowEnvironmentResourcesEnvironment{
+				Enable: core.BoolPtr(true),
+			}
+
+			workflowEnvironmentResourcesModel := &appconfigurationv1.WorkflowEnvironmentResources{
+				Environment: workflowEnvironmentResourcesEnvironmentModel,
+				Features: workflowScopeModeModel,
+				Properties: workflowScopeModeModel,
+			}
+
+			workflowEnvironmentModel := &appconfigurationv1.WorkflowEnvironment{
+				EnvironmentID: core.StringPtr("stage"),
+				Resources: workflowEnvironmentResourcesModel,
+			}
+
+			workflowScopeModel := &appconfigurationv1.WorkflowScope{
+				Collections: workflowScopeModeModel,
+				Segments: workflowScopeModeModel,
+				Environments: []appconfigurationv1.WorkflowEnvironment{*workflowEnvironmentModel},
+			}
+
+			createWorkflowConfigsOptions := &appconfigurationv1.CreateWorkflowConfigsOptions{
+				Name: core.StringPtr("ext-service-now"),
+				WorkflowID: core.StringPtr("workflow-id-1"),
+				Enabled: core.BoolPtr(true),
+				Provider: workflowProviderModel,
+				Scope: workflowScopeModel,
+			}
+
+			workflowConfigResponse, response, err := appConfigurationService.CreateWorkflowConfigs(createWorkflowConfigsOptions)
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(201))
+			Expect(workflowConfigResponse).ToNot(BeNil())
+		})
+	})
+
+	Describe(`GetWorkflowConfig - get single Approval Workflow Config`, func() {
+		BeforeEach(func() {
+			shouldSkipTest()
+		})
+		It(`GetWorkflowConfig(getWorkflowConfigOptions *GetWorkflowConfigOptions)`, func() {
+			getWorkflowConfigOptions := &appconfigurationv1.GetWorkflowConfigOptions{
+				WorkflowConfigID: core.StringPtr("workflow_config_id"),
+			}
+
+			workflowConfigResponse, response, err := appConfigurationService.GetWorkflowConfig(getWorkflowConfigOptions)
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(200))
+			Expect(workflowConfigResponse).ToNot(BeNil())
+		})
+	})
+
+	Describe(`UpdateWorkflowConfigs - Update Approval Workflow config`, func() {
+		BeforeEach(func() {
+			shouldSkipTest()
+		})
+		It(`UpdateWorkflowConfigs(updateWorkflowConfigsOptions *UpdateWorkflowConfigsOptions)`, func() {
+			workflowMetadataModel := &appconfigurationv1.WorkflowMetadataExternalServiceNowMetadata{
+				ApprovalExpiration: core.Int64Ptr(int64(10)),
+				ApprovalGroupName: core.StringPtr("AppConfiguration Approvers Updated"),
+				SmSecretID: core.StringPtr("63476562-d5b4-02ae-e966-528f8df457bb"),
+				WorkflowURL: core.StringPtr("https://dev339579.service-now.com"),
+			}
+
+			workflowProviderModel := &appconfigurationv1.WorkflowProvider{
+				Type: core.StringPtr("SERVICENOW_EXTERNAL"),
+				Metadata: workflowMetadataModel,
+			}
+
+			workflowScopeModeModel := &appconfigurationv1.WorkflowScopeMode{
+				Mode: core.StringPtr("ALL"),
+				Ids: []string{},
+			}
+
+			workflowEnvironmentResourcesEnvironmentModel := &appconfigurationv1.WorkflowEnvironmentResourcesEnvironment{
+				Enable: core.BoolPtr(true),
+			}
+
+			workflowEnvironmentResourcesModel := &appconfigurationv1.WorkflowEnvironmentResources{
+				Environment: workflowEnvironmentResourcesEnvironmentModel,
+				Features: workflowScopeModeModel,
+				Properties: workflowScopeModeModel,
+			}
+
+			workflowEnvironmentModel := &appconfigurationv1.WorkflowEnvironment{
+				EnvironmentID: core.StringPtr("stage"),
+				Resources: workflowEnvironmentResourcesModel,
+			}
+
+			workflowScopeModel := &appconfigurationv1.WorkflowScope{
+				Collections: workflowScopeModeModel,
+				Segments: workflowScopeModeModel,
+				Environments: []appconfigurationv1.WorkflowEnvironment{*workflowEnvironmentModel},
+			}
+
+			updateWorkflowConfigsOptions := &appconfigurationv1.UpdateWorkflowConfigsOptions{
+				WorkflowConfigID: core.StringPtr("workflow_config_id"),
+				Name: core.StringPtr("ext-service-now-updated"),
+				WorkflowID: core.StringPtr("workflow-id-1"),
+				Enabled: core.BoolPtr(true),
+				Provider: workflowProviderModel,
+				Scope: workflowScopeModel,
+			}
+
+			workflowConfigResponse, response, err := appConfigurationService.UpdateWorkflowConfigs(updateWorkflowConfigsOptions)
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(200))
+			Expect(workflowConfigResponse).ToNot(BeNil())
+		})
+	})
+
+	Describe(`ToggleWorkflowConfig - Toggle Approval Workflow config`, func() {
+		BeforeEach(func() {
+			shouldSkipTest()
+		})
+		It(`ToggleWorkflowConfig(toggleWorkflowConfigOptions *ToggleWorkflowConfigOptions)`, func() {
+			toggleWorkflowConfigOptions := &appconfigurationv1.ToggleWorkflowConfigOptions{
+				WorkflowConfigID: core.StringPtr("workflow_config_id"),
+				Enabled: core.BoolPtr(true),
+			}
+
+			workflowConfigResponse, response, err := appConfigurationService.ToggleWorkflowConfig(toggleWorkflowConfigOptions)
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(200))
+			Expect(workflowConfigResponse).ToNot(BeNil())
+		})
+	})
+
+	Describe(`TestWorkflowConfig - Test an Approval Workflow config`, func() {
+		BeforeEach(func() {
+			shouldSkipTest()
+		})
+		It(`TestWorkflowConfig(testWorkflowConfigOptions *TestWorkflowConfigOptions)`, func() {
+			testWorkflowConfigOptions := &appconfigurationv1.TestWorkflowConfigOptions{
+				WorkflowConfigID: core.StringPtr("workflow_config_id"),
+			}
+
+			workflowProviderValidationResponse, response, err := appConfigurationService.TestWorkflowConfig(testWorkflowConfigOptions)
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(200))
+			Expect(workflowProviderValidationResponse).ToNot(BeNil())
+		})
+	})
+
 	Describe(`ImportConfig - Import instance configuration`, func() {
 		BeforeEach(func() {
 			shouldSkipTest()
 		})
 		It(`ImportConfig(importConfigOptions *ImportConfigOptions)`, func() {
+			rolloutPhaseModel := &appconfigurationv1.RolloutPhase{
+				Percentage: core.Int64Ptr(int64(1)),
+				Duration: core.Int64Ptr(int64(38)),
+				DurationType: core.StringPtr("days"),
+			}
+
+			rolloutConfigurationModel := &appconfigurationv1.RolloutConfiguration{
+				DurationPreset: core.StringPtr("CUSTOM"),
+				StartAt: CreateMockDateTime("2019-01-01T12:00:00.000Z"),
+				Phases: []appconfigurationv1.RolloutPhase{*rolloutPhaseModel},
+			}
+
 			targetSegmentsModel := &appconfigurationv1.TargetSegments{
 				Segments: []string{"testString"},
 			}
@@ -1444,6 +1803,8 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 				Value: "testString",
 				Order: core.Int64Ptr(int64(38)),
 				RolloutPercentage: core.Int64Ptr(int64(100)),
+				RolloutType: core.StringPtr("MANUAL"),
+				RolloutConfiguration: rolloutConfigurationModel,
 				RuleID: core.StringPtr("testString"),
 				RuleName: core.StringPtr("testString"),
 			}
@@ -1462,6 +1823,8 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 				DisabledValue: core.StringPtr("2"),
 				Enabled: core.BoolPtr(true),
 				RolloutPercentage: core.Int64Ptr(int64(100)),
+				RolloutType: core.StringPtr("MANUAL"),
+				RolloutConfiguration: rolloutConfigurationModel,
 				Tags: core.StringPtr("testString"),
 				SegmentRules: []appconfigurationv1.FeatureSegmentRule{*featureSegmentRuleModel},
 				Collections: []appconfigurationv1.CollectionRef{*collectionRefModel},
@@ -1588,9 +1951,10 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 				EnvironmentID: core.StringPtr("environment_id"),
 			}
 
-			response, err := appConfigurationService.DeleteEnvironment(deleteEnvironmentOptions)
+			workflowApprovalInitiatedResponse, response, err := appConfigurationService.DeleteEnvironment(deleteEnvironmentOptions)
 			Expect(err).To(BeNil())
-			Expect(response.StatusCode).To(Equal(204))
+			Expect(response.StatusCode).To(Equal(202))
+			Expect(workflowApprovalInitiatedResponse).ToNot(BeNil())
 		})
 	})
 
@@ -1603,9 +1967,10 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 				CollectionID: core.StringPtr("collection_id"),
 			}
 
-			response, err := appConfigurationService.DeleteCollection(deleteCollectionOptions)
+			workflowApprovalInitiatedResponse, response, err := appConfigurationService.DeleteCollection(deleteCollectionOptions)
 			Expect(err).To(BeNil())
-			Expect(response.StatusCode).To(Equal(204))
+			Expect(response.StatusCode).To(Equal(202))
+			Expect(workflowApprovalInitiatedResponse).ToNot(BeNil())
 		})
 	})
 
@@ -1619,9 +1984,10 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 				FeatureID: core.StringPtr("feature_id"),
 			}
 
-			response, err := appConfigurationService.DeleteFeature(deleteFeatureOptions)
+			workflowApprovalInitiatedResponse, response, err := appConfigurationService.DeleteFeature(deleteFeatureOptions)
 			Expect(err).To(BeNil())
-			Expect(response.StatusCode).To(Equal(204))
+			Expect(response.StatusCode).To(Equal(202))
+			Expect(workflowApprovalInitiatedResponse).ToNot(BeNil())
 		})
 	})
 
@@ -1636,9 +2002,10 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 				RuleID: core.StringPtr("rule_id"),
 			}
 
-			response, err := appConfigurationService.DeleteFeatureRule(deleteFeatureRuleOptions)
+			workflowApprovalInitiatedResponse, response, err := appConfigurationService.DeleteFeatureRule(deleteFeatureRuleOptions)
 			Expect(err).To(BeNil())
-			Expect(response.StatusCode).To(Equal(204))
+			Expect(response.StatusCode).To(Equal(202))
+			Expect(workflowApprovalInitiatedResponse).ToNot(BeNil())
 		})
 	})
 
@@ -1652,9 +2019,10 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 				PropertyID: core.StringPtr("property_id"),
 			}
 
-			response, err := appConfigurationService.DeleteProperty(deletePropertyOptions)
+			workflowApprovalInitiatedResponse, response, err := appConfigurationService.DeleteProperty(deletePropertyOptions)
 			Expect(err).To(BeNil())
-			Expect(response.StatusCode).To(Equal(204))
+			Expect(response.StatusCode).To(Equal(202))
+			Expect(workflowApprovalInitiatedResponse).ToNot(BeNil())
 		})
 	})
 
@@ -1667,9 +2035,10 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 				SegmentID: core.StringPtr("segment_id"),
 			}
 
-			response, err := appConfigurationService.DeleteSegment(deleteSegmentOptions)
+			workflowApprovalInitiatedResponse, response, err := appConfigurationService.DeleteSegment(deleteSegmentOptions)
 			Expect(err).To(BeNil())
-			Expect(response.StatusCode).To(Equal(204))
+			Expect(response.StatusCode).To(Equal(202))
+			Expect(workflowApprovalInitiatedResponse).ToNot(BeNil())
 		})
 	})
 
@@ -1713,6 +2082,21 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 			}
 
 			response, err := appConfigurationService.DeleteWorkflowconfig(deleteWorkflowconfigOptions)
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(204))
+		})
+	})
+
+	Describe(`DeleteWorkflowConfigs - Delete Approval Workflow config`, func() {
+		BeforeEach(func() {
+			shouldSkipTest()
+		})
+		It(`DeleteWorkflowConfigs(deleteWorkflowConfigsOptions *DeleteWorkflowConfigsOptions)`, func() {
+			deleteWorkflowConfigsOptions := &appconfigurationv1.DeleteWorkflowConfigsOptions{
+				WorkflowConfigID: core.StringPtr("workflow_config_id"),
+			}
+
+			response, err := appConfigurationService.DeleteWorkflowConfigs(deleteWorkflowConfigsOptions)
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(204))
 		})
