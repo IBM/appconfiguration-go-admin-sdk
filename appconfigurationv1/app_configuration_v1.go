@@ -15,7 +15,7 @@
  */
 
 /*
- * IBM OpenAPI SDK Code Generator Version: 3.112.0-f88e9264-20260220-115155
+ * IBM OpenAPI SDK Code Generator Version: 3.115.0-a8d44b59-20260713-123033
  */
 
 // Package appconfigurationv1 : Operations and models for the AppConfigurationV1 service
@@ -523,14 +523,14 @@ func (appConfiguration *AppConfigurationV1) GetEnvironmentWithContext(ctx contex
 
 // DeleteEnvironment : Delete Environment
 // Delete an Environment.
-func (appConfiguration *AppConfigurationV1) DeleteEnvironment(deleteEnvironmentOptions *DeleteEnvironmentOptions) (response *core.DetailedResponse, err error) {
-	response, err = appConfiguration.DeleteEnvironmentWithContext(context.Background(), deleteEnvironmentOptions)
+func (appConfiguration *AppConfigurationV1) DeleteEnvironment(deleteEnvironmentOptions *DeleteEnvironmentOptions) (result *WorkflowApprovalInitiatedResponse, response *core.DetailedResponse, err error) {
+	result, response, err = appConfiguration.DeleteEnvironmentWithContext(context.Background(), deleteEnvironmentOptions)
 	err = core.RepurposeSDKProblem(err, "")
 	return
 }
 
 // DeleteEnvironmentWithContext is an alternate form of the DeleteEnvironment method which supports a Context parameter
-func (appConfiguration *AppConfigurationV1) DeleteEnvironmentWithContext(ctx context.Context, deleteEnvironmentOptions *DeleteEnvironmentOptions) (response *core.DetailedResponse, err error) {
+func (appConfiguration *AppConfigurationV1) DeleteEnvironmentWithContext(ctx context.Context, deleteEnvironmentOptions *DeleteEnvironmentOptions) (result *WorkflowApprovalInitiatedResponse, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(deleteEnvironmentOptions, "deleteEnvironmentOptions cannot be nil")
 	if err != nil {
 		err = core.SDKErrorf(err, "", "unexpected-nil-param", common.GetComponentInfo())
@@ -563,6 +563,7 @@ func (appConfiguration *AppConfigurationV1) DeleteEnvironmentWithContext(ctx con
 	for headerName, headerValue := range deleteEnvironmentOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
+	builder.AddHeader("Accept", "application/json")
 
 	request, err := builder.Build()
 	if err != nil {
@@ -570,11 +571,20 @@ func (appConfiguration *AppConfigurationV1) DeleteEnvironmentWithContext(ctx con
 		return
 	}
 
-	response, err = appConfiguration.Service.Request(request, nil)
+	var rawResponse map[string]json.RawMessage
+	response, err = appConfiguration.Service.Request(request, &rawResponse)
 	if err != nil {
 		core.EnrichHTTPProblem(err, "delete_environment", getServiceComponentInfo())
 		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
 		return
+	}
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalWorkflowApprovalInitiatedResponse)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-resp-error", common.GetComponentInfo())
+			return
+		}
+		response.Result = result
 	}
 
 	return
@@ -917,14 +927,14 @@ func (appConfiguration *AppConfigurationV1) GetCollectionWithContext(ctx context
 
 // DeleteCollection : Delete Collection
 // Delete the collection.
-func (appConfiguration *AppConfigurationV1) DeleteCollection(deleteCollectionOptions *DeleteCollectionOptions) (response *core.DetailedResponse, err error) {
-	response, err = appConfiguration.DeleteCollectionWithContext(context.Background(), deleteCollectionOptions)
+func (appConfiguration *AppConfigurationV1) DeleteCollection(deleteCollectionOptions *DeleteCollectionOptions) (result *WorkflowApprovalInitiatedResponse, response *core.DetailedResponse, err error) {
+	result, response, err = appConfiguration.DeleteCollectionWithContext(context.Background(), deleteCollectionOptions)
 	err = core.RepurposeSDKProblem(err, "")
 	return
 }
 
 // DeleteCollectionWithContext is an alternate form of the DeleteCollection method which supports a Context parameter
-func (appConfiguration *AppConfigurationV1) DeleteCollectionWithContext(ctx context.Context, deleteCollectionOptions *DeleteCollectionOptions) (response *core.DetailedResponse, err error) {
+func (appConfiguration *AppConfigurationV1) DeleteCollectionWithContext(ctx context.Context, deleteCollectionOptions *DeleteCollectionOptions) (result *WorkflowApprovalInitiatedResponse, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(deleteCollectionOptions, "deleteCollectionOptions cannot be nil")
 	if err != nil {
 		err = core.SDKErrorf(err, "", "unexpected-nil-param", common.GetComponentInfo())
@@ -957,6 +967,7 @@ func (appConfiguration *AppConfigurationV1) DeleteCollectionWithContext(ctx cont
 	for headerName, headerValue := range deleteCollectionOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
+	builder.AddHeader("Accept", "application/json")
 
 	request, err := builder.Build()
 	if err != nil {
@@ -964,11 +975,20 @@ func (appConfiguration *AppConfigurationV1) DeleteCollectionWithContext(ctx cont
 		return
 	}
 
-	response, err = appConfiguration.Service.Request(request, nil)
+	var rawResponse map[string]json.RawMessage
+	response, err = appConfiguration.Service.Request(request, &rawResponse)
 	if err != nil {
 		core.EnrichHTTPProblem(err, "delete_collection", getServiceComponentInfo())
 		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
 		return
+	}
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalWorkflowApprovalInitiatedResponse)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-resp-error", common.GetComponentInfo())
+			return
+		}
+		response.Result = result
 	}
 
 	return
@@ -1144,6 +1164,12 @@ func (appConfiguration *AppConfigurationV1) CreateFeatureWithContext(ctx context
 	if createFeatureOptions.RolloutPercentage != nil {
 		body["rollout_percentage"] = createFeatureOptions.RolloutPercentage
 	}
+	if createFeatureOptions.RolloutType != nil {
+		body["rollout_type"] = createFeatureOptions.RolloutType
+	}
+	if createFeatureOptions.RolloutConfiguration != nil {
+		body["rollout_configuration"] = createFeatureOptions.RolloutConfiguration
+	}
 	if createFeatureOptions.Tags != nil {
 		body["tags"] = createFeatureOptions.Tags
 	}
@@ -1248,6 +1274,12 @@ func (appConfiguration *AppConfigurationV1) UpdateFeatureWithContext(ctx context
 	}
 	if updateFeatureOptions.RolloutPercentage != nil {
 		body["rollout_percentage"] = updateFeatureOptions.RolloutPercentage
+	}
+	if updateFeatureOptions.RolloutType != nil {
+		body["rollout_type"] = updateFeatureOptions.RolloutType
+	}
+	if updateFeatureOptions.RolloutConfiguration != nil {
+		body["rollout_configuration"] = updateFeatureOptions.RolloutConfiguration
 	}
 	if updateFeatureOptions.Tags != nil {
 		body["tags"] = updateFeatureOptions.Tags
@@ -1355,6 +1387,12 @@ func (appConfiguration *AppConfigurationV1) UpdateFeatureValuesWithContext(ctx c
 	}
 	if updateFeatureValuesOptions.RolloutPercentage != nil {
 		body["rollout_percentage"] = updateFeatureValuesOptions.RolloutPercentage
+	}
+	if updateFeatureValuesOptions.RolloutType != nil {
+		body["rollout_type"] = updateFeatureValuesOptions.RolloutType
+	}
+	if updateFeatureValuesOptions.RolloutConfiguration != nil {
+		body["rollout_configuration"] = updateFeatureValuesOptions.RolloutConfiguration
 	}
 	if updateFeatureValuesOptions.SegmentRules != nil {
 		body["segment_rules"] = updateFeatureValuesOptions.SegmentRules
@@ -1466,14 +1504,14 @@ func (appConfiguration *AppConfigurationV1) GetFeatureWithContext(ctx context.Co
 
 // DeleteFeature : Delete Feature
 // Delete a feature flag.
-func (appConfiguration *AppConfigurationV1) DeleteFeature(deleteFeatureOptions *DeleteFeatureOptions) (response *core.DetailedResponse, err error) {
-	response, err = appConfiguration.DeleteFeatureWithContext(context.Background(), deleteFeatureOptions)
+func (appConfiguration *AppConfigurationV1) DeleteFeature(deleteFeatureOptions *DeleteFeatureOptions) (result *WorkflowApprovalInitiatedResponse, response *core.DetailedResponse, err error) {
+	result, response, err = appConfiguration.DeleteFeatureWithContext(context.Background(), deleteFeatureOptions)
 	err = core.RepurposeSDKProblem(err, "")
 	return
 }
 
 // DeleteFeatureWithContext is an alternate form of the DeleteFeature method which supports a Context parameter
-func (appConfiguration *AppConfigurationV1) DeleteFeatureWithContext(ctx context.Context, deleteFeatureOptions *DeleteFeatureOptions) (response *core.DetailedResponse, err error) {
+func (appConfiguration *AppConfigurationV1) DeleteFeatureWithContext(ctx context.Context, deleteFeatureOptions *DeleteFeatureOptions) (result *WorkflowApprovalInitiatedResponse, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(deleteFeatureOptions, "deleteFeatureOptions cannot be nil")
 	if err != nil {
 		err = core.SDKErrorf(err, "", "unexpected-nil-param", common.GetComponentInfo())
@@ -1507,6 +1545,7 @@ func (appConfiguration *AppConfigurationV1) DeleteFeatureWithContext(ctx context
 	for headerName, headerValue := range deleteFeatureOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
+	builder.AddHeader("Accept", "application/json")
 
 	request, err := builder.Build()
 	if err != nil {
@@ -1514,11 +1553,20 @@ func (appConfiguration *AppConfigurationV1) DeleteFeatureWithContext(ctx context
 		return
 	}
 
-	response, err = appConfiguration.Service.Request(request, nil)
+	var rawResponse map[string]json.RawMessage
+	response, err = appConfiguration.Service.Request(request, &rawResponse)
 	if err != nil {
 		core.EnrichHTTPProblem(err, "delete_feature", getServiceComponentInfo())
 		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
 		return
+	}
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalWorkflowApprovalInitiatedResponse)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-resp-error", common.GetComponentInfo())
+			return
+		}
+		response.Result = result
 	}
 
 	return
@@ -1605,6 +1653,92 @@ func (appConfiguration *AppConfigurationV1) ToggleFeatureWithContext(ctx context
 	return
 }
 
+// StopFeatureRollout : Stop Feature Rollout
+// Stop an in-progress rollout for a feature flag that is in a Progressive rollout state. The rollout is halted at the
+// specified rollout percentage, which becomes the fixed percentage at which the feature is served until the rollout is
+// reconfigured. This operation is not applicable to features in Manual rollout mode.
+func (appConfiguration *AppConfigurationV1) StopFeatureRollout(stopFeatureRolloutOptions *StopFeatureRolloutOptions) (result *Feature, response *core.DetailedResponse, err error) {
+	result, response, err = appConfiguration.StopFeatureRolloutWithContext(context.Background(), stopFeatureRolloutOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
+}
+
+// StopFeatureRolloutWithContext is an alternate form of the StopFeatureRollout method which supports a Context parameter
+func (appConfiguration *AppConfigurationV1) StopFeatureRolloutWithContext(ctx context.Context, stopFeatureRolloutOptions *StopFeatureRolloutOptions) (result *Feature, response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(stopFeatureRolloutOptions, "stopFeatureRolloutOptions cannot be nil")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "unexpected-nil-param", common.GetComponentInfo())
+		return
+	}
+	err = core.ValidateStruct(stopFeatureRolloutOptions, "stopFeatureRolloutOptions")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
+		return
+	}
+
+	pathParamsMap := map[string]string{
+		"environment_id": *stopFeatureRolloutOptions.EnvironmentID,
+		"feature_id": *stopFeatureRolloutOptions.FeatureID,
+	}
+
+	builder := core.NewRequestBuilder(core.PATCH)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = appConfiguration.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(appConfiguration.Service.Options.URL, `/environments/{environment_id}/features/{feature_id}/rollout`, pathParamsMap)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
+		return
+	}
+
+	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "StopFeatureRollout")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	for headerName, headerValue := range stopFeatureRolloutOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+	builder.AddHeader("Accept", "application/json")
+	builder.AddHeader("Content-Type", "application/json")
+
+	body := make(map[string]interface{})
+	if stopFeatureRolloutOptions.Action != nil {
+		body["action"] = stopFeatureRolloutOptions.Action
+	}
+	if stopFeatureRolloutOptions.RolloutPercentage != nil {
+		body["rollout_percentage"] = stopFeatureRolloutOptions.RolloutPercentage
+	}
+	_, err = builder.SetBodyContentJSON(body)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "set-json-body-error", common.GetComponentInfo())
+		return
+	}
+
+	request, err := builder.Build()
+	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
+		return
+	}
+
+	var rawResponse map[string]json.RawMessage
+	response, err = appConfiguration.Service.Request(request, &rawResponse)
+	if err != nil {
+		core.EnrichHTTPProblem(err, "stop_feature_rollout", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
+		return
+	}
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalFeature)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-resp-error", common.GetComponentInfo())
+			return
+		}
+		response.Result = result
+	}
+
+	return
+}
+
 // CreateFeatureRule : Create Feature Rule
 // Create a rule for feature flag.
 func (appConfiguration *AppConfigurationV1) CreateFeatureRule(createFeatureRuleOptions *CreateFeatureRuleOptions) (result *FeatureSegmentRuleWithRuleID, response *core.DetailedResponse, err error) {
@@ -1666,6 +1800,12 @@ func (appConfiguration *AppConfigurationV1) CreateFeatureRuleWithContext(ctx con
 	}
 	if createFeatureRuleOptions.RolloutPercentage != nil {
 		body["rollout_percentage"] = createFeatureRuleOptions.RolloutPercentage
+	}
+	if createFeatureRuleOptions.RolloutType != nil {
+		body["rollout_type"] = createFeatureRuleOptions.RolloutType
+	}
+	if createFeatureRuleOptions.RolloutConfiguration != nil {
+		body["rollout_configuration"] = createFeatureRuleOptions.RolloutConfiguration
 	}
 	_, err = builder.SetBodyContentJSON(body)
 	if err != nil {
@@ -1899,6 +2039,12 @@ func (appConfiguration *AppConfigurationV1) UpdateFeatureRuleWithContext(ctx con
 	if updateFeatureRuleOptions.RolloutPercentage != nil {
 		body["rollout_percentage"] = updateFeatureRuleOptions.RolloutPercentage
 	}
+	if updateFeatureRuleOptions.RolloutType != nil {
+		body["rollout_type"] = updateFeatureRuleOptions.RolloutType
+	}
+	if updateFeatureRuleOptions.RolloutConfiguration != nil {
+		body["rollout_configuration"] = updateFeatureRuleOptions.RolloutConfiguration
+	}
 	_, err = builder.SetBodyContentJSON(body)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "set-json-body-error", common.GetComponentInfo())
@@ -1932,14 +2078,14 @@ func (appConfiguration *AppConfigurationV1) UpdateFeatureRuleWithContext(ctx con
 
 // DeleteFeatureRule : Delete Feature rule
 // Delete a feature rule.
-func (appConfiguration *AppConfigurationV1) DeleteFeatureRule(deleteFeatureRuleOptions *DeleteFeatureRuleOptions) (response *core.DetailedResponse, err error) {
-	response, err = appConfiguration.DeleteFeatureRuleWithContext(context.Background(), deleteFeatureRuleOptions)
+func (appConfiguration *AppConfigurationV1) DeleteFeatureRule(deleteFeatureRuleOptions *DeleteFeatureRuleOptions) (result *WorkflowApprovalInitiatedResponse, response *core.DetailedResponse, err error) {
+	result, response, err = appConfiguration.DeleteFeatureRuleWithContext(context.Background(), deleteFeatureRuleOptions)
 	err = core.RepurposeSDKProblem(err, "")
 	return
 }
 
 // DeleteFeatureRuleWithContext is an alternate form of the DeleteFeatureRule method which supports a Context parameter
-func (appConfiguration *AppConfigurationV1) DeleteFeatureRuleWithContext(ctx context.Context, deleteFeatureRuleOptions *DeleteFeatureRuleOptions) (response *core.DetailedResponse, err error) {
+func (appConfiguration *AppConfigurationV1) DeleteFeatureRuleWithContext(ctx context.Context, deleteFeatureRuleOptions *DeleteFeatureRuleOptions) (result *WorkflowApprovalInitiatedResponse, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(deleteFeatureRuleOptions, "deleteFeatureRuleOptions cannot be nil")
 	if err != nil {
 		err = core.SDKErrorf(err, "", "unexpected-nil-param", common.GetComponentInfo())
@@ -1974,6 +2120,7 @@ func (appConfiguration *AppConfigurationV1) DeleteFeatureRuleWithContext(ctx con
 	for headerName, headerValue := range deleteFeatureRuleOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
+	builder.AddHeader("Accept", "application/json")
 
 	request, err := builder.Build()
 	if err != nil {
@@ -1981,11 +2128,108 @@ func (appConfiguration *AppConfigurationV1) DeleteFeatureRuleWithContext(ctx con
 		return
 	}
 
-	response, err = appConfiguration.Service.Request(request, nil)
+	var rawResponse map[string]json.RawMessage
+	response, err = appConfiguration.Service.Request(request, &rawResponse)
 	if err != nil {
 		core.EnrichHTTPProblem(err, "delete_feature_rule", getServiceComponentInfo())
 		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
 		return
+	}
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalWorkflowApprovalInitiatedResponse)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-resp-error", common.GetComponentInfo())
+			return
+		}
+		response.Result = result
+	}
+
+	return
+}
+
+// StopFeatureRuleRollout : Stop Feature Rule Rollout
+// Stop an in-progress rollout for a specific rule of a feature flag that is in a Progressive rollout state. The rollout
+// for the rule is halted at the specified rollout percentage, which becomes the fixed percentage at which the rule is
+// evaluated until the rollout is reconfigured. This operation is not applicable to rules that are in Manual rollout
+// mode.
+func (appConfiguration *AppConfigurationV1) StopFeatureRuleRollout(stopFeatureRuleRolloutOptions *StopFeatureRuleRolloutOptions) (result *FeatureSegmentRuleWithRuleID, response *core.DetailedResponse, err error) {
+	result, response, err = appConfiguration.StopFeatureRuleRolloutWithContext(context.Background(), stopFeatureRuleRolloutOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
+}
+
+// StopFeatureRuleRolloutWithContext is an alternate form of the StopFeatureRuleRollout method which supports a Context parameter
+func (appConfiguration *AppConfigurationV1) StopFeatureRuleRolloutWithContext(ctx context.Context, stopFeatureRuleRolloutOptions *StopFeatureRuleRolloutOptions) (result *FeatureSegmentRuleWithRuleID, response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(stopFeatureRuleRolloutOptions, "stopFeatureRuleRolloutOptions cannot be nil")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "unexpected-nil-param", common.GetComponentInfo())
+		return
+	}
+	err = core.ValidateStruct(stopFeatureRuleRolloutOptions, "stopFeatureRuleRolloutOptions")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
+		return
+	}
+
+	pathParamsMap := map[string]string{
+		"environment_id": *stopFeatureRuleRolloutOptions.EnvironmentID,
+		"feature_id": *stopFeatureRuleRolloutOptions.FeatureID,
+		"rule_id": *stopFeatureRuleRolloutOptions.RuleID,
+	}
+
+	builder := core.NewRequestBuilder(core.PATCH)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = appConfiguration.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(appConfiguration.Service.Options.URL, `/environments/{environment_id}/features/{feature_id}/rules/{rule_id}/rollout`, pathParamsMap)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
+		return
+	}
+
+	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "StopFeatureRuleRollout")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	for headerName, headerValue := range stopFeatureRuleRolloutOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+	builder.AddHeader("Accept", "application/json")
+	builder.AddHeader("Content-Type", "application/json")
+
+	body := make(map[string]interface{})
+	if stopFeatureRuleRolloutOptions.Action != nil {
+		body["action"] = stopFeatureRuleRolloutOptions.Action
+	}
+	if stopFeatureRuleRolloutOptions.RolloutPercentage != nil {
+		body["rollout_percentage"] = stopFeatureRuleRolloutOptions.RolloutPercentage
+	}
+	_, err = builder.SetBodyContentJSON(body)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "set-json-body-error", common.GetComponentInfo())
+		return
+	}
+
+	request, err := builder.Build()
+	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
+		return
+	}
+
+	var rawResponse map[string]json.RawMessage
+	response, err = appConfiguration.Service.Request(request, &rawResponse)
+	if err != nil {
+		core.EnrichHTTPProblem(err, "stop_feature_rule_rollout", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
+		return
+	}
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalFeatureSegmentRuleWithRuleID)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-resp-error", common.GetComponentInfo())
+			return
+		}
+		response.Result = result
 	}
 
 	return
@@ -2526,14 +2770,14 @@ func (appConfiguration *AppConfigurationV1) GetPropertyWithContext(ctx context.C
 
 // DeleteProperty : Delete Property
 // Delete a Property.
-func (appConfiguration *AppConfigurationV1) DeleteProperty(deletePropertyOptions *DeletePropertyOptions) (response *core.DetailedResponse, err error) {
-	response, err = appConfiguration.DeletePropertyWithContext(context.Background(), deletePropertyOptions)
+func (appConfiguration *AppConfigurationV1) DeleteProperty(deletePropertyOptions *DeletePropertyOptions) (result *WorkflowApprovalInitiatedResponse, response *core.DetailedResponse, err error) {
+	result, response, err = appConfiguration.DeletePropertyWithContext(context.Background(), deletePropertyOptions)
 	err = core.RepurposeSDKProblem(err, "")
 	return
 }
 
 // DeletePropertyWithContext is an alternate form of the DeleteProperty method which supports a Context parameter
-func (appConfiguration *AppConfigurationV1) DeletePropertyWithContext(ctx context.Context, deletePropertyOptions *DeletePropertyOptions) (response *core.DetailedResponse, err error) {
+func (appConfiguration *AppConfigurationV1) DeletePropertyWithContext(ctx context.Context, deletePropertyOptions *DeletePropertyOptions) (result *WorkflowApprovalInitiatedResponse, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(deletePropertyOptions, "deletePropertyOptions cannot be nil")
 	if err != nil {
 		err = core.SDKErrorf(err, "", "unexpected-nil-param", common.GetComponentInfo())
@@ -2567,6 +2811,7 @@ func (appConfiguration *AppConfigurationV1) DeletePropertyWithContext(ctx contex
 	for headerName, headerValue := range deletePropertyOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
+	builder.AddHeader("Accept", "application/json")
 
 	request, err := builder.Build()
 	if err != nil {
@@ -2574,11 +2819,20 @@ func (appConfiguration *AppConfigurationV1) DeletePropertyWithContext(ctx contex
 		return
 	}
 
-	response, err = appConfiguration.Service.Request(request, nil)
+	var rawResponse map[string]json.RawMessage
+	response, err = appConfiguration.Service.Request(request, &rawResponse)
 	if err != nil {
 		core.EnrichHTTPProblem(err, "delete_property", getServiceComponentInfo())
 		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
 		return
+	}
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalWorkflowApprovalInitiatedResponse)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-resp-error", common.GetComponentInfo())
+			return
+		}
+		response.Result = result
 	}
 
 	return
@@ -2629,7 +2883,7 @@ func (appConfiguration *AppConfigurationV1) ListSegmentsWithContext(ctx context.
 		builder.AddQuery("tags", fmt.Sprint(*listSegmentsOptions.Tags))
 	}
 	if listSegmentsOptions.Include != nil {
-		builder.AddQuery("include", fmt.Sprint(*listSegmentsOptions.Include))
+		builder.AddQuery("include", strings.Join(listSegmentsOptions.Include, ","))
 	}
 	if listSegmentsOptions.Limit != nil {
 		builder.AddQuery("limit", fmt.Sprint(*listSegmentsOptions.Limit))
@@ -2918,14 +3172,14 @@ func (appConfiguration *AppConfigurationV1) GetSegmentWithContext(ctx context.Co
 
 // DeleteSegment : Delete Segment
 // Delete a segment.
-func (appConfiguration *AppConfigurationV1) DeleteSegment(deleteSegmentOptions *DeleteSegmentOptions) (response *core.DetailedResponse, err error) {
-	response, err = appConfiguration.DeleteSegmentWithContext(context.Background(), deleteSegmentOptions)
+func (appConfiguration *AppConfigurationV1) DeleteSegment(deleteSegmentOptions *DeleteSegmentOptions) (result *WorkflowApprovalInitiatedResponse, response *core.DetailedResponse, err error) {
+	result, response, err = appConfiguration.DeleteSegmentWithContext(context.Background(), deleteSegmentOptions)
 	err = core.RepurposeSDKProblem(err, "")
 	return
 }
 
 // DeleteSegmentWithContext is an alternate form of the DeleteSegment method which supports a Context parameter
-func (appConfiguration *AppConfigurationV1) DeleteSegmentWithContext(ctx context.Context, deleteSegmentOptions *DeleteSegmentOptions) (response *core.DetailedResponse, err error) {
+func (appConfiguration *AppConfigurationV1) DeleteSegmentWithContext(ctx context.Context, deleteSegmentOptions *DeleteSegmentOptions) (result *WorkflowApprovalInitiatedResponse, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(deleteSegmentOptions, "deleteSegmentOptions cannot be nil")
 	if err != nil {
 		err = core.SDKErrorf(err, "", "unexpected-nil-param", common.GetComponentInfo())
@@ -2958,6 +3212,7 @@ func (appConfiguration *AppConfigurationV1) DeleteSegmentWithContext(ctx context
 	for headerName, headerValue := range deleteSegmentOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
+	builder.AddHeader("Accept", "application/json")
 
 	request, err := builder.Build()
 	if err != nil {
@@ -2965,11 +3220,20 @@ func (appConfiguration *AppConfigurationV1) DeleteSegmentWithContext(ctx context
 		return
 	}
 
-	response, err = appConfiguration.Service.Request(request, nil)
+	var rawResponse map[string]json.RawMessage
+	response, err = appConfiguration.Service.Request(request, &rawResponse)
 	if err != nil {
 		core.EnrichHTTPProblem(err, "delete_segment", getServiceComponentInfo())
 		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
 		return
+	}
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalWorkflowApprovalInitiatedResponse)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-resp-error", common.GetComponentInfo())
+			return
+		}
+		response.Result = result
 	}
 
 	return
@@ -3942,6 +4206,7 @@ func (appConfiguration *AppConfigurationV1) UpdateOriginconfigsWithContext(ctx c
 
 // ListWorkflowconfig : Get Workflow Config
 // Get the environment specific workflow configs.
+// Deprecated: this method is deprecated and may be removed in a future release.
 func (appConfiguration *AppConfigurationV1) ListWorkflowconfig(listWorkflowconfigOptions *ListWorkflowconfigOptions) (result ListWorkflowconfigResponseIntf, response *core.DetailedResponse, err error) {
 	result, response, err = appConfiguration.ListWorkflowconfigWithContext(context.Background(), listWorkflowconfigOptions)
 	err = core.RepurposeSDKProblem(err, "")
@@ -3949,7 +4214,9 @@ func (appConfiguration *AppConfigurationV1) ListWorkflowconfig(listWorkflowconfi
 }
 
 // ListWorkflowconfigWithContext is an alternate form of the ListWorkflowconfig method which supports a Context parameter
+// Deprecated: this method is deprecated and may be removed in a future release.
 func (appConfiguration *AppConfigurationV1) ListWorkflowconfigWithContext(ctx context.Context, listWorkflowconfigOptions *ListWorkflowconfigOptions) (result ListWorkflowconfigResponseIntf, response *core.DetailedResponse, err error) {
+	core.GetLogger().Warn("A deprecated operation has been invoked: ListWorkflowconfig")
 	err = core.ValidateNotNil(listWorkflowconfigOptions, "listWorkflowconfigOptions cannot be nil")
 	if err != nil {
 		err = core.SDKErrorf(err, "", "unexpected-nil-param", common.GetComponentInfo())
@@ -4011,6 +4278,7 @@ func (appConfiguration *AppConfigurationV1) ListWorkflowconfigWithContext(ctx co
 
 // CreateWorkflowconfig : Create Workflow config
 // Create a Workflow.
+// Deprecated: this method is deprecated and may be removed in a future release.
 func (appConfiguration *AppConfigurationV1) CreateWorkflowconfig(createWorkflowconfigOptions *CreateWorkflowconfigOptions) (result CreateWorkflowconfigResponseIntf, response *core.DetailedResponse, err error) {
 	result, response, err = appConfiguration.CreateWorkflowconfigWithContext(context.Background(), createWorkflowconfigOptions)
 	err = core.RepurposeSDKProblem(err, "")
@@ -4018,7 +4286,9 @@ func (appConfiguration *AppConfigurationV1) CreateWorkflowconfig(createWorkflowc
 }
 
 // CreateWorkflowconfigWithContext is an alternate form of the CreateWorkflowconfig method which supports a Context parameter
+// Deprecated: this method is deprecated and may be removed in a future release.
 func (appConfiguration *AppConfigurationV1) CreateWorkflowconfigWithContext(ctx context.Context, createWorkflowconfigOptions *CreateWorkflowconfigOptions) (result CreateWorkflowconfigResponseIntf, response *core.DetailedResponse, err error) {
+	core.GetLogger().Warn("A deprecated operation has been invoked: CreateWorkflowconfig")
 	err = core.ValidateNotNil(createWorkflowconfigOptions, "createWorkflowconfigOptions cannot be nil")
 	if err != nil {
 		err = core.SDKErrorf(err, "", "unexpected-nil-param", common.GetComponentInfo())
@@ -4087,6 +4357,7 @@ func (appConfiguration *AppConfigurationV1) CreateWorkflowconfigWithContext(ctx 
 
 // UpdateWorkflowconfig : Update Workflow config
 // Update a Workflow.
+// Deprecated: this method is deprecated and may be removed in a future release.
 func (appConfiguration *AppConfigurationV1) UpdateWorkflowconfig(updateWorkflowconfigOptions *UpdateWorkflowconfigOptions) (result UpdateWorkflowconfigResponseIntf, response *core.DetailedResponse, err error) {
 	result, response, err = appConfiguration.UpdateWorkflowconfigWithContext(context.Background(), updateWorkflowconfigOptions)
 	err = core.RepurposeSDKProblem(err, "")
@@ -4094,7 +4365,9 @@ func (appConfiguration *AppConfigurationV1) UpdateWorkflowconfig(updateWorkflowc
 }
 
 // UpdateWorkflowconfigWithContext is an alternate form of the UpdateWorkflowconfig method which supports a Context parameter
+// Deprecated: this method is deprecated and may be removed in a future release.
 func (appConfiguration *AppConfigurationV1) UpdateWorkflowconfigWithContext(ctx context.Context, updateWorkflowconfigOptions *UpdateWorkflowconfigOptions) (result UpdateWorkflowconfigResponseIntf, response *core.DetailedResponse, err error) {
+	core.GetLogger().Warn("A deprecated operation has been invoked: UpdateWorkflowconfig")
 	err = core.ValidateNotNil(updateWorkflowconfigOptions, "updateWorkflowconfigOptions cannot be nil")
 	if err != nil {
 		err = core.SDKErrorf(err, "", "unexpected-nil-param", common.GetComponentInfo())
@@ -4163,6 +4436,7 @@ func (appConfiguration *AppConfigurationV1) UpdateWorkflowconfigWithContext(ctx 
 
 // DeleteWorkflowconfig : Delete Workflow config
 // Delete a Workflow config.
+// Deprecated: this method is deprecated and may be removed in a future release.
 func (appConfiguration *AppConfigurationV1) DeleteWorkflowconfig(deleteWorkflowconfigOptions *DeleteWorkflowconfigOptions) (response *core.DetailedResponse, err error) {
 	response, err = appConfiguration.DeleteWorkflowconfigWithContext(context.Background(), deleteWorkflowconfigOptions)
 	err = core.RepurposeSDKProblem(err, "")
@@ -4170,7 +4444,9 @@ func (appConfiguration *AppConfigurationV1) DeleteWorkflowconfig(deleteWorkflowc
 }
 
 // DeleteWorkflowconfigWithContext is an alternate form of the DeleteWorkflowconfig method which supports a Context parameter
+// Deprecated: this method is deprecated and may be removed in a future release.
 func (appConfiguration *AppConfigurationV1) DeleteWorkflowconfigWithContext(ctx context.Context, deleteWorkflowconfigOptions *DeleteWorkflowconfigOptions) (response *core.DetailedResponse, err error) {
+	core.GetLogger().Warn("A deprecated operation has been invoked: DeleteWorkflowconfig")
 	err = core.ValidateNotNil(deleteWorkflowconfigOptions, "deleteWorkflowconfigOptions cannot be nil")
 	if err != nil {
 		err = core.SDKErrorf(err, "", "unexpected-nil-param", common.GetComponentInfo())
@@ -4215,6 +4491,536 @@ func (appConfiguration *AppConfigurationV1) DeleteWorkflowconfigWithContext(ctx 
 		core.EnrichHTTPProblem(err, "delete_workflowconfig", getServiceComponentInfo())
 		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
 		return
+	}
+
+	return
+}
+
+// ListWorkflowConfigs : List Workflow Config
+// List workflow configs.
+func (appConfiguration *AppConfigurationV1) ListWorkflowConfigs(listWorkflowConfigsOptions *ListWorkflowConfigsOptions) (result *WorkflowConfigsList, response *core.DetailedResponse, err error) {
+	result, response, err = appConfiguration.ListWorkflowConfigsWithContext(context.Background(), listWorkflowConfigsOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
+}
+
+// ListWorkflowConfigsWithContext is an alternate form of the ListWorkflowConfigs method which supports a Context parameter
+func (appConfiguration *AppConfigurationV1) ListWorkflowConfigsWithContext(ctx context.Context, listWorkflowConfigsOptions *ListWorkflowConfigsOptions) (result *WorkflowConfigsList, response *core.DetailedResponse, err error) {
+	err = core.ValidateStruct(listWorkflowConfigsOptions, "listWorkflowConfigsOptions")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
+		return
+	}
+
+	builder := core.NewRequestBuilder(core.GET)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = appConfiguration.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(appConfiguration.Service.Options.URL, `/workflow/configs`, nil)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
+		return
+	}
+
+	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "ListWorkflowConfigs")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	for headerName, headerValue := range listWorkflowConfigsOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+	builder.AddHeader("Accept", "application/json")
+
+	if listWorkflowConfigsOptions.Sort != nil {
+		builder.AddQuery("sort", fmt.Sprint(*listWorkflowConfigsOptions.Sort))
+	}
+	if listWorkflowConfigsOptions.Search != nil {
+		builder.AddQuery("search", fmt.Sprint(*listWorkflowConfigsOptions.Search))
+	}
+	if listWorkflowConfigsOptions.Limit != nil {
+		builder.AddQuery("limit", fmt.Sprint(*listWorkflowConfigsOptions.Limit))
+	}
+	if listWorkflowConfigsOptions.Offset != nil {
+		builder.AddQuery("offset", fmt.Sprint(*listWorkflowConfigsOptions.Offset))
+	}
+
+	request, err := builder.Build()
+	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
+		return
+	}
+
+	var rawResponse map[string]json.RawMessage
+	response, err = appConfiguration.Service.Request(request, &rawResponse)
+	if err != nil {
+		core.EnrichHTTPProblem(err, "list_workflow_configs", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
+		return
+	}
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalWorkflowConfigsList)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-resp-error", common.GetComponentInfo())
+			return
+		}
+		response.Result = result
+	}
+
+	return
+}
+
+// CreateWorkflowConfigs : Create Approval Workflow config
+// Create a Approval Workflow.
+func (appConfiguration *AppConfigurationV1) CreateWorkflowConfigs(createWorkflowConfigsOptions *CreateWorkflowConfigsOptions) (result *WorkflowConfigResponse, response *core.DetailedResponse, err error) {
+	result, response, err = appConfiguration.CreateWorkflowConfigsWithContext(context.Background(), createWorkflowConfigsOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
+}
+
+// CreateWorkflowConfigsWithContext is an alternate form of the CreateWorkflowConfigs method which supports a Context parameter
+func (appConfiguration *AppConfigurationV1) CreateWorkflowConfigsWithContext(ctx context.Context, createWorkflowConfigsOptions *CreateWorkflowConfigsOptions) (result *WorkflowConfigResponse, response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(createWorkflowConfigsOptions, "createWorkflowConfigsOptions cannot be nil")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "unexpected-nil-param", common.GetComponentInfo())
+		return
+	}
+	err = core.ValidateStruct(createWorkflowConfigsOptions, "createWorkflowConfigsOptions")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
+		return
+	}
+
+	builder := core.NewRequestBuilder(core.POST)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = appConfiguration.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(appConfiguration.Service.Options.URL, `/workflow/configs`, nil)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
+		return
+	}
+
+	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "CreateWorkflowConfigs")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	for headerName, headerValue := range createWorkflowConfigsOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+	builder.AddHeader("Accept", "application/json")
+	builder.AddHeader("Content-Type", "application/json")
+
+	body := make(map[string]interface{})
+	if createWorkflowConfigsOptions.Name != nil {
+		body["name"] = createWorkflowConfigsOptions.Name
+	}
+	if createWorkflowConfigsOptions.WorkflowID != nil {
+		body["workflow_id"] = createWorkflowConfigsOptions.WorkflowID
+	}
+	if createWorkflowConfigsOptions.Enabled != nil {
+		body["enabled"] = createWorkflowConfigsOptions.Enabled
+	}
+	if createWorkflowConfigsOptions.Provider != nil {
+		body["provider"] = createWorkflowConfigsOptions.Provider
+	}
+	if createWorkflowConfigsOptions.Scope != nil {
+		body["scope"] = createWorkflowConfigsOptions.Scope
+	}
+	_, err = builder.SetBodyContentJSON(body)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "set-json-body-error", common.GetComponentInfo())
+		return
+	}
+
+	request, err := builder.Build()
+	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
+		return
+	}
+
+	var rawResponse map[string]json.RawMessage
+	response, err = appConfiguration.Service.Request(request, &rawResponse)
+	if err != nil {
+		core.EnrichHTTPProblem(err, "create_workflow_configs", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
+		return
+	}
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalWorkflowConfigResponse)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-resp-error", common.GetComponentInfo())
+			return
+		}
+		response.Result = result
+	}
+
+	return
+}
+
+// GetWorkflowConfig : get single Approval Workflow Config
+// get single approval workflow configs.
+func (appConfiguration *AppConfigurationV1) GetWorkflowConfig(getWorkflowConfigOptions *GetWorkflowConfigOptions) (result *WorkflowConfigResponse, response *core.DetailedResponse, err error) {
+	result, response, err = appConfiguration.GetWorkflowConfigWithContext(context.Background(), getWorkflowConfigOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
+}
+
+// GetWorkflowConfigWithContext is an alternate form of the GetWorkflowConfig method which supports a Context parameter
+func (appConfiguration *AppConfigurationV1) GetWorkflowConfigWithContext(ctx context.Context, getWorkflowConfigOptions *GetWorkflowConfigOptions) (result *WorkflowConfigResponse, response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(getWorkflowConfigOptions, "getWorkflowConfigOptions cannot be nil")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "unexpected-nil-param", common.GetComponentInfo())
+		return
+	}
+	err = core.ValidateStruct(getWorkflowConfigOptions, "getWorkflowConfigOptions")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
+		return
+	}
+
+	pathParamsMap := map[string]string{
+		"workflow_config_id": *getWorkflowConfigOptions.WorkflowConfigID,
+	}
+
+	builder := core.NewRequestBuilder(core.GET)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = appConfiguration.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(appConfiguration.Service.Options.URL, `/workflow/configs/{workflow_config_id}`, pathParamsMap)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
+		return
+	}
+
+	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "GetWorkflowConfig")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	for headerName, headerValue := range getWorkflowConfigOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+	builder.AddHeader("Accept", "application/json")
+
+	request, err := builder.Build()
+	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
+		return
+	}
+
+	var rawResponse map[string]json.RawMessage
+	response, err = appConfiguration.Service.Request(request, &rawResponse)
+	if err != nil {
+		core.EnrichHTTPProblem(err, "get_workflow_config", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
+		return
+	}
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalWorkflowConfigResponse)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-resp-error", common.GetComponentInfo())
+			return
+		}
+		response.Result = result
+	}
+
+	return
+}
+
+// UpdateWorkflowConfigs : Update Approval Workflow config
+// Update a Approval Workflow.
+func (appConfiguration *AppConfigurationV1) UpdateWorkflowConfigs(updateWorkflowConfigsOptions *UpdateWorkflowConfigsOptions) (result *WorkflowConfigResponse, response *core.DetailedResponse, err error) {
+	result, response, err = appConfiguration.UpdateWorkflowConfigsWithContext(context.Background(), updateWorkflowConfigsOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
+}
+
+// UpdateWorkflowConfigsWithContext is an alternate form of the UpdateWorkflowConfigs method which supports a Context parameter
+func (appConfiguration *AppConfigurationV1) UpdateWorkflowConfigsWithContext(ctx context.Context, updateWorkflowConfigsOptions *UpdateWorkflowConfigsOptions) (result *WorkflowConfigResponse, response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(updateWorkflowConfigsOptions, "updateWorkflowConfigsOptions cannot be nil")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "unexpected-nil-param", common.GetComponentInfo())
+		return
+	}
+	err = core.ValidateStruct(updateWorkflowConfigsOptions, "updateWorkflowConfigsOptions")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
+		return
+	}
+
+	pathParamsMap := map[string]string{
+		"workflow_config_id": *updateWorkflowConfigsOptions.WorkflowConfigID,
+	}
+
+	builder := core.NewRequestBuilder(core.PUT)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = appConfiguration.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(appConfiguration.Service.Options.URL, `/workflow/configs/{workflow_config_id}`, pathParamsMap)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
+		return
+	}
+
+	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "UpdateWorkflowConfigs")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	for headerName, headerValue := range updateWorkflowConfigsOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+	builder.AddHeader("Accept", "application/json")
+	builder.AddHeader("Content-Type", "application/json")
+
+	body := make(map[string]interface{})
+	if updateWorkflowConfigsOptions.Name != nil {
+		body["name"] = updateWorkflowConfigsOptions.Name
+	}
+	if updateWorkflowConfigsOptions.WorkflowID != nil {
+		body["workflow_id"] = updateWorkflowConfigsOptions.WorkflowID
+	}
+	if updateWorkflowConfigsOptions.Enabled != nil {
+		body["enabled"] = updateWorkflowConfigsOptions.Enabled
+	}
+	if updateWorkflowConfigsOptions.Provider != nil {
+		body["provider"] = updateWorkflowConfigsOptions.Provider
+	}
+	if updateWorkflowConfigsOptions.Scope != nil {
+		body["scope"] = updateWorkflowConfigsOptions.Scope
+	}
+	_, err = builder.SetBodyContentJSON(body)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "set-json-body-error", common.GetComponentInfo())
+		return
+	}
+
+	request, err := builder.Build()
+	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
+		return
+	}
+
+	var rawResponse map[string]json.RawMessage
+	response, err = appConfiguration.Service.Request(request, &rawResponse)
+	if err != nil {
+		core.EnrichHTTPProblem(err, "update_workflow_configs", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
+		return
+	}
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalWorkflowConfigResponse)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-resp-error", common.GetComponentInfo())
+			return
+		}
+		response.Result = result
+	}
+
+	return
+}
+
+// DeleteWorkflowConfigs : Delete Approval Workflow config
+// Delete a Approval Workflow config.
+func (appConfiguration *AppConfigurationV1) DeleteWorkflowConfigs(deleteWorkflowConfigsOptions *DeleteWorkflowConfigsOptions) (response *core.DetailedResponse, err error) {
+	response, err = appConfiguration.DeleteWorkflowConfigsWithContext(context.Background(), deleteWorkflowConfigsOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
+}
+
+// DeleteWorkflowConfigsWithContext is an alternate form of the DeleteWorkflowConfigs method which supports a Context parameter
+func (appConfiguration *AppConfigurationV1) DeleteWorkflowConfigsWithContext(ctx context.Context, deleteWorkflowConfigsOptions *DeleteWorkflowConfigsOptions) (response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(deleteWorkflowConfigsOptions, "deleteWorkflowConfigsOptions cannot be nil")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "unexpected-nil-param", common.GetComponentInfo())
+		return
+	}
+	err = core.ValidateStruct(deleteWorkflowConfigsOptions, "deleteWorkflowConfigsOptions")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
+		return
+	}
+
+	pathParamsMap := map[string]string{
+		"workflow_config_id": *deleteWorkflowConfigsOptions.WorkflowConfigID,
+	}
+
+	builder := core.NewRequestBuilder(core.DELETE)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = appConfiguration.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(appConfiguration.Service.Options.URL, `/workflow/configs/{workflow_config_id}`, pathParamsMap)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
+		return
+	}
+
+	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "DeleteWorkflowConfigs")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	for headerName, headerValue := range deleteWorkflowConfigsOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	request, err := builder.Build()
+	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
+		return
+	}
+
+	response, err = appConfiguration.Service.Request(request, nil)
+	if err != nil {
+		core.EnrichHTTPProblem(err, "delete_workflow_configs", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
+		return
+	}
+
+	return
+}
+
+// ToggleWorkflowConfig : Toggle Approval Workflow config
+// Toggle a Approval Workflow.
+func (appConfiguration *AppConfigurationV1) ToggleWorkflowConfig(toggleWorkflowConfigOptions *ToggleWorkflowConfigOptions) (result *WorkflowConfigResponse, response *core.DetailedResponse, err error) {
+	result, response, err = appConfiguration.ToggleWorkflowConfigWithContext(context.Background(), toggleWorkflowConfigOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
+}
+
+// ToggleWorkflowConfigWithContext is an alternate form of the ToggleWorkflowConfig method which supports a Context parameter
+func (appConfiguration *AppConfigurationV1) ToggleWorkflowConfigWithContext(ctx context.Context, toggleWorkflowConfigOptions *ToggleWorkflowConfigOptions) (result *WorkflowConfigResponse, response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(toggleWorkflowConfigOptions, "toggleWorkflowConfigOptions cannot be nil")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "unexpected-nil-param", common.GetComponentInfo())
+		return
+	}
+	err = core.ValidateStruct(toggleWorkflowConfigOptions, "toggleWorkflowConfigOptions")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
+		return
+	}
+
+	pathParamsMap := map[string]string{
+		"workflow_config_id": *toggleWorkflowConfigOptions.WorkflowConfigID,
+	}
+
+	builder := core.NewRequestBuilder(core.PUT)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = appConfiguration.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(appConfiguration.Service.Options.URL, `/workflow/configs/{workflow_config_id}/toggle`, pathParamsMap)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
+		return
+	}
+
+	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "ToggleWorkflowConfig")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	for headerName, headerValue := range toggleWorkflowConfigOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+	builder.AddHeader("Accept", "application/json")
+	builder.AddHeader("Content-Type", "application/json")
+
+	body := make(map[string]interface{})
+	if toggleWorkflowConfigOptions.Enabled != nil {
+		body["enabled"] = toggleWorkflowConfigOptions.Enabled
+	}
+	_, err = builder.SetBodyContentJSON(body)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "set-json-body-error", common.GetComponentInfo())
+		return
+	}
+
+	request, err := builder.Build()
+	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
+		return
+	}
+
+	var rawResponse map[string]json.RawMessage
+	response, err = appConfiguration.Service.Request(request, &rawResponse)
+	if err != nil {
+		core.EnrichHTTPProblem(err, "toggle_workflow_config", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
+		return
+	}
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalWorkflowConfigResponse)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-resp-error", common.GetComponentInfo())
+			return
+		}
+		response.Result = result
+	}
+
+	return
+}
+
+// TestWorkflowConfig : Test an Approval Workflow config
+// Test a Workflow.
+func (appConfiguration *AppConfigurationV1) TestWorkflowConfig(testWorkflowConfigOptions *TestWorkflowConfigOptions) (result *WorkflowProviderValidationResponse, response *core.DetailedResponse, err error) {
+	result, response, err = appConfiguration.TestWorkflowConfigWithContext(context.Background(), testWorkflowConfigOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
+}
+
+// TestWorkflowConfigWithContext is an alternate form of the TestWorkflowConfig method which supports a Context parameter
+func (appConfiguration *AppConfigurationV1) TestWorkflowConfigWithContext(ctx context.Context, testWorkflowConfigOptions *TestWorkflowConfigOptions) (result *WorkflowProviderValidationResponse, response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(testWorkflowConfigOptions, "testWorkflowConfigOptions cannot be nil")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "unexpected-nil-param", common.GetComponentInfo())
+		return
+	}
+	err = core.ValidateStruct(testWorkflowConfigOptions, "testWorkflowConfigOptions")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
+		return
+	}
+
+	pathParamsMap := map[string]string{
+		"workflow_config_id": *testWorkflowConfigOptions.WorkflowConfigID,
+	}
+
+	builder := core.NewRequestBuilder(core.POST)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = appConfiguration.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(appConfiguration.Service.Options.URL, `/workflow/configs/{workflow_config_id}/test`, pathParamsMap)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
+		return
+	}
+
+	sdkHeaders := common.GetSdkHeaders("app_configuration", "V1", "TestWorkflowConfig")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	for headerName, headerValue := range testWorkflowConfigOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+	builder.AddHeader("Accept", "application/json")
+
+	request, err := builder.Build()
+	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
+		return
+	}
+
+	var rawResponse map[string]json.RawMessage
+	response, err = appConfiguration.Service.Request(request, &rawResponse)
+	if err != nil {
+		core.EnrichHTTPProblem(err, "test_workflow_config", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
+		return
+	}
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalWorkflowProviderValidationResponse)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-resp-error", common.GetComponentInfo())
+			return
+		}
+		response.Result = result
 	}
 
 	return
@@ -4549,6 +5355,10 @@ type Collection struct {
 
 	// Number of snapshot associated with the collection.
 	SnapshotCount *int64 `json:"snapshot_count,omitempty"`
+
+	// Workflow approval information attached to a resource when it's under approval. This field is only present when
+	// workflow is enabled and the resource has an active change request.
+	WorkflowApproval *WorkflowApprovalInfo `json:"workflow_approval,omitempty"`
 }
 
 // NewCollection : Instantiate Collection (Generic Model Constructor)
@@ -4630,6 +5440,11 @@ func UnmarshalCollection(m map[string]json.RawMessage, result interface{}) (err 
 	err = core.UnmarshalPrimitive(m, "snapshot_count", &obj.SnapshotCount)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "snapshot_count-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalModel(m, "workflow_approval", &obj.WorkflowApproval, UnmarshalWorkflowApprovalInfo)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "workflow_approval-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -5091,10 +5906,19 @@ type CreateFeatureOptions struct {
 	// Rollout percentage associated with feature flag. Supported only for Lite and Enterprise plans.
 	RolloutPercentage *int64 `json:"rollout_percentage,omitempty"`
 
+	// The rollout strategy type for the feature flag. `MANUAL` is the default. `PROGRESSIVE` enables automatic phase-based
+	// rollout.
+	RolloutType *string `json:"rollout_type,omitempty"`
+
+	// Configuration that controls the rollout behaviour for a Progressive rollout type.
+	RolloutConfiguration *RolloutConfiguration `json:"rollout_configuration,omitempty"`
+
 	// Tags associated with the feature, allowed special characters are [_. ,-:].
 	Tags *string `json:"tags,omitempty"`
 
-	// Specify the targeting rules that is used to set different feature flag values for different segments.
+	// DEPRECATED: This field is deprecated and will be removed. Use rules api to manage rules. This used to Specify the
+	// targeting rules that is used to set different feature flag values for different segments.
+	// Deprecated: this field is deprecated and may be removed in a future release.
 	SegmentRules []FeatureSegmentRule `json:"segment_rules,omitempty"`
 
 	// List of collection id representing the collections that are associated with the specified feature flag.
@@ -5120,6 +5944,14 @@ const (
 	CreateFeatureOptions_Format_JSON = "JSON"
 	CreateFeatureOptions_Format_Text = "TEXT"
 	CreateFeatureOptions_Format_Yaml = "YAML"
+)
+
+// Constants associated with the CreateFeatureOptions.RolloutType property.
+// The rollout strategy type for the feature flag. `MANUAL` is the default. `PROGRESSIVE` enables automatic phase-based
+// rollout.
+const (
+	CreateFeatureOptions_RolloutType_Manual = "MANUAL"
+	CreateFeatureOptions_RolloutType_Progressive = "PROGRESSIVE"
 )
 
 // NewCreateFeatureOptions : Instantiate CreateFeatureOptions
@@ -5194,6 +6026,18 @@ func (_options *CreateFeatureOptions) SetRolloutPercentage(rolloutPercentage int
 	return _options
 }
 
+// SetRolloutType : Allow user to set RolloutType
+func (_options *CreateFeatureOptions) SetRolloutType(rolloutType string) *CreateFeatureOptions {
+	_options.RolloutType = core.StringPtr(rolloutType)
+	return _options
+}
+
+// SetRolloutConfiguration : Allow user to set RolloutConfiguration
+func (_options *CreateFeatureOptions) SetRolloutConfiguration(rolloutConfiguration *RolloutConfiguration) *CreateFeatureOptions {
+	_options.RolloutConfiguration = rolloutConfiguration
+	return _options
+}
+
 // SetTags : Allow user to set Tags
 func (_options *CreateFeatureOptions) SetTags(tags string) *CreateFeatureOptions {
 	_options.Tags = core.StringPtr(tags)
@@ -5201,6 +6045,7 @@ func (_options *CreateFeatureOptions) SetTags(tags string) *CreateFeatureOptions
 }
 
 // SetSegmentRules : Allow user to set SegmentRules
+// Deprecated: this method is deprecated and may be removed in a future release.
 func (_options *CreateFeatureOptions) SetSegmentRules(segmentRules []FeatureSegmentRule) *CreateFeatureOptions {
 	_options.SegmentRules = segmentRules
 	return _options
@@ -5242,9 +6087,24 @@ type CreateFeatureRuleOptions struct {
 	// Rollout percentage associated with feature flag. Supported only for Lite and Enterprise plans.
 	RolloutPercentage *int64 `json:"rollout_percentage,omitempty"`
 
+	// The rollout strategy type for the feature flag. `MANUAL` is the default. `PROGRESSIVE` enables automatic phase-based
+	// rollout.
+	RolloutType *string `json:"rollout_type,omitempty"`
+
+	// Configuration that controls the rollout behaviour for a Progressive rollout type.
+	RolloutConfiguration *RolloutConfiguration `json:"rollout_configuration,omitempty"`
+
 	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
+
+// Constants associated with the CreateFeatureRuleOptions.RolloutType property.
+// The rollout strategy type for the feature flag. `MANUAL` is the default. `PROGRESSIVE` enables automatic phase-based
+// rollout.
+const (
+	CreateFeatureRuleOptions_RolloutType_Manual = "MANUAL"
+	CreateFeatureRuleOptions_RolloutType_Progressive = "PROGRESSIVE"
+)
 
 // NewCreateFeatureRuleOptions : Instantiate CreateFeatureRuleOptions
 func (*AppConfigurationV1) NewCreateFeatureRuleOptions(environmentID string, featureID string, rules []TargetSegments, value interface{}, ruleID string) *CreateFeatureRuleOptions {
@@ -5296,6 +6156,18 @@ func (_options *CreateFeatureRuleOptions) SetRuleName(ruleName string) *CreateFe
 // SetRolloutPercentage : Allow user to set RolloutPercentage
 func (_options *CreateFeatureRuleOptions) SetRolloutPercentage(rolloutPercentage int64) *CreateFeatureRuleOptions {
 	_options.RolloutPercentage = core.Int64Ptr(rolloutPercentage)
+	return _options
+}
+
+// SetRolloutType : Allow user to set RolloutType
+func (_options *CreateFeatureRuleOptions) SetRolloutType(rolloutType string) *CreateFeatureRuleOptions {
+	_options.RolloutType = core.StringPtr(rolloutType)
+	return _options
+}
+
+// SetRolloutConfiguration : Allow user to set RolloutConfiguration
+func (_options *CreateFeatureRuleOptions) SetRolloutConfiguration(rolloutConfiguration *RolloutConfiguration) *CreateFeatureRuleOptions {
+	_options.RolloutConfiguration = rolloutConfiguration
 	return _options
 }
 
@@ -5517,13 +6389,13 @@ type CreateIntegrationMetadata struct {
 	// source name.
 	EventNotificationsSourceDescription *string `json:"event_notifications_source_description,omitempty"`
 
-	// The CRN of the Key Protect or HPCS service instance.
+	// The CRN of the Key Protect service instance.
 	KmsInstanceCrn *string `json:"kms_instance_crn,omitempty"`
 
-	// The URL endpoint of Key Protect or HPCS instance.
+	// The URL endpoint of Key Protect instance.
 	KmsEndpoint *string `json:"kms_endpoint,omitempty"`
 
-	// The rootkey id of Key Protect or HPCS instance.
+	// The rootkey id of Key Protect instance.
 	RootKeyID *string `json:"root_key_id,omitempty"`
 }
 func (*CreateIntegrationMetadata) isaCreateIntegrationMetadata() bool {
@@ -5971,6 +6843,74 @@ func UnmarshalCreateWorkflowConfig(m map[string]json.RawMessage, result interfac
 	return
 }
 
+// CreateWorkflowConfigsOptions : The CreateWorkflowConfigs options.
+type CreateWorkflowConfigsOptions struct {
+	// Name of the workflow configuration.
+	Name *string `json:"name" validate:"required"`
+
+	// Unique identifier for the workflow configuration.
+	WorkflowID *string `json:"workflow_id" validate:"required"`
+
+	// Whether the workflow is enabled.
+	Enabled *bool `json:"enabled" validate:"required"`
+
+	// Provider configuration for a workflow.
+	Provider *WorkflowProvider `json:"provider" validate:"required"`
+
+	// Scope configuration for the workflow. At least one of collections, segments, or environments must be specified.
+	Scope *WorkflowScope `json:"scope" validate:"required"`
+
+	// Allows users to set headers on API requests.
+	Headers map[string]string
+}
+
+// NewCreateWorkflowConfigsOptions : Instantiate CreateWorkflowConfigsOptions
+func (*AppConfigurationV1) NewCreateWorkflowConfigsOptions(name string, workflowID string, enabled bool, provider *WorkflowProvider, scope *WorkflowScope) *CreateWorkflowConfigsOptions {
+	return &CreateWorkflowConfigsOptions{
+		Name: core.StringPtr(name),
+		WorkflowID: core.StringPtr(workflowID),
+		Enabled: core.BoolPtr(enabled),
+		Provider: provider,
+		Scope: scope,
+	}
+}
+
+// SetName : Allow user to set Name
+func (_options *CreateWorkflowConfigsOptions) SetName(name string) *CreateWorkflowConfigsOptions {
+	_options.Name = core.StringPtr(name)
+	return _options
+}
+
+// SetWorkflowID : Allow user to set WorkflowID
+func (_options *CreateWorkflowConfigsOptions) SetWorkflowID(workflowID string) *CreateWorkflowConfigsOptions {
+	_options.WorkflowID = core.StringPtr(workflowID)
+	return _options
+}
+
+// SetEnabled : Allow user to set Enabled
+func (_options *CreateWorkflowConfigsOptions) SetEnabled(enabled bool) *CreateWorkflowConfigsOptions {
+	_options.Enabled = core.BoolPtr(enabled)
+	return _options
+}
+
+// SetProvider : Allow user to set Provider
+func (_options *CreateWorkflowConfigsOptions) SetProvider(provider *WorkflowProvider) *CreateWorkflowConfigsOptions {
+	_options.Provider = provider
+	return _options
+}
+
+// SetScope : Allow user to set Scope
+func (_options *CreateWorkflowConfigsOptions) SetScope(scope *WorkflowScope) *CreateWorkflowConfigsOptions {
+	_options.Scope = scope
+	return _options
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *CreateWorkflowConfigsOptions) SetHeaders(param map[string]string) *CreateWorkflowConfigsOptions {
+	options.Headers = param
+	return options
+}
+
 // CreateWorkflowconfigOptions : The CreateWorkflowconfig options.
 type CreateWorkflowconfigOptions struct {
 	// Environment Id.
@@ -6409,6 +7349,34 @@ func (options *DeleteSegmentOptions) SetHeaders(param map[string]string) *Delete
 	return options
 }
 
+// DeleteWorkflowConfigsOptions : The DeleteWorkflowConfigs options.
+type DeleteWorkflowConfigsOptions struct {
+	// id of workflow configuration.
+	WorkflowConfigID *string `json:"workflow_config_id" validate:"required,ne="`
+
+	// Allows users to set headers on API requests.
+	Headers map[string]string
+}
+
+// NewDeleteWorkflowConfigsOptions : Instantiate DeleteWorkflowConfigsOptions
+func (*AppConfigurationV1) NewDeleteWorkflowConfigsOptions(workflowConfigID string) *DeleteWorkflowConfigsOptions {
+	return &DeleteWorkflowConfigsOptions{
+		WorkflowConfigID: core.StringPtr(workflowConfigID),
+	}
+}
+
+// SetWorkflowConfigID : Allow user to set WorkflowConfigID
+func (_options *DeleteWorkflowConfigsOptions) SetWorkflowConfigID(workflowConfigID string) *DeleteWorkflowConfigsOptions {
+	_options.WorkflowConfigID = core.StringPtr(workflowConfigID)
+	return _options
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *DeleteWorkflowConfigsOptions) SetHeaders(param map[string]string) *DeleteWorkflowConfigsOptions {
+	options.Headers = param
+	return options
+}
+
 // DeleteWorkflowconfigOptions : The DeleteWorkflowconfig options.
 type DeleteWorkflowconfigOptions struct {
 	// Environment Id.
@@ -6471,6 +7439,10 @@ type Environment struct {
 
 	// List of snapshots associated with the environment.
 	Snapshots []SnapshotOutput `json:"snapshots,omitempty"`
+
+	// Workflow approval information attached to a resource when it's under approval. This field is only present when
+	// workflow is enabled and the resource has an active change request.
+	WorkflowApproval *WorkflowApprovalInfo `json:"workflow_approval,omitempty"`
 }
 
 // NewEnvironment : Instantiate Environment (Generic Model Constructor)
@@ -6542,6 +7514,11 @@ func UnmarshalEnvironment(m map[string]json.RawMessage, result interface{}) (err
 	err = core.UnmarshalModel(m, "snapshots", &obj.Snapshots, UnmarshalSnapshotOutput)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "snapshots-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalModel(m, "workflow_approval", &obj.WorkflowApproval, UnmarshalWorkflowApprovalInfo)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "workflow_approval-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -6734,6 +7711,13 @@ type Feature struct {
 	// Rollout percentage associated with feature flag. Supported only for Lite and Enterprise plans.
 	RolloutPercentage *int64 `json:"rollout_percentage,omitempty"`
 
+	// The rollout strategy type for the feature flag. `MANUAL` is the default. `PROGRESSIVE` enables automatic phase-based
+	// rollout.
+	RolloutType *string `json:"rollout_type,omitempty"`
+
+	// Configuration that controls the rollout behaviour for a Progressive rollout type.
+	RolloutConfiguration *RolloutConfiguration `json:"rollout_configuration,omitempty"`
+
 	// Tags associated with the feature, allowed special characters are [_. ,-:].
 	Tags *string `json:"tags,omitempty"`
 
@@ -6743,14 +7727,15 @@ type Feature struct {
 	// Denotes if the targeting rules are specified for the feature flag.
 	SegmentExists *bool `json:"segment_exists,omitempty"`
 
+	// The number of targeting rules (segment_rules) configured for the feature flag.
+	SegmentCount *int64 `json:"segment_count,omitempty"`
+
+	// Identifies which rule of the feature flag is currently under a Progressive rollout. Only one rule among set-of-rules
+	// can be under rollout at a time.
+	RolloutRule *RolloutRule `json:"rollout_rule,omitempty"`
+
 	// List of collection id representing the collections that are associated with the specified feature flag.
 	Collections []CollectionRef `json:"collections,omitempty"`
-
-	// If you have enabled the workflow configuration and have a pending CR then this provides the change_request_number.
-	ChangeRequestNumber *string `json:"change_request_number,omitempty"`
-
-	// If you have enabled the workflow configuration and have a pending CR then this provides the change_request_status.
-	ChangeRequestStatus *string `json:"change_request_status,omitempty"`
 
 	// Creation time of the feature flag.
 	CreatedTime *strfmt.DateTime `json:"created_time,omitempty"`
@@ -6763,6 +7748,10 @@ type Feature struct {
 
 	// Feature flag URL.
 	Href *string `json:"href,omitempty"`
+
+	// Workflow approval information attached to a resource when it's under approval. This field is only present when
+	// workflow is enabled and the resource has an active change request.
+	WorkflowApproval *WorkflowApprovalInfo `json:"workflow_approval,omitempty"`
 }
 
 // Constants associated with the Feature.Type property.
@@ -6781,6 +7770,14 @@ const (
 	Feature_Format_JSON = "JSON"
 	Feature_Format_Text = "TEXT"
 	Feature_Format_Yaml = "YAML"
+)
+
+// Constants associated with the Feature.RolloutType property.
+// The rollout strategy type for the feature flag. `MANUAL` is the default. `PROGRESSIVE` enables automatic phase-based
+// rollout.
+const (
+	Feature_RolloutType_Manual = "MANUAL"
+	Feature_RolloutType_Progressive = "PROGRESSIVE"
 )
 
 // UnmarshalFeature unmarshals an instance of Feature from the specified map of raw messages.
@@ -6831,6 +7828,16 @@ func UnmarshalFeature(m map[string]json.RawMessage, result interface{}) (err err
 		err = core.SDKErrorf(err, "", "rollout_percentage-error", common.GetComponentInfo())
 		return
 	}
+	err = core.UnmarshalPrimitive(m, "rollout_type", &obj.RolloutType)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "rollout_type-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalModel(m, "rollout_configuration", &obj.RolloutConfiguration, UnmarshalRolloutConfiguration)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "rollout_configuration-error", common.GetComponentInfo())
+		return
+	}
 	err = core.UnmarshalPrimitive(m, "tags", &obj.Tags)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "tags-error", common.GetComponentInfo())
@@ -6846,19 +7853,19 @@ func UnmarshalFeature(m map[string]json.RawMessage, result interface{}) (err err
 		err = core.SDKErrorf(err, "", "segment_exists-error", common.GetComponentInfo())
 		return
 	}
+	err = core.UnmarshalPrimitive(m, "segment_count", &obj.SegmentCount)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "segment_count-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalModel(m, "rollout_rule", &obj.RolloutRule, UnmarshalRolloutRule)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "rollout_rule-error", common.GetComponentInfo())
+		return
+	}
 	err = core.UnmarshalModel(m, "collections", &obj.Collections, UnmarshalCollectionRef)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "collections-error", common.GetComponentInfo())
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "change_request_number", &obj.ChangeRequestNumber)
-	if err != nil {
-		err = core.SDKErrorf(err, "", "change_request_number-error", common.GetComponentInfo())
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "change_request_status", &obj.ChangeRequestStatus)
-	if err != nil {
-		err = core.SDKErrorf(err, "", "change_request_status-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "created_time", &obj.CreatedTime)
@@ -6879,6 +7886,11 @@ func UnmarshalFeature(m map[string]json.RawMessage, result interface{}) (err err
 	err = core.UnmarshalPrimitive(m, "href", &obj.Href)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "href-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalModel(m, "workflow_approval", &obj.WorkflowApproval, UnmarshalWorkflowApprovalInfo)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "workflow_approval-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -6940,12 +7952,27 @@ type FeatureSegmentRule struct {
 	// Rollout percentage associated with feature flag. Supported only for Lite and Enterprise plans.
 	RolloutPercentage *int64 `json:"rollout_percentage,omitempty"`
 
+	// The rollout strategy type for the feature flag. `MANUAL` is the default. `PROGRESSIVE` enables automatic phase-based
+	// rollout.
+	RolloutType *string `json:"rollout_type,omitempty"`
+
+	// Configuration that controls the rollout behaviour for a Progressive rollout type.
+	RolloutConfiguration *RolloutConfiguration `json:"rollout_configuration,omitempty"`
+
 	// Rule id is an identifier used for identifying the rule.
 	RuleID *string `json:"rule_id,omitempty"`
 
 	// Name assigned to a particular rule.
 	RuleName *string `json:"rule_name,omitempty"`
 }
+
+// Constants associated with the FeatureSegmentRule.RolloutType property.
+// The rollout strategy type for the feature flag. `MANUAL` is the default. `PROGRESSIVE` enables automatic phase-based
+// rollout.
+const (
+	FeatureSegmentRule_RolloutType_Manual = "MANUAL"
+	FeatureSegmentRule_RolloutType_Progressive = "PROGRESSIVE"
+)
 
 // NewFeatureSegmentRule : Instantiate FeatureSegmentRule (Generic Model Constructor)
 func (*AppConfigurationV1) NewFeatureSegmentRule(rules []TargetSegments, value interface{}, order int64) (_model *FeatureSegmentRule, err error) {
@@ -6982,6 +8009,16 @@ func UnmarshalFeatureSegmentRule(m map[string]json.RawMessage, result interface{
 	err = core.UnmarshalPrimitive(m, "rollout_percentage", &obj.RolloutPercentage)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "rollout_percentage-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "rollout_type", &obj.RolloutType)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "rollout_type-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalModel(m, "rollout_configuration", &obj.RolloutConfiguration, UnmarshalRolloutConfiguration)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "rollout_configuration-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "rule_id", &obj.RuleID)
@@ -7090,6 +8127,13 @@ type FeatureSegmentRuleWithRuleID struct {
 	// Rollout percentage associated with feature flag. Supported only for Lite and Enterprise plans.
 	RolloutPercentage *int64 `json:"rollout_percentage,omitempty"`
 
+	// The rollout strategy type for the feature flag. `MANUAL` is the default. `PROGRESSIVE` enables automatic phase-based
+	// rollout.
+	RolloutType *string `json:"rollout_type,omitempty"`
+
+	// Configuration that controls the rollout behaviour for a Progressive rollout type.
+	RolloutConfiguration *RolloutConfiguration `json:"rollout_configuration,omitempty"`
+
 	// Order of the rule, used during evaluation. The evaluation is performed in the order defined and the value associated
 	// with the first matching rule is used for evaluation.
 	Order *int64 `json:"order,omitempty"`
@@ -7097,6 +8141,14 @@ type FeatureSegmentRuleWithRuleID struct {
 	// Feature flag rule URL.
 	Href *string `json:"href,omitempty"`
 }
+
+// Constants associated with the FeatureSegmentRuleWithRuleID.RolloutType property.
+// The rollout strategy type for the feature flag. `MANUAL` is the default. `PROGRESSIVE` enables automatic phase-based
+// rollout.
+const (
+	FeatureSegmentRuleWithRuleID_RolloutType_Manual = "MANUAL"
+	FeatureSegmentRuleWithRuleID_RolloutType_Progressive = "PROGRESSIVE"
+)
 
 // UnmarshalFeatureSegmentRuleWithRuleID unmarshals an instance of FeatureSegmentRuleWithRuleID from the specified map of raw messages.
 func UnmarshalFeatureSegmentRuleWithRuleID(m map[string]json.RawMessage, result interface{}) (err error) {
@@ -7124,6 +8176,16 @@ func UnmarshalFeatureSegmentRuleWithRuleID(m map[string]json.RawMessage, result 
 	err = core.UnmarshalPrimitive(m, "rollout_percentage", &obj.RolloutPercentage)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "rollout_percentage-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "rollout_type", &obj.RolloutType)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "rollout_type-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalModel(m, "rollout_configuration", &obj.RolloutConfiguration, UnmarshalRolloutConfiguration)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "rollout_configuration-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "order", &obj.Order)
@@ -7255,6 +8317,7 @@ const (
 	GetCollectionOptions_Include_Features = "features"
 	GetCollectionOptions_Include_Properties = "properties"
 	GetCollectionOptions_Include_Snapshots = "snapshots"
+	GetCollectionOptions_Include_WorkflowApproval = "workflow_approval"
 )
 
 // NewGetCollectionOptions : Instantiate GetCollectionOptions
@@ -7308,6 +8371,7 @@ const (
 	GetEnvironmentOptions_Include_Features = "features"
 	GetEnvironmentOptions_Include_Properties = "properties"
 	GetEnvironmentOptions_Include_Snapshots = "snapshots"
+	GetEnvironmentOptions_Include_WorkflowApproval = "workflow_approval"
 )
 
 // NewGetEnvironmentOptions : Instantiate GetEnvironmentOptions
@@ -7358,9 +8422,9 @@ type GetFeatureOptions struct {
 
 // Constants associated with the GetFeatureOptions.Include property.
 const (
-	GetFeatureOptions_Include_ChangeRequest = "change_request"
 	GetFeatureOptions_Include_Collections = "collections"
 	GetFeatureOptions_Include_Rules = "rules"
+	GetFeatureOptions_Include_WorkflowApproval = "workflow_approval"
 )
 
 // NewGetFeatureOptions : Instantiate GetFeatureOptions
@@ -7518,6 +8582,7 @@ type GetPropertyOptions struct {
 const (
 	GetPropertyOptions_Include_Collections = "collections"
 	GetPropertyOptions_Include_Rules = "rules"
+	GetPropertyOptions_Include_WorkflowApproval = "workflow_approval"
 )
 
 // NewGetPropertyOptions : Instantiate GetPropertyOptions
@@ -7568,6 +8633,7 @@ type GetSegmentOptions struct {
 const (
 	GetSegmentOptions_Include_Features = "features"
 	GetSegmentOptions_Include_Properties = "properties"
+	GetSegmentOptions_Include_WorkflowApproval = "workflow_approval"
 )
 
 // NewGetSegmentOptions : Instantiate GetSegmentOptions
@@ -7591,6 +8657,34 @@ func (_options *GetSegmentOptions) SetInclude(include []string) *GetSegmentOptio
 
 // SetHeaders : Allow user to set Headers
 func (options *GetSegmentOptions) SetHeaders(param map[string]string) *GetSegmentOptions {
+	options.Headers = param
+	return options
+}
+
+// GetWorkflowConfigOptions : The GetWorkflowConfig options.
+type GetWorkflowConfigOptions struct {
+	// id of workflow configuration.
+	WorkflowConfigID *string `json:"workflow_config_id" validate:"required,ne="`
+
+	// Allows users to set headers on API requests.
+	Headers map[string]string
+}
+
+// NewGetWorkflowConfigOptions : Instantiate GetWorkflowConfigOptions
+func (*AppConfigurationV1) NewGetWorkflowConfigOptions(workflowConfigID string) *GetWorkflowConfigOptions {
+	return &GetWorkflowConfigOptions{
+		WorkflowConfigID: core.StringPtr(workflowConfigID),
+	}
+}
+
+// SetWorkflowConfigID : Allow user to set WorkflowConfigID
+func (_options *GetWorkflowConfigOptions) SetWorkflowConfigID(workflowConfigID string) *GetWorkflowConfigOptions {
+	_options.WorkflowConfigID = core.StringPtr(workflowConfigID)
+	return _options
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *GetWorkflowConfigOptions) SetHeaders(param map[string]string) *GetWorkflowConfigOptions {
 	options.Headers = param
 	return options
 }
@@ -8163,6 +9257,13 @@ type ImportFeatureRequestBody struct {
 	// Rollout percentage associated with feature flag. Supported only for Lite and Enterprise plans.
 	RolloutPercentage *int64 `json:"rollout_percentage,omitempty"`
 
+	// The rollout strategy type for the feature flag. `MANUAL` is the default. `PROGRESSIVE` enables automatic phase-based
+	// rollout.
+	RolloutType *string `json:"rollout_type,omitempty"`
+
+	// Configuration that controls the rollout behaviour for a Progressive rollout type.
+	RolloutConfiguration *RolloutConfiguration `json:"rollout_configuration,omitempty"`
+
 	// Tags associated with the feature, allowed special characters are [_. ,-:].
 	Tags *string `json:"tags,omitempty"`
 
@@ -8189,6 +9290,14 @@ const (
 	ImportFeatureRequestBody_Format_JSON = "JSON"
 	ImportFeatureRequestBody_Format_Text = "TEXT"
 	ImportFeatureRequestBody_Format_Yaml = "YAML"
+)
+
+// Constants associated with the ImportFeatureRequestBody.RolloutType property.
+// The rollout strategy type for the feature flag. `MANUAL` is the default. `PROGRESSIVE` enables automatic phase-based
+// rollout.
+const (
+	ImportFeatureRequestBody_RolloutType_Manual = "MANUAL"
+	ImportFeatureRequestBody_RolloutType_Progressive = "PROGRESSIVE"
 )
 
 // NewImportFeatureRequestBody : Instantiate ImportFeatureRequestBody (Generic Model Constructor)
@@ -8253,6 +9362,16 @@ func UnmarshalImportFeatureRequestBody(m map[string]json.RawMessage, result inte
 	err = core.UnmarshalPrimitive(m, "rollout_percentage", &obj.RolloutPercentage)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "rollout_percentage-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "rollout_type", &obj.RolloutType)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "rollout_type-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalModel(m, "rollout_configuration", &obj.RolloutConfiguration, UnmarshalRolloutConfiguration)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "rollout_configuration-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "tags", &obj.Tags)
@@ -8771,24 +9890,24 @@ type IntegrationMetadata struct {
 	// Event Notifications instance CRN.
 	EventNotificationsInstanceCrn *string `json:"event_notifications_instance_crn,omitempty"`
 
-	// Key Protect or HPCS instance root key id.
+	// Key Protect instance root key id.
 	RootKeyID *string `json:"root_key_id,omitempty"`
 
-	// Key Protect or HPCS URL endpoint.
+	// Key Protect URL endpoint.
 	KmsEndpoint *string `json:"kms_endpoint,omitempty"`
 
-	// Key Protect or HPCS instance CRN.
+	// Key Protect instance CRN.
 	KmsInstanceCrn *string `json:"kms_instance_crn,omitempty"`
 
-	// Key Protect or HPCS instance root key status.
+	// Key Protect instance root key status.
 	KeyStatus *string `json:"key_status,omitempty"`
 
-	// For service name "kms" the schema type is "BYOK". For service name "hs-crypto" the schema type is "KYOK".
+	// For service name "kms" the schema type is "BYOK".
 	KmsSchemeType *string `json:"kms_scheme_type,omitempty"`
 }
 
 // Constants associated with the IntegrationMetadata.KeyStatus property.
-// Key Protect or HPCS instance root key status.
+// Key Protect instance root key status.
 const (
 	IntegrationMetadata_KeyStatus_NonUsableDelete = "NON_USABLE_DELETE"
 	IntegrationMetadata_KeyStatus_NonUsableDisable = "NON_USABLE_DISABLE"
@@ -8900,6 +10019,7 @@ const (
 	ListCollectionsOptions_Include_Features = "features"
 	ListCollectionsOptions_Include_Properties = "properties"
 	ListCollectionsOptions_Include_Snapshots = "snapshots"
+	ListCollectionsOptions_Include_WorkflowApproval = "workflow_approval"
 )
 
 // NewListCollectionsOptions : Instantiate ListCollectionsOptions
@@ -9012,6 +10132,7 @@ const (
 	ListEnvironmentsOptions_Include_Features = "features"
 	ListEnvironmentsOptions_Include_Properties = "properties"
 	ListEnvironmentsOptions_Include_Snapshots = "snapshots"
+	ListEnvironmentsOptions_Include_WorkflowApproval = "workflow_approval"
 )
 
 // NewListEnvironmentsOptions : Instantiate ListEnvironmentsOptions
@@ -9156,9 +10277,9 @@ const (
 
 // Constants associated with the ListFeaturesOptions.Include property.
 const (
-	ListFeaturesOptions_Include_ChangeRequest = "change_request"
 	ListFeaturesOptions_Include_Collections = "collections"
 	ListFeaturesOptions_Include_Rules = "rules"
+	ListFeaturesOptions_Include_WorkflowApproval = "workflow_approval"
 )
 
 // NewListFeaturesOptions : Instantiate ListFeaturesOptions
@@ -9452,6 +10573,7 @@ const (
 const (
 	ListPropertiesOptions_Include_Collections = "collections"
 	ListPropertiesOptions_Include_Rules = "rules"
+	ListPropertiesOptions_Include_WorkflowApproval = "workflow_approval"
 )
 
 // NewListPropertiesOptions : Instantiate ListPropertiesOptions
@@ -9540,7 +10662,7 @@ type ListSegmentsOptions struct {
 	Tags *string `json:"tags,omitempty"`
 
 	// Segment details to include the associated rules in the response.
-	Include *string `json:"include,omitempty"`
+	Include []string `json:"include,omitempty"`
 
 	// The number of records to retrieve. By default, the list operation return the first 10 records. To retrieve different
 	// set of records, use `limit` with `offset` to page through the available records.
@@ -9568,9 +10690,9 @@ const (
 )
 
 // Constants associated with the ListSegmentsOptions.Include property.
-// Segment details to include the associated rules in the response.
 const (
 	ListSegmentsOptions_Include_Rules = "rules"
+	ListSegmentsOptions_Include_WorkflowApproval = "workflow_approval"
 )
 
 // NewListSegmentsOptions : Instantiate ListSegmentsOptions
@@ -9597,8 +10719,8 @@ func (_options *ListSegmentsOptions) SetTags(tags string) *ListSegmentsOptions {
 }
 
 // SetInclude : Allow user to set Include
-func (_options *ListSegmentsOptions) SetInclude(include string) *ListSegmentsOptions {
-	_options.Include = core.StringPtr(include)
+func (_options *ListSegmentsOptions) SetInclude(include []string) *ListSegmentsOptions {
+	_options.Include = include
 	return _options
 }
 
@@ -9622,6 +10744,71 @@ func (_options *ListSegmentsOptions) SetSearch(search string) *ListSegmentsOptio
 
 // SetHeaders : Allow user to set Headers
 func (options *ListSegmentsOptions) SetHeaders(param map[string]string) *ListSegmentsOptions {
+	options.Headers = param
+	return options
+}
+
+// ListWorkflowConfigsOptions : The ListWorkflowConfigs options.
+type ListWorkflowConfigsOptions struct {
+	// Sort the workflow config details based on the specified attribute. By default, items are sorted by name.
+	Sort *string `json:"sort,omitempty"`
+
+	// Searches for the provided keyword and returns the appropriate row with that value. Here the search happens on the
+	// '[Name]' of the entity.
+	Search *string `json:"search,omitempty"`
+
+	// The number of records to retrieve. By default, the list operation return the first 10 records. To retrieve different
+	// set of records, use `limit` with `offset` to page through the available records.
+	Limit *int64 `json:"limit,omitempty"`
+
+	// The number of records to skip. By specifying `offset`, you retrieve a subset of items that starts with the `offset`
+	// value. Use `offset` with `limit` to page through the available records.
+	Offset *int64 `json:"offset,omitempty"`
+
+	// Allows users to set headers on API requests.
+	Headers map[string]string
+}
+
+// Constants associated with the ListWorkflowConfigsOptions.Sort property.
+// Sort the workflow config details based on the specified attribute. By default, items are sorted by name.
+const (
+	ListWorkflowConfigsOptions_Sort_CreatedTime = "created_time"
+	ListWorkflowConfigsOptions_Sort_Name = "name"
+	ListWorkflowConfigsOptions_Sort_UpdatedTime = "updated_time"
+	ListWorkflowConfigsOptions_Sort_WorkflowID = "workflow_id"
+)
+
+// NewListWorkflowConfigsOptions : Instantiate ListWorkflowConfigsOptions
+func (*AppConfigurationV1) NewListWorkflowConfigsOptions() *ListWorkflowConfigsOptions {
+	return &ListWorkflowConfigsOptions{}
+}
+
+// SetSort : Allow user to set Sort
+func (_options *ListWorkflowConfigsOptions) SetSort(sort string) *ListWorkflowConfigsOptions {
+	_options.Sort = core.StringPtr(sort)
+	return _options
+}
+
+// SetSearch : Allow user to set Search
+func (_options *ListWorkflowConfigsOptions) SetSearch(search string) *ListWorkflowConfigsOptions {
+	_options.Search = core.StringPtr(search)
+	return _options
+}
+
+// SetLimit : Allow user to set Limit
+func (_options *ListWorkflowConfigsOptions) SetLimit(limit int64) *ListWorkflowConfigsOptions {
+	_options.Limit = core.Int64Ptr(limit)
+	return _options
+}
+
+// SetOffset : Allow user to set Offset
+func (_options *ListWorkflowConfigsOptions) SetOffset(offset int64) *ListWorkflowConfigsOptions {
+	_options.Offset = core.Int64Ptr(offset)
+	return _options
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *ListWorkflowConfigsOptions) SetHeaders(param map[string]string) *ListWorkflowConfigsOptions {
 	options.Headers = param
 	return options
 }
@@ -10119,6 +11306,10 @@ type Property struct {
 
 	// Property URL.
 	Href *string `json:"href,omitempty"`
+
+	// Workflow approval information attached to a resource when it's under approval. This field is only present when
+	// workflow is enabled and the resource has an active change request.
+	WorkflowApproval *WorkflowApprovalInfo `json:"workflow_approval,omitempty"`
 }
 
 // Constants associated with the Property.Type property.
@@ -10227,6 +11418,11 @@ func UnmarshalProperty(m map[string]json.RawMessage, result interface{}) (err er
 	err = core.UnmarshalPrimitive(m, "href", &obj.Href)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "href-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalModel(m, "workflow_approval", &obj.WorkflowApproval, UnmarshalWorkflowApprovalInfo)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "workflow_approval-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -10360,6 +11556,172 @@ func (options *RestoreGitconfigOptions) SetHeaders(param map[string]string) *Res
 	return options
 }
 
+// RolloutConfiguration : Configuration that controls the rollout behaviour for a Progressive rollout type.
+type RolloutConfiguration struct {
+	// A predefined duration preset that sets the overall pace of the rollout. Use `CUSTOM` to define phases manually with
+	// explicit `duration` and `duration_type` values on each phase.
+	DurationPreset *string `json:"duration_preset" validate:"required"`
+
+	// The UTC date and time at which the rollout should start, in ISO 8601 format.
+	StartAt *strfmt.DateTime `json:"start_at,omitempty"`
+
+	// The ordered list of rollout phases. Each phase defines a target percentage and a wait duration before the next phase
+	// begins.
+	Phases []RolloutPhase `json:"phases" validate:"required"`
+
+	// The current execution status of a rollout. `QUEUED` is the default state when a rollout is configured but not yet
+	// started. `RUNNING` indicates the rollout is actively progressing through its phases. `STOPPED` indicates the rollout
+	// was manually halted.
+	Status *string `json:"status,omitempty"`
+}
+
+// Constants associated with the RolloutConfiguration.DurationPreset property.
+// A predefined duration preset that sets the overall pace of the rollout. Use `CUSTOM` to define phases manually with
+// explicit `duration` and `duration_type` values on each phase.
+const (
+	RolloutConfiguration_DurationPreset_Custom = "CUSTOM"
+)
+
+// Constants associated with the RolloutConfiguration.Status property.
+// The current execution status of a rollout. `QUEUED` is the default state when a rollout is configured but not yet
+// started. `RUNNING` indicates the rollout is actively progressing through its phases. `STOPPED` indicates the rollout
+// was manually halted.
+const (
+	RolloutConfiguration_Status_Queued = "QUEUED"
+	RolloutConfiguration_Status_Running = "RUNNING"
+	RolloutConfiguration_Status_Stopped = "STOPPED"
+)
+
+// NewRolloutConfiguration : Instantiate RolloutConfiguration (Generic Model Constructor)
+func (*AppConfigurationV1) NewRolloutConfiguration(durationPreset string, phases []RolloutPhase) (_model *RolloutConfiguration, err error) {
+	_model = &RolloutConfiguration{
+		DurationPreset: core.StringPtr(durationPreset),
+		Phases: phases,
+	}
+	err = core.ValidateStruct(_model, "required parameters")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "model-missing-required", common.GetComponentInfo())
+	}
+	return
+}
+
+// UnmarshalRolloutConfiguration unmarshals an instance of RolloutConfiguration from the specified map of raw messages.
+func UnmarshalRolloutConfiguration(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(RolloutConfiguration)
+	err = core.UnmarshalPrimitive(m, "duration_preset", &obj.DurationPreset)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "duration_preset-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "start_at", &obj.StartAt)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "start_at-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalModel(m, "phases", &obj.Phases, UnmarshalRolloutPhase)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "phases-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "status", &obj.Status)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "status-error", common.GetComponentInfo())
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// RolloutPhase : Defines a single phase in a Progressive rollout.
+type RolloutPhase struct {
+	// The rollout percentage target for this phase. Must be an integer between 0 and 100 (inclusive).
+	Percentage *int64 `json:"percentage" validate:"required"`
+
+	// The length of time to wait before advancing to the next phase.
+	Duration *int64 `json:"duration,omitempty"`
+
+	// The unit of time for the `duration` field.
+	DurationType *string `json:"duration_type,omitempty"`
+}
+
+// Constants associated with the RolloutPhase.DurationType property.
+// The unit of time for the `duration` field.
+const (
+	RolloutPhase_DurationType_Days = "days"
+	RolloutPhase_DurationType_Hours = "hours"
+	RolloutPhase_DurationType_Minutes = "minutes"
+)
+
+// NewRolloutPhase : Instantiate RolloutPhase (Generic Model Constructor)
+func (*AppConfigurationV1) NewRolloutPhase(percentage int64) (_model *RolloutPhase, err error) {
+	_model = &RolloutPhase{
+		Percentage: core.Int64Ptr(percentage),
+	}
+	err = core.ValidateStruct(_model, "required parameters")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "model-missing-required", common.GetComponentInfo())
+	}
+	return
+}
+
+// UnmarshalRolloutPhase unmarshals an instance of RolloutPhase from the specified map of raw messages.
+func UnmarshalRolloutPhase(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(RolloutPhase)
+	err = core.UnmarshalPrimitive(m, "percentage", &obj.Percentage)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "percentage-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "duration", &obj.Duration)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "duration-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "duration_type", &obj.DurationType)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "duration_type-error", common.GetComponentInfo())
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// RolloutRule : Identifies which rule of the feature flag is currently under a Progressive rollout. Only one rule among set-of-rules
+// can be under rollout at a time.
+type RolloutRule struct {
+	// The rollout strategy type for the feature flag. `MANUAL` is the default. `PROGRESSIVE` enables automatic phase-based
+	// rollout.
+	Type *string `json:"type" validate:"required"`
+
+	// The identifier of the rule that is currently under rollout.
+	RuleID *string `json:"rule_id" validate:"required"`
+}
+
+// Constants associated with the RolloutRule.Type property.
+// The rollout strategy type for the feature flag. `MANUAL` is the default. `PROGRESSIVE` enables automatic phase-based
+// rollout.
+const (
+	RolloutRule_Type_Manual = "MANUAL"
+	RolloutRule_Type_Progressive = "PROGRESSIVE"
+)
+
+// UnmarshalRolloutRule unmarshals an instance of RolloutRule from the specified map of raw messages.
+func UnmarshalRolloutRule(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(RolloutRule)
+	err = core.UnmarshalPrimitive(m, "type", &obj.Type)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "type-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "rule_id", &obj.RuleID)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "rule_id-error", common.GetComponentInfo())
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
 // Rule : Rule is used to determine if the entity belongs to the segment during feature / property evaluation.
 type Rule struct {
 	// Attribute name.
@@ -10458,6 +11820,10 @@ type Segment struct {
 
 	// List of properties associated with the segment.
 	Properties []PropertyOutput `json:"properties,omitempty"`
+
+	// Workflow approval information attached to a resource when it's under approval. This field is only present when
+	// workflow is enabled and the resource has an active change request.
+	WorkflowApproval *WorkflowApprovalInfo `json:"workflow_approval,omitempty"`
 }
 
 // NewSegment : Instantiate Segment (Generic Model Constructor)
@@ -10525,6 +11891,11 @@ func UnmarshalSegment(m map[string]json.RawMessage, result interface{}) (err err
 	err = core.UnmarshalModel(m, "properties", &obj.Properties, UnmarshalPropertyOutput)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "properties-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalModel(m, "workflow_approval", &obj.WorkflowApproval, UnmarshalWorkflowApprovalInfo)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "workflow_approval-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -10715,6 +12086,144 @@ func UnmarshalSnapshotOutput(m map[string]json.RawMessage, result interface{}) (
 	return
 }
 
+// StopFeatureRolloutOptions : The StopFeatureRollout options.
+type StopFeatureRolloutOptions struct {
+	// Environment Id.
+	EnvironmentID *string `json:"environment_id" validate:"required,ne="`
+
+	// Feature Id.
+	FeatureID *string `json:"feature_id" validate:"required,ne="`
+
+	// The rollout control action to perform. Currently supported value is `stop`.
+	Action *string `json:"action" validate:"required"`
+
+	// The percentage at which the rollout should be stopped. Must be an integer between 0 and 100 (inclusive).
+	RolloutPercentage *int64 `json:"rollout_percentage" validate:"required"`
+
+	// Allows users to set headers on API requests.
+	Headers map[string]string
+}
+
+// Constants associated with the StopFeatureRolloutOptions.Action property.
+// The rollout control action to perform. Currently supported value is `stop`.
+const (
+	StopFeatureRolloutOptions_Action_Stop = "stop"
+)
+
+// NewStopFeatureRolloutOptions : Instantiate StopFeatureRolloutOptions
+func (*AppConfigurationV1) NewStopFeatureRolloutOptions(environmentID string, featureID string, action string, rolloutPercentage int64) *StopFeatureRolloutOptions {
+	return &StopFeatureRolloutOptions{
+		EnvironmentID: core.StringPtr(environmentID),
+		FeatureID: core.StringPtr(featureID),
+		Action: core.StringPtr(action),
+		RolloutPercentage: core.Int64Ptr(rolloutPercentage),
+	}
+}
+
+// SetEnvironmentID : Allow user to set EnvironmentID
+func (_options *StopFeatureRolloutOptions) SetEnvironmentID(environmentID string) *StopFeatureRolloutOptions {
+	_options.EnvironmentID = core.StringPtr(environmentID)
+	return _options
+}
+
+// SetFeatureID : Allow user to set FeatureID
+func (_options *StopFeatureRolloutOptions) SetFeatureID(featureID string) *StopFeatureRolloutOptions {
+	_options.FeatureID = core.StringPtr(featureID)
+	return _options
+}
+
+// SetAction : Allow user to set Action
+func (_options *StopFeatureRolloutOptions) SetAction(action string) *StopFeatureRolloutOptions {
+	_options.Action = core.StringPtr(action)
+	return _options
+}
+
+// SetRolloutPercentage : Allow user to set RolloutPercentage
+func (_options *StopFeatureRolloutOptions) SetRolloutPercentage(rolloutPercentage int64) *StopFeatureRolloutOptions {
+	_options.RolloutPercentage = core.Int64Ptr(rolloutPercentage)
+	return _options
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *StopFeatureRolloutOptions) SetHeaders(param map[string]string) *StopFeatureRolloutOptions {
+	options.Headers = param
+	return options
+}
+
+// StopFeatureRuleRolloutOptions : The StopFeatureRuleRollout options.
+type StopFeatureRuleRolloutOptions struct {
+	// Environment Id.
+	EnvironmentID *string `json:"environment_id" validate:"required,ne="`
+
+	// Feature Id.
+	FeatureID *string `json:"feature_id" validate:"required,ne="`
+
+	// rule id.
+	RuleID *string `json:"rule_id" validate:"required,ne="`
+
+	// The rollout control action to perform. Currently supported value is `stop`.
+	Action *string `json:"action" validate:"required"`
+
+	// The percentage at which the rollout should be stopped. Must be an integer between 0 and 100 (inclusive).
+	RolloutPercentage *int64 `json:"rollout_percentage" validate:"required"`
+
+	// Allows users to set headers on API requests.
+	Headers map[string]string
+}
+
+// Constants associated with the StopFeatureRuleRolloutOptions.Action property.
+// The rollout control action to perform. Currently supported value is `stop`.
+const (
+	StopFeatureRuleRolloutOptions_Action_Stop = "stop"
+)
+
+// NewStopFeatureRuleRolloutOptions : Instantiate StopFeatureRuleRolloutOptions
+func (*AppConfigurationV1) NewStopFeatureRuleRolloutOptions(environmentID string, featureID string, ruleID string, action string, rolloutPercentage int64) *StopFeatureRuleRolloutOptions {
+	return &StopFeatureRuleRolloutOptions{
+		EnvironmentID: core.StringPtr(environmentID),
+		FeatureID: core.StringPtr(featureID),
+		RuleID: core.StringPtr(ruleID),
+		Action: core.StringPtr(action),
+		RolloutPercentage: core.Int64Ptr(rolloutPercentage),
+	}
+}
+
+// SetEnvironmentID : Allow user to set EnvironmentID
+func (_options *StopFeatureRuleRolloutOptions) SetEnvironmentID(environmentID string) *StopFeatureRuleRolloutOptions {
+	_options.EnvironmentID = core.StringPtr(environmentID)
+	return _options
+}
+
+// SetFeatureID : Allow user to set FeatureID
+func (_options *StopFeatureRuleRolloutOptions) SetFeatureID(featureID string) *StopFeatureRuleRolloutOptions {
+	_options.FeatureID = core.StringPtr(featureID)
+	return _options
+}
+
+// SetRuleID : Allow user to set RuleID
+func (_options *StopFeatureRuleRolloutOptions) SetRuleID(ruleID string) *StopFeatureRuleRolloutOptions {
+	_options.RuleID = core.StringPtr(ruleID)
+	return _options
+}
+
+// SetAction : Allow user to set Action
+func (_options *StopFeatureRuleRolloutOptions) SetAction(action string) *StopFeatureRuleRolloutOptions {
+	_options.Action = core.StringPtr(action)
+	return _options
+}
+
+// SetRolloutPercentage : Allow user to set RolloutPercentage
+func (_options *StopFeatureRuleRolloutOptions) SetRolloutPercentage(rolloutPercentage int64) *StopFeatureRuleRolloutOptions {
+	_options.RolloutPercentage = core.Int64Ptr(rolloutPercentage)
+	return _options
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *StopFeatureRuleRolloutOptions) SetHeaders(param map[string]string) *StopFeatureRuleRolloutOptions {
+	options.Headers = param
+	return options
+}
+
 // TargetSegments : TargetSegments struct
 type TargetSegments struct {
 	// List of segment ids that are used for targeting using the rule.
@@ -10743,6 +12252,34 @@ func UnmarshalTargetSegments(m map[string]json.RawMessage, result interface{}) (
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
 	return
+}
+
+// TestWorkflowConfigOptions : The TestWorkflowConfig options.
+type TestWorkflowConfigOptions struct {
+	// id of workflow configuration.
+	WorkflowConfigID *string `json:"workflow_config_id" validate:"required,ne="`
+
+	// Allows users to set headers on API requests.
+	Headers map[string]string
+}
+
+// NewTestWorkflowConfigOptions : Instantiate TestWorkflowConfigOptions
+func (*AppConfigurationV1) NewTestWorkflowConfigOptions(workflowConfigID string) *TestWorkflowConfigOptions {
+	return &TestWorkflowConfigOptions{
+		WorkflowConfigID: core.StringPtr(workflowConfigID),
+	}
+}
+
+// SetWorkflowConfigID : Allow user to set WorkflowConfigID
+func (_options *TestWorkflowConfigOptions) SetWorkflowConfigID(workflowConfigID string) *TestWorkflowConfigOptions {
+	_options.WorkflowConfigID = core.StringPtr(workflowConfigID)
+	return _options
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *TestWorkflowConfigOptions) SetHeaders(param map[string]string) *TestWorkflowConfigOptions {
+	options.Headers = param
+	return options
 }
 
 // ToggleFeatureOptions : The ToggleFeature options.
@@ -10789,6 +12326,44 @@ func (_options *ToggleFeatureOptions) SetEnabled(enabled bool) *ToggleFeatureOpt
 
 // SetHeaders : Allow user to set Headers
 func (options *ToggleFeatureOptions) SetHeaders(param map[string]string) *ToggleFeatureOptions {
+	options.Headers = param
+	return options
+}
+
+// ToggleWorkflowConfigOptions : The ToggleWorkflowConfig options.
+type ToggleWorkflowConfigOptions struct {
+	// id of workflow configuration.
+	WorkflowConfigID *string `json:"workflow_config_id" validate:"required,ne="`
+
+	// The state of the approval workflow.
+	Enabled *bool `json:"enabled" validate:"required"`
+
+	// Allows users to set headers on API requests.
+	Headers map[string]string
+}
+
+// NewToggleWorkflowConfigOptions : Instantiate ToggleWorkflowConfigOptions
+func (*AppConfigurationV1) NewToggleWorkflowConfigOptions(workflowConfigID string, enabled bool) *ToggleWorkflowConfigOptions {
+	return &ToggleWorkflowConfigOptions{
+		WorkflowConfigID: core.StringPtr(workflowConfigID),
+		Enabled: core.BoolPtr(enabled),
+	}
+}
+
+// SetWorkflowConfigID : Allow user to set WorkflowConfigID
+func (_options *ToggleWorkflowConfigOptions) SetWorkflowConfigID(workflowConfigID string) *ToggleWorkflowConfigOptions {
+	_options.WorkflowConfigID = core.StringPtr(workflowConfigID)
+	return _options
+}
+
+// SetEnabled : Allow user to set Enabled
+func (_options *ToggleWorkflowConfigOptions) SetEnabled(enabled bool) *ToggleWorkflowConfigOptions {
+	_options.Enabled = core.BoolPtr(enabled)
+	return _options
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *ToggleWorkflowConfigOptions) SetHeaders(param map[string]string) *ToggleWorkflowConfigOptions {
 	options.Headers = param
 	return options
 }
@@ -10940,10 +12515,19 @@ type UpdateFeatureOptions struct {
 	// Rollout percentage associated with feature flag. Supported only for Lite and Enterprise plans.
 	RolloutPercentage *int64 `json:"rollout_percentage,omitempty"`
 
+	// The rollout strategy type for the feature flag. `MANUAL` is the default. `PROGRESSIVE` enables automatic phase-based
+	// rollout.
+	RolloutType *string `json:"rollout_type,omitempty"`
+
+	// Configuration that controls the rollout behaviour for a Progressive rollout type.
+	RolloutConfiguration *RolloutConfiguration `json:"rollout_configuration,omitempty"`
+
 	// Tags associated with the feature, allowed special characters are [_. ,-:].
 	Tags *string `json:"tags,omitempty"`
 
-	// Specify the targeting rules that is used to set different property values for different segments.
+	// DEPRECATED: This field is deprecated and will be removed. Use rules api to manage rules. This used to Specify the
+	// targeting rules that is used to set different feature flag values for different segments.
+	// Deprecated: this field is deprecated and may be removed in a future release.
 	SegmentRules []FeatureSegmentRule `json:"segment_rules,omitempty"`
 
 	// List of collection id representing the collections that are associated with the specified property.
@@ -10952,6 +12536,14 @@ type UpdateFeatureOptions struct {
 	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
+
+// Constants associated with the UpdateFeatureOptions.RolloutType property.
+// The rollout strategy type for the feature flag. `MANUAL` is the default. `PROGRESSIVE` enables automatic phase-based
+// rollout.
+const (
+	UpdateFeatureOptions_RolloutType_Manual = "MANUAL"
+	UpdateFeatureOptions_RolloutType_Progressive = "PROGRESSIVE"
+)
 
 // NewUpdateFeatureOptions : Instantiate UpdateFeatureOptions
 func (*AppConfigurationV1) NewUpdateFeatureOptions(environmentID string, featureID string) *UpdateFeatureOptions {
@@ -11009,6 +12601,18 @@ func (_options *UpdateFeatureOptions) SetRolloutPercentage(rolloutPercentage int
 	return _options
 }
 
+// SetRolloutType : Allow user to set RolloutType
+func (_options *UpdateFeatureOptions) SetRolloutType(rolloutType string) *UpdateFeatureOptions {
+	_options.RolloutType = core.StringPtr(rolloutType)
+	return _options
+}
+
+// SetRolloutConfiguration : Allow user to set RolloutConfiguration
+func (_options *UpdateFeatureOptions) SetRolloutConfiguration(rolloutConfiguration *RolloutConfiguration) *UpdateFeatureOptions {
+	_options.RolloutConfiguration = rolloutConfiguration
+	return _options
+}
+
 // SetTags : Allow user to set Tags
 func (_options *UpdateFeatureOptions) SetTags(tags string) *UpdateFeatureOptions {
 	_options.Tags = core.StringPtr(tags)
@@ -11016,6 +12620,7 @@ func (_options *UpdateFeatureOptions) SetTags(tags string) *UpdateFeatureOptions
 }
 
 // SetSegmentRules : Allow user to set SegmentRules
+// Deprecated: this method is deprecated and may be removed in a future release.
 func (_options *UpdateFeatureOptions) SetSegmentRules(segmentRules []FeatureSegmentRule) *UpdateFeatureOptions {
 	_options.SegmentRules = segmentRules
 	return _options
@@ -11057,9 +12662,24 @@ type UpdateFeatureRuleOptions struct {
 	// Rollout percentage associated with feature flag. Supported only for Lite and Enterprise plans.
 	RolloutPercentage *int64 `json:"rollout_percentage,omitempty"`
 
+	// The rollout strategy type for the feature flag. `MANUAL` is the default. `PROGRESSIVE` enables automatic phase-based
+	// rollout.
+	RolloutType *string `json:"rollout_type,omitempty"`
+
+	// Configuration that controls the rollout behaviour for a Progressive rollout type.
+	RolloutConfiguration *RolloutConfiguration `json:"rollout_configuration,omitempty"`
+
 	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
+
+// Constants associated with the UpdateFeatureRuleOptions.RolloutType property.
+// The rollout strategy type for the feature flag. `MANUAL` is the default. `PROGRESSIVE` enables automatic phase-based
+// rollout.
+const (
+	UpdateFeatureRuleOptions_RolloutType_Manual = "MANUAL"
+	UpdateFeatureRuleOptions_RolloutType_Progressive = "PROGRESSIVE"
+)
 
 // NewUpdateFeatureRuleOptions : Instantiate UpdateFeatureRuleOptions
 func (*AppConfigurationV1) NewUpdateFeatureRuleOptions(environmentID string, featureID string, ruleID string) *UpdateFeatureRuleOptions {
@@ -11109,6 +12729,18 @@ func (_options *UpdateFeatureRuleOptions) SetRuleName(ruleName string) *UpdateFe
 // SetRolloutPercentage : Allow user to set RolloutPercentage
 func (_options *UpdateFeatureRuleOptions) SetRolloutPercentage(rolloutPercentage int64) *UpdateFeatureRuleOptions {
 	_options.RolloutPercentage = core.Int64Ptr(rolloutPercentage)
+	return _options
+}
+
+// SetRolloutType : Allow user to set RolloutType
+func (_options *UpdateFeatureRuleOptions) SetRolloutType(rolloutType string) *UpdateFeatureRuleOptions {
+	_options.RolloutType = core.StringPtr(rolloutType)
+	return _options
+}
+
+// SetRolloutConfiguration : Allow user to set RolloutConfiguration
+func (_options *UpdateFeatureRuleOptions) SetRolloutConfiguration(rolloutConfiguration *RolloutConfiguration) *UpdateFeatureRuleOptions {
+	_options.RolloutConfiguration = rolloutConfiguration
 	return _options
 }
 
@@ -11194,12 +12826,29 @@ type UpdateFeatureValuesOptions struct {
 	// Rollout percentage associated with feature flag. Supported only for Lite and Enterprise plans.
 	RolloutPercentage *int64 `json:"rollout_percentage,omitempty"`
 
-	// Specify the targeting rules that is used to set different property values for different segments.
+	// The rollout strategy type for the feature flag. `MANUAL` is the default. `PROGRESSIVE` enables automatic phase-based
+	// rollout.
+	RolloutType *string `json:"rollout_type,omitempty"`
+
+	// Configuration that controls the rollout behaviour for a Progressive rollout type.
+	RolloutConfiguration *RolloutConfiguration `json:"rollout_configuration,omitempty"`
+
+	// DEPRECATED: This field is deprecated and will be removed. Use rules api to manage rules. This used to Specify the
+	// targeting rules that is used to set different feature flag values for different segments.
+	// Deprecated: this field is deprecated and may be removed in a future release.
 	SegmentRules []FeatureSegmentRule `json:"segment_rules,omitempty"`
 
 	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
+
+// Constants associated with the UpdateFeatureValuesOptions.RolloutType property.
+// The rollout strategy type for the feature flag. `MANUAL` is the default. `PROGRESSIVE` enables automatic phase-based
+// rollout.
+const (
+	UpdateFeatureValuesOptions_RolloutType_Manual = "MANUAL"
+	UpdateFeatureValuesOptions_RolloutType_Progressive = "PROGRESSIVE"
+)
 
 // NewUpdateFeatureValuesOptions : Instantiate UpdateFeatureValuesOptions
 func (*AppConfigurationV1) NewUpdateFeatureValuesOptions(environmentID string, featureID string) *UpdateFeatureValuesOptions {
@@ -11257,7 +12906,20 @@ func (_options *UpdateFeatureValuesOptions) SetRolloutPercentage(rolloutPercenta
 	return _options
 }
 
+// SetRolloutType : Allow user to set RolloutType
+func (_options *UpdateFeatureValuesOptions) SetRolloutType(rolloutType string) *UpdateFeatureValuesOptions {
+	_options.RolloutType = core.StringPtr(rolloutType)
+	return _options
+}
+
+// SetRolloutConfiguration : Allow user to set RolloutConfiguration
+func (_options *UpdateFeatureValuesOptions) SetRolloutConfiguration(rolloutConfiguration *RolloutConfiguration) *UpdateFeatureValuesOptions {
+	_options.RolloutConfiguration = rolloutConfiguration
+	return _options
+}
+
 // SetSegmentRules : Allow user to set SegmentRules
+// Deprecated: this method is deprecated and may be removed in a future release.
 func (_options *UpdateFeatureValuesOptions) SetSegmentRules(segmentRules []FeatureSegmentRule) *UpdateFeatureValuesOptions {
 	_options.SegmentRules = segmentRules
 	return _options
@@ -11725,6 +13387,84 @@ func UnmarshalUpdateWorkflowConfig(m map[string]json.RawMessage, result interfac
 	return
 }
 
+// UpdateWorkflowConfigsOptions : The UpdateWorkflowConfigs options.
+type UpdateWorkflowConfigsOptions struct {
+	// id of workflow configuration.
+	WorkflowConfigID *string `json:"workflow_config_id" validate:"required,ne="`
+
+	// Name of the workflow configuration.
+	Name *string `json:"name" validate:"required"`
+
+	// Unique identifier for the workflow configuration.
+	WorkflowID *string `json:"workflow_id" validate:"required"`
+
+	// Whether the workflow is enabled.
+	Enabled *bool `json:"enabled" validate:"required"`
+
+	// Provider configuration for a workflow.
+	Provider *WorkflowProvider `json:"provider" validate:"required"`
+
+	// Scope configuration for the workflow. At least one of collections, segments, or environments must be specified.
+	Scope *WorkflowScope `json:"scope" validate:"required"`
+
+	// Allows users to set headers on API requests.
+	Headers map[string]string
+}
+
+// NewUpdateWorkflowConfigsOptions : Instantiate UpdateWorkflowConfigsOptions
+func (*AppConfigurationV1) NewUpdateWorkflowConfigsOptions(workflowConfigID string, name string, workflowID string, enabled bool, provider *WorkflowProvider, scope *WorkflowScope) *UpdateWorkflowConfigsOptions {
+	return &UpdateWorkflowConfigsOptions{
+		WorkflowConfigID: core.StringPtr(workflowConfigID),
+		Name: core.StringPtr(name),
+		WorkflowID: core.StringPtr(workflowID),
+		Enabled: core.BoolPtr(enabled),
+		Provider: provider,
+		Scope: scope,
+	}
+}
+
+// SetWorkflowConfigID : Allow user to set WorkflowConfigID
+func (_options *UpdateWorkflowConfigsOptions) SetWorkflowConfigID(workflowConfigID string) *UpdateWorkflowConfigsOptions {
+	_options.WorkflowConfigID = core.StringPtr(workflowConfigID)
+	return _options
+}
+
+// SetName : Allow user to set Name
+func (_options *UpdateWorkflowConfigsOptions) SetName(name string) *UpdateWorkflowConfigsOptions {
+	_options.Name = core.StringPtr(name)
+	return _options
+}
+
+// SetWorkflowID : Allow user to set WorkflowID
+func (_options *UpdateWorkflowConfigsOptions) SetWorkflowID(workflowID string) *UpdateWorkflowConfigsOptions {
+	_options.WorkflowID = core.StringPtr(workflowID)
+	return _options
+}
+
+// SetEnabled : Allow user to set Enabled
+func (_options *UpdateWorkflowConfigsOptions) SetEnabled(enabled bool) *UpdateWorkflowConfigsOptions {
+	_options.Enabled = core.BoolPtr(enabled)
+	return _options
+}
+
+// SetProvider : Allow user to set Provider
+func (_options *UpdateWorkflowConfigsOptions) SetProvider(provider *WorkflowProvider) *UpdateWorkflowConfigsOptions {
+	_options.Provider = provider
+	return _options
+}
+
+// SetScope : Allow user to set Scope
+func (_options *UpdateWorkflowConfigsOptions) SetScope(scope *WorkflowScope) *UpdateWorkflowConfigsOptions {
+	_options.Scope = scope
+	return _options
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *UpdateWorkflowConfigsOptions) SetHeaders(param map[string]string) *UpdateWorkflowConfigsOptions {
+	options.Headers = param
+	return options
+}
+
 // UpdateWorkflowconfigOptions : The UpdateWorkflowconfig options.
 type UpdateWorkflowconfigOptions struct {
 	// Environment Id.
@@ -11899,6 +13639,831 @@ func UnmarshalUpdateWorkflowconfigResponse(m map[string]json.RawMessage, result 
 	return
 }
 
+// WorkflowApprovalDetails : Details of the workflow approval.
+type WorkflowApprovalDetails struct {
+	// Name of the workflow configuration.
+	WorkflowName *string `json:"workflow_name" validate:"required"`
+
+	// Unique identifier of the workflow configuration.
+	WorkflowID *string `json:"workflow_id" validate:"required"`
+
+	// Type of workflow provider.
+	ProviderType *string `json:"provider_type" validate:"required"`
+
+	// ServiceNow change request number.
+	ChangeRequestNumber *string `json:"change_request_number" validate:"required"`
+
+	// Status of the change request in ServiceNow.
+	ChangeRequestStatus *string `json:"change_request_status" validate:"required"`
+
+	// Execution status of the workflow.
+	ExecutionStatus *string `json:"execution_status" validate:"required"`
+
+	// URL to view the change request in ServiceNow.
+	ApprovalURL *string `json:"approval_url" validate:"required"`
+
+	// Type of resource being modified.
+	ResourceType *string `json:"resource_type" validate:"required"`
+
+	// Unique identifier of the resource.
+	ResourceID *string `json:"resource_id" validate:"required"`
+
+	// Environment identifier. Only present for FEATURE, PROPERTY and ENVIRONMENT resource types (SEGMENT, or COLLECTION).
+	EnvironmentID *string `json:"environment_id,omitempty"`
+
+	// Timestamp when the workflow approval was created.
+	CreatedTime *strfmt.DateTime `json:"created_time" validate:"required"`
+
+	// Timestamp when the workflow approval was last updated.
+	UpdatedTime *strfmt.DateTime `json:"updated_time" validate:"required"`
+}
+
+// Constants associated with the WorkflowApprovalDetails.ProviderType property.
+// Type of workflow provider.
+const (
+	WorkflowApprovalDetails_ProviderType_ServicenowExternal = "SERVICENOW_EXTERNAL"
+	WorkflowApprovalDetails_ProviderType_ServicenowIbm = "SERVICENOW_IBM"
+)
+
+// Constants associated with the WorkflowApprovalDetails.ChangeRequestStatus property.
+// Status of the change request in ServiceNow.
+const (
+	WorkflowApprovalDetails_ChangeRequestStatus_Approved = "APPROVED"
+	WorkflowApprovalDetails_ChangeRequestStatus_Cancelled = "CANCELLED"
+	WorkflowApprovalDetails_ChangeRequestStatus_Pending = "PENDING"
+	WorkflowApprovalDetails_ChangeRequestStatus_Rejected = "REJECTED"
+)
+
+// Constants associated with the WorkflowApprovalDetails.ExecutionStatus property.
+// Execution status of the workflow.
+const (
+	WorkflowApprovalDetails_ExecutionStatus_Completed = "COMPLETED"
+	WorkflowApprovalDetails_ExecutionStatus_Failed = "FAILED"
+	WorkflowApprovalDetails_ExecutionStatus_InProgress = "IN_PROGRESS"
+	WorkflowApprovalDetails_ExecutionStatus_Pending = "PENDING"
+)
+
+// Constants associated with the WorkflowApprovalDetails.ResourceType property.
+// Type of resource being modified.
+const (
+	WorkflowApprovalDetails_ResourceType_Collection = "COLLECTION"
+	WorkflowApprovalDetails_ResourceType_Environment = "ENVIRONMENT"
+	WorkflowApprovalDetails_ResourceType_Feature = "FEATURE"
+	WorkflowApprovalDetails_ResourceType_Property = "PROPERTY"
+	WorkflowApprovalDetails_ResourceType_Segment = "SEGMENT"
+)
+
+// UnmarshalWorkflowApprovalDetails unmarshals an instance of WorkflowApprovalDetails from the specified map of raw messages.
+func UnmarshalWorkflowApprovalDetails(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(WorkflowApprovalDetails)
+	err = core.UnmarshalPrimitive(m, "workflow_name", &obj.WorkflowName)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "workflow_name-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "workflow_id", &obj.WorkflowID)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "workflow_id-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "provider_type", &obj.ProviderType)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "provider_type-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "change_request_number", &obj.ChangeRequestNumber)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "change_request_number-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "change_request_status", &obj.ChangeRequestStatus)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "change_request_status-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "execution_status", &obj.ExecutionStatus)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "execution_status-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "approval_url", &obj.ApprovalURL)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "approval_url-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "resource_type", &obj.ResourceType)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "resource_type-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "resource_id", &obj.ResourceID)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "resource_id-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "environment_id", &obj.EnvironmentID)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "environment_id-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "created_time", &obj.CreatedTime)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "created_time-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "updated_time", &obj.UpdatedTime)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "updated_time-error", common.GetComponentInfo())
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// WorkflowApprovalInfo : Workflow approval information attached to a resource when it's under approval. This field is only present when
+// workflow is enabled and the resource has an active change request.
+type WorkflowApprovalInfo struct {
+	// Name of the workflow configuration.
+	WorkflowName *string `json:"workflow_name" validate:"required"`
+
+	// Unique identifier of the workflow configuration.
+	WorkflowID *string `json:"workflow_id" validate:"required"`
+
+	// Type of workflow provider.
+	ProviderType *string `json:"provider_type" validate:"required"`
+
+	// ServiceNow change request number.
+	ChangeRequestNumber *string `json:"change_request_number" validate:"required"`
+
+	// Status of the change request in ServiceNow.
+	ChangeRequestStatus *string `json:"change_request_status" validate:"required"`
+
+	// Execution status of the workflow.
+	ExecutionStatus *string `json:"execution_status" validate:"required"`
+
+	// URL to view the change request in ServiceNow.
+	ApprovalURL *string `json:"approval_url" validate:"required"`
+
+	// Type of resource.
+	ResourceType *string `json:"resource_type" validate:"required"`
+
+	// Unique identifier of the resource. Present for FEATURE, PROPERTY, SEGMENT, and COLLECTION. Not present for
+	// ENVIRONMENT.
+	ResourceID *string `json:"resource_id,omitempty"`
+
+	// Environment identifier. Only present for FEATURE, PROPERTY and ENVIRONMENT. Not present for SEGMENT and COLLECTION.
+	EnvironmentID *string `json:"environment_id,omitempty"`
+
+	// Timestamp when the workflow approval was created.
+	CreatedTime *strfmt.DateTime `json:"created_time" validate:"required"`
+
+	// Timestamp when the workflow approval was last updated.
+	UpdatedTime *strfmt.DateTime `json:"updated_time" validate:"required"`
+
+	// Timestamp when the workflow approval status was last polled from ServiceNow.
+	LastPollTime *strfmt.DateTime `json:"last_poll_time,omitempty"`
+}
+
+// Constants associated with the WorkflowApprovalInfo.ProviderType property.
+// Type of workflow provider.
+const (
+	WorkflowApprovalInfo_ProviderType_ServicenowExternal = "SERVICENOW_EXTERNAL"
+	WorkflowApprovalInfo_ProviderType_ServicenowIbm = "SERVICENOW_IBM"
+)
+
+// Constants associated with the WorkflowApprovalInfo.ChangeRequestStatus property.
+// Status of the change request in ServiceNow.
+const (
+	WorkflowApprovalInfo_ChangeRequestStatus_Approved = "APPROVED"
+	WorkflowApprovalInfo_ChangeRequestStatus_Cancelled = "CANCELLED"
+	WorkflowApprovalInfo_ChangeRequestStatus_Pending = "PENDING"
+	WorkflowApprovalInfo_ChangeRequestStatus_Rejected = "REJECTED"
+)
+
+// Constants associated with the WorkflowApprovalInfo.ExecutionStatus property.
+// Execution status of the workflow.
+const (
+	WorkflowApprovalInfo_ExecutionStatus_Completed = "COMPLETED"
+	WorkflowApprovalInfo_ExecutionStatus_Failed = "FAILED"
+	WorkflowApprovalInfo_ExecutionStatus_InProgress = "IN_PROGRESS"
+	WorkflowApprovalInfo_ExecutionStatus_Pending = "PENDING"
+)
+
+// Constants associated with the WorkflowApprovalInfo.ResourceType property.
+// Type of resource.
+const (
+	WorkflowApprovalInfo_ResourceType_Collection = "COLLECTION"
+	WorkflowApprovalInfo_ResourceType_Environment = "ENVIRONMENT"
+	WorkflowApprovalInfo_ResourceType_Feature = "FEATURE"
+	WorkflowApprovalInfo_ResourceType_Property = "PROPERTY"
+	WorkflowApprovalInfo_ResourceType_Segment = "SEGMENT"
+)
+
+// NewWorkflowApprovalInfo : Instantiate WorkflowApprovalInfo (Generic Model Constructor)
+func (*AppConfigurationV1) NewWorkflowApprovalInfo(workflowName string, workflowID string, providerType string, changeRequestNumber string, changeRequestStatus string, executionStatus string, approvalURL string, resourceType string, createdTime *strfmt.DateTime, updatedTime *strfmt.DateTime) (_model *WorkflowApprovalInfo, err error) {
+	_model = &WorkflowApprovalInfo{
+		WorkflowName: core.StringPtr(workflowName),
+		WorkflowID: core.StringPtr(workflowID),
+		ProviderType: core.StringPtr(providerType),
+		ChangeRequestNumber: core.StringPtr(changeRequestNumber),
+		ChangeRequestStatus: core.StringPtr(changeRequestStatus),
+		ExecutionStatus: core.StringPtr(executionStatus),
+		ApprovalURL: core.StringPtr(approvalURL),
+		ResourceType: core.StringPtr(resourceType),
+		CreatedTime: createdTime,
+		UpdatedTime: updatedTime,
+	}
+	err = core.ValidateStruct(_model, "required parameters")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "model-missing-required", common.GetComponentInfo())
+	}
+	return
+}
+
+// UnmarshalWorkflowApprovalInfo unmarshals an instance of WorkflowApprovalInfo from the specified map of raw messages.
+func UnmarshalWorkflowApprovalInfo(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(WorkflowApprovalInfo)
+	err = core.UnmarshalPrimitive(m, "workflow_name", &obj.WorkflowName)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "workflow_name-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "workflow_id", &obj.WorkflowID)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "workflow_id-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "provider_type", &obj.ProviderType)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "provider_type-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "change_request_number", &obj.ChangeRequestNumber)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "change_request_number-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "change_request_status", &obj.ChangeRequestStatus)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "change_request_status-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "execution_status", &obj.ExecutionStatus)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "execution_status-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "approval_url", &obj.ApprovalURL)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "approval_url-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "resource_type", &obj.ResourceType)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "resource_type-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "resource_id", &obj.ResourceID)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "resource_id-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "environment_id", &obj.EnvironmentID)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "environment_id-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "created_time", &obj.CreatedTime)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "created_time-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "updated_time", &obj.UpdatedTime)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "updated_time-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "last_poll_time", &obj.LastPollTime)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "last_poll_time-error", common.GetComponentInfo())
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// WorkflowApprovalInitiatedResponse : Response when workflow approval is initiated for a resource change.
+type WorkflowApprovalInitiatedResponse struct {
+	// Message describing the workflow approval initiation. Message varies based on resource type and operation.
+	Message *string `json:"message" validate:"required"`
+
+	// Details of the workflow approval.
+	WorkflowApproval *WorkflowApprovalDetails `json:"workflow_approval" validate:"required"`
+}
+
+// UnmarshalWorkflowApprovalInitiatedResponse unmarshals an instance of WorkflowApprovalInitiatedResponse from the specified map of raw messages.
+func UnmarshalWorkflowApprovalInitiatedResponse(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(WorkflowApprovalInitiatedResponse)
+	err = core.UnmarshalPrimitive(m, "message", &obj.Message)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "message-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalModel(m, "workflow_approval", &obj.WorkflowApproval, UnmarshalWorkflowApprovalDetails)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "workflow_approval-error", common.GetComponentInfo())
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// WorkflowConfigResponse : Base schema for a workflow configuration.
+type WorkflowConfigResponse struct {
+	// Name of the workflow configuration.
+	Name *string `json:"name" validate:"required"`
+
+	// Unique identifier for the workflow configuration.
+	WorkflowID *string `json:"workflow_id" validate:"required"`
+
+	// Whether the workflow is enabled.
+	Enabled *bool `json:"enabled" validate:"required"`
+
+	// Provider configuration for a workflow.
+	Provider *WorkflowProvider `json:"provider" validate:"required"`
+
+	// Scope configuration for the workflow. At least one of collections, segments, or environments must be specified.
+	Scope *WorkflowScope `json:"scope" validate:"required"`
+
+	// Timestamp when the workflow was created.
+	CreatedTime *strfmt.DateTime `json:"created_time,omitempty"`
+
+	// Timestamp when the workflow was last updated.
+	UpdatedTime *strfmt.DateTime `json:"updated_time,omitempty"`
+
+	// URL to access this workflow configuration.
+	Href *string `json:"href,omitempty"`
+}
+
+// UnmarshalWorkflowConfigResponse unmarshals an instance of WorkflowConfigResponse from the specified map of raw messages.
+func UnmarshalWorkflowConfigResponse(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(WorkflowConfigResponse)
+	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "name-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "workflow_id", &obj.WorkflowID)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "workflow_id-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "enabled", &obj.Enabled)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "enabled-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalModel(m, "provider", &obj.Provider, UnmarshalWorkflowProvider)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "provider-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalModel(m, "scope", &obj.Scope, UnmarshalWorkflowScope)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "scope-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "created_time", &obj.CreatedTime)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "created_time-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "updated_time", &obj.UpdatedTime)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "updated_time-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "href", &obj.Href)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "href-error", common.GetComponentInfo())
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// WorkflowConfigsList : List of workflow configurations with pagination.
+type WorkflowConfigsList struct {
+	// Array of workflow configuration objects.
+	WorkflowConfigs []WorkflowConfigResponse `json:"workflow_configs" validate:"required"`
+
+	// The number of records that are retrieved in a list.
+	Limit *int64 `json:"limit" validate:"required"`
+
+	// The number of records that are skipped in a list.
+	Offset *int64 `json:"offset" validate:"required"`
+
+	// The total number of records.
+	TotalCount *int64 `json:"total_count" validate:"required"`
+
+	// URL to navigate to the first page of records.
+	First *PaginatedListFirst `json:"first" validate:"required"`
+
+	// URL to navigate to the previous list of records.
+	Previous *PaginatedListPrevious `json:"previous,omitempty"`
+
+	// URL to navigate to the next list of records.
+	Next *PaginatedListNext `json:"next,omitempty"`
+
+	// URL to navigate to the last page of records.
+	Last *PaginatedListLast `json:"last" validate:"required"`
+}
+
+// UnmarshalWorkflowConfigsList unmarshals an instance of WorkflowConfigsList from the specified map of raw messages.
+func UnmarshalWorkflowConfigsList(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(WorkflowConfigsList)
+	err = core.UnmarshalModel(m, "workflow_configs", &obj.WorkflowConfigs, UnmarshalWorkflowConfigResponse)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "workflow_configs-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "limit", &obj.Limit)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "limit-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "offset", &obj.Offset)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "offset-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "total_count", &obj.TotalCount)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "total_count-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalModel(m, "first", &obj.First, UnmarshalPaginatedListFirst)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "first-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalModel(m, "previous", &obj.Previous, UnmarshalPaginatedListPrevious)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "previous-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalModel(m, "next", &obj.Next, UnmarshalPaginatedListNext)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "next-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalModel(m, "last", &obj.Last, UnmarshalPaginatedListLast)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "last-error", common.GetComponentInfo())
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// Retrieve the value to be passed to a request to access the next page of results
+func (resp *WorkflowConfigsList) GetNextOffset() (*int64, error) {
+	if core.IsNil(resp.Next) {
+		return nil, nil
+	}
+	offset, err := core.GetQueryParam(resp.Next.Href, "offset")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "read-query-param-error", common.GetComponentInfo())
+		return nil, err
+	} else if offset == nil {
+		return nil, nil
+	}
+	var offsetValue int64
+	offsetValue, err = strconv.ParseInt(*offset, 10, 64)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "parse-int-query-error", common.GetComponentInfo())
+		return nil, err
+	}
+	return core.Int64Ptr(offsetValue), nil
+}
+
+// WorkflowEnvironment : Environment-specific workflow configuration.
+type WorkflowEnvironment struct {
+	// Environment identifier.
+	EnvironmentID *string `json:"environment_id" validate:"required"`
+
+	// Resources configuration for the environment.
+	Resources *WorkflowEnvironmentResources `json:"resources,omitempty"`
+}
+
+// NewWorkflowEnvironment : Instantiate WorkflowEnvironment (Generic Model Constructor)
+func (*AppConfigurationV1) NewWorkflowEnvironment(environmentID string) (_model *WorkflowEnvironment, err error) {
+	_model = &WorkflowEnvironment{
+		EnvironmentID: core.StringPtr(environmentID),
+	}
+	err = core.ValidateStruct(_model, "required parameters")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "model-missing-required", common.GetComponentInfo())
+	}
+	return
+}
+
+// UnmarshalWorkflowEnvironment unmarshals an instance of WorkflowEnvironment from the specified map of raw messages.
+func UnmarshalWorkflowEnvironment(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(WorkflowEnvironment)
+	err = core.UnmarshalPrimitive(m, "environment_id", &obj.EnvironmentID)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "environment_id-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalModel(m, "resources", &obj.Resources, UnmarshalWorkflowEnvironmentResources)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "resources-error", common.GetComponentInfo())
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// WorkflowEnvironmentResources : Resources configuration for the environment.
+type WorkflowEnvironmentResources struct {
+	Environment *WorkflowEnvironmentResourcesEnvironment `json:"environment,omitempty"`
+
+	// Scope mode configuration. Only ALL mode is supported.
+	Features *WorkflowScopeMode `json:"features,omitempty"`
+
+	// Scope mode configuration. Only ALL mode is supported.
+	Properties *WorkflowScopeMode `json:"properties,omitempty"`
+}
+
+// UnmarshalWorkflowEnvironmentResources unmarshals an instance of WorkflowEnvironmentResources from the specified map of raw messages.
+func UnmarshalWorkflowEnvironmentResources(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(WorkflowEnvironmentResources)
+	err = core.UnmarshalModel(m, "environment", &obj.Environment, UnmarshalWorkflowEnvironmentResourcesEnvironment)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "environment-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalModel(m, "features", &obj.Features, UnmarshalWorkflowScopeMode)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "features-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalModel(m, "properties", &obj.Properties, UnmarshalWorkflowScopeMode)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "properties-error", common.GetComponentInfo())
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// WorkflowEnvironmentResourcesEnvironment : WorkflowEnvironmentResourcesEnvironment struct
+type WorkflowEnvironmentResourcesEnvironment struct {
+	// Whether environment-level workflow is enabled.
+	Enable *bool `json:"enable,omitempty"`
+}
+
+// UnmarshalWorkflowEnvironmentResourcesEnvironment unmarshals an instance of WorkflowEnvironmentResourcesEnvironment from the specified map of raw messages.
+func UnmarshalWorkflowEnvironmentResourcesEnvironment(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(WorkflowEnvironmentResourcesEnvironment)
+	err = core.UnmarshalPrimitive(m, "enable", &obj.Enable)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "enable-error", common.GetComponentInfo())
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// WorkflowMetadata : Metadata for a ServiceNow provider. Discriminated by the provider 'type' field.
+// Models which "extend" this model:
+// - WorkflowMetadataExternalServiceNowMetadata
+// - WorkflowMetadataIBMServiceNowMetadata
+type WorkflowMetadata struct {
+	// Approval expiration time in days.
+	ApprovalExpiration *int64 `json:"approval_expiration,omitempty"`
+
+	// Name of the approval group in ServiceNow.
+	ApprovalGroupName *string `json:"approval_group_name,omitempty"`
+
+	// Secret Manager secret ID for ServiceNow credentials.
+	SmSecretID *string `json:"sm_secret_id,omitempty"`
+
+	// ServiceNow instance URL.
+	WorkflowURL *string `json:"workflow_url,omitempty"`
+
+	// CRN mask for the service.
+	CrnMask *string `json:"crn_mask,omitempty"`
+
+	// The email id to which the change request will be assigned.
+	DefaultEmail *string `json:"default_email,omitempty"`
+
+	// Secret Manager secret CRN for ServiceNow credentials.
+	SmSecretCrn *string `json:"sm_secret_crn,omitempty"`
+}
+func (*WorkflowMetadata) isaWorkflowMetadata() bool {
+	return true
+}
+
+type WorkflowMetadataIntf interface {
+	isaWorkflowMetadata() bool
+}
+
+// UnmarshalWorkflowMetadata unmarshals an instance of WorkflowMetadata from the specified map of raw messages.
+func UnmarshalWorkflowMetadata(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(WorkflowMetadata)
+	err = core.UnmarshalPrimitive(m, "approval_expiration", &obj.ApprovalExpiration)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "approval_expiration-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "approval_group_name", &obj.ApprovalGroupName)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "approval_group_name-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "sm_secret_id", &obj.SmSecretID)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "sm_secret_id-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "workflow_url", &obj.WorkflowURL)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "workflow_url-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "crn_mask", &obj.CrnMask)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "crn_mask-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "default_email", &obj.DefaultEmail)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "default_email-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "sm_secret_crn", &obj.SmSecretCrn)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "sm_secret_crn-error", common.GetComponentInfo())
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// WorkflowProvider : Provider configuration for a workflow.
+type WorkflowProvider struct {
+	Type *string `json:"type" validate:"required"`
+
+	// Metadata for a ServiceNow provider. Discriminated by the provider 'type' field.
+	Metadata WorkflowMetadataIntf `json:"metadata" validate:"required"`
+}
+
+// Constants associated with the WorkflowProvider.Type property.
+const (
+	WorkflowProvider_Type_ServicenowExternal = "SERVICENOW_EXTERNAL"
+	WorkflowProvider_Type_ServicenowIbm = "SERVICENOW_IBM"
+)
+
+// NewWorkflowProvider : Instantiate WorkflowProvider (Generic Model Constructor)
+func (*AppConfigurationV1) NewWorkflowProvider(typeVar string, metadata WorkflowMetadataIntf) (_model *WorkflowProvider, err error) {
+	_model = &WorkflowProvider{
+		Type: core.StringPtr(typeVar),
+		Metadata: metadata,
+	}
+	err = core.ValidateStruct(_model, "required parameters")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "model-missing-required", common.GetComponentInfo())
+	}
+	return
+}
+
+// UnmarshalWorkflowProvider unmarshals an instance of WorkflowProvider from the specified map of raw messages.
+func UnmarshalWorkflowProvider(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(WorkflowProvider)
+	err = core.UnmarshalPrimitive(m, "type", &obj.Type)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "type-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalModel(m, "metadata", &obj.Metadata, UnmarshalWorkflowMetadata)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "metadata-error", common.GetComponentInfo())
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// WorkflowProviderValidationResponse : Response from testing a workflow provider configuration. Indicates whether the workflow provider (ServiceNow)
+// connection and configuration are valid.
+type WorkflowProviderValidationResponse struct {
+	// Descriptive message about the validation result. Contains success confirmation or detailed error information if
+	// validation failed.
+	Message *string `json:"message" validate:"required"`
+
+	// Indicates whether the workflow provider validation was successful. Returns true if the connection to ServiceNow was
+	// established and credentials are valid, false otherwise.
+	Success *bool `json:"success" validate:"required"`
+}
+
+// UnmarshalWorkflowProviderValidationResponse unmarshals an instance of WorkflowProviderValidationResponse from the specified map of raw messages.
+func UnmarshalWorkflowProviderValidationResponse(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(WorkflowProviderValidationResponse)
+	err = core.UnmarshalPrimitive(m, "message", &obj.Message)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "message-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "success", &obj.Success)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "success-error", common.GetComponentInfo())
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// WorkflowScope : Scope configuration for the workflow. At least one of collections, segments, or environments must be specified.
+type WorkflowScope struct {
+	// Scope mode configuration. Only ALL mode is supported.
+	Collections *WorkflowScopeMode `json:"collections,omitempty"`
+
+	// Scope mode configuration. Only ALL mode is supported.
+	Segments *WorkflowScopeMode `json:"segments,omitempty"`
+
+	// List of environments where the workflow applies.
+	Environments []WorkflowEnvironment `json:"environments,omitempty"`
+}
+
+// UnmarshalWorkflowScope unmarshals an instance of WorkflowScope from the specified map of raw messages.
+func UnmarshalWorkflowScope(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(WorkflowScope)
+	err = core.UnmarshalModel(m, "collections", &obj.Collections, UnmarshalWorkflowScopeMode)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "collections-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalModel(m, "segments", &obj.Segments, UnmarshalWorkflowScopeMode)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "segments-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalModel(m, "environments", &obj.Environments, UnmarshalWorkflowEnvironment)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "environments-error", common.GetComponentInfo())
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// WorkflowScopeMode : Scope mode configuration. Only ALL mode is supported.
+type WorkflowScopeMode struct {
+	// Scope mode - only ALL is supported.
+	Mode *string `json:"mode" validate:"required"`
+
+	// List of IDs - always empty when mode is ALL.
+	Ids []string `json:"ids" validate:"required"`
+}
+
+// Constants associated with the WorkflowScopeMode.Mode property.
+// Scope mode - only ALL is supported.
+const (
+	WorkflowScopeMode_Mode_All = "ALL"
+)
+
+// NewWorkflowScopeMode : Instantiate WorkflowScopeMode (Generic Model Constructor)
+func (*AppConfigurationV1) NewWorkflowScopeMode(mode string, ids []string) (_model *WorkflowScopeMode, err error) {
+	_model = &WorkflowScopeMode{
+		Mode: core.StringPtr(mode),
+		Ids: ids,
+	}
+	err = core.ValidateStruct(_model, "required parameters")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "model-missing-required", common.GetComponentInfo())
+	}
+	return
+}
+
+// UnmarshalWorkflowScopeMode unmarshals an instance of WorkflowScopeMode from the specified map of raw messages.
+func UnmarshalWorkflowScopeMode(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(WorkflowScopeMode)
+	err = core.UnmarshalPrimitive(m, "mode", &obj.Mode)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "mode-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "ids", &obj.Ids)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "ids-error", common.GetComponentInfo())
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
 // ConfigActionGitConfigPromote : Details of the promote operation.
 // This model "extends" ConfigAction
 type ConfigActionGitConfigPromote struct {
@@ -12035,13 +14600,13 @@ func UnmarshalCreateIntegrationMetadataCreateEnIntegrationMetadata(m map[string]
 // CreateIntegrationMetadataCreateKmsIntegrationMetadata : Metadata required to create KMS integration.
 // This model "extends" CreateIntegrationMetadata
 type CreateIntegrationMetadataCreateKmsIntegrationMetadata struct {
-	// The CRN of the Key Protect or HPCS service instance.
+	// The CRN of the Key Protect service instance.
 	KmsInstanceCrn *string `json:"kms_instance_crn" validate:"required"`
 
-	// The URL endpoint of Key Protect or HPCS instance.
+	// The URL endpoint of Key Protect instance.
 	KmsEndpoint *string `json:"kms_endpoint" validate:"required"`
 
-	// The rootkey id of Key Protect or HPCS instance.
+	// The rootkey id of Key Protect instance.
 	RootKeyID *string `json:"root_key_id" validate:"required"`
 }
 
@@ -12563,27 +15128,27 @@ func UnmarshalIntegrationMetadataMetadataEnIntegration(m map[string]json.RawMess
 	return
 }
 
-// IntegrationMetadataMetadataKmsIntegration : Metadata details of the retrieved Key Protect or HPCS integration.
+// IntegrationMetadataMetadataKmsIntegration : Metadata details of the retrieved Key Protect integration.
 // This model "extends" IntegrationMetadata
 type IntegrationMetadataMetadataKmsIntegration struct {
-	// Key Protect or HPCS instance root key id.
+	// Key Protect instance root key id.
 	RootKeyID *string `json:"root_key_id" validate:"required"`
 
-	// Key Protect or HPCS URL endpoint.
+	// Key Protect URL endpoint.
 	KmsEndpoint *string `json:"kms_endpoint" validate:"required"`
 
-	// Key Protect or HPCS instance CRN.
+	// Key Protect instance CRN.
 	KmsInstanceCrn *string `json:"kms_instance_crn" validate:"required"`
 
-	// Key Protect or HPCS instance root key status.
+	// Key Protect instance root key status.
 	KeyStatus *string `json:"key_status,omitempty"`
 
-	// For service name "kms" the schema type is "BYOK". For service name "hs-crypto" the schema type is "KYOK".
+	// For service name "kms" the schema type is "BYOK".
 	KmsSchemeType *string `json:"kms_scheme_type,omitempty"`
 }
 
 // Constants associated with the IntegrationMetadataMetadataKmsIntegration.KeyStatus property.
-// Key Protect or HPCS instance root key status.
+// Key Protect instance root key status.
 const (
 	IntegrationMetadataMetadataKmsIntegration_KeyStatus_NonUsableDelete = "NON_USABLE_DELETE"
 	IntegrationMetadataMetadataKmsIntegration_KeyStatus_NonUsableDisable = "NON_USABLE_DISABLE"
@@ -13253,6 +15818,129 @@ func UnmarshalUpdateWorkflowconfigResponseIBMServiceNow(m map[string]json.RawMes
 	return
 }
 
+// WorkflowMetadataExternalServiceNowMetadata : Metadata for External ServiceNow provider.
+// This model "extends" WorkflowMetadata
+type WorkflowMetadataExternalServiceNowMetadata struct {
+	// Approval expiration time in days.
+	ApprovalExpiration *int64 `json:"approval_expiration" validate:"required"`
+
+	// Name of the approval group in ServiceNow.
+	ApprovalGroupName *string `json:"approval_group_name" validate:"required"`
+
+	// Secret Manager secret ID for ServiceNow credentials.
+	SmSecretID *string `json:"sm_secret_id" validate:"required"`
+
+	// ServiceNow instance URL.
+	WorkflowURL *string `json:"workflow_url" validate:"required"`
+}
+
+// NewWorkflowMetadataExternalServiceNowMetadata : Instantiate WorkflowMetadataExternalServiceNowMetadata (Generic Model Constructor)
+func (*AppConfigurationV1) NewWorkflowMetadataExternalServiceNowMetadata(approvalExpiration int64, approvalGroupName string, smSecretID string, workflowURL string) (_model *WorkflowMetadataExternalServiceNowMetadata, err error) {
+	_model = &WorkflowMetadataExternalServiceNowMetadata{
+		ApprovalExpiration: core.Int64Ptr(approvalExpiration),
+		ApprovalGroupName: core.StringPtr(approvalGroupName),
+		SmSecretID: core.StringPtr(smSecretID),
+		WorkflowURL: core.StringPtr(workflowURL),
+	}
+	err = core.ValidateStruct(_model, "required parameters")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "model-missing-required", common.GetComponentInfo())
+	}
+	return
+}
+
+func (*WorkflowMetadataExternalServiceNowMetadata) isaWorkflowMetadata() bool {
+	return true
+}
+
+// UnmarshalWorkflowMetadataExternalServiceNowMetadata unmarshals an instance of WorkflowMetadataExternalServiceNowMetadata from the specified map of raw messages.
+func UnmarshalWorkflowMetadataExternalServiceNowMetadata(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(WorkflowMetadataExternalServiceNowMetadata)
+	err = core.UnmarshalPrimitive(m, "approval_expiration", &obj.ApprovalExpiration)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "approval_expiration-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "approval_group_name", &obj.ApprovalGroupName)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "approval_group_name-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "sm_secret_id", &obj.SmSecretID)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "sm_secret_id-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "workflow_url", &obj.WorkflowURL)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "workflow_url-error", common.GetComponentInfo())
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// WorkflowMetadataIBMServiceNowMetadata : Metadata for IBM ServiceNow provider.
+// This model "extends" WorkflowMetadata
+type WorkflowMetadataIBMServiceNowMetadata struct {
+	// Approval expiration time in days.
+	ApprovalExpiration *int64 `json:"approval_expiration" validate:"required"`
+
+	// CRN mask for the service.
+	CrnMask *string `json:"crn_mask" validate:"required"`
+
+	// The email id to which the change request will be assigned.
+	DefaultEmail *string `json:"default_email,omitempty"`
+
+	// Secret Manager secret CRN for ServiceNow credentials.
+	SmSecretCrn *string `json:"sm_secret_crn" validate:"required"`
+}
+
+// NewWorkflowMetadataIBMServiceNowMetadata : Instantiate WorkflowMetadataIBMServiceNowMetadata (Generic Model Constructor)
+func (*AppConfigurationV1) NewWorkflowMetadataIBMServiceNowMetadata(approvalExpiration int64, crnMask string, smSecretCrn string) (_model *WorkflowMetadataIBMServiceNowMetadata, err error) {
+	_model = &WorkflowMetadataIBMServiceNowMetadata{
+		ApprovalExpiration: core.Int64Ptr(approvalExpiration),
+		CrnMask: core.StringPtr(crnMask),
+		SmSecretCrn: core.StringPtr(smSecretCrn),
+	}
+	err = core.ValidateStruct(_model, "required parameters")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "model-missing-required", common.GetComponentInfo())
+	}
+	return
+}
+
+func (*WorkflowMetadataIBMServiceNowMetadata) isaWorkflowMetadata() bool {
+	return true
+}
+
+// UnmarshalWorkflowMetadataIBMServiceNowMetadata unmarshals an instance of WorkflowMetadataIBMServiceNowMetadata from the specified map of raw messages.
+func UnmarshalWorkflowMetadataIBMServiceNowMetadata(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(WorkflowMetadataIBMServiceNowMetadata)
+	err = core.UnmarshalPrimitive(m, "approval_expiration", &obj.ApprovalExpiration)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "approval_expiration-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "crn_mask", &obj.CrnMask)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "crn_mask-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "default_email", &obj.DefaultEmail)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "default_email-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "sm_secret_crn", &obj.SmSecretCrn)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "sm_secret_crn-error", common.GetComponentInfo())
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
 //
 // EnvironmentsPager can be used to simplify the use of the "ListEnvironments" method.
 //
@@ -13272,7 +15960,7 @@ func (appConfiguration *AppConfigurationV1) NewEnvironmentsPager(options *ListEn
 		return
 	}
 
-	var optionsCopy ListEnvironmentsOptions = *options
+	optionsCopy := *options
 	pager = &EnvironmentsPager{
 		hasNext: true,
 		options: &optionsCopy,
@@ -13366,7 +16054,7 @@ func (appConfiguration *AppConfigurationV1) NewCollectionsPager(options *ListCol
 		return
 	}
 
-	var optionsCopy ListCollectionsOptions = *options
+	optionsCopy := *options
 	pager = &CollectionsPager{
 		hasNext: true,
 		options: &optionsCopy,
@@ -13460,7 +16148,7 @@ func (appConfiguration *AppConfigurationV1) NewFeaturesPager(options *ListFeatur
 		return
 	}
 
-	var optionsCopy ListFeaturesOptions = *options
+	optionsCopy := *options
 	pager = &FeaturesPager{
 		hasNext: true,
 		options: &optionsCopy,
@@ -13554,7 +16242,7 @@ func (appConfiguration *AppConfigurationV1) NewPropertiesPager(options *ListProp
 		return
 	}
 
-	var optionsCopy ListPropertiesOptions = *options
+	optionsCopy := *options
 	pager = &PropertiesPager{
 		hasNext: true,
 		options: &optionsCopy,
@@ -13648,7 +16336,7 @@ func (appConfiguration *AppConfigurationV1) NewSegmentsPager(options *ListSegmen
 		return
 	}
 
-	var optionsCopy ListSegmentsOptions = *options
+	optionsCopy := *options
 	pager = &SegmentsPager{
 		hasNext: true,
 		options: &optionsCopy,
@@ -13742,7 +16430,7 @@ func (appConfiguration *AppConfigurationV1) NewGitconfigsPager(options *ListGitc
 		return
 	}
 
-	var optionsCopy ListGitconfigsOptions = *options
+	optionsCopy := *options
 	pager = &GitconfigsPager{
 		hasNext: true,
 		options: &optionsCopy,
@@ -13836,7 +16524,7 @@ func (appConfiguration *AppConfigurationV1) NewIntegrationsPager(options *ListIn
 		return
 	}
 
-	var optionsCopy ListIntegrationsOptions = *options
+	optionsCopy := *options
 	pager = &IntegrationsPager{
 		hasNext: true,
 		options: &optionsCopy,
@@ -13906,6 +16594,100 @@ func (pager *IntegrationsPager) GetNext() (page []Integration, err error) {
 
 // GetAll invokes GetAllWithContext() using context.Background() as the Context parameter.
 func (pager *IntegrationsPager) GetAll() (allItems []Integration, err error) {
+	allItems, err = pager.GetAllWithContext(context.Background())
+	err = core.RepurposeSDKProblem(err, "")
+	return
+}
+
+//
+// WorkflowConfigsPager can be used to simplify the use of the "ListWorkflowConfigs" method.
+//
+type WorkflowConfigsPager struct {
+	hasNext bool
+	options *ListWorkflowConfigsOptions
+	client  *AppConfigurationV1
+	pageContext struct {
+		next *int64
+	}
+}
+
+// NewWorkflowConfigsPager returns a new WorkflowConfigsPager instance.
+func (appConfiguration *AppConfigurationV1) NewWorkflowConfigsPager(options *ListWorkflowConfigsOptions) (pager *WorkflowConfigsPager, err error) {
+	if options.Offset != nil && *options.Offset != 0 {
+		err = core.SDKErrorf(nil, "the 'options.Offset' field should not be set", "no-query-setting", common.GetComponentInfo())
+		return
+	}
+
+	optionsCopy := *options
+	pager = &WorkflowConfigsPager{
+		hasNext: true,
+		options: &optionsCopy,
+		client:  appConfiguration,
+	}
+	return
+}
+
+// HasNext returns true if there are potentially more results to be retrieved.
+func (pager *WorkflowConfigsPager) HasNext() bool {
+	return pager.hasNext
+}
+
+// GetNextWithContext returns the next page of results using the specified Context.
+func (pager *WorkflowConfigsPager) GetNextWithContext(ctx context.Context) (page []WorkflowConfigResponse, err error) {
+	if !pager.HasNext() {
+		return nil, fmt.Errorf("no more results available")
+	}
+
+	pager.options.Offset = pager.pageContext.next
+
+	result, _, err := pager.client.ListWorkflowConfigsWithContext(ctx, pager.options)
+	if err != nil {
+		err = core.RepurposeSDKProblem(err, "error-getting-next-page")
+		return
+	}
+
+	var next *int64
+	if result.Next != nil {
+		var offset *int64
+		offset, err = core.GetQueryParamAsInt(result.Next.Href, "offset")
+		if err != nil {
+			errMsg := fmt.Sprintf("error retrieving 'offset' query parameter from URL '%s': %s", *result.Next.Href, err.Error())
+			err = core.SDKErrorf(err, errMsg, "get-query-error", common.GetComponentInfo())
+			return
+		}
+		next = offset
+	}
+	pager.pageContext.next = next
+	pager.hasNext = (pager.pageContext.next != nil)
+	page = result.WorkflowConfigs
+
+	return
+}
+
+// GetAllWithContext returns all results by invoking GetNextWithContext() repeatedly
+// until all pages of results have been retrieved.
+func (pager *WorkflowConfigsPager) GetAllWithContext(ctx context.Context) (allItems []WorkflowConfigResponse, err error) {
+	for pager.HasNext() {
+		var nextPage []WorkflowConfigResponse
+		nextPage, err = pager.GetNextWithContext(ctx)
+		if err != nil {
+			err = core.RepurposeSDKProblem(err, "error-getting-next-page")
+			return
+		}
+		allItems = append(allItems, nextPage...)
+	}
+	return
+}
+
+// GetNext invokes GetNextWithContext() using context.Background() as the Context parameter.
+func (pager *WorkflowConfigsPager) GetNext() (page []WorkflowConfigResponse, err error) {
+	page, err = pager.GetNextWithContext(context.Background())
+	err = core.RepurposeSDKProblem(err, "")
+	return
+}
+
+// GetAll invokes GetAllWithContext() using context.Background() as the Context parameter.
+func (pager *WorkflowConfigsPager) GetAll() (allItems []WorkflowConfigResponse, err error) {
 	allItems, err = pager.GetAllWithContext(context.Background())
 	err = core.RepurposeSDKProblem(err, "")
 	return

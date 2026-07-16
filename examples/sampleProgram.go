@@ -170,6 +170,12 @@ func main() {
 	createSnapshot("snapshotConfigurationId")
 	restoreSnapshot("snapshotConfigurationId")
 
+	getWorkflowConfigs()
+	createWorkflowConfigs("workflowConfigName", "workflowId", 7, "crnMask", "smSecretCrn", "defaultEmail")
+	getWorkflowConfig("workflowConfigId")
+	updateWorkflowConfigs("workflowConfigId", "workflowConfigNameUpdated", "workflowIdUpdated", 7, "crnMask", "smSecretCrn", "defaultEmail")
+	deleteWorkflowConfigs("workflowConfigId")
+
 	deleteFeature("environmentId", "numberFeatureId")
 	deleteFeature("environmentId", "booleanFeatureId")
 	deleteFeature("environmentId", "stringTextFeatureId")
@@ -280,6 +286,48 @@ func createProperty(environmentId string, name string, propertyId string, descri
 	}
 	fmt.Println(response.StatusCode)
 	fmt.Println(*result.PropertyID)
+}
+
+func createWorkflowConfigs(name string, workflowID string, approvalExpiration int64, crnMask string, smSecretCrn string, defaultEmail string) {
+	fmt.Println("createWorkflowConfigs")
+	metadata, err := appConfigurationServiceInstance.NewWorkflowMetadataIBMServiceNowMetadata(
+		approvalExpiration,
+		crnMask,
+		smSecretCrn,
+	)
+	if err != nil {
+		fmt.Println("Error building metadata: " + err.Error())
+		return
+	}
+	metadata.DefaultEmail = core.StringPtr(defaultEmail)
+	provider, err := appConfigurationServiceInstance.NewWorkflowProvider(
+		appconfigurationv1.WorkflowProvider_Type_ServicenowIbm,
+		metadata,
+	)
+	if err != nil {
+		fmt.Println("Error building provider: " + err.Error())
+		return
+	}
+	scope := &appconfigurationv1.WorkflowScope{
+		Segments: &appconfigurationv1.WorkflowScopeMode{
+			Mode: core.StringPtr(appconfigurationv1.WorkflowScopeMode_Mode_All),
+			Ids:  []string{},
+		},
+	}
+	createWorkflowConfigsOptionsModel := appConfigurationServiceInstance.NewCreateWorkflowConfigsOptions(
+		name,
+		workflowID,
+		false,
+		provider,
+		scope,
+	)
+	result, response, error := appConfigurationServiceInstance.CreateWorkflowConfigs(createWorkflowConfigsOptionsModel)
+	if error != nil {
+		fmt.Println("Error: " + error.Error())
+		return
+	}
+	fmt.Println(response.StatusCode)
+	fmt.Println(*result.WorkflowID)
 }
 
 // Update examples
@@ -431,12 +479,55 @@ func updateOriginConfigs(origins []string) {
 	fmt.Println(result.AllowedOrigins)
 }
 
+func updateWorkflowConfigs(workflowConfigId string, name string, workflowID string, approvalExpiration int64, crnMask string, smSecretCrn string, defaultEmail string) {
+	fmt.Println("updateWorkflowConfigs")
+	metadata, err := appConfigurationServiceInstance.NewWorkflowMetadataIBMServiceNowMetadata(
+		approvalExpiration,
+		crnMask,
+		smSecretCrn,
+	)
+	if err != nil {
+		fmt.Println("Error building metadata: " + err.Error())
+		return
+	}
+	metadata.DefaultEmail = core.StringPtr(defaultEmail)
+	provider, err := appConfigurationServiceInstance.NewWorkflowProvider(
+		appconfigurationv1.WorkflowProvider_Type_ServicenowIbm,
+		metadata,
+	)
+	if err != nil {
+		fmt.Println("Error building provider: " + err.Error())
+		return
+	}
+	scope := &appconfigurationv1.WorkflowScope{
+		Segments: &appconfigurationv1.WorkflowScopeMode{
+			Mode: core.StringPtr(appconfigurationv1.WorkflowScopeMode_Mode_All),
+			Ids:  []string{},
+		},
+	}
+	updateWorkflowConfigsOptionsModel := appConfigurationServiceInstance.NewUpdateWorkflowConfigsOptions(
+		workflowConfigId,
+		name,
+		workflowID,
+		false,
+		provider,
+		scope,
+	)
+	result, response, error := appConfigurationServiceInstance.UpdateWorkflowConfigs(updateWorkflowConfigsOptionsModel)
+	if error != nil {
+		fmt.Println("Error: " + error.Error())
+		return
+	}
+	fmt.Println(response.StatusCode)
+	fmt.Println(*result.Name)
+}
+
 // Delete examples
 
 func deleteCollection(collectionId string) {
 	fmt.Println("deleteCollection")
 	deleteCollectionOptionsModel := appConfigurationServiceInstance.NewDeleteCollectionOptions(collectionId)
-	response, error := appConfigurationServiceInstance.DeleteCollection(deleteCollectionOptionsModel)
+	_, response, error := appConfigurationServiceInstance.DeleteCollection(deleteCollectionOptionsModel)
 	if error != nil {
 		fmt.Println("Error: " + error.Error())
 		return
@@ -447,7 +538,7 @@ func deleteCollection(collectionId string) {
 func deleteFeature(environmentId string, featureId string) {
 	fmt.Println("deleteFeature")
 	deleteFeatureOptionsModel := appConfigurationServiceInstance.NewDeleteFeatureOptions(environmentId, featureId)
-	response, error := appConfigurationServiceInstance.DeleteFeature(deleteFeatureOptionsModel)
+	_, response, error := appConfigurationServiceInstance.DeleteFeature(deleteFeatureOptionsModel)
 	if error != nil {
 		fmt.Println("Error: " + error.Error())
 		return
@@ -458,7 +549,7 @@ func deleteFeature(environmentId string, featureId string) {
 func deleteSegment(segmentId string) {
 	fmt.Println("deleteSegment")
 	deleteSegmentOptionsModel := appConfigurationServiceInstance.NewDeleteSegmentOptions(segmentId)
-	response, error := appConfigurationServiceInstance.DeleteSegment(deleteSegmentOptionsModel)
+	_, response, error := appConfigurationServiceInstance.DeleteSegment(deleteSegmentOptionsModel)
 	if error != nil {
 		fmt.Println("Error: " + error.Error())
 		return
@@ -469,7 +560,7 @@ func deleteSegment(segmentId string) {
 func deleteProperty(environmentId string, propertyId string) {
 	fmt.Println("deleteProperty")
 	deletePropertyOptionsModel := appConfigurationServiceInstance.NewDeletePropertyOptions(environmentId, propertyId)
-	response, error := appConfigurationServiceInstance.DeleteProperty(deletePropertyOptionsModel)
+	_, response, error := appConfigurationServiceInstance.DeleteProperty(deletePropertyOptionsModel)
 	if error != nil {
 		fmt.Println("Error: " + error.Error())
 		return
@@ -480,7 +571,18 @@ func deleteProperty(environmentId string, propertyId string) {
 func deleteEnvironment(environmentId string) {
 	fmt.Println("deleteEnvironment")
 	deleteEnvironmentOptionsModel := appConfigurationServiceInstance.NewDeleteEnvironmentOptions(environmentId)
-	response, error := appConfigurationServiceInstance.DeleteEnvironment(deleteEnvironmentOptionsModel)
+	_, response, error := appConfigurationServiceInstance.DeleteEnvironment(deleteEnvironmentOptionsModel)
+	if error != nil {
+		fmt.Println("Error: " + error.Error())
+		return
+	}
+	fmt.Println(response.StatusCode)
+}
+
+func deleteWorkflowConfigs(workflowConfigId string) {
+	fmt.Println("deleteWorkflowConfigs")
+	deleteWorkflowConfigsOptionsModel := appConfigurationServiceInstance.NewDeleteWorkflowConfigsOptions(workflowConfigId)
+	response, error := appConfigurationServiceInstance.DeleteWorkflowConfigs(deleteWorkflowConfigsOptionsModel)
 	if error != nil {
 		fmt.Println("Error: " + error.Error())
 		return
@@ -563,6 +665,18 @@ func getOriginConfigs() {
 	fmt.Println(len(result.AllowedOrigins))
 }
 
+func getWorkflowConfigs() {
+	fmt.Println("getWorkflowConfigs")
+	listWorkflowConfigsOptionsModel := appConfigurationServiceInstance.NewListWorkflowConfigsOptions()
+	result, response, error := appConfigurationServiceInstance.ListWorkflowConfigs(listWorkflowConfigsOptionsModel)
+	if error != nil {
+		fmt.Println("Error: " + error.Error())
+		return
+	}
+	fmt.Println(response.StatusCode)
+	fmt.Println(result.WorkflowConfigs)
+}
+
 // Get examples
 
 func getCollection(collectionId string) {
@@ -618,6 +732,18 @@ func getEnvironment(environmentId string) {
 	fmt.Println("getEnvironment")
 	getEnvironmentOptionsModel := appConfigurationServiceInstance.NewGetEnvironmentOptions(environmentId)
 	result, response, error := appConfigurationServiceInstance.GetEnvironment(getEnvironmentOptionsModel)
+	if error != nil {
+		fmt.Println("Error: " + error.Error())
+		return
+	}
+	fmt.Println(response.StatusCode)
+	fmt.Println(*result.Name)
+}
+
+func getWorkflowConfig(workflowConfigId string) {
+	fmt.Println("getWorkflowConfig")
+	getWorkflowConfigOptionsModel := appConfigurationServiceInstance.NewGetWorkflowConfigOptions(workflowConfigId)
+	result, response, error := appConfigurationServiceInstance.GetWorkflowConfig(getWorkflowConfigOptionsModel)
 	if error != nil {
 		fmt.Println("Error: " + error.Error())
 		return
