@@ -2944,7 +2944,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"features": [{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED"}, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED"}, "rule_id": "RuleID", "rule_name": "RuleName"}], "segment_exists": false, "segment_count": 12, "rollout_rule": {"type": "MANUAL", "rule_id": "RuleID"}, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href", "workflow_approval": {"workflow_name": "WorkflowName", "workflow_id": "WorkflowID", "provider_type": "SERVICENOW_IBM", "change_request_number": "ChangeRequestNumber", "change_request_status": "PENDING", "execution_status": "PENDING", "approval_url": "ApprovalURL", "resource_type": "FEATURE", "resource_id": "ResourceID", "environment_id": "EnvironmentID", "created_time": "2019-01-01T12:00:00.000Z", "updated_time": "2019-01-01T12:00:00.000Z", "last_poll_time": "2019-01-01T12:00:00.000Z"}}], "limit": 10, "offset": 0, "total_count": 0, "first": {"href": "Href"}, "previous": {"href": "Href"}, "next": {"href": "Href"}, "last": {"href": "Href"}}`)
+					fmt.Fprintf(res, "%s", `{"features": [{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED", "metrics": [{"metric_id": "mtlwx65j", "auto_rollback": false, "metric_name": "feature-clicked", "direction": "HIGHER", "metric_type": "BINARY"}]}, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED", "metrics": [{"metric_id": "mtlwx65j", "auto_rollback": false, "metric_name": "feature-clicked", "direction": "HIGHER", "metric_type": "BINARY"}]}, "rule_id": "RuleID", "rule_name": "RuleName"}], "segment_exists": false, "segment_count": 12, "rollout_rule": {"type": "MANUAL", "rule_id": "RuleID"}, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href", "workflow_approval": {"workflow_name": "WorkflowName", "workflow_id": "WorkflowID", "provider_type": "SERVICENOW_IBM", "change_request_number": "ChangeRequestNumber", "change_request_status": "PENDING", "execution_status": "PENDING", "approval_url": "ApprovalURL", "resource_type": "FEATURE", "resource_id": "ResourceID", "environment_id": "EnvironmentID", "created_time": "2019-01-01T12:00:00.000Z", "updated_time": "2019-01-01T12:00:00.000Z", "last_poll_time": "2019-01-01T12:00:00.000Z"}}], "limit": 10, "offset": 0, "total_count": 0, "first": {"href": "Href"}, "previous": {"href": "Href"}, "next": {"href": "Href"}, "last": {"href": "Href"}}`)
 				}))
 			})
 			It(`Invoke ListFeatures successfully with retries`, func() {
@@ -3013,7 +3013,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"features": [{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED"}, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED"}, "rule_id": "RuleID", "rule_name": "RuleName"}], "segment_exists": false, "segment_count": 12, "rollout_rule": {"type": "MANUAL", "rule_id": "RuleID"}, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href", "workflow_approval": {"workflow_name": "WorkflowName", "workflow_id": "WorkflowID", "provider_type": "SERVICENOW_IBM", "change_request_number": "ChangeRequestNumber", "change_request_status": "PENDING", "execution_status": "PENDING", "approval_url": "ApprovalURL", "resource_type": "FEATURE", "resource_id": "ResourceID", "environment_id": "EnvironmentID", "created_time": "2019-01-01T12:00:00.000Z", "updated_time": "2019-01-01T12:00:00.000Z", "last_poll_time": "2019-01-01T12:00:00.000Z"}}], "limit": 10, "offset": 0, "total_count": 0, "first": {"href": "Href"}, "previous": {"href": "Href"}, "next": {"href": "Href"}, "last": {"href": "Href"}}`)
+					fmt.Fprintf(res, "%s", `{"features": [{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED", "metrics": [{"metric_id": "mtlwx65j", "auto_rollback": false, "metric_name": "feature-clicked", "direction": "HIGHER", "metric_type": "BINARY"}]}, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED", "metrics": [{"metric_id": "mtlwx65j", "auto_rollback": false, "metric_name": "feature-clicked", "direction": "HIGHER", "metric_type": "BINARY"}]}, "rule_id": "RuleID", "rule_name": "RuleName"}], "segment_exists": false, "segment_count": 12, "rollout_rule": {"type": "MANUAL", "rule_id": "RuleID"}, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href", "workflow_approval": {"workflow_name": "WorkflowName", "workflow_id": "WorkflowID", "provider_type": "SERVICENOW_IBM", "change_request_number": "ChangeRequestNumber", "change_request_status": "PENDING", "execution_status": "PENDING", "approval_url": "ApprovalURL", "resource_type": "FEATURE", "resource_id": "ResourceID", "environment_id": "EnvironmentID", "created_time": "2019-01-01T12:00:00.000Z", "updated_time": "2019-01-01T12:00:00.000Z", "last_poll_time": "2019-01-01T12:00:00.000Z"}}], "limit": 10, "offset": 0, "total_count": 0, "first": {"href": "Href"}, "previous": {"href": "Href"}, "next": {"href": "Href"}, "last": {"href": "Href"}}`)
 				}))
 			})
 			It(`Invoke ListFeatures successfully`, func() {
@@ -3190,9 +3190,9 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					requestNumber++
 					switch requestNumber {
 					case 1:
-						fmt.Fprintf(res, "%s", `{"next":{"href":"https://myhost.com/somePath?offset=1"},"features":[{"name":"Name","feature_id":"FeatureID","description":"Description","type":"BOOLEAN","format":"TEXT","enabled_value":"anyValue","disabled_value":"anyValue","enabled":false,"rollout_percentage":100,"rollout_type":"MANUAL","rollout_configuration":{"duration_preset":"CUSTOM","start_at":"2019-01-01T12:00:00.000Z","phases":[{"percentage":1,"duration":8,"duration_type":"days"}],"status":"QUEUED"},"tags":"Tags","segment_rules":[{"rules":[{"segments":["Segments"]}],"value":"anyValue","order":5,"rollout_percentage":100,"rollout_type":"MANUAL","rollout_configuration":{"duration_preset":"CUSTOM","start_at":"2019-01-01T12:00:00.000Z","phases":[{"percentage":1,"duration":8,"duration_type":"days"}],"status":"QUEUED"},"rule_id":"RuleID","rule_name":"RuleName"}],"segment_exists":false,"segment_count":12,"rollout_rule":{"type":"MANUAL","rule_id":"RuleID"},"collections":[{"collection_id":"CollectionID","name":"Name"}],"created_time":"2021-05-12T23:20:50.520Z","updated_time":"2021-05-12T23:20:50.520Z","evaluation_time":"2021-05-12T23:20:50.520Z","href":"Href","workflow_approval":{"workflow_name":"WorkflowName","workflow_id":"WorkflowID","provider_type":"SERVICENOW_IBM","change_request_number":"ChangeRequestNumber","change_request_status":"PENDING","execution_status":"PENDING","approval_url":"ApprovalURL","resource_type":"FEATURE","resource_id":"ResourceID","environment_id":"EnvironmentID","created_time":"2019-01-01T12:00:00.000Z","updated_time":"2019-01-01T12:00:00.000Z","last_poll_time":"2019-01-01T12:00:00.000Z"}}],"total_count":2,"limit":1}`)
+						fmt.Fprintf(res, "%s", `{"next":{"href":"https://myhost.com/somePath?offset=1"},"features":[{"name":"Name","feature_id":"FeatureID","description":"Description","type":"BOOLEAN","format":"TEXT","enabled_value":"anyValue","disabled_value":"anyValue","enabled":false,"rollout_percentage":100,"rollout_type":"MANUAL","rollout_configuration":{"duration_preset":"CUSTOM","start_at":"2019-01-01T12:00:00.000Z","phases":[{"percentage":1,"duration":8,"duration_type":"days"}],"status":"QUEUED","metrics":[{"metric_id":"mtlwx65j","auto_rollback":false,"metric_name":"feature-clicked","direction":"HIGHER","metric_type":"BINARY"}]},"tags":"Tags","segment_rules":[{"rules":[{"segments":["Segments"]}],"value":"anyValue","order":5,"rollout_percentage":100,"rollout_type":"MANUAL","rollout_configuration":{"duration_preset":"CUSTOM","start_at":"2019-01-01T12:00:00.000Z","phases":[{"percentage":1,"duration":8,"duration_type":"days"}],"status":"QUEUED","metrics":[{"metric_id":"mtlwx65j","auto_rollback":false,"metric_name":"feature-clicked","direction":"HIGHER","metric_type":"BINARY"}]},"rule_id":"RuleID","rule_name":"RuleName"}],"segment_exists":false,"segment_count":12,"rollout_rule":{"type":"MANUAL","rule_id":"RuleID"},"collections":[{"collection_id":"CollectionID","name":"Name"}],"created_time":"2021-05-12T23:20:50.520Z","updated_time":"2021-05-12T23:20:50.520Z","evaluation_time":"2021-05-12T23:20:50.520Z","href":"Href","workflow_approval":{"workflow_name":"WorkflowName","workflow_id":"WorkflowID","provider_type":"SERVICENOW_IBM","change_request_number":"ChangeRequestNumber","change_request_status":"PENDING","execution_status":"PENDING","approval_url":"ApprovalURL","resource_type":"FEATURE","resource_id":"ResourceID","environment_id":"EnvironmentID","created_time":"2019-01-01T12:00:00.000Z","updated_time":"2019-01-01T12:00:00.000Z","last_poll_time":"2019-01-01T12:00:00.000Z"}}],"total_count":2,"limit":1}`)
 					case 2:
-						fmt.Fprintf(res, "%s", `{"features":[{"name":"Name","feature_id":"FeatureID","description":"Description","type":"BOOLEAN","format":"TEXT","enabled_value":"anyValue","disabled_value":"anyValue","enabled":false,"rollout_percentage":100,"rollout_type":"MANUAL","rollout_configuration":{"duration_preset":"CUSTOM","start_at":"2019-01-01T12:00:00.000Z","phases":[{"percentage":1,"duration":8,"duration_type":"days"}],"status":"QUEUED"},"tags":"Tags","segment_rules":[{"rules":[{"segments":["Segments"]}],"value":"anyValue","order":5,"rollout_percentage":100,"rollout_type":"MANUAL","rollout_configuration":{"duration_preset":"CUSTOM","start_at":"2019-01-01T12:00:00.000Z","phases":[{"percentage":1,"duration":8,"duration_type":"days"}],"status":"QUEUED"},"rule_id":"RuleID","rule_name":"RuleName"}],"segment_exists":false,"segment_count":12,"rollout_rule":{"type":"MANUAL","rule_id":"RuleID"},"collections":[{"collection_id":"CollectionID","name":"Name"}],"created_time":"2021-05-12T23:20:50.520Z","updated_time":"2021-05-12T23:20:50.520Z","evaluation_time":"2021-05-12T23:20:50.520Z","href":"Href","workflow_approval":{"workflow_name":"WorkflowName","workflow_id":"WorkflowID","provider_type":"SERVICENOW_IBM","change_request_number":"ChangeRequestNumber","change_request_status":"PENDING","execution_status":"PENDING","approval_url":"ApprovalURL","resource_type":"FEATURE","resource_id":"ResourceID","environment_id":"EnvironmentID","created_time":"2019-01-01T12:00:00.000Z","updated_time":"2019-01-01T12:00:00.000Z","last_poll_time":"2019-01-01T12:00:00.000Z"}}],"total_count":2,"limit":1}`)
+						fmt.Fprintf(res, "%s", `{"features":[{"name":"Name","feature_id":"FeatureID","description":"Description","type":"BOOLEAN","format":"TEXT","enabled_value":"anyValue","disabled_value":"anyValue","enabled":false,"rollout_percentage":100,"rollout_type":"MANUAL","rollout_configuration":{"duration_preset":"CUSTOM","start_at":"2019-01-01T12:00:00.000Z","phases":[{"percentage":1,"duration":8,"duration_type":"days"}],"status":"QUEUED","metrics":[{"metric_id":"mtlwx65j","auto_rollback":false,"metric_name":"feature-clicked","direction":"HIGHER","metric_type":"BINARY"}]},"tags":"Tags","segment_rules":[{"rules":[{"segments":["Segments"]}],"value":"anyValue","order":5,"rollout_percentage":100,"rollout_type":"MANUAL","rollout_configuration":{"duration_preset":"CUSTOM","start_at":"2019-01-01T12:00:00.000Z","phases":[{"percentage":1,"duration":8,"duration_type":"days"}],"status":"QUEUED","metrics":[{"metric_id":"mtlwx65j","auto_rollback":false,"metric_name":"feature-clicked","direction":"HIGHER","metric_type":"BINARY"}]},"rule_id":"RuleID","rule_name":"RuleName"}],"segment_exists":false,"segment_count":12,"rollout_rule":{"type":"MANUAL","rule_id":"RuleID"},"collections":[{"collection_id":"CollectionID","name":"Name"}],"created_time":"2021-05-12T23:20:50.520Z","updated_time":"2021-05-12T23:20:50.520Z","evaluation_time":"2021-05-12T23:20:50.520Z","href":"Href","workflow_approval":{"workflow_name":"WorkflowName","workflow_id":"WorkflowID","provider_type":"SERVICENOW_IBM","change_request_number":"ChangeRequestNumber","change_request_status":"PENDING","execution_status":"PENDING","approval_url":"ApprovalURL","resource_type":"FEATURE","resource_id":"ResourceID","environment_id":"EnvironmentID","created_time":"2019-01-01T12:00:00.000Z","updated_time":"2019-01-01T12:00:00.000Z","last_poll_time":"2019-01-01T12:00:00.000Z"}}],"total_count":2,"limit":1}`)
 					default:
 						res.WriteHeader(400)
 					}
@@ -3291,11 +3291,17 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				rolloutPhaseModel.Duration = core.Int64Ptr(int64(38))
 				rolloutPhaseModel.DurationType = core.StringPtr("days")
 
+				// Construct an instance of the RolloutMetric model
+				rolloutMetricModel := new(appconfigurationv1.RolloutMetric)
+				rolloutMetricModel.MetricID = core.StringPtr("mtlwx65j")
+				rolloutMetricModel.AutoRollback = core.BoolPtr(false)
+
 				// Construct an instance of the RolloutConfiguration model
 				rolloutConfigurationModel := new(appconfigurationv1.RolloutConfiguration)
 				rolloutConfigurationModel.DurationPreset = core.StringPtr("CUSTOM")
 				rolloutConfigurationModel.StartAt = CreateMockDateTime("2019-01-01T12:00:00.000Z")
 				rolloutConfigurationModel.Phases = []appconfigurationv1.RolloutPhase{*rolloutPhaseModel}
+				rolloutConfigurationModel.Metrics = []appconfigurationv1.RolloutMetric{*rolloutMetricModel}
 
 				// Construct an instance of the TargetSegments model
 				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
@@ -3385,7 +3391,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
-					fmt.Fprintf(res, "%s", `{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED"}, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED"}, "rule_id": "RuleID", "rule_name": "RuleName"}], "segment_exists": false, "segment_count": 12, "rollout_rule": {"type": "MANUAL", "rule_id": "RuleID"}, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href", "workflow_approval": {"workflow_name": "WorkflowName", "workflow_id": "WorkflowID", "provider_type": "SERVICENOW_IBM", "change_request_number": "ChangeRequestNumber", "change_request_status": "PENDING", "execution_status": "PENDING", "approval_url": "ApprovalURL", "resource_type": "FEATURE", "resource_id": "ResourceID", "environment_id": "EnvironmentID", "created_time": "2019-01-01T12:00:00.000Z", "updated_time": "2019-01-01T12:00:00.000Z", "last_poll_time": "2019-01-01T12:00:00.000Z"}}`)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED", "metrics": [{"metric_id": "mtlwx65j", "auto_rollback": false, "metric_name": "feature-clicked", "direction": "HIGHER", "metric_type": "BINARY"}]}, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED", "metrics": [{"metric_id": "mtlwx65j", "auto_rollback": false, "metric_name": "feature-clicked", "direction": "HIGHER", "metric_type": "BINARY"}]}, "rule_id": "RuleID", "rule_name": "RuleName"}], "segment_exists": false, "segment_count": 12, "rollout_rule": {"type": "MANUAL", "rule_id": "RuleID"}, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href", "workflow_approval": {"workflow_name": "WorkflowName", "workflow_id": "WorkflowID", "provider_type": "SERVICENOW_IBM", "change_request_number": "ChangeRequestNumber", "change_request_status": "PENDING", "execution_status": "PENDING", "approval_url": "ApprovalURL", "resource_type": "FEATURE", "resource_id": "ResourceID", "environment_id": "EnvironmentID", "created_time": "2019-01-01T12:00:00.000Z", "updated_time": "2019-01-01T12:00:00.000Z", "last_poll_time": "2019-01-01T12:00:00.000Z"}}`)
 				}))
 			})
 			It(`Invoke CreateFeature successfully with retries`, func() {
@@ -3403,11 +3409,17 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				rolloutPhaseModel.Duration = core.Int64Ptr(int64(38))
 				rolloutPhaseModel.DurationType = core.StringPtr("days")
 
+				// Construct an instance of the RolloutMetric model
+				rolloutMetricModel := new(appconfigurationv1.RolloutMetric)
+				rolloutMetricModel.MetricID = core.StringPtr("mtlwx65j")
+				rolloutMetricModel.AutoRollback = core.BoolPtr(false)
+
 				// Construct an instance of the RolloutConfiguration model
 				rolloutConfigurationModel := new(appconfigurationv1.RolloutConfiguration)
 				rolloutConfigurationModel.DurationPreset = core.StringPtr("CUSTOM")
 				rolloutConfigurationModel.StartAt = CreateMockDateTime("2019-01-01T12:00:00.000Z")
 				rolloutConfigurationModel.Phases = []appconfigurationv1.RolloutPhase{*rolloutPhaseModel}
+				rolloutConfigurationModel.Metrics = []appconfigurationv1.RolloutMetric{*rolloutMetricModel}
 
 				// Construct an instance of the TargetSegments model
 				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
@@ -3500,7 +3512,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
-					fmt.Fprintf(res, "%s", `{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED"}, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED"}, "rule_id": "RuleID", "rule_name": "RuleName"}], "segment_exists": false, "segment_count": 12, "rollout_rule": {"type": "MANUAL", "rule_id": "RuleID"}, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href", "workflow_approval": {"workflow_name": "WorkflowName", "workflow_id": "WorkflowID", "provider_type": "SERVICENOW_IBM", "change_request_number": "ChangeRequestNumber", "change_request_status": "PENDING", "execution_status": "PENDING", "approval_url": "ApprovalURL", "resource_type": "FEATURE", "resource_id": "ResourceID", "environment_id": "EnvironmentID", "created_time": "2019-01-01T12:00:00.000Z", "updated_time": "2019-01-01T12:00:00.000Z", "last_poll_time": "2019-01-01T12:00:00.000Z"}}`)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED", "metrics": [{"metric_id": "mtlwx65j", "auto_rollback": false, "metric_name": "feature-clicked", "direction": "HIGHER", "metric_type": "BINARY"}]}, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED", "metrics": [{"metric_id": "mtlwx65j", "auto_rollback": false, "metric_name": "feature-clicked", "direction": "HIGHER", "metric_type": "BINARY"}]}, "rule_id": "RuleID", "rule_name": "RuleName"}], "segment_exists": false, "segment_count": 12, "rollout_rule": {"type": "MANUAL", "rule_id": "RuleID"}, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href", "workflow_approval": {"workflow_name": "WorkflowName", "workflow_id": "WorkflowID", "provider_type": "SERVICENOW_IBM", "change_request_number": "ChangeRequestNumber", "change_request_status": "PENDING", "execution_status": "PENDING", "approval_url": "ApprovalURL", "resource_type": "FEATURE", "resource_id": "ResourceID", "environment_id": "EnvironmentID", "created_time": "2019-01-01T12:00:00.000Z", "updated_time": "2019-01-01T12:00:00.000Z", "last_poll_time": "2019-01-01T12:00:00.000Z"}}`)
 				}))
 			})
 			It(`Invoke CreateFeature successfully`, func() {
@@ -3523,11 +3535,17 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				rolloutPhaseModel.Duration = core.Int64Ptr(int64(38))
 				rolloutPhaseModel.DurationType = core.StringPtr("days")
 
+				// Construct an instance of the RolloutMetric model
+				rolloutMetricModel := new(appconfigurationv1.RolloutMetric)
+				rolloutMetricModel.MetricID = core.StringPtr("mtlwx65j")
+				rolloutMetricModel.AutoRollback = core.BoolPtr(false)
+
 				// Construct an instance of the RolloutConfiguration model
 				rolloutConfigurationModel := new(appconfigurationv1.RolloutConfiguration)
 				rolloutConfigurationModel.DurationPreset = core.StringPtr("CUSTOM")
 				rolloutConfigurationModel.StartAt = CreateMockDateTime("2019-01-01T12:00:00.000Z")
 				rolloutConfigurationModel.Phases = []appconfigurationv1.RolloutPhase{*rolloutPhaseModel}
+				rolloutConfigurationModel.Metrics = []appconfigurationv1.RolloutMetric{*rolloutMetricModel}
 
 				// Construct an instance of the TargetSegments model
 				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
@@ -3588,11 +3606,17 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				rolloutPhaseModel.Duration = core.Int64Ptr(int64(38))
 				rolloutPhaseModel.DurationType = core.StringPtr("days")
 
+				// Construct an instance of the RolloutMetric model
+				rolloutMetricModel := new(appconfigurationv1.RolloutMetric)
+				rolloutMetricModel.MetricID = core.StringPtr("mtlwx65j")
+				rolloutMetricModel.AutoRollback = core.BoolPtr(false)
+
 				// Construct an instance of the RolloutConfiguration model
 				rolloutConfigurationModel := new(appconfigurationv1.RolloutConfiguration)
 				rolloutConfigurationModel.DurationPreset = core.StringPtr("CUSTOM")
 				rolloutConfigurationModel.StartAt = CreateMockDateTime("2019-01-01T12:00:00.000Z")
 				rolloutConfigurationModel.Phases = []appconfigurationv1.RolloutPhase{*rolloutPhaseModel}
+				rolloutConfigurationModel.Metrics = []appconfigurationv1.RolloutMetric{*rolloutMetricModel}
 
 				// Construct an instance of the TargetSegments model
 				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
@@ -3674,11 +3698,17 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				rolloutPhaseModel.Duration = core.Int64Ptr(int64(38))
 				rolloutPhaseModel.DurationType = core.StringPtr("days")
 
+				// Construct an instance of the RolloutMetric model
+				rolloutMetricModel := new(appconfigurationv1.RolloutMetric)
+				rolloutMetricModel.MetricID = core.StringPtr("mtlwx65j")
+				rolloutMetricModel.AutoRollback = core.BoolPtr(false)
+
 				// Construct an instance of the RolloutConfiguration model
 				rolloutConfigurationModel := new(appconfigurationv1.RolloutConfiguration)
 				rolloutConfigurationModel.DurationPreset = core.StringPtr("CUSTOM")
 				rolloutConfigurationModel.StartAt = CreateMockDateTime("2019-01-01T12:00:00.000Z")
 				rolloutConfigurationModel.Phases = []appconfigurationv1.RolloutPhase{*rolloutPhaseModel}
+				rolloutConfigurationModel.Metrics = []appconfigurationv1.RolloutMetric{*rolloutMetricModel}
 
 				// Construct an instance of the TargetSegments model
 				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
@@ -3760,11 +3790,17 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				rolloutPhaseModel.Duration = core.Int64Ptr(int64(38))
 				rolloutPhaseModel.DurationType = core.StringPtr("days")
 
+				// Construct an instance of the RolloutMetric model
+				rolloutMetricModel := new(appconfigurationv1.RolloutMetric)
+				rolloutMetricModel.MetricID = core.StringPtr("mtlwx65j")
+				rolloutMetricModel.AutoRollback = core.BoolPtr(false)
+
 				// Construct an instance of the RolloutConfiguration model
 				rolloutConfigurationModel := new(appconfigurationv1.RolloutConfiguration)
 				rolloutConfigurationModel.DurationPreset = core.StringPtr("CUSTOM")
 				rolloutConfigurationModel.StartAt = CreateMockDateTime("2019-01-01T12:00:00.000Z")
 				rolloutConfigurationModel.Phases = []appconfigurationv1.RolloutPhase{*rolloutPhaseModel}
+				rolloutConfigurationModel.Metrics = []appconfigurationv1.RolloutMetric{*rolloutMetricModel}
 
 				// Construct an instance of the TargetSegments model
 				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
@@ -3853,7 +3889,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED"}, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED"}, "rule_id": "RuleID", "rule_name": "RuleName"}], "segment_exists": false, "segment_count": 12, "rollout_rule": {"type": "MANUAL", "rule_id": "RuleID"}, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href", "workflow_approval": {"workflow_name": "WorkflowName", "workflow_id": "WorkflowID", "provider_type": "SERVICENOW_IBM", "change_request_number": "ChangeRequestNumber", "change_request_status": "PENDING", "execution_status": "PENDING", "approval_url": "ApprovalURL", "resource_type": "FEATURE", "resource_id": "ResourceID", "environment_id": "EnvironmentID", "created_time": "2019-01-01T12:00:00.000Z", "updated_time": "2019-01-01T12:00:00.000Z", "last_poll_time": "2019-01-01T12:00:00.000Z"}}`)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED", "metrics": [{"metric_id": "mtlwx65j", "auto_rollback": false, "metric_name": "feature-clicked", "direction": "HIGHER", "metric_type": "BINARY"}]}, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED", "metrics": [{"metric_id": "mtlwx65j", "auto_rollback": false, "metric_name": "feature-clicked", "direction": "HIGHER", "metric_type": "BINARY"}]}, "rule_id": "RuleID", "rule_name": "RuleName"}], "segment_exists": false, "segment_count": 12, "rollout_rule": {"type": "MANUAL", "rule_id": "RuleID"}, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href", "workflow_approval": {"workflow_name": "WorkflowName", "workflow_id": "WorkflowID", "provider_type": "SERVICENOW_IBM", "change_request_number": "ChangeRequestNumber", "change_request_status": "PENDING", "execution_status": "PENDING", "approval_url": "ApprovalURL", "resource_type": "FEATURE", "resource_id": "ResourceID", "environment_id": "EnvironmentID", "created_time": "2019-01-01T12:00:00.000Z", "updated_time": "2019-01-01T12:00:00.000Z", "last_poll_time": "2019-01-01T12:00:00.000Z"}}`)
 				}))
 			})
 			It(`Invoke UpdateFeature successfully with retries`, func() {
@@ -3871,11 +3907,17 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				rolloutPhaseModel.Duration = core.Int64Ptr(int64(38))
 				rolloutPhaseModel.DurationType = core.StringPtr("days")
 
+				// Construct an instance of the RolloutMetric model
+				rolloutMetricModel := new(appconfigurationv1.RolloutMetric)
+				rolloutMetricModel.MetricID = core.StringPtr("mtlwx65j")
+				rolloutMetricModel.AutoRollback = core.BoolPtr(false)
+
 				// Construct an instance of the RolloutConfiguration model
 				rolloutConfigurationModel := new(appconfigurationv1.RolloutConfiguration)
 				rolloutConfigurationModel.DurationPreset = core.StringPtr("CUSTOM")
 				rolloutConfigurationModel.StartAt = CreateMockDateTime("2019-01-01T12:00:00.000Z")
 				rolloutConfigurationModel.Phases = []appconfigurationv1.RolloutPhase{*rolloutPhaseModel}
+				rolloutConfigurationModel.Metrics = []appconfigurationv1.RolloutMetric{*rolloutMetricModel}
 
 				// Construct an instance of the TargetSegments model
 				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
@@ -3967,7 +4009,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED"}, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED"}, "rule_id": "RuleID", "rule_name": "RuleName"}], "segment_exists": false, "segment_count": 12, "rollout_rule": {"type": "MANUAL", "rule_id": "RuleID"}, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href", "workflow_approval": {"workflow_name": "WorkflowName", "workflow_id": "WorkflowID", "provider_type": "SERVICENOW_IBM", "change_request_number": "ChangeRequestNumber", "change_request_status": "PENDING", "execution_status": "PENDING", "approval_url": "ApprovalURL", "resource_type": "FEATURE", "resource_id": "ResourceID", "environment_id": "EnvironmentID", "created_time": "2019-01-01T12:00:00.000Z", "updated_time": "2019-01-01T12:00:00.000Z", "last_poll_time": "2019-01-01T12:00:00.000Z"}}`)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED", "metrics": [{"metric_id": "mtlwx65j", "auto_rollback": false, "metric_name": "feature-clicked", "direction": "HIGHER", "metric_type": "BINARY"}]}, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED", "metrics": [{"metric_id": "mtlwx65j", "auto_rollback": false, "metric_name": "feature-clicked", "direction": "HIGHER", "metric_type": "BINARY"}]}, "rule_id": "RuleID", "rule_name": "RuleName"}], "segment_exists": false, "segment_count": 12, "rollout_rule": {"type": "MANUAL", "rule_id": "RuleID"}, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href", "workflow_approval": {"workflow_name": "WorkflowName", "workflow_id": "WorkflowID", "provider_type": "SERVICENOW_IBM", "change_request_number": "ChangeRequestNumber", "change_request_status": "PENDING", "execution_status": "PENDING", "approval_url": "ApprovalURL", "resource_type": "FEATURE", "resource_id": "ResourceID", "environment_id": "EnvironmentID", "created_time": "2019-01-01T12:00:00.000Z", "updated_time": "2019-01-01T12:00:00.000Z", "last_poll_time": "2019-01-01T12:00:00.000Z"}}`)
 				}))
 			})
 			It(`Invoke UpdateFeature successfully`, func() {
@@ -3990,11 +4032,17 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				rolloutPhaseModel.Duration = core.Int64Ptr(int64(38))
 				rolloutPhaseModel.DurationType = core.StringPtr("days")
 
+				// Construct an instance of the RolloutMetric model
+				rolloutMetricModel := new(appconfigurationv1.RolloutMetric)
+				rolloutMetricModel.MetricID = core.StringPtr("mtlwx65j")
+				rolloutMetricModel.AutoRollback = core.BoolPtr(false)
+
 				// Construct an instance of the RolloutConfiguration model
 				rolloutConfigurationModel := new(appconfigurationv1.RolloutConfiguration)
 				rolloutConfigurationModel.DurationPreset = core.StringPtr("CUSTOM")
 				rolloutConfigurationModel.StartAt = CreateMockDateTime("2019-01-01T12:00:00.000Z")
 				rolloutConfigurationModel.Phases = []appconfigurationv1.RolloutPhase{*rolloutPhaseModel}
+				rolloutConfigurationModel.Metrics = []appconfigurationv1.RolloutMetric{*rolloutMetricModel}
 
 				// Construct an instance of the TargetSegments model
 				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
@@ -4054,11 +4102,17 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				rolloutPhaseModel.Duration = core.Int64Ptr(int64(38))
 				rolloutPhaseModel.DurationType = core.StringPtr("days")
 
+				// Construct an instance of the RolloutMetric model
+				rolloutMetricModel := new(appconfigurationv1.RolloutMetric)
+				rolloutMetricModel.MetricID = core.StringPtr("mtlwx65j")
+				rolloutMetricModel.AutoRollback = core.BoolPtr(false)
+
 				// Construct an instance of the RolloutConfiguration model
 				rolloutConfigurationModel := new(appconfigurationv1.RolloutConfiguration)
 				rolloutConfigurationModel.DurationPreset = core.StringPtr("CUSTOM")
 				rolloutConfigurationModel.StartAt = CreateMockDateTime("2019-01-01T12:00:00.000Z")
 				rolloutConfigurationModel.Phases = []appconfigurationv1.RolloutPhase{*rolloutPhaseModel}
+				rolloutConfigurationModel.Metrics = []appconfigurationv1.RolloutMetric{*rolloutMetricModel}
 
 				// Construct an instance of the TargetSegments model
 				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
@@ -4139,11 +4193,17 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				rolloutPhaseModel.Duration = core.Int64Ptr(int64(38))
 				rolloutPhaseModel.DurationType = core.StringPtr("days")
 
+				// Construct an instance of the RolloutMetric model
+				rolloutMetricModel := new(appconfigurationv1.RolloutMetric)
+				rolloutMetricModel.MetricID = core.StringPtr("mtlwx65j")
+				rolloutMetricModel.AutoRollback = core.BoolPtr(false)
+
 				// Construct an instance of the RolloutConfiguration model
 				rolloutConfigurationModel := new(appconfigurationv1.RolloutConfiguration)
 				rolloutConfigurationModel.DurationPreset = core.StringPtr("CUSTOM")
 				rolloutConfigurationModel.StartAt = CreateMockDateTime("2019-01-01T12:00:00.000Z")
 				rolloutConfigurationModel.Phases = []appconfigurationv1.RolloutPhase{*rolloutPhaseModel}
+				rolloutConfigurationModel.Metrics = []appconfigurationv1.RolloutMetric{*rolloutMetricModel}
 
 				// Construct an instance of the TargetSegments model
 				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
@@ -4224,11 +4284,17 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				rolloutPhaseModel.Duration = core.Int64Ptr(int64(38))
 				rolloutPhaseModel.DurationType = core.StringPtr("days")
 
+				// Construct an instance of the RolloutMetric model
+				rolloutMetricModel := new(appconfigurationv1.RolloutMetric)
+				rolloutMetricModel.MetricID = core.StringPtr("mtlwx65j")
+				rolloutMetricModel.AutoRollback = core.BoolPtr(false)
+
 				// Construct an instance of the RolloutConfiguration model
 				rolloutConfigurationModel := new(appconfigurationv1.RolloutConfiguration)
 				rolloutConfigurationModel.DurationPreset = core.StringPtr("CUSTOM")
 				rolloutConfigurationModel.StartAt = CreateMockDateTime("2019-01-01T12:00:00.000Z")
 				rolloutConfigurationModel.Phases = []appconfigurationv1.RolloutPhase{*rolloutPhaseModel}
+				rolloutConfigurationModel.Metrics = []appconfigurationv1.RolloutMetric{*rolloutMetricModel}
 
 				// Construct an instance of the TargetSegments model
 				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
@@ -4310,7 +4376,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED"}, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED"}, "rule_id": "RuleID", "rule_name": "RuleName"}], "segment_exists": false, "segment_count": 12, "rollout_rule": {"type": "MANUAL", "rule_id": "RuleID"}, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href", "workflow_approval": {"workflow_name": "WorkflowName", "workflow_id": "WorkflowID", "provider_type": "SERVICENOW_IBM", "change_request_number": "ChangeRequestNumber", "change_request_status": "PENDING", "execution_status": "PENDING", "approval_url": "ApprovalURL", "resource_type": "FEATURE", "resource_id": "ResourceID", "environment_id": "EnvironmentID", "created_time": "2019-01-01T12:00:00.000Z", "updated_time": "2019-01-01T12:00:00.000Z", "last_poll_time": "2019-01-01T12:00:00.000Z"}}`)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED", "metrics": [{"metric_id": "mtlwx65j", "auto_rollback": false, "metric_name": "feature-clicked", "direction": "HIGHER", "metric_type": "BINARY"}]}, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED", "metrics": [{"metric_id": "mtlwx65j", "auto_rollback": false, "metric_name": "feature-clicked", "direction": "HIGHER", "metric_type": "BINARY"}]}, "rule_id": "RuleID", "rule_name": "RuleName"}], "segment_exists": false, "segment_count": 12, "rollout_rule": {"type": "MANUAL", "rule_id": "RuleID"}, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href", "workflow_approval": {"workflow_name": "WorkflowName", "workflow_id": "WorkflowID", "provider_type": "SERVICENOW_IBM", "change_request_number": "ChangeRequestNumber", "change_request_status": "PENDING", "execution_status": "PENDING", "approval_url": "ApprovalURL", "resource_type": "FEATURE", "resource_id": "ResourceID", "environment_id": "EnvironmentID", "created_time": "2019-01-01T12:00:00.000Z", "updated_time": "2019-01-01T12:00:00.000Z", "last_poll_time": "2019-01-01T12:00:00.000Z"}}`)
 				}))
 			})
 			It(`Invoke UpdateFeatureValues successfully with retries`, func() {
@@ -4328,11 +4394,17 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				rolloutPhaseModel.Duration = core.Int64Ptr(int64(38))
 				rolloutPhaseModel.DurationType = core.StringPtr("days")
 
+				// Construct an instance of the RolloutMetric model
+				rolloutMetricModel := new(appconfigurationv1.RolloutMetric)
+				rolloutMetricModel.MetricID = core.StringPtr("mtlwx65j")
+				rolloutMetricModel.AutoRollback = core.BoolPtr(false)
+
 				// Construct an instance of the RolloutConfiguration model
 				rolloutConfigurationModel := new(appconfigurationv1.RolloutConfiguration)
 				rolloutConfigurationModel.DurationPreset = core.StringPtr("CUSTOM")
 				rolloutConfigurationModel.StartAt = CreateMockDateTime("2019-01-01T12:00:00.000Z")
 				rolloutConfigurationModel.Phases = []appconfigurationv1.RolloutPhase{*rolloutPhaseModel}
+				rolloutConfigurationModel.Metrics = []appconfigurationv1.RolloutMetric{*rolloutMetricModel}
 
 				// Construct an instance of the TargetSegments model
 				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
@@ -4417,7 +4489,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED"}, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED"}, "rule_id": "RuleID", "rule_name": "RuleName"}], "segment_exists": false, "segment_count": 12, "rollout_rule": {"type": "MANUAL", "rule_id": "RuleID"}, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href", "workflow_approval": {"workflow_name": "WorkflowName", "workflow_id": "WorkflowID", "provider_type": "SERVICENOW_IBM", "change_request_number": "ChangeRequestNumber", "change_request_status": "PENDING", "execution_status": "PENDING", "approval_url": "ApprovalURL", "resource_type": "FEATURE", "resource_id": "ResourceID", "environment_id": "EnvironmentID", "created_time": "2019-01-01T12:00:00.000Z", "updated_time": "2019-01-01T12:00:00.000Z", "last_poll_time": "2019-01-01T12:00:00.000Z"}}`)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED", "metrics": [{"metric_id": "mtlwx65j", "auto_rollback": false, "metric_name": "feature-clicked", "direction": "HIGHER", "metric_type": "BINARY"}]}, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED", "metrics": [{"metric_id": "mtlwx65j", "auto_rollback": false, "metric_name": "feature-clicked", "direction": "HIGHER", "metric_type": "BINARY"}]}, "rule_id": "RuleID", "rule_name": "RuleName"}], "segment_exists": false, "segment_count": 12, "rollout_rule": {"type": "MANUAL", "rule_id": "RuleID"}, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href", "workflow_approval": {"workflow_name": "WorkflowName", "workflow_id": "WorkflowID", "provider_type": "SERVICENOW_IBM", "change_request_number": "ChangeRequestNumber", "change_request_status": "PENDING", "execution_status": "PENDING", "approval_url": "ApprovalURL", "resource_type": "FEATURE", "resource_id": "ResourceID", "environment_id": "EnvironmentID", "created_time": "2019-01-01T12:00:00.000Z", "updated_time": "2019-01-01T12:00:00.000Z", "last_poll_time": "2019-01-01T12:00:00.000Z"}}`)
 				}))
 			})
 			It(`Invoke UpdateFeatureValues successfully`, func() {
@@ -4440,11 +4512,17 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				rolloutPhaseModel.Duration = core.Int64Ptr(int64(38))
 				rolloutPhaseModel.DurationType = core.StringPtr("days")
 
+				// Construct an instance of the RolloutMetric model
+				rolloutMetricModel := new(appconfigurationv1.RolloutMetric)
+				rolloutMetricModel.MetricID = core.StringPtr("mtlwx65j")
+				rolloutMetricModel.AutoRollback = core.BoolPtr(false)
+
 				// Construct an instance of the RolloutConfiguration model
 				rolloutConfigurationModel := new(appconfigurationv1.RolloutConfiguration)
 				rolloutConfigurationModel.DurationPreset = core.StringPtr("CUSTOM")
 				rolloutConfigurationModel.StartAt = CreateMockDateTime("2019-01-01T12:00:00.000Z")
 				rolloutConfigurationModel.Phases = []appconfigurationv1.RolloutPhase{*rolloutPhaseModel}
+				rolloutConfigurationModel.Metrics = []appconfigurationv1.RolloutMetric{*rolloutMetricModel}
 
 				// Construct an instance of the TargetSegments model
 				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
@@ -4497,11 +4575,17 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				rolloutPhaseModel.Duration = core.Int64Ptr(int64(38))
 				rolloutPhaseModel.DurationType = core.StringPtr("days")
 
+				// Construct an instance of the RolloutMetric model
+				rolloutMetricModel := new(appconfigurationv1.RolloutMetric)
+				rolloutMetricModel.MetricID = core.StringPtr("mtlwx65j")
+				rolloutMetricModel.AutoRollback = core.BoolPtr(false)
+
 				// Construct an instance of the RolloutConfiguration model
 				rolloutConfigurationModel := new(appconfigurationv1.RolloutConfiguration)
 				rolloutConfigurationModel.DurationPreset = core.StringPtr("CUSTOM")
 				rolloutConfigurationModel.StartAt = CreateMockDateTime("2019-01-01T12:00:00.000Z")
 				rolloutConfigurationModel.Phases = []appconfigurationv1.RolloutPhase{*rolloutPhaseModel}
+				rolloutConfigurationModel.Metrics = []appconfigurationv1.RolloutMetric{*rolloutMetricModel}
 
 				// Construct an instance of the TargetSegments model
 				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
@@ -4575,11 +4659,17 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				rolloutPhaseModel.Duration = core.Int64Ptr(int64(38))
 				rolloutPhaseModel.DurationType = core.StringPtr("days")
 
+				// Construct an instance of the RolloutMetric model
+				rolloutMetricModel := new(appconfigurationv1.RolloutMetric)
+				rolloutMetricModel.MetricID = core.StringPtr("mtlwx65j")
+				rolloutMetricModel.AutoRollback = core.BoolPtr(false)
+
 				// Construct an instance of the RolloutConfiguration model
 				rolloutConfigurationModel := new(appconfigurationv1.RolloutConfiguration)
 				rolloutConfigurationModel.DurationPreset = core.StringPtr("CUSTOM")
 				rolloutConfigurationModel.StartAt = CreateMockDateTime("2019-01-01T12:00:00.000Z")
 				rolloutConfigurationModel.Phases = []appconfigurationv1.RolloutPhase{*rolloutPhaseModel}
+				rolloutConfigurationModel.Metrics = []appconfigurationv1.RolloutMetric{*rolloutMetricModel}
 
 				// Construct an instance of the TargetSegments model
 				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
@@ -4688,7 +4778,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED"}, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED"}, "rule_id": "RuleID", "rule_name": "RuleName"}], "segment_exists": false, "segment_count": 12, "rollout_rule": {"type": "MANUAL", "rule_id": "RuleID"}, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href", "workflow_approval": {"workflow_name": "WorkflowName", "workflow_id": "WorkflowID", "provider_type": "SERVICENOW_IBM", "change_request_number": "ChangeRequestNumber", "change_request_status": "PENDING", "execution_status": "PENDING", "approval_url": "ApprovalURL", "resource_type": "FEATURE", "resource_id": "ResourceID", "environment_id": "EnvironmentID", "created_time": "2019-01-01T12:00:00.000Z", "updated_time": "2019-01-01T12:00:00.000Z", "last_poll_time": "2019-01-01T12:00:00.000Z"}}`)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED", "metrics": [{"metric_id": "mtlwx65j", "auto_rollback": false, "metric_name": "feature-clicked", "direction": "HIGHER", "metric_type": "BINARY"}]}, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED", "metrics": [{"metric_id": "mtlwx65j", "auto_rollback": false, "metric_name": "feature-clicked", "direction": "HIGHER", "metric_type": "BINARY"}]}, "rule_id": "RuleID", "rule_name": "RuleName"}], "segment_exists": false, "segment_count": 12, "rollout_rule": {"type": "MANUAL", "rule_id": "RuleID"}, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href", "workflow_approval": {"workflow_name": "WorkflowName", "workflow_id": "WorkflowID", "provider_type": "SERVICENOW_IBM", "change_request_number": "ChangeRequestNumber", "change_request_status": "PENDING", "execution_status": "PENDING", "approval_url": "ApprovalURL", "resource_type": "FEATURE", "resource_id": "ResourceID", "environment_id": "EnvironmentID", "created_time": "2019-01-01T12:00:00.000Z", "updated_time": "2019-01-01T12:00:00.000Z", "last_poll_time": "2019-01-01T12:00:00.000Z"}}`)
 				}))
 			})
 			It(`Invoke GetFeature successfully with retries`, func() {
@@ -4744,7 +4834,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED"}, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED"}, "rule_id": "RuleID", "rule_name": "RuleName"}], "segment_exists": false, "segment_count": 12, "rollout_rule": {"type": "MANUAL", "rule_id": "RuleID"}, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href", "workflow_approval": {"workflow_name": "WorkflowName", "workflow_id": "WorkflowID", "provider_type": "SERVICENOW_IBM", "change_request_number": "ChangeRequestNumber", "change_request_status": "PENDING", "execution_status": "PENDING", "approval_url": "ApprovalURL", "resource_type": "FEATURE", "resource_id": "ResourceID", "environment_id": "EnvironmentID", "created_time": "2019-01-01T12:00:00.000Z", "updated_time": "2019-01-01T12:00:00.000Z", "last_poll_time": "2019-01-01T12:00:00.000Z"}}`)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED", "metrics": [{"metric_id": "mtlwx65j", "auto_rollback": false, "metric_name": "feature-clicked", "direction": "HIGHER", "metric_type": "BINARY"}]}, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED", "metrics": [{"metric_id": "mtlwx65j", "auto_rollback": false, "metric_name": "feature-clicked", "direction": "HIGHER", "metric_type": "BINARY"}]}, "rule_id": "RuleID", "rule_name": "RuleName"}], "segment_exists": false, "segment_count": 12, "rollout_rule": {"type": "MANUAL", "rule_id": "RuleID"}, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href", "workflow_approval": {"workflow_name": "WorkflowName", "workflow_id": "WorkflowID", "provider_type": "SERVICENOW_IBM", "change_request_number": "ChangeRequestNumber", "change_request_status": "PENDING", "execution_status": "PENDING", "approval_url": "ApprovalURL", "resource_type": "FEATURE", "resource_id": "ResourceID", "environment_id": "EnvironmentID", "created_time": "2019-01-01T12:00:00.000Z", "updated_time": "2019-01-01T12:00:00.000Z", "last_poll_time": "2019-01-01T12:00:00.000Z"}}`)
 				}))
 			})
 			It(`Invoke GetFeature successfully`, func() {
@@ -5143,7 +5233,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED"}, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED"}, "rule_id": "RuleID", "rule_name": "RuleName"}], "segment_exists": false, "segment_count": 12, "rollout_rule": {"type": "MANUAL", "rule_id": "RuleID"}, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href", "workflow_approval": {"workflow_name": "WorkflowName", "workflow_id": "WorkflowID", "provider_type": "SERVICENOW_IBM", "change_request_number": "ChangeRequestNumber", "change_request_status": "PENDING", "execution_status": "PENDING", "approval_url": "ApprovalURL", "resource_type": "FEATURE", "resource_id": "ResourceID", "environment_id": "EnvironmentID", "created_time": "2019-01-01T12:00:00.000Z", "updated_time": "2019-01-01T12:00:00.000Z", "last_poll_time": "2019-01-01T12:00:00.000Z"}}`)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED", "metrics": [{"metric_id": "mtlwx65j", "auto_rollback": false, "metric_name": "feature-clicked", "direction": "HIGHER", "metric_type": "BINARY"}]}, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED", "metrics": [{"metric_id": "mtlwx65j", "auto_rollback": false, "metric_name": "feature-clicked", "direction": "HIGHER", "metric_type": "BINARY"}]}, "rule_id": "RuleID", "rule_name": "RuleName"}], "segment_exists": false, "segment_count": 12, "rollout_rule": {"type": "MANUAL", "rule_id": "RuleID"}, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href", "workflow_approval": {"workflow_name": "WorkflowName", "workflow_id": "WorkflowID", "provider_type": "SERVICENOW_IBM", "change_request_number": "ChangeRequestNumber", "change_request_status": "PENDING", "execution_status": "PENDING", "approval_url": "ApprovalURL", "resource_type": "FEATURE", "resource_id": "ResourceID", "environment_id": "EnvironmentID", "created_time": "2019-01-01T12:00:00.000Z", "updated_time": "2019-01-01T12:00:00.000Z", "last_poll_time": "2019-01-01T12:00:00.000Z"}}`)
 				}))
 			})
 			It(`Invoke ToggleFeature successfully with retries`, func() {
@@ -5215,7 +5305,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED"}, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED"}, "rule_id": "RuleID", "rule_name": "RuleName"}], "segment_exists": false, "segment_count": 12, "rollout_rule": {"type": "MANUAL", "rule_id": "RuleID"}, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href", "workflow_approval": {"workflow_name": "WorkflowName", "workflow_id": "WorkflowID", "provider_type": "SERVICENOW_IBM", "change_request_number": "ChangeRequestNumber", "change_request_status": "PENDING", "execution_status": "PENDING", "approval_url": "ApprovalURL", "resource_type": "FEATURE", "resource_id": "ResourceID", "environment_id": "EnvironmentID", "created_time": "2019-01-01T12:00:00.000Z", "updated_time": "2019-01-01T12:00:00.000Z", "last_poll_time": "2019-01-01T12:00:00.000Z"}}`)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED", "metrics": [{"metric_id": "mtlwx65j", "auto_rollback": false, "metric_name": "feature-clicked", "direction": "HIGHER", "metric_type": "BINARY"}]}, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED", "metrics": [{"metric_id": "mtlwx65j", "auto_rollback": false, "metric_name": "feature-clicked", "direction": "HIGHER", "metric_type": "BINARY"}]}, "rule_id": "RuleID", "rule_name": "RuleName"}], "segment_exists": false, "segment_count": 12, "rollout_rule": {"type": "MANUAL", "rule_id": "RuleID"}, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href", "workflow_approval": {"workflow_name": "WorkflowName", "workflow_id": "WorkflowID", "provider_type": "SERVICENOW_IBM", "change_request_number": "ChangeRequestNumber", "change_request_status": "PENDING", "execution_status": "PENDING", "approval_url": "ApprovalURL", "resource_type": "FEATURE", "resource_id": "ResourceID", "environment_id": "EnvironmentID", "created_time": "2019-01-01T12:00:00.000Z", "updated_time": "2019-01-01T12:00:00.000Z", "last_poll_time": "2019-01-01T12:00:00.000Z"}}`)
 				}))
 			})
 			It(`Invoke ToggleFeature successfully`, func() {
@@ -5345,7 +5435,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				stopFeatureRolloutOptionsModel.EnvironmentID = core.StringPtr("environment_id")
 				stopFeatureRolloutOptionsModel.FeatureID = core.StringPtr("feature_id")
 				stopFeatureRolloutOptionsModel.Action = core.StringPtr("stop")
-				stopFeatureRolloutOptionsModel.RolloutPercentage = core.Int64Ptr(int64(0))
+				stopFeatureRolloutOptionsModel.RolloutPercentage = core.Int64Ptr(int64(77))
 				stopFeatureRolloutOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
 				result, response, operationErr := appConfigurationService.StopFeatureRollout(stopFeatureRolloutOptionsModel)
@@ -5398,7 +5488,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED"}, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED"}, "rule_id": "RuleID", "rule_name": "RuleName"}], "segment_exists": false, "segment_count": 12, "rollout_rule": {"type": "MANUAL", "rule_id": "RuleID"}, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href", "workflow_approval": {"workflow_name": "WorkflowName", "workflow_id": "WorkflowID", "provider_type": "SERVICENOW_IBM", "change_request_number": "ChangeRequestNumber", "change_request_status": "PENDING", "execution_status": "PENDING", "approval_url": "ApprovalURL", "resource_type": "FEATURE", "resource_id": "ResourceID", "environment_id": "EnvironmentID", "created_time": "2019-01-01T12:00:00.000Z", "updated_time": "2019-01-01T12:00:00.000Z", "last_poll_time": "2019-01-01T12:00:00.000Z"}}`)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED", "metrics": [{"metric_id": "mtlwx65j", "auto_rollback": false, "metric_name": "feature-clicked", "direction": "HIGHER", "metric_type": "BINARY"}]}, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED", "metrics": [{"metric_id": "mtlwx65j", "auto_rollback": false, "metric_name": "feature-clicked", "direction": "HIGHER", "metric_type": "BINARY"}]}, "rule_id": "RuleID", "rule_name": "RuleName"}], "segment_exists": false, "segment_count": 12, "rollout_rule": {"type": "MANUAL", "rule_id": "RuleID"}, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href", "workflow_approval": {"workflow_name": "WorkflowName", "workflow_id": "WorkflowID", "provider_type": "SERVICENOW_IBM", "change_request_number": "ChangeRequestNumber", "change_request_status": "PENDING", "execution_status": "PENDING", "approval_url": "ApprovalURL", "resource_type": "FEATURE", "resource_id": "ResourceID", "environment_id": "EnvironmentID", "created_time": "2019-01-01T12:00:00.000Z", "updated_time": "2019-01-01T12:00:00.000Z", "last_poll_time": "2019-01-01T12:00:00.000Z"}}`)
 				}))
 			})
 			It(`Invoke StopFeatureRollout successfully with retries`, func() {
@@ -5415,7 +5505,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				stopFeatureRolloutOptionsModel.EnvironmentID = core.StringPtr("environment_id")
 				stopFeatureRolloutOptionsModel.FeatureID = core.StringPtr("feature_id")
 				stopFeatureRolloutOptionsModel.Action = core.StringPtr("stop")
-				stopFeatureRolloutOptionsModel.RolloutPercentage = core.Int64Ptr(int64(0))
+				stopFeatureRolloutOptionsModel.RolloutPercentage = core.Int64Ptr(int64(77))
 				stopFeatureRolloutOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with a Context to test a timeout error
@@ -5471,7 +5561,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED"}, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED"}, "rule_id": "RuleID", "rule_name": "RuleName"}], "segment_exists": false, "segment_count": 12, "rollout_rule": {"type": "MANUAL", "rule_id": "RuleID"}, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href", "workflow_approval": {"workflow_name": "WorkflowName", "workflow_id": "WorkflowID", "provider_type": "SERVICENOW_IBM", "change_request_number": "ChangeRequestNumber", "change_request_status": "PENDING", "execution_status": "PENDING", "approval_url": "ApprovalURL", "resource_type": "FEATURE", "resource_id": "ResourceID", "environment_id": "EnvironmentID", "created_time": "2019-01-01T12:00:00.000Z", "updated_time": "2019-01-01T12:00:00.000Z", "last_poll_time": "2019-01-01T12:00:00.000Z"}}`)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED", "metrics": [{"metric_id": "mtlwx65j", "auto_rollback": false, "metric_name": "feature-clicked", "direction": "HIGHER", "metric_type": "BINARY"}]}, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED", "metrics": [{"metric_id": "mtlwx65j", "auto_rollback": false, "metric_name": "feature-clicked", "direction": "HIGHER", "metric_type": "BINARY"}]}, "rule_id": "RuleID", "rule_name": "RuleName"}], "segment_exists": false, "segment_count": 12, "rollout_rule": {"type": "MANUAL", "rule_id": "RuleID"}, "collections": [{"collection_id": "CollectionID", "name": "Name"}], "created_time": "2021-05-12T23:20:50.520Z", "updated_time": "2021-05-12T23:20:50.520Z", "evaluation_time": "2021-05-12T23:20:50.520Z", "href": "Href", "workflow_approval": {"workflow_name": "WorkflowName", "workflow_id": "WorkflowID", "provider_type": "SERVICENOW_IBM", "change_request_number": "ChangeRequestNumber", "change_request_status": "PENDING", "execution_status": "PENDING", "approval_url": "ApprovalURL", "resource_type": "FEATURE", "resource_id": "ResourceID", "environment_id": "EnvironmentID", "created_time": "2019-01-01T12:00:00.000Z", "updated_time": "2019-01-01T12:00:00.000Z", "last_poll_time": "2019-01-01T12:00:00.000Z"}}`)
 				}))
 			})
 			It(`Invoke StopFeatureRollout successfully`, func() {
@@ -5493,7 +5583,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				stopFeatureRolloutOptionsModel.EnvironmentID = core.StringPtr("environment_id")
 				stopFeatureRolloutOptionsModel.FeatureID = core.StringPtr("feature_id")
 				stopFeatureRolloutOptionsModel.Action = core.StringPtr("stop")
-				stopFeatureRolloutOptionsModel.RolloutPercentage = core.Int64Ptr(int64(0))
+				stopFeatureRolloutOptionsModel.RolloutPercentage = core.Int64Ptr(int64(77))
 				stopFeatureRolloutOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
@@ -5516,7 +5606,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				stopFeatureRolloutOptionsModel.EnvironmentID = core.StringPtr("environment_id")
 				stopFeatureRolloutOptionsModel.FeatureID = core.StringPtr("feature_id")
 				stopFeatureRolloutOptionsModel.Action = core.StringPtr("stop")
-				stopFeatureRolloutOptionsModel.RolloutPercentage = core.Int64Ptr(int64(0))
+				stopFeatureRolloutOptionsModel.RolloutPercentage = core.Int64Ptr(int64(77))
 				stopFeatureRolloutOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := appConfigurationService.SetServiceURL("")
@@ -5560,7 +5650,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				stopFeatureRolloutOptionsModel.EnvironmentID = core.StringPtr("environment_id")
 				stopFeatureRolloutOptionsModel.FeatureID = core.StringPtr("feature_id")
 				stopFeatureRolloutOptionsModel.Action = core.StringPtr("stop")
-				stopFeatureRolloutOptionsModel.RolloutPercentage = core.Int64Ptr(int64(0))
+				stopFeatureRolloutOptionsModel.RolloutPercentage = core.Int64Ptr(int64(77))
 				stopFeatureRolloutOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation
@@ -5609,11 +5699,17 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				rolloutPhaseModel.Duration = core.Int64Ptr(int64(38))
 				rolloutPhaseModel.DurationType = core.StringPtr("days")
 
+				// Construct an instance of the RolloutMetric model
+				rolloutMetricModel := new(appconfigurationv1.RolloutMetric)
+				rolloutMetricModel.MetricID = core.StringPtr("mtlwx65j")
+				rolloutMetricModel.AutoRollback = core.BoolPtr(false)
+
 				// Construct an instance of the RolloutConfiguration model
 				rolloutConfigurationModel := new(appconfigurationv1.RolloutConfiguration)
 				rolloutConfigurationModel.DurationPreset = core.StringPtr("CUSTOM")
 				rolloutConfigurationModel.StartAt = CreateMockDateTime("2019-01-01T12:00:00.000Z")
 				rolloutConfigurationModel.Phases = []appconfigurationv1.RolloutPhase{*rolloutPhaseModel}
+				rolloutConfigurationModel.Metrics = []appconfigurationv1.RolloutMetric{*rolloutMetricModel}
 
 				// Construct an instance of the CreateFeatureRuleOptions model
 				createFeatureRuleOptionsModel := new(appconfigurationv1.CreateFeatureRuleOptions)
@@ -5678,7 +5774,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
-					fmt.Fprintf(res, "%s", `{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "rule_id": "RuleID", "rule_name": "RuleName", "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED"}, "order": 5, "href": "Href"}`)
+					fmt.Fprintf(res, "%s", `{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "rule_id": "RuleID", "rule_name": "RuleName", "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED", "metrics": [{"metric_id": "mtlwx65j", "auto_rollback": false, "metric_name": "feature-clicked", "direction": "HIGHER", "metric_type": "BINARY"}]}, "order": 5, "href": "Href"}`)
 				}))
 			})
 			It(`Invoke CreateFeatureRule successfully with retries`, func() {
@@ -5700,11 +5796,17 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				rolloutPhaseModel.Duration = core.Int64Ptr(int64(38))
 				rolloutPhaseModel.DurationType = core.StringPtr("days")
 
+				// Construct an instance of the RolloutMetric model
+				rolloutMetricModel := new(appconfigurationv1.RolloutMetric)
+				rolloutMetricModel.MetricID = core.StringPtr("mtlwx65j")
+				rolloutMetricModel.AutoRollback = core.BoolPtr(false)
+
 				// Construct an instance of the RolloutConfiguration model
 				rolloutConfigurationModel := new(appconfigurationv1.RolloutConfiguration)
 				rolloutConfigurationModel.DurationPreset = core.StringPtr("CUSTOM")
 				rolloutConfigurationModel.StartAt = CreateMockDateTime("2019-01-01T12:00:00.000Z")
 				rolloutConfigurationModel.Phases = []appconfigurationv1.RolloutPhase{*rolloutPhaseModel}
+				rolloutConfigurationModel.Metrics = []appconfigurationv1.RolloutMetric{*rolloutMetricModel}
 
 				// Construct an instance of the CreateFeatureRuleOptions model
 				createFeatureRuleOptionsModel := new(appconfigurationv1.CreateFeatureRuleOptions)
@@ -5772,7 +5874,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
-					fmt.Fprintf(res, "%s", `{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "rule_id": "RuleID", "rule_name": "RuleName", "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED"}, "order": 5, "href": "Href"}`)
+					fmt.Fprintf(res, "%s", `{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "rule_id": "RuleID", "rule_name": "RuleName", "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED", "metrics": [{"metric_id": "mtlwx65j", "auto_rollback": false, "metric_name": "feature-clicked", "direction": "HIGHER", "metric_type": "BINARY"}]}, "order": 5, "href": "Href"}`)
 				}))
 			})
 			It(`Invoke CreateFeatureRule successfully`, func() {
@@ -5799,11 +5901,17 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				rolloutPhaseModel.Duration = core.Int64Ptr(int64(38))
 				rolloutPhaseModel.DurationType = core.StringPtr("days")
 
+				// Construct an instance of the RolloutMetric model
+				rolloutMetricModel := new(appconfigurationv1.RolloutMetric)
+				rolloutMetricModel.MetricID = core.StringPtr("mtlwx65j")
+				rolloutMetricModel.AutoRollback = core.BoolPtr(false)
+
 				// Construct an instance of the RolloutConfiguration model
 				rolloutConfigurationModel := new(appconfigurationv1.RolloutConfiguration)
 				rolloutConfigurationModel.DurationPreset = core.StringPtr("CUSTOM")
 				rolloutConfigurationModel.StartAt = CreateMockDateTime("2019-01-01T12:00:00.000Z")
 				rolloutConfigurationModel.Phases = []appconfigurationv1.RolloutPhase{*rolloutPhaseModel}
+				rolloutConfigurationModel.Metrics = []appconfigurationv1.RolloutMetric{*rolloutMetricModel}
 
 				// Construct an instance of the CreateFeatureRuleOptions model
 				createFeatureRuleOptionsModel := new(appconfigurationv1.CreateFeatureRuleOptions)
@@ -5843,11 +5951,17 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				rolloutPhaseModel.Duration = core.Int64Ptr(int64(38))
 				rolloutPhaseModel.DurationType = core.StringPtr("days")
 
+				// Construct an instance of the RolloutMetric model
+				rolloutMetricModel := new(appconfigurationv1.RolloutMetric)
+				rolloutMetricModel.MetricID = core.StringPtr("mtlwx65j")
+				rolloutMetricModel.AutoRollback = core.BoolPtr(false)
+
 				// Construct an instance of the RolloutConfiguration model
 				rolloutConfigurationModel := new(appconfigurationv1.RolloutConfiguration)
 				rolloutConfigurationModel.DurationPreset = core.StringPtr("CUSTOM")
 				rolloutConfigurationModel.StartAt = CreateMockDateTime("2019-01-01T12:00:00.000Z")
 				rolloutConfigurationModel.Phases = []appconfigurationv1.RolloutPhase{*rolloutPhaseModel}
+				rolloutConfigurationModel.Metrics = []appconfigurationv1.RolloutMetric{*rolloutMetricModel}
 
 				// Construct an instance of the CreateFeatureRuleOptions model
 				createFeatureRuleOptionsModel := new(appconfigurationv1.CreateFeatureRuleOptions)
@@ -5908,11 +6022,17 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				rolloutPhaseModel.Duration = core.Int64Ptr(int64(38))
 				rolloutPhaseModel.DurationType = core.StringPtr("days")
 
+				// Construct an instance of the RolloutMetric model
+				rolloutMetricModel := new(appconfigurationv1.RolloutMetric)
+				rolloutMetricModel.MetricID = core.StringPtr("mtlwx65j")
+				rolloutMetricModel.AutoRollback = core.BoolPtr(false)
+
 				// Construct an instance of the RolloutConfiguration model
 				rolloutConfigurationModel := new(appconfigurationv1.RolloutConfiguration)
 				rolloutConfigurationModel.DurationPreset = core.StringPtr("CUSTOM")
 				rolloutConfigurationModel.StartAt = CreateMockDateTime("2019-01-01T12:00:00.000Z")
 				rolloutConfigurationModel.Phases = []appconfigurationv1.RolloutPhase{*rolloutPhaseModel}
+				rolloutConfigurationModel.Metrics = []appconfigurationv1.RolloutMetric{*rolloutMetricModel}
 
 				// Construct an instance of the CreateFeatureRuleOptions model
 				createFeatureRuleOptionsModel := new(appconfigurationv1.CreateFeatureRuleOptions)
@@ -6003,7 +6123,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "rule_id": "RuleID", "rule_name": "RuleName", "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED"}, "order": 5, "href": "Href"}], "limit": 10, "offset": 0, "total_count": 0, "first": {"href": "Href"}, "previous": {"href": "Href"}, "next": {"href": "Href"}, "last": {"href": "Href"}}`)
+					fmt.Fprintf(res, "%s", `{"segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "rule_id": "RuleID", "rule_name": "RuleName", "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED", "metrics": [{"metric_id": "mtlwx65j", "auto_rollback": false, "metric_name": "feature-clicked", "direction": "HIGHER", "metric_type": "BINARY"}]}, "order": 5, "href": "Href"}], "limit": 10, "offset": 0, "total_count": 0, "first": {"href": "Href"}, "previous": {"href": "Href"}, "next": {"href": "Href"}, "last": {"href": "Href"}}`)
 				}))
 			})
 			It(`Invoke ListFeatureRules successfully with retries`, func() {
@@ -6058,7 +6178,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "rule_id": "RuleID", "rule_name": "RuleName", "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED"}, "order": 5, "href": "Href"}], "limit": 10, "offset": 0, "total_count": 0, "first": {"href": "Href"}, "previous": {"href": "Href"}, "next": {"href": "Href"}, "last": {"href": "Href"}}`)
+					fmt.Fprintf(res, "%s", `{"segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "rule_id": "RuleID", "rule_name": "RuleName", "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED", "metrics": [{"metric_id": "mtlwx65j", "auto_rollback": false, "metric_name": "feature-clicked", "direction": "HIGHER", "metric_type": "BINARY"}]}, "order": 5, "href": "Href"}], "limit": 10, "offset": 0, "total_count": 0, "first": {"href": "Href"}, "previous": {"href": "Href"}, "next": {"href": "Href"}, "last": {"href": "Href"}}`)
 				}))
 			})
 			It(`Invoke ListFeatureRules successfully`, func() {
@@ -6221,7 +6341,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "rule_id": "RuleID", "rule_name": "RuleName", "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED"}, "order": 5, "href": "Href"}`)
+					fmt.Fprintf(res, "%s", `{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "rule_id": "RuleID", "rule_name": "RuleName", "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED", "metrics": [{"metric_id": "mtlwx65j", "auto_rollback": false, "metric_name": "feature-clicked", "direction": "HIGHER", "metric_type": "BINARY"}]}, "order": 5, "href": "Href"}`)
 				}))
 			})
 			It(`Invoke GetFeatureRule successfully with retries`, func() {
@@ -6277,7 +6397,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "rule_id": "RuleID", "rule_name": "RuleName", "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED"}, "order": 5, "href": "Href"}`)
+					fmt.Fprintf(res, "%s", `{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "rule_id": "RuleID", "rule_name": "RuleName", "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED", "metrics": [{"metric_id": "mtlwx65j", "auto_rollback": false, "metric_name": "feature-clicked", "direction": "HIGHER", "metric_type": "BINARY"}]}, "order": 5, "href": "Href"}`)
 				}))
 			})
 			It(`Invoke GetFeatureRule successfully`, func() {
@@ -6412,11 +6532,17 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				rolloutPhaseModel.Duration = core.Int64Ptr(int64(38))
 				rolloutPhaseModel.DurationType = core.StringPtr("days")
 
+				// Construct an instance of the RolloutMetric model
+				rolloutMetricModel := new(appconfigurationv1.RolloutMetric)
+				rolloutMetricModel.MetricID = core.StringPtr("mtlwx65j")
+				rolloutMetricModel.AutoRollback = core.BoolPtr(false)
+
 				// Construct an instance of the RolloutConfiguration model
 				rolloutConfigurationModel := new(appconfigurationv1.RolloutConfiguration)
 				rolloutConfigurationModel.DurationPreset = core.StringPtr("CUSTOM")
 				rolloutConfigurationModel.StartAt = CreateMockDateTime("2019-01-01T12:00:00.000Z")
 				rolloutConfigurationModel.Phases = []appconfigurationv1.RolloutPhase{*rolloutPhaseModel}
+				rolloutConfigurationModel.Metrics = []appconfigurationv1.RolloutMetric{*rolloutMetricModel}
 
 				// Construct an instance of the UpdateFeatureRuleOptions model
 				updateFeatureRuleOptionsModel := new(appconfigurationv1.UpdateFeatureRuleOptions)
@@ -6481,7 +6607,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "rule_id": "RuleID", "rule_name": "RuleName", "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED"}, "order": 5, "href": "Href"}`)
+					fmt.Fprintf(res, "%s", `{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "rule_id": "RuleID", "rule_name": "RuleName", "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED", "metrics": [{"metric_id": "mtlwx65j", "auto_rollback": false, "metric_name": "feature-clicked", "direction": "HIGHER", "metric_type": "BINARY"}]}, "order": 5, "href": "Href"}`)
 				}))
 			})
 			It(`Invoke UpdateFeatureRule successfully with retries`, func() {
@@ -6503,11 +6629,17 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				rolloutPhaseModel.Duration = core.Int64Ptr(int64(38))
 				rolloutPhaseModel.DurationType = core.StringPtr("days")
 
+				// Construct an instance of the RolloutMetric model
+				rolloutMetricModel := new(appconfigurationv1.RolloutMetric)
+				rolloutMetricModel.MetricID = core.StringPtr("mtlwx65j")
+				rolloutMetricModel.AutoRollback = core.BoolPtr(false)
+
 				// Construct an instance of the RolloutConfiguration model
 				rolloutConfigurationModel := new(appconfigurationv1.RolloutConfiguration)
 				rolloutConfigurationModel.DurationPreset = core.StringPtr("CUSTOM")
 				rolloutConfigurationModel.StartAt = CreateMockDateTime("2019-01-01T12:00:00.000Z")
 				rolloutConfigurationModel.Phases = []appconfigurationv1.RolloutPhase{*rolloutPhaseModel}
+				rolloutConfigurationModel.Metrics = []appconfigurationv1.RolloutMetric{*rolloutMetricModel}
 
 				// Construct an instance of the UpdateFeatureRuleOptions model
 				updateFeatureRuleOptionsModel := new(appconfigurationv1.UpdateFeatureRuleOptions)
@@ -6575,7 +6707,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "rule_id": "RuleID", "rule_name": "RuleName", "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED"}, "order": 5, "href": "Href"}`)
+					fmt.Fprintf(res, "%s", `{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "rule_id": "RuleID", "rule_name": "RuleName", "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED", "metrics": [{"metric_id": "mtlwx65j", "auto_rollback": false, "metric_name": "feature-clicked", "direction": "HIGHER", "metric_type": "BINARY"}]}, "order": 5, "href": "Href"}`)
 				}))
 			})
 			It(`Invoke UpdateFeatureRule successfully`, func() {
@@ -6602,11 +6734,17 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				rolloutPhaseModel.Duration = core.Int64Ptr(int64(38))
 				rolloutPhaseModel.DurationType = core.StringPtr("days")
 
+				// Construct an instance of the RolloutMetric model
+				rolloutMetricModel := new(appconfigurationv1.RolloutMetric)
+				rolloutMetricModel.MetricID = core.StringPtr("mtlwx65j")
+				rolloutMetricModel.AutoRollback = core.BoolPtr(false)
+
 				// Construct an instance of the RolloutConfiguration model
 				rolloutConfigurationModel := new(appconfigurationv1.RolloutConfiguration)
 				rolloutConfigurationModel.DurationPreset = core.StringPtr("CUSTOM")
 				rolloutConfigurationModel.StartAt = CreateMockDateTime("2019-01-01T12:00:00.000Z")
 				rolloutConfigurationModel.Phases = []appconfigurationv1.RolloutPhase{*rolloutPhaseModel}
+				rolloutConfigurationModel.Metrics = []appconfigurationv1.RolloutMetric{*rolloutMetricModel}
 
 				// Construct an instance of the UpdateFeatureRuleOptions model
 				updateFeatureRuleOptionsModel := new(appconfigurationv1.UpdateFeatureRuleOptions)
@@ -6646,11 +6784,17 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				rolloutPhaseModel.Duration = core.Int64Ptr(int64(38))
 				rolloutPhaseModel.DurationType = core.StringPtr("days")
 
+				// Construct an instance of the RolloutMetric model
+				rolloutMetricModel := new(appconfigurationv1.RolloutMetric)
+				rolloutMetricModel.MetricID = core.StringPtr("mtlwx65j")
+				rolloutMetricModel.AutoRollback = core.BoolPtr(false)
+
 				// Construct an instance of the RolloutConfiguration model
 				rolloutConfigurationModel := new(appconfigurationv1.RolloutConfiguration)
 				rolloutConfigurationModel.DurationPreset = core.StringPtr("CUSTOM")
 				rolloutConfigurationModel.StartAt = CreateMockDateTime("2019-01-01T12:00:00.000Z")
 				rolloutConfigurationModel.Phases = []appconfigurationv1.RolloutPhase{*rolloutPhaseModel}
+				rolloutConfigurationModel.Metrics = []appconfigurationv1.RolloutMetric{*rolloutMetricModel}
 
 				// Construct an instance of the UpdateFeatureRuleOptions model
 				updateFeatureRuleOptionsModel := new(appconfigurationv1.UpdateFeatureRuleOptions)
@@ -6711,11 +6855,17 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				rolloutPhaseModel.Duration = core.Int64Ptr(int64(38))
 				rolloutPhaseModel.DurationType = core.StringPtr("days")
 
+				// Construct an instance of the RolloutMetric model
+				rolloutMetricModel := new(appconfigurationv1.RolloutMetric)
+				rolloutMetricModel.MetricID = core.StringPtr("mtlwx65j")
+				rolloutMetricModel.AutoRollback = core.BoolPtr(false)
+
 				// Construct an instance of the RolloutConfiguration model
 				rolloutConfigurationModel := new(appconfigurationv1.RolloutConfiguration)
 				rolloutConfigurationModel.DurationPreset = core.StringPtr("CUSTOM")
 				rolloutConfigurationModel.StartAt = CreateMockDateTime("2019-01-01T12:00:00.000Z")
 				rolloutConfigurationModel.Phases = []appconfigurationv1.RolloutPhase{*rolloutPhaseModel}
+				rolloutConfigurationModel.Metrics = []appconfigurationv1.RolloutMetric{*rolloutMetricModel}
 
 				// Construct an instance of the UpdateFeatureRuleOptions model
 				updateFeatureRuleOptionsModel := new(appconfigurationv1.UpdateFeatureRuleOptions)
@@ -6994,7 +7144,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				stopFeatureRuleRolloutOptionsModel.FeatureID = core.StringPtr("feature_id")
 				stopFeatureRuleRolloutOptionsModel.RuleID = core.StringPtr("rule_id")
 				stopFeatureRuleRolloutOptionsModel.Action = core.StringPtr("stop")
-				stopFeatureRuleRolloutOptionsModel.RolloutPercentage = core.Int64Ptr(int64(0))
+				stopFeatureRuleRolloutOptionsModel.RolloutPercentage = core.Int64Ptr(int64(77))
 				stopFeatureRuleRolloutOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
 				result, response, operationErr := appConfigurationService.StopFeatureRuleRollout(stopFeatureRuleRolloutOptionsModel)
@@ -7047,7 +7197,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "rule_id": "RuleID", "rule_name": "RuleName", "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED"}, "order": 5, "href": "Href"}`)
+					fmt.Fprintf(res, "%s", `{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "rule_id": "RuleID", "rule_name": "RuleName", "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED", "metrics": [{"metric_id": "mtlwx65j", "auto_rollback": false, "metric_name": "feature-clicked", "direction": "HIGHER", "metric_type": "BINARY"}]}, "order": 5, "href": "Href"}`)
 				}))
 			})
 			It(`Invoke StopFeatureRuleRollout successfully with retries`, func() {
@@ -7065,7 +7215,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				stopFeatureRuleRolloutOptionsModel.FeatureID = core.StringPtr("feature_id")
 				stopFeatureRuleRolloutOptionsModel.RuleID = core.StringPtr("rule_id")
 				stopFeatureRuleRolloutOptionsModel.Action = core.StringPtr("stop")
-				stopFeatureRuleRolloutOptionsModel.RolloutPercentage = core.Int64Ptr(int64(0))
+				stopFeatureRuleRolloutOptionsModel.RolloutPercentage = core.Int64Ptr(int64(77))
 				stopFeatureRuleRolloutOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with a Context to test a timeout error
@@ -7121,7 +7271,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "rule_id": "RuleID", "rule_name": "RuleName", "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED"}, "order": 5, "href": "Href"}`)
+					fmt.Fprintf(res, "%s", `{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "rule_id": "RuleID", "rule_name": "RuleName", "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED", "metrics": [{"metric_id": "mtlwx65j", "auto_rollback": false, "metric_name": "feature-clicked", "direction": "HIGHER", "metric_type": "BINARY"}]}, "order": 5, "href": "Href"}`)
 				}))
 			})
 			It(`Invoke StopFeatureRuleRollout successfully`, func() {
@@ -7144,7 +7294,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				stopFeatureRuleRolloutOptionsModel.FeatureID = core.StringPtr("feature_id")
 				stopFeatureRuleRolloutOptionsModel.RuleID = core.StringPtr("rule_id")
 				stopFeatureRuleRolloutOptionsModel.Action = core.StringPtr("stop")
-				stopFeatureRuleRolloutOptionsModel.RolloutPercentage = core.Int64Ptr(int64(0))
+				stopFeatureRuleRolloutOptionsModel.RolloutPercentage = core.Int64Ptr(int64(77))
 				stopFeatureRuleRolloutOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
@@ -7168,7 +7318,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				stopFeatureRuleRolloutOptionsModel.FeatureID = core.StringPtr("feature_id")
 				stopFeatureRuleRolloutOptionsModel.RuleID = core.StringPtr("rule_id")
 				stopFeatureRuleRolloutOptionsModel.Action = core.StringPtr("stop")
-				stopFeatureRuleRolloutOptionsModel.RolloutPercentage = core.Int64Ptr(int64(0))
+				stopFeatureRuleRolloutOptionsModel.RolloutPercentage = core.Int64Ptr(int64(77))
 				stopFeatureRuleRolloutOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := appConfigurationService.SetServiceURL("")
@@ -7213,7 +7363,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				stopFeatureRuleRolloutOptionsModel.FeatureID = core.StringPtr("feature_id")
 				stopFeatureRuleRolloutOptionsModel.RuleID = core.StringPtr("rule_id")
 				stopFeatureRuleRolloutOptionsModel.Action = core.StringPtr("stop")
-				stopFeatureRuleRolloutOptionsModel.RolloutPercentage = core.Int64Ptr(int64(0))
+				stopFeatureRuleRolloutOptionsModel.RolloutPercentage = core.Int64Ptr(int64(77))
 				stopFeatureRuleRolloutOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation
@@ -12205,7 +12355,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"environments": [{"name": "Name", "environment_id": "EnvironmentID", "description": "Description", "tags": "Tags", "color_code": "#FDD13A", "features": [{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED"}, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED"}, "rule_id": "RuleID", "rule_name": "RuleName"}], "collections": [{"collection_id": "CollectionID", "name": "Name"}]}], "properties": [{"name": "Name", "property_id": "PropertyID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "value": "anyValue", "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5}], "collections": [{"collection_id": "CollectionID", "name": "Name"}]}]}], "segments": [{"name": "Name", "segment_id": "SegmentID", "description": "Description", "tags": "Tags", "rules": [{"attribute_name": "AttributeName", "operator": "is", "values": ["Values"]}]}]}`)
+					fmt.Fprintf(res, "%s", `{"environments": [{"name": "Name", "environment_id": "EnvironmentID", "description": "Description", "tags": "Tags", "color_code": "#FDD13A", "features": [{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED", "metrics": [{"metric_id": "mtlwx65j", "auto_rollback": false, "metric_name": "feature-clicked", "direction": "HIGHER", "metric_type": "BINARY"}]}, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED", "metrics": [{"metric_id": "mtlwx65j", "auto_rollback": false, "metric_name": "feature-clicked", "direction": "HIGHER", "metric_type": "BINARY"}]}, "rule_id": "RuleID", "rule_name": "RuleName"}], "collections": [{"collection_id": "CollectionID", "name": "Name"}]}], "properties": [{"name": "Name", "property_id": "PropertyID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "value": "anyValue", "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5}], "collections": [{"collection_id": "CollectionID", "name": "Name"}]}]}], "segments": [{"name": "Name", "segment_id": "SegmentID", "description": "Description", "tags": "Tags", "rules": [{"attribute_name": "AttributeName", "operator": "is", "values": ["Values"]}]}]}`)
 				}))
 			})
 			It(`Invoke RestoreGitconfig successfully with retries`, func() {
@@ -12259,7 +12409,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"environments": [{"name": "Name", "environment_id": "EnvironmentID", "description": "Description", "tags": "Tags", "color_code": "#FDD13A", "features": [{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED"}, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED"}, "rule_id": "RuleID", "rule_name": "RuleName"}], "collections": [{"collection_id": "CollectionID", "name": "Name"}]}], "properties": [{"name": "Name", "property_id": "PropertyID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "value": "anyValue", "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5}], "collections": [{"collection_id": "CollectionID", "name": "Name"}]}]}], "segments": [{"name": "Name", "segment_id": "SegmentID", "description": "Description", "tags": "Tags", "rules": [{"attribute_name": "AttributeName", "operator": "is", "values": ["Values"]}]}]}`)
+					fmt.Fprintf(res, "%s", `{"environments": [{"name": "Name", "environment_id": "EnvironmentID", "description": "Description", "tags": "Tags", "color_code": "#FDD13A", "features": [{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED", "metrics": [{"metric_id": "mtlwx65j", "auto_rollback": false, "metric_name": "feature-clicked", "direction": "HIGHER", "metric_type": "BINARY"}]}, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED", "metrics": [{"metric_id": "mtlwx65j", "auto_rollback": false, "metric_name": "feature-clicked", "direction": "HIGHER", "metric_type": "BINARY"}]}, "rule_id": "RuleID", "rule_name": "RuleName"}], "collections": [{"collection_id": "CollectionID", "name": "Name"}]}], "properties": [{"name": "Name", "property_id": "PropertyID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "value": "anyValue", "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5}], "collections": [{"collection_id": "CollectionID", "name": "Name"}]}]}], "segments": [{"name": "Name", "segment_id": "SegmentID", "description": "Description", "tags": "Tags", "rules": [{"attribute_name": "AttributeName", "operator": "is", "values": ["Values"]}]}]}`)
 				}))
 			})
 			It(`Invoke RestoreGitconfig successfully`, func() {
@@ -13698,934 +13848,6 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 				// Verify a nil result
 				Expect(result).To(BeNil())
-			})
-			AfterEach(func() {
-				testServer.Close()
-			})
-		})
-	})
-	Describe(`ListWorkflowconfig(listWorkflowconfigOptions *ListWorkflowconfigOptions) - Operation response error`, func() {
-		listWorkflowconfigPath := "/environments/environment_id/workflowconfigs"
-		Context(`Using mock server endpoint with invalid JSON response`, func() {
-			BeforeEach(func() {
-				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
-					defer GinkgoRecover()
-
-					// Verify the contents of the request
-					Expect(req.URL.EscapedPath()).To(Equal(listWorkflowconfigPath))
-					Expect(req.Method).To(Equal("GET"))
-					res.Header().Set("Content-type", "application/json")
-					res.WriteHeader(200)
-					fmt.Fprint(res, `} this is not valid json {`)
-				}))
-			})
-			It(`Invoke ListWorkflowconfig with error: Operation response processing error`, func() {
-				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
-					URL:           testServer.URL,
-					Authenticator: &core.NoAuthAuthenticator{},
-				})
-				Expect(serviceErr).To(BeNil())
-				Expect(appConfigurationService).ToNot(BeNil())
-
-				// Construct an instance of the ListWorkflowconfigOptions model
-				listWorkflowconfigOptionsModel := new(appconfigurationv1.ListWorkflowconfigOptions)
-				listWorkflowconfigOptionsModel.EnvironmentID = core.StringPtr("environment_id")
-				listWorkflowconfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
-				// Expect response parsing to fail since we are receiving a text/plain response
-				result, response, operationErr := appConfigurationService.ListWorkflowconfig(listWorkflowconfigOptionsModel)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(response).ToNot(BeNil())
-				Expect(result).To(BeNil())
-
-				// Enable retries and test again
-				appConfigurationService.EnableRetries(0, 0)
-				result, response, operationErr = appConfigurationService.ListWorkflowconfig(listWorkflowconfigOptionsModel)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(response).ToNot(BeNil())
-				Expect(result).To(BeNil())
-			})
-			AfterEach(func() {
-				testServer.Close()
-			})
-		})
-	})
-	Describe(`ListWorkflowconfig(listWorkflowconfigOptions *ListWorkflowconfigOptions)`, func() {
-		listWorkflowconfigPath := "/environments/environment_id/workflowconfigs"
-		Context(`Using mock server endpoint with timeout`, func() {
-			BeforeEach(func() {
-				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
-					defer GinkgoRecover()
-
-					// Verify the contents of the request
-					Expect(req.URL.EscapedPath()).To(Equal(listWorkflowconfigPath))
-					Expect(req.Method).To(Equal("GET"))
-
-					// Sleep a short time to support a timeout test
-					time.Sleep(100 * time.Millisecond)
-
-					// Set mock response
-					res.Header().Set("Content-type", "application/json")
-					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"environment_name": "EnvironmentName", "environment_id": "EnvironmentID", "workflow_url": "WorkflowURL", "approval_group_name": "ApprovalGroupName", "approval_expiration": 1, "workflow_credentials": {"username": "admin", "password": "Password", "client_id": "f7b6379b55d08210f8ree233afc7256d", "client_secret": "ClientSecret"}, "enabled": false, "created_time": "2022-11-15T23:20:50.000Z", "updated_time": "2022-11-16T21:20:50.000Z", "href": "Href"}`)
-				}))
-			})
-			It(`Invoke ListWorkflowconfig successfully with retries`, func() {
-				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
-					URL:           testServer.URL,
-					Authenticator: &core.NoAuthAuthenticator{},
-				})
-				Expect(serviceErr).To(BeNil())
-				Expect(appConfigurationService).ToNot(BeNil())
-				appConfigurationService.EnableRetries(0, 0)
-
-				// Construct an instance of the ListWorkflowconfigOptions model
-				listWorkflowconfigOptionsModel := new(appconfigurationv1.ListWorkflowconfigOptions)
-				listWorkflowconfigOptionsModel.EnvironmentID = core.StringPtr("environment_id")
-				listWorkflowconfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
-
-				// Invoke operation with a Context to test a timeout error
-				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
-				defer cancelFunc()
-				_, _, operationErr := appConfigurationService.ListWorkflowconfigWithContext(ctx, listWorkflowconfigOptionsModel)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
-
-				// Disable retries and test again
-				appConfigurationService.DisableRetries()
-				result, response, operationErr := appConfigurationService.ListWorkflowconfig(listWorkflowconfigOptionsModel)
-				Expect(operationErr).To(BeNil())
-				Expect(response).ToNot(BeNil())
-				Expect(result).ToNot(BeNil())
-
-				// Re-test the timeout error with retries disabled
-				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
-				defer cancelFunc2()
-				_, _, operationErr = appConfigurationService.ListWorkflowconfigWithContext(ctx, listWorkflowconfigOptionsModel)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
-			})
-			AfterEach(func() {
-				testServer.Close()
-			})
-		})
-		Context(`Using mock server endpoint`, func() {
-			BeforeEach(func() {
-				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
-					defer GinkgoRecover()
-
-					// Verify the contents of the request
-					Expect(req.URL.EscapedPath()).To(Equal(listWorkflowconfigPath))
-					Expect(req.Method).To(Equal("GET"))
-
-					// Set mock response
-					res.Header().Set("Content-type", "application/json")
-					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"environment_name": "EnvironmentName", "environment_id": "EnvironmentID", "workflow_url": "WorkflowURL", "approval_group_name": "ApprovalGroupName", "approval_expiration": 1, "workflow_credentials": {"username": "admin", "password": "Password", "client_id": "f7b6379b55d08210f8ree233afc7256d", "client_secret": "ClientSecret"}, "enabled": false, "created_time": "2022-11-15T23:20:50.000Z", "updated_time": "2022-11-16T21:20:50.000Z", "href": "Href"}`)
-				}))
-			})
-			It(`Invoke ListWorkflowconfig successfully`, func() {
-				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
-					URL:           testServer.URL,
-					Authenticator: &core.NoAuthAuthenticator{},
-				})
-				Expect(serviceErr).To(BeNil())
-				Expect(appConfigurationService).ToNot(BeNil())
-
-				// Invoke operation with nil options model (negative test)
-				result, response, operationErr := appConfigurationService.ListWorkflowconfig(nil)
-				Expect(operationErr).NotTo(BeNil())
-				Expect(response).To(BeNil())
-				Expect(result).To(BeNil())
-
-				// Construct an instance of the ListWorkflowconfigOptions model
-				listWorkflowconfigOptionsModel := new(appconfigurationv1.ListWorkflowconfigOptions)
-				listWorkflowconfigOptionsModel.EnvironmentID = core.StringPtr("environment_id")
-				listWorkflowconfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
-
-				// Invoke operation with valid options model (positive test)
-				result, response, operationErr = appConfigurationService.ListWorkflowconfig(listWorkflowconfigOptionsModel)
-				Expect(operationErr).To(BeNil())
-				Expect(response).ToNot(BeNil())
-				Expect(result).ToNot(BeNil())
-
-			})
-			It(`Invoke ListWorkflowconfig with error: Operation validation and request error`, func() {
-				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
-					URL:           testServer.URL,
-					Authenticator: &core.NoAuthAuthenticator{},
-				})
-				Expect(serviceErr).To(BeNil())
-				Expect(appConfigurationService).ToNot(BeNil())
-
-				// Construct an instance of the ListWorkflowconfigOptions model
-				listWorkflowconfigOptionsModel := new(appconfigurationv1.ListWorkflowconfigOptions)
-				listWorkflowconfigOptionsModel.EnvironmentID = core.StringPtr("environment_id")
-				listWorkflowconfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
-				// Invoke operation with empty URL (negative test)
-				err := appConfigurationService.SetServiceURL("")
-				Expect(err).To(BeNil())
-				result, response, operationErr := appConfigurationService.ListWorkflowconfig(listWorkflowconfigOptionsModel)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
-				Expect(response).To(BeNil())
-				Expect(result).To(BeNil())
-				// Construct a second instance of the ListWorkflowconfigOptions model with no property values
-				listWorkflowconfigOptionsModelNew := new(appconfigurationv1.ListWorkflowconfigOptions)
-				// Invoke operation with invalid model (negative test)
-				result, response, operationErr = appConfigurationService.ListWorkflowconfig(listWorkflowconfigOptionsModelNew)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(response).To(BeNil())
-				Expect(result).To(BeNil())
-			})
-			AfterEach(func() {
-				testServer.Close()
-			})
-		})
-		Context(`Using mock server endpoint with missing response body`, func() {
-			BeforeEach(func() {
-				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
-					defer GinkgoRecover()
-
-					// Set success status code with no respoonse body
-					res.WriteHeader(200)
-				}))
-			})
-			It(`Invoke ListWorkflowconfig successfully`, func() {
-				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
-					URL:           testServer.URL,
-					Authenticator: &core.NoAuthAuthenticator{},
-				})
-				Expect(serviceErr).To(BeNil())
-				Expect(appConfigurationService).ToNot(BeNil())
-
-				// Construct an instance of the ListWorkflowconfigOptions model
-				listWorkflowconfigOptionsModel := new(appconfigurationv1.ListWorkflowconfigOptions)
-				listWorkflowconfigOptionsModel.EnvironmentID = core.StringPtr("environment_id")
-				listWorkflowconfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
-
-				// Invoke operation
-				result, response, operationErr := appConfigurationService.ListWorkflowconfig(listWorkflowconfigOptionsModel)
-				Expect(operationErr).To(BeNil())
-				Expect(response).ToNot(BeNil())
-
-				// Verify a nil result
-				Expect(result).To(BeNil())
-			})
-			AfterEach(func() {
-				testServer.Close()
-			})
-		})
-	})
-	Describe(`CreateWorkflowconfig(createWorkflowconfigOptions *CreateWorkflowconfigOptions) - Operation response error`, func() {
-		createWorkflowconfigPath := "/environments/environment_id/workflowconfigs"
-		Context(`Using mock server endpoint with invalid JSON response`, func() {
-			BeforeEach(func() {
-				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
-					defer GinkgoRecover()
-
-					// Verify the contents of the request
-					Expect(req.URL.EscapedPath()).To(Equal(createWorkflowconfigPath))
-					Expect(req.Method).To(Equal("POST"))
-					res.Header().Set("Content-type", "application/json")
-					res.WriteHeader(201)
-					fmt.Fprint(res, `} this is not valid json {`)
-				}))
-			})
-			It(`Invoke CreateWorkflowconfig with error: Operation response processing error`, func() {
-				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
-					URL:           testServer.URL,
-					Authenticator: &core.NoAuthAuthenticator{},
-				})
-				Expect(serviceErr).To(BeNil())
-				Expect(appConfigurationService).ToNot(BeNil())
-
-				// Construct an instance of the ExternalServiceNowCredentials model
-				externalServiceNowCredentialsModel := new(appconfigurationv1.ExternalServiceNowCredentials)
-				externalServiceNowCredentialsModel.Username = core.StringPtr("user")
-				externalServiceNowCredentialsModel.Password = core.StringPtr("pwd")
-				externalServiceNowCredentialsModel.ClientID = core.StringPtr("client id value")
-				externalServiceNowCredentialsModel.ClientSecret = core.StringPtr("clientsecret")
-
-				// Construct an instance of the CreateWorkflowConfigExternalServiceNow model
-				createWorkflowConfigModel := new(appconfigurationv1.CreateWorkflowConfigExternalServiceNow)
-				createWorkflowConfigModel.WorkflowURL = core.StringPtr("https://xxxxx.service-now.com")
-				createWorkflowConfigModel.ApprovalGroupName = core.StringPtr("WorkflowCRApprovers")
-				createWorkflowConfigModel.ApprovalExpiration = core.Int64Ptr(int64(10))
-				createWorkflowConfigModel.WorkflowCredentials = externalServiceNowCredentialsModel
-				createWorkflowConfigModel.Enabled = core.BoolPtr(true)
-
-				// Construct an instance of the CreateWorkflowconfigOptions model
-				createWorkflowconfigOptionsModel := new(appconfigurationv1.CreateWorkflowconfigOptions)
-				createWorkflowconfigOptionsModel.EnvironmentID = core.StringPtr("environment_id")
-				createWorkflowconfigOptionsModel.WorkflowConfig = createWorkflowConfigModel
-				createWorkflowconfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
-				// Expect response parsing to fail since we are receiving a text/plain response
-				result, response, operationErr := appConfigurationService.CreateWorkflowconfig(createWorkflowconfigOptionsModel)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(response).ToNot(BeNil())
-				Expect(result).To(BeNil())
-
-				// Enable retries and test again
-				appConfigurationService.EnableRetries(0, 0)
-				result, response, operationErr = appConfigurationService.CreateWorkflowconfig(createWorkflowconfigOptionsModel)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(response).ToNot(BeNil())
-				Expect(result).To(BeNil())
-			})
-			AfterEach(func() {
-				testServer.Close()
-			})
-		})
-	})
-	Describe(`CreateWorkflowconfig(createWorkflowconfigOptions *CreateWorkflowconfigOptions)`, func() {
-		createWorkflowconfigPath := "/environments/environment_id/workflowconfigs"
-		Context(`Using mock server endpoint with timeout`, func() {
-			BeforeEach(func() {
-				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
-					defer GinkgoRecover()
-
-					// Verify the contents of the request
-					Expect(req.URL.EscapedPath()).To(Equal(createWorkflowconfigPath))
-					Expect(req.Method).To(Equal("POST"))
-
-					// For gzip-disabled operation, verify Content-Encoding is not set.
-					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
-
-					// If there is a body, then make sure we can read it
-					bodyBuf := new(bytes.Buffer)
-					if req.Header.Get("Content-Encoding") == "gzip" {
-						body, err := core.NewGzipDecompressionReader(req.Body)
-						Expect(err).To(BeNil())
-						_, err = bodyBuf.ReadFrom(body)
-						Expect(err).To(BeNil())
-					} else {
-						_, err := bodyBuf.ReadFrom(req.Body)
-						Expect(err).To(BeNil())
-					}
-					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
-
-					// Sleep a short time to support a timeout test
-					time.Sleep(100 * time.Millisecond)
-
-					// Set mock response
-					res.Header().Set("Content-type", "application/json")
-					res.WriteHeader(201)
-					fmt.Fprintf(res, "%s", `{"environment_name": "EnvironmentName", "environment_id": "EnvironmentID", "workflow_url": "WorkflowURL", "approval_group_name": "ApprovalGroupName", "approval_expiration": 1, "workflow_credentials": {"username": "admin", "password": "Password", "client_id": "f7b6379b55d08210f8ree233afc7256d", "client_secret": "ClientSecret"}, "enabled": false, "created_time": "2022-11-15T23:20:50.000Z", "updated_time": "2022-11-16T21:20:50.000Z", "href": "Href"}`)
-				}))
-			})
-			It(`Invoke CreateWorkflowconfig successfully with retries`, func() {
-				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
-					URL:           testServer.URL,
-					Authenticator: &core.NoAuthAuthenticator{},
-				})
-				Expect(serviceErr).To(BeNil())
-				Expect(appConfigurationService).ToNot(BeNil())
-				appConfigurationService.EnableRetries(0, 0)
-
-				// Construct an instance of the ExternalServiceNowCredentials model
-				externalServiceNowCredentialsModel := new(appconfigurationv1.ExternalServiceNowCredentials)
-				externalServiceNowCredentialsModel.Username = core.StringPtr("user")
-				externalServiceNowCredentialsModel.Password = core.StringPtr("pwd")
-				externalServiceNowCredentialsModel.ClientID = core.StringPtr("client id value")
-				externalServiceNowCredentialsModel.ClientSecret = core.StringPtr("clientsecret")
-
-				// Construct an instance of the CreateWorkflowConfigExternalServiceNow model
-				createWorkflowConfigModel := new(appconfigurationv1.CreateWorkflowConfigExternalServiceNow)
-				createWorkflowConfigModel.WorkflowURL = core.StringPtr("https://xxxxx.service-now.com")
-				createWorkflowConfigModel.ApprovalGroupName = core.StringPtr("WorkflowCRApprovers")
-				createWorkflowConfigModel.ApprovalExpiration = core.Int64Ptr(int64(10))
-				createWorkflowConfigModel.WorkflowCredentials = externalServiceNowCredentialsModel
-				createWorkflowConfigModel.Enabled = core.BoolPtr(true)
-
-				// Construct an instance of the CreateWorkflowconfigOptions model
-				createWorkflowconfigOptionsModel := new(appconfigurationv1.CreateWorkflowconfigOptions)
-				createWorkflowconfigOptionsModel.EnvironmentID = core.StringPtr("environment_id")
-				createWorkflowconfigOptionsModel.WorkflowConfig = createWorkflowConfigModel
-				createWorkflowconfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
-
-				// Invoke operation with a Context to test a timeout error
-				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
-				defer cancelFunc()
-				_, _, operationErr := appConfigurationService.CreateWorkflowconfigWithContext(ctx, createWorkflowconfigOptionsModel)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
-
-				// Disable retries and test again
-				appConfigurationService.DisableRetries()
-				result, response, operationErr := appConfigurationService.CreateWorkflowconfig(createWorkflowconfigOptionsModel)
-				Expect(operationErr).To(BeNil())
-				Expect(response).ToNot(BeNil())
-				Expect(result).ToNot(BeNil())
-
-				// Re-test the timeout error with retries disabled
-				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
-				defer cancelFunc2()
-				_, _, operationErr = appConfigurationService.CreateWorkflowconfigWithContext(ctx, createWorkflowconfigOptionsModel)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
-			})
-			AfterEach(func() {
-				testServer.Close()
-			})
-		})
-		Context(`Using mock server endpoint`, func() {
-			BeforeEach(func() {
-				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
-					defer GinkgoRecover()
-
-					// Verify the contents of the request
-					Expect(req.URL.EscapedPath()).To(Equal(createWorkflowconfigPath))
-					Expect(req.Method).To(Equal("POST"))
-
-					// For gzip-disabled operation, verify Content-Encoding is not set.
-					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
-
-					// If there is a body, then make sure we can read it
-					bodyBuf := new(bytes.Buffer)
-					if req.Header.Get("Content-Encoding") == "gzip" {
-						body, err := core.NewGzipDecompressionReader(req.Body)
-						Expect(err).To(BeNil())
-						_, err = bodyBuf.ReadFrom(body)
-						Expect(err).To(BeNil())
-					} else {
-						_, err := bodyBuf.ReadFrom(req.Body)
-						Expect(err).To(BeNil())
-					}
-					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
-
-					// Set mock response
-					res.Header().Set("Content-type", "application/json")
-					res.WriteHeader(201)
-					fmt.Fprintf(res, "%s", `{"environment_name": "EnvironmentName", "environment_id": "EnvironmentID", "workflow_url": "WorkflowURL", "approval_group_name": "ApprovalGroupName", "approval_expiration": 1, "workflow_credentials": {"username": "admin", "password": "Password", "client_id": "f7b6379b55d08210f8ree233afc7256d", "client_secret": "ClientSecret"}, "enabled": false, "created_time": "2022-11-15T23:20:50.000Z", "updated_time": "2022-11-16T21:20:50.000Z", "href": "Href"}`)
-				}))
-			})
-			It(`Invoke CreateWorkflowconfig successfully`, func() {
-				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
-					URL:           testServer.URL,
-					Authenticator: &core.NoAuthAuthenticator{},
-				})
-				Expect(serviceErr).To(BeNil())
-				Expect(appConfigurationService).ToNot(BeNil())
-
-				// Invoke operation with nil options model (negative test)
-				result, response, operationErr := appConfigurationService.CreateWorkflowconfig(nil)
-				Expect(operationErr).NotTo(BeNil())
-				Expect(response).To(BeNil())
-				Expect(result).To(BeNil())
-
-				// Construct an instance of the ExternalServiceNowCredentials model
-				externalServiceNowCredentialsModel := new(appconfigurationv1.ExternalServiceNowCredentials)
-				externalServiceNowCredentialsModel.Username = core.StringPtr("user")
-				externalServiceNowCredentialsModel.Password = core.StringPtr("pwd")
-				externalServiceNowCredentialsModel.ClientID = core.StringPtr("client id value")
-				externalServiceNowCredentialsModel.ClientSecret = core.StringPtr("clientsecret")
-
-				// Construct an instance of the CreateWorkflowConfigExternalServiceNow model
-				createWorkflowConfigModel := new(appconfigurationv1.CreateWorkflowConfigExternalServiceNow)
-				createWorkflowConfigModel.WorkflowURL = core.StringPtr("https://xxxxx.service-now.com")
-				createWorkflowConfigModel.ApprovalGroupName = core.StringPtr("WorkflowCRApprovers")
-				createWorkflowConfigModel.ApprovalExpiration = core.Int64Ptr(int64(10))
-				createWorkflowConfigModel.WorkflowCredentials = externalServiceNowCredentialsModel
-				createWorkflowConfigModel.Enabled = core.BoolPtr(true)
-
-				// Construct an instance of the CreateWorkflowconfigOptions model
-				createWorkflowconfigOptionsModel := new(appconfigurationv1.CreateWorkflowconfigOptions)
-				createWorkflowconfigOptionsModel.EnvironmentID = core.StringPtr("environment_id")
-				createWorkflowconfigOptionsModel.WorkflowConfig = createWorkflowConfigModel
-				createWorkflowconfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
-
-				// Invoke operation with valid options model (positive test)
-				result, response, operationErr = appConfigurationService.CreateWorkflowconfig(createWorkflowconfigOptionsModel)
-				Expect(operationErr).To(BeNil())
-				Expect(response).ToNot(BeNil())
-				Expect(result).ToNot(BeNil())
-
-			})
-			It(`Invoke CreateWorkflowconfig with error: Operation validation and request error`, func() {
-				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
-					URL:           testServer.URL,
-					Authenticator: &core.NoAuthAuthenticator{},
-				})
-				Expect(serviceErr).To(BeNil())
-				Expect(appConfigurationService).ToNot(BeNil())
-
-				// Construct an instance of the ExternalServiceNowCredentials model
-				externalServiceNowCredentialsModel := new(appconfigurationv1.ExternalServiceNowCredentials)
-				externalServiceNowCredentialsModel.Username = core.StringPtr("user")
-				externalServiceNowCredentialsModel.Password = core.StringPtr("pwd")
-				externalServiceNowCredentialsModel.ClientID = core.StringPtr("client id value")
-				externalServiceNowCredentialsModel.ClientSecret = core.StringPtr("clientsecret")
-
-				// Construct an instance of the CreateWorkflowConfigExternalServiceNow model
-				createWorkflowConfigModel := new(appconfigurationv1.CreateWorkflowConfigExternalServiceNow)
-				createWorkflowConfigModel.WorkflowURL = core.StringPtr("https://xxxxx.service-now.com")
-				createWorkflowConfigModel.ApprovalGroupName = core.StringPtr("WorkflowCRApprovers")
-				createWorkflowConfigModel.ApprovalExpiration = core.Int64Ptr(int64(10))
-				createWorkflowConfigModel.WorkflowCredentials = externalServiceNowCredentialsModel
-				createWorkflowConfigModel.Enabled = core.BoolPtr(true)
-
-				// Construct an instance of the CreateWorkflowconfigOptions model
-				createWorkflowconfigOptionsModel := new(appconfigurationv1.CreateWorkflowconfigOptions)
-				createWorkflowconfigOptionsModel.EnvironmentID = core.StringPtr("environment_id")
-				createWorkflowconfigOptionsModel.WorkflowConfig = createWorkflowConfigModel
-				createWorkflowconfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
-				// Invoke operation with empty URL (negative test)
-				err := appConfigurationService.SetServiceURL("")
-				Expect(err).To(BeNil())
-				result, response, operationErr := appConfigurationService.CreateWorkflowconfig(createWorkflowconfigOptionsModel)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
-				Expect(response).To(BeNil())
-				Expect(result).To(BeNil())
-				// Construct a second instance of the CreateWorkflowconfigOptions model with no property values
-				createWorkflowconfigOptionsModelNew := new(appconfigurationv1.CreateWorkflowconfigOptions)
-				// Invoke operation with invalid model (negative test)
-				result, response, operationErr = appConfigurationService.CreateWorkflowconfig(createWorkflowconfigOptionsModelNew)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(response).To(BeNil())
-				Expect(result).To(BeNil())
-			})
-			AfterEach(func() {
-				testServer.Close()
-			})
-		})
-		Context(`Using mock server endpoint with missing response body`, func() {
-			BeforeEach(func() {
-				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
-					defer GinkgoRecover()
-
-					// Set success status code with no respoonse body
-					res.WriteHeader(201)
-				}))
-			})
-			It(`Invoke CreateWorkflowconfig successfully`, func() {
-				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
-					URL:           testServer.URL,
-					Authenticator: &core.NoAuthAuthenticator{},
-				})
-				Expect(serviceErr).To(BeNil())
-				Expect(appConfigurationService).ToNot(BeNil())
-
-				// Construct an instance of the ExternalServiceNowCredentials model
-				externalServiceNowCredentialsModel := new(appconfigurationv1.ExternalServiceNowCredentials)
-				externalServiceNowCredentialsModel.Username = core.StringPtr("user")
-				externalServiceNowCredentialsModel.Password = core.StringPtr("pwd")
-				externalServiceNowCredentialsModel.ClientID = core.StringPtr("client id value")
-				externalServiceNowCredentialsModel.ClientSecret = core.StringPtr("clientsecret")
-
-				// Construct an instance of the CreateWorkflowConfigExternalServiceNow model
-				createWorkflowConfigModel := new(appconfigurationv1.CreateWorkflowConfigExternalServiceNow)
-				createWorkflowConfigModel.WorkflowURL = core.StringPtr("https://xxxxx.service-now.com")
-				createWorkflowConfigModel.ApprovalGroupName = core.StringPtr("WorkflowCRApprovers")
-				createWorkflowConfigModel.ApprovalExpiration = core.Int64Ptr(int64(10))
-				createWorkflowConfigModel.WorkflowCredentials = externalServiceNowCredentialsModel
-				createWorkflowConfigModel.Enabled = core.BoolPtr(true)
-
-				// Construct an instance of the CreateWorkflowconfigOptions model
-				createWorkflowconfigOptionsModel := new(appconfigurationv1.CreateWorkflowconfigOptions)
-				createWorkflowconfigOptionsModel.EnvironmentID = core.StringPtr("environment_id")
-				createWorkflowconfigOptionsModel.WorkflowConfig = createWorkflowConfigModel
-				createWorkflowconfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
-
-				// Invoke operation
-				result, response, operationErr := appConfigurationService.CreateWorkflowconfig(createWorkflowconfigOptionsModel)
-				Expect(operationErr).To(BeNil())
-				Expect(response).ToNot(BeNil())
-
-				// Verify a nil result
-				Expect(result).To(BeNil())
-			})
-			AfterEach(func() {
-				testServer.Close()
-			})
-		})
-	})
-	Describe(`UpdateWorkflowconfig(updateWorkflowconfigOptions *UpdateWorkflowconfigOptions) - Operation response error`, func() {
-		updateWorkflowconfigPath := "/environments/environment_id/workflowconfigs"
-		Context(`Using mock server endpoint with invalid JSON response`, func() {
-			BeforeEach(func() {
-				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
-					defer GinkgoRecover()
-
-					// Verify the contents of the request
-					Expect(req.URL.EscapedPath()).To(Equal(updateWorkflowconfigPath))
-					Expect(req.Method).To(Equal("PUT"))
-					res.Header().Set("Content-type", "application/json")
-					res.WriteHeader(201)
-					fmt.Fprint(res, `} this is not valid json {`)
-				}))
-			})
-			It(`Invoke UpdateWorkflowconfig with error: Operation response processing error`, func() {
-				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
-					URL:           testServer.URL,
-					Authenticator: &core.NoAuthAuthenticator{},
-				})
-				Expect(serviceErr).To(BeNil())
-				Expect(appConfigurationService).ToNot(BeNil())
-
-				// Construct an instance of the ExternalServiceNowCredentials model
-				externalServiceNowCredentialsModel := new(appconfigurationv1.ExternalServiceNowCredentials)
-				externalServiceNowCredentialsModel.Username = core.StringPtr("user")
-				externalServiceNowCredentialsModel.Password = core.StringPtr("updated password")
-				externalServiceNowCredentialsModel.ClientID = core.StringPtr("client id value")
-				externalServiceNowCredentialsModel.ClientSecret = core.StringPtr("updated client secret")
-
-				// Construct an instance of the UpdateWorkflowConfigUpdateExternalServiceNow model
-				updateWorkflowConfigModel := new(appconfigurationv1.UpdateWorkflowConfigUpdateExternalServiceNow)
-				updateWorkflowConfigModel.WorkflowURL = core.StringPtr("https://xxxxx.service-now.com")
-				updateWorkflowConfigModel.ApprovalGroupName = core.StringPtr("WorkflowCRApprovers")
-				updateWorkflowConfigModel.ApprovalExpiration = core.Int64Ptr(int64(5))
-				updateWorkflowConfigModel.WorkflowCredentials = externalServiceNowCredentialsModel
-				updateWorkflowConfigModel.Enabled = core.BoolPtr(true)
-
-				// Construct an instance of the UpdateWorkflowconfigOptions model
-				updateWorkflowconfigOptionsModel := new(appconfigurationv1.UpdateWorkflowconfigOptions)
-				updateWorkflowconfigOptionsModel.EnvironmentID = core.StringPtr("environment_id")
-				updateWorkflowconfigOptionsModel.UpdateWorkflowConfig = updateWorkflowConfigModel
-				updateWorkflowconfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
-				// Expect response parsing to fail since we are receiving a text/plain response
-				result, response, operationErr := appConfigurationService.UpdateWorkflowconfig(updateWorkflowconfigOptionsModel)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(response).ToNot(BeNil())
-				Expect(result).To(BeNil())
-
-				// Enable retries and test again
-				appConfigurationService.EnableRetries(0, 0)
-				result, response, operationErr = appConfigurationService.UpdateWorkflowconfig(updateWorkflowconfigOptionsModel)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(response).ToNot(BeNil())
-				Expect(result).To(BeNil())
-			})
-			AfterEach(func() {
-				testServer.Close()
-			})
-		})
-	})
-	Describe(`UpdateWorkflowconfig(updateWorkflowconfigOptions *UpdateWorkflowconfigOptions)`, func() {
-		updateWorkflowconfigPath := "/environments/environment_id/workflowconfigs"
-		Context(`Using mock server endpoint with timeout`, func() {
-			BeforeEach(func() {
-				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
-					defer GinkgoRecover()
-
-					// Verify the contents of the request
-					Expect(req.URL.EscapedPath()).To(Equal(updateWorkflowconfigPath))
-					Expect(req.Method).To(Equal("PUT"))
-
-					// For gzip-disabled operation, verify Content-Encoding is not set.
-					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
-
-					// If there is a body, then make sure we can read it
-					bodyBuf := new(bytes.Buffer)
-					if req.Header.Get("Content-Encoding") == "gzip" {
-						body, err := core.NewGzipDecompressionReader(req.Body)
-						Expect(err).To(BeNil())
-						_, err = bodyBuf.ReadFrom(body)
-						Expect(err).To(BeNil())
-					} else {
-						_, err := bodyBuf.ReadFrom(req.Body)
-						Expect(err).To(BeNil())
-					}
-					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
-
-					// Sleep a short time to support a timeout test
-					time.Sleep(100 * time.Millisecond)
-
-					// Set mock response
-					res.Header().Set("Content-type", "application/json")
-					res.WriteHeader(201)
-					fmt.Fprintf(res, "%s", `{"environment_name": "EnvironmentName", "environment_id": "EnvironmentID", "workflow_url": "WorkflowURL", "approval_group_name": "ApprovalGroupName", "approval_expiration": 1, "workflow_credentials": {"username": "admin", "password": "Password", "client_id": "f7b6379b55d08210f8ree233afc7256d", "client_secret": "ClientSecret"}, "enabled": false, "created_time": "2022-11-15T23:20:50.000Z", "updated_time": "2022-11-16T21:20:50.000Z", "href": "Href"}`)
-				}))
-			})
-			It(`Invoke UpdateWorkflowconfig successfully with retries`, func() {
-				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
-					URL:           testServer.URL,
-					Authenticator: &core.NoAuthAuthenticator{},
-				})
-				Expect(serviceErr).To(BeNil())
-				Expect(appConfigurationService).ToNot(BeNil())
-				appConfigurationService.EnableRetries(0, 0)
-
-				// Construct an instance of the ExternalServiceNowCredentials model
-				externalServiceNowCredentialsModel := new(appconfigurationv1.ExternalServiceNowCredentials)
-				externalServiceNowCredentialsModel.Username = core.StringPtr("user")
-				externalServiceNowCredentialsModel.Password = core.StringPtr("updated password")
-				externalServiceNowCredentialsModel.ClientID = core.StringPtr("client id value")
-				externalServiceNowCredentialsModel.ClientSecret = core.StringPtr("updated client secret")
-
-				// Construct an instance of the UpdateWorkflowConfigUpdateExternalServiceNow model
-				updateWorkflowConfigModel := new(appconfigurationv1.UpdateWorkflowConfigUpdateExternalServiceNow)
-				updateWorkflowConfigModel.WorkflowURL = core.StringPtr("https://xxxxx.service-now.com")
-				updateWorkflowConfigModel.ApprovalGroupName = core.StringPtr("WorkflowCRApprovers")
-				updateWorkflowConfigModel.ApprovalExpiration = core.Int64Ptr(int64(5))
-				updateWorkflowConfigModel.WorkflowCredentials = externalServiceNowCredentialsModel
-				updateWorkflowConfigModel.Enabled = core.BoolPtr(true)
-
-				// Construct an instance of the UpdateWorkflowconfigOptions model
-				updateWorkflowconfigOptionsModel := new(appconfigurationv1.UpdateWorkflowconfigOptions)
-				updateWorkflowconfigOptionsModel.EnvironmentID = core.StringPtr("environment_id")
-				updateWorkflowconfigOptionsModel.UpdateWorkflowConfig = updateWorkflowConfigModel
-				updateWorkflowconfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
-
-				// Invoke operation with a Context to test a timeout error
-				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
-				defer cancelFunc()
-				_, _, operationErr := appConfigurationService.UpdateWorkflowconfigWithContext(ctx, updateWorkflowconfigOptionsModel)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
-
-				// Disable retries and test again
-				appConfigurationService.DisableRetries()
-				result, response, operationErr := appConfigurationService.UpdateWorkflowconfig(updateWorkflowconfigOptionsModel)
-				Expect(operationErr).To(BeNil())
-				Expect(response).ToNot(BeNil())
-				Expect(result).ToNot(BeNil())
-
-				// Re-test the timeout error with retries disabled
-				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
-				defer cancelFunc2()
-				_, _, operationErr = appConfigurationService.UpdateWorkflowconfigWithContext(ctx, updateWorkflowconfigOptionsModel)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
-			})
-			AfterEach(func() {
-				testServer.Close()
-			})
-		})
-		Context(`Using mock server endpoint`, func() {
-			BeforeEach(func() {
-				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
-					defer GinkgoRecover()
-
-					// Verify the contents of the request
-					Expect(req.URL.EscapedPath()).To(Equal(updateWorkflowconfigPath))
-					Expect(req.Method).To(Equal("PUT"))
-
-					// For gzip-disabled operation, verify Content-Encoding is not set.
-					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
-
-					// If there is a body, then make sure we can read it
-					bodyBuf := new(bytes.Buffer)
-					if req.Header.Get("Content-Encoding") == "gzip" {
-						body, err := core.NewGzipDecompressionReader(req.Body)
-						Expect(err).To(BeNil())
-						_, err = bodyBuf.ReadFrom(body)
-						Expect(err).To(BeNil())
-					} else {
-						_, err := bodyBuf.ReadFrom(req.Body)
-						Expect(err).To(BeNil())
-					}
-					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
-
-					// Set mock response
-					res.Header().Set("Content-type", "application/json")
-					res.WriteHeader(201)
-					fmt.Fprintf(res, "%s", `{"environment_name": "EnvironmentName", "environment_id": "EnvironmentID", "workflow_url": "WorkflowURL", "approval_group_name": "ApprovalGroupName", "approval_expiration": 1, "workflow_credentials": {"username": "admin", "password": "Password", "client_id": "f7b6379b55d08210f8ree233afc7256d", "client_secret": "ClientSecret"}, "enabled": false, "created_time": "2022-11-15T23:20:50.000Z", "updated_time": "2022-11-16T21:20:50.000Z", "href": "Href"}`)
-				}))
-			})
-			It(`Invoke UpdateWorkflowconfig successfully`, func() {
-				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
-					URL:           testServer.URL,
-					Authenticator: &core.NoAuthAuthenticator{},
-				})
-				Expect(serviceErr).To(BeNil())
-				Expect(appConfigurationService).ToNot(BeNil())
-
-				// Invoke operation with nil options model (negative test)
-				result, response, operationErr := appConfigurationService.UpdateWorkflowconfig(nil)
-				Expect(operationErr).NotTo(BeNil())
-				Expect(response).To(BeNil())
-				Expect(result).To(BeNil())
-
-				// Construct an instance of the ExternalServiceNowCredentials model
-				externalServiceNowCredentialsModel := new(appconfigurationv1.ExternalServiceNowCredentials)
-				externalServiceNowCredentialsModel.Username = core.StringPtr("user")
-				externalServiceNowCredentialsModel.Password = core.StringPtr("updated password")
-				externalServiceNowCredentialsModel.ClientID = core.StringPtr("client id value")
-				externalServiceNowCredentialsModel.ClientSecret = core.StringPtr("updated client secret")
-
-				// Construct an instance of the UpdateWorkflowConfigUpdateExternalServiceNow model
-				updateWorkflowConfigModel := new(appconfigurationv1.UpdateWorkflowConfigUpdateExternalServiceNow)
-				updateWorkflowConfigModel.WorkflowURL = core.StringPtr("https://xxxxx.service-now.com")
-				updateWorkflowConfigModel.ApprovalGroupName = core.StringPtr("WorkflowCRApprovers")
-				updateWorkflowConfigModel.ApprovalExpiration = core.Int64Ptr(int64(5))
-				updateWorkflowConfigModel.WorkflowCredentials = externalServiceNowCredentialsModel
-				updateWorkflowConfigModel.Enabled = core.BoolPtr(true)
-
-				// Construct an instance of the UpdateWorkflowconfigOptions model
-				updateWorkflowconfigOptionsModel := new(appconfigurationv1.UpdateWorkflowconfigOptions)
-				updateWorkflowconfigOptionsModel.EnvironmentID = core.StringPtr("environment_id")
-				updateWorkflowconfigOptionsModel.UpdateWorkflowConfig = updateWorkflowConfigModel
-				updateWorkflowconfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
-
-				// Invoke operation with valid options model (positive test)
-				result, response, operationErr = appConfigurationService.UpdateWorkflowconfig(updateWorkflowconfigOptionsModel)
-				Expect(operationErr).To(BeNil())
-				Expect(response).ToNot(BeNil())
-				Expect(result).ToNot(BeNil())
-
-			})
-			It(`Invoke UpdateWorkflowconfig with error: Operation validation and request error`, func() {
-				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
-					URL:           testServer.URL,
-					Authenticator: &core.NoAuthAuthenticator{},
-				})
-				Expect(serviceErr).To(BeNil())
-				Expect(appConfigurationService).ToNot(BeNil())
-
-				// Construct an instance of the ExternalServiceNowCredentials model
-				externalServiceNowCredentialsModel := new(appconfigurationv1.ExternalServiceNowCredentials)
-				externalServiceNowCredentialsModel.Username = core.StringPtr("user")
-				externalServiceNowCredentialsModel.Password = core.StringPtr("updated password")
-				externalServiceNowCredentialsModel.ClientID = core.StringPtr("client id value")
-				externalServiceNowCredentialsModel.ClientSecret = core.StringPtr("updated client secret")
-
-				// Construct an instance of the UpdateWorkflowConfigUpdateExternalServiceNow model
-				updateWorkflowConfigModel := new(appconfigurationv1.UpdateWorkflowConfigUpdateExternalServiceNow)
-				updateWorkflowConfigModel.WorkflowURL = core.StringPtr("https://xxxxx.service-now.com")
-				updateWorkflowConfigModel.ApprovalGroupName = core.StringPtr("WorkflowCRApprovers")
-				updateWorkflowConfigModel.ApprovalExpiration = core.Int64Ptr(int64(5))
-				updateWorkflowConfigModel.WorkflowCredentials = externalServiceNowCredentialsModel
-				updateWorkflowConfigModel.Enabled = core.BoolPtr(true)
-
-				// Construct an instance of the UpdateWorkflowconfigOptions model
-				updateWorkflowconfigOptionsModel := new(appconfigurationv1.UpdateWorkflowconfigOptions)
-				updateWorkflowconfigOptionsModel.EnvironmentID = core.StringPtr("environment_id")
-				updateWorkflowconfigOptionsModel.UpdateWorkflowConfig = updateWorkflowConfigModel
-				updateWorkflowconfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
-				// Invoke operation with empty URL (negative test)
-				err := appConfigurationService.SetServiceURL("")
-				Expect(err).To(BeNil())
-				result, response, operationErr := appConfigurationService.UpdateWorkflowconfig(updateWorkflowconfigOptionsModel)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
-				Expect(response).To(BeNil())
-				Expect(result).To(BeNil())
-				// Construct a second instance of the UpdateWorkflowconfigOptions model with no property values
-				updateWorkflowconfigOptionsModelNew := new(appconfigurationv1.UpdateWorkflowconfigOptions)
-				// Invoke operation with invalid model (negative test)
-				result, response, operationErr = appConfigurationService.UpdateWorkflowconfig(updateWorkflowconfigOptionsModelNew)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(response).To(BeNil())
-				Expect(result).To(BeNil())
-			})
-			AfterEach(func() {
-				testServer.Close()
-			})
-		})
-		Context(`Using mock server endpoint with missing response body`, func() {
-			BeforeEach(func() {
-				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
-					defer GinkgoRecover()
-
-					// Set success status code with no respoonse body
-					res.WriteHeader(201)
-				}))
-			})
-			It(`Invoke UpdateWorkflowconfig successfully`, func() {
-				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
-					URL:           testServer.URL,
-					Authenticator: &core.NoAuthAuthenticator{},
-				})
-				Expect(serviceErr).To(BeNil())
-				Expect(appConfigurationService).ToNot(BeNil())
-
-				// Construct an instance of the ExternalServiceNowCredentials model
-				externalServiceNowCredentialsModel := new(appconfigurationv1.ExternalServiceNowCredentials)
-				externalServiceNowCredentialsModel.Username = core.StringPtr("user")
-				externalServiceNowCredentialsModel.Password = core.StringPtr("updated password")
-				externalServiceNowCredentialsModel.ClientID = core.StringPtr("client id value")
-				externalServiceNowCredentialsModel.ClientSecret = core.StringPtr("updated client secret")
-
-				// Construct an instance of the UpdateWorkflowConfigUpdateExternalServiceNow model
-				updateWorkflowConfigModel := new(appconfigurationv1.UpdateWorkflowConfigUpdateExternalServiceNow)
-				updateWorkflowConfigModel.WorkflowURL = core.StringPtr("https://xxxxx.service-now.com")
-				updateWorkflowConfigModel.ApprovalGroupName = core.StringPtr("WorkflowCRApprovers")
-				updateWorkflowConfigModel.ApprovalExpiration = core.Int64Ptr(int64(5))
-				updateWorkflowConfigModel.WorkflowCredentials = externalServiceNowCredentialsModel
-				updateWorkflowConfigModel.Enabled = core.BoolPtr(true)
-
-				// Construct an instance of the UpdateWorkflowconfigOptions model
-				updateWorkflowconfigOptionsModel := new(appconfigurationv1.UpdateWorkflowconfigOptions)
-				updateWorkflowconfigOptionsModel.EnvironmentID = core.StringPtr("environment_id")
-				updateWorkflowconfigOptionsModel.UpdateWorkflowConfig = updateWorkflowConfigModel
-				updateWorkflowconfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
-
-				// Invoke operation
-				result, response, operationErr := appConfigurationService.UpdateWorkflowconfig(updateWorkflowconfigOptionsModel)
-				Expect(operationErr).To(BeNil())
-				Expect(response).ToNot(BeNil())
-
-				// Verify a nil result
-				Expect(result).To(BeNil())
-			})
-			AfterEach(func() {
-				testServer.Close()
-			})
-		})
-	})
-	Describe(`DeleteWorkflowconfig(deleteWorkflowconfigOptions *DeleteWorkflowconfigOptions)`, func() {
-		deleteWorkflowconfigPath := "/environments/environment_id/workflowconfigs"
-		Context(`Using mock server endpoint`, func() {
-			BeforeEach(func() {
-				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
-					defer GinkgoRecover()
-
-					// Verify the contents of the request
-					Expect(req.URL.EscapedPath()).To(Equal(deleteWorkflowconfigPath))
-					Expect(req.Method).To(Equal("DELETE"))
-
-					res.WriteHeader(204)
-				}))
-			})
-			It(`Invoke DeleteWorkflowconfig successfully`, func() {
-				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
-					URL:           testServer.URL,
-					Authenticator: &core.NoAuthAuthenticator{},
-				})
-				Expect(serviceErr).To(BeNil())
-				Expect(appConfigurationService).ToNot(BeNil())
-
-				// Invoke operation with nil options model (negative test)
-				response, operationErr := appConfigurationService.DeleteWorkflowconfig(nil)
-				Expect(operationErr).NotTo(BeNil())
-				Expect(response).To(BeNil())
-
-				// Construct an instance of the DeleteWorkflowconfigOptions model
-				deleteWorkflowconfigOptionsModel := new(appconfigurationv1.DeleteWorkflowconfigOptions)
-				deleteWorkflowconfigOptionsModel.EnvironmentID = core.StringPtr("environment_id")
-				deleteWorkflowconfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
-
-				// Invoke operation with valid options model (positive test)
-				response, operationErr = appConfigurationService.DeleteWorkflowconfig(deleteWorkflowconfigOptionsModel)
-				Expect(operationErr).To(BeNil())
-				Expect(response).ToNot(BeNil())
-			})
-			It(`Invoke DeleteWorkflowconfig with error: Operation validation and request error`, func() {
-				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
-					URL:           testServer.URL,
-					Authenticator: &core.NoAuthAuthenticator{},
-				})
-				Expect(serviceErr).To(BeNil())
-				Expect(appConfigurationService).ToNot(BeNil())
-
-				// Construct an instance of the DeleteWorkflowconfigOptions model
-				deleteWorkflowconfigOptionsModel := new(appconfigurationv1.DeleteWorkflowconfigOptions)
-				deleteWorkflowconfigOptionsModel.EnvironmentID = core.StringPtr("environment_id")
-				deleteWorkflowconfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
-				// Invoke operation with empty URL (negative test)
-				err := appConfigurationService.SetServiceURL("")
-				Expect(err).To(BeNil())
-				response, operationErr := appConfigurationService.DeleteWorkflowconfig(deleteWorkflowconfigOptionsModel)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
-				Expect(response).To(BeNil())
-				// Construct a second instance of the DeleteWorkflowconfigOptions model with no property values
-				deleteWorkflowconfigOptionsModelNew := new(appconfigurationv1.DeleteWorkflowconfigOptions)
-				// Invoke operation with invalid model (negative test)
-				response, operationErr = appConfigurationService.DeleteWorkflowconfig(deleteWorkflowconfigOptionsModelNew)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(response).To(BeNil())
 			})
 			AfterEach(func() {
 				testServer.Close()
@@ -16662,11 +15884,17 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				rolloutPhaseModel.Duration = core.Int64Ptr(int64(38))
 				rolloutPhaseModel.DurationType = core.StringPtr("days")
 
+				// Construct an instance of the RolloutMetric model
+				rolloutMetricModel := new(appconfigurationv1.RolloutMetric)
+				rolloutMetricModel.MetricID = core.StringPtr("mtlwx65j")
+				rolloutMetricModel.AutoRollback = core.BoolPtr(false)
+
 				// Construct an instance of the RolloutConfiguration model
 				rolloutConfigurationModel := new(appconfigurationv1.RolloutConfiguration)
 				rolloutConfigurationModel.DurationPreset = core.StringPtr("CUSTOM")
 				rolloutConfigurationModel.StartAt = CreateMockDateTime("2019-01-01T12:00:00.000Z")
 				rolloutConfigurationModel.Phases = []appconfigurationv1.RolloutPhase{*rolloutPhaseModel}
+				rolloutConfigurationModel.Metrics = []appconfigurationv1.RolloutMetric{*rolloutMetricModel}
 
 				// Construct an instance of the TargetSegments model
 				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
@@ -16830,11 +16058,17 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				rolloutPhaseModel.Duration = core.Int64Ptr(int64(38))
 				rolloutPhaseModel.DurationType = core.StringPtr("days")
 
+				// Construct an instance of the RolloutMetric model
+				rolloutMetricModel := new(appconfigurationv1.RolloutMetric)
+				rolloutMetricModel.MetricID = core.StringPtr("mtlwx65j")
+				rolloutMetricModel.AutoRollback = core.BoolPtr(false)
+
 				// Construct an instance of the RolloutConfiguration model
 				rolloutConfigurationModel := new(appconfigurationv1.RolloutConfiguration)
 				rolloutConfigurationModel.DurationPreset = core.StringPtr("CUSTOM")
 				rolloutConfigurationModel.StartAt = CreateMockDateTime("2019-01-01T12:00:00.000Z")
 				rolloutConfigurationModel.Phases = []appconfigurationv1.RolloutPhase{*rolloutPhaseModel}
+				rolloutConfigurationModel.Metrics = []appconfigurationv1.RolloutMetric{*rolloutMetricModel}
 
 				// Construct an instance of the TargetSegments model
 				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
@@ -17006,11 +16240,17 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				rolloutPhaseModel.Duration = core.Int64Ptr(int64(38))
 				rolloutPhaseModel.DurationType = core.StringPtr("days")
 
+				// Construct an instance of the RolloutMetric model
+				rolloutMetricModel := new(appconfigurationv1.RolloutMetric)
+				rolloutMetricModel.MetricID = core.StringPtr("mtlwx65j")
+				rolloutMetricModel.AutoRollback = core.BoolPtr(false)
+
 				// Construct an instance of the RolloutConfiguration model
 				rolloutConfigurationModel := new(appconfigurationv1.RolloutConfiguration)
 				rolloutConfigurationModel.DurationPreset = core.StringPtr("CUSTOM")
 				rolloutConfigurationModel.StartAt = CreateMockDateTime("2019-01-01T12:00:00.000Z")
 				rolloutConfigurationModel.Phases = []appconfigurationv1.RolloutPhase{*rolloutPhaseModel}
+				rolloutConfigurationModel.Metrics = []appconfigurationv1.RolloutMetric{*rolloutMetricModel}
 
 				// Construct an instance of the TargetSegments model
 				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
@@ -17126,11 +16366,17 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				rolloutPhaseModel.Duration = core.Int64Ptr(int64(38))
 				rolloutPhaseModel.DurationType = core.StringPtr("days")
 
+				// Construct an instance of the RolloutMetric model
+				rolloutMetricModel := new(appconfigurationv1.RolloutMetric)
+				rolloutMetricModel.MetricID = core.StringPtr("mtlwx65j")
+				rolloutMetricModel.AutoRollback = core.BoolPtr(false)
+
 				// Construct an instance of the RolloutConfiguration model
 				rolloutConfigurationModel := new(appconfigurationv1.RolloutConfiguration)
 				rolloutConfigurationModel.DurationPreset = core.StringPtr("CUSTOM")
 				rolloutConfigurationModel.StartAt = CreateMockDateTime("2019-01-01T12:00:00.000Z")
 				rolloutConfigurationModel.Phases = []appconfigurationv1.RolloutPhase{*rolloutPhaseModel}
+				rolloutConfigurationModel.Metrics = []appconfigurationv1.RolloutMetric{*rolloutMetricModel}
 
 				// Construct an instance of the TargetSegments model
 				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
@@ -17260,11 +16506,17 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				rolloutPhaseModel.Duration = core.Int64Ptr(int64(38))
 				rolloutPhaseModel.DurationType = core.StringPtr("days")
 
+				// Construct an instance of the RolloutMetric model
+				rolloutMetricModel := new(appconfigurationv1.RolloutMetric)
+				rolloutMetricModel.MetricID = core.StringPtr("mtlwx65j")
+				rolloutMetricModel.AutoRollback = core.BoolPtr(false)
+
 				// Construct an instance of the RolloutConfiguration model
 				rolloutConfigurationModel := new(appconfigurationv1.RolloutConfiguration)
 				rolloutConfigurationModel.DurationPreset = core.StringPtr("CUSTOM")
 				rolloutConfigurationModel.StartAt = CreateMockDateTime("2019-01-01T12:00:00.000Z")
 				rolloutConfigurationModel.Phases = []appconfigurationv1.RolloutPhase{*rolloutPhaseModel}
+				rolloutConfigurationModel.Metrics = []appconfigurationv1.RolloutMetric{*rolloutMetricModel}
 
 				// Construct an instance of the TargetSegments model
 				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
@@ -17433,7 +16685,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"environments": [{"name": "Name", "environment_id": "EnvironmentID", "description": "Description", "tags": "Tags", "color_code": "#FDD13A", "features": [{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED"}, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED"}, "rule_id": "RuleID", "rule_name": "RuleName"}], "collections": [{"collection_id": "CollectionID", "name": "Name"}]}], "properties": [{"name": "Name", "property_id": "PropertyID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "value": "anyValue", "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5}], "collections": [{"collection_id": "CollectionID", "name": "Name"}]}]}], "collections": [{"collection_id": "CollectionID", "name": "Name", "description": "Description", "tags": "Tags"}], "segments": [{"name": "Name", "segment_id": "SegmentID", "description": "Description", "tags": "Tags", "rules": [{"attribute_name": "AttributeName", "operator": "is", "values": ["Values"]}]}]}`)
+					fmt.Fprintf(res, "%s", `{"environments": [{"name": "Name", "environment_id": "EnvironmentID", "description": "Description", "tags": "Tags", "color_code": "#FDD13A", "features": [{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED", "metrics": [{"metric_id": "mtlwx65j", "auto_rollback": false, "metric_name": "feature-clicked", "direction": "HIGHER", "metric_type": "BINARY"}]}, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED", "metrics": [{"metric_id": "mtlwx65j", "auto_rollback": false, "metric_name": "feature-clicked", "direction": "HIGHER", "metric_type": "BINARY"}]}, "rule_id": "RuleID", "rule_name": "RuleName"}], "collections": [{"collection_id": "CollectionID", "name": "Name"}]}], "properties": [{"name": "Name", "property_id": "PropertyID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "value": "anyValue", "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5}], "collections": [{"collection_id": "CollectionID", "name": "Name"}]}]}], "collections": [{"collection_id": "CollectionID", "name": "Name", "description": "Description", "tags": "Tags"}], "segments": [{"name": "Name", "segment_id": "SegmentID", "description": "Description", "tags": "Tags", "rules": [{"attribute_name": "AttributeName", "operator": "is", "values": ["Values"]}]}]}`)
 				}))
 			})
 			It(`Invoke ListInstanceConfig successfully with retries`, func() {
@@ -17486,7 +16738,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"environments": [{"name": "Name", "environment_id": "EnvironmentID", "description": "Description", "tags": "Tags", "color_code": "#FDD13A", "features": [{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED"}, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED"}, "rule_id": "RuleID", "rule_name": "RuleName"}], "collections": [{"collection_id": "CollectionID", "name": "Name"}]}], "properties": [{"name": "Name", "property_id": "PropertyID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "value": "anyValue", "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5}], "collections": [{"collection_id": "CollectionID", "name": "Name"}]}]}], "collections": [{"collection_id": "CollectionID", "name": "Name", "description": "Description", "tags": "Tags"}], "segments": [{"name": "Name", "segment_id": "SegmentID", "description": "Description", "tags": "Tags", "rules": [{"attribute_name": "AttributeName", "operator": "is", "values": ["Values"]}]}]}`)
+					fmt.Fprintf(res, "%s", `{"environments": [{"name": "Name", "environment_id": "EnvironmentID", "description": "Description", "tags": "Tags", "color_code": "#FDD13A", "features": [{"name": "Name", "feature_id": "FeatureID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "enabled_value": "anyValue", "disabled_value": "anyValue", "enabled": false, "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED", "metrics": [{"metric_id": "mtlwx65j", "auto_rollback": false, "metric_name": "feature-clicked", "direction": "HIGHER", "metric_type": "BINARY"}]}, "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED", "metrics": [{"metric_id": "mtlwx65j", "auto_rollback": false, "metric_name": "feature-clicked", "direction": "HIGHER", "metric_type": "BINARY"}]}, "rule_id": "RuleID", "rule_name": "RuleName"}], "collections": [{"collection_id": "CollectionID", "name": "Name"}]}], "properties": [{"name": "Name", "property_id": "PropertyID", "description": "Description", "type": "BOOLEAN", "format": "TEXT", "value": "anyValue", "tags": "Tags", "segment_rules": [{"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5}], "collections": [{"collection_id": "CollectionID", "name": "Name"}]}]}], "collections": [{"collection_id": "CollectionID", "name": "Name", "description": "Description", "tags": "Tags"}], "segments": [{"name": "Name", "segment_id": "SegmentID", "description": "Description", "tags": "Tags", "rules": [{"attribute_name": "AttributeName", "operator": "is", "values": ["Values"]}]}]}`)
 				}))
 			})
 			It(`Invoke ListInstanceConfig successfully`, func() {
@@ -18015,6 +17267,2237 @@ var _ = Describe(`AppConfigurationV1`, func() {
 			})
 		})
 	})
+	Describe(`ListGuardedRollouts(listGuardedRolloutsOptions *ListGuardedRolloutsOptions) - Operation response error`, func() {
+		listGuardedRolloutsPath := "/environments/environment_id/features/feature_id/guarded-rollouts"
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(listGuardedRolloutsPath))
+					Expect(req.Method).To(Equal("GET"))
+					Expect(req.URL.Query()["limit"]).To(Equal([]string{fmt.Sprint(int64(10))}))
+					Expect(req.URL.Query()["offset"]).To(Equal([]string{fmt.Sprint(int64(0))}))
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprint(res, `} this is not valid json {`)
+				}))
+			})
+			It(`Invoke ListGuardedRollouts with error: Operation response processing error`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the ListGuardedRolloutsOptions model
+				listGuardedRolloutsOptionsModel := new(appconfigurationv1.ListGuardedRolloutsOptions)
+				listGuardedRolloutsOptionsModel.EnvironmentID = core.StringPtr("environment_id")
+				listGuardedRolloutsOptionsModel.FeatureID = core.StringPtr("feature_id")
+				listGuardedRolloutsOptionsModel.Limit = core.Int64Ptr(int64(10))
+				listGuardedRolloutsOptionsModel.Offset = core.Int64Ptr(int64(0))
+				listGuardedRolloutsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Expect response parsing to fail since we are receiving a text/plain response
+				result, response, operationErr := appConfigurationService.ListGuardedRollouts(listGuardedRolloutsOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				appConfigurationService.EnableRetries(0, 0)
+				result, response, operationErr = appConfigurationService.ListGuardedRollouts(listGuardedRolloutsOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`ListGuardedRollouts(listGuardedRolloutsOptions *ListGuardedRolloutsOptions)`, func() {
+		listGuardedRolloutsPath := "/environments/environment_id/features/feature_id/guarded-rollouts"
+		Context(`Using mock server endpoint with timeout`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(listGuardedRolloutsPath))
+					Expect(req.Method).To(Equal("GET"))
+
+					Expect(req.URL.Query()["limit"]).To(Equal([]string{fmt.Sprint(int64(10))}))
+					Expect(req.URL.Query()["offset"]).To(Equal([]string{fmt.Sprint(int64(0))}))
+					// Sleep a short time to support a timeout test
+					time.Sleep(100 * time.Millisecond)
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"guarded_rollouts": [{"rollout_id": "2e195ab5-70a3-44e9-824b-3d0631cf360b", "rule_id": "rule-id-1", "start_time": "2026-08-17T02:00:47.000Z", "end_time": "2026-08-17T14:00:47.000Z", "status": "IN_PROGRESS"}], "limit": 10, "offset": 0, "total_count": 0, "first": {"href": "Href"}, "previous": {"href": "Href"}, "next": {"href": "Href"}, "last": {"href": "Href"}}`)
+				}))
+			})
+			It(`Invoke ListGuardedRollouts successfully with retries`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+				appConfigurationService.EnableRetries(0, 0)
+
+				// Construct an instance of the ListGuardedRolloutsOptions model
+				listGuardedRolloutsOptionsModel := new(appconfigurationv1.ListGuardedRolloutsOptions)
+				listGuardedRolloutsOptionsModel.EnvironmentID = core.StringPtr("environment_id")
+				listGuardedRolloutsOptionsModel.FeatureID = core.StringPtr("feature_id")
+				listGuardedRolloutsOptionsModel.Limit = core.Int64Ptr(int64(10))
+				listGuardedRolloutsOptionsModel.Offset = core.Int64Ptr(int64(0))
+				listGuardedRolloutsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with a Context to test a timeout error
+				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc()
+				_, _, operationErr := appConfigurationService.ListGuardedRolloutsWithContext(ctx, listGuardedRolloutsOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+
+				// Disable retries and test again
+				appConfigurationService.DisableRetries()
+				result, response, operationErr := appConfigurationService.ListGuardedRollouts(listGuardedRolloutsOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				_, _, operationErr = appConfigurationService.ListGuardedRolloutsWithContext(ctx, listGuardedRolloutsOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(listGuardedRolloutsPath))
+					Expect(req.Method).To(Equal("GET"))
+
+					Expect(req.URL.Query()["limit"]).To(Equal([]string{fmt.Sprint(int64(10))}))
+					Expect(req.URL.Query()["offset"]).To(Equal([]string{fmt.Sprint(int64(0))}))
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"guarded_rollouts": [{"rollout_id": "2e195ab5-70a3-44e9-824b-3d0631cf360b", "rule_id": "rule-id-1", "start_time": "2026-08-17T02:00:47.000Z", "end_time": "2026-08-17T14:00:47.000Z", "status": "IN_PROGRESS"}], "limit": 10, "offset": 0, "total_count": 0, "first": {"href": "Href"}, "previous": {"href": "Href"}, "next": {"href": "Href"}, "last": {"href": "Href"}}`)
+				}))
+			})
+			It(`Invoke ListGuardedRollouts successfully`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Invoke operation with nil options model (negative test)
+				result, response, operationErr := appConfigurationService.ListGuardedRollouts(nil)
+				Expect(operationErr).NotTo(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+
+				// Construct an instance of the ListGuardedRolloutsOptions model
+				listGuardedRolloutsOptionsModel := new(appconfigurationv1.ListGuardedRolloutsOptions)
+				listGuardedRolloutsOptionsModel.EnvironmentID = core.StringPtr("environment_id")
+				listGuardedRolloutsOptionsModel.FeatureID = core.StringPtr("feature_id")
+				listGuardedRolloutsOptionsModel.Limit = core.Int64Ptr(int64(10))
+				listGuardedRolloutsOptionsModel.Offset = core.Int64Ptr(int64(0))
+				listGuardedRolloutsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with valid options model (positive test)
+				result, response, operationErr = appConfigurationService.ListGuardedRollouts(listGuardedRolloutsOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+			})
+			It(`Invoke ListGuardedRollouts with error: Operation validation and request error`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the ListGuardedRolloutsOptions model
+				listGuardedRolloutsOptionsModel := new(appconfigurationv1.ListGuardedRolloutsOptions)
+				listGuardedRolloutsOptionsModel.EnvironmentID = core.StringPtr("environment_id")
+				listGuardedRolloutsOptionsModel.FeatureID = core.StringPtr("feature_id")
+				listGuardedRolloutsOptionsModel.Limit = core.Int64Ptr(int64(10))
+				listGuardedRolloutsOptionsModel.Offset = core.Int64Ptr(int64(0))
+				listGuardedRolloutsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Invoke operation with empty URL (negative test)
+				err := appConfigurationService.SetServiceURL("")
+				Expect(err).To(BeNil())
+				result, response, operationErr := appConfigurationService.ListGuardedRollouts(listGuardedRolloutsOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+				// Construct a second instance of the ListGuardedRolloutsOptions model with no property values
+				listGuardedRolloutsOptionsModelNew := new(appconfigurationv1.ListGuardedRolloutsOptions)
+				// Invoke operation with invalid model (negative test)
+				result, response, operationErr = appConfigurationService.ListGuardedRollouts(listGuardedRolloutsOptionsModelNew)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke ListGuardedRollouts successfully`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the ListGuardedRolloutsOptions model
+				listGuardedRolloutsOptionsModel := new(appconfigurationv1.ListGuardedRolloutsOptions)
+				listGuardedRolloutsOptionsModel.EnvironmentID = core.StringPtr("environment_id")
+				listGuardedRolloutsOptionsModel.FeatureID = core.StringPtr("feature_id")
+				listGuardedRolloutsOptionsModel.Limit = core.Int64Ptr(int64(10))
+				listGuardedRolloutsOptionsModel.Offset = core.Int64Ptr(int64(0))
+				listGuardedRolloutsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := appConfigurationService.ListGuardedRollouts(listGuardedRolloutsOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Test pagination helper method on response`, func() {
+			It(`Invoke GetNextOffset successfully`, func() {
+				responseObject := new(appconfigurationv1.GuardedRolloutsList)
+				nextObject := new(appconfigurationv1.PaginatedListNext)
+				nextObject.Href = core.StringPtr("ibm.com?offset=135")
+				responseObject.Next = nextObject
+
+				value, err := responseObject.GetNextOffset()
+				Expect(err).To(BeNil())
+				Expect(value).To(Equal(core.Int64Ptr(int64(135))))
+			})
+			It(`Invoke GetNextOffset without a "Next" property in the response`, func() {
+				responseObject := new(appconfigurationv1.GuardedRolloutsList)
+
+				value, err := responseObject.GetNextOffset()
+				Expect(err).To(BeNil())
+				Expect(value).To(BeNil())
+			})
+			It(`Invoke GetNextOffset without any query params in the "Next" URL`, func() {
+				responseObject := new(appconfigurationv1.GuardedRolloutsList)
+				nextObject := new(appconfigurationv1.PaginatedListNext)
+				nextObject.Href = core.StringPtr("ibm.com")
+				responseObject.Next = nextObject
+
+				value, err := responseObject.GetNextOffset()
+				Expect(err).To(BeNil())
+				Expect(value).To(BeNil())
+			})
+			It(`Invoke GetNextOffset with a non-integer query param in the "Next" URL`, func() {
+				responseObject := new(appconfigurationv1.GuardedRolloutsList)
+				nextObject := new(appconfigurationv1.PaginatedListNext)
+				nextObject.Href = core.StringPtr("ibm.com?offset=tiger")
+				responseObject.Next = nextObject
+
+				value, err := responseObject.GetNextOffset()
+				Expect(err).NotTo(BeNil())
+				Expect(value).To(BeNil())
+			})
+		})
+		Context(`Using mock server endpoint - paginated response`, func() {
+			BeforeEach(func() {
+				requestNumber := 0
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(listGuardedRolloutsPath))
+					Expect(req.Method).To(Equal("GET"))
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					requestNumber++
+					switch requestNumber {
+					case 1:
+						fmt.Fprintf(res, "%s", `{"next":{"href":"https://myhost.com/somePath?offset=1"},"guarded_rollouts":[{"rollout_id":"2e195ab5-70a3-44e9-824b-3d0631cf360b","rule_id":"rule-id-1","start_time":"2026-08-17T02:00:47.000Z","end_time":"2026-08-17T14:00:47.000Z","status":"IN_PROGRESS"}],"total_count":2,"limit":1}`)
+					case 2:
+						fmt.Fprintf(res, "%s", `{"guarded_rollouts":[{"rollout_id":"2e195ab5-70a3-44e9-824b-3d0631cf360b","rule_id":"rule-id-1","start_time":"2026-08-17T02:00:47.000Z","end_time":"2026-08-17T14:00:47.000Z","status":"IN_PROGRESS"}],"total_count":2,"limit":1}`)
+					default:
+						res.WriteHeader(400)
+					}
+				}))
+			})
+			It(`Use GuardedRolloutsPager.GetNext successfully`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				listGuardedRolloutsOptionsModel := &appconfigurationv1.ListGuardedRolloutsOptions{
+					EnvironmentID: core.StringPtr("environment_id"),
+					FeatureID: core.StringPtr("feature_id"),
+					Limit: core.Int64Ptr(int64(10)),
+				}
+
+				pager, err := appConfigurationService.NewGuardedRolloutsPager(listGuardedRolloutsOptionsModel)
+				Expect(err).To(BeNil())
+				Expect(pager).ToNot(BeNil())
+
+				var allResults []appconfigurationv1.GuardedRollout
+				for pager.HasNext() {
+					nextPage, err := pager.GetNext()
+					Expect(err).To(BeNil())
+					Expect(nextPage).ToNot(BeNil())
+					allResults = append(allResults, nextPage...)
+				}
+				Expect(len(allResults)).To(Equal(2))
+			})
+			It(`Use GuardedRolloutsPager.GetAll successfully`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				listGuardedRolloutsOptionsModel := &appconfigurationv1.ListGuardedRolloutsOptions{
+					EnvironmentID: core.StringPtr("environment_id"),
+					FeatureID: core.StringPtr("feature_id"),
+					Limit: core.Int64Ptr(int64(10)),
+				}
+
+				pager, err := appConfigurationService.NewGuardedRolloutsPager(listGuardedRolloutsOptionsModel)
+				Expect(err).To(BeNil())
+				Expect(pager).ToNot(BeNil())
+
+				allResults, err := pager.GetAll()
+				Expect(err).To(BeNil())
+				Expect(allResults).ToNot(BeNil())
+				Expect(len(allResults)).To(Equal(2))
+			})
+		})
+	})
+	Describe(`GetGuardedRollout(getGuardedRolloutOptions *GetGuardedRolloutOptions) - Operation response error`, func() {
+		getGuardedRolloutPath := "/environments/environment_id/features/feature_id/guarded-rollouts/2e195ab5-70a3-44e9-824b-3d0631cf360b"
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(getGuardedRolloutPath))
+					Expect(req.Method).To(Equal("GET"))
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprint(res, `} this is not valid json {`)
+				}))
+			})
+			It(`Invoke GetGuardedRollout with error: Operation response processing error`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the GetGuardedRolloutOptions model
+				getGuardedRolloutOptionsModel := new(appconfigurationv1.GetGuardedRolloutOptions)
+				getGuardedRolloutOptionsModel.EnvironmentID = core.StringPtr("environment_id")
+				getGuardedRolloutOptionsModel.FeatureID = core.StringPtr("feature_id")
+				getGuardedRolloutOptionsModel.RolloutID = core.StringPtr("2e195ab5-70a3-44e9-824b-3d0631cf360b")
+				getGuardedRolloutOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Expect response parsing to fail since we are receiving a text/plain response
+				result, response, operationErr := appConfigurationService.GetGuardedRollout(getGuardedRolloutOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				appConfigurationService.EnableRetries(0, 0)
+				result, response, operationErr = appConfigurationService.GetGuardedRollout(getGuardedRolloutOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`GetGuardedRollout(getGuardedRolloutOptions *GetGuardedRolloutOptions)`, func() {
+		getGuardedRolloutPath := "/environments/environment_id/features/feature_id/guarded-rollouts/2e195ab5-70a3-44e9-824b-3d0631cf360b"
+		Context(`Using mock server endpoint with timeout`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(getGuardedRolloutPath))
+					Expect(req.Method).To(Equal("GET"))
+
+					// Sleep a short time to support a timeout test
+					time.Sleep(100 * time.Millisecond)
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"rollout_id": "2e195ab5-70a3-44e9-824b-3d0631cf360b", "rule_id": "IBMers", "rule": {"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED", "metrics": [{"metric_id": "mtlwx65j", "auto_rollback": false, "metric_name": "feature-clicked", "direction": "HIGHER", "metric_type": "BINARY"}]}, "rule_id": "RuleID", "rule_name": "RuleName"}, "start_time": "2026-08-17T02:00:47.000Z", "end_time": "2026-08-17T14:00:47.000Z", "status": "IN_PROGRESS", "description": "Successfully completed the guarded rollout", "current_phase_index": 3, "phases": [{"phase_index": 0, "percentage": 5, "duration": 12, "duration_type": "minutes", "extended": true}], "feature_snapshot": {"collections": [{"collection_id": "CollectionID", "name": "Name"}], "enabled_value": "anyValue", "disabled_value": "anyValue"}, "metrics": [{"metric_id": "my-final-metric", "metric_name": "Error Rate", "description": "Tracks error rate as a percentage; lower values are better.", "event_key": "error-rate", "metric_type": "BINARY", "direction": "HIGHER", "auto_rollback": false, "status": "HEALTHY", "sub_status": "PHASE_EXTEND", "last_regression_detected_time": "2026-08-17T02:14:40.000Z", "last_regression_dismissed_time": "2026-08-17T02:14:40.000Z", "last_event_received_time": "2026-08-17T02:14:40.000Z"}]}`)
+				}))
+			})
+			It(`Invoke GetGuardedRollout successfully with retries`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+				appConfigurationService.EnableRetries(0, 0)
+
+				// Construct an instance of the GetGuardedRolloutOptions model
+				getGuardedRolloutOptionsModel := new(appconfigurationv1.GetGuardedRolloutOptions)
+				getGuardedRolloutOptionsModel.EnvironmentID = core.StringPtr("environment_id")
+				getGuardedRolloutOptionsModel.FeatureID = core.StringPtr("feature_id")
+				getGuardedRolloutOptionsModel.RolloutID = core.StringPtr("2e195ab5-70a3-44e9-824b-3d0631cf360b")
+				getGuardedRolloutOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with a Context to test a timeout error
+				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc()
+				_, _, operationErr := appConfigurationService.GetGuardedRolloutWithContext(ctx, getGuardedRolloutOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+
+				// Disable retries and test again
+				appConfigurationService.DisableRetries()
+				result, response, operationErr := appConfigurationService.GetGuardedRollout(getGuardedRolloutOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				_, _, operationErr = appConfigurationService.GetGuardedRolloutWithContext(ctx, getGuardedRolloutOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(getGuardedRolloutPath))
+					Expect(req.Method).To(Equal("GET"))
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"rollout_id": "2e195ab5-70a3-44e9-824b-3d0631cf360b", "rule_id": "IBMers", "rule": {"rules": [{"segments": ["Segments"]}], "value": "anyValue", "order": 5, "rollout_percentage": 100, "rollout_type": "MANUAL", "rollout_configuration": {"duration_preset": "CUSTOM", "start_at": "2019-01-01T12:00:00.000Z", "phases": [{"percentage": 1, "duration": 8, "duration_type": "days"}], "status": "QUEUED", "metrics": [{"metric_id": "mtlwx65j", "auto_rollback": false, "metric_name": "feature-clicked", "direction": "HIGHER", "metric_type": "BINARY"}]}, "rule_id": "RuleID", "rule_name": "RuleName"}, "start_time": "2026-08-17T02:00:47.000Z", "end_time": "2026-08-17T14:00:47.000Z", "status": "IN_PROGRESS", "description": "Successfully completed the guarded rollout", "current_phase_index": 3, "phases": [{"phase_index": 0, "percentage": 5, "duration": 12, "duration_type": "minutes", "extended": true}], "feature_snapshot": {"collections": [{"collection_id": "CollectionID", "name": "Name"}], "enabled_value": "anyValue", "disabled_value": "anyValue"}, "metrics": [{"metric_id": "my-final-metric", "metric_name": "Error Rate", "description": "Tracks error rate as a percentage; lower values are better.", "event_key": "error-rate", "metric_type": "BINARY", "direction": "HIGHER", "auto_rollback": false, "status": "HEALTHY", "sub_status": "PHASE_EXTEND", "last_regression_detected_time": "2026-08-17T02:14:40.000Z", "last_regression_dismissed_time": "2026-08-17T02:14:40.000Z", "last_event_received_time": "2026-08-17T02:14:40.000Z"}]}`)
+				}))
+			})
+			It(`Invoke GetGuardedRollout successfully`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Invoke operation with nil options model (negative test)
+				result, response, operationErr := appConfigurationService.GetGuardedRollout(nil)
+				Expect(operationErr).NotTo(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+
+				// Construct an instance of the GetGuardedRolloutOptions model
+				getGuardedRolloutOptionsModel := new(appconfigurationv1.GetGuardedRolloutOptions)
+				getGuardedRolloutOptionsModel.EnvironmentID = core.StringPtr("environment_id")
+				getGuardedRolloutOptionsModel.FeatureID = core.StringPtr("feature_id")
+				getGuardedRolloutOptionsModel.RolloutID = core.StringPtr("2e195ab5-70a3-44e9-824b-3d0631cf360b")
+				getGuardedRolloutOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with valid options model (positive test)
+				result, response, operationErr = appConfigurationService.GetGuardedRollout(getGuardedRolloutOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+			})
+			It(`Invoke GetGuardedRollout with error: Operation validation and request error`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the GetGuardedRolloutOptions model
+				getGuardedRolloutOptionsModel := new(appconfigurationv1.GetGuardedRolloutOptions)
+				getGuardedRolloutOptionsModel.EnvironmentID = core.StringPtr("environment_id")
+				getGuardedRolloutOptionsModel.FeatureID = core.StringPtr("feature_id")
+				getGuardedRolloutOptionsModel.RolloutID = core.StringPtr("2e195ab5-70a3-44e9-824b-3d0631cf360b")
+				getGuardedRolloutOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Invoke operation with empty URL (negative test)
+				err := appConfigurationService.SetServiceURL("")
+				Expect(err).To(BeNil())
+				result, response, operationErr := appConfigurationService.GetGuardedRollout(getGuardedRolloutOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+				// Construct a second instance of the GetGuardedRolloutOptions model with no property values
+				getGuardedRolloutOptionsModelNew := new(appconfigurationv1.GetGuardedRolloutOptions)
+				// Invoke operation with invalid model (negative test)
+				result, response, operationErr = appConfigurationService.GetGuardedRollout(getGuardedRolloutOptionsModelNew)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke GetGuardedRollout successfully`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the GetGuardedRolloutOptions model
+				getGuardedRolloutOptionsModel := new(appconfigurationv1.GetGuardedRolloutOptions)
+				getGuardedRolloutOptionsModel.EnvironmentID = core.StringPtr("environment_id")
+				getGuardedRolloutOptionsModel.FeatureID = core.StringPtr("feature_id")
+				getGuardedRolloutOptionsModel.RolloutID = core.StringPtr("2e195ab5-70a3-44e9-824b-3d0631cf360b")
+				getGuardedRolloutOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := appConfigurationService.GetGuardedRollout(getGuardedRolloutOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`GetGuardedRolloutMetric(getGuardedRolloutMetricOptions *GetGuardedRolloutMetricOptions) - Operation response error`, func() {
+		getGuardedRolloutMetricPath := "/environments/environment_id/features/feature_id/guarded-rollouts/2e195ab5-70a3-44e9-824b-3d0631cf360b/metrics/user-clicks"
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(getGuardedRolloutMetricPath))
+					Expect(req.Method).To(Equal("GET"))
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprint(res, `} this is not valid json {`)
+				}))
+			})
+			It(`Invoke GetGuardedRolloutMetric with error: Operation response processing error`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the GetGuardedRolloutMetricOptions model
+				getGuardedRolloutMetricOptionsModel := new(appconfigurationv1.GetGuardedRolloutMetricOptions)
+				getGuardedRolloutMetricOptionsModel.EnvironmentID = core.StringPtr("environment_id")
+				getGuardedRolloutMetricOptionsModel.FeatureID = core.StringPtr("feature_id")
+				getGuardedRolloutMetricOptionsModel.RolloutID = core.StringPtr("2e195ab5-70a3-44e9-824b-3d0631cf360b")
+				getGuardedRolloutMetricOptionsModel.MetricID = core.StringPtr("user-clicks")
+				getGuardedRolloutMetricOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Expect response parsing to fail since we are receiving a text/plain response
+				result, response, operationErr := appConfigurationService.GetGuardedRolloutMetric(getGuardedRolloutMetricOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				appConfigurationService.EnableRetries(0, 0)
+				result, response, operationErr = appConfigurationService.GetGuardedRolloutMetric(getGuardedRolloutMetricOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`GetGuardedRolloutMetric(getGuardedRolloutMetricOptions *GetGuardedRolloutMetricOptions)`, func() {
+		getGuardedRolloutMetricPath := "/environments/environment_id/features/feature_id/guarded-rollouts/2e195ab5-70a3-44e9-824b-3d0631cf360b/metrics/user-clicks"
+		Context(`Using mock server endpoint with timeout`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(getGuardedRolloutMetricPath))
+					Expect(req.Method).To(Equal("GET"))
+
+					// Sleep a short time to support a timeout test
+					time.Sleep(100 * time.Millisecond)
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"rollout_id": "4cfe724a-770b-4819-9fa8-65aec86894c3", "metric_id": "mtlwx65j", "status": "HEALTHY", "sub_status": "PHASE_EXTEND", "result": [{"timestamp": "2026-09-22T06:26:11.979Z", "difference": {"estimate": -56.0407, "lower": -56.47, "upper": -55.6, "exposures": 68909, "conversions": 53825}, "original": {"estimate": -56.0407, "lower": -56.47, "upper": -55.6, "exposures": 68909, "conversions": 53825}, "target": {"estimate": -56.0407, "lower": -56.47, "upper": -55.6, "exposures": 68909, "conversions": 53825}}]}`)
+				}))
+			})
+			It(`Invoke GetGuardedRolloutMetric successfully with retries`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+				appConfigurationService.EnableRetries(0, 0)
+
+				// Construct an instance of the GetGuardedRolloutMetricOptions model
+				getGuardedRolloutMetricOptionsModel := new(appconfigurationv1.GetGuardedRolloutMetricOptions)
+				getGuardedRolloutMetricOptionsModel.EnvironmentID = core.StringPtr("environment_id")
+				getGuardedRolloutMetricOptionsModel.FeatureID = core.StringPtr("feature_id")
+				getGuardedRolloutMetricOptionsModel.RolloutID = core.StringPtr("2e195ab5-70a3-44e9-824b-3d0631cf360b")
+				getGuardedRolloutMetricOptionsModel.MetricID = core.StringPtr("user-clicks")
+				getGuardedRolloutMetricOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with a Context to test a timeout error
+				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc()
+				_, _, operationErr := appConfigurationService.GetGuardedRolloutMetricWithContext(ctx, getGuardedRolloutMetricOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+
+				// Disable retries and test again
+				appConfigurationService.DisableRetries()
+				result, response, operationErr := appConfigurationService.GetGuardedRolloutMetric(getGuardedRolloutMetricOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				_, _, operationErr = appConfigurationService.GetGuardedRolloutMetricWithContext(ctx, getGuardedRolloutMetricOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(getGuardedRolloutMetricPath))
+					Expect(req.Method).To(Equal("GET"))
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"rollout_id": "4cfe724a-770b-4819-9fa8-65aec86894c3", "metric_id": "mtlwx65j", "status": "HEALTHY", "sub_status": "PHASE_EXTEND", "result": [{"timestamp": "2026-09-22T06:26:11.979Z", "difference": {"estimate": -56.0407, "lower": -56.47, "upper": -55.6, "exposures": 68909, "conversions": 53825}, "original": {"estimate": -56.0407, "lower": -56.47, "upper": -55.6, "exposures": 68909, "conversions": 53825}, "target": {"estimate": -56.0407, "lower": -56.47, "upper": -55.6, "exposures": 68909, "conversions": 53825}}]}`)
+				}))
+			})
+			It(`Invoke GetGuardedRolloutMetric successfully`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Invoke operation with nil options model (negative test)
+				result, response, operationErr := appConfigurationService.GetGuardedRolloutMetric(nil)
+				Expect(operationErr).NotTo(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+
+				// Construct an instance of the GetGuardedRolloutMetricOptions model
+				getGuardedRolloutMetricOptionsModel := new(appconfigurationv1.GetGuardedRolloutMetricOptions)
+				getGuardedRolloutMetricOptionsModel.EnvironmentID = core.StringPtr("environment_id")
+				getGuardedRolloutMetricOptionsModel.FeatureID = core.StringPtr("feature_id")
+				getGuardedRolloutMetricOptionsModel.RolloutID = core.StringPtr("2e195ab5-70a3-44e9-824b-3d0631cf360b")
+				getGuardedRolloutMetricOptionsModel.MetricID = core.StringPtr("user-clicks")
+				getGuardedRolloutMetricOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with valid options model (positive test)
+				result, response, operationErr = appConfigurationService.GetGuardedRolloutMetric(getGuardedRolloutMetricOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+			})
+			It(`Invoke GetGuardedRolloutMetric with error: Operation validation and request error`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the GetGuardedRolloutMetricOptions model
+				getGuardedRolloutMetricOptionsModel := new(appconfigurationv1.GetGuardedRolloutMetricOptions)
+				getGuardedRolloutMetricOptionsModel.EnvironmentID = core.StringPtr("environment_id")
+				getGuardedRolloutMetricOptionsModel.FeatureID = core.StringPtr("feature_id")
+				getGuardedRolloutMetricOptionsModel.RolloutID = core.StringPtr("2e195ab5-70a3-44e9-824b-3d0631cf360b")
+				getGuardedRolloutMetricOptionsModel.MetricID = core.StringPtr("user-clicks")
+				getGuardedRolloutMetricOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Invoke operation with empty URL (negative test)
+				err := appConfigurationService.SetServiceURL("")
+				Expect(err).To(BeNil())
+				result, response, operationErr := appConfigurationService.GetGuardedRolloutMetric(getGuardedRolloutMetricOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+				// Construct a second instance of the GetGuardedRolloutMetricOptions model with no property values
+				getGuardedRolloutMetricOptionsModelNew := new(appconfigurationv1.GetGuardedRolloutMetricOptions)
+				// Invoke operation with invalid model (negative test)
+				result, response, operationErr = appConfigurationService.GetGuardedRolloutMetric(getGuardedRolloutMetricOptionsModelNew)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke GetGuardedRolloutMetric successfully`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the GetGuardedRolloutMetricOptions model
+				getGuardedRolloutMetricOptionsModel := new(appconfigurationv1.GetGuardedRolloutMetricOptions)
+				getGuardedRolloutMetricOptionsModel.EnvironmentID = core.StringPtr("environment_id")
+				getGuardedRolloutMetricOptionsModel.FeatureID = core.StringPtr("feature_id")
+				getGuardedRolloutMetricOptionsModel.RolloutID = core.StringPtr("2e195ab5-70a3-44e9-824b-3d0631cf360b")
+				getGuardedRolloutMetricOptionsModel.MetricID = core.StringPtr("user-clicks")
+				getGuardedRolloutMetricOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := appConfigurationService.GetGuardedRolloutMetric(getGuardedRolloutMetricOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`ListMetrics(listMetricsOptions *ListMetricsOptions) - Operation response error`, func() {
+		listMetricsPath := "/metrics"
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(listMetricsPath))
+					Expect(req.Method).To(Equal("GET"))
+					// TODO: Add check for expand query parameter
+					Expect(req.URL.Query()["search"]).To(Equal([]string{"search_string"}))
+					Expect(req.URL.Query()["limit"]).To(Equal([]string{fmt.Sprint(int64(10))}))
+					Expect(req.URL.Query()["offset"]).To(Equal([]string{fmt.Sprint(int64(0))}))
+					Expect(req.URL.Query()["sort"]).To(Equal([]string{"created_time"}))
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprint(res, `} this is not valid json {`)
+				}))
+			})
+			It(`Invoke ListMetrics with error: Operation response processing error`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the ListMetricsOptions model
+				listMetricsOptionsModel := new(appconfigurationv1.ListMetricsOptions)
+				listMetricsOptionsModel.Expand = core.BoolPtr(true)
+				listMetricsOptionsModel.Include = []string{"experiments", "guarded_rollouts"}
+				listMetricsOptionsModel.Search = core.StringPtr("search_string")
+				listMetricsOptionsModel.Limit = core.Int64Ptr(int64(10))
+				listMetricsOptionsModel.Offset = core.Int64Ptr(int64(0))
+				listMetricsOptionsModel.Sort = core.StringPtr("created_time")
+				listMetricsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Expect response parsing to fail since we are receiving a text/plain response
+				result, response, operationErr := appConfigurationService.ListMetrics(listMetricsOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				appConfigurationService.EnableRetries(0, 0)
+				result, response, operationErr = appConfigurationService.ListMetrics(listMetricsOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`ListMetrics(listMetricsOptions *ListMetricsOptions)`, func() {
+		listMetricsPath := "/metrics"
+		Context(`Using mock server endpoint with timeout`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(listMetricsPath))
+					Expect(req.Method).To(Equal("GET"))
+
+					// TODO: Add check for expand query parameter
+					Expect(req.URL.Query()["search"]).To(Equal([]string{"search_string"}))
+					Expect(req.URL.Query()["limit"]).To(Equal([]string{fmt.Sprint(int64(10))}))
+					Expect(req.URL.Query()["offset"]).To(Equal([]string{fmt.Sprint(int64(0))}))
+					Expect(req.URL.Query()["sort"]).To(Equal([]string{"created_time"}))
+					// Sleep a short time to support a timeout test
+					time.Sleep(100 * time.Millisecond)
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"metrics": [{"metric_id": "user-clicks", "metric_name": "User Clicks", "description": "Tracks user click events", "event_type": "CLICK", "metric_type": "BINARY", "event_key": "user_click_event", "direction": "HIGHER", "is_favorite": false, "experiments": [{"experiment_id": "exp-12345", "name": "Checkout Flow A/B Test", "experiment_status": "RUNNING"}], "experiments_count": 1, "guarded_rollouts": [{"rollout_id": "4cfe724a-770b-4819-9fa8-65aec86894c3", "rollout_status": "IN_PROGRESS", "feature_id": "checkout-redesign", "feature_name": "Checkout Redesign", "environment_id": "production", "environment_name": "Production"}], "guarded_rollouts_count": 1, "created_time": "2026-03-24T12:00:00.000Z", "updated_time": "2026-03-24T12:00:00.000Z", "last_event_received_time": "2026-03-24T14:30:00.000Z", "href": "https://us-south.apprapp.cloud.ibm.com/apprapp/feature/v1/instances/9xxxxx-xxxxx-xxxxx-b3cd-xxxxx/metrics/user-clicks"}], "limit": 10, "offset": 0, "total_count": 0, "first": {"href": "Href"}, "previous": {"href": "Href"}, "next": {"href": "Href"}, "last": {"href": "Href"}}`)
+				}))
+			})
+			It(`Invoke ListMetrics successfully with retries`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+				appConfigurationService.EnableRetries(0, 0)
+
+				// Construct an instance of the ListMetricsOptions model
+				listMetricsOptionsModel := new(appconfigurationv1.ListMetricsOptions)
+				listMetricsOptionsModel.Expand = core.BoolPtr(true)
+				listMetricsOptionsModel.Include = []string{"experiments", "guarded_rollouts"}
+				listMetricsOptionsModel.Search = core.StringPtr("search_string")
+				listMetricsOptionsModel.Limit = core.Int64Ptr(int64(10))
+				listMetricsOptionsModel.Offset = core.Int64Ptr(int64(0))
+				listMetricsOptionsModel.Sort = core.StringPtr("created_time")
+				listMetricsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with a Context to test a timeout error
+				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc()
+				_, _, operationErr := appConfigurationService.ListMetricsWithContext(ctx, listMetricsOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+
+				// Disable retries and test again
+				appConfigurationService.DisableRetries()
+				result, response, operationErr := appConfigurationService.ListMetrics(listMetricsOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				_, _, operationErr = appConfigurationService.ListMetricsWithContext(ctx, listMetricsOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(listMetricsPath))
+					Expect(req.Method).To(Equal("GET"))
+
+					// TODO: Add check for expand query parameter
+					Expect(req.URL.Query()["search"]).To(Equal([]string{"search_string"}))
+					Expect(req.URL.Query()["limit"]).To(Equal([]string{fmt.Sprint(int64(10))}))
+					Expect(req.URL.Query()["offset"]).To(Equal([]string{fmt.Sprint(int64(0))}))
+					Expect(req.URL.Query()["sort"]).To(Equal([]string{"created_time"}))
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"metrics": [{"metric_id": "user-clicks", "metric_name": "User Clicks", "description": "Tracks user click events", "event_type": "CLICK", "metric_type": "BINARY", "event_key": "user_click_event", "direction": "HIGHER", "is_favorite": false, "experiments": [{"experiment_id": "exp-12345", "name": "Checkout Flow A/B Test", "experiment_status": "RUNNING"}], "experiments_count": 1, "guarded_rollouts": [{"rollout_id": "4cfe724a-770b-4819-9fa8-65aec86894c3", "rollout_status": "IN_PROGRESS", "feature_id": "checkout-redesign", "feature_name": "Checkout Redesign", "environment_id": "production", "environment_name": "Production"}], "guarded_rollouts_count": 1, "created_time": "2026-03-24T12:00:00.000Z", "updated_time": "2026-03-24T12:00:00.000Z", "last_event_received_time": "2026-03-24T14:30:00.000Z", "href": "https://us-south.apprapp.cloud.ibm.com/apprapp/feature/v1/instances/9xxxxx-xxxxx-xxxxx-b3cd-xxxxx/metrics/user-clicks"}], "limit": 10, "offset": 0, "total_count": 0, "first": {"href": "Href"}, "previous": {"href": "Href"}, "next": {"href": "Href"}, "last": {"href": "Href"}}`)
+				}))
+			})
+			It(`Invoke ListMetrics successfully`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Invoke operation with nil options model (negative test)
+				result, response, operationErr := appConfigurationService.ListMetrics(nil)
+				Expect(operationErr).NotTo(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+
+				// Construct an instance of the ListMetricsOptions model
+				listMetricsOptionsModel := new(appconfigurationv1.ListMetricsOptions)
+				listMetricsOptionsModel.Expand = core.BoolPtr(true)
+				listMetricsOptionsModel.Include = []string{"experiments", "guarded_rollouts"}
+				listMetricsOptionsModel.Search = core.StringPtr("search_string")
+				listMetricsOptionsModel.Limit = core.Int64Ptr(int64(10))
+				listMetricsOptionsModel.Offset = core.Int64Ptr(int64(0))
+				listMetricsOptionsModel.Sort = core.StringPtr("created_time")
+				listMetricsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with valid options model (positive test)
+				result, response, operationErr = appConfigurationService.ListMetrics(listMetricsOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+			})
+			It(`Invoke ListMetrics with error: Operation request error`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the ListMetricsOptions model
+				listMetricsOptionsModel := new(appconfigurationv1.ListMetricsOptions)
+				listMetricsOptionsModel.Expand = core.BoolPtr(true)
+				listMetricsOptionsModel.Include = []string{"experiments", "guarded_rollouts"}
+				listMetricsOptionsModel.Search = core.StringPtr("search_string")
+				listMetricsOptionsModel.Limit = core.Int64Ptr(int64(10))
+				listMetricsOptionsModel.Offset = core.Int64Ptr(int64(0))
+				listMetricsOptionsModel.Sort = core.StringPtr("created_time")
+				listMetricsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Invoke operation with empty URL (negative test)
+				err := appConfigurationService.SetServiceURL("")
+				Expect(err).To(BeNil())
+				result, response, operationErr := appConfigurationService.ListMetrics(listMetricsOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke ListMetrics successfully`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the ListMetricsOptions model
+				listMetricsOptionsModel := new(appconfigurationv1.ListMetricsOptions)
+				listMetricsOptionsModel.Expand = core.BoolPtr(true)
+				listMetricsOptionsModel.Include = []string{"experiments", "guarded_rollouts"}
+				listMetricsOptionsModel.Search = core.StringPtr("search_string")
+				listMetricsOptionsModel.Limit = core.Int64Ptr(int64(10))
+				listMetricsOptionsModel.Offset = core.Int64Ptr(int64(0))
+				listMetricsOptionsModel.Sort = core.StringPtr("created_time")
+				listMetricsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := appConfigurationService.ListMetrics(listMetricsOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Test pagination helper method on response`, func() {
+			It(`Invoke GetNextOffset successfully`, func() {
+				responseObject := new(appconfigurationv1.MetricsList)
+				nextObject := new(appconfigurationv1.PaginatedListNext)
+				nextObject.Href = core.StringPtr("ibm.com?offset=135")
+				responseObject.Next = nextObject
+
+				value, err := responseObject.GetNextOffset()
+				Expect(err).To(BeNil())
+				Expect(value).To(Equal(core.Int64Ptr(int64(135))))
+			})
+			It(`Invoke GetNextOffset without a "Next" property in the response`, func() {
+				responseObject := new(appconfigurationv1.MetricsList)
+
+				value, err := responseObject.GetNextOffset()
+				Expect(err).To(BeNil())
+				Expect(value).To(BeNil())
+			})
+			It(`Invoke GetNextOffset without any query params in the "Next" URL`, func() {
+				responseObject := new(appconfigurationv1.MetricsList)
+				nextObject := new(appconfigurationv1.PaginatedListNext)
+				nextObject.Href = core.StringPtr("ibm.com")
+				responseObject.Next = nextObject
+
+				value, err := responseObject.GetNextOffset()
+				Expect(err).To(BeNil())
+				Expect(value).To(BeNil())
+			})
+			It(`Invoke GetNextOffset with a non-integer query param in the "Next" URL`, func() {
+				responseObject := new(appconfigurationv1.MetricsList)
+				nextObject := new(appconfigurationv1.PaginatedListNext)
+				nextObject.Href = core.StringPtr("ibm.com?offset=tiger")
+				responseObject.Next = nextObject
+
+				value, err := responseObject.GetNextOffset()
+				Expect(err).NotTo(BeNil())
+				Expect(value).To(BeNil())
+			})
+		})
+		Context(`Using mock server endpoint - paginated response`, func() {
+			BeforeEach(func() {
+				requestNumber := 0
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(listMetricsPath))
+					Expect(req.Method).To(Equal("GET"))
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					requestNumber++
+					switch requestNumber {
+					case 1:
+						fmt.Fprintf(res, "%s", `{"next":{"href":"https://myhost.com/somePath?offset=1"},"total_count":2,"limit":1,"metrics":[{"metric_id":"user-clicks","metric_name":"User Clicks","description":"Tracks user click events","event_type":"CLICK","metric_type":"BINARY","event_key":"user_click_event","direction":"HIGHER","is_favorite":false,"experiments":[{"experiment_id":"exp-12345","name":"Checkout Flow A/B Test","experiment_status":"RUNNING"}],"experiments_count":1,"guarded_rollouts":[{"rollout_id":"4cfe724a-770b-4819-9fa8-65aec86894c3","rollout_status":"IN_PROGRESS","feature_id":"checkout-redesign","feature_name":"Checkout Redesign","environment_id":"production","environment_name":"Production"}],"guarded_rollouts_count":1,"created_time":"2026-03-24T12:00:00.000Z","updated_time":"2026-03-24T12:00:00.000Z","last_event_received_time":"2026-03-24T14:30:00.000Z","href":"https://us-south.apprapp.cloud.ibm.com/apprapp/feature/v1/instances/9xxxxx-xxxxx-xxxxx-b3cd-xxxxx/metrics/user-clicks"}]}`)
+					case 2:
+						fmt.Fprintf(res, "%s", `{"total_count":2,"limit":1,"metrics":[{"metric_id":"user-clicks","metric_name":"User Clicks","description":"Tracks user click events","event_type":"CLICK","metric_type":"BINARY","event_key":"user_click_event","direction":"HIGHER","is_favorite":false,"experiments":[{"experiment_id":"exp-12345","name":"Checkout Flow A/B Test","experiment_status":"RUNNING"}],"experiments_count":1,"guarded_rollouts":[{"rollout_id":"4cfe724a-770b-4819-9fa8-65aec86894c3","rollout_status":"IN_PROGRESS","feature_id":"checkout-redesign","feature_name":"Checkout Redesign","environment_id":"production","environment_name":"Production"}],"guarded_rollouts_count":1,"created_time":"2026-03-24T12:00:00.000Z","updated_time":"2026-03-24T12:00:00.000Z","last_event_received_time":"2026-03-24T14:30:00.000Z","href":"https://us-south.apprapp.cloud.ibm.com/apprapp/feature/v1/instances/9xxxxx-xxxxx-xxxxx-b3cd-xxxxx/metrics/user-clicks"}]}`)
+					default:
+						res.WriteHeader(400)
+					}
+				}))
+			})
+			It(`Use MetricsPager.GetNext successfully`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				listMetricsOptionsModel := &appconfigurationv1.ListMetricsOptions{
+					Expand: core.BoolPtr(true),
+					Include: []string{"experiments", "guarded_rollouts"},
+					Search: core.StringPtr("search_string"),
+					Limit: core.Int64Ptr(int64(10)),
+					Sort: core.StringPtr("created_time"),
+				}
+
+				pager, err := appConfigurationService.NewMetricsPager(listMetricsOptionsModel)
+				Expect(err).To(BeNil())
+				Expect(pager).ToNot(BeNil())
+
+				var allResults []appconfigurationv1.MetricDetail
+				for pager.HasNext() {
+					nextPage, err := pager.GetNext()
+					Expect(err).To(BeNil())
+					Expect(nextPage).ToNot(BeNil())
+					allResults = append(allResults, nextPage...)
+				}
+				Expect(len(allResults)).To(Equal(2))
+			})
+			It(`Use MetricsPager.GetAll successfully`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				listMetricsOptionsModel := &appconfigurationv1.ListMetricsOptions{
+					Expand: core.BoolPtr(true),
+					Include: []string{"experiments", "guarded_rollouts"},
+					Search: core.StringPtr("search_string"),
+					Limit: core.Int64Ptr(int64(10)),
+					Sort: core.StringPtr("created_time"),
+				}
+
+				pager, err := appConfigurationService.NewMetricsPager(listMetricsOptionsModel)
+				Expect(err).To(BeNil())
+				Expect(pager).ToNot(BeNil())
+
+				allResults, err := pager.GetAll()
+				Expect(err).To(BeNil())
+				Expect(allResults).ToNot(BeNil())
+				Expect(len(allResults)).To(Equal(2))
+			})
+		})
+	})
+	Describe(`CreateMetric(createMetricOptions *CreateMetricOptions) - Operation response error`, func() {
+		createMetricPath := "/metrics"
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(createMetricPath))
+					Expect(req.Method).To(Equal("POST"))
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(201)
+					fmt.Fprint(res, `} this is not valid json {`)
+				}))
+			})
+			It(`Invoke CreateMetric with error: Operation response processing error`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the CreateMetricOptions model
+				createMetricOptionsModel := new(appconfigurationv1.CreateMetricOptions)
+				createMetricOptionsModel.MetricID = core.StringPtr("user-clicks")
+				createMetricOptionsModel.MetricName = core.StringPtr("User Clicks")
+				createMetricOptionsModel.MetricType = core.StringPtr("COUNT")
+				createMetricOptionsModel.EventType = core.StringPtr("CLICK")
+				createMetricOptionsModel.EventKey = core.StringPtr("user_click_event")
+				createMetricOptionsModel.Direction = core.StringPtr("HIGHER")
+				createMetricOptionsModel.Description = core.StringPtr("Tracks user click events")
+				createMetricOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Expect response parsing to fail since we are receiving a text/plain response
+				result, response, operationErr := appConfigurationService.CreateMetric(createMetricOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				appConfigurationService.EnableRetries(0, 0)
+				result, response, operationErr = appConfigurationService.CreateMetric(createMetricOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`CreateMetric(createMetricOptions *CreateMetricOptions)`, func() {
+		createMetricPath := "/metrics"
+		Context(`Using mock server endpoint with timeout`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(createMetricPath))
+					Expect(req.Method).To(Equal("POST"))
+
+					// For gzip-disabled operation, verify Content-Encoding is not set.
+					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+
+					// If there is a body, then make sure we can read it
+					bodyBuf := new(bytes.Buffer)
+					if req.Header.Get("Content-Encoding") == "gzip" {
+						body, err := core.NewGzipDecompressionReader(req.Body)
+						Expect(err).To(BeNil())
+						_, err = bodyBuf.ReadFrom(body)
+						Expect(err).To(BeNil())
+					} else {
+						_, err := bodyBuf.ReadFrom(req.Body)
+						Expect(err).To(BeNil())
+					}
+					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
+
+					// Sleep a short time to support a timeout test
+					time.Sleep(100 * time.Millisecond)
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(201)
+					fmt.Fprintf(res, "%s", `{"metric_id": "user-clicks", "metric_name": "User Clicks", "description": "Tracks user click events", "event_type": "CLICK", "metric_type": "BINARY", "event_key": "user_click_event", "direction": "HIGHER", "is_favorite": false, "created_time": "2026-03-24T12:00:00.000Z", "updated_time": "2026-03-24T12:00:00.000Z", "href": "https://us-south.apprapp.cloud.ibm.com/apprapp/feature/v1/instances/9xxxxx-xxxxx-xxxxx-b3cd-xxxxx/metrics/user-clicks"}`)
+				}))
+			})
+			It(`Invoke CreateMetric successfully with retries`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+				appConfigurationService.EnableRetries(0, 0)
+
+				// Construct an instance of the CreateMetricOptions model
+				createMetricOptionsModel := new(appconfigurationv1.CreateMetricOptions)
+				createMetricOptionsModel.MetricID = core.StringPtr("user-clicks")
+				createMetricOptionsModel.MetricName = core.StringPtr("User Clicks")
+				createMetricOptionsModel.MetricType = core.StringPtr("COUNT")
+				createMetricOptionsModel.EventType = core.StringPtr("CLICK")
+				createMetricOptionsModel.EventKey = core.StringPtr("user_click_event")
+				createMetricOptionsModel.Direction = core.StringPtr("HIGHER")
+				createMetricOptionsModel.Description = core.StringPtr("Tracks user click events")
+				createMetricOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with a Context to test a timeout error
+				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc()
+				_, _, operationErr := appConfigurationService.CreateMetricWithContext(ctx, createMetricOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+
+				// Disable retries and test again
+				appConfigurationService.DisableRetries()
+				result, response, operationErr := appConfigurationService.CreateMetric(createMetricOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				_, _, operationErr = appConfigurationService.CreateMetricWithContext(ctx, createMetricOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(createMetricPath))
+					Expect(req.Method).To(Equal("POST"))
+
+					// For gzip-disabled operation, verify Content-Encoding is not set.
+					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+
+					// If there is a body, then make sure we can read it
+					bodyBuf := new(bytes.Buffer)
+					if req.Header.Get("Content-Encoding") == "gzip" {
+						body, err := core.NewGzipDecompressionReader(req.Body)
+						Expect(err).To(BeNil())
+						_, err = bodyBuf.ReadFrom(body)
+						Expect(err).To(BeNil())
+					} else {
+						_, err := bodyBuf.ReadFrom(req.Body)
+						Expect(err).To(BeNil())
+					}
+					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(201)
+					fmt.Fprintf(res, "%s", `{"metric_id": "user-clicks", "metric_name": "User Clicks", "description": "Tracks user click events", "event_type": "CLICK", "metric_type": "BINARY", "event_key": "user_click_event", "direction": "HIGHER", "is_favorite": false, "created_time": "2026-03-24T12:00:00.000Z", "updated_time": "2026-03-24T12:00:00.000Z", "href": "https://us-south.apprapp.cloud.ibm.com/apprapp/feature/v1/instances/9xxxxx-xxxxx-xxxxx-b3cd-xxxxx/metrics/user-clicks"}`)
+				}))
+			})
+			It(`Invoke CreateMetric successfully`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Invoke operation with nil options model (negative test)
+				result, response, operationErr := appConfigurationService.CreateMetric(nil)
+				Expect(operationErr).NotTo(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+
+				// Construct an instance of the CreateMetricOptions model
+				createMetricOptionsModel := new(appconfigurationv1.CreateMetricOptions)
+				createMetricOptionsModel.MetricID = core.StringPtr("user-clicks")
+				createMetricOptionsModel.MetricName = core.StringPtr("User Clicks")
+				createMetricOptionsModel.MetricType = core.StringPtr("COUNT")
+				createMetricOptionsModel.EventType = core.StringPtr("CLICK")
+				createMetricOptionsModel.EventKey = core.StringPtr("user_click_event")
+				createMetricOptionsModel.Direction = core.StringPtr("HIGHER")
+				createMetricOptionsModel.Description = core.StringPtr("Tracks user click events")
+				createMetricOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with valid options model (positive test)
+				result, response, operationErr = appConfigurationService.CreateMetric(createMetricOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+			})
+			It(`Invoke CreateMetric with error: Operation validation and request error`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the CreateMetricOptions model
+				createMetricOptionsModel := new(appconfigurationv1.CreateMetricOptions)
+				createMetricOptionsModel.MetricID = core.StringPtr("user-clicks")
+				createMetricOptionsModel.MetricName = core.StringPtr("User Clicks")
+				createMetricOptionsModel.MetricType = core.StringPtr("COUNT")
+				createMetricOptionsModel.EventType = core.StringPtr("CLICK")
+				createMetricOptionsModel.EventKey = core.StringPtr("user_click_event")
+				createMetricOptionsModel.Direction = core.StringPtr("HIGHER")
+				createMetricOptionsModel.Description = core.StringPtr("Tracks user click events")
+				createMetricOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Invoke operation with empty URL (negative test)
+				err := appConfigurationService.SetServiceURL("")
+				Expect(err).To(BeNil())
+				result, response, operationErr := appConfigurationService.CreateMetric(createMetricOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+				// Construct a second instance of the CreateMetricOptions model with no property values
+				createMetricOptionsModelNew := new(appconfigurationv1.CreateMetricOptions)
+				// Invoke operation with invalid model (negative test)
+				result, response, operationErr = appConfigurationService.CreateMetric(createMetricOptionsModelNew)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(201)
+				}))
+			})
+			It(`Invoke CreateMetric successfully`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the CreateMetricOptions model
+				createMetricOptionsModel := new(appconfigurationv1.CreateMetricOptions)
+				createMetricOptionsModel.MetricID = core.StringPtr("user-clicks")
+				createMetricOptionsModel.MetricName = core.StringPtr("User Clicks")
+				createMetricOptionsModel.MetricType = core.StringPtr("COUNT")
+				createMetricOptionsModel.EventType = core.StringPtr("CLICK")
+				createMetricOptionsModel.EventKey = core.StringPtr("user_click_event")
+				createMetricOptionsModel.Direction = core.StringPtr("HIGHER")
+				createMetricOptionsModel.Description = core.StringPtr("Tracks user click events")
+				createMetricOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := appConfigurationService.CreateMetric(createMetricOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`GetMetric(getMetricOptions *GetMetricOptions) - Operation response error`, func() {
+		getMetricPath := "/metrics/user-clicks"
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(getMetricPath))
+					Expect(req.Method).To(Equal("GET"))
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprint(res, `} this is not valid json {`)
+				}))
+			})
+			It(`Invoke GetMetric with error: Operation response processing error`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the GetMetricOptions model
+				getMetricOptionsModel := new(appconfigurationv1.GetMetricOptions)
+				getMetricOptionsModel.MetricID = core.StringPtr("user-clicks")
+				getMetricOptionsModel.Include = []string{"experiments", "guarded_rollouts"}
+				getMetricOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Expect response parsing to fail since we are receiving a text/plain response
+				result, response, operationErr := appConfigurationService.GetMetric(getMetricOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				appConfigurationService.EnableRetries(0, 0)
+				result, response, operationErr = appConfigurationService.GetMetric(getMetricOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`GetMetric(getMetricOptions *GetMetricOptions)`, func() {
+		getMetricPath := "/metrics/user-clicks"
+		Context(`Using mock server endpoint with timeout`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(getMetricPath))
+					Expect(req.Method).To(Equal("GET"))
+
+					// Sleep a short time to support a timeout test
+					time.Sleep(100 * time.Millisecond)
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"metric_id": "user-clicks", "metric_name": "User Clicks", "description": "Tracks user click events", "event_type": "CLICK", "metric_type": "BINARY", "event_key": "user_click_event", "direction": "HIGHER", "is_favorite": false, "experiments": [{"experiment_id": "exp-12345", "name": "Checkout Flow A/B Test", "experiment_status": "RUNNING"}], "experiments_count": 1, "guarded_rollouts": [{"rollout_id": "4cfe724a-770b-4819-9fa8-65aec86894c3", "rollout_status": "IN_PROGRESS", "feature_id": "checkout-redesign", "feature_name": "Checkout Redesign", "environment_id": "production", "environment_name": "Production"}], "guarded_rollouts_count": 1, "created_time": "2026-03-24T12:00:00.000Z", "updated_time": "2026-03-24T12:00:00.000Z", "last_event_received_time": "2026-03-24T14:30:00.000Z", "href": "https://us-south.apprapp.cloud.ibm.com/apprapp/feature/v1/instances/9xxxxx-xxxxx-xxxxx-b3cd-xxxxx/metrics/user-clicks"}`)
+				}))
+			})
+			It(`Invoke GetMetric successfully with retries`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+				appConfigurationService.EnableRetries(0, 0)
+
+				// Construct an instance of the GetMetricOptions model
+				getMetricOptionsModel := new(appconfigurationv1.GetMetricOptions)
+				getMetricOptionsModel.MetricID = core.StringPtr("user-clicks")
+				getMetricOptionsModel.Include = []string{"experiments", "guarded_rollouts"}
+				getMetricOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with a Context to test a timeout error
+				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc()
+				_, _, operationErr := appConfigurationService.GetMetricWithContext(ctx, getMetricOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+
+				// Disable retries and test again
+				appConfigurationService.DisableRetries()
+				result, response, operationErr := appConfigurationService.GetMetric(getMetricOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				_, _, operationErr = appConfigurationService.GetMetricWithContext(ctx, getMetricOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(getMetricPath))
+					Expect(req.Method).To(Equal("GET"))
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"metric_id": "user-clicks", "metric_name": "User Clicks", "description": "Tracks user click events", "event_type": "CLICK", "metric_type": "BINARY", "event_key": "user_click_event", "direction": "HIGHER", "is_favorite": false, "experiments": [{"experiment_id": "exp-12345", "name": "Checkout Flow A/B Test", "experiment_status": "RUNNING"}], "experiments_count": 1, "guarded_rollouts": [{"rollout_id": "4cfe724a-770b-4819-9fa8-65aec86894c3", "rollout_status": "IN_PROGRESS", "feature_id": "checkout-redesign", "feature_name": "Checkout Redesign", "environment_id": "production", "environment_name": "Production"}], "guarded_rollouts_count": 1, "created_time": "2026-03-24T12:00:00.000Z", "updated_time": "2026-03-24T12:00:00.000Z", "last_event_received_time": "2026-03-24T14:30:00.000Z", "href": "https://us-south.apprapp.cloud.ibm.com/apprapp/feature/v1/instances/9xxxxx-xxxxx-xxxxx-b3cd-xxxxx/metrics/user-clicks"}`)
+				}))
+			})
+			It(`Invoke GetMetric successfully`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Invoke operation with nil options model (negative test)
+				result, response, operationErr := appConfigurationService.GetMetric(nil)
+				Expect(operationErr).NotTo(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+
+				// Construct an instance of the GetMetricOptions model
+				getMetricOptionsModel := new(appconfigurationv1.GetMetricOptions)
+				getMetricOptionsModel.MetricID = core.StringPtr("user-clicks")
+				getMetricOptionsModel.Include = []string{"experiments", "guarded_rollouts"}
+				getMetricOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with valid options model (positive test)
+				result, response, operationErr = appConfigurationService.GetMetric(getMetricOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+			})
+			It(`Invoke GetMetric with error: Operation validation and request error`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the GetMetricOptions model
+				getMetricOptionsModel := new(appconfigurationv1.GetMetricOptions)
+				getMetricOptionsModel.MetricID = core.StringPtr("user-clicks")
+				getMetricOptionsModel.Include = []string{"experiments", "guarded_rollouts"}
+				getMetricOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Invoke operation with empty URL (negative test)
+				err := appConfigurationService.SetServiceURL("")
+				Expect(err).To(BeNil())
+				result, response, operationErr := appConfigurationService.GetMetric(getMetricOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+				// Construct a second instance of the GetMetricOptions model with no property values
+				getMetricOptionsModelNew := new(appconfigurationv1.GetMetricOptions)
+				// Invoke operation with invalid model (negative test)
+				result, response, operationErr = appConfigurationService.GetMetric(getMetricOptionsModelNew)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke GetMetric successfully`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the GetMetricOptions model
+				getMetricOptionsModel := new(appconfigurationv1.GetMetricOptions)
+				getMetricOptionsModel.MetricID = core.StringPtr("user-clicks")
+				getMetricOptionsModel.Include = []string{"experiments", "guarded_rollouts"}
+				getMetricOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := appConfigurationService.GetMetric(getMetricOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`UpdateMetric(updateMetricOptions *UpdateMetricOptions) - Operation response error`, func() {
+		updateMetricPath := "/metrics/user-clicks"
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(updateMetricPath))
+					Expect(req.Method).To(Equal("PUT"))
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprint(res, `} this is not valid json {`)
+				}))
+			})
+			It(`Invoke UpdateMetric with error: Operation response processing error`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the UpdateMetricOptions model
+				updateMetricOptionsModel := new(appconfigurationv1.UpdateMetricOptions)
+				updateMetricOptionsModel.MetricID = core.StringPtr("user-clicks")
+				updateMetricOptionsModel.MetricName = core.StringPtr("Updated User Clicks")
+				updateMetricOptionsModel.Description = core.StringPtr("Updated description for user click events")
+				updateMetricOptionsModel.EventKey = core.StringPtr("updated_user_click_event")
+				updateMetricOptionsModel.Direction = core.StringPtr("HIGHER")
+				updateMetricOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Expect response parsing to fail since we are receiving a text/plain response
+				result, response, operationErr := appConfigurationService.UpdateMetric(updateMetricOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				appConfigurationService.EnableRetries(0, 0)
+				result, response, operationErr = appConfigurationService.UpdateMetric(updateMetricOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`UpdateMetric(updateMetricOptions *UpdateMetricOptions)`, func() {
+		updateMetricPath := "/metrics/user-clicks"
+		Context(`Using mock server endpoint with timeout`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(updateMetricPath))
+					Expect(req.Method).To(Equal("PUT"))
+
+					// For gzip-disabled operation, verify Content-Encoding is not set.
+					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+
+					// If there is a body, then make sure we can read it
+					bodyBuf := new(bytes.Buffer)
+					if req.Header.Get("Content-Encoding") == "gzip" {
+						body, err := core.NewGzipDecompressionReader(req.Body)
+						Expect(err).To(BeNil())
+						_, err = bodyBuf.ReadFrom(body)
+						Expect(err).To(BeNil())
+					} else {
+						_, err := bodyBuf.ReadFrom(req.Body)
+						Expect(err).To(BeNil())
+					}
+					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
+
+					// Sleep a short time to support a timeout test
+					time.Sleep(100 * time.Millisecond)
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"metric_id": "user-clicks", "metric_name": "User Clicks", "description": "Tracks user click events", "event_type": "CLICK", "metric_type": "BINARY", "event_key": "user_click_event", "direction": "HIGHER", "is_favorite": false, "created_time": "2026-03-24T12:00:00.000Z", "updated_time": "2026-03-24T12:00:00.000Z", "href": "https://us-south.apprapp.cloud.ibm.com/apprapp/feature/v1/instances/9xxxxx-xxxxx-xxxxx-b3cd-xxxxx/metrics/user-clicks"}`)
+				}))
+			})
+			It(`Invoke UpdateMetric successfully with retries`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+				appConfigurationService.EnableRetries(0, 0)
+
+				// Construct an instance of the UpdateMetricOptions model
+				updateMetricOptionsModel := new(appconfigurationv1.UpdateMetricOptions)
+				updateMetricOptionsModel.MetricID = core.StringPtr("user-clicks")
+				updateMetricOptionsModel.MetricName = core.StringPtr("Updated User Clicks")
+				updateMetricOptionsModel.Description = core.StringPtr("Updated description for user click events")
+				updateMetricOptionsModel.EventKey = core.StringPtr("updated_user_click_event")
+				updateMetricOptionsModel.Direction = core.StringPtr("HIGHER")
+				updateMetricOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with a Context to test a timeout error
+				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc()
+				_, _, operationErr := appConfigurationService.UpdateMetricWithContext(ctx, updateMetricOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+
+				// Disable retries and test again
+				appConfigurationService.DisableRetries()
+				result, response, operationErr := appConfigurationService.UpdateMetric(updateMetricOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				_, _, operationErr = appConfigurationService.UpdateMetricWithContext(ctx, updateMetricOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(updateMetricPath))
+					Expect(req.Method).To(Equal("PUT"))
+
+					// For gzip-disabled operation, verify Content-Encoding is not set.
+					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+
+					// If there is a body, then make sure we can read it
+					bodyBuf := new(bytes.Buffer)
+					if req.Header.Get("Content-Encoding") == "gzip" {
+						body, err := core.NewGzipDecompressionReader(req.Body)
+						Expect(err).To(BeNil())
+						_, err = bodyBuf.ReadFrom(body)
+						Expect(err).To(BeNil())
+					} else {
+						_, err := bodyBuf.ReadFrom(req.Body)
+						Expect(err).To(BeNil())
+					}
+					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"metric_id": "user-clicks", "metric_name": "User Clicks", "description": "Tracks user click events", "event_type": "CLICK", "metric_type": "BINARY", "event_key": "user_click_event", "direction": "HIGHER", "is_favorite": false, "created_time": "2026-03-24T12:00:00.000Z", "updated_time": "2026-03-24T12:00:00.000Z", "href": "https://us-south.apprapp.cloud.ibm.com/apprapp/feature/v1/instances/9xxxxx-xxxxx-xxxxx-b3cd-xxxxx/metrics/user-clicks"}`)
+				}))
+			})
+			It(`Invoke UpdateMetric successfully`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Invoke operation with nil options model (negative test)
+				result, response, operationErr := appConfigurationService.UpdateMetric(nil)
+				Expect(operationErr).NotTo(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+
+				// Construct an instance of the UpdateMetricOptions model
+				updateMetricOptionsModel := new(appconfigurationv1.UpdateMetricOptions)
+				updateMetricOptionsModel.MetricID = core.StringPtr("user-clicks")
+				updateMetricOptionsModel.MetricName = core.StringPtr("Updated User Clicks")
+				updateMetricOptionsModel.Description = core.StringPtr("Updated description for user click events")
+				updateMetricOptionsModel.EventKey = core.StringPtr("updated_user_click_event")
+				updateMetricOptionsModel.Direction = core.StringPtr("HIGHER")
+				updateMetricOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with valid options model (positive test)
+				result, response, operationErr = appConfigurationService.UpdateMetric(updateMetricOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+			})
+			It(`Invoke UpdateMetric with error: Operation validation and request error`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the UpdateMetricOptions model
+				updateMetricOptionsModel := new(appconfigurationv1.UpdateMetricOptions)
+				updateMetricOptionsModel.MetricID = core.StringPtr("user-clicks")
+				updateMetricOptionsModel.MetricName = core.StringPtr("Updated User Clicks")
+				updateMetricOptionsModel.Description = core.StringPtr("Updated description for user click events")
+				updateMetricOptionsModel.EventKey = core.StringPtr("updated_user_click_event")
+				updateMetricOptionsModel.Direction = core.StringPtr("HIGHER")
+				updateMetricOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Invoke operation with empty URL (negative test)
+				err := appConfigurationService.SetServiceURL("")
+				Expect(err).To(BeNil())
+				result, response, operationErr := appConfigurationService.UpdateMetric(updateMetricOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+				// Construct a second instance of the UpdateMetricOptions model with no property values
+				updateMetricOptionsModelNew := new(appconfigurationv1.UpdateMetricOptions)
+				// Invoke operation with invalid model (negative test)
+				result, response, operationErr = appConfigurationService.UpdateMetric(updateMetricOptionsModelNew)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke UpdateMetric successfully`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the UpdateMetricOptions model
+				updateMetricOptionsModel := new(appconfigurationv1.UpdateMetricOptions)
+				updateMetricOptionsModel.MetricID = core.StringPtr("user-clicks")
+				updateMetricOptionsModel.MetricName = core.StringPtr("Updated User Clicks")
+				updateMetricOptionsModel.Description = core.StringPtr("Updated description for user click events")
+				updateMetricOptionsModel.EventKey = core.StringPtr("updated_user_click_event")
+				updateMetricOptionsModel.Direction = core.StringPtr("HIGHER")
+				updateMetricOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := appConfigurationService.UpdateMetric(updateMetricOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`DeleteMetric(deleteMetricOptions *DeleteMetricOptions)`, func() {
+		deleteMetricPath := "/metrics/user-clicks"
+		Context(`Using mock server endpoint`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(deleteMetricPath))
+					Expect(req.Method).To(Equal("DELETE"))
+
+					res.WriteHeader(204)
+				}))
+			})
+			It(`Invoke DeleteMetric successfully`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Invoke operation with nil options model (negative test)
+				response, operationErr := appConfigurationService.DeleteMetric(nil)
+				Expect(operationErr).NotTo(BeNil())
+				Expect(response).To(BeNil())
+
+				// Construct an instance of the DeleteMetricOptions model
+				deleteMetricOptionsModel := new(appconfigurationv1.DeleteMetricOptions)
+				deleteMetricOptionsModel.MetricID = core.StringPtr("user-clicks")
+				deleteMetricOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with valid options model (positive test)
+				response, operationErr = appConfigurationService.DeleteMetric(deleteMetricOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+			})
+			It(`Invoke DeleteMetric with error: Operation validation and request error`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the DeleteMetricOptions model
+				deleteMetricOptionsModel := new(appconfigurationv1.DeleteMetricOptions)
+				deleteMetricOptionsModel.MetricID = core.StringPtr("user-clicks")
+				deleteMetricOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Invoke operation with empty URL (negative test)
+				err := appConfigurationService.SetServiceURL("")
+				Expect(err).To(BeNil())
+				response, operationErr := appConfigurationService.DeleteMetric(deleteMetricOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
+				Expect(response).To(BeNil())
+				// Construct a second instance of the DeleteMetricOptions model with no property values
+				deleteMetricOptionsModelNew := new(appconfigurationv1.DeleteMetricOptions)
+				// Invoke operation with invalid model (negative test)
+				response, operationErr = appConfigurationService.DeleteMetric(deleteMetricOptionsModelNew)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`SetMetricFavorite(setMetricFavoriteOptions *SetMetricFavoriteOptions) - Operation response error`, func() {
+		setMetricFavoritePath := "/metrics/user-clicks/favorite"
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(setMetricFavoritePath))
+					Expect(req.Method).To(Equal("PATCH"))
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprint(res, `} this is not valid json {`)
+				}))
+			})
+			It(`Invoke SetMetricFavorite with error: Operation response processing error`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the SetMetricFavoriteOptions model
+				setMetricFavoriteOptionsModel := new(appconfigurationv1.SetMetricFavoriteOptions)
+				setMetricFavoriteOptionsModel.MetricID = core.StringPtr("user-clicks")
+				setMetricFavoriteOptionsModel.IsFavorite = core.BoolPtr(true)
+				setMetricFavoriteOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Expect response parsing to fail since we are receiving a text/plain response
+				result, response, operationErr := appConfigurationService.SetMetricFavorite(setMetricFavoriteOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				appConfigurationService.EnableRetries(0, 0)
+				result, response, operationErr = appConfigurationService.SetMetricFavorite(setMetricFavoriteOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`SetMetricFavorite(setMetricFavoriteOptions *SetMetricFavoriteOptions)`, func() {
+		setMetricFavoritePath := "/metrics/user-clicks/favorite"
+		Context(`Using mock server endpoint with timeout`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(setMetricFavoritePath))
+					Expect(req.Method).To(Equal("PATCH"))
+
+					// For gzip-disabled operation, verify Content-Encoding is not set.
+					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+
+					// If there is a body, then make sure we can read it
+					bodyBuf := new(bytes.Buffer)
+					if req.Header.Get("Content-Encoding") == "gzip" {
+						body, err := core.NewGzipDecompressionReader(req.Body)
+						Expect(err).To(BeNil())
+						_, err = bodyBuf.ReadFrom(body)
+						Expect(err).To(BeNil())
+					} else {
+						_, err := bodyBuf.ReadFrom(req.Body)
+						Expect(err).To(BeNil())
+					}
+					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
+
+					// Sleep a short time to support a timeout test
+					time.Sleep(100 * time.Millisecond)
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"metric_id": "user-clicks", "metric_name": "User Clicks", "description": "Tracks user click events", "event_type": "CLICK", "metric_type": "BINARY", "event_key": "user_click_event", "direction": "HIGHER", "is_favorite": false, "created_time": "2026-03-24T12:00:00.000Z", "updated_time": "2026-03-24T12:00:00.000Z", "href": "https://us-south.apprapp.cloud.ibm.com/apprapp/feature/v1/instances/9xxxxx-xxxxx-xxxxx-b3cd-xxxxx/metrics/user-clicks"}`)
+				}))
+			})
+			It(`Invoke SetMetricFavorite successfully with retries`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+				appConfigurationService.EnableRetries(0, 0)
+
+				// Construct an instance of the SetMetricFavoriteOptions model
+				setMetricFavoriteOptionsModel := new(appconfigurationv1.SetMetricFavoriteOptions)
+				setMetricFavoriteOptionsModel.MetricID = core.StringPtr("user-clicks")
+				setMetricFavoriteOptionsModel.IsFavorite = core.BoolPtr(true)
+				setMetricFavoriteOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with a Context to test a timeout error
+				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc()
+				_, _, operationErr := appConfigurationService.SetMetricFavoriteWithContext(ctx, setMetricFavoriteOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+
+				// Disable retries and test again
+				appConfigurationService.DisableRetries()
+				result, response, operationErr := appConfigurationService.SetMetricFavorite(setMetricFavoriteOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				_, _, operationErr = appConfigurationService.SetMetricFavoriteWithContext(ctx, setMetricFavoriteOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(setMetricFavoritePath))
+					Expect(req.Method).To(Equal("PATCH"))
+
+					// For gzip-disabled operation, verify Content-Encoding is not set.
+					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+
+					// If there is a body, then make sure we can read it
+					bodyBuf := new(bytes.Buffer)
+					if req.Header.Get("Content-Encoding") == "gzip" {
+						body, err := core.NewGzipDecompressionReader(req.Body)
+						Expect(err).To(BeNil())
+						_, err = bodyBuf.ReadFrom(body)
+						Expect(err).To(BeNil())
+					} else {
+						_, err := bodyBuf.ReadFrom(req.Body)
+						Expect(err).To(BeNil())
+					}
+					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"metric_id": "user-clicks", "metric_name": "User Clicks", "description": "Tracks user click events", "event_type": "CLICK", "metric_type": "BINARY", "event_key": "user_click_event", "direction": "HIGHER", "is_favorite": false, "created_time": "2026-03-24T12:00:00.000Z", "updated_time": "2026-03-24T12:00:00.000Z", "href": "https://us-south.apprapp.cloud.ibm.com/apprapp/feature/v1/instances/9xxxxx-xxxxx-xxxxx-b3cd-xxxxx/metrics/user-clicks"}`)
+				}))
+			})
+			It(`Invoke SetMetricFavorite successfully`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Invoke operation with nil options model (negative test)
+				result, response, operationErr := appConfigurationService.SetMetricFavorite(nil)
+				Expect(operationErr).NotTo(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+
+				// Construct an instance of the SetMetricFavoriteOptions model
+				setMetricFavoriteOptionsModel := new(appconfigurationv1.SetMetricFavoriteOptions)
+				setMetricFavoriteOptionsModel.MetricID = core.StringPtr("user-clicks")
+				setMetricFavoriteOptionsModel.IsFavorite = core.BoolPtr(true)
+				setMetricFavoriteOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with valid options model (positive test)
+				result, response, operationErr = appConfigurationService.SetMetricFavorite(setMetricFavoriteOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+			})
+			It(`Invoke SetMetricFavorite with error: Operation validation and request error`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the SetMetricFavoriteOptions model
+				setMetricFavoriteOptionsModel := new(appconfigurationv1.SetMetricFavoriteOptions)
+				setMetricFavoriteOptionsModel.MetricID = core.StringPtr("user-clicks")
+				setMetricFavoriteOptionsModel.IsFavorite = core.BoolPtr(true)
+				setMetricFavoriteOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Invoke operation with empty URL (negative test)
+				err := appConfigurationService.SetServiceURL("")
+				Expect(err).To(BeNil())
+				result, response, operationErr := appConfigurationService.SetMetricFavorite(setMetricFavoriteOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+				// Construct a second instance of the SetMetricFavoriteOptions model with no property values
+				setMetricFavoriteOptionsModelNew := new(appconfigurationv1.SetMetricFavoriteOptions)
+				// Invoke operation with invalid model (negative test)
+				result, response, operationErr = appConfigurationService.SetMetricFavorite(setMetricFavoriteOptionsModelNew)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke SetMetricFavorite successfully`, func() {
+				appConfigurationService, serviceErr := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(appConfigurationService).ToNot(BeNil())
+
+				// Construct an instance of the SetMetricFavoriteOptions model
+				setMetricFavoriteOptionsModel := new(appconfigurationv1.SetMetricFavoriteOptions)
+				setMetricFavoriteOptionsModel.MetricID = core.StringPtr("user-clicks")
+				setMetricFavoriteOptionsModel.IsFavorite = core.BoolPtr(true)
+				setMetricFavoriteOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := appConfigurationService.SetMetricFavorite(setMetricFavoriteOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
 	Describe(`Model constructor tests`, func() {
 		Context(`Using a service client instance`, func() {
 			appConfigurationService, _ := appconfigurationv1.NewAppConfigurationV1(&appconfigurationv1.AppConfigurationV1Options{
@@ -18087,15 +19570,25 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(rolloutPhaseModel.Duration).To(Equal(core.Int64Ptr(int64(38))))
 				Expect(rolloutPhaseModel.DurationType).To(Equal(core.StringPtr("days")))
 
+				// Construct an instance of the RolloutMetric model
+				rolloutMetricModel := new(appconfigurationv1.RolloutMetric)
+				Expect(rolloutMetricModel).ToNot(BeNil())
+				rolloutMetricModel.MetricID = core.StringPtr("mtlwx65j")
+				rolloutMetricModel.AutoRollback = core.BoolPtr(false)
+				Expect(rolloutMetricModel.MetricID).To(Equal(core.StringPtr("mtlwx65j")))
+				Expect(rolloutMetricModel.AutoRollback).To(Equal(core.BoolPtr(false)))
+
 				// Construct an instance of the RolloutConfiguration model
 				rolloutConfigurationModel := new(appconfigurationv1.RolloutConfiguration)
 				Expect(rolloutConfigurationModel).ToNot(BeNil())
 				rolloutConfigurationModel.DurationPreset = core.StringPtr("CUSTOM")
 				rolloutConfigurationModel.StartAt = CreateMockDateTime("2019-01-01T12:00:00.000Z")
 				rolloutConfigurationModel.Phases = []appconfigurationv1.RolloutPhase{*rolloutPhaseModel}
+				rolloutConfigurationModel.Metrics = []appconfigurationv1.RolloutMetric{*rolloutMetricModel}
 				Expect(rolloutConfigurationModel.DurationPreset).To(Equal(core.StringPtr("CUSTOM")))
 				Expect(rolloutConfigurationModel.StartAt).To(Equal(CreateMockDateTime("2019-01-01T12:00:00.000Z")))
 				Expect(rolloutConfigurationModel.Phases).To(Equal([]appconfigurationv1.RolloutPhase{*rolloutPhaseModel}))
+				Expect(rolloutConfigurationModel.Metrics).To(Equal([]appconfigurationv1.RolloutMetric{*rolloutMetricModel}))
 
 				// Construct an instance of the TargetSegments model
 				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
@@ -18188,15 +19681,25 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(rolloutPhaseModel.Duration).To(Equal(core.Int64Ptr(int64(38))))
 				Expect(rolloutPhaseModel.DurationType).To(Equal(core.StringPtr("days")))
 
+				// Construct an instance of the RolloutMetric model
+				rolloutMetricModel := new(appconfigurationv1.RolloutMetric)
+				Expect(rolloutMetricModel).ToNot(BeNil())
+				rolloutMetricModel.MetricID = core.StringPtr("mtlwx65j")
+				rolloutMetricModel.AutoRollback = core.BoolPtr(false)
+				Expect(rolloutMetricModel.MetricID).To(Equal(core.StringPtr("mtlwx65j")))
+				Expect(rolloutMetricModel.AutoRollback).To(Equal(core.BoolPtr(false)))
+
 				// Construct an instance of the RolloutConfiguration model
 				rolloutConfigurationModel := new(appconfigurationv1.RolloutConfiguration)
 				Expect(rolloutConfigurationModel).ToNot(BeNil())
 				rolloutConfigurationModel.DurationPreset = core.StringPtr("CUSTOM")
 				rolloutConfigurationModel.StartAt = CreateMockDateTime("2019-01-01T12:00:00.000Z")
 				rolloutConfigurationModel.Phases = []appconfigurationv1.RolloutPhase{*rolloutPhaseModel}
+				rolloutConfigurationModel.Metrics = []appconfigurationv1.RolloutMetric{*rolloutMetricModel}
 				Expect(rolloutConfigurationModel.DurationPreset).To(Equal(core.StringPtr("CUSTOM")))
 				Expect(rolloutConfigurationModel.StartAt).To(Equal(CreateMockDateTime("2019-01-01T12:00:00.000Z")))
 				Expect(rolloutConfigurationModel.Phases).To(Equal([]appconfigurationv1.RolloutPhase{*rolloutPhaseModel}))
+				Expect(rolloutConfigurationModel.Metrics).To(Equal([]appconfigurationv1.RolloutMetric{*rolloutMetricModel}))
 
 				// Construct an instance of the CreateFeatureRuleOptions model
 				environmentID := "environment_id"
@@ -18285,6 +19788,33 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(createIntegrationOptionsModel.IntegrationType).To(Equal(core.StringPtr("EVENT_NOTIFICATIONS")))
 				Expect(createIntegrationOptionsModel.Metadata).To(Equal(createIntegrationMetadataModel))
 				Expect(createIntegrationOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
+			})
+			It(`Invoke NewCreateMetricOptions successfully`, func() {
+				// Construct an instance of the CreateMetricOptions model
+				createMetricOptionsMetricID := "user-clicks"
+				createMetricOptionsMetricName := "User Clicks"
+				createMetricOptionsMetricType := "COUNT"
+				createMetricOptionsEventType := "CLICK"
+				createMetricOptionsEventKey := "user_click_event"
+				createMetricOptionsDirection := "HIGHER"
+				createMetricOptionsModel := appConfigurationService.NewCreateMetricOptions(createMetricOptionsMetricID, createMetricOptionsMetricName, createMetricOptionsMetricType, createMetricOptionsEventType, createMetricOptionsEventKey, createMetricOptionsDirection)
+				createMetricOptionsModel.SetMetricID("user-clicks")
+				createMetricOptionsModel.SetMetricName("User Clicks")
+				createMetricOptionsModel.SetMetricType("COUNT")
+				createMetricOptionsModel.SetEventType("CLICK")
+				createMetricOptionsModel.SetEventKey("user_click_event")
+				createMetricOptionsModel.SetDirection("HIGHER")
+				createMetricOptionsModel.SetDescription("Tracks user click events")
+				createMetricOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
+				Expect(createMetricOptionsModel).ToNot(BeNil())
+				Expect(createMetricOptionsModel.MetricID).To(Equal(core.StringPtr("user-clicks")))
+				Expect(createMetricOptionsModel.MetricName).To(Equal(core.StringPtr("User Clicks")))
+				Expect(createMetricOptionsModel.MetricType).To(Equal(core.StringPtr("COUNT")))
+				Expect(createMetricOptionsModel.EventType).To(Equal(core.StringPtr("CLICK")))
+				Expect(createMetricOptionsModel.EventKey).To(Equal(core.StringPtr("user_click_event")))
+				Expect(createMetricOptionsModel.Direction).To(Equal(core.StringPtr("HIGHER")))
+				Expect(createMetricOptionsModel.Description).To(Equal(core.StringPtr("Tracks user click events")))
+				Expect(createMetricOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewCreatePropertyOptions successfully`, func() {
 				// Construct an instance of the TargetSegments model
@@ -18454,45 +19984,6 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(createWorkflowConfigsOptionsModel.Scope).To(Equal(workflowScopeModel))
 				Expect(createWorkflowConfigsOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
-			It(`Invoke NewCreateWorkflowconfigOptions successfully`, func() {
-				// Construct an instance of the ExternalServiceNowCredentials model
-				externalServiceNowCredentialsModel := new(appconfigurationv1.ExternalServiceNowCredentials)
-				Expect(externalServiceNowCredentialsModel).ToNot(BeNil())
-				externalServiceNowCredentialsModel.Username = core.StringPtr("admin")
-				externalServiceNowCredentialsModel.Password = core.StringPtr("testString")
-				externalServiceNowCredentialsModel.ClientID = core.StringPtr("f7b6379b55d08210f8ree233afc7256d")
-				externalServiceNowCredentialsModel.ClientSecret = core.StringPtr("testString")
-				Expect(externalServiceNowCredentialsModel.Username).To(Equal(core.StringPtr("admin")))
-				Expect(externalServiceNowCredentialsModel.Password).To(Equal(core.StringPtr("testString")))
-				Expect(externalServiceNowCredentialsModel.ClientID).To(Equal(core.StringPtr("f7b6379b55d08210f8ree233afc7256d")))
-				Expect(externalServiceNowCredentialsModel.ClientSecret).To(Equal(core.StringPtr("testString")))
-
-				// Construct an instance of the CreateWorkflowConfigExternalServiceNow model
-				createWorkflowConfigModel := new(appconfigurationv1.CreateWorkflowConfigExternalServiceNow)
-				Expect(createWorkflowConfigModel).ToNot(BeNil())
-				createWorkflowConfigModel.WorkflowURL = core.StringPtr("testString")
-				createWorkflowConfigModel.ApprovalGroupName = core.StringPtr("testString")
-				createWorkflowConfigModel.ApprovalExpiration = core.Int64Ptr(int64(1))
-				createWorkflowConfigModel.WorkflowCredentials = externalServiceNowCredentialsModel
-				createWorkflowConfigModel.Enabled = core.BoolPtr(false)
-				Expect(createWorkflowConfigModel.WorkflowURL).To(Equal(core.StringPtr("testString")))
-				Expect(createWorkflowConfigModel.ApprovalGroupName).To(Equal(core.StringPtr("testString")))
-				Expect(createWorkflowConfigModel.ApprovalExpiration).To(Equal(core.Int64Ptr(int64(1))))
-				Expect(createWorkflowConfigModel.WorkflowCredentials).To(Equal(externalServiceNowCredentialsModel))
-				Expect(createWorkflowConfigModel.Enabled).To(Equal(core.BoolPtr(false)))
-
-				// Construct an instance of the CreateWorkflowconfigOptions model
-				environmentID := "environment_id"
-				var workflowConfig appconfigurationv1.CreateWorkflowConfigIntf = nil
-				createWorkflowconfigOptionsModel := appConfigurationService.NewCreateWorkflowconfigOptions(environmentID, workflowConfig)
-				createWorkflowconfigOptionsModel.SetEnvironmentID("environment_id")
-				createWorkflowconfigOptionsModel.SetWorkflowConfig(createWorkflowConfigModel)
-				createWorkflowconfigOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
-				Expect(createWorkflowconfigOptionsModel).ToNot(BeNil())
-				Expect(createWorkflowconfigOptionsModel.EnvironmentID).To(Equal(core.StringPtr("environment_id")))
-				Expect(createWorkflowconfigOptionsModel.WorkflowConfig).To(Equal(createWorkflowConfigModel))
-				Expect(createWorkflowconfigOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
-			})
 			It(`Invoke NewDeleteCollectionOptions successfully`, func() {
 				// Construct an instance of the DeleteCollectionOptions model
 				collectionID := "collection_id"
@@ -18562,6 +20053,16 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(deleteIntegrationOptionsModel.IntegrationID).To(Equal(core.StringPtr("integration_id")))
 				Expect(deleteIntegrationOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
+			It(`Invoke NewDeleteMetricOptions successfully`, func() {
+				// Construct an instance of the DeleteMetricOptions model
+				metricID := "user-clicks"
+				deleteMetricOptionsModel := appConfigurationService.NewDeleteMetricOptions(metricID)
+				deleteMetricOptionsModel.SetMetricID("user-clicks")
+				deleteMetricOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
+				Expect(deleteMetricOptionsModel).ToNot(BeNil())
+				Expect(deleteMetricOptionsModel.MetricID).To(Equal(core.StringPtr("user-clicks")))
+				Expect(deleteMetricOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
+			})
 			It(`Invoke NewDeletePropertyOptions successfully`, func() {
 				// Construct an instance of the DeletePropertyOptions model
 				environmentID := "environment_id"
@@ -18595,29 +20096,10 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(deleteWorkflowConfigsOptionsModel.WorkflowConfigID).To(Equal(core.StringPtr("workflow_config_id")))
 				Expect(deleteWorkflowConfigsOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
-			It(`Invoke NewDeleteWorkflowconfigOptions successfully`, func() {
-				// Construct an instance of the DeleteWorkflowconfigOptions model
-				environmentID := "environment_id"
-				deleteWorkflowconfigOptionsModel := appConfigurationService.NewDeleteWorkflowconfigOptions(environmentID)
-				deleteWorkflowconfigOptionsModel.SetEnvironmentID("environment_id")
-				deleteWorkflowconfigOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
-				Expect(deleteWorkflowconfigOptionsModel).ToNot(BeNil())
-				Expect(deleteWorkflowconfigOptionsModel.EnvironmentID).To(Equal(core.StringPtr("environment_id")))
-				Expect(deleteWorkflowconfigOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
-			})
 			It(`Invoke NewEnvironment successfully`, func() {
 				name := "testString"
 				environmentID := "testString"
 				_model, err := appConfigurationService.NewEnvironment(name, environmentID)
-				Expect(_model).ToNot(BeNil())
-				Expect(err).To(BeNil())
-			})
-			It(`Invoke NewExternalServiceNowCredentials successfully`, func() {
-				username := "admin"
-				password := "testString"
-				clientID := "f7b6379b55d08210f8ree233afc7256d"
-				clientSecret := "testString"
-				_model, err := appConfigurationService.NewExternalServiceNowCredentials(username, password, clientID, clientSecret)
 				Expect(_model).ToNot(BeNil())
 				Expect(err).To(BeNil())
 			})
@@ -18705,6 +20187,41 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(getGitconfigOptionsModel.GitConfigID).To(Equal(core.StringPtr("git_config_id")))
 				Expect(getGitconfigOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
+			It(`Invoke NewGetGuardedRolloutMetricOptions successfully`, func() {
+				// Construct an instance of the GetGuardedRolloutMetricOptions model
+				environmentID := "environment_id"
+				featureID := "feature_id"
+				rolloutID := "2e195ab5-70a3-44e9-824b-3d0631cf360b"
+				metricID := "user-clicks"
+				getGuardedRolloutMetricOptionsModel := appConfigurationService.NewGetGuardedRolloutMetricOptions(environmentID, featureID, rolloutID, metricID)
+				getGuardedRolloutMetricOptionsModel.SetEnvironmentID("environment_id")
+				getGuardedRolloutMetricOptionsModel.SetFeatureID("feature_id")
+				getGuardedRolloutMetricOptionsModel.SetRolloutID("2e195ab5-70a3-44e9-824b-3d0631cf360b")
+				getGuardedRolloutMetricOptionsModel.SetMetricID("user-clicks")
+				getGuardedRolloutMetricOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
+				Expect(getGuardedRolloutMetricOptionsModel).ToNot(BeNil())
+				Expect(getGuardedRolloutMetricOptionsModel.EnvironmentID).To(Equal(core.StringPtr("environment_id")))
+				Expect(getGuardedRolloutMetricOptionsModel.FeatureID).To(Equal(core.StringPtr("feature_id")))
+				Expect(getGuardedRolloutMetricOptionsModel.RolloutID).To(Equal(core.StringPtr("2e195ab5-70a3-44e9-824b-3d0631cf360b")))
+				Expect(getGuardedRolloutMetricOptionsModel.MetricID).To(Equal(core.StringPtr("user-clicks")))
+				Expect(getGuardedRolloutMetricOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
+			})
+			It(`Invoke NewGetGuardedRolloutOptions successfully`, func() {
+				// Construct an instance of the GetGuardedRolloutOptions model
+				environmentID := "environment_id"
+				featureID := "feature_id"
+				rolloutID := "2e195ab5-70a3-44e9-824b-3d0631cf360b"
+				getGuardedRolloutOptionsModel := appConfigurationService.NewGetGuardedRolloutOptions(environmentID, featureID, rolloutID)
+				getGuardedRolloutOptionsModel.SetEnvironmentID("environment_id")
+				getGuardedRolloutOptionsModel.SetFeatureID("feature_id")
+				getGuardedRolloutOptionsModel.SetRolloutID("2e195ab5-70a3-44e9-824b-3d0631cf360b")
+				getGuardedRolloutOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
+				Expect(getGuardedRolloutOptionsModel).ToNot(BeNil())
+				Expect(getGuardedRolloutOptionsModel.EnvironmentID).To(Equal(core.StringPtr("environment_id")))
+				Expect(getGuardedRolloutOptionsModel.FeatureID).To(Equal(core.StringPtr("feature_id")))
+				Expect(getGuardedRolloutOptionsModel.RolloutID).To(Equal(core.StringPtr("2e195ab5-70a3-44e9-824b-3d0631cf360b")))
+				Expect(getGuardedRolloutOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
+			})
 			It(`Invoke NewGetIntegrationOptions successfully`, func() {
 				// Construct an instance of the GetIntegrationOptions model
 				integrationID := "integration_id"
@@ -18714,6 +20231,18 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(getIntegrationOptionsModel).ToNot(BeNil())
 				Expect(getIntegrationOptionsModel.IntegrationID).To(Equal(core.StringPtr("integration_id")))
 				Expect(getIntegrationOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
+			})
+			It(`Invoke NewGetMetricOptions successfully`, func() {
+				// Construct an instance of the GetMetricOptions model
+				metricID := "user-clicks"
+				getMetricOptionsModel := appConfigurationService.NewGetMetricOptions(metricID)
+				getMetricOptionsModel.SetMetricID("user-clicks")
+				getMetricOptionsModel.SetInclude([]string{"experiments", "guarded_rollouts"})
+				getMetricOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
+				Expect(getMetricOptionsModel).ToNot(BeNil())
+				Expect(getMetricOptionsModel.MetricID).To(Equal(core.StringPtr("user-clicks")))
+				Expect(getMetricOptionsModel.Include).To(Equal([]string{"experiments", "guarded_rollouts"}))
+				Expect(getMetricOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewGetPropertyOptions successfully`, func() {
 				// Construct an instance of the GetPropertyOptions model
@@ -18770,15 +20299,25 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(rolloutPhaseModel.Duration).To(Equal(core.Int64Ptr(int64(38))))
 				Expect(rolloutPhaseModel.DurationType).To(Equal(core.StringPtr("days")))
 
+				// Construct an instance of the RolloutMetric model
+				rolloutMetricModel := new(appconfigurationv1.RolloutMetric)
+				Expect(rolloutMetricModel).ToNot(BeNil())
+				rolloutMetricModel.MetricID = core.StringPtr("mtlwx65j")
+				rolloutMetricModel.AutoRollback = core.BoolPtr(false)
+				Expect(rolloutMetricModel.MetricID).To(Equal(core.StringPtr("mtlwx65j")))
+				Expect(rolloutMetricModel.AutoRollback).To(Equal(core.BoolPtr(false)))
+
 				// Construct an instance of the RolloutConfiguration model
 				rolloutConfigurationModel := new(appconfigurationv1.RolloutConfiguration)
 				Expect(rolloutConfigurationModel).ToNot(BeNil())
 				rolloutConfigurationModel.DurationPreset = core.StringPtr("CUSTOM")
 				rolloutConfigurationModel.StartAt = CreateMockDateTime("2019-01-01T12:00:00.000Z")
 				rolloutConfigurationModel.Phases = []appconfigurationv1.RolloutPhase{*rolloutPhaseModel}
+				rolloutConfigurationModel.Metrics = []appconfigurationv1.RolloutMetric{*rolloutMetricModel}
 				Expect(rolloutConfigurationModel.DurationPreset).To(Equal(core.StringPtr("CUSTOM")))
 				Expect(rolloutConfigurationModel.StartAt).To(Equal(CreateMockDateTime("2019-01-01T12:00:00.000Z")))
 				Expect(rolloutConfigurationModel.Phases).To(Equal([]appconfigurationv1.RolloutPhase{*rolloutPhaseModel}))
+				Expect(rolloutConfigurationModel.Metrics).To(Equal([]appconfigurationv1.RolloutMetric{*rolloutMetricModel}))
 
 				// Construct an instance of the TargetSegments model
 				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
@@ -19097,6 +20636,23 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(listGitconfigsOptionsModel.Search).To(Equal(core.StringPtr("search_string")))
 				Expect(listGitconfigsOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
+			It(`Invoke NewListGuardedRolloutsOptions successfully`, func() {
+				// Construct an instance of the ListGuardedRolloutsOptions model
+				environmentID := "environment_id"
+				featureID := "feature_id"
+				listGuardedRolloutsOptionsModel := appConfigurationService.NewListGuardedRolloutsOptions(environmentID, featureID)
+				listGuardedRolloutsOptionsModel.SetEnvironmentID("environment_id")
+				listGuardedRolloutsOptionsModel.SetFeatureID("feature_id")
+				listGuardedRolloutsOptionsModel.SetLimit(int64(10))
+				listGuardedRolloutsOptionsModel.SetOffset(int64(0))
+				listGuardedRolloutsOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
+				Expect(listGuardedRolloutsOptionsModel).ToNot(BeNil())
+				Expect(listGuardedRolloutsOptionsModel.EnvironmentID).To(Equal(core.StringPtr("environment_id")))
+				Expect(listGuardedRolloutsOptionsModel.FeatureID).To(Equal(core.StringPtr("feature_id")))
+				Expect(listGuardedRolloutsOptionsModel.Limit).To(Equal(core.Int64Ptr(int64(10))))
+				Expect(listGuardedRolloutsOptionsModel.Offset).To(Equal(core.Int64Ptr(int64(0))))
+				Expect(listGuardedRolloutsOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
+			})
 			It(`Invoke NewListInstanceConfigOptions successfully`, func() {
 				// Construct an instance of the ListInstanceConfigOptions model
 				listInstanceConfigOptionsModel := appConfigurationService.NewListInstanceConfigOptions()
@@ -19116,6 +20672,25 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(listIntegrationsOptionsModel.Limit).To(Equal(core.Int64Ptr(int64(10))))
 				Expect(listIntegrationsOptionsModel.Offset).To(Equal(core.Int64Ptr(int64(0))))
 				Expect(listIntegrationsOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
+			})
+			It(`Invoke NewListMetricsOptions successfully`, func() {
+				// Construct an instance of the ListMetricsOptions model
+				listMetricsOptionsModel := appConfigurationService.NewListMetricsOptions()
+				listMetricsOptionsModel.SetExpand(true)
+				listMetricsOptionsModel.SetInclude([]string{"experiments", "guarded_rollouts"})
+				listMetricsOptionsModel.SetSearch("search_string")
+				listMetricsOptionsModel.SetLimit(int64(10))
+				listMetricsOptionsModel.SetOffset(int64(0))
+				listMetricsOptionsModel.SetSort("created_time")
+				listMetricsOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
+				Expect(listMetricsOptionsModel).ToNot(BeNil())
+				Expect(listMetricsOptionsModel.Expand).To(Equal(core.BoolPtr(true)))
+				Expect(listMetricsOptionsModel.Include).To(Equal([]string{"experiments", "guarded_rollouts"}))
+				Expect(listMetricsOptionsModel.Search).To(Equal(core.StringPtr("search_string")))
+				Expect(listMetricsOptionsModel.Limit).To(Equal(core.Int64Ptr(int64(10))))
+				Expect(listMetricsOptionsModel.Offset).To(Equal(core.Int64Ptr(int64(0))))
+				Expect(listMetricsOptionsModel.Sort).To(Equal(core.StringPtr("created_time")))
+				Expect(listMetricsOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewListOriginconfigsOptions successfully`, func() {
 				// Construct an instance of the ListOriginconfigsOptions model
@@ -19188,16 +20763,6 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(listWorkflowConfigsOptionsModel.Offset).To(Equal(core.Int64Ptr(int64(0))))
 				Expect(listWorkflowConfigsOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
-			It(`Invoke NewListWorkflowconfigOptions successfully`, func() {
-				// Construct an instance of the ListWorkflowconfigOptions model
-				environmentID := "environment_id"
-				listWorkflowconfigOptionsModel := appConfigurationService.NewListWorkflowconfigOptions(environmentID)
-				listWorkflowconfigOptionsModel.SetEnvironmentID("environment_id")
-				listWorkflowconfigOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
-				Expect(listWorkflowconfigOptionsModel).ToNot(BeNil())
-				Expect(listWorkflowconfigOptionsModel.EnvironmentID).To(Equal(core.StringPtr("environment_id")))
-				Expect(listWorkflowconfigOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
-			})
 			It(`Invoke NewPromoteGitconfigOptions successfully`, func() {
 				// Construct an instance of the PromoteGitconfigOptions model
 				gitConfigID := "git_config_id"
@@ -19254,6 +20819,12 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(_model).ToNot(BeNil())
 				Expect(err).To(BeNil())
 			})
+			It(`Invoke NewRolloutMetric successfully`, func() {
+				metricID := "mtlwx65j"
+				_model, err := appConfigurationService.NewRolloutMetric(metricID)
+				Expect(_model).ToNot(BeNil())
+				Expect(err).To(BeNil())
+			})
 			It(`Invoke NewRolloutPhase successfully`, func() {
 				percentage := int64(1)
 				_model, err := appConfigurationService.NewRolloutPhase(percentage)
@@ -19284,6 +20855,19 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(_model).ToNot(BeNil())
 				Expect(err).To(BeNil())
 			})
+			It(`Invoke NewSetMetricFavoriteOptions successfully`, func() {
+				// Construct an instance of the SetMetricFavoriteOptions model
+				metricID := "user-clicks"
+				setMetricFavoriteOptionsIsFavorite := true
+				setMetricFavoriteOptionsModel := appConfigurationService.NewSetMetricFavoriteOptions(metricID, setMetricFavoriteOptionsIsFavorite)
+				setMetricFavoriteOptionsModel.SetMetricID("user-clicks")
+				setMetricFavoriteOptionsModel.SetIsFavorite(true)
+				setMetricFavoriteOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
+				Expect(setMetricFavoriteOptionsModel).ToNot(BeNil())
+				Expect(setMetricFavoriteOptionsModel.MetricID).To(Equal(core.StringPtr("user-clicks")))
+				Expect(setMetricFavoriteOptionsModel.IsFavorite).To(Equal(core.BoolPtr(true)))
+				Expect(setMetricFavoriteOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
+			})
 			It(`Invoke NewSnapshotOutput successfully`, func() {
 				gitConfigID := "testString"
 				name := "testString"
@@ -19296,18 +20880,17 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				environmentID := "environment_id"
 				featureID := "feature_id"
 				stopFeatureRolloutOptionsAction := "stop"
-				stopFeatureRolloutOptionsRolloutPercentage := int64(0)
-				stopFeatureRolloutOptionsModel := appConfigurationService.NewStopFeatureRolloutOptions(environmentID, featureID, stopFeatureRolloutOptionsAction, stopFeatureRolloutOptionsRolloutPercentage)
+				stopFeatureRolloutOptionsModel := appConfigurationService.NewStopFeatureRolloutOptions(environmentID, featureID, stopFeatureRolloutOptionsAction)
 				stopFeatureRolloutOptionsModel.SetEnvironmentID("environment_id")
 				stopFeatureRolloutOptionsModel.SetFeatureID("feature_id")
 				stopFeatureRolloutOptionsModel.SetAction("stop")
-				stopFeatureRolloutOptionsModel.SetRolloutPercentage(int64(0))
+				stopFeatureRolloutOptionsModel.SetRolloutPercentage(int64(77))
 				stopFeatureRolloutOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(stopFeatureRolloutOptionsModel).ToNot(BeNil())
 				Expect(stopFeatureRolloutOptionsModel.EnvironmentID).To(Equal(core.StringPtr("environment_id")))
 				Expect(stopFeatureRolloutOptionsModel.FeatureID).To(Equal(core.StringPtr("feature_id")))
 				Expect(stopFeatureRolloutOptionsModel.Action).To(Equal(core.StringPtr("stop")))
-				Expect(stopFeatureRolloutOptionsModel.RolloutPercentage).To(Equal(core.Int64Ptr(int64(0))))
+				Expect(stopFeatureRolloutOptionsModel.RolloutPercentage).To(Equal(core.Int64Ptr(int64(77))))
 				Expect(stopFeatureRolloutOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewStopFeatureRuleRolloutOptions successfully`, func() {
@@ -19316,20 +20899,19 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				featureID := "feature_id"
 				ruleID := "rule_id"
 				stopFeatureRuleRolloutOptionsAction := "stop"
-				stopFeatureRuleRolloutOptionsRolloutPercentage := int64(0)
-				stopFeatureRuleRolloutOptionsModel := appConfigurationService.NewStopFeatureRuleRolloutOptions(environmentID, featureID, ruleID, stopFeatureRuleRolloutOptionsAction, stopFeatureRuleRolloutOptionsRolloutPercentage)
+				stopFeatureRuleRolloutOptionsModel := appConfigurationService.NewStopFeatureRuleRolloutOptions(environmentID, featureID, ruleID, stopFeatureRuleRolloutOptionsAction)
 				stopFeatureRuleRolloutOptionsModel.SetEnvironmentID("environment_id")
 				stopFeatureRuleRolloutOptionsModel.SetFeatureID("feature_id")
 				stopFeatureRuleRolloutOptionsModel.SetRuleID("rule_id")
 				stopFeatureRuleRolloutOptionsModel.SetAction("stop")
-				stopFeatureRuleRolloutOptionsModel.SetRolloutPercentage(int64(0))
+				stopFeatureRuleRolloutOptionsModel.SetRolloutPercentage(int64(77))
 				stopFeatureRuleRolloutOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(stopFeatureRuleRolloutOptionsModel).ToNot(BeNil())
 				Expect(stopFeatureRuleRolloutOptionsModel.EnvironmentID).To(Equal(core.StringPtr("environment_id")))
 				Expect(stopFeatureRuleRolloutOptionsModel.FeatureID).To(Equal(core.StringPtr("feature_id")))
 				Expect(stopFeatureRuleRolloutOptionsModel.RuleID).To(Equal(core.StringPtr("rule_id")))
 				Expect(stopFeatureRuleRolloutOptionsModel.Action).To(Equal(core.StringPtr("stop")))
-				Expect(stopFeatureRuleRolloutOptionsModel.RolloutPercentage).To(Equal(core.Int64Ptr(int64(0))))
+				Expect(stopFeatureRuleRolloutOptionsModel.RolloutPercentage).To(Equal(core.Int64Ptr(int64(77))))
 				Expect(stopFeatureRuleRolloutOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewTargetSegments successfully`, func() {
@@ -19422,15 +21004,25 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(rolloutPhaseModel.Duration).To(Equal(core.Int64Ptr(int64(38))))
 				Expect(rolloutPhaseModel.DurationType).To(Equal(core.StringPtr("days")))
 
+				// Construct an instance of the RolloutMetric model
+				rolloutMetricModel := new(appconfigurationv1.RolloutMetric)
+				Expect(rolloutMetricModel).ToNot(BeNil())
+				rolloutMetricModel.MetricID = core.StringPtr("mtlwx65j")
+				rolloutMetricModel.AutoRollback = core.BoolPtr(false)
+				Expect(rolloutMetricModel.MetricID).To(Equal(core.StringPtr("mtlwx65j")))
+				Expect(rolloutMetricModel.AutoRollback).To(Equal(core.BoolPtr(false)))
+
 				// Construct an instance of the RolloutConfiguration model
 				rolloutConfigurationModel := new(appconfigurationv1.RolloutConfiguration)
 				Expect(rolloutConfigurationModel).ToNot(BeNil())
 				rolloutConfigurationModel.DurationPreset = core.StringPtr("CUSTOM")
 				rolloutConfigurationModel.StartAt = CreateMockDateTime("2019-01-01T12:00:00.000Z")
 				rolloutConfigurationModel.Phases = []appconfigurationv1.RolloutPhase{*rolloutPhaseModel}
+				rolloutConfigurationModel.Metrics = []appconfigurationv1.RolloutMetric{*rolloutMetricModel}
 				Expect(rolloutConfigurationModel.DurationPreset).To(Equal(core.StringPtr("CUSTOM")))
 				Expect(rolloutConfigurationModel.StartAt).To(Equal(CreateMockDateTime("2019-01-01T12:00:00.000Z")))
 				Expect(rolloutConfigurationModel.Phases).To(Equal([]appconfigurationv1.RolloutPhase{*rolloutPhaseModel}))
+				Expect(rolloutConfigurationModel.Metrics).To(Equal([]appconfigurationv1.RolloutMetric{*rolloutMetricModel}))
 
 				// Construct an instance of the TargetSegments model
 				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
@@ -19517,15 +21109,25 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(rolloutPhaseModel.Duration).To(Equal(core.Int64Ptr(int64(38))))
 				Expect(rolloutPhaseModel.DurationType).To(Equal(core.StringPtr("days")))
 
+				// Construct an instance of the RolloutMetric model
+				rolloutMetricModel := new(appconfigurationv1.RolloutMetric)
+				Expect(rolloutMetricModel).ToNot(BeNil())
+				rolloutMetricModel.MetricID = core.StringPtr("mtlwx65j")
+				rolloutMetricModel.AutoRollback = core.BoolPtr(false)
+				Expect(rolloutMetricModel.MetricID).To(Equal(core.StringPtr("mtlwx65j")))
+				Expect(rolloutMetricModel.AutoRollback).To(Equal(core.BoolPtr(false)))
+
 				// Construct an instance of the RolloutConfiguration model
 				rolloutConfigurationModel := new(appconfigurationv1.RolloutConfiguration)
 				Expect(rolloutConfigurationModel).ToNot(BeNil())
 				rolloutConfigurationModel.DurationPreset = core.StringPtr("CUSTOM")
 				rolloutConfigurationModel.StartAt = CreateMockDateTime("2019-01-01T12:00:00.000Z")
 				rolloutConfigurationModel.Phases = []appconfigurationv1.RolloutPhase{*rolloutPhaseModel}
+				rolloutConfigurationModel.Metrics = []appconfigurationv1.RolloutMetric{*rolloutMetricModel}
 				Expect(rolloutConfigurationModel.DurationPreset).To(Equal(core.StringPtr("CUSTOM")))
 				Expect(rolloutConfigurationModel.StartAt).To(Equal(CreateMockDateTime("2019-01-01T12:00:00.000Z")))
 				Expect(rolloutConfigurationModel.Phases).To(Equal([]appconfigurationv1.RolloutPhase{*rolloutPhaseModel}))
+				Expect(rolloutConfigurationModel.Metrics).To(Equal([]appconfigurationv1.RolloutMetric{*rolloutMetricModel}))
 
 				// Construct an instance of the UpdateFeatureRuleOptions model
 				environmentID := "environment_id"
@@ -19591,15 +21193,25 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(rolloutPhaseModel.Duration).To(Equal(core.Int64Ptr(int64(38))))
 				Expect(rolloutPhaseModel.DurationType).To(Equal(core.StringPtr("days")))
 
+				// Construct an instance of the RolloutMetric model
+				rolloutMetricModel := new(appconfigurationv1.RolloutMetric)
+				Expect(rolloutMetricModel).ToNot(BeNil())
+				rolloutMetricModel.MetricID = core.StringPtr("mtlwx65j")
+				rolloutMetricModel.AutoRollback = core.BoolPtr(false)
+				Expect(rolloutMetricModel.MetricID).To(Equal(core.StringPtr("mtlwx65j")))
+				Expect(rolloutMetricModel.AutoRollback).To(Equal(core.BoolPtr(false)))
+
 				// Construct an instance of the RolloutConfiguration model
 				rolloutConfigurationModel := new(appconfigurationv1.RolloutConfiguration)
 				Expect(rolloutConfigurationModel).ToNot(BeNil())
 				rolloutConfigurationModel.DurationPreset = core.StringPtr("CUSTOM")
 				rolloutConfigurationModel.StartAt = CreateMockDateTime("2019-01-01T12:00:00.000Z")
 				rolloutConfigurationModel.Phases = []appconfigurationv1.RolloutPhase{*rolloutPhaseModel}
+				rolloutConfigurationModel.Metrics = []appconfigurationv1.RolloutMetric{*rolloutMetricModel}
 				Expect(rolloutConfigurationModel.DurationPreset).To(Equal(core.StringPtr("CUSTOM")))
 				Expect(rolloutConfigurationModel.StartAt).To(Equal(CreateMockDateTime("2019-01-01T12:00:00.000Z")))
 				Expect(rolloutConfigurationModel.Phases).To(Equal([]appconfigurationv1.RolloutPhase{*rolloutPhaseModel}))
+				Expect(rolloutConfigurationModel.Metrics).To(Equal([]appconfigurationv1.RolloutMetric{*rolloutMetricModel}))
 
 				// Construct an instance of the TargetSegments model
 				targetSegmentsModel := new(appconfigurationv1.TargetSegments)
@@ -19680,6 +21292,24 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(updateGitconfigOptionsModel.GitFilePath).To(Equal(core.StringPtr("testString")))
 				Expect(updateGitconfigOptionsModel.GitToken).To(Equal(core.StringPtr("testString")))
 				Expect(updateGitconfigOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
+			})
+			It(`Invoke NewUpdateMetricOptions successfully`, func() {
+				// Construct an instance of the UpdateMetricOptions model
+				metricID := "user-clicks"
+				updateMetricOptionsModel := appConfigurationService.NewUpdateMetricOptions(metricID)
+				updateMetricOptionsModel.SetMetricID("user-clicks")
+				updateMetricOptionsModel.SetMetricName("Updated User Clicks")
+				updateMetricOptionsModel.SetDescription("Updated description for user click events")
+				updateMetricOptionsModel.SetEventKey("updated_user_click_event")
+				updateMetricOptionsModel.SetDirection("HIGHER")
+				updateMetricOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
+				Expect(updateMetricOptionsModel).ToNot(BeNil())
+				Expect(updateMetricOptionsModel.MetricID).To(Equal(core.StringPtr("user-clicks")))
+				Expect(updateMetricOptionsModel.MetricName).To(Equal(core.StringPtr("Updated User Clicks")))
+				Expect(updateMetricOptionsModel.Description).To(Equal(core.StringPtr("Updated description for user click events")))
+				Expect(updateMetricOptionsModel.EventKey).To(Equal(core.StringPtr("updated_user_click_event")))
+				Expect(updateMetricOptionsModel.Direction).To(Equal(core.StringPtr("HIGHER")))
+				Expect(updateMetricOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewUpdateOriginconfigsOptions successfully`, func() {
 				// Construct an instance of the UpdateOriginconfigsOptions model
@@ -19894,45 +21524,6 @@ var _ = Describe(`AppConfigurationV1`, func() {
 				Expect(updateWorkflowConfigsOptionsModel.Scope).To(Equal(workflowScopeModel))
 				Expect(updateWorkflowConfigsOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
-			It(`Invoke NewUpdateWorkflowconfigOptions successfully`, func() {
-				// Construct an instance of the ExternalServiceNowCredentials model
-				externalServiceNowCredentialsModel := new(appconfigurationv1.ExternalServiceNowCredentials)
-				Expect(externalServiceNowCredentialsModel).ToNot(BeNil())
-				externalServiceNowCredentialsModel.Username = core.StringPtr("admin")
-				externalServiceNowCredentialsModel.Password = core.StringPtr("testString")
-				externalServiceNowCredentialsModel.ClientID = core.StringPtr("f7b6379b55d08210f8ree233afc7256d")
-				externalServiceNowCredentialsModel.ClientSecret = core.StringPtr("testString")
-				Expect(externalServiceNowCredentialsModel.Username).To(Equal(core.StringPtr("admin")))
-				Expect(externalServiceNowCredentialsModel.Password).To(Equal(core.StringPtr("testString")))
-				Expect(externalServiceNowCredentialsModel.ClientID).To(Equal(core.StringPtr("f7b6379b55d08210f8ree233afc7256d")))
-				Expect(externalServiceNowCredentialsModel.ClientSecret).To(Equal(core.StringPtr("testString")))
-
-				// Construct an instance of the UpdateWorkflowConfigUpdateExternalServiceNow model
-				updateWorkflowConfigModel := new(appconfigurationv1.UpdateWorkflowConfigUpdateExternalServiceNow)
-				Expect(updateWorkflowConfigModel).ToNot(BeNil())
-				updateWorkflowConfigModel.WorkflowURL = core.StringPtr("testString")
-				updateWorkflowConfigModel.ApprovalGroupName = core.StringPtr("testString")
-				updateWorkflowConfigModel.ApprovalExpiration = core.Int64Ptr(int64(1))
-				updateWorkflowConfigModel.WorkflowCredentials = externalServiceNowCredentialsModel
-				updateWorkflowConfigModel.Enabled = core.BoolPtr(false)
-				Expect(updateWorkflowConfigModel.WorkflowURL).To(Equal(core.StringPtr("testString")))
-				Expect(updateWorkflowConfigModel.ApprovalGroupName).To(Equal(core.StringPtr("testString")))
-				Expect(updateWorkflowConfigModel.ApprovalExpiration).To(Equal(core.Int64Ptr(int64(1))))
-				Expect(updateWorkflowConfigModel.WorkflowCredentials).To(Equal(externalServiceNowCredentialsModel))
-				Expect(updateWorkflowConfigModel.Enabled).To(Equal(core.BoolPtr(false)))
-
-				// Construct an instance of the UpdateWorkflowconfigOptions model
-				environmentID := "environment_id"
-				var updateWorkflowConfig appconfigurationv1.UpdateWorkflowConfigIntf = nil
-				updateWorkflowconfigOptionsModel := appConfigurationService.NewUpdateWorkflowconfigOptions(environmentID, updateWorkflowConfig)
-				updateWorkflowconfigOptionsModel.SetEnvironmentID("environment_id")
-				updateWorkflowconfigOptionsModel.SetUpdateWorkflowConfig(updateWorkflowConfigModel)
-				updateWorkflowconfigOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
-				Expect(updateWorkflowconfigOptionsModel).ToNot(BeNil())
-				Expect(updateWorkflowconfigOptionsModel.EnvironmentID).To(Equal(core.StringPtr("environment_id")))
-				Expect(updateWorkflowconfigOptionsModel.UpdateWorkflowConfig).To(Equal(updateWorkflowConfigModel))
-				Expect(updateWorkflowconfigOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
-			})
 			It(`Invoke NewWorkflowApprovalInfo successfully`, func() {
 				workflowName := "testString"
 				workflowID := "testString"
@@ -19977,29 +21568,8 @@ var _ = Describe(`AppConfigurationV1`, func() {
 			})
 			It(`Invoke NewCreateIntegrationMetadataCreateKmsIntegrationMetadata successfully`, func() {
 				kmsInstanceCrn := "crn:v1:bluemix:public:kms:au-syd:a/4f631ea3b3204b2b878a295604994acf:a3d454ea-38f4-4ae1-92e1-6a4aaac24e14::"
-				kmsEndpoint := "https://au-syd.kms.cloud.ibm.com"
 				rootKeyID := "testString"
-				_model, err := appConfigurationService.NewCreateIntegrationMetadataCreateKmsIntegrationMetadata(kmsInstanceCrn, kmsEndpoint, rootKeyID)
-				Expect(_model).ToNot(BeNil())
-				Expect(err).To(BeNil())
-			})
-			It(`Invoke NewCreateWorkflowConfigExternalServiceNow successfully`, func() {
-				workflowURL := "testString"
-				approvalGroupName := "testString"
-				approvalExpiration := int64(1)
-				var workflowCredentials *appconfigurationv1.ExternalServiceNowCredentials = nil
-				enabled := false
-				_, err := appConfigurationService.NewCreateWorkflowConfigExternalServiceNow(workflowURL, approvalGroupName, approvalExpiration, workflowCredentials, enabled)
-				Expect(err).ToNot(BeNil())
-			})
-			It(`Invoke NewCreateWorkflowConfigIBMServiceNow successfully`, func() {
-				serviceCrn := "testString"
-				workflowType := "testString"
-				approvalExpiration := int64(1)
-				smInstanceCrn := "testString"
-				secretID := "testString"
-				enabled := false
-				_model, err := appConfigurationService.NewCreateWorkflowConfigIBMServiceNow(serviceCrn, workflowType, approvalExpiration, smInstanceCrn, secretID, enabled)
+				_model, err := appConfigurationService.NewCreateIntegrationMetadataCreateKmsIntegrationMetadata(kmsInstanceCrn, rootKeyID)
 				Expect(_model).ToNot(BeNil())
 				Expect(err).To(BeNil())
 			})
@@ -20116,7 +21686,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 			model.EventNotificationsSourceName = core.StringPtr("testString")
 			model.EventNotificationsSourceDescription = core.StringPtr("testString")
 			model.KmsInstanceCrn = core.StringPtr("crn:v1:bluemix:public:kms:au-syd:a/4f631ea3b3204b2b878a295604994acf:a3d454ea-38f4-4ae1-92e1-6a4aaac24e14::")
-			model.KmsEndpoint = core.StringPtr("https://au-syd.kms.cloud.ibm.com")
+			model.KmsEndpoint = core.StringPtr("https://private.au-syd.kms.cloud.ibm.com")
 			model.RootKeyID = core.StringPtr("testString")
 
 			b, err := json.Marshal(model)
@@ -20128,37 +21698,6 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 			var result *appconfigurationv1.CreateIntegrationMetadata
 			err = appconfigurationv1.UnmarshalCreateIntegrationMetadata(raw, &result)
-			Expect(err).To(BeNil())
-			Expect(result).ToNot(BeNil())
-			Expect(result).To(Equal(model))
-		})
-		It(`Invoke UnmarshalCreateWorkflowConfig successfully`, func() {
-			// Construct an instance of the model.
-			model := new(appconfigurationv1.CreateWorkflowConfig)
-			model.EnvironmentName = core.StringPtr("testString")
-			model.EnvironmentID = core.StringPtr("testString")
-			model.WorkflowURL = core.StringPtr("testString")
-			model.ApprovalGroupName = core.StringPtr("testString")
-			model.ApprovalExpiration = core.Int64Ptr(int64(1))
-			model.WorkflowCredentials = nil
-			model.Enabled = core.BoolPtr(false)
-			model.CreatedTime = CreateMockDateTime("2022-11-15T23:20:50.000Z")
-			model.UpdatedTime = CreateMockDateTime("2022-11-16T21:20:50.000Z")
-			model.Href = core.StringPtr("testString")
-			model.ServiceCrn = core.StringPtr("testString")
-			model.WorkflowType = core.StringPtr("testString")
-			model.SmInstanceCrn = core.StringPtr("testString")
-			model.SecretID = core.StringPtr("testString")
-
-			b, err := json.Marshal(model)
-			Expect(err).To(BeNil())
-
-			var raw map[string]json.RawMessage
-			err = json.Unmarshal(b, &raw)
-			Expect(err).To(BeNil())
-
-			var result *appconfigurationv1.CreateWorkflowConfig
-			err = appconfigurationv1.UnmarshalCreateWorkflowConfig(raw, &result)
 			Expect(err).To(BeNil())
 			Expect(result).ToNot(BeNil())
 			Expect(result).To(Equal(model))
@@ -20188,27 +21727,6 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 			var result *appconfigurationv1.Environment
 			err = appconfigurationv1.UnmarshalEnvironment(raw, &result)
-			Expect(err).To(BeNil())
-			Expect(result).ToNot(BeNil())
-			Expect(result).To(Equal(model))
-		})
-		It(`Invoke UnmarshalExternalServiceNowCredentials successfully`, func() {
-			// Construct an instance of the model.
-			model := new(appconfigurationv1.ExternalServiceNowCredentials)
-			model.Username = core.StringPtr("admin")
-			model.Password = core.StringPtr("testString")
-			model.ClientID = core.StringPtr("f7b6379b55d08210f8ree233afc7256d")
-			model.ClientSecret = core.StringPtr("testString")
-
-			b, err := json.Marshal(model)
-			Expect(err).To(BeNil())
-
-			var raw map[string]json.RawMessage
-			err = json.Unmarshal(b, &raw)
-			Expect(err).To(BeNil())
-
-			var result *appconfigurationv1.ExternalServiceNowCredentials
-			err = appconfigurationv1.UnmarshalExternalServiceNowCredentials(raw, &result)
 			Expect(err).To(BeNil())
 			Expect(result).ToNot(BeNil())
 			Expect(result).To(Equal(model))
@@ -20481,6 +21999,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 			model.StartAt = CreateMockDateTime("2019-01-01T12:00:00.000Z")
 			model.Phases = nil
 			model.Status = core.StringPtr("QUEUED")
+			model.Metrics = nil
 
 			b, err := json.Marshal(model)
 			Expect(err).To(BeNil())
@@ -20491,6 +22010,28 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 			var result *appconfigurationv1.RolloutConfiguration
 			err = appconfigurationv1.UnmarshalRolloutConfiguration(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalRolloutMetric successfully`, func() {
+			// Construct an instance of the model.
+			model := new(appconfigurationv1.RolloutMetric)
+			model.MetricID = core.StringPtr("mtlwx65j")
+			model.AutoRollback = core.BoolPtr(false)
+			model.MetricName = core.StringPtr("feature-clicked")
+			model.Direction = core.StringPtr("HIGHER")
+			model.MetricType = core.StringPtr("BINARY")
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *appconfigurationv1.RolloutMetric
+			err = appconfigurationv1.UnmarshalRolloutMetric(raw, &result)
 			Expect(err).To(BeNil())
 			Expect(result).ToNot(BeNil())
 			Expect(result).To(Equal(model))
@@ -20620,31 +22161,6 @@ var _ = Describe(`AppConfigurationV1`, func() {
 			Expect(result).ToNot(BeNil())
 			Expect(result).To(Equal(model))
 		})
-		It(`Invoke UnmarshalUpdateWorkflowConfig successfully`, func() {
-			// Construct an instance of the model.
-			model := new(appconfigurationv1.UpdateWorkflowConfig)
-			model.WorkflowURL = core.StringPtr("testString")
-			model.ApprovalGroupName = core.StringPtr("testString")
-			model.ApprovalExpiration = core.Int64Ptr(int64(1))
-			model.WorkflowCredentials = nil
-			model.Enabled = core.BoolPtr(false)
-			model.ServiceCrn = core.StringPtr("testString")
-			model.SmInstanceCrn = core.StringPtr("testString")
-			model.SecretID = core.StringPtr("testString")
-
-			b, err := json.Marshal(model)
-			Expect(err).To(BeNil())
-
-			var raw map[string]json.RawMessage
-			err = json.Unmarshal(b, &raw)
-			Expect(err).To(BeNil())
-
-			var result *appconfigurationv1.UpdateWorkflowConfig
-			err = appconfigurationv1.UnmarshalUpdateWorkflowConfig(raw, &result)
-			Expect(err).To(BeNil())
-			Expect(result).ToNot(BeNil())
-			Expect(result).To(Equal(model))
-		})
 		It(`Invoke UnmarshalWorkflowApprovalInfo successfully`, func() {
 			// Construct an instance of the model.
 			model := new(appconfigurationv1.WorkflowApprovalInfo)
@@ -20741,6 +22257,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 			model.WorkflowURL = core.StringPtr("https://dev339579.service-now.com")
 			model.CrnMask = core.StringPtr("crn:v1:bluemix:public:apprapp:au-syd::::")
 			model.DefaultEmail = core.StringPtr("sai.kumar4@ibm.com")
+			model.ServiceEnvironment = core.StringPtr("production")
 			model.SmSecretCrn = core.StringPtr("crn:v1:bluemix:public:secrets-manager:eu-gb:a/4f631ea3b3204b2b878a295604994acf:cc7a5695-989e-467a-b557-12f3d5c5b1a0:secret:18211326-d511-c6f5-df44-aef7d5f985a2")
 
 			b, err := json.Marshal(model)
@@ -20839,7 +22356,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 			// Construct an instance of the model.
 			model := new(appconfigurationv1.CreateIntegrationMetadataCreateKmsIntegrationMetadata)
 			model.KmsInstanceCrn = core.StringPtr("crn:v1:bluemix:public:kms:au-syd:a/4f631ea3b3204b2b878a295604994acf:a3d454ea-38f4-4ae1-92e1-6a4aaac24e14::")
-			model.KmsEndpoint = core.StringPtr("https://au-syd.kms.cloud.ibm.com")
+			model.KmsEndpoint = core.StringPtr("https://private.au-syd.kms.cloud.ibm.com")
 			model.RootKeyID = core.StringPtr("testString")
 
 			b, err := json.Marshal(model)
@@ -20851,61 +22368,6 @@ var _ = Describe(`AppConfigurationV1`, func() {
 
 			var result *appconfigurationv1.CreateIntegrationMetadataCreateKmsIntegrationMetadata
 			err = appconfigurationv1.UnmarshalCreateIntegrationMetadataCreateKmsIntegrationMetadata(raw, &result)
-			Expect(err).To(BeNil())
-			Expect(result).ToNot(BeNil())
-			Expect(result).To(Equal(model))
-		})
-		It(`Invoke UnmarshalCreateWorkflowConfigExternalServiceNow successfully`, func() {
-			// Construct an instance of the model.
-			model := new(appconfigurationv1.CreateWorkflowConfigExternalServiceNow)
-			model.EnvironmentName = core.StringPtr("testString")
-			model.EnvironmentID = core.StringPtr("testString")
-			model.WorkflowURL = core.StringPtr("testString")
-			model.ApprovalGroupName = core.StringPtr("testString")
-			model.ApprovalExpiration = core.Int64Ptr(int64(1))
-			model.WorkflowCredentials = nil
-			model.Enabled = core.BoolPtr(false)
-			model.CreatedTime = CreateMockDateTime("2022-11-15T23:20:50.000Z")
-			model.UpdatedTime = CreateMockDateTime("2022-11-16T21:20:50.000Z")
-			model.Href = core.StringPtr("testString")
-
-			b, err := json.Marshal(model)
-			Expect(err).To(BeNil())
-
-			var raw map[string]json.RawMessage
-			err = json.Unmarshal(b, &raw)
-			Expect(err).To(BeNil())
-
-			var result *appconfigurationv1.CreateWorkflowConfigExternalServiceNow
-			err = appconfigurationv1.UnmarshalCreateWorkflowConfigExternalServiceNow(raw, &result)
-			Expect(err).To(BeNil())
-			Expect(result).ToNot(BeNil())
-			Expect(result).To(Equal(model))
-		})
-		It(`Invoke UnmarshalCreateWorkflowConfigIBMServiceNow successfully`, func() {
-			// Construct an instance of the model.
-			model := new(appconfigurationv1.CreateWorkflowConfigIBMServiceNow)
-			model.EnvironmentName = core.StringPtr("testString")
-			model.EnvironmentID = core.StringPtr("testString")
-			model.ServiceCrn = core.StringPtr("testString")
-			model.WorkflowType = core.StringPtr("testString")
-			model.ApprovalExpiration = core.Int64Ptr(int64(1))
-			model.SmInstanceCrn = core.StringPtr("testString")
-			model.SecretID = core.StringPtr("testString")
-			model.Enabled = core.BoolPtr(false)
-			model.CreatedTime = CreateMockDateTime("2022-11-15T23:20:50.000Z")
-			model.UpdatedTime = CreateMockDateTime("2022-11-16T21:20:50.000Z")
-			model.Href = core.StringPtr("testString")
-
-			b, err := json.Marshal(model)
-			Expect(err).To(BeNil())
-
-			var raw map[string]json.RawMessage
-			err = json.Unmarshal(b, &raw)
-			Expect(err).To(BeNil())
-
-			var result *appconfigurationv1.CreateWorkflowConfigIBMServiceNow
-			err = appconfigurationv1.UnmarshalCreateWorkflowConfigIBMServiceNow(raw, &result)
 			Expect(err).To(BeNil())
 			Expect(result).ToNot(BeNil())
 			Expect(result).To(Equal(model))
@@ -20950,50 +22412,6 @@ var _ = Describe(`AppConfigurationV1`, func() {
 			Expect(result).ToNot(BeNil())
 			Expect(result).To(Equal(model))
 		})
-		It(`Invoke UnmarshalUpdateWorkflowConfigUpdateExternalServiceNow successfully`, func() {
-			// Construct an instance of the model.
-			model := new(appconfigurationv1.UpdateWorkflowConfigUpdateExternalServiceNow)
-			model.WorkflowURL = core.StringPtr("testString")
-			model.ApprovalGroupName = core.StringPtr("testString")
-			model.ApprovalExpiration = core.Int64Ptr(int64(1))
-			model.WorkflowCredentials = nil
-			model.Enabled = core.BoolPtr(false)
-
-			b, err := json.Marshal(model)
-			Expect(err).To(BeNil())
-
-			var raw map[string]json.RawMessage
-			err = json.Unmarshal(b, &raw)
-			Expect(err).To(BeNil())
-
-			var result *appconfigurationv1.UpdateWorkflowConfigUpdateExternalServiceNow
-			err = appconfigurationv1.UnmarshalUpdateWorkflowConfigUpdateExternalServiceNow(raw, &result)
-			Expect(err).To(BeNil())
-			Expect(result).ToNot(BeNil())
-			Expect(result).To(Equal(model))
-		})
-		It(`Invoke UnmarshalUpdateWorkflowConfigUpdateIBMServiceNow successfully`, func() {
-			// Construct an instance of the model.
-			model := new(appconfigurationv1.UpdateWorkflowConfigUpdateIBMServiceNow)
-			model.ServiceCrn = core.StringPtr("testString")
-			model.ApprovalExpiration = core.Int64Ptr(int64(1))
-			model.SmInstanceCrn = core.StringPtr("testString")
-			model.SecretID = core.StringPtr("testString")
-			model.Enabled = core.BoolPtr(false)
-
-			b, err := json.Marshal(model)
-			Expect(err).To(BeNil())
-
-			var raw map[string]json.RawMessage
-			err = json.Unmarshal(b, &raw)
-			Expect(err).To(BeNil())
-
-			var result *appconfigurationv1.UpdateWorkflowConfigUpdateIBMServiceNow
-			err = appconfigurationv1.UnmarshalUpdateWorkflowConfigUpdateIBMServiceNow(raw, &result)
-			Expect(err).To(BeNil())
-			Expect(result).ToNot(BeNil())
-			Expect(result).To(Equal(model))
-		})
 		It(`Invoke UnmarshalWorkflowMetadataExternalServiceNowMetadata successfully`, func() {
 			// Construct an instance of the model.
 			model := new(appconfigurationv1.WorkflowMetadataExternalServiceNowMetadata)
@@ -21021,6 +22439,7 @@ var _ = Describe(`AppConfigurationV1`, func() {
 			model.ApprovalExpiration = core.Int64Ptr(int64(7))
 			model.CrnMask = core.StringPtr("crn:v1:bluemix:public:apprapp:au-syd::::")
 			model.DefaultEmail = core.StringPtr("sai.kumar4@ibm.com")
+			model.ServiceEnvironment = core.StringPtr("production")
 			model.SmSecretCrn = core.StringPtr("crn:v1:bluemix:public:secrets-manager:eu-gb:a/4f631ea3b3204b2b878a295604994acf:cc7a5695-989e-467a-b557-12f3d5c5b1a0:secret:18211326-d511-c6f5-df44-aef7d5f985a2")
 
 			b, err := json.Marshal(model)

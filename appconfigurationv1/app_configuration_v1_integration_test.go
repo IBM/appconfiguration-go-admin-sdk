@@ -117,8 +117,9 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 				Expect(environmentList).ToNot(BeNil())
 				allResults = append(allResults, environmentList.Environments...)
 
-				listEnvironmentsOptions.Offset, err = environmentList.GetNextOffset()
-				Expect(err).To(BeNil())
+				nextToken, nextErr := environmentList.GetNextOffset()
+				Expect(nextErr).To(BeNil())
+				listEnvironmentsOptions.Offset = nextToken
 
 				if listEnvironmentsOptions.Offset == nil {
 					break
@@ -249,8 +250,9 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 				Expect(collectionList).ToNot(BeNil())
 				allResults = append(allResults, collectionList.Collections...)
 
-				listCollectionsOptions.Offset, err = collectionList.GetNextOffset()
-				Expect(err).To(BeNil())
+				nextToken, nextErr := collectionList.GetNextOffset()
+				Expect(nextErr).To(BeNil())
+				listCollectionsOptions.Offset = nextToken
 
 				if listCollectionsOptions.Offset == nil {
 					break
@@ -382,8 +384,9 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 				Expect(featuresList).ToNot(BeNil())
 				allResults = append(allResults, featuresList.Features...)
 
-				listFeaturesOptions.Offset, err = featuresList.GetNextOffset()
-				Expect(err).To(BeNil())
+				nextToken, nextErr := featuresList.GetNextOffset()
+				Expect(nextErr).To(BeNil())
+				listFeaturesOptions.Offset = nextToken
 
 				if listFeaturesOptions.Offset == nil {
 					break
@@ -442,10 +445,16 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 				DurationType: core.StringPtr("days"),
 			}
 
+			rolloutMetricModel := &appconfigurationv1.RolloutMetric{
+				MetricID: core.StringPtr("mtlwx65j"),
+				AutoRollback: core.BoolPtr(false),
+			}
+
 			rolloutConfigurationModel := &appconfigurationv1.RolloutConfiguration{
 				DurationPreset: core.StringPtr("CUSTOM"),
 				StartAt: CreateMockDateTime("2019-01-01T12:00:00.000Z"),
 				Phases: []appconfigurationv1.RolloutPhase{*rolloutPhaseModel},
+				Metrics: []appconfigurationv1.RolloutMetric{*rolloutMetricModel},
 			}
 
 			targetSegmentsModel := &appconfigurationv1.TargetSegments{
@@ -503,10 +512,16 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 				DurationType: core.StringPtr("days"),
 			}
 
+			rolloutMetricModel := &appconfigurationv1.RolloutMetric{
+				MetricID: core.StringPtr("mtlwx65j"),
+				AutoRollback: core.BoolPtr(false),
+			}
+
 			rolloutConfigurationModel := &appconfigurationv1.RolloutConfiguration{
 				DurationPreset: core.StringPtr("CUSTOM"),
 				StartAt: CreateMockDateTime("2019-01-01T12:00:00.000Z"),
 				Phases: []appconfigurationv1.RolloutPhase{*rolloutPhaseModel},
+				Metrics: []appconfigurationv1.RolloutMetric{*rolloutMetricModel},
 			}
 
 			targetSegmentsModel := &appconfigurationv1.TargetSegments{
@@ -563,10 +578,16 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 				DurationType: core.StringPtr("days"),
 			}
 
+			rolloutMetricModel := &appconfigurationv1.RolloutMetric{
+				MetricID: core.StringPtr("mtlwx65j"),
+				AutoRollback: core.BoolPtr(false),
+			}
+
 			rolloutConfigurationModel := &appconfigurationv1.RolloutConfiguration{
 				DurationPreset: core.StringPtr("CUSTOM"),
 				StartAt: CreateMockDateTime("2019-01-01T12:00:00.000Z"),
 				Phases: []appconfigurationv1.RolloutPhase{*rolloutPhaseModel},
+				Metrics: []appconfigurationv1.RolloutMetric{*rolloutMetricModel},
 			}
 
 			targetSegmentsModel := &appconfigurationv1.TargetSegments{
@@ -650,7 +671,7 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 				EnvironmentID: core.StringPtr("environment_id"),
 				FeatureID: core.StringPtr("feature_id"),
 				Action: core.StringPtr("stop"),
-				RolloutPercentage: core.Int64Ptr(int64(0)),
+				RolloutPercentage: core.Int64Ptr(int64(77)),
 			}
 
 			feature, response, err := appConfigurationService.StopFeatureRollout(stopFeatureRolloutOptions)
@@ -675,10 +696,16 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 				DurationType: core.StringPtr("days"),
 			}
 
+			rolloutMetricModel := &appconfigurationv1.RolloutMetric{
+				MetricID: core.StringPtr("mtlwx65j"),
+				AutoRollback: core.BoolPtr(false),
+			}
+
 			rolloutConfigurationModel := &appconfigurationv1.RolloutConfiguration{
 				DurationPreset: core.StringPtr("CUSTOM"),
 				StartAt: CreateMockDateTime("2019-01-01T12:00:00.000Z"),
 				Phases: []appconfigurationv1.RolloutPhase{*rolloutPhaseModel},
+				Metrics: []appconfigurationv1.RolloutMetric{*rolloutMetricModel},
 			}
 
 			createFeatureRuleOptions := &appconfigurationv1.CreateFeatureRuleOptions{
@@ -750,10 +777,16 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 				DurationType: core.StringPtr("days"),
 			}
 
+			rolloutMetricModel := &appconfigurationv1.RolloutMetric{
+				MetricID: core.StringPtr("mtlwx65j"),
+				AutoRollback: core.BoolPtr(false),
+			}
+
 			rolloutConfigurationModel := &appconfigurationv1.RolloutConfiguration{
 				DurationPreset: core.StringPtr("CUSTOM"),
 				StartAt: CreateMockDateTime("2019-01-01T12:00:00.000Z"),
 				Phases: []appconfigurationv1.RolloutPhase{*rolloutPhaseModel},
+				Metrics: []appconfigurationv1.RolloutMetric{*rolloutMetricModel},
 			}
 
 			updateFeatureRuleOptions := &appconfigurationv1.UpdateFeatureRuleOptions{
@@ -785,7 +818,7 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 				FeatureID: core.StringPtr("feature_id"),
 				RuleID: core.StringPtr("rule_id"),
 				Action: core.StringPtr("stop"),
-				RolloutPercentage: core.Int64Ptr(int64(0)),
+				RolloutPercentage: core.Int64Ptr(int64(77)),
 			}
 
 			featureSegmentRuleWithRuleID, response, err := appConfigurationService.StopFeatureRuleRollout(stopFeatureRuleRolloutOptions)
@@ -848,8 +881,9 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 				Expect(propertiesList).ToNot(BeNil())
 				allResults = append(allResults, propertiesList.Properties...)
 
-				listPropertiesOptions.Offset, err = propertiesList.GetNextOffset()
-				Expect(err).To(BeNil())
+				nextToken, nextErr := propertiesList.GetNextOffset()
+				Expect(nextErr).To(BeNil())
+				listPropertiesOptions.Offset = nextToken
 
 				if listPropertiesOptions.Offset == nil {
 					break
@@ -1050,8 +1084,9 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 				Expect(segmentsList).ToNot(BeNil())
 				allResults = append(allResults, segmentsList.Segments...)
 
-				listSegmentsOptions.Offset, err = segmentsList.GetNextOffset()
-				Expect(err).To(BeNil())
+				nextToken, nextErr := segmentsList.GetNextOffset()
+				Expect(nextErr).To(BeNil())
+				listSegmentsOptions.Offset = nextToken
 
 				if listSegmentsOptions.Offset == nil {
 					break
@@ -1190,8 +1225,9 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 				Expect(gitConfigList).ToNot(BeNil())
 				allResults = append(allResults, gitConfigList.GitConfig...)
 
-				listGitconfigsOptions.Offset, err = gitConfigList.GetNextOffset()
-				Expect(err).To(BeNil())
+				nextToken, nextErr := gitConfigList.GetNextOffset()
+				Expect(nextErr).To(BeNil())
+				listGitconfigsOptions.Offset = nextToken
 
 				if listGitconfigsOptions.Offset == nil {
 					break
@@ -1351,8 +1387,9 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 				Expect(integrationList).ToNot(BeNil())
 				allResults = append(allResults, integrationList.Integrations...)
 
-				listIntegrationsOptions.Offset, err = integrationList.GetNextOffset()
-				Expect(err).To(BeNil())
+				nextToken, nextErr := integrationList.GetNextOffset()
+				Expect(nextErr).To(BeNil())
+				listIntegrationsOptions.Offset = nextToken
 
 				if listIntegrationsOptions.Offset == nil {
 					break
@@ -1465,86 +1502,6 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 		})
 	})
 
-	Describe(`ListWorkflowconfig - Get Workflow Config`, func() {
-		BeforeEach(func() {
-			shouldSkipTest()
-		})
-		It(`ListWorkflowconfig(listWorkflowconfigOptions *ListWorkflowconfigOptions)`, func() {
-			listWorkflowconfigOptions := &appconfigurationv1.ListWorkflowconfigOptions{
-				EnvironmentID: core.StringPtr("environment_id"),
-			}
-
-			listWorkflowconfigResponse, response, err := appConfigurationService.ListWorkflowconfig(listWorkflowconfigOptions)
-			Expect(err).To(BeNil())
-			Expect(response.StatusCode).To(Equal(200))
-			Expect(listWorkflowconfigResponse).ToNot(BeNil())
-		})
-	})
-
-	Describe(`CreateWorkflowconfig - Create Workflow config`, func() {
-		BeforeEach(func() {
-			shouldSkipTest()
-		})
-		It(`CreateWorkflowconfig(createWorkflowconfigOptions *CreateWorkflowconfigOptions)`, func() {
-			externalServiceNowCredentialsModel := &appconfigurationv1.ExternalServiceNowCredentials{
-				Username: core.StringPtr("user"),
-				Password: core.StringPtr("pwd"),
-				ClientID: core.StringPtr("client id value"),
-				ClientSecret: core.StringPtr("clientsecret"),
-			}
-
-			createWorkflowConfigModel := &appconfigurationv1.CreateWorkflowConfigExternalServiceNow{
-				WorkflowURL: core.StringPtr("https://xxxxx.service-now.com"),
-				ApprovalGroupName: core.StringPtr("WorkflowCRApprovers"),
-				ApprovalExpiration: core.Int64Ptr(int64(10)),
-				WorkflowCredentials: externalServiceNowCredentialsModel,
-				Enabled: core.BoolPtr(true),
-			}
-
-			createWorkflowconfigOptions := &appconfigurationv1.CreateWorkflowconfigOptions{
-				EnvironmentID: core.StringPtr("environment_id"),
-				WorkflowConfig: createWorkflowConfigModel,
-			}
-
-			createWorkflowconfigResponse, response, err := appConfigurationService.CreateWorkflowconfig(createWorkflowconfigOptions)
-			Expect(err).To(BeNil())
-			Expect(response.StatusCode).To(Equal(201))
-			Expect(createWorkflowconfigResponse).ToNot(BeNil())
-		})
-	})
-
-	Describe(`UpdateWorkflowconfig - Update Workflow config`, func() {
-		BeforeEach(func() {
-			shouldSkipTest()
-		})
-		It(`UpdateWorkflowconfig(updateWorkflowconfigOptions *UpdateWorkflowconfigOptions)`, func() {
-			externalServiceNowCredentialsModel := &appconfigurationv1.ExternalServiceNowCredentials{
-				Username: core.StringPtr("user"),
-				Password: core.StringPtr("updated password"),
-				ClientID: core.StringPtr("client id value"),
-				ClientSecret: core.StringPtr("updated client secret"),
-			}
-
-			updateWorkflowConfigModel := &appconfigurationv1.UpdateWorkflowConfigUpdateExternalServiceNow{
-				WorkflowURL: core.StringPtr("https://xxxxx.service-now.com"),
-				ApprovalGroupName: core.StringPtr("WorkflowCRApprovers"),
-				ApprovalExpiration: core.Int64Ptr(int64(5)),
-				WorkflowCredentials: externalServiceNowCredentialsModel,
-				Enabled: core.BoolPtr(true),
-			}
-
-			updateWorkflowconfigOptions := &appconfigurationv1.UpdateWorkflowconfigOptions{
-				EnvironmentID: core.StringPtr("environment_id"),
-				UpdateWorkflowConfig: updateWorkflowConfigModel,
-			}
-
-			updateWorkflowconfigResponse, response, err := appConfigurationService.UpdateWorkflowconfig(updateWorkflowconfigOptions)
-			Expect(err).To(BeNil())
-			Expect(response.StatusCode).To(Equal(201))
-			Expect(updateWorkflowconfigResponse).ToNot(BeNil())
-		})
-	})
-
 	Describe(`ListWorkflowConfigs - List Workflow Config`, func() {
 		BeforeEach(func() {
 			shouldSkipTest()
@@ -1568,8 +1525,9 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 				Expect(workflowConfigsList).ToNot(BeNil())
 				allResults = append(allResults, workflowConfigsList.WorkflowConfigs...)
 
-				listWorkflowConfigsOptions.Offset, err = workflowConfigsList.GetNextOffset()
-				Expect(err).To(BeNil())
+				nextToken, nextErr := workflowConfigsList.GetNextOffset()
+				Expect(nextErr).To(BeNil())
+				listWorkflowConfigsOptions.Offset = nextToken
 
 				if listWorkflowConfigsOptions.Offset == nil {
 					break
@@ -1788,10 +1746,16 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 				DurationType: core.StringPtr("days"),
 			}
 
+			rolloutMetricModel := &appconfigurationv1.RolloutMetric{
+				MetricID: core.StringPtr("mtlwx65j"),
+				AutoRollback: core.BoolPtr(false),
+			}
+
 			rolloutConfigurationModel := &appconfigurationv1.RolloutConfiguration{
 				DurationPreset: core.StringPtr("CUSTOM"),
 				StartAt: CreateMockDateTime("2019-01-01T12:00:00.000Z"),
 				Phases: []appconfigurationv1.RolloutPhase{*rolloutPhaseModel},
+				Metrics: []appconfigurationv1.RolloutMetric{*rolloutMetricModel},
 			}
 
 			targetSegmentsModel := &appconfigurationv1.TargetSegments{
@@ -1942,6 +1906,257 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 		})
 	})
 
+	Describe(`ListGuardedRollouts - List Guarded Rollouts`, func() {
+		BeforeEach(func() {
+			shouldSkipTest()
+		})
+		It(`ListGuardedRollouts(listGuardedRolloutsOptions *ListGuardedRolloutsOptions) with pagination`, func(){
+			listGuardedRolloutsOptions := &appconfigurationv1.ListGuardedRolloutsOptions{
+				EnvironmentID: core.StringPtr("environment_id"),
+				FeatureID: core.StringPtr("feature_id"),
+				Limit: core.Int64Ptr(int64(10)),
+				Offset: core.Int64Ptr(int64(0)),
+			}
+
+			listGuardedRolloutsOptions.Offset = nil
+			listGuardedRolloutsOptions.Limit = core.Int64Ptr(1)
+
+			var allResults []appconfigurationv1.GuardedRollout
+			for {
+				guardedRolloutsList, response, err := appConfigurationService.ListGuardedRollouts(listGuardedRolloutsOptions)
+				Expect(err).To(BeNil())
+				Expect(response.StatusCode).To(Equal(200))
+				Expect(guardedRolloutsList).ToNot(BeNil())
+				allResults = append(allResults, guardedRolloutsList.GuardedRollouts...)
+
+				nextToken, nextErr := guardedRolloutsList.GetNextOffset()
+				Expect(nextErr).To(BeNil())
+				listGuardedRolloutsOptions.Offset = nextToken
+
+				if listGuardedRolloutsOptions.Offset == nil {
+					break
+				}
+			}
+			fmt.Fprintf(GinkgoWriter, "Retrieved a total of %d item(s) with pagination.\n", len(allResults))
+		})
+		It(`ListGuardedRollouts(listGuardedRolloutsOptions *ListGuardedRolloutsOptions) using GuardedRolloutsPager`, func(){
+			listGuardedRolloutsOptions := &appconfigurationv1.ListGuardedRolloutsOptions{
+				EnvironmentID: core.StringPtr("environment_id"),
+				FeatureID: core.StringPtr("feature_id"),
+				Limit: core.Int64Ptr(int64(10)),
+			}
+
+			// Test GetNext().
+			pager, err := appConfigurationService.NewGuardedRolloutsPager(listGuardedRolloutsOptions)
+			Expect(err).To(BeNil())
+			Expect(pager).ToNot(BeNil())
+
+			var allResults []appconfigurationv1.GuardedRollout
+			for pager.HasNext() {
+				nextPage, nextPageErr := pager.GetNext()
+				Expect(nextPageErr).To(BeNil())
+				Expect(nextPage).ToNot(BeNil())
+				allResults = append(allResults, nextPage...)
+			}
+
+			// Test GetAll().
+			pager, err = appConfigurationService.NewGuardedRolloutsPager(listGuardedRolloutsOptions)
+			Expect(err).To(BeNil())
+			Expect(pager).ToNot(BeNil())
+
+			allItems, err := pager.GetAll()
+			Expect(err).To(BeNil())
+			Expect(allItems).ToNot(BeNil())
+
+			Expect(len(allItems)).To(Equal(len(allResults)))
+			fmt.Fprintf(GinkgoWriter, "ListGuardedRollouts() returned a total of %d item(s) using GuardedRolloutsPager.\n", len(allResults))
+		})
+	})
+
+	Describe(`GetGuardedRollout - Get Guarded Rollout`, func() {
+		BeforeEach(func() {
+			shouldSkipTest()
+		})
+		It(`GetGuardedRollout(getGuardedRolloutOptions *GetGuardedRolloutOptions)`, func() {
+			getGuardedRolloutOptions := &appconfigurationv1.GetGuardedRolloutOptions{
+				EnvironmentID: core.StringPtr("environment_id"),
+				FeatureID: core.StringPtr("feature_id"),
+				RolloutID: core.StringPtr("2e195ab5-70a3-44e9-824b-3d0631cf360b"),
+			}
+
+			guardedRolloutDetail, response, err := appConfigurationService.GetGuardedRollout(getGuardedRolloutOptions)
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(200))
+			Expect(guardedRolloutDetail).ToNot(BeNil())
+		})
+	})
+
+	Describe(`GetGuardedRolloutMetric - Get Guarded Rollout Metric`, func() {
+		BeforeEach(func() {
+			shouldSkipTest()
+		})
+		It(`GetGuardedRolloutMetric(getGuardedRolloutMetricOptions *GetGuardedRolloutMetricOptions)`, func() {
+			getGuardedRolloutMetricOptions := &appconfigurationv1.GetGuardedRolloutMetricOptions{
+				EnvironmentID: core.StringPtr("environment_id"),
+				FeatureID: core.StringPtr("feature_id"),
+				RolloutID: core.StringPtr("2e195ab5-70a3-44e9-824b-3d0631cf360b"),
+				MetricID: core.StringPtr("user-clicks"),
+			}
+
+			guardedRolloutMetricDetail, response, err := appConfigurationService.GetGuardedRolloutMetric(getGuardedRolloutMetricOptions)
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(200))
+			Expect(guardedRolloutMetricDetail).ToNot(BeNil())
+		})
+	})
+
+	Describe(`ListMetrics - Get list of Metrics`, func() {
+		BeforeEach(func() {
+			shouldSkipTest()
+		})
+		It(`ListMetrics(listMetricsOptions *ListMetricsOptions) with pagination`, func(){
+			listMetricsOptions := &appconfigurationv1.ListMetricsOptions{
+				Expand: core.BoolPtr(true),
+				Include: []string{"experiments", "guarded_rollouts"},
+				Search: core.StringPtr("search_string"),
+				Limit: core.Int64Ptr(int64(10)),
+				Offset: core.Int64Ptr(int64(0)),
+				Sort: core.StringPtr("created_time"),
+			}
+
+			listMetricsOptions.Offset = nil
+			listMetricsOptions.Limit = core.Int64Ptr(1)
+
+			var allResults []appconfigurationv1.MetricDetail
+			for {
+				metricsList, response, err := appConfigurationService.ListMetrics(listMetricsOptions)
+				Expect(err).To(BeNil())
+				Expect(response.StatusCode).To(Equal(200))
+				Expect(metricsList).ToNot(BeNil())
+				allResults = append(allResults, metricsList.Metrics...)
+
+				nextToken, nextErr := metricsList.GetNextOffset()
+				Expect(nextErr).To(BeNil())
+				listMetricsOptions.Offset = nextToken
+
+				if listMetricsOptions.Offset == nil {
+					break
+				}
+			}
+			fmt.Fprintf(GinkgoWriter, "Retrieved a total of %d item(s) with pagination.\n", len(allResults))
+		})
+		It(`ListMetrics(listMetricsOptions *ListMetricsOptions) using MetricsPager`, func(){
+			listMetricsOptions := &appconfigurationv1.ListMetricsOptions{
+				Expand: core.BoolPtr(true),
+				Include: []string{"experiments", "guarded_rollouts"},
+				Search: core.StringPtr("search_string"),
+				Limit: core.Int64Ptr(int64(10)),
+				Sort: core.StringPtr("created_time"),
+			}
+
+			// Test GetNext().
+			pager, err := appConfigurationService.NewMetricsPager(listMetricsOptions)
+			Expect(err).To(BeNil())
+			Expect(pager).ToNot(BeNil())
+
+			var allResults []appconfigurationv1.MetricDetail
+			for pager.HasNext() {
+				nextPage, nextPageErr := pager.GetNext()
+				Expect(nextPageErr).To(BeNil())
+				Expect(nextPage).ToNot(BeNil())
+				allResults = append(allResults, nextPage...)
+			}
+
+			// Test GetAll().
+			pager, err = appConfigurationService.NewMetricsPager(listMetricsOptions)
+			Expect(err).To(BeNil())
+			Expect(pager).ToNot(BeNil())
+
+			allItems, err := pager.GetAll()
+			Expect(err).To(BeNil())
+			Expect(allItems).ToNot(BeNil())
+
+			Expect(len(allItems)).To(Equal(len(allResults)))
+			fmt.Fprintf(GinkgoWriter, "ListMetrics() returned a total of %d item(s) using MetricsPager.\n", len(allResults))
+		})
+	})
+
+	Describe(`CreateMetric - Create Metric`, func() {
+		BeforeEach(func() {
+			shouldSkipTest()
+		})
+		It(`CreateMetric(createMetricOptions *CreateMetricOptions)`, func() {
+			createMetricOptions := &appconfigurationv1.CreateMetricOptions{
+				MetricID: core.StringPtr("user-clicks"),
+				MetricName: core.StringPtr("User Clicks"),
+				MetricType: core.StringPtr("COUNT"),
+				EventType: core.StringPtr("CLICK"),
+				EventKey: core.StringPtr("user_click_event"),
+				Direction: core.StringPtr("HIGHER"),
+				Description: core.StringPtr("Tracks user click events"),
+			}
+
+			metric, response, err := appConfigurationService.CreateMetric(createMetricOptions)
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(201))
+			Expect(metric).ToNot(BeNil())
+		})
+	})
+
+	Describe(`GetMetric - Get Metric`, func() {
+		BeforeEach(func() {
+			shouldSkipTest()
+		})
+		It(`GetMetric(getMetricOptions *GetMetricOptions)`, func() {
+			getMetricOptions := &appconfigurationv1.GetMetricOptions{
+				MetricID: core.StringPtr("user-clicks"),
+				Include: []string{"experiments", "guarded_rollouts"},
+			}
+
+			metricDetail, response, err := appConfigurationService.GetMetric(getMetricOptions)
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(200))
+			Expect(metricDetail).ToNot(BeNil())
+		})
+	})
+
+	Describe(`UpdateMetric - Update Metric`, func() {
+		BeforeEach(func() {
+			shouldSkipTest()
+		})
+		It(`UpdateMetric(updateMetricOptions *UpdateMetricOptions)`, func() {
+			updateMetricOptions := &appconfigurationv1.UpdateMetricOptions{
+				MetricID: core.StringPtr("user-clicks"),
+				MetricName: core.StringPtr("Updated User Clicks"),
+				Description: core.StringPtr("Updated description for user click events"),
+				EventKey: core.StringPtr("updated_user_click_event"),
+				Direction: core.StringPtr("HIGHER"),
+			}
+
+			metric, response, err := appConfigurationService.UpdateMetric(updateMetricOptions)
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(200))
+			Expect(metric).ToNot(BeNil())
+		})
+	})
+
+	Describe(`SetMetricFavorite - Set Metric Favorite Status`, func() {
+		BeforeEach(func() {
+			shouldSkipTest()
+		})
+		It(`SetMetricFavorite(setMetricFavoriteOptions *SetMetricFavoriteOptions)`, func() {
+			setMetricFavoriteOptions := &appconfigurationv1.SetMetricFavoriteOptions{
+				MetricID: core.StringPtr("user-clicks"),
+				IsFavorite: core.BoolPtr(true),
+			}
+
+			metric, response, err := appConfigurationService.SetMetricFavorite(setMetricFavoriteOptions)
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(200))
+			Expect(metric).ToNot(BeNil())
+		})
+	})
+
 	Describe(`DeleteEnvironment - Delete Environment`, func() {
 		BeforeEach(func() {
 			shouldSkipTest()
@@ -2072,21 +2287,6 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 		})
 	})
 
-	Describe(`DeleteWorkflowconfig - Delete Workflow config`, func() {
-		BeforeEach(func() {
-			shouldSkipTest()
-		})
-		It(`DeleteWorkflowconfig(deleteWorkflowconfigOptions *DeleteWorkflowconfigOptions)`, func() {
-			deleteWorkflowconfigOptions := &appconfigurationv1.DeleteWorkflowconfigOptions{
-				EnvironmentID: core.StringPtr("environment_id"),
-			}
-
-			response, err := appConfigurationService.DeleteWorkflowconfig(deleteWorkflowconfigOptions)
-			Expect(err).To(BeNil())
-			Expect(response.StatusCode).To(Equal(204))
-		})
-	})
-
 	Describe(`DeleteWorkflowConfigs - Delete Approval Workflow config`, func() {
 		BeforeEach(func() {
 			shouldSkipTest()
@@ -2097,6 +2297,21 @@ var _ = Describe(`AppConfigurationV1 Integration Tests`, func() {
 			}
 
 			response, err := appConfigurationService.DeleteWorkflowConfigs(deleteWorkflowConfigsOptions)
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(204))
+		})
+	})
+
+	Describe(`DeleteMetric - Delete Metric`, func() {
+		BeforeEach(func() {
+			shouldSkipTest()
+		})
+		It(`DeleteMetric(deleteMetricOptions *DeleteMetricOptions)`, func() {
+			deleteMetricOptions := &appconfigurationv1.DeleteMetricOptions{
+				MetricID: core.StringPtr("user-clicks"),
+			}
+
+			response, err := appConfigurationService.DeleteMetric(deleteMetricOptions)
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(204))
 		})
