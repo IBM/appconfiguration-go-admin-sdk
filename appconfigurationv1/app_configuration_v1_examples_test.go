@@ -530,8 +530,8 @@ var _ = Describe(`AppConfigurationV1 Examples Tests`, func() {
 				"environment_id",
 				"feature_id",
 				"stop",
-				int64(0),
 			)
+			stopFeatureRolloutOptions.SetRolloutPercentage(int64(77))
 
 			feature, response, err := appConfigurationService.StopFeatureRollout(stopFeatureRolloutOptions)
 			if err != nil {
@@ -664,8 +664,8 @@ var _ = Describe(`AppConfigurationV1 Examples Tests`, func() {
 				"feature_id",
 				"rule_id",
 				"stop",
-				int64(0),
 			)
+			stopFeatureRuleRolloutOptions.SetRolloutPercentage(int64(77))
 
 			featureSegmentRuleWithRuleID, response, err := appConfigurationService.StopFeatureRuleRollout(stopFeatureRuleRolloutOptions)
 			if err != nil {
@@ -1245,101 +1245,6 @@ var _ = Describe(`AppConfigurationV1 Examples Tests`, func() {
 			Expect(response.StatusCode).To(Equal(200))
 			Expect(originConfigList).ToNot(BeNil())
 		})
-		It(`ListWorkflowconfig request example`, func() {
-			fmt.Println("\nListWorkflowconfig() result:")
-			// begin-list_workflowconfig
-
-			listWorkflowconfigOptions := appConfigurationService.NewListWorkflowconfigOptions(
-				"environment_id",
-			)
-
-			listWorkflowconfigResponse, response, err := appConfigurationService.ListWorkflowconfig(listWorkflowconfigOptions)
-			if err != nil {
-				panic(err)
-			}
-			b, _ := json.MarshalIndent(listWorkflowconfigResponse, "", "  ")
-			fmt.Println(string(b))
-
-			// end-list_workflowconfig
-
-			Expect(err).To(BeNil())
-			Expect(response.StatusCode).To(Equal(200))
-			Expect(listWorkflowconfigResponse).ToNot(BeNil())
-		})
-		It(`CreateWorkflowconfig request example`, func() {
-			fmt.Println("\nCreateWorkflowconfig() result:")
-			// begin-create_Workflowconfig
-
-			externalServiceNowCredentialsModel := &appconfigurationv1.ExternalServiceNowCredentials{
-				Username: core.StringPtr("user"),
-				Password: core.StringPtr("pwd"),
-				ClientID: core.StringPtr("client id value"),
-				ClientSecret: core.StringPtr("clientsecret"),
-			}
-
-			createWorkflowConfigModel := &appconfigurationv1.CreateWorkflowConfigExternalServiceNow{
-				WorkflowURL: core.StringPtr("https://xxxxx.service-now.com"),
-				ApprovalGroupName: core.StringPtr("WorkflowCRApprovers"),
-				ApprovalExpiration: core.Int64Ptr(int64(10)),
-				WorkflowCredentials: externalServiceNowCredentialsModel,
-				Enabled: core.BoolPtr(true),
-			}
-
-			createWorkflowconfigOptions := appConfigurationService.NewCreateWorkflowconfigOptions(
-				"environment_id",
-				createWorkflowConfigModel,
-			)
-
-			createWorkflowconfigResponse, response, err := appConfigurationService.CreateWorkflowconfig(createWorkflowconfigOptions)
-			if err != nil {
-				panic(err)
-			}
-			b, _ := json.MarshalIndent(createWorkflowconfigResponse, "", "  ")
-			fmt.Println(string(b))
-
-			// end-create_Workflowconfig
-
-			Expect(err).To(BeNil())
-			Expect(response.StatusCode).To(Equal(201))
-			Expect(createWorkflowconfigResponse).ToNot(BeNil())
-		})
-		It(`UpdateWorkflowconfig request example`, func() {
-			fmt.Println("\nUpdateWorkflowconfig() result:")
-			// begin-update_Workflowconfig
-
-			externalServiceNowCredentialsModel := &appconfigurationv1.ExternalServiceNowCredentials{
-				Username: core.StringPtr("user"),
-				Password: core.StringPtr("updated password"),
-				ClientID: core.StringPtr("client id value"),
-				ClientSecret: core.StringPtr("updated client secret"),
-			}
-
-			updateWorkflowConfigModel := &appconfigurationv1.UpdateWorkflowConfigUpdateExternalServiceNow{
-				WorkflowURL: core.StringPtr("https://xxxxx.service-now.com"),
-				ApprovalGroupName: core.StringPtr("WorkflowCRApprovers"),
-				ApprovalExpiration: core.Int64Ptr(int64(5)),
-				WorkflowCredentials: externalServiceNowCredentialsModel,
-				Enabled: core.BoolPtr(true),
-			}
-
-			updateWorkflowconfigOptions := appConfigurationService.NewUpdateWorkflowconfigOptions(
-				"environment_id",
-				updateWorkflowConfigModel,
-			)
-
-			updateWorkflowconfigResponse, response, err := appConfigurationService.UpdateWorkflowconfig(updateWorkflowconfigOptions)
-			if err != nil {
-				panic(err)
-			}
-			b, _ := json.MarshalIndent(updateWorkflowconfigResponse, "", "  ")
-			fmt.Println(string(b))
-
-			// end-update_Workflowconfig
-
-			Expect(err).To(BeNil())
-			Expect(response.StatusCode).To(Equal(201))
-			Expect(updateWorkflowconfigResponse).ToNot(BeNil())
-		})
 		It(`ListWorkflowConfigs request example`, func() {
 			fmt.Println("\nListWorkflowConfigs() result:")
 			// begin-list_workflow_configs
@@ -1716,6 +1621,203 @@ var _ = Describe(`AppConfigurationV1 Examples Tests`, func() {
 			Expect(response.StatusCode).To(Equal(200))
 			Expect(instanceConfigStatusResponse).ToNot(BeNil())
 		})
+		It(`ListGuardedRollouts request example`, func() {
+			fmt.Println("\nListGuardedRollouts() result:")
+			// begin-list_guarded_rollouts
+			listGuardedRolloutsOptions := &appconfigurationv1.ListGuardedRolloutsOptions{
+				EnvironmentID: core.StringPtr("environment_id"),
+				FeatureID: core.StringPtr("feature_id"),
+				Limit: core.Int64Ptr(int64(10)),
+			}
+
+			pager, err := appConfigurationService.NewGuardedRolloutsPager(listGuardedRolloutsOptions)
+			if err != nil {
+				panic(err)
+			}
+
+			var allResults []appconfigurationv1.GuardedRollout
+			for pager.HasNext() {
+				nextPage, err := pager.GetNext()
+				if err != nil {
+					panic(err)
+				}
+				allResults = append(allResults, nextPage...)
+			}
+			b, _ := json.MarshalIndent(allResults, "", "  ")
+			fmt.Println(string(b))
+			// end-list_guarded_rollouts
+		})
+		It(`GetGuardedRollout request example`, func() {
+			fmt.Println("\nGetGuardedRollout() result:")
+			// begin-get_guarded_rollout
+
+			getGuardedRolloutOptions := appConfigurationService.NewGetGuardedRolloutOptions(
+				"environment_id",
+				"feature_id",
+				"2e195ab5-70a3-44e9-824b-3d0631cf360b",
+			)
+
+			guardedRolloutDetail, response, err := appConfigurationService.GetGuardedRollout(getGuardedRolloutOptions)
+			if err != nil {
+				panic(err)
+			}
+			b, _ := json.MarshalIndent(guardedRolloutDetail, "", "  ")
+			fmt.Println(string(b))
+
+			// end-get_guarded_rollout
+
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(200))
+			Expect(guardedRolloutDetail).ToNot(BeNil())
+		})
+		It(`GetGuardedRolloutMetric request example`, func() {
+			fmt.Println("\nGetGuardedRolloutMetric() result:")
+			// begin-get_guarded_rollout_metric
+
+			getGuardedRolloutMetricOptions := appConfigurationService.NewGetGuardedRolloutMetricOptions(
+				"environment_id",
+				"feature_id",
+				"2e195ab5-70a3-44e9-824b-3d0631cf360b",
+				"user-clicks",
+			)
+
+			guardedRolloutMetricDetail, response, err := appConfigurationService.GetGuardedRolloutMetric(getGuardedRolloutMetricOptions)
+			if err != nil {
+				panic(err)
+			}
+			b, _ := json.MarshalIndent(guardedRolloutMetricDetail, "", "  ")
+			fmt.Println(string(b))
+
+			// end-get_guarded_rollout_metric
+
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(200))
+			Expect(guardedRolloutMetricDetail).ToNot(BeNil())
+		})
+		It(`ListMetrics request example`, func() {
+			fmt.Println("\nListMetrics() result:")
+			// begin-list_metrics
+			listMetricsOptions := &appconfigurationv1.ListMetricsOptions{
+				Expand: core.BoolPtr(true),
+				Include: []string{"experiments", "guarded_rollouts"},
+				Search: core.StringPtr("search_string"),
+				Limit: core.Int64Ptr(int64(10)),
+				Sort: core.StringPtr("created_time"),
+			}
+
+			pager, err := appConfigurationService.NewMetricsPager(listMetricsOptions)
+			if err != nil {
+				panic(err)
+			}
+
+			var allResults []appconfigurationv1.MetricDetail
+			for pager.HasNext() {
+				nextPage, err := pager.GetNext()
+				if err != nil {
+					panic(err)
+				}
+				allResults = append(allResults, nextPage...)
+			}
+			b, _ := json.MarshalIndent(allResults, "", "  ")
+			fmt.Println(string(b))
+			// end-list_metrics
+		})
+		It(`CreateMetric request example`, func() {
+			fmt.Println("\nCreateMetric() result:")
+			// begin-create_metric
+
+			createMetricOptions := appConfigurationService.NewCreateMetricOptions(
+				"user-clicks",
+				"User Clicks",
+				"COUNT",
+				"CLICK",
+				"user_click_event",
+				"HIGHER",
+			)
+			createMetricOptions.SetDescription("Tracks user click events")
+
+			metric, response, err := appConfigurationService.CreateMetric(createMetricOptions)
+			if err != nil {
+				panic(err)
+			}
+			b, _ := json.MarshalIndent(metric, "", "  ")
+			fmt.Println(string(b))
+
+			// end-create_metric
+
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(201))
+			Expect(metric).ToNot(BeNil())
+		})
+		It(`GetMetric request example`, func() {
+			fmt.Println("\nGetMetric() result:")
+			// begin-get_metric
+
+			getMetricOptions := appConfigurationService.NewGetMetricOptions(
+				"user-clicks",
+			)
+			getMetricOptions.SetInclude([]string{"experiments", "guarded_rollouts"})
+
+			metricDetail, response, err := appConfigurationService.GetMetric(getMetricOptions)
+			if err != nil {
+				panic(err)
+			}
+			b, _ := json.MarshalIndent(metricDetail, "", "  ")
+			fmt.Println(string(b))
+
+			// end-get_metric
+
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(200))
+			Expect(metricDetail).ToNot(BeNil())
+		})
+		It(`UpdateMetric request example`, func() {
+			fmt.Println("\nUpdateMetric() result:")
+			// begin-update_metric
+
+			updateMetricOptions := appConfigurationService.NewUpdateMetricOptions(
+				"user-clicks",
+			)
+			updateMetricOptions.SetMetricName("Updated User Clicks")
+			updateMetricOptions.SetDescription("Updated description for user click events")
+			updateMetricOptions.SetEventKey("updated_user_click_event")
+			updateMetricOptions.SetDirection("HIGHER")
+
+			metric, response, err := appConfigurationService.UpdateMetric(updateMetricOptions)
+			if err != nil {
+				panic(err)
+			}
+			b, _ := json.MarshalIndent(metric, "", "  ")
+			fmt.Println(string(b))
+
+			// end-update_metric
+
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(200))
+			Expect(metric).ToNot(BeNil())
+		})
+		It(`SetMetricFavorite request example`, func() {
+			fmt.Println("\nSetMetricFavorite() result:")
+			// begin-set_metric_favorite
+
+			setMetricFavoriteOptions := appConfigurationService.NewSetMetricFavoriteOptions(
+				"user-clicks",
+				true,
+			)
+
+			metric, response, err := appConfigurationService.SetMetricFavorite(setMetricFavoriteOptions)
+			if err != nil {
+				panic(err)
+			}
+			b, _ := json.MarshalIndent(metric, "", "  ")
+			fmt.Println(string(b))
+
+			// end-set_metric_favorite
+
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(200))
+			Expect(metric).ToNot(BeNil())
+		})
 		It(`DeleteEnvironment request example`, func() {
 			fmt.Println("\nDeleteEnvironment() result:")
 			// begin-delete_environment
@@ -1886,26 +1988,6 @@ var _ = Describe(`AppConfigurationV1 Examples Tests`, func() {
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(204))
 		})
-		It(`DeleteWorkflowconfig request example`, func() {
-			// begin-delete_workflowconfig
-
-			deleteWorkflowconfigOptions := appConfigurationService.NewDeleteWorkflowconfigOptions(
-				"environment_id",
-			)
-
-			response, err := appConfigurationService.DeleteWorkflowconfig(deleteWorkflowconfigOptions)
-			if err != nil {
-				panic(err)
-			}
-			if response.StatusCode != 204 {
-				fmt.Printf("\nUnexpected response status code received from DeleteWorkflowconfig(): %d\n", response.StatusCode)
-			}
-
-			// end-delete_workflowconfig
-
-			Expect(err).To(BeNil())
-			Expect(response.StatusCode).To(Equal(204))
-		})
 		It(`DeleteWorkflowConfigs request example`, func() {
 			// begin-delete_workflow_configs
 
@@ -1922,6 +2004,26 @@ var _ = Describe(`AppConfigurationV1 Examples Tests`, func() {
 			}
 
 			// end-delete_workflow_configs
+
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(204))
+		})
+		It(`DeleteMetric request example`, func() {
+			// begin-delete_metric
+
+			deleteMetricOptions := appConfigurationService.NewDeleteMetricOptions(
+				"user-clicks",
+			)
+
+			response, err := appConfigurationService.DeleteMetric(deleteMetricOptions)
+			if err != nil {
+				panic(err)
+			}
+			if response.StatusCode != 204 {
+				fmt.Printf("\nUnexpected response status code received from DeleteMetric(): %d\n", response.StatusCode)
+			}
+
+			// end-delete_metric
 
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(204))
